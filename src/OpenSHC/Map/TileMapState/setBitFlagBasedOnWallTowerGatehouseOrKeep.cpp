@@ -14,7 +14,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FF870
-    byte TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y)
+    uint TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y)
     {
         /*
           The body is the handwritten neighbour-flag macro; see NeighbourFlagsGlobalAsm.hpp. Written as C++

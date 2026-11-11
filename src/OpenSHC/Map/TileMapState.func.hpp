@@ -338,7 +338,7 @@ namespace Map {
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FF080, &TileMapState::updateMacroLayerRelated2)
         updateMacroLayerRelated2;
 
-        MACRO_FUNCTION_RESOLVER(byte (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FF870,
+        MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004FF870,
             &TileMapState::setBitFlagBasedOnWallTowerGatehouseOrKeep)
         setBitFlagBasedOnWallTowerGatehouseOrKeep;
 

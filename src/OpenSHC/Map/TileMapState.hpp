@@ -403,7 +403,7 @@ namespace Map {
 
         void updateMacroLayerRelated2();
 
-        byte setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y);
+        uint setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y);
 
         uint returnSomeHeight(int tile, int param_2);
 
