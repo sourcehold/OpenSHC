@@ -44,19 +44,19 @@ namespace Rendering {
             this->viewportState.viewportY = maxViewportY;
         }
 
-        if (DAT_TileMapState::instance.mapOrientation != 0) {
-            if (DAT_TileMapState::instance.mapOrientation == 6) {
+        if (DAT_TileMapState::instance.mapOrientation != Map::MC_MAP_NORTH) {
+            if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_WEST) {
                 if (this->viewportState.viewportX > maxViewportX - Enums::VC_TILE_PIXEL_WIDTH) {
                     this->viewportState.viewportX = maxViewportX - Enums::VC_TILE_PIXEL_WIDTH;
                 }
-            } else if (DAT_TileMapState::instance.mapOrientation == 4) {
+            } else if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_SOUTH) {
                 if (this->viewportState.viewportY < minViewportY + Enums::VC_TILE_ROW_PIXEL_HEIGHT) {
                     this->viewportState.viewportY = minViewportY + Enums::VC_TILE_ROW_PIXEL_HEIGHT;
                 }
                 if (this->viewportState.viewportY > maxViewportY - Enums::VC_TILE_ROW_PIXEL_HEIGHT) {
                     this->viewportState.viewportY = maxViewportY - Enums::VC_TILE_ROW_PIXEL_HEIGHT;
                 }
-            } else if (DAT_TileMapState::instance.mapOrientation == 2) {
+            } else if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_EAST) {
                 if (this->viewportState.viewportX < minViewportX + 16) {
                     this->viewportState.viewportX = minViewportX + 16;
                 }

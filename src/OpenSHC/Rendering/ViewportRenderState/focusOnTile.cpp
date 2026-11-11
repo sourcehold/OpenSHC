@@ -12,12 +12,12 @@ namespace Rendering {
     void ViewportRenderState::focusOnTile(int tile)
     {
         int screenPointIndex = Enums::VC_SCREEN_POINT_TABLE_START;
-        if (DAT_TileMapState::instance.mapOrientation != 0) {
-            if (DAT_TileMapState::instance.mapOrientation == 6) {
+        if (DAT_TileMapState::instance.mapOrientation != Map::MC_MAP_NORTH) {
+            if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_WEST) {
                 screenPointIndex = Enums::VC_SCREEN_POINT_TABLE_START + Enums::VC_SCREEN_POINT_TABLE_SIZE;
-            } else if (DAT_TileMapState::instance.mapOrientation == 4) {
+            } else if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_SOUTH) {
                 screenPointIndex = Enums::VC_SCREEN_POINT_TABLE_START + 2 * Enums::VC_SCREEN_POINT_TABLE_SIZE;
-            } else if (DAT_TileMapState::instance.mapOrientation == 2) {
+            } else if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_EAST) {
                 screenPointIndex = Enums::VC_SCREEN_POINT_TABLE_START + 3 * Enums::VC_SCREEN_POINT_TABLE_SIZE;
             }
         }
