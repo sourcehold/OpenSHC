@@ -27,8 +27,6 @@ namespace AI {
                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                                    .yEntry;
 
-        // Declared before the if because the tribe loop below reads them. Measured: initialising them to 0
-        // costs quick_diff 99.16 -> 97.93
         uint gatehouseX;
         uint gatehouseY;
         if (!MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::canNavigateFromKeepToKeep, DAT_GameState::ptr)(

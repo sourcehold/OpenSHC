@@ -36,7 +36,6 @@ namespace AI {
                     != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[j + tribeType])
                     continue;
 
-                // Measured: the (char) cast is load-bearing, dropping it costs 100% -> 85.4%
                 DAT_TribesState::instance.tribes[tribeID].unitStance = (char)(SEC_RNG::instance.currentNumber2 & 1);
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
