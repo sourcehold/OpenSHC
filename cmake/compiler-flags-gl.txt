@@ -127,3 +127,14 @@ src/OpenSHC/UI/HoveredState/clearHoveredState.cpp
 src/OpenSHC/UI/HoveredState/Constructor_HoveredState.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentButtonOnScreenMenu.cpp
 src/OpenSHC/UI/Rendering/RenderCurrentButtonToScreenMenuWithBlendingUnk.cpp
+src/OpenSHC/Map/Units/UnitsState/checkIfCitizenUnitIsAliveBasedOnState.cpp
+src/OpenSHC/Map/Units/UnitsState/hasTunnelerNotFinishedDigging.cpp
+src/OpenSHC/Map/Units/UnitsState/hasUnitReachedDestination.cpp
+src/OpenSHC/Map/Units/UnitsState/commitUnitLocation.cpp
+src/OpenSHC/Map/Units/UnitsState/makeUnitStopWalkingByClearingPathProgressState.cpp
+src/OpenSHC/Map/Units/UnitsState/resumeMovementIfNoAttackTarget.cpp
+src/OpenSHC/Map/Units/UpdateBurningMan.cpp
+src/OpenSHC/Map/Units/UpdateMiner.cpp
+src/OpenSHC/Map/Units/UpdateQuarryMason.cpp
+src/OpenSHC/Map/Units/UpdateDrunkard.cpp
+src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
