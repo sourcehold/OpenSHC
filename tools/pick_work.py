@@ -10,8 +10,8 @@ pass --tsv with a local path (or another URL) to override it.
 Every pick is reported with the URL of the place its best match lives, derived
 from the rollup's best_source (``main`` or a remote-tracking branch such as
 ``owner-OpenSHC/reimpl/foo``) and the local git remotes. With --all-sources the
-local reimpl/ branches are scanned as well, so each pick lists every fork
-branch that has the function and the URL of the file on that branch.
+local fork branches are scanned as well, so each pick lists every branch that
+has the function and the URL of the file on that branch.
 
 Usage:
     python pick_worst.py [-n N] [--tsv PATH_OR_URL] [--namespace NS]
@@ -197,14 +197,14 @@ def ref_rows(ref, wanted):
     return rows
 
 
-def collect_sources(picks, pattern="/reimpl/", min_pct=None, progress=False,
+def collect_sources(picks, pattern="", min_pct=None, progress=False,
                     keep_duplicates=False):
     """Fill each pick's 'sources' with every ref that reports the function.
 
     Branch contents are taken as truth exactly as status_rollup.py does: nothing
     is re-measured, only the per-address status files are read.
 
-    Most reimpl/ branches are cut from one another, so the same file turns up
+    Most of these branches are cut from one another, so the same file turns up
     verbatim on dozens of them. Sources are therefore grouped by the blob id of
     the cpp on that branch: one entry per distinct version of the function,
     carrying the other branches that hold the identical file in 'also_on'.
@@ -385,12 +385,12 @@ def main(argv=None):
     ap.add_argument("--spread", action="store_true",
                     help="ignore namespace grouping; take the globally worst N")
     ap.add_argument("--all-sources", action="store_true",
-                    help="scan the local reimpl/ branches and list every fork "
-                         "branch that has the function, with the URL of its file "
-                         "there (slow: one pass over every remote-tracking branch)")
-    ap.add_argument("--sources-filter", default="/reimpl/",
-                    help="regex selecting the remote-tracking branches to scan "
-                         "with --all-sources (default '/reimpl/')")
+                    help="scan the local fork branches and list every branch "
+                         "that has the function, with the URL of its file there "
+                         "(slow: one pass over every remote-tracking branch)")
+    ap.add_argument("--sources-filter", default="",
+                    help="regex narrowing the remote-tracking branches to scan "
+                         "with --all-sources (default: all of them)")
     ap.add_argument("--sources-min-pct", type=float,
                     help="with --all-sources, only list branches at or above "
                          "this match percentage (default: above 0%%, i.e. every "

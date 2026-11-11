@@ -1,7 +1,7 @@
 name: status-rollup
 
-# Rolls up status/addresses-SHC-*.txt from this repo and from the reimpl/
-# branches of every fork, and publishes the result as a workflow artifact.
+# Rolls up status/addresses-SHC-*.txt from this repo and from every branch of
+# every fork, and publishes the result as a workflow artifact.
 #
 # This workflow is deliberately UNPRIVILEGED: on a pull request it checks out
 # and runs code from the PR, so it must never hold a writable token. Publishing
@@ -37,7 +37,7 @@ jobs:
           persist-credentials: false
 
       # --fetch-forks adds every fork as a remote and shallow-fetches its
-      # reimpl/ branches before the rollup reads them, so the fetch and the scan
+      # branches before the rollup reads them, so the fetch and the scan
       # cannot drift apart. Only branch tips are fetched and nothing from a
       # fetched branch is executed: one status file per ref is read.
       - name: Roll up status files
