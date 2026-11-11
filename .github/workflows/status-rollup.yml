@@ -36,16 +36,17 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Fetch fork reimpl/ branches
+      # --fetch-forks adds every fork as a remote and shallow-fetches its
+      # reimpl/ branches before the rollup reads them, so the fetch and the scan
+      # cannot drift apart. Only branch tips are fetched and nothing from a
+      # fetched branch is executed: one status file per ref is read.
+      - name: Roll up status files
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
+          REIMPL_REPO: ${{ github.repository }}
         run: |
-          chmod +x tools/reimplementation-helper/todo/fetch_fork_branches.sh
-          tools/reimplementation-helper/todo/fetch_fork_branches.sh "$REPO"
-
-      - name: Roll up status files
-        run: python -I tools/reimplementation-helper/todo/status_rollup.py | tee rollup.log
+          python -I tools/reimplementation-helper/todo/status_rollup.py \
+            --fetch-forks | tee rollup.log
 
       - name: Summary
         run: |

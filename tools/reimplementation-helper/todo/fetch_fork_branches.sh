@@ -7,11 +7,14 @@
 # from a fetched branch is ever executed.
 #
 # Requires: gh (authenticated via GH_TOKEN), git. Run from the repo root.
-# Usage: tools/reimplementation-helper/todo/fetch_fork_branches.sh <owner/repo>
+# Usage: tools/reimplementation-helper/todo/fetch_fork_branches.sh [owner/repo]
+#
+# The repository defaults to the project's own; pass another one to walk up from
+# a fork instead.
 
 set -euo pipefail
 
-repo_full_name="${1:?usage: fetch_fork_branches.sh <owner/repo>}"
+repo_full_name="${1:-sourcehold/OpenSHC}"
 
 # Walk up to the root repository, then enumerate its forks.
 root=$(gh repo view "$repo_full_name" --json parent,nameWithOwner \

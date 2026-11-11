@@ -7,6 +7,19 @@ row per SHC id saying whether it is at 100% somewhere or still needs work.
 Run from the repo root:
     python -I tools/reimplementation-helper/todo/status_rollup.py
 
+Only branches that are present as remote-tracking refs can be read, so a plain
+clone sees nothing but its own. Pass --fetch-forks (or set REIMPL_FETCH_FORKS=1)
+to add every fork of the root repository as a remote first and shallow-fetch its
+reimpl/ branches, which is what fetch_fork_branches.sh does in CI:
+
+    python -I tools/reimplementation-helper/todo/status_rollup.py --fetch-forks
+
+That needs gh, authenticated (GH_TOKEN). Only branch tips are fetched, and
+nothing from a fetched branch is ever executed -- one status file per ref is
+read. The repository is taken from --repo, else REIMPL_REPO, else the origin
+remote, else sourcehold/OpenSHC. Without the flag the fetch is skipped and only
+what is already fetched is scanned, so the CI workflow keeps working unchanged.
+
 Output: status_rollup.tsv in the current working directory.
 
 Set REIMPL_FILTER to a regex to widen or narrow which remote-tracking branches
@@ -19,10 +32,12 @@ The helpers here are also imported by status_regression.py, so keep the module
 importable: everything that runs belongs in main().
 """
 
-import os, re, subprocess
+import argparse, os, re, subprocess
 from collections import Counter
 
 ROOT = 'src/OpenSHC'
+#: the project's own repository; forks are enumerated from its root
+DEFAULT_REPO = 'sourcehold/OpenSHC'
 STATUS_GLOB = re.compile(r'^status/addresses-SHC-[0-9A-Fa-f]+\.txt$')
 # one entry per line: SHC_<hash>_0x<addr> | <pct>% | <status text>
 ENTRY = re.compile(r'^\s*(SHC_[0-9A-Fa-f]+_0x([0-9A-Fa-f]+))\s*\|\s*([0-9.]+)%\s*\|\s*(.*?)\s*$')
@@ -102,6 +117,68 @@ def header_cpp_map():
     return cpp_of
 
 
+REPO_NAME = re.compile(r'^[A-Za-z0-9._-]+/[A-Za-z0-9._-]+$')
+
+
+def origin_repo():
+    """-> 'owner/name' of the origin remote, or '' if it is not a GitHub url."""
+    rc, out = run(['git', 'remote', 'get-url', 'origin'])
+    url = out.strip()
+    if url.endswith('.git'):
+        url = url[:-4]
+    m = re.search(r'github\.com[:/]+([A-Za-z0-9._-]+/[A-Za-z0-9._-]+)/?$', url)
+    return m.group(1) if m else ''
+
+
+def fork_repos(repo_full_name):
+    """-> [root repo, every fork of it]; the root is the repo's parent, if any."""
+    rc, out = run(['gh', 'repo', 'view', repo_full_name, '--json', 'parent,nameWithOwner',
+                   '--jq', 'if .parent then .parent.owner.login + "/" + .parent.name '
+                           'else .nameWithOwner end'])
+    if rc != 0 or not out.strip():
+        raise RuntimeError('gh repo view %s failed (is gh installed and authenticated?)'
+                           % repo_full_name)
+    root = out.strip()
+    rc, out = run(['gh', 'api', 'repos/%s/forks' % root, '--paginate',
+                   '--jq', '.[].full_name'])
+    if rc != 0:
+        raise RuntimeError('gh api repos/%s/forks failed' % root)
+    repos = {root} | {ln.strip() for ln in out.splitlines() if ln.strip()}
+    # ignore anything that is not a plain owner/name, so that a surprising API
+    # response cannot turn into command arguments or a path
+    return root, sorted(r for r in repos if REPO_NAME.match(r))
+
+
+def fetch_fork_branches(repo_full_name=None):
+    """Add every fork as a remote and shallow-fetch its reimpl/ branches.
+
+    The Python counterpart of fetch_fork_branches.sh, so that a local run covers
+    the same branches CI does. Only branch tips are fetched.
+    """
+    repo_full_name = (repo_full_name or os.environ.get('REIMPL_REPO')
+                      or origin_repo() or DEFAULT_REPO)
+    root, repos = fork_repos(repo_full_name)
+    print('root repository: %s' % root)
+    print('repositories to scan: %d' % len(repos))
+    fetched = 0
+    for repo in repos:
+        remote = repo.replace('/', '-')
+        run(['git', 'remote', 'remove', remote])
+        run(['git', 'remote', 'add', remote, 'https://github.com/%s' % repo])
+        # a fork with no reimpl/ branches is normal, not an error
+        rc, out = run(['git', 'fetch', '--no-tags', '--depth=1', remote,
+                       '+refs/heads/reimpl/*:refs/remotes/%s/reimpl/*' % remote])
+        if rc != 0:
+            print('  %s: skipped (unreachable or no reimpl/ branches)' % repo)
+            continue
+        rc, out = run(['git', 'branch', '-r', '--list', '%s/reimpl/*' % remote])
+        n = len([b for b in out.splitlines() if b.strip()])
+        if n:
+            fetched += n
+            print('  %s: %d reimpl branch(es)' % (repo, n))
+    print('fetched reimpl/ branches: %d' % fetched)
+
+
 def reimpl_refs(filter_re=None, exclude_shas=()):
     """-> ['HEAD', <remote-tracking branches matching the filter>] (sorted)."""
     if filter_re is None:
@@ -141,7 +218,55 @@ def best_per_id(refs):
     return best, at100, seen
 
 
-def main():
+def remote_repos():
+    """-> {remote name: 'owner/name'} from the remotes' urls.
+
+    The url is the only reliable source: a remote added by hand is not named
+    after the repository, and an owner or a name may itself contain a dash, so
+    splitting the 'owner-name' remote fetch_fork_branches creates is ambiguous.
+    """
+    rc, out = run(['git', 'remote', '-v'])
+    repos = {}
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) < 2 or parts[0] in repos:
+            continue
+        url = parts[1][:-4] if parts[1].endswith('.git') else parts[1]
+        m = re.search(r'github\.com[:/]+([A-Za-z0-9._-]+/[A-Za-z0-9._-]+)/?$', url)
+        if m:
+            repos[parts[0]] = m.group(1)
+    return repos
+
+
+def fork_of(ref, repos=None):
+    """'owner-name/reimpl/foo' -> 'owner/name'; the remote name has no slash."""
+    if ref == 'HEAD':
+        return 'main'
+    remote = ref.split('/', 1)[0]
+    if repos is None:
+        repos = remote_repos()
+    if remote in repos:
+        return repos[remote]
+    owner, _, name = remote.partition('-')
+    return '%s/%s' % (owner, name) if name else remote
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(
+        description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument('--fetch-forks', action='store_true',
+                    default=os.environ.get('REIMPL_FETCH_FORKS') == '1',
+                    help='add every fork as a remote and shallow-fetch its reimpl/ '
+                         'branches before rolling up (needs gh; REIMPL_FETCH_FORKS=1)')
+    ap.add_argument('--repo', default=os.environ.get('REIMPL_REPO'),
+                    help="repository to enumerate the forks of, as owner/name "
+                         "(default: REIMPL_REPO, else the origin remote, else "
+                         + DEFAULT_REPO + ")")
+    args = ap.parse_args(argv)
+
+    if args.fetch_forks:
+        fetch_fork_branches(args.repo)
+
     # data files are written to the current working directory (run from the repo root)
     cpp_of = header_cpp_map()
     print('resolvers in main headers:', len(cpp_of))
@@ -149,6 +274,17 @@ def main():
     refs = reimpl_refs()
     best, at100, seen = best_per_id(refs)
     print('refs scanned: %d (%d with a status file)' % (len(refs), len(seen)))
+    repos = remote_repos()
+    # GitHub repository names are case-insensitive, and the same fork is often
+    # reachable under two remotes, so count one entry per repository
+    forks = Counter(fork_of(r, repos).lower() for r in refs)
+    print('forks covered: %d' % len([f for f in forks if f != 'main']))
+    for fork, n in sorted(forks.items(), key=lambda kv: (-kv[1], kv[0])):
+        if fork != 'main':
+            print('   %-40s %d branch(es)' % (fork, n))
+    if len(forks) <= 1 and not args.fetch_forks:
+        print('NOTE: no fork branches are fetched; rerun with --fetch-forks to '
+              'include every fork of the repository')
     missing = [r for r in refs if r not in seen]
     if missing:
         print('refs with NO status file:', len(missing))
