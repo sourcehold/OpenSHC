@@ -615,7 +615,7 @@ PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDNM@@StructResolv
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A
+PUBLIC ?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A
 
 PUBLIC ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A
 
@@ -633,7 +633,7 @@ PUBLIC ?instance@?$Extern@USoundEffectsHelperData1@Audio@OpenSHC@@$0NPDHPA@@Stru
 
 PUBLIC ?instance@?$Extern@USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@$0NPDIHI@@StructResolver@@2USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@A
 
-PUBLIC ?instance@?$Extern@PAUIDirectPlay4@dplay@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@dplay@@A
+PUBLIC ?instance@?$Extern@PAUIDirectPlay4@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@@A
 
 PUBLIC ?instance@?$Extern@U_GUID@@$0NPDNBM@@StructResolver@@2U_GUID@@A
 
@@ -653,7 +653,7 @@ PUBLIC ?instance@?$Extern@K$0NPECDA@@StructResolver@@2KA
 
 PUBLIC ?instance@?$Extern@K$0NPECDE@@StructResolver@@2KA
 
-PUBLIC ?instance@?$Extern@I$0NPECDI@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0NPECDI@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0NPECEI@@StructResolver@@2IA
 
@@ -947,7 +947,7 @@ PUBLIC ?instance@?$Extern@I$0ONDAGM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA
 
-PUBLIC ?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBFI@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBGA@@StructResolver@@2IA
 
@@ -965,7 +965,7 @@ PUBLIC ?instance@?$Extern@I$0ONDBHI@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@I$0ONDBHM@@StructResolver@@2IA
 
-PUBLIC ?instance@?$Extern@I$0ONDBIA@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBIA@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBJI@@StructResolver@@2IA
 
@@ -1271,7 +1271,7 @@ PUBLIC ?instance@?$Extern@VMenuView@UI@OpenSHC@@$0LJHELM@@StructResolver@@2VMenu
 
 PUBLIC ?instance@?$Extern@H$0LJIEAE@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0LJIEAM@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0LJIEAM@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@K$0LJIEBA@@StructResolver@@2KA
 
@@ -2302,7 +2302,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDOA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33E0h
 
-?instance@?$Extern@U_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2U_LARGE_INTEGER@@A EQU 00DF33E8h
+?instance@?$Extern@T_LARGE_INTEGER@@$0NPDDOI@@StructResolver@@2T_LARGE_INTEGER@@A EQU 00DF33E8h
 
 ?instance@?$Extern@TColorUnion@Helpers@IO@OpenSHC@@$0NPDDPA@@StructResolver@@2TColorUnion@Helpers@IO@OpenSHC@@A EQU 00DF33F0h
 
@@ -2320,7 +2320,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@$0NPDIHI@@StructResolver@@2USkirmishLobbySetupStructureLongName@Skirmish@Game@OpenSHC@@A EQU 00DF3878h
 
-?instance@?$Extern@PAUIDirectPlay4@dplay@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@dplay@@A EQU 00DF3D18h
+?instance@?$Extern@PAUIDirectPlay4@@$0NPDNBI@@StructResolver@@2PAUIDirectPlay4@@A EQU 00DF3D18h
 
 ?instance@?$Extern@U_GUID@@$0NPDNBM@@StructResolver@@2U_GUID@@A EQU 00DF3D1Ch
 
@@ -2340,7 +2340,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@K$0NPECDE@@StructResolver@@2KA EQU 00DF4234h
 
-?instance@?$Extern@I$0NPECDI@@StructResolver@@2IA EQU 00DF4238h
+?instance@?$Extern@H$0NPECDI@@StructResolver@@2HA EQU 00DF4238h
 
 ?instance@?$Extern@I$0NPECEI@@StructResolver@@2IA EQU 00DF4248h
 
@@ -2634,7 +2634,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@_N$0ONDBCI@@StructResolver@@2_NA EQU 00ED3128h
 
-?instance@?$Extern@I$0ONDBFI@@StructResolver@@2IA EQU 00ED3158h
+?instance@?$Extern@H$0ONDBFI@@StructResolver@@2HA EQU 00ED3158h
 
 ?instance@?$Extern@I$0ONDBGA@@StructResolver@@2IA EQU 00ED3160h
 
@@ -2652,7 +2652,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@I$0ONDBHM@@StructResolver@@2IA EQU 00ED317Ch
 
-?instance@?$Extern@I$0ONDBIA@@StructResolver@@2IA EQU 00ED3180h
+?instance@?$Extern@H$0ONDBIA@@StructResolver@@2HA EQU 00ED3180h
 
 ?instance@?$Extern@I$0ONDBJI@@StructResolver@@2IA EQU 00ED3198h
 
@@ -2958,7 +2958,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0LJIEAE@@StructResolver@@2HA EQU 00B98404h
 
-?instance@?$Extern@I$0LJIEAM@@StructResolver@@2IA EQU 00B9840Ch
+?instance@?$Extern@H$0LJIEAM@@StructResolver@@2HA EQU 00B9840Ch
 
 ?instance@?$Extern@K$0LJIEBA@@StructResolver@@2KA EQU 00B98410h
 

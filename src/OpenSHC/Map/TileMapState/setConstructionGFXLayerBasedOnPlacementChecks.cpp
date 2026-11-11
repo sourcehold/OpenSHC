@@ -366,7 +366,7 @@ namespace Map {
                     this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
                 } else {
                     int towerRotation
-                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate.rotationIndex1][j - 1]
+                        = DAT_TerrainDefinedData::instance.constructionSpriteRotationTable[gate.rotationIndex1][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
                         towerRotation = towerRotation + 8;
@@ -401,7 +401,7 @@ namespace Map {
                     this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0x34] + j + 0x60e;
                 } else {
                     int towerRotation
-                        = DAT_TerrainDefinedData::instance.ConstructionSpriteRotationTable[gate2.rotationIndex2][j - 1]
+                        = DAT_TerrainDefinedData::instance.constructionSpriteRotationTable[gate2.rotationIndex2][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
                         towerRotation = towerRotation + 8;

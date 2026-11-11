@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -16,6 +17,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
+        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Enums::RenderTargetInt;
         using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -103,7 +105,7 @@ namespace UI {
             void drawLine(int x1, int y1, int x2, int y2, ushort color);
 
             void drawHeaderTextBanner(
-                int textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height);
+                eTextSections textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height);
         };
 
         static_assert_cpp98_obj(sizeof(PencilRenderCore) == 66, PencilRenderCore);

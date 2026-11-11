@@ -53,7 +53,7 @@ namespace Map {
         GateTowerPlacement gateTowerChecks[4]; // 0x0000056C length: 96
         XYPair gateHouseTiles[4][6]; // 0x000005CC length: 192
         XYPair gateTowerTileOffsets[8][5]; // 0x0000068C length: 320
-        int ConstructionSpriteRotationTable[8][4]; // 0x000007CC length: 128
+        int constructionSpriteRotationTable[8][4]; // 0x000007CC length: 128
         int field_0x84c[25]; // 0x0000084C length: 100
         undefined1 padding_0x8b0[4]; // 0x000008B0 length: 4
         int field_0x8b4[25]; // 0x000008B4 length: 100
