@@ -5,8 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC650
     int TileMapState::computeWallCornerRenderRotation(uint x)
     {

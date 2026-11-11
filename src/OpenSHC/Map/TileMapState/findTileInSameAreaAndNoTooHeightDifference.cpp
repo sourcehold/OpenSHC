@@ -5,8 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00500370
     BOOLEnum TileMapState::findTileInSameAreaAndNoTooHeightDifference(int area, int tile, int yUnk)
     {

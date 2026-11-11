@@ -22,9 +22,8 @@ namespace Map {
     {
         int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-        this->LogicLayer[tile] = this->LogicLayer[tile]
-            & ~(L_PLAIN2_AND_PITCH | L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED
-                | L_CRENEL_VARIATIONUnk);
+        this->LogicLayer[tile] &= ~(L_PLAIN2_AND_PITCH | L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS
+            | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
         this->HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
         this->DamageLayer[tile] = 0;
         if ((this->LogicLayer[tile] & L_TREE) != 0) {
@@ -51,9 +50,9 @@ namespace Map {
         }
         if ((this->LogicLayer[tile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, y);
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
+            this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
         }
-        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & ~0x3c0;
+        this->MiscDisplayLayer[tile] &= ~0x3c0;
     }
 
 }

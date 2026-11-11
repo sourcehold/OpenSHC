@@ -40,7 +40,7 @@ namespace Map {
                         break;
                     }
                 }
-                this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
+                this->temporaryTerrainTypeIndex += 1;
                 if ((int)this->temporaryTerrainTypeIndex >= 1000) {
                     return;
                 }
@@ -50,7 +50,7 @@ namespace Map {
                 || ((this->LogicLayer[tile] & L_SEA) != 0 && (this->Logic2Layer[tile] & L2_PLATEAU_HIGH) != 0)) {
                 this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 1;
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
-                this->temporaryTerrainTypeIndex = this->temporaryTerrainTypeIndex + 1;
+                this->temporaryTerrainTypeIndex += 1;
                 if ((int)this->temporaryTerrainTypeIndex >= 1000) {
                     return;
                 }

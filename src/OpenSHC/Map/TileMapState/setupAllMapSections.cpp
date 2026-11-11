@@ -38,8 +38,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00512100
     void TileMapState::setupAllMapSections()
     {

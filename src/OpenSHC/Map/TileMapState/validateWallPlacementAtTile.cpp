@@ -22,9 +22,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::Units::UnitLogicState;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F94A0
     void TileMapState::validateWallPlacementAtTile(int playerID, uint x, uint y, short mapperCommand)
     {

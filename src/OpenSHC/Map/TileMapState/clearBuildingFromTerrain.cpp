@@ -13,9 +13,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00515A20
     void TileMapState::clearBuildingFromTerrain(int buildingID)
     {

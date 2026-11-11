@@ -19,7 +19,7 @@ namespace Map {
             if (rowWidth > 0) {
                 this->LogicLayer[index] = L_BORDER_EDGE;
             }
-            index = index + rowWidth;
+            index += rowWidth;
             if (rowWidth > 0) {
                 this->LogicLayer[index - 1] = L_BORDER_EDGE;
             }
@@ -32,7 +32,7 @@ namespace Map {
             if (rowWidth > 0) {
                 this->LogicLayer[index] = L_BORDER_EDGE;
             }
-            index = index + rowWidth;
+            index += rowWidth;
             if (rowWidth > 0) {
                 this->LogicLayer[index - 1] = L_BORDER_EDGE;
             }

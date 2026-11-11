@@ -13,9 +13,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9DF0
     void TileMapState::validateBuildingPlacementAtTile(int playerID, int x, int y)
     {

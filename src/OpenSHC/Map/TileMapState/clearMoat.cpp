@@ -19,7 +19,7 @@ namespace Map {
                     .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
                     .addXgetTile,
             DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]);
-        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT_DUG_OR_PLANNED;
+        this->LogicLayer[tile] &= ~L_MOAT_DUG_OR_PLANNED;
     }
 
 }

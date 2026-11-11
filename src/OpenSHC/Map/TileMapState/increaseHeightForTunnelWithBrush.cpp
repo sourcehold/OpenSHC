@@ -43,7 +43,7 @@ namespace Map {
 
             if ((this->HeightLayer[tile] < 16 || this->DefaultHeightLayer[tile] < 16)
                 && this->HeightLayer[tile] + increment >= 0) {
-                this->HeightLayer[tile] = this->HeightLayer[tile] + increment;
+                this->HeightLayer[tile] += increment;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(y, brushTile);

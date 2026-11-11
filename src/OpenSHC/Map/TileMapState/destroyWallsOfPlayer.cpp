@@ -31,8 +31,8 @@ namespace Map {
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(
                 tile);
-            this->LogicLayer[tile] = this->LogicLayer[tile]
-                & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+            this->LogicLayer[tile]
+                &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             this->DamageLayer[tile] = 0;
             uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];

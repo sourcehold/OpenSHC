@@ -20,7 +20,7 @@ namespace Map {
         int orientation = DAT_LandscapeState::instance.rocks[rockID].orientation + this->mapOrientation;
         int index = 0;
         if (orientation >= 8) {
-            orientation = orientation - 8;
+            orientation -= 8;
         }
         int size = DAT_LandscapeState::instance.rocks[rockID].size;
         int surface = (orientation / 2) * size * size;

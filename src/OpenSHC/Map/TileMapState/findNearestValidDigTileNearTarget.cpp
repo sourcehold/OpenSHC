@@ -34,8 +34,8 @@ namespace Map {
         uint targetHeight = this->HeightLayer[targetTile];
         int targetBuildingID = this->BuildingLayer[targetTile];
         if (targetBuildingID != 0) {
-            targetHeight = targetHeight
-                + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+            targetHeight
+                += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                     DAT_BuildingsState::ptr)(targetBuildingID);
         }
 
@@ -49,8 +49,8 @@ namespace Map {
             uint height = this->HeightLayer[tile];
             int buildingID = this->BuildingLayer[tile];
             if (buildingID != 0) {
-                height = height
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
+                height
+                    += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(buildingID);
             }
             if ((int)height >= (int)(targetHeight + 16) || (int)height <= (int)(targetHeight - 16)) {

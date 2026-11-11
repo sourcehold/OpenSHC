@@ -9,9 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00515F40
     TileMapState* TileMapState::Constructor_TileMapState()
     {

@@ -14,7 +14,7 @@ namespace Map {
             return;
         }
 
-        this->counter1 = this->counter1 + 1;
+        this->counter1 += 1;
         this->refreshCertainTileMap_old = this->refreshCertainTileMap;
         this->refreshRelatedOne = 0;
         for (int row = 0; row < 256; row++) {
@@ -52,12 +52,12 @@ namespace Map {
             } else if (this->refreshCertainTileMap == 2) {
                 this->heightBasedScreenYOffset[row] = row;
             } else if (this->refreshCertainTileMap == 3) {
-                this->heightBasedScreenYOffset[row] = this->heightBasedScreenYOffset[row] - step;
+                this->heightBasedScreenYOffset[row] -= step;
                 if (this->heightBasedScreenYOffset[row] > target) {
                     importHeight = TRUE;
                 }
             } else if (this->refreshCertainTileMap == 4) {
-                this->heightBasedScreenYOffset[row] = this->heightBasedScreenYOffset[row] + step;
+                this->heightBasedScreenYOffset[row] += step;
                 if (this->heightBasedScreenYOffset[row] != row) {
                     importHeight = TRUE;
                 }

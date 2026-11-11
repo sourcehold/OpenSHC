@@ -29,25 +29,24 @@ namespace Map {
             return;
         }
         if (brushStep < 8) {
-            *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-            *yPointer = *yPointer
-                + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+            *tilePointer += this->directionTranslationMatrix[*yPointer][brushStep];
+            *yPointer += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             return;
         }
 
         if (brushStep < 28) {
-            brushStep = brushStep - 20;
+            brushStep -= 20;
             for (int i = 0; i < 2; i++) {
-                *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-                *yPointer = *yPointer
-                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+                *tilePointer += this->directionTranslationMatrix[*yPointer][brushStep];
+                *yPointer
+                    += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             }
         } else if (brushStep < 48) {
-            brushStep = brushStep - 40;
+            brushStep -= 40;
             for (int i = 0; i < 3; i++) {
-                *tilePointer = *tilePointer + this->directionTranslationMatrix[*yPointer][brushStep];
-                *yPointer = *yPointer
-                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
+                *tilePointer += this->directionTranslationMatrix[*yPointer][brushStep];
+                *yPointer
+                    += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             }
         }
     }

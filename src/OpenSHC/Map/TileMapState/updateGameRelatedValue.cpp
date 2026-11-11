@@ -18,8 +18,7 @@ namespace Map {
         if (DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown == 40) {
             this->field_0x554a10 = -1;
         }
-        DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown
-            = DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown - 1;
+        DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown -= 1;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setSignpostDistanceForCampaignMission, this)();
         int signpostDistance = ((40 - DAT_GameState::instance.mapAndTime.gameEventRelatedCountdown)
                                    * DAT_GameState::instance.mapAndTime.unk_signpostDistance)

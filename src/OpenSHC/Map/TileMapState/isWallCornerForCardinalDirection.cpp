@@ -7,8 +7,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F86D0
     BOOLEnum TileMapState::isWallCornerForCardinalDirection(int tile, int y, int direction)
     {

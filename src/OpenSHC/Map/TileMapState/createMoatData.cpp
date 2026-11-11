@@ -11,8 +11,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Game::GameMode2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005110B0
     int TileMapState::createMoatData(undefined4 playerID, uint x, uint y, int filled)
     {
@@ -55,7 +53,7 @@ namespace Map {
                 this->moats[moatID].stage = 1;
                 this->moats[moatID].fillProgress = 0;
             }
-            this->moatTileCount = this->moatTileCount + 1;
+            this->moatTileCount += 1;
             return moatID;
         }
         return 0;

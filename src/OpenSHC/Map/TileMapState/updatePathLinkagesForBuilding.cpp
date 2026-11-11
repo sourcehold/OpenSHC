@@ -10,8 +10,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00506AD0
     void TileMapState::updatePathLinkagesForBuilding(int buildingID)
     {

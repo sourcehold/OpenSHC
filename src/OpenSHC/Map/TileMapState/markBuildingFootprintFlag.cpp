@@ -18,8 +18,8 @@ namespace Map {
             buildingSizeTileIndex++;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_PLAIN1_AND_FARM;
-            this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & ~0xc;
+            this->LogicLayer[tile] |= L_PLAIN1_AND_FARM;
+            this->MiscDisplayLayer[tile] &= ~0xc;
             if (buildingSizeTileIndex >= this->constructionTileCount) {
                 break;
             }

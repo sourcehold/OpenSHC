@@ -8,8 +8,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8AC0
     BOOLEnum TileMapState::hasHigherPlainNeighborWithWallOrGatehouse(int tile, int y, int direction)
     {
@@ -24,7 +22,7 @@ namespace Map {
             rotatedDirection = direction + 6;
         }
         if (rotatedDirection >= 8) {
-            rotatedDirection = rotatedDirection - 8;
+            rotatedDirection -= 8;
         }
 
         int neighbour = this->directionTranslationMatrix[y][rotatedDirection] + tile;

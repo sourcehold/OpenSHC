@@ -7,8 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA550
     int TileMapState::getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType)
     {

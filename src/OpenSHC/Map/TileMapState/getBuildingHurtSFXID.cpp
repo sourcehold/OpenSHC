@@ -7,8 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingLogicalState;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8210
     uint TileMapState::getBuildingHurtSFXID(int tileUnk)
     {

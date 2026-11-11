@@ -9,9 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Units::UnitLogicState;
-    using OpenSHC::Map::Units::UnitType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
     void TileMapState::triggerLoweredView(int requestedView)
     {

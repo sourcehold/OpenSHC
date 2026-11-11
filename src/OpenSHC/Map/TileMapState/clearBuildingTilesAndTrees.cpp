@@ -11,8 +11,6 @@
 
 namespace OpenSHC {
 namespace Map {
-    using namespace OpenSHC::Map::LogicHelpers; // L_* flags
-    using OpenSHC::Map::Buildings::Building;
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
@@ -31,8 +29,8 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(treeID);
                 }
             }
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk]
-                & ~(L_BUILDING | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY);
+            this->LogicLayer[tileUnk]
+                &= ~(L_BUILDING | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY);
             this->DamageLayer[tileUnk] = 0;
             this->BuildingLayer[tileUnk] = 0;
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {

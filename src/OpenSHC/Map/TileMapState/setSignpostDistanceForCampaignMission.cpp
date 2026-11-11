@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Game::GameMode2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00500BB0
     void TileMapState::setSignpostDistanceForCampaignMission()
     {

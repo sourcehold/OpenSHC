@@ -51,7 +51,7 @@ namespace Map {
         if ((logic & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0 && this->HeightLayer[tile] <= 12) {
             if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, 0)
                 != 0) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_MOAT_DUG_OR_PLANNED;
+                this->LogicLayer[tile] |= L_MOAT_DUG_OR_PLANNED;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(tileY, tile);

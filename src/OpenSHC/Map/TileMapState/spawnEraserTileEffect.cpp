@@ -27,15 +27,15 @@ namespace Map {
     {
         uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & ~0x400;
+        this->MiscDisplayLayer[tile] &= ~0x400;
         if (this->UnitLayer[tile] != 0) {
             return;
         }
 
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tile);
-        this->LogicLayer[tile] = this->LogicLayer[tile]
-            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+        this->LogicLayer[tile]
+            &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
         int microX
             = (tile
                   - DAT_ViewportRenderState::instance

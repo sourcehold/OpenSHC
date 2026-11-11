@@ -32,12 +32,12 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) == 0 || this->pitchDitches[id].state == -1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::destroyPitchDitch, this)(id);
             } else if (this->pitchDitches[id].state == 0) {
-                this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
+                this->pitchDitches[id].state += 1;
                 this->pitchDitches[id].field_0x12 = 0;
             } else if (this->pitchDitches[id].state == 2) {
-                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                this->pitchDitches[id].field_0x12 += 1;
                 if (this->pitchDitches[id].field_0x12 == 20) {
-                    this->pitchDitches[id].state = this->pitchDitches[id].state + 1;
+                    this->pitchDitches[id].state += 1;
                     this->pitchDitches[id].field_0x12 = 0;
                     uint height = DAT_TileMapState::instance.HeightLayer[tile];
                     for (int i = 0; i < 4; i++) {
@@ -63,7 +63,7 @@ namespace Map {
                     }
                 }
             } else if (this->pitchDitches[id].state == 3) {
-                this->pitchDitches[id].field_0x12 = this->pitchDitches[id].field_0x12 + 1;
+                this->pitchDitches[id].field_0x12 += 1;
                 if (this->pitchDitches[id].field_0x12 == 200) {
                     DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
                     this->pitchDitches[id].state = -1;
