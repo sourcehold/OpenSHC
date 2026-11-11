@@ -137,7 +137,7 @@ namespace Map {
 
             void playHurtSFXForUnit(int unitID);
 
-            int countLivingNondyingUnitsForPlayer(int unitID);
+            int countLivingNondyingUnitsForPlayer(int unitType);
 
             void triggerStoneTowerDeathForPlayer(int param_1);
 

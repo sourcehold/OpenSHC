@@ -16,6 +16,7 @@ namespace Map {
 
                 DNE_DESTINATION_HAS_BEEN_SET = 0, // 0x00000000
                 DNE_DESTINATION_NEEDED = 1, // 0x00000001
+                DNE_UNKNOWN_2 = 2, // 0x00000002
                 DNE_FLETCHER_SPECIFIC_COUNTDOWN = 5, // 0x00000005
                 DNE_OX_SPECIFIC_COUNTDOWN = 20 // 0x00000014
 

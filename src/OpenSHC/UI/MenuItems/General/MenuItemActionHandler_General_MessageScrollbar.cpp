@@ -1,0 +1,49 @@
+#include "../General.func.hpp"
+
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuItems {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x004BAD70
+        void General::MenuItemActionHandler_General_MessageScrollbar(
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
+        {
+            switch (scrollbarEvent) {
+            case 1:
+                *minValue = 0;
+                *maxValue = DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount;
+                *currentValue = 0;
+                return;
+            case 2:
+            case 3:
+                DAT_MapPropertiesState::instance.offset = *currentValue;
+                return;
+            case 4:
+                *currentValue = DAT_MapPropertiesState::instance.offset;
+                *maxValue = DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount;
+                return;
+            case 5:
+                // Stores and returns here rather than through the shared store below, as the original does.
+                if (DAT_MapPropertiesState::instance.offset > 0) {
+                    --DAT_MapPropertiesState::instance.offset;
+                    *currentValue = DAT_MapPropertiesState::instance.offset;
+                    return;
+                }
+                break;
+            case 6:
+                if (DAT_MapPropertiesState::instance.offset
+                    < (int)DAT_MapPropertiesState::instance.total - DAT_MapPropertiesState::instance.visibleRowCount) {
+                    ++DAT_MapPropertiesState::instance.offset;
+                }
+                break;
+            default:
+                return;
+            }
+            *currentValue = DAT_MapPropertiesState::instance.offset;
+        }
+
+    }
+}
+}
