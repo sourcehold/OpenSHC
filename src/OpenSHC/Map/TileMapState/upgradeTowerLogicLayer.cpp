@@ -22,24 +22,26 @@ namespace Map {
                            .addXgetTile
                 + DAT_BuildingsState::instance.buildings[buildingID].x + this->buildingX;
             this->LogicLayer[tile] &= ~L_BUILDING;
-            uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-            uint logic = this->LogicLayer[tile];
-            if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[widthOrHeight][0] == buildingSizeTileIndex) {
-                logic |= L_BUILDING;
-            } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[widthOrHeight][1]
+            if (DAT_TerrainDefinedData::instance
+                    .TowerTileOffsetsBySize[DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight][0]
                 == buildingSizeTileIndex) {
-                logic |= L_BUILDING;
-            } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[widthOrHeight][2]
+                this->LogicLayer[tile] |= L_BUILDING;
+            } else if (DAT_TerrainDefinedData::instance
+                           .TowerTileOffsetsBySize[DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight][1]
                 == buildingSizeTileIndex) {
-                logic |= L_BUILDING;
-            } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[widthOrHeight][3]
+                this->LogicLayer[tile] |= L_BUILDING;
+            } else if (DAT_TerrainDefinedData::instance
+                           .TowerTileOffsetsBySize[DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight][2]
                 == buildingSizeTileIndex) {
-                logic |= L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
+            } else if (DAT_TerrainDefinedData::instance
+                           .TowerTileOffsetsBySize[DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight][3]
+                == buildingSizeTileIndex) {
+                this->LogicLayer[tile] |= L_BUILDING;
             } else {
-                logic |= L_KEEP_NON_MANOR_HOUSE;
+                this->LogicLayer[tile] |= L_KEEP_NON_MANOR_HOUSE;
             }
             buildingSizeTileIndex++;
-            this->LogicLayer[tile] = logic;
             if (buildingSizeTileIndex >= this->constructionTileCount) {
                 break;
             }

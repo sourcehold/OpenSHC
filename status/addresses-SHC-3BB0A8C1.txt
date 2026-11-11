@@ -41095,15 +41095,15 @@ SHC_3BB0A8C1_0x004FC7C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FC810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FC9E0 | 93.3% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FC9E0 | 97.0% | asm macro via this, resolvers
 
-SHC_3BB0A8C1_0x004FDB00 | 89.2% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FDB00 | 92.8% | asm macro via this, resolvers
 
 SHC_3BB0A8C1_0x004FF080 | 96.5% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FF870 | 90.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FF870 | 98.1% | resolver call get/call eax
 
 SHC_3BB0A8C1_0x004FF990 | 95.2% | Style pass, asm differs
 
@@ -41655,7 +41655,7 @@ SHC_3BB0A8C1_0x005034A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00503720 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005037B0 | 70.1% | fix pond enemy checks; regallo
+SHC_3BB0A8C1_0x005037B0 | 72.5% | fix pond enemy checks; regallo
 
 SHC_3BB0A8C1_0x005046A0 | 0.0% | Pending
 
@@ -42069,7 +42069,7 @@ SHC_3BB0A8C1_0x00504ED1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00504EE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00504F10 | 31.0% | Style pass, asm differs
+SHC_3BB0A8C1_0x00504F10 | 37.8% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x005050F0 | 0.0% | Pending
 
@@ -42097,7 +42097,7 @@ SHC_3BB0A8C1_0x00507060 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00507130 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00507280 | 56.6% | ecx not kept across callee
+SHC_3BB0A8C1_0x00507280 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00507350 | 100.0% | Reimplemented
 
@@ -42767,7 +42767,7 @@ SHC_3BB0A8C1_0x00508DD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00508EC0 | 58.7% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00509180 | 93.3% | asm macros via this, not globa
+SHC_3BB0A8C1_0x00509180 | 95.4% | resolver call get/call eax
 
 SHC_3BB0A8C1_0x0050A74E | 0.0% | Pending
 
@@ -44733,7 +44733,7 @@ SHC_3BB0A8C1_0x00512100 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00512180 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00512450 | 96.7% | GL ecx
+SHC_3BB0A8C1_0x00512450 | 98.1% | GL ecx
 
 SHC_3BB0A8C1_0x005127B0 | 100.0% | Reimplemented
 
@@ -44741,7 +44741,7 @@ SHC_3BB0A8C1_0x005127D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00512920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00512940 | 92.8% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x00512940 | 93.1% | resolver call get/call eax
 
 SHC_3BB0A8C1_0x00514480 | 100.0% | Reimplemented
 
@@ -44771,7 +44771,7 @@ SHC_3BB0A8C1_0x00515A20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00515C80 | 98.8% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00515DA0 | 74.4% | Style pass, asm differs
+SHC_3BB0A8C1_0x00515DA0 | 75.4% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x00515F40 | 100.0% | Reimplemented
 
