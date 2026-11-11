@@ -88,7 +88,7 @@ In case of uncertainty, check the matching.
 fillMemory_ByteValue(14836, '\0', &this->playerDataArray[playerID]);
 
 // yes
-fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
+fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), 0, &this->playerDataArray[playerID]);
 ```
 
 **neutral**, and it binds the call to the layout of the structure.
