@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/Enums/MapOrientation.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -37,9 +38,7 @@ namespace AI {
             Commands::M_MAPPER_WOODSMAN,
             MACRO_CALL_MEMBER(Map::TileMapState_Func::getBuildingSizeForCommandBuildingType, DAT_TileMapState::ptr)(
                 Commands::M_MAPPER_WOODSMAN),
-            // rotation 15 is a magic value: the building ends up with rotation 0
-            // unless DAT_TileMapState::skipPlacementCheck is set
-            15);
+            Map::Enums::MO_NONE);
     }
 
 }
