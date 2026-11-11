@@ -22,7 +22,6 @@ namespace Map {
             int buildingID, int param_2, int param_3, undefined4 param_4)
         {
             // Shows the gold, popularity or trade popup above keeps, campgrounds and marketplaces of other players
-            // Matching note: the calls read the owner again through this alias; the original does not reuse playerID
             short const& owner = this->buildings[buildingID].owner;
             int const playerID = this->buildings[buildingID].owner;
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
@@ -61,9 +60,6 @@ namespace Map {
                     DAT_EntityState::ptr)(owner, entityType)) {
                 return;
             }
-            // Matching note: the tile index is a local of its own: inline, MSVC folds the last addition into the load
-            // address. x and y are read from the fields rather than through locals, which keeps x in ebx and the entity
-            // type in edi as in the original
             int const halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
             int const tile
                 = DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y + halfSize]
@@ -88,7 +84,6 @@ namespace Map {
                 DAT_EntityState::instance.entityArray[entityID].displayValue
                     = DAT_GameState::instance.playerDataArray[playerID].popularity / 100;
             } else if (entityType == (EntityType)42) {
-                // Matching note: the two trade arms are separate in the original; one || test measured 93%
                 DAT_EntityState::instance.entityArray[entityID].displayValue = param_3;
                 DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)param_4 * 2 + 141;
             } else if (entityType == (EntityType)43) {

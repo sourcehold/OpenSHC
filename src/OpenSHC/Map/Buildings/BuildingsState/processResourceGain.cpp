@@ -49,11 +49,9 @@ namespace Map {
                 return TRUE;
             }
 
-            // One counter for both fill loops: the original keeps them in the same stack slot.
             int n;
-            // Fill up the stockpiles that already store this resource first. The test is written the way
-            // getResourceSpace tests "can store this resource" (empty, or already holding it), and then skips the
-            // empty ones, which is why the original tests currentNumberOfResource twice.
+            // Fill up the stockpiles that already store this resource first. The test is the one getResourceSpace
+            // uses for "can store this resource" (empty, or already holding it), and then skips the empty ones.
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState != BLS_NORMAL || this->buildings[i].owner != playerID
                     || this->buildings[i].buildingType != storageType) {
@@ -64,7 +62,6 @@ namespace Map {
                     if (this->buildings[i].currentNumberOfResource == 0) {
                         continue;
                     }
-                    // Matching note: inverting this test into a continue drops to 0.91
                     if (this->buildings[i].resources[resourceType]
                         < DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]) {
                         int const space = DAT_BuildingDefinedData::instance.StorageLimitResourceTypeArray[resourceType]

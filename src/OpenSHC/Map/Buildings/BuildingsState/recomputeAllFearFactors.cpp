@@ -31,7 +31,6 @@ namespace Map {
                 if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE) {
                     continue;
                 }
-                // Matching note: every bad type has an arm of its own; one || test measured 81%
                 int goodOrBad = 0;
                 if (this->buildings[i].buildingType == BT_GALLOWS) {
                     goodOrBad = -1;
@@ -97,7 +96,6 @@ namespace Map {
                 }
 
                 // Track the extremes for the final statistics while the lord is alive
-                // Matching note: the level is read from the field, not a local, to keep the loop pointer on it
                 int const lordID = DAT_GameState::instance.playerDataArray[p].lordID;
                 if (lordID != 0
                     && DAT_GameState::instance.playerDataArray[p].lordUID == DAT_UnitsState::instance.units[lordID].uid

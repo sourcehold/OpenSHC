@@ -15,19 +15,18 @@ namespace Map {
         void BuildingsState::updateWheatFieldTileGraphics(int buildingID)
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
-            // continue from is stored in padding_0x2fc
+            // continue from is stored in wheatFieldIndexToGrow
             int start = 0;
             int frame = 0;
             int unchangedLeft = 3;
             if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
+                start = DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow;
             }
             for (int i = 0; i < 36; ++i) {
                 int const tile
                     = this->buildings[buildingID]
                           .tileRefs[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
                 char const stage = DAT_TileMapState::instance.DamageLayer[tile];
-                // Matching note: the separate stage == 0 test is in the original; folding it into stage < 1 costs 2%.
                 // Stages above 121 keep the frame of the previous tile
                 if (stage == 0) {
                     frame = 0;
@@ -62,19 +61,15 @@ namespace Map {
                 } else {
                     gfx = GMFirstPictureIndex::instance[OpenSHC::DE::SHCDE::GM_FARMLAND] + frame;
                 }
-                // Matching note: the position store is written in both arms; merged, the buildingID * 0xcb temporary
-                // takes ebx ahead of start, unlike the original
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft != 0 && DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                        *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc
-                            = (i + 1 + start) % 36;
+                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow = (i + 1 + start) % 36;
                         return;
                     }
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                     if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                        *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc
-                            = (i + 1 + start) % 36;
+                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow = (i + 1 + start) % 36;
                         return;
                     }
                 }

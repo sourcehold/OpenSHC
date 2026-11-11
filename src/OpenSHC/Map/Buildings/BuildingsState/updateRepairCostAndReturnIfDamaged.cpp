@@ -22,8 +22,6 @@ namespace Map {
                                   .requiredStone_0x4;
             int const wood
                 = DAT_BuildingsState::instance.buildingCosts[this->buildings[buildingIndex].buildingType].requiredWood;
-            // Matching note: the ternary evaluates the share twice, as a max() macro would; a cost local (41%) and an
-            // if/else (68%) both lose the match
             if (wood != 0) {
                 this->INT_SelectedBuildingStoneWoodCost
                     = (this->buildings[buildingIndex].maxHealth - this->buildings[buildingIndex].currentHealth) * wood

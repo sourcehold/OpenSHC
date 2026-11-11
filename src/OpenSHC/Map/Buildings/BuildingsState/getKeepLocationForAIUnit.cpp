@@ -85,8 +85,6 @@ namespace Map {
                     }
                     return TRUE;
                 }
-                // Matching note: this explicit return lets MSVC cross-jump the position test into the parade ground
-                // loop
                 return FALSE;
             }
 

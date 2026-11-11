@@ -52,9 +52,8 @@ namespace Map {
                         .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
                     (EntityType)30, 0);
 
-                // do/while: the original skips the tile count test before the first pass (a for loop measured 0.95)
                 int t = 0;
-                do {
+                while (true) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                         DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
                     int const tile
@@ -62,7 +61,6 @@ namespace Map {
                               .translationMatrix[this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY]
                               .addXgetTile
                         + this->buildings[buildingID].x + DAT_TileMapState::instance.buildingX;
-                    // Reading the random value twice instead of keeping a local makes both remainders an idiv
                     if (DAT_TileMapState::instance.RandomLayer[tile] % 5 == 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0,
@@ -77,7 +75,10 @@ namespace Map {
                             (EntityType)30, -((DAT_TileMapState::instance.RandomLayer[tile] >> 4) % 20));
                     }
                     ++t;
-                } while (t < DAT_TileMapState::instance.constructionTileCount);
+                    if (t >= DAT_TileMapState::instance.constructionTileCount) {
+                        break;
+                    }
+                }
                 break;
             }
             }

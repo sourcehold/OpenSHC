@@ -39,7 +39,6 @@ namespace Map {
             }
 
             this->structCount = 0;
-            // Matching note: one loop clears both per-player counters; MSVC unrolls the first store into nine
             for (int playerID = 0; playerID < countof(DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits);
                 ++playerID) {
                 DAT_AIVState::instance.mapExtraInfo.playerTotalKillingPits[playerID] = 0;

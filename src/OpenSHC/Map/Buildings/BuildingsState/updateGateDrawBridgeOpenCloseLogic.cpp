@@ -32,11 +32,6 @@ namespace Map {
         void BuildingsState::updateGateDrawBridgeOpenCloseLogic()
         {
             // Updates the gatehouse DAT_CurrentBuildingID: capturing by enemy troops and opening/closing for its owner.
-            // DAT_CurrentBuildingID is not reloaded after applyGateOrDrawbridgeOpenCloseChange, which needs /GL
-            // (cmake/compiler-flags-gl.txt) together with the callee chain findParticularBuilding and
-            // setupBuildingEntrancesOffset.
-            // Matching note: these stay declared up front; moving the zeroed ones (0.97) or gateMicroX/Y (0.89) to
-            // their first use loses the match, as the original stores them all before the tick test.
             int const gateX = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x;
             int const gateMicroX = gateX * 8;
             int const gateY = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
@@ -50,12 +45,11 @@ namespace Map {
             if (DAT_GameState::instance.gameTicksLoadBalancer % 10
                 == (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 + 5) % 10) {
                 // Count the troops of every player on the gatehouse and look for its flag.
-                // The original does not check the tile count before the first iteration.
                 int strength[9];
                 for (int p = 0; p < 9; ++p) {
                     strength[p] = 0;
                 }
-                do {
+                while (true) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                         t, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].widthOrHeight);
@@ -81,7 +75,6 @@ namespace Map {
                         }
                     }
                     int entityID = DAT_TileMapState::instance.EntityLayer[tile];
-                    // Matching note: written as for (int n = 1; entityID != 0 && n < 10; ++n) this drops to 0.83
                     int n = 0;
                     while (entityID != 0 && ++n < 10) {
                         if (DAT_EntityState::instance.entityArray[entityID].entityType
@@ -100,7 +93,10 @@ namespace Map {
                         entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                     }
                     ++t;
-                } while (t < DAT_TileMapState::instance.constructionTileCount);
+                    if (t >= DAT_TileMapState::instance.constructionTileCount) {
+                        break;
+                    }
+                }
 
                 int flagColor = 0;
                 int newController = 0;
@@ -146,10 +142,9 @@ namespace Map {
                 }
 
                 if (flagColor != 0 && flagEntityID != 0) {
-                    // Color all flags on the gatehouse. The original does not check the tile count before the first
-                    // iteration.
+                    // Color all flags on the gatehouse.
                     int t2 = 0;
-                    do {
+                    while (true) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                             t2, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].widthOrHeight);
@@ -177,7 +172,10 @@ namespace Map {
                             entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                         }
                         ++t2;
-                    } while (t2 < DAT_TileMapState::instance.constructionTileCount);
+                        if (t2 >= DAT_TileMapState::instance.constructionTileCount) {
+                            break;
+                        }
+                    }
                 }
                 if (newController != 0) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2c6
@@ -257,7 +255,12 @@ namespace Map {
                 } else {
                     distanceY = DAT_UnitsState::instance.units[enemyID].microYPosition - gateMicroY;
                 }
-                int const distance = distanceX >= distanceY ? distanceX : distanceY;
+                int distance;
+                if (distanceX >= distanceY) {
+                    distance = distanceX;
+                } else {
+                    distance = distanceY;
+                }
                 if (distance < 200) {
                     enemyNear = true;
                     break;

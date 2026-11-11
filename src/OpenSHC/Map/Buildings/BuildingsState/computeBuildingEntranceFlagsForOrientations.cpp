@@ -11,13 +11,11 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041B7C0
-        void BuildingsState::computeBuildingEntranceFlagsForOrientations(int param_1)
+        void BuildingsState::computeBuildingEntranceFlagsForOrientations(int buildingID)
         {
-            // param_1 is the building ID. Marks the sides of a keep-like building that have an entrance
-            // (field_0x280 holds one flag per side).
-            uint const size = this->buildings[param_1].widthOrHeight;
+            // Marks the sides of a keep-like building that have an entrance (field_0x280 holds one flag per side).
+            uint const size = this->buildings[buildingID].widthOrHeight;
             int const tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
-            // Matching note: the side length is kept apart from size and stored in a separate arm per size.
             int sideLength;
             if (size == 4) {
                 sideLength = size;
@@ -34,8 +32,8 @@ namespace Map {
             } else {
                 tryIndex = tileCount - 2;
             }
-            for (int side = 0; side < countof(this->buildings[param_1].field_0x280); ++side) {
-                this->buildings[param_1].field_0x280[side] = false;
+            for (int side = 0; side < countof(this->buildings[buildingID].field_0x280); ++side) {
+                this->buildings[buildingID].field_0x280[side] = false;
             }
             for (int i = 0; i < tileCount; ++i) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
@@ -47,12 +45,12 @@ namespace Map {
                 uint const logic
                     = DAT_TileMapState::instance
                           .LogicLayer[DAT_ViewportRenderState::instance
-                                          .translationMatrix[this->buildings[param_1].y + this->DAT_TempYOffset]
+                                          .translationMatrix[this->buildings[buildingID].y + this->DAT_TempYOffset]
                                           .addXgetTile
-                              + this->buildings[param_1].x + this->DAT_TempXOffset];
+                              + this->buildings[buildingID].x + this->DAT_TempXOffset];
                 if ((logic & LogicHelpers::L_WALL_OR_GATEHOUSE) != 0 && (logic & LogicHelpers::L_STOCKPILEUnk) == 0
                     && (logic & LogicHelpers::L_CRENEL) == 0) {
-                    this->buildings[param_1].field_0x280[i / sideLength] = true;
+                    this->buildings[buildingID].field_0x280[i / sideLength] = true;
                 }
             }
         }

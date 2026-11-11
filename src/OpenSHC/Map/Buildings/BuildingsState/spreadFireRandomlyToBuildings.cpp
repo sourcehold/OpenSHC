@@ -16,13 +16,12 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingLogicalState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00422C60
-        void BuildingsState::spreadFireRandomlyToBuildings(int param_1, int param_2)
+        void BuildingsState::spreadFireRandomlyToBuildings(int playerID, int count)
         {
-            // Sets param_2 random buildings of player param_1 on fire. Very flammable buildings are 5 times as likely.
-            // weight is zeroed before the guard: the original compares the campground id against its register
+            // Sets count random buildings of player playerID on fire. Very flammable buildings are 5 times as likely.
             int weight = 0;
-            if (param_2 < 1
-                || DAT_GameState::instance.playerDataArray[param_1]
+            if (count < 1
+                || DAT_GameState::instance.playerDataArray[playerID]
                         .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                         .id
                     <= 0) {
@@ -32,7 +31,7 @@ namespace Map {
             // logicalState 0 is an unused building slot
             for (int i = 1; i < this->maxBuildingsCount; ++i) {
                 if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
-                    || this->buildings[i].owner != param_1 || this->buildings[i].fireDuration != 0
+                    || this->buildings[i].owner != playerID || this->buildings[i].fireDuration != 0
                     || this->buildings[i].cooldownTimer != 0) {
                     continue;
                 }
@@ -49,12 +48,12 @@ namespace Map {
                 return;
             }
 
-            for (; param_2 > 0 && weight > 0; --param_2) {
+            for (; count > 0 && weight > 0; --count) {
                 int pick = SEC_RNG::instance.currentNumber2 % weight;
                 MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                 for (int i = 1; i < this->maxBuildingsCount; ++i) {
                     if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
-                        || this->buildings[i].owner != param_1 || this->buildings[i].fireDuration != 0
+                        || this->buildings[i].owner != playerID || this->buildings[i].fireDuration != 0
                         || this->buildings[i].cooldownTimer != 0) {
                         continue;
                     }

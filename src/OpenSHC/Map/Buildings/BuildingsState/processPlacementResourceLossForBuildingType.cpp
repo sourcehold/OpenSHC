@@ -25,10 +25,6 @@ namespace Map {
         void BuildingsState::processPlacementResourceLossForBuildingType(
             int playerID, BuildingType buildingType, int param_3)
         {
-            // Matching note: the original reads gameMode_2 once into ebx and compares that register again after the
-            // woodcutter call, which needs LTCG to know the callee (and its callee findFirstBuildingOfType) leaves the
-            // global alone. With findFirstBuildingOfType.cpp in cmake/compiler-flags-gl.txt this source matches
-            // exactly; without it the compare reloads the global. A gameMode local instead swaps ebx and ebp.
             if (DAT_GameCore::instance.solitaryAllBuildingsAreFree
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
                 return;

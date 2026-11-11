@@ -14,14 +14,12 @@ namespace Map {
         void BuildingsState::updateHopsFieldTileGraphics(int buildingID)
         {
             // Unless all tiles are refreshed (field_0x18e024), only one tile is updated per call and the position to
-            // continue from is stored in padding_0x2fc
-            // Matching note: i is set in both arms rather than in the for. In the loop preheader it lets the
-            // buildingID * 0xcb temporary take ebx ahead of start, unlike the original
+            // continue from is stored in wheatFieldIndexToGrow
             int start = 0;
             int unchangedLeft = 3;
             int i;
             if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                start = *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc;
+                start = DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow;
                 i = 0;
             } else {
                 i = 0;
@@ -29,7 +27,6 @@ namespace Map {
             for (; i < 24; ++i) {
                 int const tile = this->buildings[buildingID].tileRefs[(i + start) % 24];
                 char const stage = DAT_TileMapState::instance.DamageLayer[tile];
-                // Matching note: the separate stage == 0 test is in the original; folding it into stage < 2 costs 2%
                 int frame;
                 if (stage == 0) {
                     frame = 0;
@@ -66,7 +63,7 @@ namespace Map {
                 }
                 if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                     // Note: wraps at 36 instead of 24 like the tile index above
-                    *(short*)DAT_BuildingsState::instance.buildings[buildingID].padding_0x2fc = (i + 1 + start) % 36;
+                    DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow = (i + 1 + start) % 36;
                     return;
                 }
             }

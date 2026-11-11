@@ -13,14 +13,13 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00421BE0
-        int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y)
+        int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int workerIndexPlus1, int x, int y)
         {
             // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise.
-            // param_2 - 1 matching entrance tiles are skipped when a new entrance is searched.
+            // workerIndexPlus1 - 1 matching entrance tiles are skipped when a new entrance is searched.
             if (buildingID <= 0) {
                 return 0;
             }
-            // Matching note: the reference, the playerID local and the order of the lookups below are load-bearing
             Building& b = this->buildings[buildingID];
             int const playerID = b.owner;
             int const fromArea
@@ -72,7 +71,7 @@ namespace Map {
                 buildingID, 0);
             int const found = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
-                buildingID, param_2, 0, x, y);
+                buildingID, workerIndexPlus1, 0, x, y);
             if (found == 0) {
                 this->buildings[buildingID].hasAccessToKeep = 0;
                 return 0;

@@ -60,7 +60,6 @@ namespace Map {
             int const height = this->buildings[buildingID].terrainHeightUnk;
 
             // Tiles next to the building.
-            // Matching note: the three searches share one counter; a counter per for loop changes the stack slots
             int tries;
             for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingEntrancesOffset, this)(
@@ -98,7 +97,7 @@ namespace Map {
                 }
             }
 
-            // Tiles one step further away (the original reuses the tile count variable)
+            // Tiles one step further away
             tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCountForOneLarger[size];
             for (tries = 0; tries < tileCount; ++tries) {
                 MACRO_CALL_MEMBER(

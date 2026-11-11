@@ -20,8 +20,6 @@ namespace Map {
                 if (this->buildings[i].logicalState != BLS_NORMAL) {
                     continue;
                 }
-                // Matching note: type is a reference so the test and the index share one load (a value moves the loop
-                // anchor to sleeping); owner is an int local read twice, which puts it in esi and type in edi
                 BuildingTypeShort const& type = this->buildings[i].buildingType;
                 // The cesspit and all later types (fear factor buildings and decorations) never sleep
                 if (type >= BT_CESSPIT) {

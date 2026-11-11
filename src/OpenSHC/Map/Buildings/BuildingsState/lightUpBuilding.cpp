@@ -74,9 +74,8 @@ namespace Map {
             }
             int const x = this->buildings[buildingID].x;
             int const y = this->buildings[buildingID].y;
-            // do/while: the original skips the tile count test before the first pass (a for loop measured 0.976)
             int i = 0;
-            do {
+            while (true) {
                 MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                     i, this->buildings[buildingID].widthOrHeight);
                 int const tile
@@ -95,7 +94,10 @@ namespace Map {
                     }
                 }
                 ++i;
-            } while (i < DAT_TileMapState::instance.constructionTileCount);
+                if (i >= DAT_TileMapState::instance.constructionTileCount) {
+                    break;
+                }
+            }
             return TRUE;
         }
 

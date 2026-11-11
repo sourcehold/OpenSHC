@@ -10,9 +10,6 @@ namespace Map {
         void BuildingsState::sortBuildingIDsNeedPeasantsQueue(int playerID)
         {
             // Bubble sorts the queue by idle time, then by building priority.
-            // Matching note: the idle times are read from the fields each time rather than through locals: with
-            // locals the allocator keeps &buildings[previous] in ebp instead of &buildings[current]. The two
-            // identical swap blocks are deliberate: the original cross-jumps from the idle test into the second one.
             if (this->DAT_CountOfBuildingsNeedPeasants <= 1) {
                 return;
             }
