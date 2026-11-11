@@ -68,8 +68,7 @@ namespace AI {
                     && gridY <= countof(this->heatMaps[0]) - 2) {
                     this->heatMaps[gridX][gridY].isNotNearEdgeUnk = 0;
                 }
-                if ((short)DAT_TileMapState::instance.PathConnectionLayer[tile]
-                    != this->mapExtraInfo.largestSeparateArea) {
+                if (DAT_TileMapState::instance.PathConnectionLayer[tile] != this->mapExtraInfo.largestSeparateArea) {
                     ++this->heatMaps[gridX][gridY].tilesNotPartOfLargestAreaCount;
                 }
                 if (DAT_TileMapState::instance.LogicLayer[tile]
