@@ -290,7 +290,7 @@ namespace Synchrony {
         undefined4 timeSkirmishGameStart; // 0x001092A4 length: 4
         int DAT_MapU4Int2_2; // 0x001092A8 length: 4
         undefined4 DAT_HashCountdown; // 0x001092AC length: 4
-        undefined4 connectionInfoExpanded; // 0x001092B0 length: 4
+        BOOLEnum connectionInfoExpanded; // 0x001092B0 length: 4
         undefined4 skirmishStrongWalls; // 0x001092B4 length: 4
         undefined4 skirmishAlliances; // 0x001092B8 length: 4
         undefined4 skirmishNoCowThrowing; // 0x001092BC length: 4
