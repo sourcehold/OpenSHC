@@ -1,7 +1,5 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/MapConstants.hpp"
-
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
@@ -13,7 +11,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005127B0
     void TileMapState::resetAreaBasedOnLogicalLayer()
     {
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
                 continue;
             }

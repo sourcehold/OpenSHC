@@ -35,7 +35,7 @@ namespace Map {
         }
 
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        short command = (short)mapper;
+        short command = mapper;
         this->DamageLayer[tile] = 0;
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         if (command == OpenSHC::Commands::M_MAPPER_WALL) {
@@ -83,7 +83,7 @@ namespace Map {
         }
         if ((this->LogicLayer[tile] & L_TREE) != 0) {
             int organism = this->OrganismLayer[tile];
-            if (organism < 2000) {
+            if (organism < countof(DAT_LandscapeState::instance.trees)) {
                 DAT_LandscapeState::instance.trees[organism].state = 3;
             }
         }

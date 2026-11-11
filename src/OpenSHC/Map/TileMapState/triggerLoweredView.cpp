@@ -28,7 +28,7 @@ namespace Map {
             return;
         }
 
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (DAT_UnitsState::instance.units[unitID].logicalState == OpenSHC::Map::Units::ULS_INVISIBLE) {
                 continue;
             }

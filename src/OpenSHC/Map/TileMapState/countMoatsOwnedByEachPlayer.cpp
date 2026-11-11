@@ -8,10 +8,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005000E0
     void TileMapState::countMoatsOwnedByEachPlayer()
     {
-        for (int playerID = 1; playerID < 9; playerID++) {
+        for (int playerID = 1; playerID < countof(DAT_GameState::instance.playerDataArray); playerID++) {
             DAT_GameState::instance.playerDataArray[playerID].moatsOwned = 0;
         }
-        for (int moatID = 1; moatID < 16000; moatID++) {
+        for (int moatID = 1; moatID < countof(this->moats); moatID++) {
             char const owner = this->moats[moatID].owner;
             if (owner != 0) {
                 int const ownerIndex = owner;

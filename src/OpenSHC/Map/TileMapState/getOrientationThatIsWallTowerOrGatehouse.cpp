@@ -23,7 +23,7 @@ namespace Map {
         }
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        for (int index = 0; index < 8; index++) {
+        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.SomeOrientationOrderArray); index++) {
             int orientation = DAT_TerrainDefinedData::instance.SomeOrientationOrderArray[index];
             int neighbour = this->directionTranslationMatrix[y][orientation] + rowTile;
             if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0

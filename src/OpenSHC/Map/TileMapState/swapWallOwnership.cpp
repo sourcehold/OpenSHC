@@ -1,7 +1,5 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/MapConstants.hpp"
-
 namespace OpenSHC {
 namespace Map {
 
@@ -10,7 +8,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9220
     void TileMapState::swapWallOwnership(int playerID, int otherPlayerID)
     {
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
                 if ((this->WallOwnerLayer[tile] & 7) + 1 == playerID) {
                     this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (otherPlayerID - 1);

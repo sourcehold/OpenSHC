@@ -6,7 +6,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00500940
     void TileMapState::swapPitchOwnership(int playerID, int otherPlayerID)
     {
-        for (int pitchDitchID = 1; pitchDitchID < 4000; pitchDitchID++) {
+        for (int pitchDitchID = 1; pitchDitchID < countof(this->pitchDitches); pitchDitchID++) {
             if (this->pitchDitches[pitchDitchID].owner == 0) {
                 continue;
             }

@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -21,7 +20,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F93E0
     void TileMapState::destroyWallsOfPlayer(int playerID)
     {
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 continue;
             }

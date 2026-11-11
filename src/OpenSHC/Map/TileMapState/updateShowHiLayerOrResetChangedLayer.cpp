@@ -17,7 +17,7 @@ namespace Map {
         this->counter1 += 1;
         this->refreshCertainTileMap_old = this->refreshCertainTileMap;
         this->refreshRelatedOne = 0;
-        for (int row = 0; row < 256; row++) {
+        for (int row = 0; row < countof(this->heightBasedScreenYOffset); row++) {
             int target = ((uint)row >> 2) + 1;
             int step;
             if (this->refreshCertainTileMap == 3) {

@@ -7,7 +7,7 @@ namespace Map {
     void TileMapState::recountTotalOwnedMoats()
     {
         this->currentMoatCount = 0;
-        for (int i = 1; i < 16000; ++i) {
+        for (int i = 1; i < countof(this->moats); ++i) {
             if (this->moats[i].owner != 0) {
                 this->currentMoatCount = i + 1;
             }

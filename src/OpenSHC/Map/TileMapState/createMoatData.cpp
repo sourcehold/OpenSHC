@@ -33,7 +33,7 @@ namespace Map {
             return 0;
         }
 
-        for (int moatID = 1; moatID < 16000; moatID++) {
+        for (int moatID = 1; moatID < countof(this->moats); moatID++) {
             if (this->moats[moatID].owner != 0) {
                 continue;
             }

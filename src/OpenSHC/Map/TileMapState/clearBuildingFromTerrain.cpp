@@ -16,8 +16,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00515A20
     void TileMapState::clearBuildingFromTerrain(int buildingID)
     {
-        uint x = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-        uint y = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+        uint x = DAT_BuildingsState::instance.buildings[buildingID].x;
+        uint y = DAT_BuildingsState::instance.buildings[buildingID].y;
         uint size = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingType != OpenSHC::Map::Buildings::BT_KILLINGPIT) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(

@@ -56,13 +56,13 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupLogicalMapBorders, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateShowHiLayerOrResetChangedLayer, this)();
 
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if (this->LogicLayer[tile] == L_BORDER) {
-                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2];
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2];
             } else if (this->LogicLayer[tile] == L_BORDER_EDGE) {
-                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2] + 1;
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2] + 1;
             } else {
-                this->GfxLayer[tile] = (ushort)GMFirstPictureIndex::instance[2] + 2;
+                this->GfxLayer[tile] = GMFirstPictureIndex::instance[2] + 2;
             }
         }
 
@@ -103,7 +103,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::fillWith0xFF, DAT_GameState::ptr)();
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearAnimalSpawnLocationsUnk, DAT_TribesState::ptr)();
 
-        for (int tribe = 0; tribe < 1000; tribe++) {
+        for (int tribe = 0; tribe < countof(DAT_AICState::instance.tribeIDArray); tribe++) {
             DAT_AICState::instance.tribeIDArray[tribe] = 0;
             DAT_AICState::instance.tribeUIDArray[tribe] = 0;
         }

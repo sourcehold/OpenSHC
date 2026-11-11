@@ -39,7 +39,7 @@ namespace Map {
                     DAT_BuildingsState::ptr)(targetBuildingID);
         }
 
-        for (int index = 0; index < 4; index++) {
+        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.field_0x378c); index++) {
             int fromXPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].x + x2;
             int fromYPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;

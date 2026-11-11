@@ -25,7 +25,7 @@ namespace Map {
             int tileUnk = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
             if ((this->LogicLayer[tileUnk] & L_FARM_FIELD_APPLE) != 0) {
                 int treeID = this->OrganismLayer[tileUnk];
-                if (treeID != 0 && treeID < 2000) {
+                if (treeID != 0 && treeID < countof(DAT_LandscapeState::instance.trees)) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(treeID);
                 }
             }

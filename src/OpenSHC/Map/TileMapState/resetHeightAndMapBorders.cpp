@@ -16,7 +16,7 @@ namespace Map {
     {
         int inset = (MC_MAP_XY_LIMIT - mapSize) / 2;
         this->mapSize = mapSize;
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->LogicLayer); tile++) {
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             }
@@ -92,7 +92,7 @@ namespace Map {
                 DAT_PathFindingState::ptr)();
         }
 
-        for (int borderTile = 0; borderTile < MC_MAP_TILES_COUNT; borderTile++) {
+        for (int borderTile = 0; borderTile < countof(this->LogicLayer); borderTile++) {
             if ((this->LogicLayer[borderTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 this->HeightLayer[borderTile] = 8;
             }

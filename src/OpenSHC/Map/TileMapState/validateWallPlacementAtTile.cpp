@@ -29,7 +29,7 @@ namespace Map {
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         uint logic = this->LogicLayer[tile];
         int const building = this->BuildingLayer[tile];
-        if ((logic & L_WALL_OR_GATEHOUSE) != 0 && (char)this->DamageLayer[tile] < 12) {
+        if ((logic & L_WALL_OR_GATEHOUSE) != 0 && this->DamageLayer[tile] < 12) {
             return;
         }
         if ((logic & L_BUILDING) != 0) {

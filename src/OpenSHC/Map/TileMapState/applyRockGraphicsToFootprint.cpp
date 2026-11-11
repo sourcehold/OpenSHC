@@ -33,21 +33,19 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 if (this->disableElevationRendering == 0) {
                     this->GfxLayer[tile]
-                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                              + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
-                              + (short)this->buildingRotationRelatedValue + surface)
+                        = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
                         - 1;
                 } else if (DAT_LandscapeState::instance.rocks[rockID].size == 1) {
                     this->GfxLayer[tile]
-                        = ((short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                              + (short)DAT_LandscapeState::instance.rocks[rockID].gfx
-                              + (short)this->buildingRotationRelatedValue + surface)
+                        = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
                         - 1;
                 } else {
                     this->GfxLayer[tile]
-                        = (short)MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
-                              DAT_LandscapeState::ptr)(((byte)DAT_TileMapState::instance.RandomLayer[tile] & 3) + 1)
-                        + (short)GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
+                        = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getRandomRockImageOffset,
+                              DAT_LandscapeState::ptr)((DAT_TileMapState::instance.RandomLayer[tile] & 3) + 1)
+                        + GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                         + surface - 1;
                 }
             }

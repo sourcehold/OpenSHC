@@ -2,7 +2,6 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
-#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
@@ -72,7 +71,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(this->SEC_PathfindingCostTileMap1105), '\0', this->SEC_PathfindingCostTileMap1105);
 
-        for (int tile = 0; tile < MC_MAP_TILES_COUNT; tile++) {
+        for (int tile = 0; tile < countof(this->RandomLayer); tile++) {
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             this->RandomLayer[tile] = SEC_RNG::instance.currentNumber2;
         }
