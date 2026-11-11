@@ -20,8 +20,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005401D0
     void Units::UpdateMiner()
     {
-        // The accesses indexed through DAT_CurrentUnitSlotID keep the original's load and store order and its
-        // registers (all through unitID: quick_diff 1.0000 -> 0.9013)
         int const unitID = DAT_CurrentUnitSlotID::instance;
         int const workplace = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].workplaceBuildingID_1;
         if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {

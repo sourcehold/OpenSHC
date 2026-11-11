@@ -18,8 +18,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00540EC0
     void Units::UpdateInnkeeper()
     {
-        // Every access is indexed through DAT_CurrentUnitSlotID, as the original re-reads the slot after each call
-        // it can't see into (all through a unitID local: quick_diff 1.0000 -> 0.6159)
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].calculatedOwnerPlayerIndex = 3;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].movementSpeed = 3;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;

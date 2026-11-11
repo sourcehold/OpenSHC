@@ -19,8 +19,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00567320
     void Units::UpdateDrunkard()
     {
-        // The accesses indexed through DAT_CurrentUnitSlotID keep the original's load and store order and its
-        // registers (all through unitID: quick_diff 1.0000 -> 0.6877)
         int const unitID = DAT_CurrentUnitSlotID::instance;
         DAT_GameState::instance.playerDataArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner]
             .field_0x2174 += 1;

@@ -15,8 +15,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0053BC20
     void Units::UpdateBurningMan()
     {
-        // The accesses indexed through DAT_CurrentUnitSlotID keep the original's load and store order and its
-        // registers (all through unitID: quick_diff 1.0000 -> 0.7154)
         int const unitID = DAT_CurrentUnitSlotID::instance;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner = 0;
