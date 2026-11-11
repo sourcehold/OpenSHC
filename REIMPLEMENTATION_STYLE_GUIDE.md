@@ -514,6 +514,20 @@ Else write 0 instead of '\0'.
 ## 28. Remove unused `using` declarations
 If the type or namespace is unused, remove the `using` declaration in the cpp file.
 
+## 29. Use self-add and other self-operations
+```cpp
+// no
+x = x + 4;
+x = x | 0x1;
+x = x & 0xf;
+x = x + 1;
+// yes
+x += 4;
+x |= 0x1;
+x &= 0xf;
+x++;
+```
+
 ---
 
 ## Measuring
