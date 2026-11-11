@@ -18,7 +18,7 @@ namespace UI {
             WindowAndDirectDraw* window, RECT& sourceRect, RECT& destinationRect)
         {
             if (window->unk_resetViewportRelated == 2 && DAT_WindowAndDirectDraw::instance.pendingBltMode != 2) {
-                window->mbr_0xcc += 1;
+                window->mbr_0xcc++;
                 sourceRect.top = DAT_WindowAndDirectDraw::instance.resolutionY - 128;
                 sourceRect.bottom = DAT_WindowAndDirectDraw::instance.resolutionY;
                 destinationRect.left = window->clientOnScreenCoords.left;
@@ -88,7 +88,7 @@ namespace UI {
             }
             if (this->windowMoveEventBlitCountdown != 0) {
                 DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
-                this->windowMoveEventBlitCountdown -= 1;
+                this->windowMoveEventBlitCountdown--;
                 return;
             }
             DWORD const now = timeGetTime();
