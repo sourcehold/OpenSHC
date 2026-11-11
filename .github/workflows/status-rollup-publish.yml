@@ -110,7 +110,7 @@ jobs:
           echo "Included PR #$PR head $got as data."
 
       # --fetch-forks adds every fork as a remote and shallow-fetches its
-      # reimpl/ branches before the rollup reads them, so the fetch and the scan
+      # branches before the rollup reads them, so the fetch and the scan
       # cannot drift apart. It runs after the PR head has been fetched above, so
       # both are in the clone by the time anything is scanned. Only branch tips
       # are fetched and nothing from a fetched branch is executed: one status
@@ -120,10 +120,9 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REIMPL_REPO: ${{ github.repository }}
-          # include the one fetched PR head alongside the reimpl/ branches.
-          # Anchored on the exact number: a bare ^pr/ would also pick up every
-          # other refs/pull ref that happens to be present in the clone.
-          REIMPL_FILTER: ${{ steps.ctx.outputs.mode == 'pr' && format('/reimpl/|^pr/{0}$', steps.ctx.outputs.pr) || '/reimpl/' }}
+          # No REIMPL_FILTER: every remote-tracking branch is scanned, which
+          # covers the fork branches and the one PR head fetched above alike.
+          # Only that one refs/pull ref is ever fetched into this clone.
         run: |
           python -I tools/reimplementation-helper/todo/status_rollup.py \
             --fetch-forks | tee rollup.log

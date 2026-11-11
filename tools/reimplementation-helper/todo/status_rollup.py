@@ -1,16 +1,21 @@
-"""Roll up the per-address status files of main and every reimpl/ branch.
+"""Roll up the per-address status files of main and every fork branch.
 
-Reads status/addresses-SHC-*.txt from HEAD and from each remote reimpl/ branch
+Reads status/addresses-SHC-*.txt from HEAD and from every remote-tracking branch
 (branch contents are taken as truth, nothing is re-measured) and writes one TSV
 row per SHC id saying whether it is at 100% somewhere or still needs work.
+
+Every branch, not only the reimpl/ ones: finished work turns up on branches
+named for whatever produced it (ci/, cishard/, civar/, buildings-update-...),
+and two such branches on one fork alone held 300+ entries better than the rollup
+knew about while only reimpl/ was scanned.
 
 Run from the repo root:
     python -I tools/reimplementation-helper/todo/status_rollup.py
 
 Only branches that are present as remote-tracking refs can be read, so a plain
 clone sees nothing but its own. Pass --fetch-forks (or set REIMPL_FETCH_FORKS=1)
-to add every fork of the root repository as a remote first and shallow-fetch its
-reimpl/ branches, which is what fetch_fork_branches.sh does in CI:
+to add every fork of the root repository as a remote first and shallow-fetch all
+of its branches, which is what fetch_fork_branches.sh does:
 
     python -I tools/reimplementation-helper/todo/status_rollup.py --fetch-forks
 
@@ -22,8 +27,8 @@ what is already fetched is scanned, so the CI workflow keeps working unchanged.
 
 Output: status_rollup.tsv in the current working directory.
 
-Set REIMPL_FILTER to a regex to widen or narrow which remote-tracking branches
-are scanned (default '/reimpl/'). Note for Git Bash on Windows: a value that
+Set REIMPL_FILTER to a regex to narrow which remote-tracking branches are
+scanned (default: all of them). Note for Git Bash on Windows: a value that
 starts with '/' is rewritten into a Windows path by MSYS, which silently turns
 the regex into one that matches nothing -- prefix the command with
 MSYS_NO_PATHCONV=1, or write the pattern without a leading slash.
@@ -150,10 +155,15 @@ def fork_repos(repo_full_name):
 
 
 def fetch_fork_branches(repo_full_name=None):
-    """Add every fork as a remote and shallow-fetch its reimpl/ branches.
+    """Add every fork as a remote and shallow-fetch all of its branches.
 
     The Python counterpart of fetch_fork_branches.sh, so that a local run covers
     the same branches CI does. Only branch tips are fetched.
+
+    Every branch, not just reimpl/: finished work turns up on branches named for
+    whatever produced it (ci/, cishard/, civar/, buildings-update-...), and two
+    such branches on one fork alone held 300+ entries better than the rollup
+    knew about while only reimpl/ was fetched.
     """
     repo_full_name = (repo_full_name or os.environ.get('REIMPL_REPO')
                       or origin_repo() or DEFAULT_REPO)
@@ -165,25 +175,30 @@ def fetch_fork_branches(repo_full_name=None):
         remote = repo.replace('/', '-')
         run(['git', 'remote', 'remove', remote])
         run(['git', 'remote', 'add', remote, 'https://github.com/%s' % repo])
-        # a fork with no reimpl/ branches is normal, not an error
+        # an empty or unreachable fork is normal, not an error
         rc, out = run(['git', 'fetch', '--no-tags', '--depth=1', remote,
-                       '+refs/heads/reimpl/*:refs/remotes/%s/reimpl/*' % remote])
+                       '+refs/heads/*:refs/remotes/%s/*' % remote])
         if rc != 0:
-            print('  %s: skipped (unreachable or no reimpl/ branches)' % repo)
+            print('  %s: skipped (unreachable)' % repo)
             continue
-        rc, out = run(['git', 'branch', '-r', '--list', '%s/reimpl/*' % remote])
-        n = len([b for b in out.splitlines() if b.strip()])
+        rc, out = run(['git', 'branch', '-r', '--list', '%s/*' % remote])
+        n = len([b for b in out.splitlines() if b.strip() and '->' not in b])
         if n:
             fetched += n
-            print('  %s: %d reimpl branch(es)' % (repo, n))
-    print('fetched reimpl/ branches: %d' % fetched)
+            print('  %s: %d branch(es)' % (repo, n))
+    print('fetched branches: %d' % fetched)
 
 
 def reimpl_refs(filter_re=None, exclude_shas=()):
-    """-> ['HEAD', <remote-tracking branches matching the filter>] (sorted)."""
+    """-> ['HEAD', <remote-tracking branches matching the filter>] (sorted).
+
+    Every remote-tracking branch by default: work worth finding sits on branches
+    named for whatever produced it, not only on reimpl/ ones. Set REIMPL_FILTER
+    to narrow it again.
+    """
     if filter_re is None:
-        # which remote-tracking branches to include; override in CI with REIMPL_FILTER
-        filter_re = re.compile(os.environ.get('REIMPL_FILTER', '/reimpl/'))
+        # which remote-tracking branches to include; override with REIMPL_FILTER
+        filter_re = re.compile(os.environ.get('REIMPL_FILTER', ''))
     rc, out = run(['git', 'branch', '-r', '--format=%(refname:short)'])
     refs = []
     for b in out.splitlines():
@@ -256,7 +271,7 @@ def main(argv=None):
         description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument('--fetch-forks', action='store_true',
                     default=os.environ.get('REIMPL_FETCH_FORKS') == '1',
-                    help='add every fork as a remote and shallow-fetch its reimpl/ '
+                    help='add every fork as a remote and shallow-fetch all of its '
                          'branches before rolling up (needs gh; REIMPL_FETCH_FORKS=1)')
     ap.add_argument('--repo', default=os.environ.get('REIMPL_REPO'),
                     help="repository to enumerate the forks of, as owner/name "

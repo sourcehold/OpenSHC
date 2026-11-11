@@ -1,10 +1,15 @@
 <#
 .SYNOPSIS
-Add every fork of the root repository as a remote and shallow-fetch its
-reimpl/ branches, so that status_rollup.py sees them as ordinary
-remote-tracking branches.
+Add every fork of the root repository as a remote and shallow-fetch all of its
+branches, so that status_rollup.py sees them as ordinary remote-tracking
+branches.
 
 .DESCRIPTION
+Every branch, not just reimpl/: finished work turns up on branches named for
+whatever produced it (ci/, cishard/, civar/, buildings-update-...), and two such
+branches on one fork alone held 300+ entries better than the rollup knew about
+while only reimpl/ was fetched.
+
 Only branch tips are fetched: the rollup reads one file per ref, and nothing
 from a fetched branch is ever executed.
 
@@ -51,16 +56,16 @@ foreach ($repo in $repos) {
     git remote remove $remote 2>$null | Out-Null
     git remote add $remote "https://github.com/$repo"
 
-    # A fork with no reimpl/ branches is normal, not an error.
-    git fetch --no-tags --depth=1 $remote "+refs/heads/reimpl/*:refs/remotes/$remote/reimpl/*" 2>$null | Out-Null
+    # An empty or unreachable fork is normal, not an error.
+    git fetch --no-tags --depth=1 $remote "+refs/heads/*:refs/remotes/$remote/*" 2>$null | Out-Null
     if ($LASTEXITCODE -eq 0) {
-        $n = @(git branch -r --list "$remote/reimpl/*").Count
-        if ($n -gt 0) { Write-Host "  ${repo}: $n reimpl branch(es)" }
+        $n = @(git branch -r --list "$remote/*").Count
+        if ($n -gt 0) { Write-Host "  ${repo}: $n branch(es)" }
     }
     else {
-        Write-Host "  ${repo}: skipped (unreachable or no reimpl/ branches)"
+        Write-Host "  ${repo}: skipped (unreachable)"
     }
 }
 
-$total = @(git branch -r | Where-Object { $_ -match '/reimpl/' }).Count
-Write-Host "Total reimpl/ branches: $total"
+$total = @(git branch -r | Where-Object { $_ -notmatch '-> ' }).Count
+Write-Host "Total remote-tracking branches: $total"
