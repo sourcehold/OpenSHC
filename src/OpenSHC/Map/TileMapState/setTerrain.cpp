@@ -119,19 +119,19 @@ namespace Map {
                 if (this->OrganismLayer[tile] != 0) {
                     continue;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PEBBLES;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_PEBBLES;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
                 this->HeightLayer[tile] = 0;
                 this->DefaultHeightLayer[tile] = 0;
                 this->forceUpdateLogicalAndMiscDisplayLayers = 1;
@@ -151,21 +151,21 @@ namespace Map {
                 if (flags2 != L2_NONE && (this->LogicLayer[tile] & L_RIVER) == 0) {
                     continue;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
                 if (flags1 == L_RIVER) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
+                    this->LogicLayer[tile] &= ~L_FORD;
                 } else {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
+                    this->LogicLayer[tile] &= ~L_RIVER;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PEBBLES;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_PEBBLES;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
                 if (flags2 != L2_BEACH) {
                     this->WallGFXLayer[tile] = this->RandomLayer[tile] & 7;
@@ -178,7 +178,7 @@ namespace Map {
                     this->WallGFXLayer[tile] = (DAT_GameCore::instance.mapTimeInTicks & 8)
                         + this->WallGFXLayer[tile] * 0x20 + (this->RandomLayer[tile] & 7) * 0x400;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
                 if (this->HeightLayer[tile] >= 8) {
                     this->HeightLayer[tile] = this->DefaultHeightLayer[tile] - 8;
                     this->forceUpdateLogicalAndMiscDisplayLayers = 1;
@@ -206,19 +206,19 @@ namespace Map {
                     this->HeightLayer[tile] = 8;
                     this->DefaultHeightLayer[tile] = 8;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PEBBLES;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_PEBBLES;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_IRON) {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                     continue;
@@ -238,17 +238,17 @@ namespace Map {
                 if (this->OrganismLayer[tile] != 0) {
                     continue;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PEBBLES;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_PEBBLES;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_PEBBLES) {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                     continue;
@@ -272,19 +272,19 @@ namespace Map {
                     this->HeightLayer[tile] = 8;
                     this->DefaultHeightLayer[tile] = 8;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_MARSH) {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                     continue;
@@ -303,18 +303,18 @@ namespace Map {
                 }
                 this->HeightLayer[tile] = 8;
                 this->DefaultHeightLayer[tile] = 8;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_OIL) {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                     continue;
@@ -334,16 +334,16 @@ namespace Map {
                 if ((this->LogicLayer[tile] & L_MARSH) == 0) {
                     continue;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_MOAT) {
                 if (this->OrganismLayer[tile] != 0) {
                     continue;
@@ -410,30 +410,30 @@ namespace Map {
                         && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
                                playerID, x, yParam, 0)
                             != 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_MOAT_DUG_OR_PLANNED;
+                        this->LogicLayer[tile] |= L_MOAT_DUG_OR_PLANNED;
                     }
                 } else if (flags2 == L2_SCRUB) {
                     if ((this->LogicLayer[tile] & L_MOAT_DUG_OR_PLANNED) != 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT_DUG_OR_PLANNED;
+                        this->LogicLayer[tile] &= ~L_MOAT_DUG_OR_PLANNED;
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, yParam);
                     }
                 } else {
                     this->HeightLayer[tile] = 8;
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                    this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                     this->Logic2Layer[tile] = 0;
                     if (flags2 == L2_EARTH_AND_STONES) {
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
                                 playerID, x, yParam, 1)
                             != 0) {
-                            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT_DUG_OR_PLANNED;
-                            this->LogicLayer[tile] = this->LogicLayer[tile] | L_MOAT;
+                            this->LogicLayer[tile] &= ~L_MOAT_DUG_OR_PLANNED;
+                            this->LogicLayer[tile] |= L_MOAT;
                             this->HeightLayer[tile] = 0;
                         }
                     } else if (flags2 == L2_MOAT_UNDUG) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, yParam);
                         this->HeightLayer[tile] = 8;
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT_DUG_OR_PLANNED;
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
+                        this->LogicLayer[tile] &= ~L_MOAT_DUG_OR_PLANNED;
+                        this->LogicLayer[tile] &= ~L_MOAT;
                     }
                 }
             } else if (flags2 == L2_EARTH_AND_STONES || flags2 == L2_OASIS_GRASS || flags2 == L2_BEACH
@@ -483,18 +483,18 @@ namespace Map {
                     this->HeightLayer[tile] = 8;
                     this->DefaultHeightLayer[tile] = 8;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_BOULDERS;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_BOULDERS;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
                 if (flags2 != L2_EARTH_AND_STONES) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                    this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 }
                 this->Logic2Layer[tile] = (byte)flags2;
             } else if (flags1 == L_BOULDERS) {
@@ -520,19 +520,19 @@ namespace Map {
                     this->HeightLayer[tile] = 8;
                     this->DefaultHeightLayer[tile] = 8;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_SEA;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_UNNAMED_0x40;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_RIVER;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_FORD;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PEBBLES;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_IRON;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MARSH;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_OIL;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
+                this->LogicLayer[tile] &= ~L_SEA;
+                this->LogicLayer[tile] &= ~L_UNNAMED_0x40;
+                this->LogicLayer[tile] &= ~L_RIVER;
+                this->LogicLayer[tile] &= ~L_FORD;
+                this->LogicLayer[tile] &= ~L_ROCKY;
+                this->LogicLayer[tile] &= ~L_PEBBLES;
+                this->LogicLayer[tile] &= ~L_IRON;
+                this->LogicLayer[tile] &= ~L_MARSH;
+                this->LogicLayer[tile] &= ~L_OIL;
+                this->LogicLayer[tile] &= ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 this->Logic2Layer[tile] = 0;
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             } else if (flags1 == L_UNNAMED_0x40) {
                 if ((this->LogicLayer[tile] & L_SEA) == 0) {
                     continue;
@@ -549,7 +549,7 @@ namespace Map {
                 if (this->OrganismLayer[tile] != 0) {
                     continue;
                 }
-                this->LogicLayer[tile] = this->LogicLayer[tile] | flags1;
+                this->LogicLayer[tile] |= flags1;
             }
 
             if (flags1 != L_NONE) {

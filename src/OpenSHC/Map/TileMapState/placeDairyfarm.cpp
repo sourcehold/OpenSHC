@@ -18,7 +18,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_DAIRY;
@@ -69,7 +68,7 @@ namespace Map {
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             this->HeightLayer[tileUnk] = (byte)averageHeight;
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+            this->LogicLayer[tileUnk] |= L_BUILDING;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
             this->ChangedLayer[tileUnk] = 2;
@@ -80,7 +79,7 @@ namespace Map {
 
         for (int i = 4; i < 27; i++) {
             int tileUnk = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_FARM_FIELD_DAIRY;
+            this->LogicLayer[tileUnk] |= L_FARM_FIELD_DAIRY;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(

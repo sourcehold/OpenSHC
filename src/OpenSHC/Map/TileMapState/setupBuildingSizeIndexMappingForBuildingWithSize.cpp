@@ -13,7 +13,7 @@ namespace Map {
     {
         int tileCount = buildingSize * buildingSize;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            4056, '\0', DAT_BuildingSizeIndexMapping::instance + buildingSize);
+            4056, 0, DAT_BuildingSizeIndexMapping::instance + buildingSize);
         if (buildingSize <= 1) {
             return;
         }

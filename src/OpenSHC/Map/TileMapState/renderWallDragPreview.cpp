@@ -13,8 +13,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8BD0
     void TileMapState::renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command)
     {
@@ -56,7 +54,7 @@ namespace Map {
             if (this->DAT_WallTileCountCurrentDrag >= this->constructionTileCount) {
                 break;
             }
-            this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag + 1;
+            this->DAT_WallTileCountCurrentDrag += 1;
 
             /* a crenel dragged over an existing one does not count against the tile budget */
             int onCrenel = 0;
@@ -65,7 +63,7 @@ namespace Map {
             }
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0 || this->DamageLayer[tile] != 0 || onCrenel != 0) {
                 if (onCrenel != 0) {
-                    this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
+                    this->DAT_WallTileCountCurrentDrag -= 1;
                 }
                 if (this->illegalBuild != FALSE) {
                     if (command == 0x19) {
@@ -87,7 +85,7 @@ namespace Map {
                     /* a stair climbs one graphic per eight units of height below the wall top */
                     int steps = (budget - this->HeightLayer[tile]) / 8 - 1;
                     if (steps <= 0) {
-                        this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
+                        this->DAT_WallTileCountCurrentDrag -= 1;
                     } else {
                         if (steps > 10) {
                             steps = 10;
@@ -96,7 +94,7 @@ namespace Map {
                     }
                 }
             } else {
-                this->DAT_WallTileCountCurrentDrag = this->DAT_WallTileCountCurrentDrag - 1;
+                this->DAT_WallTileCountCurrentDrag -= 1;
             }
 
             int stepX = leftX;
@@ -110,60 +108,60 @@ namespace Map {
             if (command == 0x1b) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 } else if (stepY > 0) {
                     if ((int)y >= (int)y2) {
-                        translation = translation - 3;
-                        y = y - 1;
-                        upY = upY - 1;
-                        downY = downY + 1;
+                        translation -= 3;
+                        y -= 1;
+                        upY -= 1;
+                        downY += 1;
                     } else {
-                        translation = translation + 3;
-                        y = y + 1;
-                        upY = upY + 1;
-                        downY = downY - 1;
+                        translation += 3;
+                        y += 1;
+                        upY += 1;
+                        downY -= 1;
                     }
                 } else {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             } else {
                 if (stepX != 0) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 }
                 if (stepY != 0) {
                     if ((int)y >= (int)y2) {
-                        translation = translation - 3;
-                        y = y - 1;
-                        upY = upY - 1;
-                        downY = downY + 1;
+                        translation -= 3;
+                        y -= 1;
+                        upY -= 1;
+                        downY += 1;
                     } else {
-                        translation = translation + 3;
-                        y = y + 1;
-                        upY = upY + 1;
-                        downY = downY - 1;
+                        translation += 3;
+                        y += 1;
+                        upY += 1;
+                        downY -= 1;
                     }
                 }
                 if (x == x2 && y == y2) {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             }
             if (budget > 0x10 && overshoot == 2) {
-                budget = budget - 0x10;
+                budget -= 0x10;
             }
         } while (x != x2 || y != y2 || overshoot != 0);
 

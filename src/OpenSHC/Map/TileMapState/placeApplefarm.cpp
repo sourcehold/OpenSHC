@@ -18,7 +18,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
@@ -50,7 +49,7 @@ namespace Map {
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             this->HeightLayer[tileUnk] = (byte)averageHeight;
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+            this->LogicLayer[tileUnk] |= L_BUILDING;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(
@@ -62,7 +61,7 @@ namespace Map {
         for (int i = 0; i < 8; i++) {
             int tileUnk = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tileUnk);
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_FARM_FIELD_APPLE;
+            this->LogicLayer[tileUnk] |= L_FARM_FIELD_APPLE;
             this->ChangedLayer[tileUnk] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::placeAppleTree, DAT_LandscapeState::ptr)(buildingID,
                 DAT_TerrainDefinedData::instance.AppleFarmOffsets[i].x + x,

@@ -8,8 +8,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FBE70
     BOOLEnum TileMapState::isTileSuitableForBrushPlacement(int tile, uint x, uint y)
     {

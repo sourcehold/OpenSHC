@@ -33,9 +33,9 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[buildingSizeTileIndex] = tileUnk;
             }
             this->HeightLayer[tileUnk] = (char)param_7 + 0x5a;
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_WALL_OR_GATEHOUSE;
+            this->LogicLayer[tileUnk] |= L_WALL_OR_GATEHOUSE;
             this->WallOwnerLayer[tileUnk] = this->WallOwnerLayer[tileUnk] & 0xf8 | (char)param_1 - 1U;
-            this->MiscDisplayLayer[tileUnk] = this->MiscDisplayLayer[tileUnk] | 0x20;
+            this->MiscDisplayLayer[tileUnk] |= 0x20;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             buildingSizeTileIndex++;
             this->BuildingWasLayer[tileUnk] = (uchar)param_4;
@@ -43,11 +43,11 @@ namespace Map {
         } while (buildingSizeTileIndex < this->constructionTileCount);
 
         if (param_6 == 0x50) {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::createClimbData, DAT_PathFindingState::ptr)(
-                4, buildingID, 0, 2, 0);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::createClimbData,
+                DAT_PathFindingState::ptr)(4, buildingID, 0, 2, 0);
         } else {
-            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::createClimbData, DAT_PathFindingState::ptr)(
-                4, buildingID, 0, 0, 0);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::createClimbData,
+                DAT_PathFindingState::ptr)(4, buildingID, 0, 0, 0);
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);

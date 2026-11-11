@@ -36,9 +36,9 @@ namespace Map {
             }
             if ((this->LogicLayer[tileUnk] & (L_SEA | L_MARSH | L_MOAT)) == 0) {
                 if (noVariation != 0) {
-                    this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] & ~L_TREE_VARIATION;
+                    this->LogicLayer[tileUnk] &= ~L_TREE_VARIATION;
                 } else {
-                    this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_TREE_VARIATION;
+                    this->LogicLayer[tileUnk] |= L_TREE_VARIATION;
                 }
             }
         }

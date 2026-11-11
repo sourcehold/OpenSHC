@@ -24,12 +24,9 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005037B0
     void TileMapState::checkBuildingCanBePlacedHere(
@@ -154,7 +151,7 @@ namespace Map {
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
-                        i = i + 1;
+                        i += 1;
                     } while (i < this->constructionTileCount);
                 }
                 break;
@@ -204,7 +201,7 @@ namespace Map {
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
-                        i = i + 1;
+                        i += 1;
                     } while (i < this->constructionTileCount);
                 } else if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
@@ -250,7 +247,7 @@ namespace Map {
                                 break;
                             }
                         }
-                        x = x + 1;
+                        x += 1;
                         siteClear = true;
                     } while ((int)x < this->constructionTileCount);
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
@@ -287,7 +284,7 @@ namespace Map {
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
-                        i = i + 1;
+                        i += 1;
                     } while (i < this->constructionTileCount);
                 }
                 break;
@@ -309,7 +306,7 @@ namespace Map {
                             noEnemyNearby = false;
                             break;
                         }
-                        x = x + 1;
+                        x += 1;
                     } while ((int)x < this->constructionTileCount);
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                             DAT_PathFindingState::ptr)(
@@ -335,7 +332,7 @@ namespace Map {
                         this->buildingPlacementFail = TRUE;
                         break;
                     }
-                    i = i + 1;
+                    i += 1;
                 } while (i < this->constructionTileCount);
             }
         }
@@ -361,25 +358,25 @@ namespace Map {
                 return;
             }
             if ((logic & 0x20000) != 0) {
-                _boulderCount = _boulderCount + 1;
+                _boulderCount += 1;
             }
             if ((logic & 0x80000) != 0) {
-                _ironCount = _ironCount + 1;
+                _ironCount += 1;
             }
             if ((int)logic < 0) {
-                _oilCount = _oilCount + 1;
+                _oilCount += 1;
             }
             if ((logic & 0x100000) == 0) {
                 char const logic2 = this->Logic2Layer[tile];
                 if ((logic2 & 0x10) != 0) {
                     // grass
                     y__fertileLandCount = y__fertileLandCount + 1;
-                    _grassCount = _grassCount + 1;
+                    _grassCount += 1;
                 }
                 if (logic2 < 0) {
                     // thick scrub
                     y__fertileLandCount = y__fertileLandCount + 1;
-                    _grassCount = _grassCount + 1;
+                    _grassCount += 1;
                 }
                 if ((logic2 & 1) != 0) {
                     // scrub
@@ -391,7 +388,7 @@ namespace Map {
                 != 0) {
                 this->buildingPlacementFail = TRUE;
             }
-            x = x + 1;
+            x += 1;
         } while ((int)x < this->constructionTileCount);
         short const command = (short)commandBuildingType;
         if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM || command == OpenSHC::Commands::M_MAPPER_WHEATFARM
@@ -461,7 +458,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             int const outbuilding2X
                 = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + _x;
@@ -488,7 +485,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             return;
         }
@@ -521,7 +518,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             int const tower2X = gateTowers[3] + _x;
             int const tower2Y = gateTowers[4] + _y;
@@ -546,7 +543,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             for (int part = 0; part < 6; part++) {
                 uint const partY
@@ -691,7 +688,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             int const part1X
                 = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][1].x;
@@ -718,7 +715,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             int const part2X
                 = _x + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[this->DAT_TempBuildingRotation][2].x;
@@ -745,7 +742,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             return;
         }
@@ -776,7 +773,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             return;
         }
@@ -804,7 +801,7 @@ namespace Map {
                     != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
-                x = x + 1;
+                x += 1;
             } while ((int)x < this->constructionTileCount);
             return;
         }

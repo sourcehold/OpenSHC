@@ -35,7 +35,6 @@ namespace Map {
     using OpenSHC::Game::GameMode2;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
     using OpenSHC::Map::Units::UnitType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005029D0
     void TileMapState::validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command)
@@ -215,60 +214,60 @@ namespace Map {
             if ((short)command == 0x1b) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 } else if (stepY > 0) {
                     if ((int)y >= (int)y2) {
-                        translation = translation - 3;
-                        upY = upY - 1;
-                        y = y - 1;
-                        downY = downY + 1;
+                        translation -= 3;
+                        upY -= 1;
+                        y -= 1;
+                        downY += 1;
                     } else {
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        y = y + 1;
-                        downY = downY - 1;
+                        translation += 3;
+                        upY += 1;
+                        y += 1;
+                        downY -= 1;
                     }
                 } else {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             } else {
                 if (stepX != 0) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 }
                 if (stepY != 0) {
                     if ((int)y >= (int)y2) {
-                        translation = translation - 3;
-                        upY = upY - 1;
-                        y = y - 1;
-                        downY = downY + 1;
+                        translation -= 3;
+                        upY -= 1;
+                        y -= 1;
+                        downY += 1;
                     } else {
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        y = y + 1;
-                        downY = downY - 1;
+                        translation += 3;
+                        upY += 1;
+                        y += 1;
+                        downY -= 1;
                     }
                 }
                 if (x == x2 && y == y2) {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             }
             if (budget > 0x10) {
-                budget = budget - 0x10;
+                budget -= 0x10;
             }
         } while (x != x2 || y != y2 || overshoot != 0);
         this->illegalBuild = FALSE;

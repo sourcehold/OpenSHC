@@ -72,9 +72,9 @@ namespace Map {
             }
 
             if ((logic & L_RIVER) != 0) {
-                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] + 8;
+                this->HeightLayer[brushTile] += 8;
             }
-            this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
+            this->LogicLayer[brushTile] &= ~L_ROCKY;
             /* the tile moves a tenth of the way towards the brush average, plus one */
             byte levelled;
             bool levelChanged = true;
@@ -99,7 +99,7 @@ namespace Map {
             }
             this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
-                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
+                this->HeightLayer[brushTile] -= 8;
             }
             uint brushY = y;
             this->DAT_SomeTile = brushTile;

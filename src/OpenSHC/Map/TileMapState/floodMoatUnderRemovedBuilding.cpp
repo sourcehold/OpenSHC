@@ -29,7 +29,7 @@ namespace Map {
             if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation][buildingSizeTileIndex] != 0) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile, this)(targetedTile)
                     != 0) {
-                    this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] | L_MOAT;
+                    this->LogicLayer[targetedTile] |= L_MOAT;
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(targetedTile, 2);
                 }
             }

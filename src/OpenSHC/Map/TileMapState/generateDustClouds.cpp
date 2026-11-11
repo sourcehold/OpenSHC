@@ -19,7 +19,7 @@ namespace Map {
         short seed = SEC_RNG::instance.currentNumber2;
         int random = SEC_RNG::instance.currentNumber2;
         MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-        this->SEC_Section1052 = this->SEC_Section1052 + 1;
+        this->SEC_Section1052 += 1;
         if (random % 500 == this->SEC_Section1052 % 500) {
             this->SEC_Section1053 = random % 0xb4;
         }
@@ -27,10 +27,10 @@ namespace Map {
             this->SEC_Section1054 = random % 0xb4;
         }
         if (this->SEC_Section1053 != 0) {
-            this->SEC_Section1053 = this->SEC_Section1053 - 1;
+            this->SEC_Section1053 -= 1;
         }
         if (this->SEC_Section1054 != 0) {
-            this->SEC_Section1054 = this->SEC_Section1054 - 1;
+            this->SEC_Section1054 -= 1;
         }
 
         for (int i = 0; i < this->temporaryTerrainTypeIndex; i++) {

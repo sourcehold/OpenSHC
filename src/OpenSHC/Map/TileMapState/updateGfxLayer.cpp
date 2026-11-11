@@ -104,7 +104,7 @@
         COUNT = 0;                                                                                                     \
         for (BIT = 0; BIT < 8; BIT = BIT + 1) {                                                                        \
             if ((1 << BIT & MASK) != 0) {                                                                              \
-                COUNT = COUNT + 1;                                                                                     \
+                COUNT += 1;                                                                                            \
             }                                                                                                          \
         }                                                                                                              \
         if (COUNT < 4) {                                                                                               \
@@ -161,12 +161,9 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_ROCKY;
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
-    using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
@@ -235,7 +232,7 @@ namespace Map {
         if (this->forceUpdateTextureTilemap <= 0) {
             return;
         }
-        this->forceUpdateTextureTilemap = this->forceUpdateTextureTilemap - 1;
+        this->forceUpdateTextureTilemap -= 1;
         rotationNew = DAT_PathFindingState::instance.mappingYRelated % 10;
         for (blockRowVal = this->someIndex; blockRowVal <= this->someLimit; blockRowVal = blockRowVal + 1) {
             for (blockColumnRef = this->someYLike; blockColumnRef <= this->someYLikeLimit;
@@ -435,8 +432,7 @@ namespace Map {
                                             this->GfxLayer[this->DAT_SomeTile]
                                                 = GMFirstPictureIndex::instance[0xc] + 0x83;
                                         }
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_CRENEL_VARIATIONUnk;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_CRENEL_VARIATIONUnk;
                                     } else if (MACRO_CALL_MEMBER(
                                                    OpenSHC::Map::TileMapState_Func::isWallCornerForDiagonalDirection,
                                                    this)(this->DAT_SomeTile, this->DAT_SomeY, 3)
@@ -454,8 +450,7 @@ namespace Map {
                                             this->GfxLayer[this->DAT_SomeTile]
                                                 = GMFirstPictureIndex::instance[0xc] + 0x80;
                                         }
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_CRENEL_VARIATIONUnk;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_CRENEL_VARIATIONUnk;
                                     } else if (MACRO_CALL_MEMBER(
                                                    OpenSHC::Map::TileMapState_Func::isWallCornerForDiagonalDirection,
                                                    this)(this->DAT_SomeTile, this->DAT_SomeY, 5)
@@ -473,8 +468,7 @@ namespace Map {
                                             this->GfxLayer[this->DAT_SomeTile]
                                                 = GMFirstPictureIndex::instance[0xc] + 0x81;
                                         }
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_CRENEL_VARIATIONUnk;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_CRENEL_VARIATIONUnk;
                                     } else if (MACRO_CALL_MEMBER(
                                                    OpenSHC::Map::TileMapState_Func::isWallCornerForDiagonalDirection,
                                                    this)(this->DAT_SomeTile, this->DAT_SomeY, 7)
@@ -492,12 +486,10 @@ namespace Map {
                                             this->GfxLayer[this->DAT_SomeTile]
                                                 = GMFirstPictureIndex::instance[0xc] + 0x82;
                                         }
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_CRENEL_VARIATIONUnk;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_CRENEL_VARIATIONUnk;
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[0xc] + 0x84;
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_CRENEL_VARIATIONUnk;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_CRENEL_VARIATIONUnk;
                                     }
                                 } else if ((this->LogicLayer[this->DAT_SomeTile] & L_STAIRS) != 0) {
                                     if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::hasHigherNeighborWithStairs,
@@ -557,8 +549,7 @@ namespace Map {
                                                | L_MARSH | L_OIL))
                                 == 0) {
                                 cornerMain = 0;
-                                this->WallOwnerLayer[this->DAT_SomeTile]
-                                    = this->WallOwnerLayer[this->DAT_SomeTile] & ~8;
+                                this->WallOwnerLayer[this->DAT_SomeTile] &= ~8;
                                 MACRO_NEIGHBOUR_FLAGS_LOGIC_8(wall, NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE)
                                 wallNeighboursIndex = this->bitFlag;
                                 MACRO_NEIGHBOUR_FLAGS_LOGIC_8(m1, 2)
@@ -641,8 +632,7 @@ namespace Map {
                                                     && (DAT_TileMapState::instance.LogicLayer[diagonalTileTmp]
                                                            & L_WALL_OR_GATEHOUSE)
                                                         != 0)) {
-                                                this->WallOwnerLayer[this->DAT_SomeTile]
-                                                    = this->WallOwnerLayer[this->DAT_SomeTile] | 8;
+                                                this->WallOwnerLayer[this->DAT_SomeTile] |= 8;
                                             }
                                         }
                                     }
@@ -945,14 +935,14 @@ namespace Map {
                                     if (pathLowPos == pathHighMaskCur) {
                                         pathSymmetricNow = 1;
                                     }
-                                    pathLowPos = pathLowPos << DAT_TileMapState::instance.mapOrientation;
+                                    pathLowPos <<= DAT_TileMapState::instance.mapOrientation;
                                     pathLowPos = pathLowPos & 0xff | pathLowPos >> 8;
                                     SEA_EDGE_PICK(
                                         pathLowPos, pathOffsetVal, pathModulusWork, pathBitsWork, pathBitValue)
                                     pathOffsetVal
                                         = this->RandomLayer[this->DAT_SomeTile] % pathModulusWork + pathOffsetVal;
                                     if (pathSymmetricNow == 0) {
-                                        pathOffsetVal = pathOffsetVal + 0x66;
+                                        pathOffsetVal += 0x66;
                                     }
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[0xa6]
                                         + (pathOffsetVal + 0x2b) + shadeLevelRef * 0xf6 - 1;
@@ -961,7 +951,7 @@ namespace Map {
                                     if (this->bitFlag != 0) {
                                         edgeModulusWork = 2;
                                         edgeMaskD = this->bitFlag;
-                                        edgeMaskD = edgeMaskD << DAT_TileMapState::instance.mapOrientation;
+                                        edgeMaskD <<= DAT_TileMapState::instance.mapOrientation;
                                         edgeMaskD = edgeMaskD & 0xff | edgeMaskD >> 8;
                                         SEA_EDGE_PICK(
                                             edgeMaskD, edgeOffsetId, edgeModulusWork, edgeBitsValue, edgeBitId)
@@ -996,11 +986,11 @@ namespace Map {
                                 }
                                 MACRO_NEIGHBOUR_FLAGS_LOGIC_4(riv2, 0x100031)
                                 this->bitFlag = ~this->bitFlag;
-                                this->bitFlag = this->bitFlag & 0xaa;
+                                this->bitFlag &= 0xaa;
                                 if (this->bitFlag == 0) {
                                     MACRO_NEIGHBOUR_FLAGS_LOGIC_8(riv3, 0x100031)
                                     this->bitFlag = ~this->bitFlag;
-                                    this->bitFlag = this->bitFlag & 0x55;
+                                    this->bitFlag &= 0x55;
                                 }
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::propagateCliffEdgeFlagFromNeighbor,
@@ -1242,11 +1232,11 @@ namespace Map {
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_FORD) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_LOGIC_4(ford1, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                 this->bitFlag = ~this->bitFlag;
-                                this->bitFlag = this->bitFlag & 0xaa;
+                                this->bitFlag &= 0xaa;
                                 if (this->bitFlag == 0) {
                                     MACRO_NEIGHBOUR_FLAGS_LOGIC_8(ford2, NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD)
                                     this->bitFlag = ~this->bitFlag;
-                                    this->bitFlag = this->bitFlag & 0x55;
+                                    this->bitFlag &= 0x55;
                                 }
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 0x29c
@@ -1390,7 +1380,7 @@ namespace Map {
                                     = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 rockIndexId = this->OrganismLayer[this->DAT_SomeTile];
                                 if (rockIndexId >= 2000) {
-                                    rockIndexId = rockIndexId - 2000;
+                                    rockIndexId -= 2000;
                                     if (DAT_LandscapeState::instance.rocks[rockIndexId].tile != this->DAT_SomeTile) {
                                         continue;
                                     }
@@ -1502,7 +1492,7 @@ namespace Map {
                                     }
                                 }
                                 this->bitFlag = ~this->bitFlag;
-                                this->bitFlag = this->bitFlag & 0xaa;
+                                this->bitFlag &= 0xaa;
                                 if (this->bitFlag == 0) {
                                     this->bitFlag = 0;
                                     for (moatDirectionValue = 1; moatDirectionValue < 8;
@@ -1524,7 +1514,7 @@ namespace Map {
                                         }
                                     }
                                     this->bitFlag = ~this->bitFlag;
-                                    this->bitFlag = this->bitFlag & 0x55;
+                                    this->bitFlag &= 0x55;
                                 }
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 0xcc
@@ -1680,8 +1670,7 @@ namespace Map {
                                         this->GfxLayer[this->DAT_SomeTile] = 0;
                                     } else if (cliffDropValue != 0
                                         && DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
-                                        this->LogicLayer[this->DAT_SomeTile]
-                                            = this->LogicLayer[this->DAT_SomeTile] | L_ROCKY;
+                                        this->LogicLayer[this->DAT_SomeTile] |= L_ROCKY;
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[0x38]
                                             + this->LuminesenceLayer[this->DAT_SomeTile] * 8
                                             + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);

@@ -27,8 +27,6 @@ namespace Map {
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504A30
     void TileMapState::evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y)

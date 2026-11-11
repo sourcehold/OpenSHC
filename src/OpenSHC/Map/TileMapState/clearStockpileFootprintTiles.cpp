@@ -19,36 +19,36 @@ namespace Map {
                        .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 0].y + y]
                        .addXgetTile
                 + x + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 0].x;
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
+            this->LogicLayer[tile] &= ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             if (DAT_BuildingsState::instance.buildings[this->AlphaGFXLayer[tile]].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
+                this->MiscDisplayLayer[tile] |= 0x4000;
             }
             this->AlphaGFXLayer[tile] = 0;
             tile = DAT_ViewportRenderState::instance
                        .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 1].y + y]
                        .addXgetTile
                 + x + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 1].x;
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
+            this->LogicLayer[tile] &= ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             if (DAT_BuildingsState::instance.buildings[this->AlphaGFXLayer[tile]].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
+                this->MiscDisplayLayer[tile] |= 0x4000;
             }
             this->AlphaGFXLayer[tile] = 0;
             tile = DAT_ViewportRenderState::instance
                        .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 2].y + y]
                        .addXgetTile
                 + x + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[offset + 2].x;
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
+            this->LogicLayer[tile] &= ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             if (DAT_BuildingsState::instance.buildings[this->AlphaGFXLayer[tile]].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x4000;
+                this->MiscDisplayLayer[tile] |= 0x4000;
             }
             this->AlphaGFXLayer[tile] = 0;
         }

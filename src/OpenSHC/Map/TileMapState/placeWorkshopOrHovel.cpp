@@ -38,7 +38,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[tileIndex] = tileUnk;
             }
             this->HeightLayer[tileUnk] = (byte)averageHeight;
-            this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+            this->LogicLayer[tileUnk] |= L_BUILDING;
             this->BuildingLayer[tileUnk] = (short)buildingID;
             tileIndex++;
             this->BuildingWasLayer[tileUnk] = (uchar)type;
@@ -53,8 +53,7 @@ namespace Map {
                     <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
                 || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
-                DAT_BottomLeftTextDisplayState::ptr)(
-                1, 0x4d, 1, 0, 100, 6000);
+                DAT_BottomLeftTextDisplayState::ptr)(1, 0x4d, 1, 0, 100, 6000);
         }
     }
 

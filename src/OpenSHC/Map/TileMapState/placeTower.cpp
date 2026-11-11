@@ -33,15 +33,15 @@ namespace Map {
             }
             this->HeightLayer[tileUnk] = (byte)param_7;
             if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][0] == index) {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+                this->LogicLayer[tileUnk] |= L_BUILDING;
             } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][1] == index) {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+                this->LogicLayer[tileUnk] |= L_BUILDING;
             } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][2] == index) {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+                this->LogicLayer[tileUnk] |= L_BUILDING;
             } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][3] == index) {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+                this->LogicLayer[tileUnk] |= L_BUILDING;
             } else {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_KEEP_NON_MANOR_HOUSE;
+                this->LogicLayer[tileUnk] |= L_KEEP_NON_MANOR_HOUSE;
             }
             this->BuildingLayer[tileUnk] = (short)buildingID;
             index++;

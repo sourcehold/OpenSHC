@@ -40,7 +40,7 @@ namespace Map {
                                 this->MacroLayer[this->DAT_SomeTile] = 0x800;
                             }
                         }
-                        this->DAT_SomeX = this->DAT_SomeX + 1;
+                        this->DAT_SomeX += 1;
                     }
                 }
             }
@@ -99,7 +99,7 @@ namespace Map {
                                 }
                             }
                         }
-                        this->DAT_SomeX = this->DAT_SomeX + 1;
+                        this->DAT_SomeX += 1;
                     }
                 }
             }
@@ -129,7 +129,7 @@ namespace Map {
                                 this->MacroLayer[this->DAT_SomeTile] = 2;
                             }
                         }
-                        this->DAT_SomeX = this->DAT_SomeX + 1;
+                        this->DAT_SomeX += 1;
                     }
                 }
             }

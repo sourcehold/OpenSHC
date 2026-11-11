@@ -49,7 +49,7 @@ namespace Map {
                         this->DefaultHeightLayer[tile] = 8;
                     }
                     this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffdf;
+                    this->MiscDisplayLayer[tile] &= 0xffdf;
                     if ((this->LogicLayer[tile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(tile
                                 - DAT_ViewportRenderState::instance
@@ -57,14 +57,13 @@ namespace Map {
                                             .tileTranslationMatrix_YComponent[tile]]
                                     .addXgetTile,
                             DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]);
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
+                        this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
                     }
-                    this->LogicLayer[tile] = this->LogicLayer[tile]
-                        & (L_STOCKPILEUnk | L_PLAIN1_AND_FARM | L_BORDER | L_BORDER_EDGE | L_BUILDING
-                            | L_MOAT_DUG_OR_PLANNED | L_DEFAULT_EARTH_OR_TEXTURE | L_UNKNOWN_WALL_RELATED | L_CLIMBABLE
-                            | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY
-                            | L_KEEP_NON_MANOR_HOUSE | L_MOAT);
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xf83f;
+                    this->LogicLayer[tile] &= (L_STOCKPILEUnk | L_PLAIN1_AND_FARM | L_BORDER | L_BORDER_EDGE
+                        | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_DEFAULT_EARTH_OR_TEXTURE | L_UNKNOWN_WALL_RELATED
+                        | L_CLIMBABLE | L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY
+                        | L_KEEP_NON_MANOR_HOUSE | L_MOAT);
+                    this->MiscDisplayLayer[tile] &= 0xf83f;
                     this->Logic2Layer[tile] = 0;
                     if (this->HeightLayer[tile] == 80) {
                         this->Logic2Layer[tile] = L2_PLATEAU_MEDIUM;

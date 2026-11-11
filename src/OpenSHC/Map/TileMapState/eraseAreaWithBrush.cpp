@@ -23,9 +23,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Units::UnitLogicState;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00508EC0
     void TileMapState::eraseAreaWithBrush(uint x, uint y, uint brush)

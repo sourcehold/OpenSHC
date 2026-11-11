@@ -69,8 +69,8 @@ namespace Map {
             }
         }
 
-        x = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].xOffset;
-        y = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].yOffset;
+        x += DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].xOffset;
+        y += DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[variant][0].yOffset;
         index = 0;
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 7);

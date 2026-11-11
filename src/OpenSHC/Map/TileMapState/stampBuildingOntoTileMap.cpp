@@ -28,7 +28,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[buildingSizeTileIndex] = tile;
             }
             this->HeightLayer[tile] = (byte)param_8;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+            this->LogicLayer[tile] |= L_BUILDING;
             this->BuildingLayer[tile] = (short)buildingID;
             buildingSizeTileIndex++;
             this->ChangedLayer[tile] = 2;

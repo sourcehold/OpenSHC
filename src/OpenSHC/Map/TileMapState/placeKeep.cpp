@@ -22,9 +22,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
 
     using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::Map::LogicHelpers::Logic1;
-    using OpenSHC::Map::LogicHelpers::Logic2;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005146D0
     void TileMapState::placeKeep(
@@ -68,9 +65,9 @@ namespace Map {
             }
             this->HeightLayer[tile] = (byte)xyValue;
             if (keepType == OpenSHC::Map::Buildings::BT_MANORHOUSE) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             } else {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_KEEP_NON_MANOR_HOUSE;
+                this->LogicLayer[tile] |= L_KEEP_NON_MANOR_HOUSE;
             }
             this->BuildingLayer[tile] = (short)keepID;
             this->BuildingWasLayer[tile] = (uchar)keepType;
@@ -105,7 +102,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind;
             DAT_BuildingsState::instance.buildings[doorID].quarryStockpileID = (short)this->placedBuildingID;
             DAT_BuildingsState::instance.buildings[doorID].orientation = (short)keepOrientation;
-            this->LogicLayer[doorTile] = this->LogicLayer[doorTile] | L_BUILDING;
+            this->LogicLayer[doorTile] |= L_BUILDING;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -123,7 +120,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind / 2;
             DAT_BuildingsState::instance.buildings[doorID].quarryStockpileID = (short)this->placedBuildingID;
             DAT_BuildingsState::instance.buildings[doorID].orientation = (short)keepOrientation;
-            this->MiscDisplayLayer[doorTile] = this->MiscDisplayLayer[doorTile] | 4;
+            this->MiscDisplayLayer[doorTile] |= 4;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -141,7 +138,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[doorID].unknownManorHouseOrStoneKeepRelated = keepKind;
             DAT_BuildingsState::instance.buildings[doorID].quarryStockpileID = (short)this->placedBuildingID;
             DAT_BuildingsState::instance.buildings[doorID].orientation = (short)keepOrientation;
-            this->LogicLayer[doorTile] = this->LogicLayer[doorTile] | L_BUILDING;
+            this->LogicLayer[doorTile] |= L_BUILDING;
             this->BuildingLayer[doorTile] = (short)doorID;
             this->ChangedLayer[doorTile] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -150,7 +147,7 @@ namespace Map {
 
         /* the campground */
         y = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][group].yOffset;
-        x = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][group].xOffset;
+        x += DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][group].xOffset;
         int campID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
             DAT_BuildingsState::ptr)(playerID, x, y, xyValue, OpenSHC::Map::Buildings::BT_CAMPGROUND, 7, playerID, 0xf);
         DAT_BuildingsState::instance.buildings[campID].uidWhenPlaced = uid;
@@ -187,19 +184,19 @@ namespace Map {
             this->HeightLayer[tile] = (byte)xyValue;
             /* only the campground's cross of five middle tiles blocks movement */
             if (this->buildingX == 3 && this->buildingY == 3) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             }
             if (this->buildingX == 3 && this->buildingY == 2) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             }
             if (this->buildingX == 3 && this->buildingY == 4) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             }
             if (this->buildingX == 2 && this->buildingY == 3) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             }
             if (this->buildingX == 4 && this->buildingY == 3) {
-                this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+                this->LogicLayer[tile] |= L_BUILDING;
             }
             this->BuildingLayer[tile] = (short)campID;
             this->ChangedLayer[tile] = 2;

@@ -12,8 +12,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA000
     void TileMapState::determineBuildingPlacementRotation(int x, int y)
     {
@@ -71,7 +69,7 @@ namespace Map {
                         + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x]
                        & (L_STOCKPILEUnk | L_STAIRS))
                     == 0) {
-                walls[rotation] = walls[rotation] + 1;
+                walls[rotation] += 1;
             }
             if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x) <= 399
                 && (uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 5] + y) <= 399
@@ -94,7 +92,7 @@ namespace Map {
                         + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x]
                        & (L_STOCKPILEUnk | L_STAIRS))
                     == 0) {
-                walls[rotation] = walls[rotation] + 1;
+                walls[rotation] += 1;
             }
             if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x) <= 399
                 && (uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 7] + y) <= 399
@@ -117,7 +115,7 @@ namespace Map {
                         + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x]
                        & (L_STOCKPILEUnk | L_STAIRS))
                     == 0) {
-                walls[rotation] = walls[rotation] + 1;
+                walls[rotation] += 1;
             }
         }
 

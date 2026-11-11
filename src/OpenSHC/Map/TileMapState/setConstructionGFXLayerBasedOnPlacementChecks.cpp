@@ -16,10 +16,7 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Location::GateTowerPlacement;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504F10
     void TileMapState::setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size)
@@ -58,7 +55,7 @@ namespace Map {
                             ? 0x37
                             : 0x3e;
                     }
-                    i = i + 1;
+                    i += 1;
                 } while (i < this->constructionTileCount);
                 if (command == OpenSHC::Commands::M_MAPPER_KEEP1 || command == OpenSHC::Commands::M_MAPPER_KEEP2
                     || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
@@ -95,7 +92,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        i = i + 1;
+                        i += 1;
                     } while (i < this->constructionTileCount);
                     int const outbuilding2X
                         = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + x;
@@ -116,7 +113,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                 }
                 if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A
@@ -140,7 +137,7 @@ namespace Map {
                                   this)(tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, gateCommand, 0)
                             ? 0x37
                             : 0x3e;
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                     int const tower2X = check.x2 + x;
                     int const tower2Y = check.y2 + y;
@@ -155,7 +152,7 @@ namespace Map {
                                   this)(tile, DAT_GameSynchronyState::instance.currentPlayerSlotID, gateCommand, 0)
                             ? 0x37
                             : 0x3e;
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                     for (int j = 0; j != 6; j++) {
                         int const tile = DAT_ViewportRenderState::instance
@@ -191,7 +188,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                     j = 0;
                     do {
@@ -207,7 +204,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                     j = 0;
                     do {
@@ -223,7 +220,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                 } else if (command == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD
                     || command == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
@@ -241,7 +238,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                 } else if (command == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
                     int j = 0;
@@ -258,7 +255,7 @@ namespace Map {
                                 ? 0x37
                                 : 0x3e;
                         }
-                        j = j + 1;
+                        j += 1;
                     } while (j < this->constructionTileCount);
                 }
                 return;
@@ -288,9 +285,9 @@ namespace Map {
                 + this->buildingX + x;
             int rotation = this->uiBuildingRotation;
             if (rotation != 0xf && rotation != 8) {
-                rotation = rotation - this->mapOrientation;
+                rotation -= this->mapOrientation;
                 if (rotation < 0) {
-                    rotation = rotation + 8;
+                    rotation += 8;
                 }
             }
             int sprite;
@@ -318,7 +315,7 @@ namespace Map {
                     OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buildingCommand)
                 == OpenSHC::Map::Buildings::BT_UNKNOWN1) {
-                sprite = sprite + (&DAT_BuildingDefinedData::instance.field_0x976c[9].y)[buildingCommand];
+                sprite += (&DAT_BuildingDefinedData::instance.field_0x976c[9].y)[buildingCommand];
             } else if (MACRO_CALL_MEMBER(
                            OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                            DAT_BuildingsState::ptr)(buildingCommand)
@@ -336,9 +333,9 @@ namespace Map {
                     + (short)sprite + (short)this->buildingRotationRelatedValue - 1;
             }
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                this->MiscDisplayLayer[tile] |= 0x8000;
             }
-            i = i + 1;
+            i += 1;
         } while (i < this->constructionTileCount);
         if (command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1A || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1B
             || command == OpenSHC::Commands::M_MAPPER_GATE_WOOD1C
@@ -354,9 +351,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             for (int j = 0; j != 5; j++) {
                 XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate.rotationIndex1][j];
@@ -369,13 +366,13 @@ namespace Map {
                         = DAT_TerrainDefinedData::instance.constructionSpriteRotationTable[gate.rotationIndex1][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
-                        towerRotation = towerRotation + 8;
+                        towerRotation += 8;
                     }
                     this->ConstructionGFXLayer[tile]
                         = GMFirstPictureIndex::instance[0x34] + (towerRotation / 2) * 4 + j + 0x60e;
                 }
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
             GateTowerPlacement const& gate2 = DAT_TerrainDefinedData::instance.gateTowerPlacements[gateIndex];
@@ -388,9 +385,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[0x34];
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             for (int j = 0; j != 5; j++) {
                 XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[gate2.rotationIndex2][j];
@@ -404,13 +401,13 @@ namespace Map {
                         = DAT_TerrainDefinedData::instance.constructionSpriteRotationTable[gate2.rotationIndex2][j - 1]
                         - this->mapOrientation;
                     if (towerRotation < 0) {
-                        towerRotation = towerRotation + 8;
+                        towerRotation += 8;
                     }
                     this->ConstructionGFXLayer[tile]
                         = GMFirstPictureIndex::instance[0x34] + (towerRotation / 2) * 4 + j + 0x60e;
                 }
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
             for (int j = 0; j != 6; j++) {
@@ -428,7 +425,7 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (this->RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[6] + 0x138;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
@@ -441,7 +438,7 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = ((byte)this->RandomLayer[tile] & 3) + GMFirstPictureIndex::instance[0xe];
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
@@ -454,7 +451,7 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = ((byte)this->RandomLayer[tile] & 1) * 9 + 0x25 + GMFirstPictureIndex::instance[0xe];
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
@@ -470,7 +467,7 @@ namespace Map {
                           field.property)
                     + 0x37 + GMFirstPictureIndex::instance[0xe];
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
@@ -480,7 +477,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
                 this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[0xe] + 0x3d;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
@@ -494,9 +491,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x48;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             int const lowerY = y + 5;
             j = 0;
@@ -508,9 +505,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x7a;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             j = 0;
             do {
@@ -521,9 +518,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x61;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         } else if (command == OpenSHC::Commands::M_MAPPER_ENGINEERS_GUILD) {
             int const lowerY = y + 5;
@@ -536,9 +533,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x93;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         } else if (command == OpenSHC::Commands::M_MAPPER_TUNNELERS_GUILD) {
             int const lowerY = y + 5;
@@ -551,9 +548,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0xac;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         } else if (command == OpenSHC::Commands::M_MAPPER_OIL_SMELTER) {
             int const lowerY = y + 4;
@@ -566,9 +563,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x128;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         } else if (command == OpenSHC::Commands::M_MAPPER_KEEP1) {
             if (this->mapOrientation == 2) {
@@ -580,7 +577,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[0][0].x + x;
             this->ConstructionGFXLayer[tile1] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x523;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile1] = this->MiscDisplayLayer[tile1] | 0x8000;
+                this->MiscDisplayLayer[tile1] |= 0x8000;
             }
             int const tile2 = DAT_ViewportRenderState::instance
                                   .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][1].y + y]
@@ -588,7 +585,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[0][1].x + x;
             this->ConstructionGFXLayer[tile2] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x52e;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile2] = this->MiscDisplayLayer[tile2] | 0x8000;
+                this->MiscDisplayLayer[tile2] |= 0x8000;
             }
             int const tile3 = DAT_ViewportRenderState::instance
                                   .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[0][2].y + y]
@@ -596,7 +593,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[0][2].x + x;
             this->ConstructionGFXLayer[tile3] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x527;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile3] = this->MiscDisplayLayer[tile3] | 0x8000;
+                this->MiscDisplayLayer[tile3] |= 0x8000;
             }
             int const outbuildingX = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][0].xOffset;
             int const outbuildingY = y + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[0][0].yOffset;
@@ -609,9 +606,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x17;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             int const outbuilding2X = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][0].xOffset + x;
             int const outbuilding2Y = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[0][0].yOffset + y;
@@ -624,9 +621,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 0x19;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         } else if (command == OpenSHC::Commands::M_MAPPER_KEEP2 || command == OpenSHC::Commands::M_MAPPER_KEEP3) {
             if (this->mapOrientation == 2) {
@@ -639,7 +636,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][0].x + x;
             this->ConstructionGFXLayer[tile1] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x521;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile1] = this->MiscDisplayLayer[tile1] | 0x8000;
+                this->MiscDisplayLayer[tile1] |= 0x8000;
             }
             int const tile2 = DAT_ViewportRenderState::instance
                                   .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][1].y + y]
@@ -647,7 +644,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][1].x + x;
             this->ConstructionGFXLayer[tile2] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x529;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile2] = this->MiscDisplayLayer[tile2] | 0x8000;
+                this->MiscDisplayLayer[tile2] |= 0x8000;
             }
             int const tile3 = DAT_ViewportRenderState::instance
                                   .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][2].y + y]
@@ -655,7 +652,7 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][2].x + x;
             this->ConstructionGFXLayer[tile3] = GMFirstPictureIndex::instance[0x34] + keepSpriteVariant + 0x525;
             if (skipPlacementFailChecks != 0) {
-                this->MiscDisplayLayer[tile3] = this->MiscDisplayLayer[tile3] | 0x8000;
+                this->MiscDisplayLayer[tile3] |= 0x8000;
             }
             int const outbuildingX
                 = x + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[keepIndex][0].xOffset;
@@ -670,9 +667,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 0x17;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
             int const outbuilding2X
                 = DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[keepIndex][0].xOffset + x;
@@ -687,9 +684,9 @@ namespace Map {
                 this->ConstructionGFXLayer[tile]
                     = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 0x19;
                 if (skipPlacementFailChecks != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x8000;
+                    this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-                j = j + 1;
+                j += 1;
             } while (j < this->constructionTileCount);
         }
     }

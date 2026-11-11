@@ -29,7 +29,6 @@ namespace Map {
 
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005024F0
     BOOLEnum TileMapState::isValidCastleSiteLocation(int x, uint y, int cbt)
@@ -96,10 +95,10 @@ namespace Map {
             /* a moat site must be clear of moat, a moat-fill site must sit on one */
             if (cbt == 0x6a) {
                 if ((this->LogicLayer[brushTile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) == 0) {
-                    x = x + 1;
+                    x += 1;
                 }
             } else if (cbt != 0x6b || (this->LogicLayer[brushTile] & L_MOAT_DUG_OR_PLANNED) != 0) {
-                x = x + 1;
+                x += 1;
             }
         }
         return (BOOLEnum)(x != 0);

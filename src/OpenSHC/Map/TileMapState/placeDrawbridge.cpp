@@ -11,7 +11,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_MOAT;
 
@@ -34,16 +33,16 @@ namespace Map {
             this->BuildingWasLayer[tileUnk] = (uchar)buildingType;
             this->ChangedLayer[tileUnk] = 2;
             if (DAT_TerrainDefinedData::instance.DrawbridgeTileMoatProperty[tileIndex] != 0) {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] | L_BUILDING;
+                this->LogicLayer[tileUnk] |= L_BUILDING;
             }
             if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[rot][tileIndex] != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
                     playerID, this->buildingX + x, this->buildingY + y, 1);
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] & ~L_MOAT;
+                this->LogicLayer[tileUnk] &= ~L_MOAT;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(tileUnk, 0);
                 this->HeightLayer[tileUnk] = 0;
             } else {
-                this->LogicLayer[tileUnk] = this->LogicLayer[tileUnk] & ~L_MOAT;
+                this->LogicLayer[tileUnk] &= ~L_MOAT;
             }
             tileIndex++;
         } while (tileIndex < this->constructionTileCount);

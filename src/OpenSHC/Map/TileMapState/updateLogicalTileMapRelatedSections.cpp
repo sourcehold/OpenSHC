@@ -33,8 +33,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004F70F0
     void TileMapState::updateLogicalTileMapRelatedSections()
     {
@@ -55,34 +53,34 @@ namespace Map {
 
                 int height = this->HeightLayer[tile];
                 int screenY = this->heightBasedScreenYOffset[height];
-                this->ShowHiLayer[tile] = '\0';
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffef;
+                this->ShowHiLayer[tile] = 0;
+                this->MiscDisplayLayer[tile] &= 0xffef;
                 /* whether the tile draws its own texture or the default earth */
                 if (height == 0) {
                     if (((this->LogicLayer[tile] & L_RIVER) == 0 && (this->Logic2Layer[tile] & L2_BEACH) != 0)
                         || (this->LogicLayer[tile] & L_MOAT) != 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                        this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                     } else {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_DEFAULT_EARTH_OR_TEXTURE;
+                        this->LogicLayer[tile] &= ~L_DEFAULT_EARTH_OR_TEXTURE;
                     }
                 } else if (height <= 8) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_PLATEAU_MEDIUM) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_PLATEAU_HIGH) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_EARTH_AND_STONES) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_OASIS_GRASS) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_SCRUB) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
-                } else if ((char)this->Logic2Layer[tile] < '\0') {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
+                } else if ((char)this->Logic2Layer[tile] < 0) {
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else if ((this->Logic2Layer[tile] & L2_STONES_OR_DRIVEN_SANDUnk) != 0) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] |= L_DEFAULT_EARTH_OR_TEXTURE;
                 } else {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_DEFAULT_EARTH_OR_TEXTURE;
+                    this->LogicLayer[tile] &= ~L_DEFAULT_EARTH_OR_TEXTURE;
                 }
 
                 /* a tile level with all eight neighbours keeps its texture */
@@ -91,7 +89,7 @@ namespace Map {
                     int const neighbourHeight = this->HeightLayer[neighbour];
                     if ((height > 8 || neighbourHeight == 0) && height != neighbourHeight) {
                         if ((this->LogicLayer[neighbour] & (L_RIVER | L_MOAT)) == 0) {
-                            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_DEFAULT_EARTH_OR_TEXTURE;
+                            this->LogicLayer[tile] &= ~L_DEFAULT_EARTH_OR_TEXTURE;
                         }
                         break;
                     }
@@ -100,7 +98,7 @@ namespace Map {
                 if (building != 0
                     && DAT_BuildingsState::instance.buildings[building].buildingType
                         == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x10;
+                    this->MiscDisplayLayer[tile] |= 0x10;
                 }
 
                 if (this->disableElevationRendering == 0) {
@@ -108,15 +106,15 @@ namespace Map {
                     int walkTile = tile;
                     int* direction = this->directionTranslationMatrix[row] + this->screenSouthEastDirection;
                     for (int depth = 0; depth < 0x80; depth = depth + 0x10) {
-                        walkTile = walkTile + *direction;
+                        walkTile += *direction;
                         if ((this->LogicLayer[walkTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                             break;
                         }
-                        if (screenY <= (this->heightBasedScreenYOffset[this->HeightLayer[walkTile]] - depth) + -0x10) {
+                        if (screenY <= (this->heightBasedScreenYOffset[this->HeightLayer[walkTile]] - depth) - 0x10) {
                             this->ShowHiLayer[tile] = 0xff;
                             break;
                         }
-                        direction = direction + this->orientedRowStep * 8;
+                        direction += this->orientedRowStep * 8;
                     }
                     if (height == 0) {
                         continue;
@@ -142,14 +140,14 @@ namespace Map {
                 } else if ((this->LogicLayer[tile] & L_STAIRS) != 0) {
                     occluded = 1;
                 } else {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x10;
+                    this->MiscDisplayLayer[tile] |= 0x10;
                     occluded = 0;
                 }
                 for (int i = 0; i < 8; i++) {
                     int neighbour = this->directionTranslationMatrix[row][i] + tile;
                     if ((height > 8 && height != this->HeightLayer[neighbour])
                         || (this->LogicLayer[neighbour] & L_TREE_VARIATION) != 0) {
-                        this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffef;
+                        this->MiscDisplayLayer[tile] &= 0xffef;
                         break;
                     }
                     if ((this->LogicLayer[neighbour] & L_FARM_FIELD_WHEAT) != 0) {
@@ -159,7 +157,7 @@ namespace Map {
                         occluded = 1;
                     }
                 }
-                this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfffc;
+                this->MiscDisplayLayer[tile] &= 0xfffc;
 
                 int stepLeft = 0;
                 int stepRight = 0;
@@ -235,8 +233,8 @@ namespace Map {
                             && (this->LogicLayer[leftTile2] & L_STOCKPILEUnk) == 0)) {
                         occluded = 1;
                     }
-                    shadowTile = shadowTile
-                        + this->directionTranslationMatrix[this->orientedRowStep + row][this->screenSouthEastDirection];
+                    shadowTile += this->directionTranslationMatrix[this->orientedRowStep + row]
+                                                                  [this->screenSouthEastDirection];
                     if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
                                DAT_BuildingsState::ptr)(this->BuildingLayer[shadowTile])
@@ -265,9 +263,8 @@ namespace Map {
                             && (this->LogicLayer[leftTile3] & L_STOCKPILEUnk) == 0)) {
                         occluded = 1;
                     }
-                    shadowTile = shadowTile
-                        + this->directionTranslationMatrix[row + this->orientedRowStep * 2]
-                                                          [this->screenSouthEastDirection];
+                    shadowTile += this->directionTranslationMatrix[row + this->orientedRowStep * 2]
+                                                                  [this->screenSouthEastDirection];
                     if ((this->LogicLayer[shadowTile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0
                         && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlag1,
                                DAT_BuildingsState::ptr)(this->BuildingLayer[shadowTile])
@@ -329,9 +326,9 @@ namespace Map {
                     occluded = 1;
                 }
                 if (occluded != 0) {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xffef;
+                    this->MiscDisplayLayer[tile] &= 0xffef;
                 } else {
-                    this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 0x10;
+                    this->MiscDisplayLayer[tile] |= 0x10;
                 }
 
                 if (screenY > lowest) {
@@ -340,10 +337,10 @@ namespace Map {
                     }
                     if ((this->LogicLayer[tile] & L_SEA) == 0) {
                         if (stepLeft != 0) {
-                            this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 1;
+                            this->MiscDisplayLayer[tile] |= 1;
                         }
                         if (stepRight != 0) {
-                            this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] | 2;
+                            this->MiscDisplayLayer[tile] |= 2;
                         }
                     }
                 }

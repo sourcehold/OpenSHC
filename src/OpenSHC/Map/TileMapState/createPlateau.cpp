@@ -52,7 +52,7 @@ namespace Map {
                 && (logic
                        & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_MOAT_DUG_OR_PLANNED | L_KEEP_NON_MANOR_HOUSE | L_MOAT))
                     == 0) {
-                this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
+                this->LogicLayer[brushTile] &= ~L_ROCKY;
                 if (plateauHeightSetting == 4) {
                     this->HeightLayer[brushTile] = 80;
                 } else if (plateauHeightSetting == 8) {
@@ -60,7 +60,7 @@ namespace Map {
                 }
                 this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
                 if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
-                    this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
+                    this->HeightLayer[brushTile] -= 8;
                 }
                 uint brushY = the_y;
                 this->Logic2Layer[brushTile] = (byte)plateauHeightSetting;

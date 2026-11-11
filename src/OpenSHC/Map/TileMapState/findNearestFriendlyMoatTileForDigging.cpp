@@ -16,8 +16,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_MOAT;
     using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005111D0
     BOOLEnum TileMapState::findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number)
     {
@@ -81,7 +79,7 @@ namespace Map {
                     fromTarget = 0;
                 }
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1) {
-                    score = score + pathCost * 10;
+                    score += pathCost * 10;
                 }
                 score = fromTarget / 2 + this->moats[moatID].someCountDown + score;
                 if (score < best) {

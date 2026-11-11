@@ -13,8 +13,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00507BD0
     void TileMapState::placeEngineersguild(
         int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7)
@@ -39,7 +37,7 @@ namespace Map {
                 + this->buildingX + param_2;
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             this->HeightLayer[tile] = (byte)param_7;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | 0x400;
+            this->LogicLayer[tile] |= 0x400;
             this->BuildingLayer[tile] = guildID;
             index++;
             this->BuildingWasLayer[tile] = (uchar)param_4;
@@ -48,8 +46,8 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         /* param_2 is the x coordinate; the original moves x and y in place */
-        param_2 = param_2 + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[partIndex][1].x;
-        param_3 = param_3 + DAT_TerrainDefinedData::instance.BuildingPartsOffsets[partIndex][1].y;
+        param_2 += DAT_TerrainDefinedData::instance.BuildingPartsOffsets[partIndex][1].x;
+        param_3 += DAT_TerrainDefinedData::instance.BuildingPartsOffsets[partIndex][1].y;
         ushort const campID = (ushort)MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             param_1, param_2, param_3, param_7, OpenSHC::Map::Buildings::BT_PARADEGROUND, 5, param_1, 0xf);

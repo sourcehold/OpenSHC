@@ -15,8 +15,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
 
     using OpenSHC::Map::Buildings::BuildingLogicalState;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA2D0
     void TileMapState::checkDrawbridgePlacement(int x, int y)

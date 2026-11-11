@@ -15,7 +15,6 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::Map::Buildings::BuildingType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00506370
     void TileMapState::updateBuildingGraphicsLayer(int buildingID)
@@ -60,7 +59,7 @@ namespace Map {
                         pile = (short)this->buildingRotationRelatedValue
                             + ((short)(remaining / 4) + ((ushort)remaining & 3) * 0xc) * 4;
                     } else if (DAT_TerrainDefinedData::instance.field_0x8b4[resource] == 0) {
-                        pile = (short)this->buildingRotationRelatedValue + -4 + (short)stored * 4;
+                        pile = (short)this->buildingRotationRelatedValue - 4 + (short)stored * 4;
                     } else {
                         pile = (short)this->buildingRotationRelatedValue
                             + ((short)DAT_BuildingsState::instance.buildings[buildingID].currentLimitOfResource
@@ -292,7 +291,7 @@ namespace Map {
                     int relative
                         = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation - this->mapOrientation;
                     if (relative < 0) {
-                        relative = relative + 8;
+                        relative += 8;
                     }
                     short rotation = (short)relative;
                     short span;
@@ -301,7 +300,7 @@ namespace Map {
                         span = rotation * 8;
                     } else {
                         span = (short)DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-                        span = span * span;
+                        span *= span;
                     }
                     short sprite;
                     if (DAT_BuildingsState::instance.buildings[buildingID].buildingIsVisuallyActive == 0) {

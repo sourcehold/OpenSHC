@@ -22,7 +22,7 @@ namespace Map {
                 + this->buildingX + x;
             int buildingID = this->BuildingLayer[targetedTile];
             int variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation;
-            this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] & ~L_BUILDING;
+            this->LogicLayer[targetedTile] &= ~L_BUILDING;
             if (DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation / 2][buildingSizeTileIndex]
                 != 0) {
                 uint moatID
@@ -30,17 +30,17 @@ namespace Map {
                 if (moatID != 0) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatData, this)(moatID);
-                        this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] & ~L_MOAT;
-                        this->Logic2Layer[targetedTile] = this->Logic2Layer[targetedTile] | L2_EARTH_AND_STONES;
+                        this->LogicLayer[targetedTile] &= ~L_MOAT;
+                        this->Logic2Layer[targetedTile] |= L2_EARTH_AND_STONES;
                         this->BuildingWasLayer[targetedTile] = 0;
                         this->HeightLayer[targetedTile] = 8;
                     } else {
-                        this->LogicLayer[targetedTile] = this->LogicLayer[targetedTile] | L_MOAT;
+                        this->LogicLayer[targetedTile] |= L_MOAT;
                     }
                 }
             }
             if ((this->LogicLayer[targetedTile] & L_MOAT) == 0) {
-                this->Logic2Layer[targetedTile] = this->Logic2Layer[targetedTile] | L2_EARTH_AND_STONES;
+                this->Logic2Layer[targetedTile] |= L2_EARTH_AND_STONES;
                 this->BuildingWasLayer[targetedTile] = 0;
             }
             this->BuildingLayer[targetedTile] = 0;

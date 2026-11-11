@@ -20,7 +20,7 @@ namespace Map {
             buildingSizeTileIndex++;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
                 + this->buildingX;
-            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_ROCKY;
+            this->LogicLayer[tile] &= ~L_ROCKY;
             this->OrganismLayer[tile] = 0;
         } while (buildingSizeTileIndex < this->constructionTileCount);
     }

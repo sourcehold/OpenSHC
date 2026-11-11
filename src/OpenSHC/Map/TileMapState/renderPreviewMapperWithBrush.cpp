@@ -16,10 +16,8 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00508A00
     void TileMapState::renderPreviewMapperWithBrush(uint x, uint y, MappersEnum mapper)

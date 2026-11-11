@@ -36,7 +36,6 @@ namespace Map {
 
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Map::Units::States::UnitState;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00502F30
     void TileMapState::placeWalls(
@@ -108,30 +107,30 @@ namespace Map {
                 }
 
                 if ((short)wallType == OpenSHC::Commands::M_MAPPER_WALL) {
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x5a;
+                    this->HeightLayer[tile] += 0x5a;
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-                    this->HeightLayer[tile] = this->HeightLayer[tile] + 0x3c;
+                    this->HeightLayer[tile] += 0x3c;
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_CRENAL) {
-                    this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL;
+                    this->LogicLayer[tile] |= L_CRENEL;
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::hasOnlyTowerNeighborsNoWalls, this)(tile, y)
                         != FALSE) {
-                        this->HeightLayer[tile] = this->HeightLayer[tile] + 0x44;
+                        this->HeightLayer[tile] += 0x44;
                         towerNeighbours = 1;
                     } else {
-                        this->HeightLayer[tile] = this->HeightLayer[tile] + 0x62;
+                        this->HeightLayer[tile] += 0x62;
                     }
                     /* a crenel on an odd tile of one axis carries the alternate variation */
                     if ((x & 1) != 0 && (y & 1) == 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                        this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
                     }
                     if ((x & 1) == 0 && (y & 1) != 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_CRENEL_VARIATIONUnk;
+                        this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
                     }
                 } else if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR) {
                     int const steps = budget - this->HeightLayer[tile] - 0x10;
                     if (steps > 0) {
-                        this->LogicLayer[tile] = this->LogicLayer[tile] | L_STAIRS;
-                        this->HeightLayer[tile] = this->HeightLayer[tile] + (char)steps;
+                        this->LogicLayer[tile] |= L_STAIRS;
+                        this->HeightLayer[tile] += (char)steps;
                     } else {
                         applyWall = 0;
                     }
@@ -153,8 +152,8 @@ namespace Map {
                             DAT_UnitsState::instance.units[(short)unit].disappearFadeAlphaCountdown = 0;
                         }
                         if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) != 0) {
-                            this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_PLAIN2_AND_PITCH;
-                            this->HeightLayer[tile] = this->HeightLayer[tile] + 4;
+                            this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
+                            this->HeightLayer[tile] += 4;
                         }
                         if ((this->LogicLayer[tile] & L_TREE) != 0) {
                             int const organism = this->OrganismLayer[tile];
@@ -180,7 +179,7 @@ namespace Map {
                             }
                         }
                         if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL || towerNeighbours != 0) {
-                            this->LogicLayer[tile] = this->LogicLayer[tile] | L_UNKNOWN_WALL_RELATED;
+                            this->LogicLayer[tile] |= L_UNKNOWN_WALL_RELATED;
                         }
                         this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (char)playerID - 1U;
                     }
@@ -204,60 +203,60 @@ namespace Map {
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR) {
                 if (stepX > stepY) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 } else if (stepY > 0) {
                     if ((int)y >= (int)y2) {
-                        y = y - 1;
-                        translation = translation - 3;
-                        upY = upY - 1;
-                        downY = downY + 1;
+                        y -= 1;
+                        translation -= 3;
+                        upY -= 1;
+                        downY += 1;
                     } else {
-                        y = y + 1;
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        downY = downY - 1;
+                        y += 1;
+                        translation += 3;
+                        upY += 1;
+                        downY -= 1;
                     }
                 } else {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             } else {
                 if (stepX != 0) {
                     if ((int)x >= (int)x2) {
-                        leftX = leftX - 1;
-                        x = x - 1;
-                        rightX = rightX + 1;
+                        leftX -= 1;
+                        x -= 1;
+                        rightX += 1;
                     } else {
-                        leftX = leftX + 1;
-                        x = x + 1;
-                        rightX = rightX - 1;
+                        leftX += 1;
+                        x += 1;
+                        rightX -= 1;
                     }
                 }
                 if (stepY != 0) {
                     if ((int)y >= (int)y2) {
-                        y = y - 1;
-                        translation = translation - 3;
-                        upY = upY - 1;
-                        downY = downY + 1;
+                        y -= 1;
+                        translation -= 3;
+                        upY -= 1;
+                        downY += 1;
                     } else {
-                        y = y + 1;
-                        translation = translation + 3;
-                        upY = upY + 1;
-                        downY = downY - 1;
+                        y += 1;
+                        translation += 3;
+                        upY += 1;
+                        downY -= 1;
                     }
                 }
                 if (x == x2 && y == y2) {
-                    overshoot = overshoot - 1;
+                    overshoot -= 1;
                 }
             }
             if (budget >= 0x10) {
-                budget = budget - 0x10;
+                budget -= 0x10;
             }
         } while (x != x2 || y != y2 || overshoot != 0);
 

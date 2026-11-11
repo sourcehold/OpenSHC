@@ -17,8 +17,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005076A0
     void TileMapState::placeBarracks(int playerID, uint xPosition, uint yPosition, undefined4 buildingType,
         uint buildingSize, int buildingOrientation, undefined4 param_7)
@@ -55,10 +53,10 @@ namespace Map {
                 + this->buildingX + xPosition;
             *(int*)yPosition = iVar3;
             this->HeightLayer[iVar3] = (byte)param_7;
-            this->LogicLayer[iVar3] = this->LogicLayer[iVar3] | 0x400;
+            this->LogicLayer[iVar3] |= 0x400;
             this->BuildingLayer[iVar3] = (short)_buildingID;
-            iVar5 = iVar5 + 1;
-            yPosition = yPosition + sizeof(int);
+            iVar5 += 1;
+            yPosition += sizeof(int);
             this->BuildingWasLayer[iVar3] = (uchar)buildingType;
             this->ChangedLayer[iVar3] = 2;
         } while (iVar5 < this->constructionTileCount);
@@ -81,10 +79,10 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar2);
             this->HeightLayer[iVar2] = (byte)param_7;
             if ((this->buildingX == 2) && (this->buildingY == 2)) {
-                this->LogicLayer[iVar2] = this->LogicLayer[iVar2] | 0x400;
+                this->LogicLayer[iVar2] |= 0x400;
             }
             this->BuildingLayer[iVar2] = (short)iVar5;
-            buildingSize = buildingSize + 1;
+            buildingSize += 1;
             this->BuildingWasLayer[iVar2] = (uchar)buildingType;
             this->ChangedLayer[iVar2] = 2;
         } while ((int)buildingSize < this->constructionTileCount);
@@ -109,10 +107,10 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar2);
             this->HeightLayer[iVar2] = (byte)param_7;
             if ((this->buildingX == 2) && (this->buildingY == 2)) {
-                this->LogicLayer[iVar2] = this->LogicLayer[iVar2] | 0x400;
+                this->LogicLayer[iVar2] |= 0x400;
             }
             this->BuildingLayer[iVar2] = (short)iVar5;
-            buildingSize = buildingSize + 1;
+            buildingSize += 1;
             this->BuildingWasLayer[iVar2] = (uchar)buildingType;
             this->ChangedLayer[iVar2] = 2;
         } while ((int)buildingSize < this->constructionTileCount);
@@ -137,11 +135,11 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(iVar7);
             this->HeightLayer[iVar7] = (byte)param_7;
             if ((this->buildingX == 2) && (this->buildingY == 2)) {
-                this->LogicLayer[iVar7] = this->LogicLayer[iVar7] | 0x400;
+                this->LogicLayer[iVar7] |= 0x400;
             }
             this->BuildingLayer[iVar7] = (short)iVar5;
             this->BuildingWasLayer[iVar7] = (uchar)buildingType;
-            buildingSize = buildingSize + 1;
+            buildingSize += 1;
             this->ChangedLayer[iVar7] = 2;
         } while ((int)buildingSize < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(_buildingID);

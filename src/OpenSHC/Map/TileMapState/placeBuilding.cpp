@@ -42,11 +42,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005162D0
     void TileMapState::placeBuilding(
@@ -89,8 +86,7 @@ namespace Map {
                 + this->buildingX + x;
             if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT
                 && (this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
-                DAT_GameState::instance.playerDataArray[playerID].startResources[4]
-                    = DAT_GameState::instance.playerDataArray[playerID].startResources[4] + 1;
+                DAT_GameState::instance.playerDataArray[playerID].startResources[4] += 1;
             }
             if ((this->LogicLayer[tile] & L_ROCKY) != 0) {
                 int rock = this->OrganismLayer[tile];
@@ -103,9 +99,8 @@ namespace Map {
                         DAT_PathFindingState::ptr)(8, this->buildingX + x, this->buildingY + y);
                 }
             }
-            this->LogicLayer[tile] = this->LogicLayer[tile]
-                & ~(L_CRENEL_VARIATIONUnk | L_UNKNOWN_WALL_RELATED | L_STAIRS | L_CRENEL | L_WALL_OR_GATEHOUSE
-                    | L_PLAIN2_AND_PITCH);
+            this->LogicLayer[tile] &= ~(L_CRENEL_VARIATIONUnk | L_UNKNOWN_WALL_RELATED | L_STAIRS | L_CRENEL
+                | L_WALL_OR_GATEHOUSE | L_PLAIN2_AND_PITCH);
             this->HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
             this->DamageLayer[tile] = 0;
             if ((this->LogicLayer[tile] & L_TREE) != 0) {
@@ -173,9 +168,9 @@ namespace Map {
             if ((this->LogicLayer[tile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(
                     this->buildingX + x, this->buildingY + y);
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
+                this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
             }
-            this->MiscDisplayLayer[tile] = this->MiscDisplayLayer[tile] & 0xfc3f;
+            this->MiscDisplayLayer[tile] &= 0xfc3f;
             index++;
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
             DAT_TileMapState::instance.field_0x554a30 = 1;

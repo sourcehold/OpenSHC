@@ -20,10 +20,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
     using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
 
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Buildings::BuildingType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005160C0
     BOOLEnum TileMapState::prepareAreaForBuildingPlacement(
         int playerID, uint x, uint y, MappersEnum commandBuildingType, int buildingWidthOrHeight)
@@ -89,7 +85,7 @@ namespace Map {
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x32c, '\0', DAT_BuildingsState::instance.buildings + buildingID);
+                        0x32c, 0, DAT_BuildingsState::instance.buildings + buildingID);
                     result = TRUE;
                 }
             } else if ((DAT_TileMapState::instance.LogicLayer[tile] & L_FARM_FIELD_APPLE) != 0) {
@@ -105,7 +101,7 @@ namespace Map {
                         OpenSHC::Game::GameStateStructures_Func::updatePrimaryBuildingPlayerDataReferences,
                         DAT_GameState::ptr)(buildingID);
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        0x32c, '\0', DAT_BuildingsState::instance.buildings + buildingID);
+                        0x32c, 0, DAT_BuildingsState::instance.buildings + buildingID);
                     result = TRUE;
                 }
             }

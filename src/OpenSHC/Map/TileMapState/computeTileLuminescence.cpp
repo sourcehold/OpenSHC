@@ -80,8 +80,8 @@ namespace Map {
         int rayTile = tileUnk;
         int rayY = y;
         for (int step = 6; step > 1; step = step - 1) {
-            rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
-            rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
+            rayTile += this->directionTranslationMatrix[rayY][diagonal];
+            rayY += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
             if ((this->LogicLayer[rayTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 break;
             }
@@ -100,12 +100,11 @@ namespace Map {
                 high = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
-                high = high
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
-                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
-                        * 7;
+                high += MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                            &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
+                    * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
-                high = high + 0x28;
+                high += 0x28;
             }
             int rise = high - ownHeight;
             int lit;
@@ -153,12 +152,11 @@ namespace Map {
                 sampled = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
-                sampled = sampled
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
-                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
-                        * 7;
+                sampled += MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                               &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
+                    * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
-                sampled = sampled + 0x28;
+                sampled += 0x28;
             }
             int rise = sampled - ownHeight;
             int lit;
@@ -176,9 +174,9 @@ namespace Map {
             if (lit > alongShade) {
                 alongShade = lit;
             }
-            rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
-            rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
-            along = along - 1;
+            rayTile += this->directionTranslationMatrix[rayY][diagonal];
+            rayY += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
+            along -= 1;
         } while (along > -1);
 
         /* third ray: the same, one cardinal step the other way */
@@ -204,12 +202,11 @@ namespace Map {
                 sampled = this->HeightLayer[rayTile];
             }
             if ((this->LogicLayer[rayTile] & L_TREE) != 0) {
-                sampled = sampled
-                    + MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
-                          &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
-                        * 7;
+                sampled += MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::getTreeGrowthTargetStage,
+                               &DAT_LandscapeState::instance)(this->OrganismLayer[rayTile])
+                    * 7;
             } else if ((this->LogicLayer[rayTile] & L_TREE_VARIATION) != 0) {
-                sampled = sampled + 0x28;
+                sampled += 0x28;
             }
             int rise = sampled - ownHeight;
             int lit;
@@ -227,9 +224,9 @@ namespace Map {
             if (lit > acrossShade) {
                 acrossShade = lit;
             }
-            rayTile = rayTile + this->directionTranslationMatrix[rayY][diagonal];
-            rayY = rayY + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
-            across = across - 1;
+            rayTile += this->directionTranslationMatrix[rayY][diagonal];
+            rayY += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[diagonal].int_.yOffset;
+            across -= 1;
         } while (across > -1);
 
         if (acrossShade + alongShade - 4 > shade - 2) {
@@ -272,7 +269,7 @@ namespace Map {
                 slope = 1;
             }
             if (darkSide > ownHeight + 4) {
-                slope = slope + 1;
+                slope += 1;
             }
             if ((this->LogicLayer[tileUnk] & L_MOAT) == 0) {
                 if (slope == 1) {

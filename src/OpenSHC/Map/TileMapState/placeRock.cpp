@@ -126,11 +126,10 @@ namespace Map {
                 + this->buildingX + x;
             this->HeightLayer[tile] = (byte)height;
             this->DefaultHeightLayer[tile] = (byte)height;
-            this->LogicLayer[tile] = this->LogicLayer[tile]
-                & ~(L_SEA | L_PLAIN2_AND_PITCH | L_UNNAMED_0x40 | L_BOULDERS | L_PEBBLES | L_IRON | L_RIVER | L_FORD
-                    | L_MARSH | L_MOAT | L_OIL);
+            this->LogicLayer[tile] &= ~(L_SEA | L_PLAIN2_AND_PITCH | L_UNNAMED_0x40 | L_BOULDERS | L_PEBBLES | L_IRON
+                | L_RIVER | L_FORD | L_MARSH | L_MOAT | L_OIL);
             this->Logic2Layer[tile] = 0;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_ROCKY;
+            this->LogicLayer[tile] |= L_ROCKY;
             this->OrganismLayer[tile] = (short)kind;
         } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,

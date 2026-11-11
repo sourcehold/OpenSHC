@@ -23,7 +23,7 @@ namespace Map {
             this->directionTranslationMatrix[row][6] = -1;
             this->directionTranslationMatrix[row][7] = -step;
             this->yArray1[row] = step;
-            step = step + 2;
+            step += 2;
         }
 
         this->directionTranslationMatrix[199][1] = 2 - step;
@@ -59,8 +59,8 @@ namespace Map {
                 this->directionTranslationMatrix[lowerRow][5] = lowerStep - 2;
                 this->directionTranslationMatrix[lowerRow][6] = -1;
                 this->yArray1[lowerRow] = lowerStep;
-                lowerStep = lowerStep - 2;
-                lowerCounter = lowerCounter + 2;
+                lowerStep -= 2;
+                lowerCounter += 2;
                 lowerRow++;
             } while (lowerStep > 0);
         }

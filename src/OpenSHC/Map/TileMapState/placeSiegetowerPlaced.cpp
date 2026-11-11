@@ -30,7 +30,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[buildingSizeTileIndex] = tile;
             }
             this->HeightLayer[tile] = (byte)param_7;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_KEEP_NON_MANOR_HOUSE;
+            this->LogicLayer[tile] |= L_KEEP_NON_MANOR_HOUSE;
             this->BuildingLayer[tile] = (short)buildingID;
             buildingSizeTileIndex++;
             this->BuildingWasLayer[tile] = (uchar)buildingType;

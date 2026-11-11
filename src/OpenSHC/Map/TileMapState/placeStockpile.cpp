@@ -64,7 +64,7 @@ namespace Map {
                            .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y]
                            .addXgetTile
                 + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].x + x;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | (L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
+            this->LogicLayer[tile] |= (L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
             this->HeightLayer[tile] = height;
             this->AlphaGFXLayer[tile] = (ushort)buildingID;
             this->BuildingWasLayer[tile] = (uchar)buildingType;

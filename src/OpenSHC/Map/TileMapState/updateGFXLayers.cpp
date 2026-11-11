@@ -83,7 +83,7 @@ namespace Map {
         if (this->forceUpdateGFXLayers <= 0) {
             return;
         }
-        this->forceUpdateGFXLayers = this->forceUpdateGFXLayers - 1;
+        this->forceUpdateGFXLayers -= 1;
 
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::getYSmallerThanYLimit,
                 &DAT_PathFindingState::instance)()
@@ -122,7 +122,7 @@ namespace Map {
                             macroSizeType = this->MacroLayer[this->DAT_SomeTile] & 0x3f;
                             macroMid = (this->MacroLayer[this->DAT_SomeTile] & 0x7c0) >> 6;
                             macroTop = (this->MacroLayer[this->DAT_SomeTile] & 0xf000) >> 12;
-                            macroTop = macroTop & 3;
+                            macroTop &= 3;
                             /* the mask makes MSVC load the dword before the address, as the original does */
                             this->PillarGFXLayer[this->DAT_SomeTile]
                                 = (ushort)(GMFirstPictureIndex::instance[9] & 0xffff);
@@ -227,7 +227,7 @@ namespace Map {
 
                             if (macroSizeType == 1) {
                                 this->bitFlag = ~this->bitFlag;
-                                this->bitFlag = this->bitFlag & 0xaa;
+                                this->bitFlag &= 0xaa;
                                 if (this->mapOrientation == 0) {
                                     this->bitFlag = MACRO_CALL_MEMBER(
                                         OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::rotateByteLeft,

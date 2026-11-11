@@ -19,8 +19,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_ROCKY;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFBA0
     int TileMapState::getTotalHeightAt(int tile, int playerID)
     {
@@ -154,7 +152,7 @@ namespace Map {
             }
         }
 
-        extra = extra + this->HeightLayer[tile];
+        extra += this->HeightLayer[tile];
         if (exposed != 0) {
             return extra;
         }

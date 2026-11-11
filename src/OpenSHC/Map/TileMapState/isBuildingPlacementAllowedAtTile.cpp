@@ -32,10 +32,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::GameMode;
     using OpenSHC::Map::Units::UnitType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9A60
     int TileMapState::isBuildingPlacementAllowedAtTile(

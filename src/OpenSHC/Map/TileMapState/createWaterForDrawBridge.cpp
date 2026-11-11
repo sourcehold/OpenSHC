@@ -30,7 +30,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(
                     DAT_BuildingsState::instance.buildings[buildingID].owner, this->buildingX + xPosition, footprintY,
                     1);
-                this->LogicLayer[tile] = this->LogicLayer[tile] & ~L_MOAT;
+                this->LogicLayer[tile] &= ~L_MOAT;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMoatVisualStateAtTile, this)(tile, 0);
                 this->HeightLayer[tile] = 0;
             }

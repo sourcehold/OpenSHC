@@ -37,7 +37,7 @@ namespace Map {
             }
             this->pitchDitches[pitchDitchID].owner = (short)playerID;
             this->pitchDitches[pitchDitchID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
-            DAT_GameCore::instance.uniqueGameObjectTracker = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
+            DAT_GameCore::instance.uniqueGameObjectTracker += 1;
             this->pitchDitches[pitchDitchID].y = (short)y;
             this->pitchDitches[pitchDitchID].x = (short)x;
             this->pitchDitches[pitchDitchID].field_0x12 = 0;
@@ -46,8 +46,7 @@ namespace Map {
             this->pitchDitches[pitchDitchID].state = 0;
             this->pitchDitches[pitchDitchID].rng = SEC_RNG::instance.currentNumber2;
             if (this->HeightLayer[this->pitchDitches[pitchDitchID].tile] > 4) {
-                this->HeightLayer[this->pitchDitches[pitchDitchID].tile]
-                    = this->HeightLayer[this->pitchDitches[pitchDitchID].tile] - 4;
+                this->HeightLayer[this->pitchDitches[pitchDitchID].tile] -= 4;
             } else {
                 this->HeightLayer[this->pitchDitches[pitchDitchID].tile] = 0;
             }

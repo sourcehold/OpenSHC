@@ -83,10 +83,8 @@ namespace Map {
                 DAT_LandscapeState::ptr)((short)treeType);
         int treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
             x, y, (TreeType)(short)logicalType, stage, 0, 0, 3);
-        this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile]
-            = this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] & ~L_ROCKY;
-        this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile]
-            = this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] | L_TREE;
+        this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] &= ~L_ROCKY;
+        this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] |= L_TREE;
         this->OrganismLayer[DAT_LandscapeState::instance.trees[treeID].tile] = (short)treeID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::applyTreeBrushToLogicalLayer, this)(treeID, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

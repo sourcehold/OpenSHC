@@ -40,14 +40,11 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
-    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::DE::SHCDE::eSFX;
     using OpenSHC::Game::GameMode;
     using OpenSHC::Map::Buildings::BuildingLogicalState;
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Entities::EntityType;
     using OpenSHC::Map::Units::States::UnitState;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00517790
     void TileMapState::processEntityDamageToBuildingCollateral(
@@ -83,20 +80,18 @@ namespace Map {
                 if (unitID != 0) {
                     if (DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]
                         == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk
-                            = DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk + 1;
+                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk += 1;
                     } else {
                         DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk = 0;
                     }
                 }
-                DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + damage * 10;
+                DAT_GameCore::instance.cowPoisonTrackerUnk += damage * 10;
                 for (int hit = 0; hit < damage; hit++) {
                     if (this->HeightLayer[tile] <= this->DefaultHeightLayer[tile]) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
                             DAT_EntityState::ptr)(tile);
-                        this->LogicLayer[tile] = this->LogicLayer[tile]
-                            & ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED
-                                | L_CRENEL_VARIATIONUnk);
+                        this->LogicLayer[tile] &= ~(
+                            L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
                         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
                         this->DamageLayer[tile] = 0;
                         MACRO_CALL_MEMBER(
@@ -106,9 +101,9 @@ namespace Map {
                         DAT_TileMapState::instance.field_0x554a30 = 1;
                         break;
                     }
-                    this->HeightLayer[tile] = this->HeightLayer[tile] - 1;
+                    this->HeightLayer[tile] -= 1;
                     if ((char)this->DamageLayer[tile] < 200) {
-                        this->DamageLayer[tile] = this->DamageLayer[tile] + 1;
+                        this->DamageLayer[tile] += 1;
                     }
                 }
                 continue;
@@ -139,7 +134,7 @@ namespace Map {
             }
 
             short newHealth = health - (short)damage;
-            DAT_GameCore::instance.cowPoisonTrackerUnk = DAT_GameCore::instance.cowPoisonTrackerUnk + damage * 10;
+            DAT_GameCore::instance.cowPoisonTrackerUnk += damage * 10;
             DAT_BuildingsState::instance.buildings[buildingID].currentHealth = newHealth;
             switch (buildingType) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
@@ -156,8 +151,7 @@ namespace Map {
                 if (DAT_GameState::instance.mapAndTime
                         .playerTeams[DAT_BuildingsState::instance.buildings[buildingID].owner]
                     == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                    DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk
-                        = DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk + 1;
+                    DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk += 1;
                 } else {
                     DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk = 0;
                 }
@@ -168,15 +162,13 @@ namespace Map {
 
             if (buildingType != OpenSHC::Map::Buildings::BT_UNKNOWN3 && (buildingType <= 0x55 || buildingType > 0x59)) {
                 int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID]
-                    = DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID] + 1;
-                DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[owner]
-                    = DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[owner] + 1;
+                DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID] += 1;
+                DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[owner] += 1;
                 /* a per-attacker tally inside the owner's player data, 0x20 apart */
                 int* tally
                     = (int*)((char*)&DAT_GameState::instance.playerDataArray[owner].attackedByPlayerArrayUnk[0][1]
                         + playerID * 0x20);
-                *tally = *tally + 1;
+                *tally += 1;
             }
             switch (buildingType) {
             case OpenSHC::Map::Buildings::BT_OILSMELTER:

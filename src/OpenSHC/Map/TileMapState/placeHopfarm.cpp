@@ -17,9 +17,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::LogicHelpers::Logic1;
-    using OpenSHC::Map::LogicHelpers::Logic2;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x005151C0
     void TileMapState::placeHopfarm(
         int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7)
@@ -44,7 +41,7 @@ namespace Map {
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + param_3].addXgetTile
                 + this->buildingX + param_2;
             this->HeightLayer[tile] = (byte)param_7;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | OpenSHC::Map::LogicHelpers::L_BUILDING;
+            this->LogicLayer[tile] |= OpenSHC::Map::LogicHelpers::L_BUILDING;
             this->BuildingLayer[tile] = (short)buildingID;
             this->BuildingWasLayer[tile] = (uchar)param_4;
             this->ChangedLayer[tile] = 2;
@@ -67,7 +64,7 @@ namespace Map {
                       .x
                 + param_2;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->LogicLayer[tile] = this->LogicLayer[tile] | 0x2000000;
+            this->LogicLayer[tile] |= 0x2000000;
             this->BuildingLayer[tile] = (short)buildingID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
@@ -81,8 +78,7 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
-        DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation
-            = DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation + 1;
+        DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation += 1;
         if (DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation > 1) {
             DAT_GameState::instance.playerDataArray[param_1].unkHopFarmVariation = 0;
         }

@@ -45,9 +45,8 @@ namespace Map {
             }
         }
 
-        this->Logic2Layer[tileUnk] = this->Logic2Layer[tileUnk]
-            & (OpenSHC::Map::LogicHelpers::L2_BEACH | OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS
-                | OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH);
+        this->Logic2Layer[tileUnk] &= (OpenSHC::Map::LogicHelpers::L2_BEACH | OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS
+            | OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH);
         byte flags = this->Logic2Layer[tileUnk];
         if (lowest < high) {
             /* the bank runs along whichever axis the map is turned to */

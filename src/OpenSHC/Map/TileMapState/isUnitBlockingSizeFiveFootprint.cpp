@@ -9,8 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAEE0
     BOOLEnum TileMapState::isUnitBlockingSizeFiveFootprint(int buildingID)
     {

@@ -15,8 +15,6 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
 
-    using OpenSHC::Map::Buildings::BuildingType;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00508030
     void TileMapState::placeOilsmelter(
         int playerID, uint x, uint y, undefined4 height, uint sizeIndex, int buildingTypeLike, undefined4 param_7)
@@ -27,7 +25,7 @@ namespace Map {
         if (buildingTypeLike == 0xf) {
             buildingTypeLike = 0;
         } else {
-            buildingTypeLike = buildingTypeLike / 2;
+            buildingTypeLike /= 2;
         }
 
         /* the id is kept zero-extended for the layer stores and sign-extended for the array index */
@@ -43,7 +41,7 @@ namespace Map {
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             this->HeightLayer[tile] = (byte)param_7;
-            this->LogicLayer[tile] = this->LogicLayer[tile] | L_BUILDING;
+            this->LogicLayer[tile] |= L_BUILDING;
             this->BuildingLayer[tile] = smelterID;
             index++;
             this->BuildingWasLayer[tile] = (uchar)height;
@@ -54,7 +52,7 @@ namespace Map {
 
         /* the campfire sits at a fixed offset from the smelter, chosen by the smelter's size */
         x = x + DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].x;
-        y = y + DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].y;
+        y += DAT_TerrainDefinedData::instance.field_0x19c[buildingTypeLike].y;
         ushort campfire = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
             DAT_BuildingsState::ptr)(playerID, x, y, param_7, OpenSHC::Map::Buildings::BT_CAMPFIRE, 4, playerID, 0xf);
         int campfireID = (short)campfire;

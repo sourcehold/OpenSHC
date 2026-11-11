@@ -69,15 +69,15 @@ namespace Map {
                 continue;
             }
 
-            this->HeightLayer[brushTile] = this->HeightLayer[brushTile] + 1;
+            this->HeightLayer[brushTile] += 1;
             if (mapper == 0) {
                 /* mapper min */
                 this->HeightLayer[brushTile] = 8;
-                this->Logic2Layer[brushTile] = this->Logic2Layer[brushTile] & 0xf3;
+                this->Logic2Layer[brushTile] &= 0xf3;
             } else if (mapper == 1) {
                 /* mapper max, bug:fixme: is 156 really the maximum height? */
                 this->HeightLayer[brushTile] = 156;
-                this->LogicLayer[brushTile] = this->LogicLayer[brushTile] | 0x8000;
+                this->LogicLayer[brushTile] |= 0x8000;
             } else if (mapper == 5) {
                 this->HeightLayer[brushTile] = 100;
             } else if (mapper == 2) {
@@ -103,7 +103,7 @@ namespace Map {
                         organism - 2000);
                 }
             }
-            this->LogicLayer[brushTile] = this->LogicLayer[brushTile] & ~L_ROCKY;
+            this->LogicLayer[brushTile] &= ~L_ROCKY;
             if (this->HeightLayer[brushTile] < 8) {
                 this->HeightLayer[brushTile] = 8;
             }
@@ -112,7 +112,7 @@ namespace Map {
             }
             this->DefaultHeightLayer[brushTile] = this->HeightLayer[brushTile];
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
-                this->HeightLayer[brushTile] = this->HeightLayer[brushTile] - 8;
+                this->HeightLayer[brushTile] -= 8;
             }
             uint brushY = y;
             this->DAT_SomeTile = brushTile;

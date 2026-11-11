@@ -22,9 +22,7 @@
 namespace OpenSHC {
 namespace Map {
 
-    using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Units::UnitLogicState;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005017C0
     void TileMapState::useEraserBrush(uint x, uint y, int brush)

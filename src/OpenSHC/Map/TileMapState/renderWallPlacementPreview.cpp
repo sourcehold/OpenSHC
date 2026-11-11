@@ -12,8 +12,6 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB9E0
     void TileMapState::renderWallPlacementPreview(uint x, uint y, short kind)
     {
@@ -87,7 +85,7 @@ namespace Map {
             rotation = this->mapOrientation;
         }
         if (rotation >= 8) {
-            rotation = rotation - 8;
+            rotation -= 8;
         }
         /* the rotation part of the graphic index does not change over the footprint */
         int variationStep = rotation / 2 * size * size;

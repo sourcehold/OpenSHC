@@ -51,7 +51,6 @@ namespace Map {
 
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00512450
     void TileMapState::prepareMap()
@@ -79,7 +78,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(this->mapOrientation);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x27420, '\0', DAT_TileMapState::instance.WalkLayer);
+            0x27420, 0, DAT_TileMapState::instance.WalkLayer);
         DAT_ViewportRenderState::instance.viewportState.viewportY = savedY;
         DAT_ViewportRenderState::instance.viewportState.viewportX = savedX;
         MACRO_CALL_MEMBER(
