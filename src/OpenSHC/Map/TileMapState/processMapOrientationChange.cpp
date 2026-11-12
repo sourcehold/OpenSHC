@@ -8,7 +8,7 @@ namespace Map {
     {
         if ((int)this->DAT_FutureMapOrientation < 8) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(
-                this->DAT_FutureMapOrientation);
+                (MapOrientation)this->DAT_FutureMapOrientation);
             this->DAT_FutureMapOrientation = 8;
         }
     }

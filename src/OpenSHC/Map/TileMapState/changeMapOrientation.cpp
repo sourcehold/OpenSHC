@@ -11,7 +11,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00501B90
-    void TileMapState::changeMapOrientation(int mapOrientation)
+    void TileMapState::changeMapOrientation(MapOrientation mapOrientation)
     {
         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::saveFocusTileAndCenterPreview,
             DAT_ViewportRenderState::ptr)();
