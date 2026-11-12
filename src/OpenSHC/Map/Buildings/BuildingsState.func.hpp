@@ -619,8 +619,8 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00420BF0, &BuildingsState::upgradeBuildingsForMapVersion)
             upgradeBuildingsForMapVersion;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, uint, uint, undefined4, BuildingType, uint, int, int),
-                false, Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, uint, uint, int, BuildingType, uint, int, int), false,
+                Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
             setupBuildingData;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00421890,
