@@ -356,7 +356,8 @@ namespace Map {
                     OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                     DAT_BuildingsState::ptr)(buildingCommand)
                 == OpenSHC::Map::Buildings::BT_UNKNOWN1) {
-                sprite += (&DAT_BuildingDefinedData::instance.field_0x976c[9].y)[buildingCommand];
+                sprite += DAT_BuildingDefinedData::instance
+                              .UnknownVariations[buildingCommand - OpenSHC::Commands::M_MAPPER_UNKNOWN_248];
             } else if (MACRO_CALL_MEMBER(
                            OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
                            DAT_BuildingsState::ptr)(buildingCommand)
