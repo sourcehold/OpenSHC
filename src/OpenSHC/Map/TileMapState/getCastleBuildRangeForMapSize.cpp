@@ -9,13 +9,13 @@ namespace Map {
     undefined4 TileMapState::getCastleBuildRangeForMapSize()
     {
         switch (this->mapSize) {
-        case 160:
+        case MC_MAP_SIZE_160:
             return 45;
-        case 200:
+        case MC_MAP_SIZE_200:
             return 50;
-        case 300:
+        case MC_MAP_SIZE_300:
             return 60;
-        case MC_MAP_XY_LIMIT:
+        case MC_MAP_SIZE_400:
             return 70;
         }
         return 70;

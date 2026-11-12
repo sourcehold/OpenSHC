@@ -28,6 +28,7 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Enums::MapOrientation;
     using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
@@ -304,7 +305,7 @@ namespace Map {
 
         BOOLEnum hasHigherPlainNeighborWithWallOrGatehouse(int param_1, int param_2, int param_3);
 
-        int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
+        MapOrientation getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
         void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 

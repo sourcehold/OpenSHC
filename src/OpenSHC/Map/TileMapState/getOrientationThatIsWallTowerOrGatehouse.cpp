@@ -13,13 +13,13 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8B50
-    int TileMapState::getOrientationThatIsWallTowerOrGatehouse(uint x, uint y)
+    MapOrientation TileMapState::getOrientationThatIsWallTowerOrGatehouse(uint x, uint y)
     {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
-            return 15;
+            return OpenSHC::Map::Enums::MO_NONE;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
-            return 15;
+            return OpenSHC::Map::Enums::MO_NONE;
         }
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -28,10 +28,10 @@ namespace Map {
             int neighbour = this->directionTranslationMatrix[y][orientation] + rowTile;
             if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0
                 && (this->LogicLayer[neighbour] & (L_STOCKPILEUnk | L_CRENEL_VARIATIONUnk)) == 0) {
-                return orientation;
+                return (MapOrientation)orientation;
             }
         }
-        return 15;
+        return OpenSHC::Map::Enums::MO_NONE;
     }
 
 }

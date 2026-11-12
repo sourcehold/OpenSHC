@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Trees/TreeType.hpp"
+
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -30,20 +32,20 @@ namespace Map {
             int treeID = this->OrganismLayer[tile];
             if (treeID < countof(DAT_LandscapeState::instance.trees)) {
                 switch (DAT_LandscapeState::instance.trees[treeID].treeType) {
-                case 5:
-                case 6:
-                case 7:
-                case 8:
-                case 9:
-                case 10:
-                case 11:
-                case 12:
-                case 13:
-                case 14:
-                case 16:
-                case 17:
-                case 18:
-                case 19:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_5:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_6:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_7:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_8:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_9:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_10:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_11:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_12:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_13:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_14:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_16:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_17:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_18:
+                case OpenSHC::Map::Trees::TT_UNKNOWN_19:
                     DAT_LandscapeState::instance.trees[treeID].state = 3;
                 }
             }

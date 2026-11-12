@@ -142,7 +142,7 @@ namespace Map {
             &TileMapState::hasHigherPlainNeighborWithWallOrGatehouse)
         hasHigherPlainNeighborWithWallOrGatehouse;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004F8B50,
+        MACRO_FUNCTION_RESOLVER(MapOrientation (TileMapState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004F8B50,
             &TileMapState::getOrientationThatIsWallTowerOrGatehouse)
         getOrientationThatIsWallTowerOrGatehouse;
 
