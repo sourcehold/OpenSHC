@@ -1,0 +1,214 @@
+OpenSHC::Map::Buildings::BuildingsState::getSpriteID2
+    OpenSHC::Map::Buildings::BuildingsState::convertCommandBuildingTypeToBuildingType
+OpenSHC::Map::Buildings::BuildingsState::getStorageBuildingForResourceTypeAndAmount
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingStorageTypeForResourceType
+OpenSHC::Map::Buildings::BuildingsState::getResourceSpace
+    OpenSHC::Map::Buildings::BuildingsState::getResourceCountThatCanBeDeposited
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingStorageTypeForResourceType
+OpenSHC::Map::Buildings::BuildingsState::getBuildingCost
+    OpenSHC::Map::Buildings::BuildingsState::convertCommandBuildingTypeToBuildingType
+OpenSHC::Map::Buildings::BuildingsState::updateNeededEmployeeCount
+    OpenSHC::Map::Buildings::BuildingsState::hasWorker
+OpenSHC::Map::Buildings::BuildingsState::canUnitReachBuildingPerimeter
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingHeightForBuildingID
+OpenSHC::Map::Buildings::UpdateFletchersWorkshop
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdateBlacksmithsWorkshop
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdatePoleturnersWorkshop
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdateArmorersWorkshop
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdateBakery
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdateInn
+    OpenSHC::Map::Buildings::BuildingsState::updateVisuallyActiveState
+OpenSHC::Map::Buildings::UpdateStables
+    OpenSHC::Map::Buildings::BuildingsState::validateBuildingTetheredUnits
+OpenSHC::Map::Buildings::UpdateBadBuildingGallows
+    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
+OpenSHC::Map::Buildings::UpdateBadBuildingGibbet
+    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
+OpenSHC::Map::Buildings::UpdateBadBuildingDungeon
+    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
+OpenSHC::Map::Buildings::UpdateBadBuildingStretchingRack
+    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
+OpenSHC::Map::Buildings::BuildingsState::hasBuildingAsNeighbour
+    OpenSHC::Map::Buildings::BuildingsState::setupBuildingEntrancesOffset
+OpenSHC::Map::Buildings::BuildingsState::findParticularBuilding
+    OpenSHC::Map::Buildings::BuildingsState::setupBuildingEntrancesOffset
+OpenSHC::Map::Buildings::BuildingsState::findAccessibleAreaNearBuildingLocation
+    OpenSHC::Map::Buildings::BuildingsState::setupBuildingEntrancesOffset
+OpenSHC::Map::Buildings::BuildingsState::addResourceToStockpile
+    OpenSHC::Map::Buildings::BuildingsState::extendResourceCountdownForPlayerBuildingsOfType
+OpenSHC::Map::Buildings::BuildingsState::addResourceToGranary
+    OpenSHC::Map::Buildings::BuildingsState::getResourceCountThatCanBeDeposited
+OpenSHC::Map::Buildings::BuildingsState::addResourceToArmory
+    OpenSHC::Map::Buildings::BuildingsState::getArmoryIDIfSpaceLeft
+OpenSHC::Map::Buildings::BuildingsState::processResourceLoss
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingStorageTypeForResourceType
+OpenSHC::Map::Buildings::UpdateIronMine
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingResourceAmountByUid
+OpenSHC::Map::Buildings::BuildingsState::destroyBuildingAndLinkedDuplicates
+    OpenSHC::Map::Buildings::BuildingsState::destroySignpostData
+OpenSHC::Map::Buildings::BuildingsState::buildingIsAccessible
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingHeightForBuildingID
+OpenSHC::UI::MenuItems::BuildMenu::MenuItemActionHandler_BuildMenu_UnitActionButtons
+    OpenSHC::UI::Helpers::SetTribesPatrolButtonPressed
+OpenSHC::UI::Rendering::TextureRenderCore::renderInterfaceOrBuildingOccupationArea
+    OpenSHC::UI::Rendering::InitBlendFilterArraysUnk
+OpenSHC::UI::Rendering::TextureRenderCore::renderGmWithPreparedAlphaMask
+    OpenSHC::UI::Rendering::InitBlendFilterArraysUnk
+OpenSHC::UI::Rendering::TextureRenderCore::transformTilesetToRGB565
+    OpenSHC::UI::Rendering::TextureRenderCore::transformTileObjectToRGB565
+OpenSHC::Game::GameStateStructures::clearEnemyRelatedStructures
+    OpenSHC::Game::GameStateStructures::setVariousGameStateToInitialValues
+OpenSHC::Game::GameStateStructures::getSalesPrice
+    OpenSHC::Game::GameStateStructures::getSellResourceAmount
+OpenSHC::UI::MenuItems::General::MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::Rendering::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::Rendering::RenderButtonImageWithBlending
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::ChooseRandomNumberOfEnemies::MenuItemRenderFunction_ChooseRandomNumberOfEnemies_Main
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::Rendering::RenderCurrentButtonOnScreenMenu
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::Rendering::RenderCurrentButtonToScreenMenuWithBlendingUnk
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::MapEditorLandscaping::MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_BarracksWeaponAvailability
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_GeneralButtonRender
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_SelectBuySellGoods
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemActionHandler_BuildingAndStatusMenu_BarrackUnitPortraits
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_MercenaryPostPortraits
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_EngineerAndMonkPortraits
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_TunnelerPortrait
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::Input::MouseState::updateRightDragCameraControl
+    OpenSHC::Map::Navigation::DirectionAlgorithmState::getMouseVectorLengthBasedOnDirection
+OpenSHC::IO::ResourceManager::swapMapDataWithNextMap
+    OpenSHC::IO::LowLevelMemory::copyData
+OpenSHC::IO::ResourceManager::readFirstPartOfCurrentResourceIntoMemory
+    OpenSHC::IO::LowLevelMemory::putFileNameAndAppendFileExtension
+OpenSHC::IO::ResourceManager::readNextPartOfCurrentResourceIntoMemory
+    OpenSHC::IO::LowLevelMemory::putFileNameAndAppendFileExtension
+OpenSHC::IO::DecoderState::encodeData
+    OpenSHC::IO::LowLevelMemory::copyData
+OpenSHC::IO::DecoderState::decodeData
+    OpenSHC::IO::LowLevelMemory::copyData
+OpenSHC::Synchrony::GameSynchronyState::processSyncPacket
+    OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
+OpenSHC::Synchrony::GameSynchronyState::receiveAllTransmittedCommands
+    OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
+OpenSHC::Map::TileMapState::updateMoatCountdownTimers
+    OpenSHC::Map::TileMapState::recountTotalOwnedMoats
+OpenSHC::UI::HoveredState::Constructor_HoveredState
+    OpenSHC::UI::HoveredState::clearHoveredState
+OpenSHC::Map::Units::UpdateBurningMan
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
+OpenSHC::Map::Units::UpdateCamel
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateMiner
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateInnkeeper
+    OpenSHC::Map::Buildings::BuildingsState::getBuildingResourceAmountByUid
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateMerchant
+    OpenSHC::Game::GameStateStructures::activateTraderState
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateMerchantHorse
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateLady
+    OpenSHC::Map::Units::UnitsState::makeUnitStopWalkingByClearingPathProgressState
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::changeDestinationByAmount
+OpenSHC::Map::Units::UpdateJuggler
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
+OpenSHC::Map::Units::UpdateFireEater
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
+    OpenSHC::Map::Units::UnitsState::changeDestinationByAmount
+OpenSHC::Map::Units::UpdateQuarryMason
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+OpenSHC::Map::Units::UpdateHopsFarmer
+    OpenSHC::Map::Units::IncrementAndOptionalUpdateAVValueRelated
+    OpenSHC::Map::Units::SetStateToFreetimeWalking
+    OpenSHC::Map::Units::ComputeGoodsProduced
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateAppleFarmer
+    OpenSHC::Map::Units::IncrementAndOptionalUpdateAVValueRelated
+    OpenSHC::Map::Units::SetStateToFreetimeWalking
+    OpenSHC::Map::Units::ComputeGoodsProduced
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateDairyFarmer
+    OpenSHC::Map::Units::IncrementAndOptionalUpdateAVValueRelated
+    OpenSHC::Map::Units::SetStateToFreetimeWalking
+    OpenSHC::Map::Units::CheckUnitProductionPaused
+    OpenSHC::Map::Units::ComputeGoodsProduced
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdatePikeman
+    OpenSHC::Rendering::ViewportRenderState::xyAreValid
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::changeDestinationByAmount
+OpenSHC::Map::Units::UpdateMaceman
+    OpenSHC::Rendering::ViewportRenderState::xyAreValid
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::changeDestinationByAmount
+OpenSHC::Map::Units::UpdateSwordsman
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateKnight
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateDrunkard
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
+OpenSHC::Map::Units::UpdateCatapult
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateTrebuchet
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateMangonel
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateBallista
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateSlave
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateAssassin
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateArabianSwordsman
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateFireBallista
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateHorseArcher
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
