@@ -63,7 +63,7 @@ namespace Game {
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         int furthestMission; // 0x00000054 length: 4
-        dword unlockAllHistoricalCampaigns; // 0x00000058 length: 4
+        BOOLEnum unlockAllHistoricalCampaigns; // 0x00000058 length: 4
         dword unused1; // 0x0000005C length: 4
         dword section1066; // 0x00000060 length: 4
         dword gameSuspended; // 0x00000064 length: 4
@@ -73,7 +73,7 @@ namespace Game {
         dword field_0x74; // 0x00000074 length: 4
         int mapU4Int1; // 0x00000078 length: 4
         int mapU4Int1_2; // 0x0000007C length: 4
-        dword viewedKeepIndex; // 0x00000080 length: 4
+        int viewedKeepIndex; // 0x00000080 length: 4
         int battleLevel; // 0x00000084 length: 4
         dword cowPoisonTrackerUnk; // 0x00000088 length: 4
         int someSoundMatchTime_1; // 0x0000008C length: 4
@@ -137,7 +137,7 @@ namespace Game {
         byte unused_0x178[2024]; // 0x00000178 length: 2024
         BOOLEnum cheatModeFlag; // 0x00000960 length: 4
         BOOLEnum solitaryAltUDungeon; // 0x00000964 length: 4
-        dword descriptionUseStringTable; // 0x00000968 length: 4
+        BOOLEnum descriptionUseStringTable; // 0x00000968 length: 4
         dword descriptionStringTableIndex; // 0x0000096C length: 4
         char temporaryTextBufferOfSize1000[1000]; // 0x00000970 length: 1000
         char standaloneFilename[1001]; // 0x00000D58 length: 1001
@@ -159,7 +159,7 @@ namespace Game {
         int savedMapBalance; // 0x00001D8C length: 4
         MapLockStateInt U3_mapLockedState; // 0x00001D90 length: 4
         MapLockStateInt savedMapLocked; // 0x00001D94 length: 4
-        dword mapLoadedForEditor; // 0x00001D98 length: 4
+        BOOLEnum mapLoadedForEditor; // 0x00001D98 length: 4
         int mapU3EndInt; // 0x00001D9C length: 4
         int savedMapEndInt2; // 0x00001DA0 length: 4
         int canBeginMainLoop; // 0x00001DA4 length: 4

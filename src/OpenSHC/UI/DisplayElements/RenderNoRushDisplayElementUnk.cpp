@@ -2,8 +2,6 @@
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/Helpers.func.hpp"
-#include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
@@ -26,13 +24,6 @@ namespace OpenSHC {
 namespace UI {
     namespace DisplayElements {
 
-        using OpenSHC::DE::SHCDE::eTextSections;
-        using OpenSHC::Rendering::ScreenResolutionEnum;
-        using OpenSHC::Rendering::Enums::RenderTarget;
-        using OpenSHC::Text::TextAlignment;
-        using OpenSHC::UI::Enums::DisplayElementID;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004B20B0
         void RenderNoRushDisplayElementUnk(int posX, int posY, DWORD elementState)
         {
@@ -52,36 +43,50 @@ namespace UI {
                 + 50;
             int x = posX + 800;
             DAT_PencilRenderCore::instance.surfaceTarget = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+            // Separate ifs, not an else-if chain (an else-if chain: quick_diff 0.9797 -> 0.9054)
             if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
                 x += 112;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
                 x -= 240;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
                 x -= 400;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
                 x -= 240;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
                 x -= 320;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
                 x -= 560;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
                 x -= 560;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
                 x -= 880;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
                 x -= 880;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
                 x -= 283;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
                 x -= 440;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
                 x -= 400;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x600) {
                 x -= 112;
-            } else if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
+            }
+            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
                 x -= 280;
             }
-            x += -18 - (barWidth / 2);
+            x -= 18 + barWidth / 2;
             int const left = x - (barWidth / 2);
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
                 DAT_PencilRenderCore::ptr)(left - 7, posY - 5, (barWidth / 2) + 5 + x, posY + 30, 16);

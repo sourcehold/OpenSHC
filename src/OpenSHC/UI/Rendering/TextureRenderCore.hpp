@@ -60,23 +60,15 @@ namespace UI {
             dword mbr_0x6c; // 0x0000006C length: 4
             dword colorPaletteOverride; // 0x00000070 length: 4
             int gmProcessedImageDataBufferSize_0x74; // 0x00000074 length: 4
-            void* gmProcessedImageData; // 0x00000078 length: 4
+            byte* gmProcessedImageData; // 0x00000078 length: 4
             int unknownMemSize_1_0x7c; // 0x0000007C length: 4
             void* unknownMemPtr_1_0x80; // 0x00000080 length: 4
             int unknownMemSize_2_0x84; // 0x00000084 length: 4
             void* address2; // 0x00000088 length: 4
             int gmAndGfxImageDataBufferSize_0x8c; // 0x0000008C length: 4
-            void* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
-            void* bitmapsFaces_0x94; // 0x00000094 length: 4
-            int bitmapFaceSizes[28]; // 0x00000098 length: 112
-            int field_0x108; // 0x00000108 length: 4
-            int field_0x10c; // 0x0000010C length: 4
-            int field_0x110; // 0x00000110 length: 4
-            int field_0x114; // 0x00000114 length: 4
-            int field_0x118; // 0x00000118 length: 4
-            int field_0x11c; // 0x0000011C length: 4
-            int field_0x120; // 0x00000120 length: 4
-            int field_0x124; // 0x00000124 length: 4
+            byte* gmAndGfxImageDataBuffer; // 0x00000090 length: 4
+            ushort* bitmapsFaces_0x94; // 0x00000094 length: 4
+            int bitmapFaceSizes[36]; // 0x00000098 length: 144
             int field_0x128; // 0x00000128 length: 4
             int field_0x12c; // 0x0000012C length: 4
             undefined1 padding_0x130[1004]; // 0x00000130 length: 1004

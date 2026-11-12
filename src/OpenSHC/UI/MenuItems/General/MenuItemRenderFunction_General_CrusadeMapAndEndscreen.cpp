@@ -40,7 +40,7 @@ namespace UI {
                 int const textY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 583;
                 int const textX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400;
                 // one call per caption, merged but for the index (an index local: quick_diff 0.9464 -> 0.8468)
-                if ((int)DAT_SkirmishTrailRelated1::instance > 0) {
+                if (DAT_SkirmishTrailRelated1::instance > 0) {
                     // "Skip Current Mission"
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,

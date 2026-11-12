@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTargetInt.hpp"
 #include "OpenSHC/UI/Enums/RoundedBoxEdgeRoundingLevel.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -16,6 +17,7 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
+        using OpenSHC::DE::SHCDE::eTextSections;
         using OpenSHC::Rendering::Enums::RenderTargetInt;
         using OpenSHC::UI::Enums::RoundedBoxEdgeRoundingLevel;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -30,18 +32,18 @@ namespace UI {
             ushort* surfacePtr; // 0x00000004 length: 4
             dword horizontalByteSize; // 0x00000008 length: 4
             RenderTargetInt surfaceTarget; // 0x0000000C length: 4
-            dword currentX; // 0x00000010 length: 4
-            dword currentY; // 0x00000014 length: 4
+            int currentX; // 0x00000010 length: 4
+            int currentY; // 0x00000014 length: 4
             dword field_0x18; // 0x00000018 length: 4
             dword field_0x1c; // 0x0000001C length: 4
-            dword moveDirectionXUnk_0x20; // 0x00000020 length: 4
-            dword moveDirectionYUnk_0x24; // 0x00000024 length: 4
+            int moveDirectionXUnk_0x20; // 0x00000020 length: 4
+            int moveDirectionYUnk_0x24; // 0x00000024 length: 4
             int currentWidth_0x28; // 0x00000028 length: 4
             int currentHeight_0x2c; // 0x0000002C length: 4
-            dword drawStartX; // 0x00000030 length: 4
-            dword drawStartY; // 0x00000034 length: 4
-            dword drawEndX; // 0x00000038 length: 4
-            dword drawEndY; // 0x0000003C length: 4
+            int drawStartX; // 0x00000030 length: 4
+            int drawStartY; // 0x00000034 length: 4
+            int drawEndX; // 0x00000038 length: 4
+            int drawEndY; // 0x0000003C length: 4
             ushort drawColor; // 0x00000040 length: 2
 
         private:
@@ -103,7 +105,7 @@ namespace UI {
             void drawLine(int x1, int y1, int x2, int y2, ushort color);
 
             void drawHeaderTextBanner(
-                int textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height);
+                eTextSections textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height);
         };
 
         static_assert_cpp98_obj(sizeof(PencilRenderCore) == 66, PencilRenderCore);

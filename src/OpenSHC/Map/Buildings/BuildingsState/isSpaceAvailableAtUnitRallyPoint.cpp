@@ -59,9 +59,8 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(
                             Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                             DAT_PathFindingState::ptr)(playerID,
-                            (short)DAT_TileMapState::instance
-                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                            (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                            DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
                         != 0) {
                         this->DAT_TempXOffset = x;
                         this->DAT_TempYOffset = y;

@@ -12,6 +12,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
@@ -27,6 +28,7 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -65,8 +67,8 @@ namespace Map {
         uchar ShowHiLayer[80400]; // 0x002EE270 length: 80400
         short MiscDisplayLayer[80400]; // 0x00301C80 length: 160800
         char DamageLayer[80400]; // 0x003290A0 length: 80400
-        ushort MacroLayer[80400]; // 0x0033CAB0 length: 160800
-        ushort PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
+        short MacroLayer[80400]; // 0x0033CAB0 length: 160800
+        short PathConnectionLayer[80400]; // 0x00363ED0 length: 160800
         uchar PathLinkageLayer[80400]; // 0x0038B2F0 length: 80400
         uchar OccupancyLayer[80400]; // 0x0039ED00 length: 80400
         short CertainPathLayer[80400]; // 0x003B2710 length: 160800
@@ -76,11 +78,11 @@ namespace Map {
         uchar unitDeathHeatMap[80400]; // 0x00428370 length: 80400
         uchar SEC_TileMap1104[80400]; // 0x0043BD80 length: 80400
         uchar SEC_PathfindingCostTileMap1105[9][80400]; // 0x0044F790 length: 723600
-        undefined4 someIndex; // 0x00500220 length: 4
-        undefined4 someLimit; // 0x00500224 length: 4
-        undefined4 someYLike; // 0x00500228 length: 4
-        undefined4 someYLikeLimit; // 0x0050022C length: 4
-        byte mapping40x40[40][40]; // 0x00500230 length: 1600
+        int someIndex; // 0x00500220 length: 4
+        int someLimit; // 0x00500224 length: 4
+        int someYLike; // 0x00500228 length: 4
+        int someYLikeLimit; // 0x0050022C length: 4
+        char mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
         int currentMoatCount; // 0x0053F070 length: 4
         undefined4 moatTileCount; // 0x0053F074 length: 4
@@ -88,19 +90,19 @@ namespace Map {
         undefined4 ALG_MoatYResult; // 0x0053F07C length: 4
         int someMoatTile; // 0x0053F080 length: 4
         PitchDitch pitchDitches[4000]; // 0x0053F084 length: 80000
-        undefined4 maxPitchDitchCount; // 0x00552904 length: 4
+        int maxPitchDitchCount; // 0x00552904 length: 4
         undefined1 padding_0x552908[4]; // 0x00552908 length: 4
         short specialAreasArray[8]; // 0x0055290C length: 16
-        undefined4 temporaryTerrainTypeIndex; // 0x0055291C length: 4
-        undefined4 SEC_Section1052; // 0x00552920 length: 4
-        undefined4 SEC_Section1053; // 0x00552924 length: 4
-        undefined4 SEC_Section1054; // 0x00552928 length: 4
+        int temporaryTerrainTypeIndex; // 0x0055291C length: 4
+        int SEC_Section1052; // 0x00552920 length: 4
+        int SEC_Section1053; // 0x00552924 length: 4
+        int SEC_Section1054; // 0x00552928 length: 4
         int temporaryTerrainTypeArray[1000]; // 0x0055292C length: 4000
         int temporaryTerrainTypeBinaryArray[1000]; // 0x005538CC length: 4000
-        undefined4 forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
-        undefined4 forceUpdateTextureTilemap; // 0x00554870 length: 4
-        undefined4 forceUpdateGFXLayers; // 0x00554874 length: 4
-        undefined4 forceUpdateMacroLayerFlag; // 0x00554878 length: 4
+        BOOLEnum forceUpdateLogicalAndMiscDisplayLayers; // 0x0055486C length: 4
+        BOOLEnum forceUpdateTextureTilemap; // 0x00554870 length: 4
+        BOOLEnum forceUpdateGFXLayers; // 0x00554874 length: 4
+        BOOLEnum forceUpdateMacroLayerFlag; // 0x00554878 length: 4
         undefined4 field_0x55487c; // 0x0055487C length: 4
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
@@ -108,7 +110,7 @@ namespace Map {
         undefined4 rockOrientation; // 0x00554890 length: 4
         undefined4 editorRockType; // 0x00554894 length: 4
         undefined4 lastTime; // 0x00554898 length: 4
-        int mapOrientation; // 0x0055489C length: 4
+        MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
         int screenSouthEastDirection; // 0x005548A4 length: 4
         int screenEastDirection; // 0x005548A8 length: 4
@@ -121,7 +123,7 @@ namespace Map {
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
         undefined4 disableElevationRendering; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
-        undefined1 padding_0x5548d0[4]; // 0x005548D0 length: 4
+        undefined4 field_0x5548d0; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
         int savedEditorActiveBrush; // 0x005548DC length: 4
@@ -155,17 +157,17 @@ namespace Map {
         undefined4 buildingSpriteID1; // 0x0055494C length: 4
         undefined4 buildingSpriteID2; // 0x00554950 length: 4
         undefined4 cursorTargetID; // 0x00554954 length: 4
-        undefined4 buildingHeightLimit; // 0x00554958 length: 4
-        undefined4 buildingMinHeight; // 0x0055495C length: 4
-        undefined4 buildingMaxHeight; // 0x00554960 length: 4
-        undefined4 buildingMaxHeightDifference; // 0x00554964 length: 4
+        int buildingHeightLimit; // 0x00554958 length: 4
+        int buildingMinHeight; // 0x0055495C length: 4
+        int buildingMaxHeight; // 0x00554960 length: 4
+        int buildingMaxHeightDifference; // 0x00554964 length: 4
         undefined4 buildingPlacementProperty_3; // 0x00554968 length: 4
         undefined4 buildingPlacementProperty_4; // 0x0055496C length: 4
         undefined4 buildingPlacementProperty_5; // 0x00554970 length: 4
         undefined4 buildingPlacementProperty_6; // 0x00554974 length: 4
         undefined4 buildingPlacementProperty_7; // 0x00554978 length: 4
         undefined1 padding_0x55497c[4]; // 0x0055497C length: 4
-        undefined4 wallDragButtonUp; // 0x00554980 length: 4
+        BOOLEnum wallDragButtonUp; // 0x00554980 length: 4
         int constructionTileCount; // 0x00554984 length: 4
         int DAT_WallTileCountCurrentDrag; // 0x00554988 length: 4
         undefined4 buildingX; // 0x0055498C length: 4
@@ -181,7 +183,7 @@ namespace Map {
         int DAT_TempBuildingRotation; // 0x005549B4 length: 4
         int field_0x5549b8; // 0x005549B8 length: 4
         undefined4 cursorAnimationTime; // 0x005549BC length: 4
-        undefined4 cursorOverlayAnimationFrame; // 0x005549C0 length: 4
+        int cursorOverlayAnimationFrame; // 0x005549C0 length: 4
         undefined4 cursorOverlayImageBase; // 0x005549C4 length: 4
         undefined4 cursorOverlayGmID; // 0x005549C8 length: 4
         undefined4 flagAnimationDivisor; // 0x005549CC length: 4
@@ -304,7 +306,7 @@ namespace Map {
 
         int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
-        void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
         void reassignWallOwnershipForPlayer(int param_1, int param_2);
 
@@ -312,7 +314,7 @@ namespace Map {
 
         void destroyWallsOfPlayer(int playerID);
 
-        void validateWallPlacementAtTile(int playerID, uint x, uint y, MappersEnum param_4);
+        void validateWallPlacementAtTile(int playerID, uint x, uint y, short param_4);
 
         void setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize);
 
@@ -487,7 +489,7 @@ namespace Map {
 
         BOOLEnum isValidCastleSiteLocation(int x, uint y, int cbt);
 
-        void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, undefined4 param_4);
+        void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, short param_4);
 
         int getMaxWallHeightInBrushArea(int param_1, uint param_2);
 
@@ -506,7 +508,7 @@ namespace Map {
 
         void updateBuildingPlacementRotationPreview(int param_1, int param_2);
 
-        int setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
+        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 
@@ -516,10 +518,10 @@ namespace Map {
             int playerID, uint x, uint y, BuildingType type, uint size, int orientation, undefined4 averageHeight);
 
         void placeSiegetowerPlaced(
-            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, short param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeSiegeTent(
-            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, short param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placePositiveFearfactor(int playerID, uint x, uint y, undefined4 buildingType, undefined4 variation,
             uint buildingSize, undefined4 param_7, undefined4 height);
@@ -540,14 +542,14 @@ namespace Map {
         void placeGatehouseLarge(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
-        void placeBarracks(int playerID, uint xPosition, int* yPosition_param, undefined4 buildingType,
-            uint buildingSize, int buildingOrientation, undefined4 param_7);
+        void placeBarracks(int playerID, uint xPosition, uint yPosition, undefined4 buildingType, uint buildingSize,
+            int buildingOrientation, undefined4 param_7);
 
         void placeEngineersguild(
-            int param_1, int* param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeTunnelersguild(
-            int param_1, int* param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
+            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
 
         void placeOilsmelter(
             int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, undefined4 param_7);
@@ -608,7 +610,7 @@ namespace Map {
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
-        void placeDrawbridge(int playerID, uint x, uint y, undefined4 buildingType, uint width, int* orientation,
+        void placeDrawbridge(int playerID, uint x, uint y, undefined4 buildingType, uint width, int orientation,
             undefined4 averageHeight);
 
         void placeWheatfarm(int playerID, uint x, uint y, undefined4 buildingType, undefined4 param_5, int variation,
@@ -618,10 +620,10 @@ namespace Map {
             int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5, int param_6, int param_7);
 
         void placeDairyfarm(int param_1, uint param_2, uint param_3, undefined4 param_4, undefined4 param_5,
-            int* param_6, undefined4 param_7);
+            int param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int* param_7);
+            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 

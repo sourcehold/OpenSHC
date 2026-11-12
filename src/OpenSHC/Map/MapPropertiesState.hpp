@@ -65,9 +65,9 @@ namespace Map {
         int scenarionMissionType; // 0x00013534 length: 4
         MapType2Int SEC_U3_MapType2_1; // 0x00013538 length: 4
         MapType2Int scenarioMissionSiegeOrInvasion; // 0x0001353C length: 4
-        undefined4 SEC_Section1090; // 0x00013540 length: 4
-        undefined4 SEC_Section1080; // 0x00013544 length: 4
-        undefined4 SEC_Section1081; // 0x00013548 length: 4
+        int SEC_Section1090; // 0x00013540 length: 4
+        int SEC_Section1080; // 0x00013544 length: 4
+        BOOLEnum SEC_Section1081; // 0x00013548 length: 4
         undefined1 padding_0x1354c[4]; // 0x0001354C length: 4
         int visibleRowCount; // 0x00013550 length: 4
         undefined1 padding_0x13554[8]; // 0x00013554 length: 8
@@ -78,14 +78,15 @@ namespace Map {
         int field_0x1356c; // 0x0001356C length: 4
         undefined4 invasionTroopIndex; // 0x00013570 length: 4
         int DAT_BuildingAvailabilityScrollbarOffset; // 0x00013574 length: 4
-        undefined4 flag; // 0x00013578 length: 4
+        BOOLEnum flag; // 0x00013578 length: 4
         int offset; // 0x0001357C length: 4
         int indexStored; // 0x00013580 length: 4
         int selectedAbsoluteIndex; // 0x00013584 length: 4
         dword selectionTime; // 0x00013588 length: 4
         undefined4 value; // 0x0001358C length: 4
-        undefined4 field_0x13590; // 0x00013590 length: 4
-        undefined1 padding_0x13594[8]; // 0x00013594 length: 8
+        int field_0x13590; // 0x00013590 length: 4
+        int field_0x13594; // 0x00013594 length: 4
+        int field_0x13598; // 0x00013598 length: 4
         undefined4 total; // 0x0001359C length: 4
         int unknownArray_01[1000]; // 0x000135A0 length: 4000
         undefined4 year_copy; // 0x00014540 length: 4

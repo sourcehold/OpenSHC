@@ -88,7 +88,7 @@ In case of uncertainty, check the matching.
 fillMemory_ByteValue(14836, '\0', &this->playerDataArray[playerID]);
 
 // yes
-fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
+fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), 0, &this->playerDataArray[playerID]);
 ```
 
 **neutral**, and it binds the call to the layout of the structure.
@@ -472,7 +472,61 @@ if (someCondition) {
 }
 ```
 
+## 25. Favor for-loops over unrolls
+```cpp
+    // FUNCTION: STRONGHOLDCRUSADER 0x00491730
+    void MenuTextInputState::clearModalDialog2to6()
+    {
+// no
+        this->previousModalDialogs[0] = 0;
+        this->previousModalDialogs[1] = 0;
+        this->previousModalDialogs[2] = 0;
+        this->previousModalDialogs[3] = 0;
+        this->previousModalDialogs[4] = 0;
 
+// yes
+        for (int i = 0; i < countof(this->previousModalDialogs); ++i) {
+            this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+        }
+    }
+```
+
+**measure**. Also needs interpretation of the code to understand what for-loop could replace it.
+
+## 26. Favor `i < countof(this->array)` instead of magic values
+```cpp
+// no
+for (int i = 0; i < 5; ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+
+// yes
+for (int i = 0; i < countof(this->previousModalDialogs); ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+```
+
+**neutral** when our supplied `countof` is used.
+
+## 27. Only use '\0' if strings and chars are involved
+Else write 0 instead of '\0'.
+
+## 28. Remove unused `using` declarations
+If the type or namespace is unused, remove the `using` declaration in the cpp file.
+
+## 29. Use self-add and other self-operations
+```cpp
+// no
+x = x + 4;
+x = x | 0x1;
+x = x & 0xf;
+x = x + 1;
+// yes
+x += 4;
+x |= 0x1;
+x &= 0xf;
+x++;
+```
 
 ---
 
