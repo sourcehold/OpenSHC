@@ -28,9 +28,9 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_GARDEN11:
         case OpenSHC::Commands::M_MAPPER_GARDEN12:
         case OpenSHC::Commands::M_MAPPER_OIL_SMELTER:
-        case 258:
-        case 259:
-        case 260:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_258:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_259:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_260:
         case OpenSHC::Commands::M_MAPPER_WATERPOT:
             return 4;
         case OpenSHC::Commands::M_MAPPER_STORES:
@@ -102,10 +102,10 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_CAMP_FIRE:
         case OpenSHC::Commands::M_MAPPER_KILLING_PIT:
         case OpenSHC::Commands::M_MAPPER_PITCH_DITCH:
-        case 248:
-        case 249:
-        case 250:
-        case 251:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_248:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_249:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_250:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_251:
         case OpenSHC::Commands::M_MAPPER_SHRINE5:
             return 1;
         case OpenSHC::Commands::M_MAPPER_KEEP3:
@@ -135,12 +135,12 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_GARDEN5:
         case OpenSHC::Commands::M_MAPPER_GARDEN6:
         case OpenSHC::Commands::M_MAPPER_GALLOWS:
-        case 252:
-        case 253:
-        case 254:
-        case 255:
-        case 256:
-        case 257:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_252:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_253:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_254:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_255:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_256:
+        case OpenSHC::Commands::M_MAPPER_UNKNOWN_257:
         case OpenSHC::Commands::M_MAPPER_GIBBET:
         case OpenSHC::Commands::M_MAPPER_STATUE1:
         case OpenSHC::Commands::M_MAPPER_STATUE2:
