@@ -390,7 +390,7 @@ namespace Map {
 
             void upgradeBuildingsForMapVersion(int receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingType buildingType,
+            int setupBuildingData(int playerID, uint x, uint y, int averageHeight, BuildingType buildingType,
                 uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);
