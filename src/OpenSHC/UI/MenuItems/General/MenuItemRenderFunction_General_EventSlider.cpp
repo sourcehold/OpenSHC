@@ -81,8 +81,8 @@ namespace UI {
                     DAT_ButtonY::instance + DAT_ButtonH::instance - 4, COL_DARK_LIME::instance.shortValue);
             }
             if (slider == -2 && value == 10) {
+                // "-"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow,
-                    // "-"
                     DAT_TextManagerObject::ptr)(s___005a2280, DAT_ButtonX::instance + DAT_ButtonW::instance + 12,
                     DAT_ButtonY::instance + 6, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18,
                     FALSE, 0);

@@ -37,8 +37,7 @@ namespace UI {
             if (buttonID == -2) {
                 return;
             }
-            // the two tabs, -100 and -101: the selected one (0 or 2 for the first, 1 or 3 for the second) is drawn
-            // pressed
+            // tabs -100 and -101: the selected one (0 or 2 for -100, 1 or 3 for -101) is drawn pressed
             if ((buttonID == -100 && (INT_00ec082c::instance == 0 || INT_00ec082c::instance == 2))
                 || (buttonID == -101 && (INT_00ec082c::instance == 1 || INT_00ec082c::instance == 3))) {
                 DAT_ButtonUnknownZero::instance = TRUE;

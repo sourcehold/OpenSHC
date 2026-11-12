@@ -29,6 +29,7 @@ namespace UI {
                 DAT_ButtonX::instance + DAT_ButtonW::instance, DAT_ButtonY::instance + DAT_ButtonH::instance, 12);
             // the slider's title, drawn under the thumb
             if (DAT_MenuModalComposition2::instance.textGroup >= 0) {
+                // the title's position in locals, y first (inline: quick_diff 1.0000 -> 0.7039)
                 int const textY = DAT_ButtonY::instance + 4;
                 int const textX = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
@@ -51,6 +52,7 @@ namespace UI {
             }
             // a thumb as wide as the slider covers the title, so it is drawn again over it
             if (thumbHeight == DAT_ButtonW::instance && DAT_MenuModalComposition2::instance.textGroup >= 0) {
+                // the title's position in locals, y first (inline: quick_diff 1.0000 -> 0.7039)
                 int const textY = DAT_ButtonY::instance + 4;
                 int const textX = DAT_ButtonW::instance / 2 + DAT_ButtonX::instance;
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

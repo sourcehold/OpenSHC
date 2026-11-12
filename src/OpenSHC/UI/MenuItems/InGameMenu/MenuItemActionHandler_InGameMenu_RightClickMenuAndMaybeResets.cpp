@@ -16,10 +16,10 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00438B60
-        void InGameMenu::MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets(int param_1, ...)
+        void InGameMenu::MenuItemActionHandler_InGameMenu_RightClickMenuAndMaybeResets(int unused, ...)
         {
             DAT_MouseState::instance.mouseBasedEvent = 0;
-            if (DAT_ViewportRenderState::instance.viewportState.field_0x0 == 0) {
+            if (!DAT_ViewportRenderState::instance.viewportState.field_0x0) {
                 return;
             }
             if (!DAT_MouseState::instance.rightClickStart
@@ -28,7 +28,7 @@ namespace UI {
                             == OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
                         || DAT_GameCore::instance.activeMenuTab.tabType
                             == OpenSHC::UI::Enums::BASMTT_SIEGETENT_SHIELD))) {
-                if (DAT_MouseState::instance.rightClickState && DAT_MouseState::instance.previewEnabled != 0) {
+                if (DAT_MouseState::instance.rightClickState && DAT_MouseState::instance.previewEnabled) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Input::MouseState_Func::updateRightDragCameraControl, DAT_MouseState::ptr)();
                     return;
