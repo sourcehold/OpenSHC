@@ -76,7 +76,7 @@ namespace Map {
                 DAT_PathFindingState::ptr)(playerID, anchorX, anchorY, enemyDistance)) {
             this->demolishBlocked = 1;
             this->buildingPlacementFail = TRUE;
-            this->buildingPlacementFailReason = (BuildingFailReasonEnum)20;
+            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_20;
             if (buildingID != 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].owner == playerID || playerID == 0) {
                     return;

@@ -41,7 +41,7 @@ namespace Map {
                     continue;
                 }
             }
-            if ((char)this->moats[moatID].stage != number) {
+            if (this->moats[moatID].stage != number) {
                 continue;
             }
             if (this->BuildingLayer[this->moats[moatID].tile] != 0 && this->moats[moatID].zeroOrTwo == 0) {

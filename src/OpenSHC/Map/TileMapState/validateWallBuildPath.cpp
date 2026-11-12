@@ -98,7 +98,7 @@ namespace Map {
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL
             && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(this->DAT_SomeTile, y1)
                 == FALSE) {
-            this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
+            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_19;
             return;
         }
 
@@ -160,17 +160,17 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                        DAT_PathFindingState::ptr)(playerID, x, y, enemyRange)
                     != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                 return;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                         DAT_PathFindingState::ptr)(playerID, x, y, searchRange, -1, -1, -1)
                     != FALSE) {
-                    if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)18) {
+                    if (this->buildingPlacementFailReason == OpenSHC::Map::Buildings::BRE_UNKNOWN_18) {
                         return;
                     }
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
+                    this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_19;
                     return;
                 }
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
@@ -179,10 +179,10 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isTileInRangeOfKeepRange,
                             DAT_PathFindingState::ptr)(playerID, x, y, buildRange)
                         != FALSE) {
-                        if (this->buildingPlacementFailReason == (BuildingFailReasonEnum)18) {
+                        if (this->buildingPlacementFailReason == OpenSHC::Map::Buildings::BRE_UNKNOWN_18) {
                             return;
                         }
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
+                        this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_19;
                         return;
                     }
                 }
@@ -191,24 +191,24 @@ namespace Map {
                 && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                        DAT_PathFindingState::ptr)(playerID, x, y, 7, -1, -1, -1)
                     != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
                     DAT_PathFindingState::ptr)(playerID, x, y, 2)
                 != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                 return;
             }
             if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                     DAT_PathFindingState::ptr)(x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)
                 != FALSE) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)21;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_21;
                 return;
             }
             if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileEnclosedByWalls, this)(tile, y) == FALSE) {
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)19;
+                    this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_19;
                     return;
                 }
             } else if (command == OpenSHC::Commands::M_MAPPER_STAIR

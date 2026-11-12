@@ -135,7 +135,7 @@ namespace Map {
                             i, buildingSize);
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                                 DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + y, 3)) {
-                            this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
@@ -146,7 +146,7 @@ namespace Map {
             case OpenSHC::Commands::M_MAPPER_DOG_CAGE:
                 if (DAT_GameState::instance.playerDataArray[playerID].dogCageCount >= 10) {
                     this->buildingPlacementFail = TRUE;
-                    this->buildingPlacementFailReason = (BuildingFailReasonEnum)1000;
+                    this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_1000;
                     return;
                 }
                 // fall through
@@ -198,7 +198,7 @@ namespace Map {
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                                 DAT_PathFindingState::ptr)(
                                 playerID, this->buildingX + x, this->buildingY + y, distance)) {
-                            this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                             siteClear = FALSE;
                             break;
                         }
@@ -207,7 +207,7 @@ namespace Map {
                                     OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                                     DAT_PathFindingState::ptr)(
                                     playerID, this->buildingX + x, this->buildingY + y, range, -1, -1, -1)) {
-                                this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                                 siteClear = FALSE;
                                 break;
                             }
@@ -217,7 +217,7 @@ namespace Map {
                                     MACRO_CALL_MEMBER(
                                         OpenSHC::Map::TileMapState_Func::getCastleBuildRangeForMapSize, this)()
                                         + keepRangeBonus)) {
-                                this->buildingPlacementFailReason = (BuildingFailReasonEnum)18;
+                                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_18;
                                 siteClear = FALSE;
                                 break;
                             }
@@ -228,14 +228,14 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                             DAT_PathFindingState::ptr)(
                             x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)) {
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)21;
+                        this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_21;
                     } else if (siteClear) {
                         break;
                     }
                     this->buildingPlacementFail = TRUE;
                     if (this->buildingPlacementFailReason
                         == OpenSHC::Map::Buildings::BFRE_DEFAULT_CANT_PLACE_THAT_THERE) {
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)18;
+                        this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_18;
                     }
                 } else {
                     int i = 0;
@@ -246,7 +246,7 @@ namespace Map {
                                 OpenSHC::Map::Navigation::PathFindingState_Func::isOpponentBuildingInRange,
                                 DAT_PathFindingState::ptr)(
                                 playerID, this->buildingX + x, this->buildingY + y, 7, -1, -1, -1)) {
-                            this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
@@ -268,7 +268,7 @@ namespace Map {
                             i, buildingSize);
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                                 DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + y, 3)) {
-                            this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                             this->buildingPlacementFail = TRUE;
                             break;
                         }
@@ -289,7 +289,7 @@ namespace Map {
                         if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isEnemyTooCloseUnk,
                                 DAT_PathFindingState::ptr)(
                                 playerID, this->buildingX + x, this->buildingY + y, distance)) {
-                            this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                            this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                             noEnemyNearby = FALSE;
                             break;
                         }
@@ -298,7 +298,7 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::isSignPostWithinDistance,
                             DAT_PathFindingState::ptr)(
                             x, y, DAT_GameState::instance.mapAndTime.unk_signpostDistance + 5)) {
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)21;
+                        this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_21;
                         this->buildingPlacementFail = TRUE;
                     } else if (!noEnemyNearby) {
                         this->buildingPlacementFail = TRUE;
@@ -313,7 +313,7 @@ namespace Map {
                         i, buildingSize);
                     if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findSomeSuitableLocationUnk,
                             DAT_PathFindingState::ptr)(playerID, this->buildingX + x, this->buildingY + y, 2)) {
-                        this->buildingPlacementFailReason = (BuildingFailReasonEnum)17;
+                        this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_17;
                         this->buildingPlacementFail = TRUE;
                         break;
                     }
@@ -377,12 +377,12 @@ namespace Map {
             || commandShort == OpenSHC::Commands::M_MAPPER_HOPSFARM
             || commandShort == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
             if (fertileCount < this->constructionTileCount) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)22;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_22;
                 this->buildingPlacementFail = TRUE;
                 return;
             }
             if (grassCount < 50) {
-                this->buildingPlacementFailReason = (BuildingFailReasonEnum)23;
+                this->buildingPlacementFailReason = OpenSHC::Map::Buildings::BRE_UNKNOWN_23;
                 this->buildingPlacementFail = TRUE;
             }
             return;
