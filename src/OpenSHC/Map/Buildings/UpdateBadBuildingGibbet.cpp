@@ -15,14 +15,15 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004190D0
     void Buildings::UpdateBadBuildingGibbet()
     {
-        int buildingID = DAT_CurrentBuildingID::instance;
         int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 % 9;
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(
+            DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
-        buildingID = DAT_CurrentBuildingID::instance;
+        int const buildingID = DAT_CurrentBuildingID::instance;
+        // indexing by the global rather than buildingID is required for 100% match
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
         DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
