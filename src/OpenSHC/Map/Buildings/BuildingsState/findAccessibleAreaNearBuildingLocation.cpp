@@ -18,7 +18,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->DAT_TempYOffset + y].addXgetTile
                     + this->DAT_TempXOffset + x;
                 if (DAT_TileMapState::instance.PathConnectionLayer[tile] != 0) {
-                    return (short)DAT_TileMapState::instance.PathConnectionLayer[tile];
+                    return DAT_TileMapState::instance.PathConnectionLayer[tile];
                 }
             }
             return 0;

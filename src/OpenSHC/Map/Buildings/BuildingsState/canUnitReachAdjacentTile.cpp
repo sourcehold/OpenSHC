@@ -19,15 +19,14 @@ namespace Map {
         {
             int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[param_1];
             int const unitArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[param_2].tile];
             int const height = DAT_TileMapState::instance.HeightLayer[param_1];
-            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()
-                != FALSE) {
+            if (MACRO_CALL_MEMBER(Units::UnitsState_Func::selectionContainsOnlyArabAssassins, DAT_UnitsState::ptr)()) {
                 return FALSE;
             }
             for (int direction = 0; direction < 8; ++direction) {
                 int const area
-                    = (short)DAT_TileMapState::instance
+                    = DAT_TileMapState::instance
                           .PathConnectionLayer[DAT_TileMapState::instance.directionTranslationMatrix[row][direction]
                               + param_1];
                 // The original compares the height of param_1 with itself, not with the neighbouring tile.
