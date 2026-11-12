@@ -16,8 +16,8 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00514520
-    void TileMapState::placeKillingPit(
-        int playerID, uint x, uint y, short buildingType, uint buildingSize, int variation, int averageHeight)
+    void TileMapState::placeKillingPit(int playerID, uint x, uint y, BuildingTypeShort buildingType, uint buildingSize,
+        int variation, int averageHeight)
     {
         /* the original masks the terrain bits once, before the building is even created */
         int grassOrScrub = this->Logic2Layer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x]
