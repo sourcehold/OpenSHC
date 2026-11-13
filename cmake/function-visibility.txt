@@ -27,11 +27,7 @@ OpenSHC::Map::Buildings::UpdateStables
     OpenSHC::Map::Buildings::BuildingsState::validateBuildingTetheredUnits
 OpenSHC::Map::Buildings::UpdateBadBuildingGallows
     OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
-OpenSHC::Map::Buildings::UpdateBadBuildingGibbet
-    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
 OpenSHC::Map::Buildings::UpdateBadBuildingDungeon
-    OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
-OpenSHC::Map::Buildings::UpdateBadBuildingStretchingRack
     OpenSHC::Map::Buildings::BuildingsState::updateBuildingSignpostCounter
 OpenSHC::Map::Buildings::BuildingsState::hasBuildingAsNeighbour
     OpenSHC::Map::Buildings::BuildingsState::setupBuildingEntrancesOffset
