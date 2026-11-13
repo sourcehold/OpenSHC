@@ -59,7 +59,7 @@ namespace Game {
         dword field_0x30; // 0x00000030 length: 4
         ActiveMenuTab secondaryActiveMenuTabToSwitchTo; // 0x00000034 length: 4
         BuildMenuTabTypeInt tabTypeSiegeSubset; // 0x00000038 length: 4
-        dword historicCampaignNumber; // 0x0000003C length: 4
+        int historicCampaignNumber; // 0x0000003C length: 4
         int missionNumber1to20; // 0x00000040 length: 4
         ScenarioProgress scenarioProgress; // 0x00000044 length: 16
         int furthestMission; // 0x00000054 length: 4
@@ -172,7 +172,7 @@ namespace Game {
         int skirmishTrailMonthsTakenOrChicken[50]; // 0x00001DFC length: 200
         int skirmishTrailStartDateInMonths[50]; // 0x00001EC4 length: 200
         dword skirmishTrailYearReached; // 0x00001F8C length: 4
-        dword skirmishTrailStartDateMonths; // 0x00001F90 length: 4
+        int skirmishTrailStartDateMonths; // 0x00001F90 length: 4
         BOOLEnum isSkirmishTrail; // 0x00001F94 length: 4
         int skirmishTrailProgress; // 0x00001F98 length: 4
         TrailTypeInt currentTrailType; // 0x00001F9C length: 4
@@ -180,14 +180,14 @@ namespace Game {
         int warchestTrailMonthsTakenOrChicken[50]; // 0x00001FA4 length: 200
         int warchestTrailStartDatesInMonths[50]; // 0x0000206C length: 200
         dword warchestTrailYearReached; // 0x00002134 length: 4
-        dword warchestTrailStartDateMonths; // 0x00002138 length: 4
+        int warchestTrailStartDateMonths; // 0x00002138 length: 4
         dword field_0x213c; // 0x0000213C length: 4
         int warchestTrailProgress; // 0x00002140 length: 4
         int furthestExtremeTrailMission; // 0x00002144 length: 4
         int extremeTrailMonthsTakenOrChicken[50]; // 0x00002148 length: 200
         int extremeTrailStartDatesInMonths[50]; // 0x00002210 length: 200
         dword extremeTrailYearReached; // 0x000022D8 length: 4
-        dword extremeTrailStartDateMonths; // 0x000022DC length: 4
+        int extremeTrailStartDateMonths; // 0x000022DC length: 4
         dword field_0x22e0; // 0x000022E0 length: 4
         int extremeTrailProgress; // 0x000022E4 length: 4
         int lordIconUnk; // 0x000022E8 length: 4
