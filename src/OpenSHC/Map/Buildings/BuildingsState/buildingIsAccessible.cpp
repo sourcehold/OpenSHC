@@ -22,7 +22,7 @@ namespace Map {
                 return 0;
             }
             int const campgroundArea
-                = (short)DAT_TileMapState::instance
+                = DAT_TileMapState::instance
                       .PathConnectionLayer[DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner]
                               .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                               .tileEntry];
@@ -41,7 +41,7 @@ namespace Map {
                 int entryHeight = DAT_TileMapState::instance.HeightLayer[entryTile];
                 if (DAT_TileMapState::instance.BuildingLayer[entryTile] != 0) {
                     entryHeight += MACRO_CALL_MEMBER(BuildingsState_Func::getBuildingHeightForBuildingID,
-                        DAT_BuildingsState::ptr)((short)DAT_TileMapState::instance.BuildingLayer[entryTile]);
+                        DAT_BuildingsState::ptr)(DAT_TileMapState::instance.BuildingLayer[entryTile]);
                 }
                 if (buildingHeight > entryHeight + 16) {
                     blocked = 1;
@@ -57,11 +57,10 @@ namespace Map {
                     blocked = 1;
                 }
                 if (campgroundArea != 0) {
-                    int const entryArea = (short)DAT_TileMapState::instance.PathConnectionLayer[entryTile];
+                    int const entryArea = DAT_TileMapState::instance.PathConnectionLayer[entryTile];
                     if (entryArea != campgroundArea
-                        && DAT_BuildingDefinedData::instance
-                                .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
-                            == 0
+                        && !DAT_BuildingDefinedData::instance
+                            .ABuildingTypeValueArray[this->buildings[buildingID].buildingType]
                         && MACRO_CALL_MEMBER(
                                Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                                DAT_PathFindingState::ptr)(

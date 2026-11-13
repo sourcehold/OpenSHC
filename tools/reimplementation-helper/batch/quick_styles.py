@@ -8,7 +8,8 @@ dozen forms of a function becomes a triage loop instead of an afternoon.
 Put each complete .cpp in
     build-RelWithDebInfo/batch/variants/<function>/<style>.cpp
 then run this. The original file is saved as _original.cpp.bak in that directory before the first
-run, so a bad set of variants cannot lose it. The winner is left in the source tree.
+run, so a bad set of variants cannot lose it, and it is scored as `_original` alongside the
+variants. The winner is left in the source tree; on a tie with the original, the original stays.
 
 usage:
   quick_styles.py FunctionName [-s] [style ...]
@@ -81,6 +82,12 @@ def main():
 
     results = []
     try:
+        # the committed source is a candidate too: a variant that merely ties it must not
+        # replace it (that happened: an identical-scoring variant was left in the tree)
+        shutil.copy(backup, target)
+        ratio, err = measure(target, keep_slots, out_dir)
+        results.append((ratio, '_original'))
+        print("%-32s %s" % ('_original', "COMPILE FAIL" if ratio is None else "%.4f%%" % ratio))
         for style in styles:
             shutil.copy(vdir / (style + ".cpp"), target)
             common.format_file(target)
@@ -107,11 +114,12 @@ def main():
     best = ranked[0][0]
     tied = [s for r, s in ranked if abs(r - best) < 1e-9]
     print("\nbest %.4f%% achieved by: %s" % (best, ", ".join(tied)))
+    keep = '_original' if '_original' in tied else tied[0]
     if len(tied) > 1:
-        print("(tied -- keeping %s; pick whichever reads best)" % tied[0])
+        print("(tied -- keeping %s; pick whichever reads best)" % keep)
     print("quick_diff ratio, not the reccmp score: confirm with reccmp_report.py --run")
 
-    shutil.copy(vdir / (tied[0] + ".cpp"), target)
+    shutil.copy(backup if keep == '_original' else vdir / (keep + ".cpp"), target)
     common.format_file(target)
     (vdir / "quick_results.json").write_text(
         json.dumps({s: r for r, s in results if r is not None}, indent=1), encoding="utf-8")
