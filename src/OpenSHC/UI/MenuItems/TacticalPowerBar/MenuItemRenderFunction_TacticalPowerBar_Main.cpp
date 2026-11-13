@@ -24,7 +24,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004D9EC0
         void TacticalPowerBar::MenuItemRenderFunction_TacticalPowerBar_Main(int slot, ...)
         {
-            // y, then x, into locals; the icon calls re-read the globals (inline: quick_diff 1.0000 -> 0.8776)
+            // y, then x, into locals; the icon calls re-read the globals, as the original does
             int const buttonY = DAT_ButtonY::instance;
             int const buttonX = DAT_ButtonX::instance;
             int const level

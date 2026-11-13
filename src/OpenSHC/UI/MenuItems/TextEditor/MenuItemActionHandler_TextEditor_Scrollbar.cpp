@@ -22,7 +22,7 @@ namespace UI {
                 *maxValue = max(DAT_TextEditorState::instance.topVisibleLineIndex
                         - DAT_TextEditorState::instance.dialogContentHeight,
                     0);
-                // clamped again after max, as the original does (without it: quick_diff 1.0000 -> 0.7126)
+                // clamped again after max, as the original does
                 if (*maxValue < 0) {
                     *maxValue = 0;
                 }
