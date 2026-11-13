@@ -29,7 +29,7 @@ namespace Game {
         SetupSkirmishMode;
 
         MACRO_FUNCTION_RESOLVER(
-            int(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004C6CD0, &OpenSHC::Game::Skirmish::StoreLocalTime)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004C6CD0, &OpenSHC::Game::Skirmish::StoreLocalTime)
         StoreLocalTime;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int score), false, Address::SHC_3BB0A8C1_0x004D1700,
