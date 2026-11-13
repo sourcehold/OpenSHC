@@ -12,7 +12,7 @@ rewrite sources, because the Visual Studio bundled one is too old for `.clang-fo
 
 | Script | Purpose |
 |---|---|
-| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
+| `build_quiet.py [--keep-going]` | `build.bat RelWithDebInfo OpenSHC.dll`, prints only errors (the compiler's, or cmake's when the configure fails) and `BUILD_OK`/`BUILD_FAIL` (build.bat exits 0 even on errors). Retries once on a PDB server error, see the note below. |
 | `build_parallel.py [-j N] [--no-link] [--dry-run] [filter...]` | The same build with the object compiles run `-j` at a time, then `build_quiet.py` for the link and the verdict. nmake has no `-j`, so a whole-list build otherwise compiles one file on one core: the 1138 object compiles take ~38 minutes at `-j 4` on four cores, against ~2.4 objects a minute serially (~7.5 hours for the same set); ~50 minutes for a full run including the LTCG link. Replays nmake's own command per object, so it is the same compiler, flags and response file; see the note below before changing it. |
 | `syntax_check.py [-j N] [substr...]` | `cl /Zs` every (matching) list file, `-j` at a time; finds all compile errors in one pass without linking, and far cheaper than compiling (20 files of `AI/AICState`: 47s at `-j 4`, 134s serially, 676s to actually compile at `-j 4`). |
 | `reccmp_report.py [--run] pct\|save\|cmp\|diff` | Match % and *normalized* % (call/tail-jump targets and resolver addresses ignored) per function, snapshots, before/after comparison, compact asm diffs. |
