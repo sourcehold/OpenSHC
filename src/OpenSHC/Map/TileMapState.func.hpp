@@ -5,6 +5,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
@@ -17,6 +18,7 @@ namespace Map {
         using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Enums::CardinalDirection;
         using OpenSHC::Map::Enums::MapOrientation;
         using OpenSHC::Map::LogicHelpers::Logic1;
         using OpenSHC::Map::LogicHelpers::Logic2;
@@ -144,8 +146,8 @@ namespace Map {
             &TileMapState::hasHigherPlainNeighborWithWallOrGatehouse)
         hasHigherPlainNeighborWithWallOrGatehouse;
 
-        MACRO_FUNCTION_RESOLVER(MapOrientation (TileMapState::*)(uint, uint), false, Address::SHC_3BB0A8C1_0x004F8B50,
-            &TileMapState::getOrientationThatIsWallTowerOrGatehouse)
+        MACRO_FUNCTION_RESOLVER(CardinalDirection (TileMapState::*)(uint, uint), false,
+            Address::SHC_3BB0A8C1_0x004F8B50, &TileMapState::getOrientationThatIsWallTowerOrGatehouse)
         getOrientationThatIsWallTowerOrGatehouse;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, uint, uint, short), false,
