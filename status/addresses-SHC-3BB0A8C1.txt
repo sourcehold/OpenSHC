@@ -521,7 +521,7 @@ SHC_3BB0A8C1_0x00402BD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00402C50 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402DA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00402DA0 | 100.0% | Reimplemented (counted: only float constant names and the CRT math helpers (_CIcos, _CItan, _CIsqrt) differ)
 
 SHC_3BB0A8C1_0x00402E20 | 0.0% | Pending
 
@@ -1621,7 +1621,7 @@ SHC_3BB0A8C1_0x00405124 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00405125 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00405130 | 0.0% | Pending
+SHC_3BB0A8C1_0x00405130 | 100.0% | Reimplemented (counted: only the constant 0x10300131 is shown as an address label in ours)
 
 SHC_3BB0A8C1_0x004052E0 | 0.0% | Pending
 
@@ -2341,7 +2341,7 @@ SHC_3BB0A8C1_0x00406640 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00406648 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00406650 | 0.0% | Pending
+SHC_3BB0A8C1_0x00406650 | 100.0% | Reimplemented (counted: only float constant names and the CRT math helpers (_CIsin, _CIcos, _ftol2_sse) differ)
 
 SHC_3BB0A8C1_0x00406900 | 0.0% | Pending
 
@@ -6813,7 +6813,7 @@ SHC_3BB0A8C1_0x004272C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00427320 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004274F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004274F0 | 100.0% | Reimplemented (counted: only the memset symbol name differs)
 
 SHC_3BB0A8C1_0x004276F0 | 100.0% | Reimplemented
 
@@ -6919,7 +6919,7 @@ SHC_3BB0A8C1_0x00429A38 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00429A3C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00429A40 | 0.0% | Pending
+SHC_3BB0A8C1_0x00429A40 | 100.0% | Reimplemented (counted: only callback trampolines, sprintf, the jump-table label and the 0xB8E6F5 buffer label differ)
 
 SHC_3BB0A8C1_0x0042A380 | 0.0% | Pending
 
@@ -21177,7 +21177,7 @@ SHC_3BB0A8C1_0x0046F4E1 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046F4E2 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0046F4F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046F4F0 | 100.0% | Reimplemented (counted: only the GetProcAddress import name differs)
 
 SHC_3BB0A8C1_0x0046F513 | 0.0% | Pending
 
@@ -21187,7 +21187,7 @@ SHC_3BB0A8C1_0x0046F533 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0046F550 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0046F570 | 0.0% | Pending
+SHC_3BB0A8C1_0x0046F570 | 100.0% | Reimplemented (counted: only the security cookie and memset symbols differ)
 
 SHC_3BB0A8C1_0x0046F610 | 0.0% | Pending
 
@@ -23387,7 +23387,7 @@ SHC_3BB0A8C1_0x004909E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00490C20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00490D90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00490D90 | 100.0% | Reimplemented (counted: only the security cookie and callback trampolines differ)
 
 SHC_3BB0A8C1_0x0049102D | 0.0% | Pending
 
@@ -23401,7 +23401,7 @@ SHC_3BB0A8C1_0x00491130 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00491270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004914D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004914D0 | 100.0% | Reimplemented (counted: only the security cookie and a callback trampoline differ)
 
 SHC_3BB0A8C1_0x00491680 | 100.0% | Reimplemented
 
@@ -27527,7 +27527,7 @@ SHC_3BB0A8C1_0x004B9020 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B9060 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B9110 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B9110 | 100.0% | Reimplemented (counted: only the pushed DoNothing callback (trampoline) and the jump-table label differ)
 
 SHC_3BB0A8C1_0x004B9264 | 0.0% | Pending
 
@@ -29081,7 +29081,7 @@ SHC_3BB0A8C1_0x004BA559 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BA560 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004BA5C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BA5C0 | 100.0% | Reimplemented (counted: only the pushed SumUnitPoints callback (trampoline) differs)
 
 SHC_3BB0A8C1_0x004BA780 | 100.0% | Reimplemented
 
@@ -29781,7 +29781,7 @@ SHC_3BB0A8C1_0x004BBD83 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BBD84 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BBD90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BBD90 | 100.0% | Reimplemented (counted: only the pushed DoNothing callback (trampoline) and the jump-table label differ)
 
 SHC_3BB0A8C1_0x004BBED8 | 0.0% | Pending
 
@@ -30477,7 +30477,7 @@ SHC_3BB0A8C1_0x004BE585 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BE586 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BE590 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BE590 | 100.0% | Reimplemented (counted: only the security cookie symbols differ)
 
 SHC_3BB0A8C1_0x004BE7E0 | 100.0% | Reimplemented
 
@@ -30489,7 +30489,7 @@ SHC_3BB0A8C1_0x004BEA20 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BEA90 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004BEB20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BEB20 | 100.0% | Reimplemented (counted: only the security cookie symbols differ)
 
 SHC_3BB0A8C1_0x004BEC10 | 100.0% | Reimplemented
 
@@ -33897,7 +33897,7 @@ SHC_3BB0A8C1_0x004C226F | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C2270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C2280 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C2280 | 100.0% | Reimplemented (counted: only the resetMouseCursorState tail-jump target differs; it goes through main's trampoline)
 
 SHC_3BB0A8C1_0x004C3110 | 0.0% | Pending
 
@@ -36203,7 +36203,7 @@ SHC_3BB0A8C1_0x004DB4F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DB5C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DB600 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB600 | 100.0% | Reimplemented (counted: only float constant names and _ftol2_sse differ)
 
 SHC_3BB0A8C1_0x004DB7B0 | 100.0% | Reimplemented
 
@@ -36219,7 +36219,7 @@ SHC_3BB0A8C1_0x004DBBAC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DBBB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DBBC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DBBC0 | 100.0% | Reimplemented (counted: only float constant names, _ftol2_sse and the intro_04.wav string label differ)
 
 SHC_3BB0A8C1_0x004DBE20 | 0.0% | Pending
 
@@ -36239,7 +36239,7 @@ SHC_3BB0A8C1_0x004DBEEC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DBEF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DBF00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DBF00 | 100.0% | Reimplemented (counted: only float constant names and _ftol2_sse differ)
 
 SHC_3BB0A8C1_0x004DC12C | 0.0% | Pending
 
