@@ -1,0 +1,92 @@
+#include "../BuildingsState.func.hpp"
+
+#include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
+
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
+#include "OpenSHC/Globals/SEC_RNG.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Buildings {
+
+        using OpenSHC::Map::Buildings::BuildingLogicalState;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00422C60
+        void BuildingsState::spreadFireRandomlyToBuildings(int playerID, int count)
+        {
+            // Sets count random buildings of player playerID on fire. Very flammable buildings are 5 times as likely.
+            int weight = 0;
+            if (count < 1
+                || DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .id
+                    <= 0) {
+                return;
+            }
+
+            // logicalState 0 is an unused building slot
+            for (int i = 1; i < this->maxBuildingsCount; ++i) {
+                if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
+                    || this->buildings[i].owner != playerID || this->buildings[i].fireDuration != 0
+                    || this->buildings[i].cooldownTimer != 0) {
+                    continue;
+                }
+                int const flammability = MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i);
+                if (flammability != 0 && flammability != 4) {
+                    ++weight;
+                }
+                if (flammability == 5) {
+                    weight += 4;
+                }
+            }
+            if (weight == 0) {
+                return;
+            }
+
+            for (; count > 0 && weight > 0; --count) {
+                int pick = SEC_RNG::instance.currentNumber2 % weight;
+                MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
+                for (int i = 1; i < this->maxBuildingsCount; ++i) {
+                    if (this->buildings[i].logicalState == 0 || this->buildings[i].logicalState == BLS_REMOVE
+                        || this->buildings[i].owner != playerID || this->buildings[i].fireDuration != 0
+                        || this->buildings[i].cooldownTimer != 0) {
+                        continue;
+                    }
+                    int const flammability = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i);
+                    if (flammability == 0 || flammability == 4) {
+                        continue;
+                    }
+                    --pick;
+                    // The original asks for the flammability a second time instead of reusing it
+                    if (MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(i)
+                        == 5) {
+                        pick -= 4;
+                    }
+                    if (pick >= 0) {
+                        continue;
+                    }
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::lightUpBuilding, this)(i, 0, 0);
+                    MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::setSpawnMoment, DAT_MinimapViewState::ptr)(
+                        this->buildings[i].x, this->buildings[i].y);
+                    --weight;
+                    // Note: the original checks building 2000 instead of the building set on fire
+                    if (MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingFlammabilityFactor, this)(2000)
+                        == 5) {
+                        weight -= 4;
+                    }
+                    break;
+                }
+            }
+        }
+
+    }
+}
+}
