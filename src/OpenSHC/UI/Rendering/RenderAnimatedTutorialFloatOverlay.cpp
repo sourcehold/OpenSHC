@@ -34,67 +34,62 @@ namespace UI {
             frame = 0;
             INT_00df563c::instance = now;
         }
-        // The gotos measure 3.5 points better than a plain if/else-if chain: the original keeps the shared
-        // 168 and 600 blocks at their first occurrence. It also keeps x - 8 and y - 32 apart from the
-        // later - 28 and - 69 (an inlined helper?), which this source folds.
+        x -= 8;
+        y -= 32;
         int resolutionYOffset = 0;
         if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768) {
-        yOffset168:
             resolutionYOffset = 168;
-            goto draw;
         }
         if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x1024) {
             resolutionYOffset = 424;
-            goto draw;
         }
         if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x1200) {
-        yOffset600:
             resolutionYOffset = 600;
-        } else {
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
-                resolutionYOffset = 120;
-                goto draw;
-            }
-            if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1440x900) {
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
-                    resolutionYOffset = 480;
-                    goto draw;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200)
-                    goto yOffset600;
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
-                    resolutionYOffset = 840;
-                    goto draw;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
-                    resolutionYOffset = 1000;
-                    goto draw;
-                }
-                if ((DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768)
-                    || (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768))
-                    goto yOffset168;
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
-                    resolutionYOffset = 4050;
-                    goto draw;
-                }
-                if (DAT_WindowAndDirectDraw::instance.currentGameResolution != OpenSHC::Rendering::SRE_1600x900)
-                    goto draw;
-            }
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1280x720) {
+            resolutionYOffset = 120;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1440x900) {
             resolutionYOffset = 300;
         }
-    draw:
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1080) {
+            resolutionYOffset = 480;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1920x1200) {
+            resolutionYOffset = 600;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1440) {
+            resolutionYOffset = 840;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_2560x1600) {
+            resolutionYOffset = 1000;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1366x768) {
+            resolutionYOffset = 168;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1360x768) {
+            resolutionYOffset = 168;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1680x1050) {
+            resolutionYOffset = 4050;
+        }
+        if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1600x900) {
+            resolutionYOffset = 300;
+        }
         RenderTargetInt const previousDrawBuffer = DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;
+        x -= 28;
+        y -= 69;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame + 261,
-            DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + x - 36, y - 101 + resolutionYOffset,
+            DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + x, y + resolutionYOffset,
             OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame + 271, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
             DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame + 261,
             DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX
-                + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + x - 36,
-            DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + resolutionYOffset + y - 101,
+                + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + x,
+            DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + resolutionYOffset + y,
             OpenSHC::IO::Graphics::GID_FLOATS_NEW, frame + 271, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = previousDrawBuffer;
     }
