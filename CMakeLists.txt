@@ -139,6 +139,37 @@ endif()
 # For now, we set the /GL flag for a select number of files. Setting the /GL flag in *both* the caller and callee function
 # implementation removes the unnecessary mov ecx instruction from the callers code.
 file_dependent_read_list("${CMAKE_SOURCE_DIR}/cmake/compiler-flags-gl.txt" COMPILER_FLAG_GL_FILES)
+
+# Optional, off by default: compile each caller of cmake/function-visibility.txt in one translation unit with the
+# callees whose bodies it must see, instead of relying on /GL. cmake/function-visibility-units.py groups the
+# listed functions and writes one wrapper .cpp per group that #includes its members. The wrappers replace their
+# members in the build, and the members leave the /GL list; the wrappers themselves are built without /GL.
+option(OPENSHC_FUNCTION_VISIBILITY_UNITS "Build the function-visibility.txt groups as wrapper units, not /GL" OFF)
+if(OPENSHC_FUNCTION_VISIBILITY_UNITS)
+    find_package(Python3 REQUIRED COMPONENTS Interpreter)
+    set(VISIBILITY_DIR "${CMAKE_BINARY_DIR}/function-visibility-units")
+    file(MAKE_DIRECTORY "${VISIBILITY_DIR}")
+    string(REPLACE ";" "\n" VISIBILITY_SOURCES_TEXT "${OPENSHC_SOURCES}")
+    file(WRITE "${VISIBILITY_DIR}/sources.txt" "${VISIBILITY_SOURCES_TEXT}\n")
+    file_add_depends("${CMAKE_SOURCE_DIR}/cmake/function-visibility.txt")
+    file_add_depends("${CMAKE_SOURCE_DIR}/cmake/function-visibility-units.py")
+    execute_process(
+        COMMAND "${Python3_EXECUTABLE}" "${CMAKE_SOURCE_DIR}/cmake/function-visibility-units.py"
+            "${CMAKE_SOURCE_DIR}" "${CMAKE_SOURCE_DIR}/cmake/function-visibility.txt"
+            "${VISIBILITY_DIR}/sources.txt" "${VISIBILITY_DIR}"
+        RESULT_VARIABLE VISIBILITY_RESULT
+    )
+    if(NOT VISIBILITY_RESULT EQUAL 0)
+        message(FATAL_ERROR "cmake/function-visibility-units.py failed")
+    endif()
+    include("${VISIBILITY_DIR}/units.cmake")
+    if(OPENSHC_VISIBILITY_MEMBER_FILES)
+        list(REMOVE_ITEM OPENSHC_SOURCES ${OPENSHC_VISIBILITY_MEMBER_FILES})
+        list(REMOVE_ITEM COMPILER_FLAG_GL_FILES ${OPENSHC_VISIBILITY_MEMBER_FILES})
+    endif()
+    list(APPEND OPENSHC_SOURCES ${OPENSHC_VISIBILITY_UNIT_FILES})
+endif()
+
 set_source_files_properties(${COMPILER_FLAG_GL_FILES} PROPERTIES COMPILE_OPTIONS /GL)
 
 
