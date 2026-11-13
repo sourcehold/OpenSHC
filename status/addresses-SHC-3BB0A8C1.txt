@@ -6711,7 +6711,7 @@ SHC_3BB0A8C1_0x00425500 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00425580 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004255D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004255D0 | 98.7% | cleanup; scheduling
 
 SHC_3BB0A8C1_0x00425720 | 100.0% | Reimplemented
 
@@ -11149,7 +11149,7 @@ SHC_3BB0A8C1_0x00434350 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004347F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004348D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004348D0 | 50.2% | 18 returns and the range tests fixed; block layout and register allocation
 
 SHC_3BB0A8C1_0x00434FE0 | 0.0% | Pending
 
@@ -13693,7 +13693,7 @@ SHC_3BB0A8C1_0x00442230 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00442300 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00442640 | 0.0% | Pending
+SHC_3BB0A8C1_0x00442640 | 90.7% | one switch, 3 behaviour fixes; block layout
 
 SHC_3BB0A8C1_0x004429C0 | 0.0% | Pending
 
@@ -18399,7 +18399,7 @@ SHC_3BB0A8C1_0x0045DE34 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045DE38 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045DE40 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045DE40 | 91.5% | switches in the original's order, 3 behaviour fixes; scheduling
 
 SHC_3BB0A8C1_0x0045EC94 | 0.0% | Pending
 
@@ -28251,7 +28251,7 @@ SHC_3BB0A8C1_0x004B9BF2 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B9BF3 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B9C00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B9C00 | 97.4% | inner switch in the original's order, no goto; scheduling
 
 SHC_3BB0A8C1_0x004B9D68 | 0.0% | Pending
 
@@ -28653,7 +28653,7 @@ SHC_3BB0A8C1_0x004B9E4E | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B9E4F | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B9E50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B9E50 | 88.0% | arms in the original's order and store order; register allocation
 
 SHC_3BB0A8C1_0x004BA2A0 | 0.0% | Pending
 
