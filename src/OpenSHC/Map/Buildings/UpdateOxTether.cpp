@@ -42,7 +42,9 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         int buildingID = DAT_CurrentBuildingID::instance;
         if (DAT_GameSynchronyState::instance.currentGameMode != 0) {
-            DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag = 1;
+            // assignment via a local stack pointer is required for a closer match
+            int* displayOwnerFlagPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
+            *displayOwnerFlagPtr = 1;
             DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage += 1;
             if (DAT_BuildingDefinedData::instance.SharedOverlayAnimationFrames
                     [DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage / 2]

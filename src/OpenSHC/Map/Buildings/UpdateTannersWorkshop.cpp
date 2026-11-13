@@ -76,7 +76,10 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength = 31;
             } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength
                 > 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength -= 1;
+                // assignment via a local stack pointer is required for a closer match
+                short* renderBlendStrengthPtr
+                    = &DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength;
+                *renderBlendStrengthPtr -= 1;
             }
         } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 1
             || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 3

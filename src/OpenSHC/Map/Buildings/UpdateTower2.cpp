@@ -38,7 +38,9 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9 = 0;
         DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;
-        DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10 = 0;
+        // assignment via a local stack pointer is required for a closer match
+        int* extraOverlayImage10Ptr = &DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
+        *extraOverlayImage10Ptr = 0;
         DAT_BuildingsState::instance.buildings[buildingID].buildingProgress += 1;
         if (DAT_BuildingsState::instance.buildings[buildingID].buildingProgress >= 40) {
             DAT_BuildingsState::instance.buildings[buildingID].buildingProgress = 0;

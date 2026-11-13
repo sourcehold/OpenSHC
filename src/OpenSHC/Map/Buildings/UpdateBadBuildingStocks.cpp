@@ -28,12 +28,15 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
         int const buildingID = DAT_CurrentBuildingID::instance;
-        DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk = 0;
+        // assignment via a local stack pointer is required for a closer match
+        int* playerColorUnkPtr = &DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
+        *playerColorUnkPtr = 0;
         DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
             DAT_BuildingsState::ptr)(buildingID, 1);
-        DAT_BuildingsState::instance.buildings[buildingID].renderAnimation
-            = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -2;
+        // assignment via a local stack pointer is required for a closer match
+        short* renderAnimationPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
+        *renderAnimationPtr = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -2;
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame
             = (char)DAT_BuildingDefinedData::instance
                   .BadBuildingStocksAnimationFrames[DAT_BuildingsState::instance.buildings[buildingID].animationIndex];

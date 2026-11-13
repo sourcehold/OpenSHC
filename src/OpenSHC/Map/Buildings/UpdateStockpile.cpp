@@ -17,6 +17,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00412360
     void Buildings::UpdateStockpile()
     {
+        int resourceGiven = 0;
         int const owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
         if (DAT_GameSynchronyState::instance.currentGameMode != 0
@@ -38,7 +39,6 @@ namespace Map {
         }
 
         // Hand out one unit of each starting resource the stockpile has room for
-        int resourceGiven = 0;
         if (DAT_GameState::instance.playerDataArray[owner].startResources[OpenSHC::Game::Resources::RT_WOOD] > 0
             && MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::buildingHasSpaceForResource,
                 DAT_BuildingsState::ptr)(DAT_CurrentBuildingID::instance, OpenSHC::Game::Resources::RT_WOOD)) {

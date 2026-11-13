@@ -20,7 +20,9 @@ namespace Map {
             DAT_CurrentBuildingID::instance);
         int const buildingID = DAT_CurrentBuildingID::instance;
         DAT_BuildingsState::instance.buildings[buildingID].renderAnimation = 1;
-        DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag = 1;
+        // assignment via a local stack pointer is required for a closer match
+        int* displayOwnerFlagPtr = &DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag;
+        *displayOwnerFlagPtr = 1;
         DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite1 = 3;
         DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2 = 0;
         DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite3 = 0;
@@ -34,13 +36,17 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage9 = 0;
         DAT_BuildingsState::instance.buildings[buildingID].flagSlot.overlayImage = 0;
         DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = 0;
-        DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10 = 0;
-        DAT_BuildingsState::instance.buildings[buildingID].someX
-            = DAT_BuildingsState::instance.buildings[buildingID].x + 2;
+        // assignment via a local stack pointer is required for a closer match
+        int* extraOverlayImage10Ptr = &DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10;
+        *extraOverlayImage10Ptr = 0;
+        short* someXPtr = &DAT_BuildingsState::instance.buildings[buildingID].someX;
+        *someXPtr = DAT_BuildingsState::instance.buildings[buildingID].x + 2;
         DAT_BuildingsState::instance.buildings[buildingID].someY
             = DAT_BuildingsState::instance.buildings[buildingID].y + 2;
-        DAT_BuildingsState::instance.buildings[buildingID].buildingProgress += 1;
-        if (DAT_BuildingsState::instance.buildings[buildingID].buildingProgress >= 40) {
+        // assignment via a local stack pointer is required for a closer match
+        int* buildingProgressPtr = &DAT_BuildingsState::instance.buildings[buildingID].buildingProgress;
+        *buildingProgressPtr += 1;
+        if (*buildingProgressPtr >= 40) {
             DAT_BuildingsState::instance.buildings[buildingID].buildingProgress = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::computeBuildingEntranceFlagsForOrientations,
                 DAT_BuildingsState::ptr)(buildingID);

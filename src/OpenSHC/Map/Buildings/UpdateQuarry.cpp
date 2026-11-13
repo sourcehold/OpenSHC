@@ -24,7 +24,6 @@ namespace Map {
         int const variant = SEC_RNG::instance.currentNumber2 & 3;
         int const stockpileID
             = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].quarryStockpileID;
-        int workerCount = 0;
         DAT_GameState::instance
             .playerDataArray[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner]
             .countStoneQuarries += 1;
@@ -42,6 +41,7 @@ namespace Map {
             && DAT_GameSynchronyState::instance.currentGameMode == 0) {
             return;
         }
+        int workerCount = 0;
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[0] != 0) {
             workerCount = 1;
         }

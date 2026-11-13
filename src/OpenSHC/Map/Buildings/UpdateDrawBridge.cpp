@@ -41,8 +41,8 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::floodMoatUnderRemovedBuilding,
                     DAT_TileMapState::ptr)(DAT_CurrentBuildingID::instance);
-                DAT_GameState::instance.playerDataArray[owner].someCount31 += 1;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].drawbridgeState2 = 12;
+                DAT_GameState::instance.playerDataArray[owner].someCount31 += 1;
             }
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 1;
             if (direction == 0) {
