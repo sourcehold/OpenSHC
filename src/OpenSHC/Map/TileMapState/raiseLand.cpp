@@ -64,20 +64,21 @@ namespace Map {
                 this->HeightLayer[brushTile] += 8;
             }
             this->ChangedLayer[brushTile] = 2;
-            if (this->HeightLayer[brushTile] <= minHeight) {
+            byte const& height = this->HeightLayer[brushTile];
+            if (height <= minHeight) {
                 this->HeightLayer[brushTile] = (byte)minHeight;
             }
-            if (*(byte volatile*)&this->HeightLayer[brushTile] > 0 || change >= 0) {
+            if (height > 0 || change >= 0) {
                 this->HeightLayer[brushTile] += (char)change;
                 this->Logic2Layer[brushTile] = 0;
             }
-            if (this->HeightLayer[brushTile] < minHeight) {
+            if (height < minHeight) {
                 this->HeightLayer[brushTile] = (byte)minHeight;
             }
-            if (this->HeightLayer[brushTile] > maxHeight) {
+            if (height > maxHeight) {
                 this->HeightLayer[brushTile] = (byte)maxHeight;
             }
-            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = height;
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }
