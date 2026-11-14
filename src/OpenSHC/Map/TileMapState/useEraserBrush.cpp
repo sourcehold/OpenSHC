@@ -25,11 +25,11 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005017C0
     void TileMapState::useEraserBrush(uint x, uint y, int brush)
     {
-        uint const baseX = x;
-        uint const baseY = y;
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
+        uint const baseY = y;
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        uint const baseX = x;
         x = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int const baseTile = x;
         MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(x);
 
         for (int index = 0; index < brushSize; index++) {
