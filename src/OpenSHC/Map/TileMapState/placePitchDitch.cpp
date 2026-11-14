@@ -40,21 +40,22 @@ namespace Map {
             DAT_GameCore::instance.uniqueGameObjectTracker++;
             this->pitchDitches[pitchDitchID].y = y;
             this->pitchDitches[pitchDitchID].x = x;
-            this->pitchDitches[pitchDitchID].field_0x12 = 0;
             this->pitchDitches[pitchDitchID].tile
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->pitchDitches[pitchDitchID].state = 0;
+            this->pitchDitches[pitchDitchID].field_0x12 = 0;
             this->pitchDitches[pitchDitchID].rng = SEC_RNG::instance.currentNumber2;
-            if (this->HeightLayer[this->pitchDitches[pitchDitchID].tile] > 4) {
-                this->HeightLayer[this->pitchDitches[pitchDitchID].tile] -= 4;
+            PitchDitch const& pitchDitch = this->pitchDitches[pitchDitchID];
+            if (this->HeightLayer[pitchDitch.tile] > 4) {
+                this->HeightLayer[pitchDitch.tile] -= 4;
             } else {
-                this->HeightLayer[this->pitchDitches[pitchDitchID].tile] = 0;
+                this->HeightLayer[pitchDitch.tile] = 0;
             }
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-            this->LogicLayer[this->pitchDitches[pitchDitchID].tile] |= L_PLAIN2_AND_PITCH;
-            this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= 0xbfff;
-            this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= 0xdfff;
-            this->ChangedLayer[this->pitchDitches[pitchDitchID].tile] = 2;
+            this->LogicLayer[pitchDitch.tile] |= L_PLAIN2_AND_PITCH;
+            this->MiscDisplayLayer[pitchDitch.tile] &= 0xbfff;
+            this->MiscDisplayLayer[pitchDitch.tile] &= 0xdfff;
+            this->ChangedLayer[pitchDitch.tile] = 2;
             return pitchDitchID;
         }
         return 0;
