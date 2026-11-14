@@ -6759,7 +6759,7 @@ SHC_3BB0A8C1_0x00425FF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00426060 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004261E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004261E0 | 82.1% | gynt's draft in main's style; the original keeps 0 in edi
 
 SHC_3BB0A8C1_0x004262B0 | 100.0% | Reimplemented
 
@@ -6767,7 +6767,7 @@ SHC_3BB0A8C1_0x00426340 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00426570 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00426600 | 0.0% | Pending
+SHC_3BB0A8C1_0x00426600 | 97.7% | x in its own local; the menu y store placed before the resolution test
 
 SHC_3BB0A8C1_0x004266A0 | 100.0% | Reimplemented
 
@@ -10117,7 +10117,7 @@ SHC_3BB0A8C1_0x00430686 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00430690 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004306D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004306D0 | 91.4% | own rewrite from the asm with gynt's draft; the constant 1's register and the name branch's register use
 
 SHC_3BB0A8C1_0x00430B10 | 0.0% | Pending
 
@@ -13391,7 +13391,7 @@ SHC_3BB0A8C1_0x00439730 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00439890 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004398B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004398B0 | 96.3% | the 640x480 y store restored, s_ pointers, style pass; 99 held in ecx through every block
 
 SHC_3BB0A8C1_0x0043A850 | 100.0% | Reimplemented
 
@@ -13641,7 +13641,7 @@ SHC_3BB0A8C1_0x00440420 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00440430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00440560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00440560 | 98.2% | the early return restored, style pass; stack slots of the name buffer and the cookie
 
 SHC_3BB0A8C1_0x00440600 | 0.0% | Pending
 
@@ -16381,7 +16381,7 @@ SHC_3BB0A8C1_0x004489F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00448D40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00448E90 | 0.0% | Pending
+SHC_3BB0A8C1_0x00448E90 | 84.2% | own rewrite from the asm with gynt's draft; the scroll counter's register and the box's register allocation
 
 SHC_3BB0A8C1_0x00449274 | 0.0% | Pending
 
@@ -16407,7 +16407,7 @@ SHC_3BB0A8C1_0x00449400 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00449410 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004494E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004494E0 | 72.9% | gynt's draft in the original's arm order; the original keeps the mercenary post's arm apart from the barracks' one
 
 SHC_3BB0A8C1_0x00449994 | 0.0% | Pending
 
