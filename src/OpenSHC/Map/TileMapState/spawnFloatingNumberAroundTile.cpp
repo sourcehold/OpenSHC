@@ -19,17 +19,17 @@ namespace Map {
     {
         int const radius = type / 2;
         int index = 0;
-        int const xBase = x - radius;
-        int const yBase = y - radius;
-        for (int xOffset = DAT_TerrainDefinedData::instance.field_0x2764[radius * 60].x; xOffset != -1;
+        // x and y become the corner of the square the offset table is measured from
+        x -= radius;
+        y -= radius;
+        for (int xOffset = DAT_TerrainDefinedData::instance.field_0x2764[radius * 60 + index].x; xOffset != -1;
             xOffset = DAT_TerrainDefinedData::instance.field_0x2764[radius * 60 + index].x) {
             int const yOffset = DAT_TerrainDefinedData::instance.field_0x2764[radius * 60 + index].y;
-            int const tile
-                = DAT_ViewportRenderState::instance.translationMatrix[yOffset + yBase].addXgetTile + xOffset + xBase;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[yOffset + y].addXgetTile + xOffset + x;
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0
                 && (index & 1) == 0) {
-                int const frame = (DAT_TileMapState::instance.cursorOverlayAnimationFrame + yOffset + xOffset + index
-                                      + xBase + yBase - 1)
+                int const frame
+                    = (DAT_TileMapState::instance.cursorOverlayAnimationFrame + yOffset + xOffset + index + x + y - 1)
                     % 16;
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(
