@@ -416,7 +416,7 @@ namespace Map {
                     break;
                 }
             }
-            for (int j = 0; j < 5; j++) {
+            for (j = 0; j < 5; j++) {
                 XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[tower1Rotation][j];
                 int const tile
                     = DAT_ViewportRenderState::instance.translationMatrix[offset.y + tower1Y + originY].addXgetTile
@@ -457,7 +457,7 @@ namespace Map {
                     break;
                 }
             }
-            for (int j = 0; j < 5; j++) {
+            for (j = 0; j < 5; j++) {
                 XYPair const& offset = DAT_TerrainDefinedData::instance.gateTowerTileOffsets[tower2Rotation][j];
                 int const tile
                     = DAT_ViewportRenderState::instance.translationMatrix[offset.y + tower2Y + originY].addXgetTile
@@ -491,7 +491,8 @@ namespace Map {
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_WHEATFARM) {
-            for (int j = 0; j != 36; j++) {
+            int j = 0;
+            do {
                 int const tile
                     = DAT_ViewportRenderState::instance
                           .translationMatrix
@@ -512,9 +513,11 @@ namespace Map {
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-            }
+                j++;
+            } while (j < 36);
         } else if (command == OpenSHC::Commands::M_MAPPER_HOPSFARM) {
-            for (int j = 0; j != 24; j++) {
+            int j = 0;
+            do {
                 int const tile
                     = DAT_ViewportRenderState::instance
                           .translationMatrix
@@ -536,9 +539,10 @@ namespace Map {
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-            }
+                j++;
+            } while (j < 24);
         } else if (command == OpenSHC::Commands::M_MAPPER_CATTLEFARM) {
-            for (int j = 0; j != 23; j++) {
+            for (int j = 0; j < 23; j++) {
                 int const tile
                     = DAT_ViewportRenderState::instance
                           .translationMatrix
@@ -568,7 +572,8 @@ namespace Map {
                 }
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_APPLEFARM) {
-            for (int j = 0; j != 8; j++) {
+            int j = 0;
+            do {
                 XYPair const& offset = DAT_TerrainDefinedData::instance.AppleFarmOffsets[j];
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[offset.y + originY].addXgetTile
                     + offset.x + originX;
@@ -576,7 +581,8 @@ namespace Map {
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
-            }
+                j++;
+            } while (j < 8);
         } else if (command == OpenSHC::Commands::M_MAPPER_BARRACKS_EURO
             || command == OpenSHC::Commands::M_MAPPER_BARRACKS_ARAB) {
             x = originX + 5;
