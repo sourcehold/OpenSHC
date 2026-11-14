@@ -41105,7 +41105,7 @@ SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FF870 | 98.1% | resolver call get/call eax
 
-SHC_3BB0A8C1_0x004FF990 | 95.2% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FF990 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FFAAC | 0.0% | Pending
 

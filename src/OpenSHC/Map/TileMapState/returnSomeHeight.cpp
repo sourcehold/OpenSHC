@@ -59,12 +59,13 @@ namespace Map {
                 break;
             }
         } else if ((logic & L_ROCKY) != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0) {
-            int const organism = this->OrganismLayer[tile];
+            // rock ids are biased by 2000
+            int organism = this->OrganismLayer[tile];
             if (organism >= 2000) {
-                short const rockType = DAT_LandscapeState::instance.rocks[organism - 2000].type;
-                if (rockType >= 13) {
+                organism -= 2000;
+                if (DAT_LandscapeState::instance.rocks[organism].type >= 13) {
                     extraHeight = 70;
-                } else if (rockType >= 9) {
+                } else if (DAT_LandscapeState::instance.rocks[organism].type >= 9) {
                     extraHeight = 50;
                 }
             }
