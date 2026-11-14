@@ -15,10 +15,11 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00515C80
     void TileMapState::createWaterForDrawBridge(int buildingID)
     {
-        int const xPosition = DAT_BuildingsState::instance.buildings[buildingID].x;
-        int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
-        int const yPosition = DAT_BuildingsState::instance.buildings[buildingID].y;
-        uint const widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+        Buildings::Building const& building = DAT_BuildingsState::instance.buildings[buildingID];
+        int const xPosition = building.x;
+        int const variation = building.buildingVariation / 2;
+        int const yPosition = building.y;
+        uint const widthOrHeight = building.widthOrHeight;
         int buildingSizeTileIndex = 0;
         int const* drawbridgeMapping = DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation];
         while (true) {

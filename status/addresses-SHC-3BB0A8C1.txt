@@ -44769,7 +44769,7 @@ SHC_3BB0A8C1_0x00515740 | 96.8% | was uncompilable; rebuilt tile
 
 SHC_3BB0A8C1_0x00515A20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00515C80 | 98.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x00515C80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00515DA0 | 83.2% | register allocation
 
