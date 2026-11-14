@@ -331,8 +331,15 @@ namespace Map {
                 tileIndex, buildingSize);
             uint const tileX = this->buildingX + x;
             uint const tileY = this->buildingY + y;
-            if (tileX > 399 || tileY > 399
-                || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
+            if (tileX > 399) {
+                this->buildingPlacementFail = 2;
+                return;
+            }
+            if (tileY > 399) {
+                this->buildingPlacementFail = 2;
+                return;
+            }
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
                 this->buildingPlacementFail = 2;
                 return;
             }
@@ -398,14 +405,17 @@ namespace Map {
             || commandShort == OpenSHC::Commands::M_MAPPER_KEEP3) {
             int const keepIndex = command - OpenSHC::Commands::M_MAPPER_KEEP1;
             for (int part = 0; part < 3; part++) {
-                uint const partY = DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].y + y;
                 if (!MACRO_CALL_MEMBER(
                         OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(
-                        DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].x + x, partY)) {
+                        DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].x + x,
+                        DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].y + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile = DAT_ViewportRenderState::instance.translationMatrix[partY].addXgetTile
+                int const tile
+                    = DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].y + y]
+                          .addXgetTile
                     + DAT_TerrainDefinedData::instance.field_0x264[keepIndex][part].x + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
@@ -445,14 +455,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 5);
-                uint const tileY = this->buildingY + y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(x + this->buildingX, tileY)) {
+                        DAT_ViewportRenderState::ptr)(x + this->buildingX, this->buildingY + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -475,14 +484,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 3);
-                uint const tileY = this->buildingY + y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + x, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + x, this->buildingY + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -498,13 +506,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 3);
-                uint const tileY = this->buildingY + tower2Y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(tower2X + this->buildingX, tileY)) {
+                        DAT_ViewportRenderState::ptr)(tower2X + this->buildingX, this->buildingY + tower2Y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile
+                int const tile
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + tower2Y].addXgetTile
                     + this->buildingX + tower2X;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
@@ -517,24 +525,29 @@ namespace Map {
                 tileIndex++;
             } while (tileIndex < this->constructionTileCount);
             for (int part = 0; part < 6; part++) {
-                uint const partY = DAT_TerrainDefinedData::instance
-                                       .gateHouseTiles[command - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
-                                       .y
-                    + startY;
                 if (!MACRO_CALL_MEMBER(
                         OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(startX
                             + DAT_TerrainDefinedData::instance
                                 .gateHouseTiles[command - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
                                 .x,
-                        partY)) {
+                        DAT_TerrainDefinedData::instance
+                                .gateHouseTiles[command - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
+                                .y
+                            + startY)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile = DAT_ViewportRenderState::instance.translationMatrix[partY].addXgetTile
+                int const tile = DAT_ViewportRenderState::instance
+                                     .translationMatrix[DAT_TerrainDefinedData::instance
+                                                            .gateHouseTiles[command
+                                                                - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
+                                                            .y
+                                         + startY]
+                                     .addXgetTile
                     + DAT_TerrainDefinedData::instance
                           .gateHouseTiles[command - OpenSHC::Commands::M_MAPPER_GATE_WOOD1A][part]
                           .x
-                    + x;
+                    + startX;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -630,14 +643,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 5);
-                uint const tileY = this->buildingY + y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + x, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + x, this->buildingY + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -655,14 +667,14 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 5);
-                uint const tileY = this->buildingY + part1Y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + part1X, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + part1X, this->buildingY + part1Y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
                 int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + part1X;
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + part1Y].addXgetTile
+                    + this->buildingX + part1X;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -680,14 +692,14 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 5);
-                uint const tileY = this->buildingY + part2Y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + part2X, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + part2X, this->buildingY + part2Y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
                 int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + part2X;
+                    = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + part2Y].addXgetTile
+                    + this->buildingX + part2X;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -707,14 +719,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 5);
-                uint const tileY = this->buildingY + y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + x, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + x, this->buildingY + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
@@ -733,14 +744,13 @@ namespace Map {
             tileIndex = 0;
             do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 4);
-                uint const tileY = this->buildingY + y;
                 if (!MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
-                        DAT_ViewportRenderState::ptr)(this->buildingX + x, tileY)) {
+                        DAT_ViewportRenderState::ptr)(this->buildingX + x, this->buildingY + y)) {
                     this->buildingPlacementFail = 2;
                     return;
                 }
-                int const tile
-                    = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+                int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                    + this->buildingX + x;
                 if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                     this->buildingPlacementFail = 2;
                     return;
