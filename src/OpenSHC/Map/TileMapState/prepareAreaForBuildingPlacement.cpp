@@ -43,8 +43,8 @@ namespace Map {
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
                 return FALSE;
             }
-            int const tile
-                = DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile + this->buildingX + x;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
+                + this->buildingX + x;
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return FALSE;
             }
