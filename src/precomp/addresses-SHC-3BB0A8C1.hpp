@@ -97441,7 +97441,7 @@ enum {
     SHC_3BB0A8C1_0x00EC0834 = 0x00EC0834,
     // type: /int
     SHC_3BB0A8C1_0x00EC0838 = 0x00EC0838,
-    // type: /int
+    // type: /float
     SHC_3BB0A8C1_0x00EC083C = 0x00EC083C,
     // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1[600]
     SHC_3BB0A8C1_0x00EC0840 = 0x00EC0840,
@@ -97636,7 +97636,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31C0 = 0x00ED31C0,
     // label: DAT_ButtonBlendStrength
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31C4 = 0x00ED31C4,
     // label: DAT_StopHandlingMenuItems
     // location:
