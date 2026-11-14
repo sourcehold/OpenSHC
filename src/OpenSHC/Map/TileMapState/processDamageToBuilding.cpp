@@ -68,69 +68,7 @@ namespace Map {
         }
 
         uint logic = this->LogicLayer[tile];
-        if ((logic & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) == 0 && this->BuildingLayer[tile] == 0) {
-            if ((logic & L_WALL_OR_GATEHOUSE) == 0) {
-                destroyed = TRUE;
-            } else {
-                if ((logic & L_STOCKPILEUnk) != 0) {
-                    return FALSE;
-                }
-                int wallOwner = (this->WallOwnerLayer[tile] & 7) + 1;
-                if (spareOwnTeam != FALSE
-                    && DAT_GameState::instance.mapAndTime.playerTeams[playerID]
-                        == DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]) {
-                    return FALSE;
-                }
-                DAT_GameState::instance.playerDataArray[wallOwner].defensesDamagedByPlayer = (short)playerID;
-                if (unitID != 0) {
-                    if (DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]
-                        == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
-                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk += 1;
-                    } else {
-                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk = 0;
-                    }
-                }
-                // a wall standing alone takes half again the damage, a well connected one half
-                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::countLogicPropertyInSurroundingTiles, this)(
-                    tile, yPosition, L_KEEP_NON_MANOR_HOUSE | L_WALL_OR_GATEHOUSE);
-                if ((int)this->DAT_CardinalTilesAroundTile <= 1) {
-                    damageUnk += damageUnk / 2;
-                } else if ((int)this->DAT_CardinalTilesAroundTile > 2) {
-                    damageUnk /= 2;
-                }
-                if (suppressDamage != 0) {
-                    damageUnk = 0;
-                }
-                DAT_TroopValueState::instance.attackInfo.buildingDamageEventCount += 1;
-                DAT_GameCore::instance.cowPoisonTrackerUnk += damageUnk * 10;
-                if (suppressDamage == 0 && (this->LogicLayer[tile] & L_UNKNOWN_WALL_RELATED) == 0
-                    && this->DamageLayer[tile] == 0 && this->HeightLayer[tile] > this->DefaultHeightLayer[tile] + 60) {
-                    this->HeightLayer[tile] -= 20;
-                }
-                for (int hit = 0; hit < damageUnk; hit++) {
-                    if (this->HeightLayer[tile] <= this->DefaultHeightLayer[tile]) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
-                            DAT_EntityState::ptr)(tile);
-                        this->LogicLayer[tile] &= ~(
-                            L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
-                        this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
-                        this->DamageLayer[tile] = 0;
-                        DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
-                        DAT_TileMapState::instance.field_0x554a30 = 1;
-                        destroyed = TRUE;
-                        break;
-                    }
-                    this->HeightLayer[tile] -= 1;
-                    if ((char)this->DamageLayer[tile] < 200) {
-                        this->DamageLayer[tile] += 1;
-                    }
-                }
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-                    DAT_PathFindingState::ptr)(yPosition, tile);
-            }
-        } else {
-
+        if ((logic & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0 || this->BuildingLayer[tile] != 0) {
             int buildingID = this->BuildingLayer[tile];
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == (BuildingLogicalState)0) {
                 return TRUE;
@@ -524,6 +462,67 @@ namespace Map {
                     destroyed = TRUE;
                 } break;
                 }
+            }
+        } else {
+            if ((logic & L_WALL_OR_GATEHOUSE) == 0) {
+                destroyed = TRUE;
+            } else {
+                if ((logic & L_STOCKPILEUnk) != 0) {
+                    return FALSE;
+                }
+                int wallOwner = (this->WallOwnerLayer[tile] & 7) + 1;
+                if (spareOwnTeam != FALSE
+                    && DAT_GameState::instance.mapAndTime.playerTeams[playerID]
+                        == DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]) {
+                    return FALSE;
+                }
+                DAT_GameState::instance.playerDataArray[wallOwner].defensesDamagedByPlayer = (short)playerID;
+                if (unitID != 0) {
+                    if (DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]
+                        == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
+                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk += 1;
+                    } else {
+                        DAT_UnitsState::instance.units[unitID].friendlyFireCounterUnk = 0;
+                    }
+                }
+                // a wall standing alone takes half again the damage, a well connected one half
+                MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::countLogicPropertyInSurroundingTiles, this)(
+                    tile, yPosition, L_KEEP_NON_MANOR_HOUSE | L_WALL_OR_GATEHOUSE);
+                if ((int)this->DAT_CardinalTilesAroundTile <= 1) {
+                    damageUnk += damageUnk / 2;
+                } else if ((int)this->DAT_CardinalTilesAroundTile > 2) {
+                    damageUnk /= 2;
+                }
+                if (suppressDamage != 0) {
+                    damageUnk = 0;
+                }
+                DAT_TroopValueState::instance.attackInfo.buildingDamageEventCount += 1;
+                DAT_GameCore::instance.cowPoisonTrackerUnk += damageUnk * 10;
+                if (suppressDamage == 0 && (this->LogicLayer[tile] & L_UNKNOWN_WALL_RELATED) == 0
+                    && this->DamageLayer[tile] == 0 && this->HeightLayer[tile] > this->DefaultHeightLayer[tile] + 60) {
+                    this->HeightLayer[tile] -= 20;
+                }
+                for (int hit = 0; hit < damageUnk; hit++) {
+                    if (this->HeightLayer[tile] <= this->DefaultHeightLayer[tile]) {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile,
+                            DAT_EntityState::ptr)(tile);
+                        this->LogicLayer[tile] &= ~(
+                            L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
+                        this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
+                        this->DamageLayer[tile] = 0;
+                        DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
+                        DAT_TileMapState::instance.field_0x554a30 = 1;
+                        destroyed = TRUE;
+                        break;
+                    }
+                    this->HeightLayer[tile] -= 1;
+                    if ((char)this->DamageLayer[tile] < 200) {
+                        this->DamageLayer[tile] += 1;
+                    }
+                }
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+                    DAT_PathFindingState::ptr)(yPosition, tile);
             }
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
