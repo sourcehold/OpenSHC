@@ -42165,7 +42165,7 @@ SHC_3BB0A8C1_0x00508870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00508910 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508A00 | 91.8% | Style pass, asm differs
+SHC_3BB0A8C1_0x00508A00 | 94.5% | brush loop register order
 
 SHC_3BB0A8C1_0x00508C7C | 0.0% | Pending
 

@@ -164,8 +164,9 @@ namespace Map {
             }
         } else {
             // a moat preview always covers the nine tiles around the cursor
+            int index = 0;
             uint brushY = y;
-            for (int index = 0; index < 9; index++) {
+            for (; index < 9; index++) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                     0, index, (int*)&x, (int*)&brushY, baseTile, y);
                 this->ConstructionGFXLayer[x] = gfx;
