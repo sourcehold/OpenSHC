@@ -92,12 +92,12 @@ namespace Map {
             }
         } else if ((logic & L_ROCKY) != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0) {
             // rock ids are biased by 2000
-            int const organism = this->OrganismLayer[tile];
+            int organism = this->OrganismLayer[tile];
             if (organism >= 2000) {
-                short const rockType = DAT_LandscapeState::instance.rocks[organism - 2000].type;
-                if (rockType >= 13) {
+                organism -= 2000;
+                if (DAT_LandscapeState::instance.rocks[organism].type >= 13) {
                     extra = 70;
-                } else if (rockType >= 9) {
+                } else if (DAT_LandscapeState::instance.rocks[organism].type >= 9) {
                     extra = 50;
                 }
             }
