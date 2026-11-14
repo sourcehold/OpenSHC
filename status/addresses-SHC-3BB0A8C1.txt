@@ -41349,7 +41349,7 @@ SHC_3BB0A8C1_0x004FFF01 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004FFF02 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FFF10 | 72.1% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FFF10 | 89.3% | this reg tie, tail merge
 
 SHC_3BB0A8C1_0x00500060 | 0.0% | Pending
 
