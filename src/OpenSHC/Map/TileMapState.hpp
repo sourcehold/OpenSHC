@@ -119,7 +119,7 @@ namespace Map {
         undefined4 refreshCertainTileMap_old; // 0x005548BC length: 4
         undefined4 counter1; // 0x005548C0 length: 4
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
-        undefined4 disableElevationRendering; // 0x005548C8 length: 4
+        BOOLEnum disableElevationRendering; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
         undefined4 field_0x5548d0; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4

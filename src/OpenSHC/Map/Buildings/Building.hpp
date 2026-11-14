@@ -11,6 +11,7 @@
 #include "OpenSHC/Game/Resources/ResourceTypeShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFlagSlot.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTargetMarkerShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Buildings/Enums/DefensiveTowerEngineTypeByte.hpp"
 
@@ -21,6 +22,7 @@ namespace Map {
         using OpenSHC::Game::Resources::ResourceTypeShort;
         using OpenSHC::Map::Buildings::BuildingFlagSlot;
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
+        using OpenSHC::Map::Buildings::BuildingTargetMarkerShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::Map::Buildings::Enums::DefensiveTowerEngineTypeByte;
 
@@ -89,7 +91,7 @@ namespace Map {
             short tickRelatedVisuallyActiveIndicator; // 0x000000BC length: 2
             short renderBlendStrength; // 0x000000BE length: 2
             short recruitTimer; // 0x000000C0 length: 2
-            short field_0xc2; // 0x000000C2 length: 2
+            BuildingTargetMarkerShort targetMarker; // 0x000000C2 length: 2
             short noRubble; // 0x000000C4 length: 2
             undefined1 padding_0xc6[2]; // 0x000000C6 length: 2
             int miscDisplayLayerTile; // 0x000000C8 length: 4
