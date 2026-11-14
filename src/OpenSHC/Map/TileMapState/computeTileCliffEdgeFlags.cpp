@@ -30,16 +30,18 @@ namespace Map {
         // the height of each of the eight neighbours, or the own height where there is no river
         int heights[8];
         for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.field_0x372c); i++) {
-            int const offsetX = DAT_TerrainDefinedData::instance.field_0x372c[i].x;
-            uint neighbourY = y + DAT_TerrainDefinedData::instance.field_0x372c[i].y;
-            uint neighbourX = x + offsetX;
+            XYPair offset;
+            offset.x = DAT_TerrainDefinedData::instance.field_0x372c[i].x;
+            offset.y = DAT_TerrainDefinedData::instance.field_0x372c[i].y;
+            uint const neighbourY = offset.y + y;
+            uint const neighbourX = offset.x + x;
             heights[i] = height;
             if (neighbourX > 399 || neighbourY > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] == 0) {
                 continue;
             }
             int const neighbour
-                = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile + offsetX + x;
+                = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile + offset.x + x;
             if ((this->LogicLayer[neighbour] & L_RIVER) == 0) {
                 continue;
             }
@@ -52,7 +54,7 @@ namespace Map {
         }
 
         this->Logic2Layer[tile] &= (L2_BEACH | L2_OASIS_GRASS | L2_PLATEAU_HIGH);
-        byte flags = this->Logic2Layer[tile];
+        byte const flags = this->Logic2Layer[tile];
         if (lowest < height) {
             // the bank runs along whichever axis the map is turned to (Logic2 has no names for edge bits 1, 2, 4)
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
