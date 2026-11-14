@@ -37,7 +37,7 @@ namespace Map {
             int index = 0;
             while (true) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 2);
-                int tile
+                int const tile
                     = DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y
                               + this->buildingY + y]
@@ -61,10 +61,10 @@ namespace Map {
         this->placedBuildingID = buildingID;
         // the surrounding tiles carry the stockpile graphic but stay walkable
         for (int slot = 0; slot != countof(DAT_TerrainDefinedData::instance.StockpilePathableOffsets); slot++) {
-            int tile = DAT_ViewportRenderState::instance
-                           .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].y + y]
-                           .addXgetTile
-                + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot].x + x;
+            Navigation::Algorithms::XYPair const& offset
+                = DAT_TerrainDefinedData::instance.StockpilePathableOffsets[slot];
+            int const tile
+                = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
             this->LogicLayer[tile] |= L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE;
             this->HeightLayer[tile] = (byte)(averageHeight + 10);
             this->AlphaGFXLayer[tile] = (ushort)buildingID;
