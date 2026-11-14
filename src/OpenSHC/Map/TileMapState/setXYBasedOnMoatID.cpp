@@ -9,7 +9,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005003D0
     int TileMapState::setXYBasedOnMoatID(int moatID, int mode, uint x, uint y)
     {
-        if (x > 399 || y > 399 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+        bool const isOnMap
+            = x <= 399 && y <= 399 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] != 0;
+        if (!isOnMap) {
             return 0;
         }
 
