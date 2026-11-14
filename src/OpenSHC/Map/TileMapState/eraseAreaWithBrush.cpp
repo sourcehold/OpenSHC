@@ -26,10 +26,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00508EC0
     void TileMapState::eraseAreaWithBrush(uint x, uint y, uint brush)
     {
-        if (x > 399) {
-            return;
-        }
-        if (y > 399) {
+        if (x > 399 || y > 399) {
             return;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
