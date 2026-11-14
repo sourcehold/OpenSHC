@@ -41575,7 +41575,7 @@ SHC_3BB0A8C1_0x00502390 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005024F0 | 61.6% | Style pass, asm differs
 
-SHC_3BB0A8C1_0x00502680 | 74.1% | mapper arms block layout
+SHC_3BB0A8C1_0x00502680 | 75.2% | code motion of mapper arms
 
 SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 

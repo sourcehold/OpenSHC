@@ -31,22 +31,22 @@ namespace Map {
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
 
         int highest = 0;
-        // the original reuses the brush parameter to hold the lowest height seen
-        brush = 200;
+        int lowest = 200;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
-            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
-                if (this->HeightLayer[tile] > highest) {
-                    highest = this->HeightLayer[tile];
-                }
-                if (this->HeightLayer[tile] < (int)brush) {
-                    brush = this->HeightLayer[tile];
-                }
+            if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
+                continue;
+            }
+            if (this->HeightLayer[tile] > highest) {
+                highest = this->HeightLayer[tile];
+            }
+            if (this->HeightLayer[tile] < lowest) {
+                lowest = this->HeightLayer[tile];
             }
         }
 
-        int const average = (int)(brush + highest) / 2;
+        int const average = (lowest + highest) / 2;
         tile = baseTile;
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
