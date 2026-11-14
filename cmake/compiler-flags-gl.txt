@@ -119,6 +119,7 @@ src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAn
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection.cpp
 src/OpenSHC/UI/MenuItems/General/MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface.cpp
 src/OpenSHC/Map/TileMapState/getBuildingSizeIndexMappingData.cpp
+src/OpenSHC/Map/TileMapState/getRubbleGraphicStageForDamageLevel.cpp
 src/OpenSHC/Map/TileMapState/setSignpostDistanceForCampaignMission.cpp
 src/OpenSHC/Map/TileMapState/clearDrawBridgeWater.cpp
 src/OpenSHC/Map/TileMapState/clearFixedSizeTwoBuildingFootprint.cpp
