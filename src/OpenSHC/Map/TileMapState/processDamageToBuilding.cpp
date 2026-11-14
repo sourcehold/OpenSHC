@@ -139,8 +139,7 @@ namespace Map {
                 == OpenSHC::Map::Buildings::BLS_REMOVE) {
                 return TRUE;
             }
-            short health = DAT_BuildingsState::instance.buildings[buildingID].currentHealth;
-            if (health == 0) {
+            if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth == 0) {
                 return TRUE;
             }
             DAT_GameCore::instance.cowPoisonTrackerUnk += damageUnk * 10;
@@ -158,7 +157,7 @@ namespace Map {
                         .playerTeams[DAT_BuildingsState::instance.buildings[buildingID].owner]) {
                 return FALSE;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].currentHealth = health - (short)damageUnk;
+            DAT_BuildingsState::instance.buildings[buildingID].currentHealth -= (short)damageUnk;
 
             if (aiBuildDelayRelated == TRUE
                 && (DAT_BuildingsState::instance.buildings[buildingID].buildingType
