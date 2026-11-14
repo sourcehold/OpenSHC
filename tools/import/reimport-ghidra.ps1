@@ -1,6 +1,8 @@
 param(
     [Parameter(Mandatory = $false)]
     [string]$Sarif = "Stronghold Crusader.exe.sarif",
+    # Read the program straight from a .gzf with pyghidra (no SARIF export, no cache)
+    [string]$Gzf = "",
     [string]$OutputDir = "src",
     [bool]$ClearCache = $true,
     [bool]$OverwriteAll = $true,
@@ -22,8 +24,13 @@ if ($Interactive) {
 
 $pyArgs += "$ScriptPath"
 
-$pyArgs += "--sarif"
-$pyArgs += $Sarif
+if ($Gzf) {
+    $pyArgs += "--gzf"
+    $pyArgs += $Gzf
+} else {
+    $pyArgs += "--sarif"
+    $pyArgs += $Sarif
+}
 
 $pyArgs += "--output-dir"
 $pyArgs += "$OutputDir"
@@ -63,12 +70,12 @@ if ($DryRun) {
         $hppFiles | Remove-Item
     }
 
-    if($GenerateSarif) {
+    if($GenerateSarif -and -not $Gzf) {
         Write-Output "Generating sarif file from gzf"
         & python .\tools\import\gzftosarif.py --sarif $Sarif
     }
 
-    Write-Output "Converting sarif to .hpp files"
+    Write-Output "Converting $(if ($Gzf) { $Gzf } else { $Sarif }) to .hpp files"
     # Execute the export
     & python $pyArgs
 
