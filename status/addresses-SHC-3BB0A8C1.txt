@@ -39655,7 +39655,7 @@ SHC_3BB0A8C1_0x004F9F00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FA000 | 57.6% | corner unroll, slots differ
 
-SHC_3BB0A8C1_0x004FA2D0 | 86.6% | 47.37% cold block layout regal
+SHC_3BB0A8C1_0x004FA2D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FA460 | 100.0% | Reimplemented
 

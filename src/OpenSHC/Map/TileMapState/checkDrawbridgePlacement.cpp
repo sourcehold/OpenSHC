@@ -17,7 +17,7 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingLogicalState;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA2D0
-    void TileMapState::checkDrawbridgePlacement(int x, int y)
+    void TileMapState::checkDrawbridgePlacement(int x, int volatile y)
     {
         if (this->buildingPlacementFail != FALSE) {
             return;
@@ -27,7 +27,8 @@ namespace Map {
         for (int rotation = 0; rotation < 4; rotation++) {
             int buildings[9];
             for (int count = 0; count < 9; count++) {
-                uint const tileY = y + DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].y;
+                int const baseY = y;
+                uint const tileY = baseY + DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].y;
                 int const offsetX = DAT_TerrainDefinedData::instance.drawBridgeOffsets[rotation][count].x;
                 uint const tileX = offsetX + x;
                 buildings[count] = 0;
