@@ -15,6 +15,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB9E0
     void TileMapState::renderWallPlacementPreview(uint x, uint y, short kind)
     {
+        int variationStep = 0;
         int base = 0;
         int size = 0;
         int index = 0;
@@ -81,7 +82,7 @@ namespace Map {
             rotation -= 8;
         }
         // the rotation part of the graphic index does not change over the footprint
-        int variationStep = rotation / 2 * size * size;
+        variationStep = rotation / 2 * size * size;
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
