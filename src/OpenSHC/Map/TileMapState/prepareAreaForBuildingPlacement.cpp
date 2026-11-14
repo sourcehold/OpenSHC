@@ -34,7 +34,10 @@ namespace Map {
                 index, buildingWidthOrHeight);
             uint const tileY = y + this->buildingY;
             uint const tileX = x + this->buildingX;
-            if (tileX > 399 || tileY > 399) {
+            if (tileX > 399) {
+                return FALSE;
+            }
+            if (tileY > 399) {
                 return FALSE;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] == 0) {
