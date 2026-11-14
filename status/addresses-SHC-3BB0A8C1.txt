@@ -7457,9 +7457,9 @@ SHC_3BB0A8C1_0x0042C060 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0042C090 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0042C190 | 0.0% | Pending
+SHC_3BB0A8C1_0x0042C190 | 83.7% | the original zeroes its register again at the top of each setup; the loop's end address
 
-SHC_3BB0A8C1_0x0042C1E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0042C1E0 | 89.6% | order of the three products in the unit loops; where the remaining points are loaded
 
 SHC_3BB0A8C1_0x0042C2F0 | 0.0% | Pending
 
@@ -13589,7 +13589,7 @@ SHC_3BB0A8C1_0x0043E4E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043E540 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043E5A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043E5A0 | 75.0% | the original keeps the fear level and the result in the same register (eax)
 
 SHC_3BB0A8C1_0x0043E5F0 | 100.0% | Reimplemented
 
@@ -14869,7 +14869,7 @@ SHC_3BB0A8C1_0x0044440A | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044440B | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00444410 | 0.0% | Pending
+SHC_3BB0A8C1_0x00444410 | 71.4% | stance per case; engineer gotos as break; shared building-focus goto kept; register allocation
 
 SHC_3BB0A8C1_0x00444A14 | 0.0% | Pending
 
@@ -18897,7 +18897,7 @@ SHC_3BB0A8C1_0x00462150 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00462190 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00462340 | 0.0% | Pending
+SHC_3BB0A8C1_0x00462340 | 80.4% | no gotos; register allocation
 
 SHC_3BB0A8C1_0x00462550 | 0.0% | Pending
 
@@ -24203,7 +24203,7 @@ SHC_3BB0A8C1_0x004950A8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004950A9 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004950B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004950B0 | 92.0% | if-chains in the original's != order; register allocation
 
 SHC_3BB0A8C1_0x004951A0 | 0.0% | Pending
 
