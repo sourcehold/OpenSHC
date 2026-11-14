@@ -43,7 +43,7 @@ namespace Map {
         int downY = y2 - y1;
         int rightX = x2 - x1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        do {
+        while (true) {
             if (command == OpenSHC::Commands::M_MAPPER_STAIR && budget < 24) {
                 break;
             }
@@ -157,7 +157,10 @@ namespace Map {
             if (budget > 16 && overshoot == 2) {
                 budget -= 16;
             }
-        } while (x != x2 || y != y2 || overshoot != 0);
+            if (x == x2 && y == y2 && overshoot == 0) {
+                break;
+            }
+        }
 
         if (this->illegalBuild != FALSE) {
             this->DAT_WallTileCountCurrentDrag = 0;

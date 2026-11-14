@@ -39377,7 +39377,7 @@ SHC_3BB0A8C1_0x004F8AC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F8B50 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F8BD0 | 93.9% | Style pass, asm differs
+SHC_3BB0A8C1_0x004F8BD0 | 93.9% | stack slot tie
 
 SHC_3BB0A8C1_0x004F9000 | 100.0% | Reimplemented
 
