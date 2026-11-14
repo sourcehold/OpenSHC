@@ -77,7 +77,7 @@ namespace Map {
                 != building) {
                 return 0;
             }
-            return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
+            return this->getTotalHeightAtTile2(tile);
         }
         default:
             return 0;
