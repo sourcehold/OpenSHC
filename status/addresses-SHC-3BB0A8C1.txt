@@ -2579,7 +2579,7 @@ SHC_3BB0A8C1_0x00408EB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00408ED0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00408FC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00408FC0 | 84.1% | Reg alloc only
 
 SHC_3BB0A8C1_0x004090E8 | 0.0% | Pending
 
@@ -13475,7 +13475,7 @@ SHC_3BB0A8C1_0x0043C160 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043C1A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043C1E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043C1E0 | 87.6% | Register allocation differs
 
 SHC_3BB0A8C1_0x0043C6A0 | 100.0% | Reimplemented, identical code; the loop-end compare (one past the table) is the next global's symbol in the original, unnamed in ours
 
@@ -13601,11 +13601,11 @@ SHC_3BB0A8C1_0x0043F2C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043F2F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043F6A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043F6A0 | 93.8% | Bar loop: three scratch registers rotate; the year sum is an lea
 
 SHC_3BB0A8C1_0x0043F930 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0043FAC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0043FAC0 | 85.3% | Loop registers differ
 
 SHC_3BB0A8C1_0x0043FBB0 | 100.0% | Reimplemented
 
@@ -16373,7 +16373,7 @@ SHC_3BB0A8C1_0x00447D30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00447DC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00447FA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00447FA0 | 40.2% | Register allocation differs
 
 SHC_3BB0A8C1_0x004482F0 | 0.0% | Pending
 
@@ -16971,7 +16971,7 @@ SHC_3BB0A8C1_0x00453600 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00453B00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00454080 | 0.0% | Pending
+SHC_3BB0A8C1_0x00454080 | 86.3% | the C++ part before the asm keeps its values in other registers; the asm matches
 
 SHC_3BB0A8C1_0x00454620 | 100.0% | Reimplemented
 
@@ -19155,11 +19155,11 @@ SHC_3BB0A8C1_0x00462FF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004630B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004630D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004630D0 | 93.5% | Alpha branch's pixel index is reassociated
 
 SHC_3BB0A8C1_0x00463270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00463310 | 0.0% | Pending
+SHC_3BB0A8C1_0x00463310 | 72.1% | Block placement and jump offsets around the statue case
 
 SHC_3BB0A8C1_0x004637E8 | 0.0% | Pending
 
@@ -21245,17 +21245,17 @@ SHC_3BB0A8C1_0x0046FF50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046FFB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00470040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00470040 | 57.2% | Zero not kept in ebp; param_1 takes the register instead
 
 SHC_3BB0A8C1_0x00470610 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004706A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004706E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004706E0 | 71.5% | Scheduling and scratch registers in the windowed branch
 
 SHC_3BB0A8C1_0x004707F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004708F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004708F0 | 80.4% | Volatile register rotation only
 
 SHC_3BB0A8C1_0x004709B0 | 100.0% | Reimplemented
 
@@ -21413,7 +21413,7 @@ SHC_3BB0A8C1_0x004728F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00472950 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004729B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004729B0 | 79.1% | Callee-saved register swap only
 
 SHC_3BB0A8C1_0x00472A90 | 100.0% | Reimplemented
 
@@ -22125,7 +22125,7 @@ SHC_3BB0A8C1_0x00479369 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00479400 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00479540 | 0.0% | Pending
+SHC_3BB0A8C1_0x00479540 | 86.4% | calls into the C++ library (ofstream constructor, destructor, operator<<) that reccmp cannot map; register rotation
 
 SHC_3BB0A8C1_0x00479790 | 0.0% | Pending
 
@@ -23071,7 +23071,7 @@ SHC_3BB0A8C1_0x00487770 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00487800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487A30 | 69.4% | this spilled to edi across the proxied computeLatencyAdjustmentFromMatchTimes (81.2% with that callee reimplemented); return-block layout
 
 SHC_3BB0A8C1_0x00487C50 | 100.0% | Reimplemented
 
@@ -26007,7 +26007,7 @@ SHC_3BB0A8C1_0x004B2280 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B2530 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B2820 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B2820 | 82.7% | Zero kept in esi
 
 SHC_3BB0A8C1_0x004B2A60 | 100.0% | Reimplemented
 
@@ -26883,7 +26883,7 @@ SHC_3BB0A8C1_0x004B5280 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B5300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B5330 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B5330 | 21.4% | Pixel store and registers differ
 
 SHC_3BB0A8C1_0x004B5480 | 0.0% | Pending
 
@@ -26891,7 +26891,7 @@ SHC_3BB0A8C1_0x004B58D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B5A20 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B5F70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B5F70 | 48.2% | Frame one slot smaller
 
 SHC_3BB0A8C1_0x004B61F0 | 100.0% | Reimplemented
 
@@ -27095,7 +27095,7 @@ SHC_3BB0A8C1_0x004B7AB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B7AF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B7C90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B7C90 | 74.5% | Register allocation differs
 
 SHC_3BB0A8C1_0x004B7F60 | 100.0% | Reimplemented
 
@@ -35577,7 +35577,7 @@ SHC_3BB0A8C1_0x004D55D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D5780 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D5810 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D5810 | 58.8% | Frame 8 bytes larger, reg alloc
 
 SHC_3BB0A8C1_0x004D5990 | 0.0% | Pending
 
@@ -35841,7 +35841,7 @@ SHC_3BB0A8C1_0x004D6F60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D7200 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D76A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D76A0 | 58.2% | Register assignment differs
 
 SHC_3BB0A8C1_0x004D7730 | 0.0% | Pending
 
@@ -36185,7 +36185,7 @@ SHC_3BB0A8C1_0x004DAE90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DAF50 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 
-SHC_3BB0A8C1_0x004DAFB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAFB0 | 67.8% | Loop registers and RECT spills differ
 
 SHC_3BB0A8C1_0x004DB0D0 | 100.0% | Reimplemented
 
