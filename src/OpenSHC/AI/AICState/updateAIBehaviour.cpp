@@ -3,15 +3,13 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/AI/AIRecruitUnitChoice.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
 namespace OpenSHC {
 namespace AI {
-
-    using OpenSHC::AI::AIRecruitUnitChoice;
-    using OpenSHC::AI::AIType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D53E0
     void AICState::updateAIBehaviour()
@@ -20,7 +18,7 @@ namespace AI {
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::makeOutpostTribesAttack, this)();
 
         // every AI gets its own tick of the day, week and month, so the work is spread out
-        for (int playerID = 1; playerID < 9; playerID++) {
+        for (int playerID = 1; playerID < countof(DAT_GameState::instance.playerDataArray); playerID++) {
             if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
                 continue;
             if (DAT_GameState::instance.playerDataArray[playerID].playerDeathRelated != 0)
@@ -83,7 +81,7 @@ namespace AI {
                 } else {
                     // only spend on recruiting while gold is above the AIC's threshold
                     DAT_GameState::instance.playerDataArray[playerID].canStartSpending
-                        = DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf]
+                        = DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
                         > this->aics[aicIndex].recruitGoldThreshold;
                 }
             }

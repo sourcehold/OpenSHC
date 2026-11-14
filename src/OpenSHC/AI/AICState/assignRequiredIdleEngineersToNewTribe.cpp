@@ -27,9 +27,9 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_E_ENGINEER)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == 22)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == OpenSHC::AI::AIUBT_HARASS_SIEGE)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == 10)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType == OpenSHC::AI::AIUBT_ENGINEERING)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].engineerRelatedUnk != 0)
                 continue;

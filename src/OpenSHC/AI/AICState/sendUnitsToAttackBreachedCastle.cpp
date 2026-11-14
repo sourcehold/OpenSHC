@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -18,10 +19,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
-    using OpenSHC::Map::Units::Instructions::UnitMatchSpeedEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D30E0
@@ -36,10 +33,12 @@ namespace AI {
         int const defendingLordID = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer,
             DAT_UnitsState::ptr)(DAT_GameState::instance.playerDataArray[attackingPlayerIndex].attackedPlayerID);
 
-        for (int i = 0; i < 11; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxBreachTribes); i++) {
             int const tribeType = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeType;
             int const tribeCount = DAT_SkirmishDefinedData::instance.MaxBreachTribes[i].tribeCount;
-            if (tribeType == 18 || tribeType == 14 || tribeType == 13) {
+            if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01
+                || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_04_01
+                || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_BASIC_03_01) {
                 continue;
             }
 
@@ -54,16 +53,17 @@ namespace AI {
                     continue;
                 }
 
-                int const targetUnitID = (short)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+                int const targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
                 DAT_TribesState::instance.tribes[tribeID].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;
 
-                if (sentUnitsToAttackLord != FALSE || defendingLordID == 0 || tribeType == 186) {
+                if (sentUnitsToAttackLord || defendingLordID == 0
+                    || tribeType == OpenSHC::AI::Tribes::AITI_BREACH_08_01) {
                     if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::giveSomeRaidCommand, this)(tribeID, tribeType)
                         != 0) {
                         continue;
                     }
 
-                    if (tribeType == 186) {
+                    if (tribeType == OpenSHC::AI::Tribes::AITI_BREACH_08_01) {
                         vector += 4;
                     }
                     DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = OpenSHC::Map::Units::STBT_8;

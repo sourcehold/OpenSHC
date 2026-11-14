@@ -21,8 +21,8 @@ namespace AI {
         }
 
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(tribeID,
-            (short)DAT_BuildingsState::instance.buildings[keepID].x + 3,
-            (short)DAT_BuildingsState::instance.buildings[keepID].y + 4, 0);
+            DAT_BuildingsState::instance.buildings[keepID].x + 3, DAT_BuildingsState::instance.buildings[keepID].y + 4,
+            0);
     }
 }
 }

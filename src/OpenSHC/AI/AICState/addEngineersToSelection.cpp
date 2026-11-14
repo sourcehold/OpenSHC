@@ -16,7 +16,7 @@ namespace AI {
     {
         int const tribeID
             = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
-        for (int unitID = 1; unitID < (int)DAT_UnitsState::instance.maxUnitCount; unitID++) {
+        for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
             if (unitCount <= 0)
                 break;
             if (DAT_UnitsState::instance.units[unitID].logicalState != Map::Units::ULS_NORMAL)
@@ -27,7 +27,7 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_E_ENGINEER)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 10)
+            if (DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != OpenSHC::AI::AIUBT_ENGINEERING)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].tribeID != 0)
                 continue;

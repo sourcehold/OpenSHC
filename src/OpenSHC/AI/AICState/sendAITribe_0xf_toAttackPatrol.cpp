@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -14,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF4F0
     void AICState::sendAITribe_0xf_toAttackPatrol(int playerID)
     {
-        int tribeIndex = 15;
+        int tribeIndex = OpenSHC::AI::Tribes::AITI_BREACH_BASIC_05_01;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL) {
             return;
         }

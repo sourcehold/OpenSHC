@@ -12,7 +12,6 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D2E00
     void AICState::sendTribeToAIVLocationSlot(int tribeID, AIVUnitType aivUnitType, int slotIndex)
@@ -21,7 +20,8 @@ namespace AI {
 
         // Find the slotIndex-th non-empty slot
         int tile = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < countof(DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType]);
+            i++) {
             if (DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlots[aivUnitType][i] == 0) {
                 continue;
             }
@@ -35,8 +35,7 @@ namespace AI {
         int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
 
-        if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile)
-            != FALSE) {
+        if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID, tile)) {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
                 tribeID, x, y, 0);
             return;

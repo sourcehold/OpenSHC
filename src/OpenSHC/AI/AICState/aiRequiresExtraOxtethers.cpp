@@ -29,12 +29,11 @@ namespace AI {
         for (; quarryID != 0;
             quarryID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findNextBuildingForPlayerAndType,
                 DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_QUARRY, quarryID)) {
-            // The (short) is load-bearing: quarryStockpileID is undefined2, and the original sign-extends it.
             int const stone = DAT_BuildingsState::instance
-                                  .buildings[(short)DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID]
+                                  .buildings[DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID]
                                   .resources[Game::Resources::RT_STONE];
             int tetherCount = 0;
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < countof(DAT_BuildingsState::instance.buildings[quarryID].quarryLinkedOxTethers); i++) {
                 int const tetherID = DAT_BuildingsState::instance.buildings[quarryID].quarryLinkedOxTethers[i];
                 if (tetherID == 0)
                     continue;
