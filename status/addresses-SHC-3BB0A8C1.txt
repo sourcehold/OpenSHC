@@ -42765,7 +42765,7 @@ SHC_3BB0A8C1_0x00508DC3 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00508DD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508EC0 | 58.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x00508EC0 | 82.9% | entry scheduling, arg regs
 
 SHC_3BB0A8C1_0x00509180 | 95.4% | resolver call get/call eax
 
