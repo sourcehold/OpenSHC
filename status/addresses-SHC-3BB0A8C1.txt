@@ -7865,7 +7865,7 @@ SHC_3BB0A8C1_0x0042D632 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042D633 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0042D640 | 75.1% | gynt's draft, mechanical pass; structure
+SHC_3BB0A8C1_0x0042D640 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042D8B0 | 0.0% | Pending
 
@@ -23383,7 +23383,7 @@ SHC_3BB0A8C1_0x00490690 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00490920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004909E0 | 79.4% | gynt's draft, mechanical pass; structure
+SHC_3BB0A8C1_0x004909E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00490C20 | 0.0% | Pending
 
