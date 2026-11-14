@@ -10,7 +10,7 @@ namespace Rendering {
     {
         for (int floaterIndex = 1; floaterIndex < this->availableFloaterIndex; floaterIndex++) {
             DAT_TileMapState::instance.FloatingLayer[this->floatersArray[floaterIndex].tile] = 0;
-            this->floatersArray[floaterIndex].id = 0;
+            this->floatersArray[floaterIndex].nextFloaterID = 0;
         }
         this->availableFloaterIndex = 1;
     }

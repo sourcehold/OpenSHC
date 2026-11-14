@@ -19,21 +19,21 @@ namespace Rendering {
         }
 
         if (DAT_TileMapState::instance.FloatingLayer[tile] == 0) {
-            this->floatersArray[newFloaterIndex].id = 0;
+            this->floatersArray[newFloaterIndex].nextFloaterID = 0;
         } else {
             uint floaterID = DAT_TileMapState::instance.FloatingLayer[tile];
             if (countof(this->floatersArray) - 1 < floaterID) {
                 return;
             }
-            for (; floaterID != 0; floaterID = this->floatersArray[floaterID].id) {
+            for (; floaterID != 0; floaterID = this->floatersArray[floaterID].nextFloaterID) {
                 if (this->floatersArray[floaterID].imageID == imageID && this->floatersArray[floaterID].gmID == gmID) {
                     return;
                 }
             }
-            this->floatersArray[newFloaterIndex].id = DAT_TileMapState::instance.FloatingLayer[tile];
+            this->floatersArray[newFloaterIndex].nextFloaterID = DAT_TileMapState::instance.FloatingLayer[tile];
         }
 
-        DAT_TileMapState::instance.FloatingLayer[tile] = (ushort)newFloaterIndex;
+        DAT_TileMapState::instance.FloatingLayer[tile] = newFloaterIndex;
         this->floatersArray[newFloaterIndex].gmID = gmID;
         this->floatersArray[newFloaterIndex].imageID = imageID;
         this->floatersArray[newFloaterIndex].originX

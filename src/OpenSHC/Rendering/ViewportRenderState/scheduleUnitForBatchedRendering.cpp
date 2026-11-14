@@ -9,16 +9,16 @@ namespace OpenSHC {
 namespace Rendering {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004E26D0
-    void ViewportRenderState::scheduleUnitForBatchedRendering(undefined4 unitIDOrStatus, undefined4 drawX,
-        undefined4 drawY, undefined4 imageID, undefined4 blendStrength, undefined4 gmID, int param_7)
+    void ViewportRenderState::scheduleUnitForBatchedRendering(
+        int unitIDOrStatus, int drawX, int drawY, int imageID, int blendStrength, int gmID, int batchesEarlier)
     {
         int batch;
-        if (param_7 == 1) {
+        if (batchesEarlier == 1) {
             batch = this->unitBatchedRenderCounterUntil6 + 4;
             if (Enums::VC_UNIT_BATCH_COUNT < batch) {
                 batch -= Enums::VC_UNIT_BATCH_COUNT;
             }
-        } else if (param_7 == 2) {
+        } else if (batchesEarlier == 2) {
             batch = this->unitBatchedRenderCounterUntil6 + 3;
             if (Enums::VC_UNIT_BATCH_COUNT < batch) {
                 batch -= Enums::VC_UNIT_BATCH_COUNT;

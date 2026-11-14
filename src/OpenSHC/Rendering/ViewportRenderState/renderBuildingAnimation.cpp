@@ -14,7 +14,7 @@ namespace Rendering {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004E3870
     void ViewportRenderState::renderBuildingAnimation(
-        int buildingID, int screenX, int screenY, undefined4 param_4, int clipToBuilding)
+        int buildingID, int screenX, int screenY, int tile, BOOLEnum clipToBuilding)
     {
         if (DAT_BuildingsState::instance.buildings[buildingID].renderAnimation == 0) {
             return;
@@ -22,14 +22,14 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
             return;
         }
-        if (DAT_TileMapState::instance.disableElevationRendering != 0) {
+        if (DAT_TileMapState::instance.disableElevationRendering != FALSE) {
             return;
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].drawBridgeState1 != 0) {
             return;
         }
 
-        if (clipToBuilding != 0) {
+        if (clipToBuilding != FALSE) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::temporarySaveMapSurfaceHeightRangeUnk,
                 DAT_TextureRenderCoreObject::ptr)
             ();
@@ -56,7 +56,7 @@ namespace Rendering {
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY);
         }
-        if (clipToBuilding != 0) {
+        if (clipToBuilding != FALSE) {
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::restoreMapSurfaceHeightRangeFromTemporaryUnk,
                 DAT_TextureRenderCoreObject::ptr)

@@ -24,9 +24,10 @@ namespace Rendering {
 
         int maxViewportX = (((Map::MC_MAP_SIZE_400 - mapBorder) / 2 - this->viewportState.viewportHeight) + 4)
             * Enums::VC_TILE_PIXEL_WIDTH;
-        int maxViewportY = ((401 - this->viewportState.viewportWidth) - mapBorder) * Enums::VC_TILE_ROW_PIXEL_HEIGHT;
+        int maxViewportY = ((Map::MC_MAP_SIZE_400 + 1 - this->viewportState.viewportWidth) - mapBorder)
+            * Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         int minViewportX = (mapBorder / 2 + 1) * Enums::VC_TILE_PIXEL_WIDTH;
-        int minViewportY = mapBorder * Enums::VC_TILE_ROW_PIXEL_HEIGHT + 16;
+        int minViewportY = mapBorder * Enums::VC_TILE_ROW_PIXEL_HEIGHT + Enums::VC_TILE_PIXEL_HEIGHT;
         if (this->viewportState.isZoomedOutUnk != 0) {
             minViewportX = (mapBorder / 2 - 4) * Enums::VC_TILE_PIXEL_WIDTH;
         }
@@ -57,8 +58,8 @@ namespace Rendering {
                     this->viewportState.viewportY = maxViewportY - Enums::VC_TILE_ROW_PIXEL_HEIGHT;
                 }
             } else if (DAT_TileMapState::instance.mapOrientation == Map::MC_MAP_EAST) {
-                if (this->viewportState.viewportX < minViewportX + 16) {
-                    this->viewportState.viewportX = minViewportX + 16;
+                if (this->viewportState.viewportX < minViewportX + Enums::VC_TILE_PIXEL_WIDTH / 2) {
+                    this->viewportState.viewportX = minViewportX + Enums::VC_TILE_PIXEL_WIDTH / 2;
                 }
                 if (this->viewportState.viewportY > maxViewportY - Enums::VC_TILE_ROW_PIXEL_HEIGHT) {
                     this->viewportState.viewportY = maxViewportY - Enums::VC_TILE_ROW_PIXEL_HEIGHT;
@@ -82,16 +83,20 @@ namespace Rendering {
 
         if (this->viewportState.isZoomedOutUnk == 0) {
             this->viewportState.currentCameraOffsetX
-                = (DAT_ViewportRenderState::instance.viewportState.viewportX & 0x1f) + 150;
+                = (DAT_ViewportRenderState::instance.viewportState.viewportX & (Enums::VC_TILE_PIXEL_WIDTH - 1))
+                + Enums::VC_MAP_SURFACE_MARGIN_X;
             this->viewportState.currentCameraOffsetY
-                = (DAT_ViewportRenderState::instance.viewportState.viewportY & 0xf) + 8;
+                = (DAT_ViewportRenderState::instance.viewportState.viewportY & (Enums::VC_TILE_PIXEL_HEIGHT - 1))
+                + Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         } else {
-            this->viewportState.currentCameraOffsetX
-                = (DAT_ViewportRenderState::instance.viewportState.viewportX >> 1 & 0xf) + 150;
-            this->viewportState.currentCameraOffsetY
-                = (DAT_ViewportRenderState::instance.viewportState.viewportY >> 1 & 7) + 8;
+            this->viewportState.currentCameraOffsetX = (DAT_ViewportRenderState::instance.viewportState.viewportX >> 1
+                                                           & (Enums::VC_TILE_PIXEL_WIDTH / 2 - 1))
+                + Enums::VC_MAP_SURFACE_MARGIN_X;
+            this->viewportState.currentCameraOffsetY = (DAT_ViewportRenderState::instance.viewportState.viewportY >> 1
+                                                           & (Enums::VC_TILE_PIXEL_HEIGHT / 2 - 1))
+                + Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         }
-        this->viewportState.currentCameraOffsetY += 8;
+        this->viewportState.currentCameraOffsetY += Enums::VC_TILE_ROW_PIXEL_HEIGHT;
     }
 
 }

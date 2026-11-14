@@ -5,6 +5,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Map/Buildings/Building.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTargetMarker.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
@@ -36,8 +37,6 @@ namespace Rendering {
     // FUNCTION: STRONGHOLDCRUSADER 0x004E2AD0
     void ViewportRenderState::renderGmOverlayBuilding2(int buildingID, int screenX, int screenY, int tile)
     {
-        BuildingTypeShort buildingType;
-
         int heightOffset = 0;
         if (DAT_BuildingDefinedData::instance
                 .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
@@ -104,8 +103,8 @@ namespace Rendering {
                         DAT_TileMapState::instance.cursorOverlayAnimationFrame + 296, 0);
                 }
             }
-            short const bannerState = DAT_BuildingsState::instance.buildings[buildingID].field_0xc2;
-            if (bannerState == 1) {
+            short const targetMarker = DAT_BuildingsState::instance.buildings[buildingID].targetMarker;
+            if (targetMarker == OpenSHC::Map::Buildings::BTM_UNIT_TARGET) {
                 int const maskImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16;
                 int const overlayImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -115,8 +114,8 @@ namespace Rendering {
                             .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                         - heightOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].field_0xc2 = 0;
-            } else if (bannerState == 2) {
+                DAT_BuildingsState::instance.buildings[buildingID].targetMarker = OpenSHC::Map::Buildings::BTM_NONE;
+            } else if (targetMarker == OpenSHC::Map::Buildings::BTM_ENGINEER_TARGET) {
                 int const maskImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
                 int const overlayImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -126,7 +125,7 @@ namespace Rendering {
                             .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                         - heightOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].field_0xc2 = 0;
+                DAT_BuildingsState::instance.buildings[buildingID].targetMarker = OpenSHC::Map::Buildings::BTM_NONE;
             }
         }
         int frame;
@@ -536,11 +535,11 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
             return;
         }
-        if (DAT_TileMapState::instance.disableElevationRendering != 0) {
+        if (DAT_TileMapState::instance.disableElevationRendering != FALSE) {
             return;
         }
         DAT_CurrentlyRenderedSpriteID::instance = (GmID)DAT_BuildingsState::instance.buildings[buildingID].spriteID2;
-        buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+        BuildingTypeShort buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         DAT_RenderedUnitOwner::instance = 0;
         if (buildingType == OpenSHC::Map::Buildings::BT_KILLINGPIT
             && DAT_BuildingsState::instance.buildings[buildingID].owner

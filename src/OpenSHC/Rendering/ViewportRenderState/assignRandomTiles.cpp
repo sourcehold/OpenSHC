@@ -3,6 +3,7 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 
@@ -19,7 +20,7 @@ namespace Rendering {
                 int randomTile = (MACRO_CALL(OpenSHC::OS_Func::_rand)() << 15 | MACRO_CALL(OpenSHC::OS_Func::_rand)())
                     % Map::MC_MAP_TILES_COUNT;
                 if ((DAT_TileMapState::instance.LogicLayer[randomTile] & Map::LogicHelpers::L_SEA) != 0
-                    && (DAT_TileMapState::instance.MiscDisplayLayer[randomTile] & 0x3c0) == 0
+                    && (DAT_TileMapState::instance.MiscDisplayLayer[randomTile] & Map::LogicHelpers::MD_SEA_EDGES) == 0
                     && (DAT_TileMapState::instance.Logic2Layer[randomTile] & Map::LogicHelpers::L2_PLATEAU_HIGH) == 0) {
                     this->landscapeAnimationRandomTileArray[i] = randomTile;
                     this->landscapeSeaWhiteCapsAnimationFrames[i] = 0;
