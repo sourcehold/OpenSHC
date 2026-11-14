@@ -140,3 +140,4 @@ src/OpenSHC/Map/Units/UpdateMerchant.cpp
 src/OpenSHC/UI/MenuItems/InGameMenu/MenuItemRenderFunction_InGameMenu_MainButtons.cpp
 src/OpenSHC/UI/MenuItems/Roundtable/MenuItemActionHandler_Roundtable_Main.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/isAIPlayer.cpp
+src/OpenSHC/Map/Units/UpdateGhost.cpp
