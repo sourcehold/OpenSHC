@@ -42151,7 +42151,7 @@ SHC_3BB0A8C1_0x00507E00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00507F80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508030 | 90.2% | fix campfire id; GL ecx
+SHC_3BB0A8C1_0x00508030 | 97.0% | stack slot allocation
 
 SHC_3BB0A8C1_0x00508250 | 100.0% | Reimplemented
 
