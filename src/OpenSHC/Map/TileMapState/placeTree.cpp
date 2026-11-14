@@ -39,7 +39,8 @@ namespace Map {
             return;
         }
 
-        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int const baseTile = tile;
         int const stage = MACRO_CALL_MEMBER(
             OpenSHC::Map::LandscapeState_Func::getValueFrom0UpTo3ForTreeTypeAndTreeStage, DAT_LandscapeState::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
@@ -54,7 +55,6 @@ namespace Map {
             return;
         }
 
-        int tile = baseTile;
         int brushY = y;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
