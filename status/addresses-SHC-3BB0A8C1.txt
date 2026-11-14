@@ -41541,7 +41541,7 @@ SHC_3BB0A8C1_0x00501760 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x005017A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005017C0 | 63.4% | Style pass, asm differs
+SHC_3BB0A8C1_0x005017C0 | 87.7% | entry scheduling, arg regs
 
 SHC_3BB0A8C1_0x00501A20 | 100.0% | Reimplemented
 
