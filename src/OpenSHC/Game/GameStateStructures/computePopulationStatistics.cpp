@@ -1,0 +1,125 @@
+#include "../GameStateStructures.func.hpp"
+
+#include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_UIDragDropDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+#include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
+
+namespace OpenSHC {
+namespace Game {
+
+    using WindowsHelper::Enums::BOOLEnum;
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x0045AF30
+    void GameStateStructures::computePopulationStatistics()
+    {
+        for (int playerID = 1; playerID < 9; ++playerID) {
+            this->playerDataArray[playerID].currentPopulation
+                = ((this->playerDataArray[playerID].countEntities
+                       - this->playerDataArray[playerID].nonInteractiveCitizenCountUnk)
+                      - this->playerDataArray[playerID].field639_0x2174)
+                - this->playerDataArray[playerID].armySize;
+            if (this->playerDataArray[playerID].lordID != 0
+                && DAT_UnitsState::instance.units[this->playerDataArray[playerID].lordID].uid
+                    == this->playerDataArray[playerID].lordUID) {
+                this->playerDataArray[playerID].currentPopulation
+                    = this->playerDataArray[playerID].currentPopulation - 1;
+            }
+            if (this->playerDataArray[playerID].ladyIDUnk != 0
+                && DAT_UnitsState::instance.units[this->playerDataArray[playerID].ladyIDUnk].uid
+                    == this->playerDataArray[playerID].someUnitIDSelfRef) {
+                this->playerDataArray[playerID].currentPopulation
+                    = this->playerDataArray[playerID].currentPopulation - 1;
+            }
+            if (this->playerDataArray[playerID].jesterIDUnk != 0
+                && DAT_UnitsState::instance.units[this->playerDataArray[playerID].jesterIDUnk].uid
+                    == this->playerDataArray[playerID].someUnitIDSelfRef_2) {
+                this->playerDataArray[playerID].currentPopulation
+                    = this->playerDataArray[playerID].currentPopulation - 1;
+            }
+            this->playerDataArray[playerID].populationRelatedCrowdingCountUnk
+                = this->playerDataArray[playerID].currentPopulation_2
+                - this->playerDataArray[playerID].availablePeasantsOrHousedPeasants;
+            if (this->playerDataArray[playerID].blessedPeopleCountUnk <= 0) {
+                this->playerDataArray[playerID].blessedPeoplePercentage = 0;
+            } else {
+                int blessedPercentage;
+                if (this->playerDataArray[playerID].unblessedPeopleCountUnk
+                        + this->playerDataArray[playerID].blessedPeopleCountUnk
+                    == 0) {
+                    blessedPercentage = 100;
+                } else {
+                    blessedPercentage = (this->playerDataArray[playerID].blessedPeopleCountUnk * 100)
+                        / (this->playerDataArray[playerID].unblessedPeopleCountUnk
+                            + this->playerDataArray[playerID].blessedPeopleCountUnk);
+                }
+                this->playerDataArray[playerID].blessedPeoplePercentage = blessedPercentage;
+            }
+            if (this->mapAndTime.startOfDay != FALSE) {
+                this->playerDataArray[playerID]
+                    .populationGrowth[this->playerDataArray[playerID].populationGrowthStatisticCounter]
+                    = this->playerDataArray[playerID].availablePeasantsOrHousedPeasants;
+                this->playerDataArray[playerID].populationGrowthStatisticCounter
+                    = this->playerDataArray[playerID].populationGrowthStatisticCounter + 1;
+                if (this->playerDataArray[playerID].populationGrowthStatisticCounter >= 8) {
+                    this->playerDataArray[playerID].populationGrowthStatisticCounter = 0;
+                }
+                int growthSum = 0;
+                for (int sample = 0; sample < 8; ++sample) {
+                    growthSum += this->playerDataArray[playerID].populationGrowth[sample];
+                }
+                this->playerDataArray[playerID].averagePopulationGrowthUnk = growthSum / 8;
+            }
+            if (this->mapAndTime.monthChanged != 0) {
+                if (this->mapAndTime.populationIndex < 300) {
+                    this->mapAndTime.playerPopulationStatistics[playerID][this->mapAndTime.populationIndex]
+                        = (short)this->playerDataArray[playerID].currentPopulation;
+                } else {
+                    // Running average move values
+                    for (int sample = 0; sample < 299; ++sample) {
+                        this->mapAndTime.playerPopulationStatistics[playerID][sample]
+                            = this->mapAndTime.playerPopulationStatistics[playerID][sample + 1];
+                    }
+                    this->mapAndTime.playerPopulationStatistics[playerID][299]
+                        = (short)this->playerDataArray[playerID].currentPopulation;
+                }
+            }
+            if (this->playerDataArray[playerID].currentPopulation
+                > DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[playerID]) {
+                DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[playerID]
+                    = (short)this->playerDataArray[playerID].currentPopulation;
+            }
+            if (DAT_GameCore::instance.gameMode_2 != GM_EDITOR) {
+                if (this->playerDataArray[playerID].tacticalPowersBarLevel < 7000) {
+                    this->playerDataArray[playerID].tacticalPowersBarLevel
+                        = this->playerDataArray[playerID].tacticalPowersBarLevel + 1;
+                }
+                if (this->playerDataArray[playerID].goldDonation > 0) {
+                    int goldIncrement = this->playerDataArray[playerID].goldDonation;
+                    if (goldIncrement > 10) {
+                        goldIncrement = 10;
+                    }
+                    this->playerDataArray[playerID].currentResources[15]
+                        = this->playerDataArray[playerID].currentResources[15] + goldIncrement;
+                    this->playerDataArray[playerID].goldDonation
+                        = this->playerDataArray[playerID].goldDonation - goldIncrement;
+                    if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
+                        DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 1;
+                    }
+                }
+            }
+        }
+        if (this->mapAndTime.monthChanged != 0) {
+            ++this->mapAndTime.populationIndex;
+        }
+        MACRO_CALL_MEMBER(GameStateStructures_Func::updateFoodTypesInStockForAllPlayers, this)();
+    }
+
+}
+}
