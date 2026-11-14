@@ -66,6 +66,7 @@ namespace Map {
             }
 
             this->HeightLayer[brushTile] += 1;
+            byte const& height = this->HeightLayer[brushTile];
             if (mapper == 0) {
                 // mapper min
                 this->HeightLayer[brushTile] = 8;
@@ -80,9 +81,9 @@ namespace Map {
                 // scale towards the brush average, in eighths of the ratio to it
                 int ratio = 100;
                 if (average != 0) {
-                    ratio = *(byte volatile*)&this->HeightLayer[brushTile] * 100 / average;
+                    ratio = height * 100 / average;
                 }
-                ratio = (ratio / 8 + 100) * *(byte volatile*)&this->HeightLayer[brushTile] / 100;
+                ratio = (ratio / 8 + 100) * height / 100;
                 if (ratio > 156) {
                     ratio = 156;
                 }
@@ -103,7 +104,7 @@ namespace Map {
             if (this->HeightLayer[brushTile] > 156) {
                 this->HeightLayer[brushTile] = 156;
             }
-            this->DefaultHeightLayer[brushTile] = *(byte volatile*)&this->HeightLayer[brushTile];
+            this->DefaultHeightLayer[brushTile] = height;
             if ((this->LogicLayer[brushTile] & L_RIVER) != 0) {
                 this->HeightLayer[brushTile] -= 8;
             }
