@@ -120,6 +120,8 @@ namespace Map {
                         upY += 1;
                         downY -= 1;
                     }
+                } else if (x == x2 && y == y2) {
+                    overshoot -= 1;
                 } else {
                     overshoot -= 1;
                 }
