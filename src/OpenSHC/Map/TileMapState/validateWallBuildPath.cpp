@@ -40,8 +40,8 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x005029D0
     void TileMapState::validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, short command)
     {
-        int budget = 0;
         int overshoot = 2;
+        int budget = 0;
         int enemyRange;
         int searchRange;
         if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
@@ -102,11 +102,11 @@ namespace Map {
             return;
         }
 
+        this->field_0x554920 = 1;
         int upY = y1 - y2;
         int leftX = x1 - x2;
         int downY = y2 - y1;
         int rightX = x2 - x1;
-        this->field_0x554920 = 1;
         do {
             int const tile = *translation + x;
             uint const logic = this->LogicLayer[tile];

@@ -41579,7 +41579,7 @@ SHC_3BB0A8C1_0x00502680 | 75.2% | code motion of mapper arms
 
 SHC_3BB0A8C1_0x00502950 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005029D0 | 78.0% | Style pass, asm differs
+SHC_3BB0A8C1_0x005029D0 | 78.5% | register allocation
 
 SHC_3BB0A8C1_0x00502F14 | 0.0% | Pending
 
