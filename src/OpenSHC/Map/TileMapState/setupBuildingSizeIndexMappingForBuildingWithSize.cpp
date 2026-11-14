@@ -12,12 +12,12 @@ namespace Map {
     void TileMapState::setupBuildingSizeIndexMappingForBuildingWithSize(int buildingSize)
     {
         int const tileCount = buildingSize * buildingSize;
+        int const maxCoord = buildingSize - 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             4056, 0, DAT_BuildingSizeIndexMapping::instance + buildingSize);
         if (buildingSize <= 1) {
             return;
         }
-        int const maxCoord = buildingSize - 1;
 
         // pass 0: the unrotated footprint, in reading order
         for (int y = 0; y < buildingSize; y++) {
@@ -43,10 +43,10 @@ namespace Map {
                     y++;
                 }
             }
-            if (diagonal < maxCoord) {
+            if (diagonal < buildingSize - 1) {
                 run++;
-                y = 0;
                 x = diagonal + 1;
+                y = 0;
             } else {
                 run--;
                 x = maxCoord;
@@ -73,19 +73,19 @@ namespace Map {
                 y = diagonal + 1;
             } else {
                 run--;
-                x = maxCoord + buildingSize - 2 - diagonal;
+                x = maxCoord + (buildingSize - 2) - diagonal;
                 y = maxCoord;
             }
         }
 
         x = maxCoord;
         y = maxCoord;
+        int secondIndex = last;
         run = 1;
-        index = last;
         for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][4] = index;
-                index--;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][4] = secondIndex;
+                secondIndex--;
                 if (step < run - 1) {
                     x++;
                     y--;
@@ -98,18 +98,18 @@ namespace Map {
             } else {
                 run--;
                 x = 0;
-                y = maxCoord + (buildingSize - 2 - diagonal);
+                y = (buildingSize - 2 - diagonal) + maxCoord;
             }
         }
 
         x = 0;
         y = maxCoord;
+        secondIndex = last;
         run = 1;
-        index = last;
         for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][5] = index;
-                index--;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][5] = secondIndex;
+                secondIndex--;
                 if (step < run - 1) {
                     x++;
                     y++;
