@@ -17,7 +17,8 @@ namespace Map {
         using OpenSHC::Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052EC10
-        int UnitsState::nonEuroRecruit(UnitType unitType, undefined4 recruitmentBuilding, int playerID, int param_4)
+        int UnitsState::nonEuroRecruit(
+            UnitType unitType, undefined4 recruitmentBuilding, int playerID, int onlyCheckAvailability)
         {
             this->euroUnitAcquisitionFailReason = 0;
             int _unitCost;
@@ -77,19 +78,19 @@ namespace Map {
                 if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                     continue;
                 }
-                if (param_4 != 0) {
+                if (onlyCheckAvailability != 0) {
                     return 1;
                 }
-                this->units[unitID].unitTypeToChangeInto = (UnitTypeShort)unitType;
+                this->units[unitID].unitTypeToChangeInto = unitType;
                 this->units[unitID].state_2 = 0;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
                 this->units[unitID].disappearFadeAlphaCountdown = 0;
                 this->units[unitID].engineerManningSiegeStateRef_checkType = 1;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 this->units[unitID].isDisappearingUnk = 1;
-                this->units[unitID].workplaceBuildingID_1 = (short)recruitmentBuilding;
+                this->units[unitID].workplaceBuildingID_1 = recruitmentBuilding;
                 this->units[unitID].resourceToDeposit = 0;
-                DAT_GameState::instance.playerDataArray[playerID].currentResources[0xf] -= _unitCost;
+                DAT_GameState::instance.playerDataArray[playerID].currentResources[15] -= _unitCost;
                 DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[playerID] += 1;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::aiAssignNewUnitToTribe, DAT_TribesState::ptr)(
                     playerID, unitType, unitID);
