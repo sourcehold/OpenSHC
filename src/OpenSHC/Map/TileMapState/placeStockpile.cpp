@@ -69,7 +69,8 @@ namespace Map {
             this->HeightLayer[tile] = (byte)(averageHeight + 10);
             this->AlphaGFXLayer[tile] = (ushort)buildingID;
             this->BuildingWasLayer[tile] = (uchar)buildingType;
-            this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (byte)(playerID - 1);
+            this->WallOwnerLayer[tile] &= 0xf8;
+            this->WallOwnerLayer[tile] |= (byte)(playerID - 1);
             this->ChangedLayer[tile] = 2;
         }
 
