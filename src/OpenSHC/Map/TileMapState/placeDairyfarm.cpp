@@ -37,22 +37,21 @@ namespace Map {
 
         // 27 tiles from one of four layouts; tiles 4.. are the field and carry an initial crop stage
         for (int i = 0; i < 27; i++) {
-            DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]
-                = DAT_ViewportRenderState::instance
-                      .translationMatrix[DAT_TerrainDefinedData::instance
-                                             .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID]
-                                                     .dairyFarmVariationMod4][i]
-                                             .offset.y
-                          + y]
-                      .addXgetTile
+            int& tileRef = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
+            tileRef = DAT_ViewportRenderState::instance
+                          .translationMatrix[DAT_TerrainDefinedData::instance
+                                                 .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID]
+                                                         .dairyFarmVariationMod4][i]
+                                                 .offset.y
+                              + y]
+                          .addXgetTile
                 + DAT_TerrainDefinedData::instance
                       .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4][i]
                       .offset.x
                 + x;
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(
-                DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tileRef);
             if (i >= 4) {
-                this->DamageLayer[DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i]]
+                this->DamageLayer[tileRef]
                     = (byte)DAT_TerrainDefinedData::instance
                           .field_0xf5c[DAT_GameState::instance.playerDataArray[playerID].dairyFarmVariationMod4][i]
                           .property;
