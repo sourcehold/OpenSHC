@@ -45,17 +45,19 @@ namespace Map {
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] |= L_CRENEL;
             this->HeightLayer[tile] += 98;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            uint const xParity = *(uint volatile*)&x & 1;
+            if (xParity == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if (xParity == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
             this->LogicLayer[tile] |= L_CRENEL;
             this->HeightLayer[tile] += 68;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            uint const xParity = *(uint volatile*)&x & 1;
+            if (xParity == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if (xParity == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {
