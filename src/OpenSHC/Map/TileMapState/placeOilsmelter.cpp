@@ -30,7 +30,7 @@ namespace Map {
         ushort tileBuildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             playerID, x, y, averageHeight, (BuildingType)(short)buildingType, buildingSize, playerID, 15);
-        int const buildingID = (short)tileBuildingID;
+        int buildingID = (short)tileBuildingID;
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
         while (true) {
@@ -48,6 +48,7 @@ namespace Map {
                 break;
             }
         }
+        int const smelterID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
@@ -57,14 +58,14 @@ namespace Map {
         tileBuildingID = MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             playerID, x, y, averageHeight, OpenSHC::Map::Buildings::BT_CAMPFIRE, 4, playerID, 15);
-        int const campfireID = (short)tileBuildingID;
-        DAT_BuildingsState::instance.buildings[campfireID].uidWhenPlaced = uniqueID;
-        DAT_BuildingsState::instance.buildings[campfireID].quarryStockpileID = (short)this->placedBuildingID;
-        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = tileBuildingID;
+        buildingID = (short)tileBuildingID;
+        DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
+        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = (short)this->placedBuildingID;
+        DAT_BuildingsState::instance.buildings[smelterID].quarryStockpileID = tileBuildingID;
         int campIndex = 0;
         while (true) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
-                campIndex, DAT_BuildingsState::instance.buildings[campfireID].widthOrHeight);
+                campIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
@@ -78,9 +79,9 @@ namespace Map {
             }
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setTileRefsForOilSmelter,
-            DAT_BuildingsState::ptr)(campfireID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(campfireID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(campfireID);
+            DAT_BuildingsState::ptr)(buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(8, x, y);
     }
