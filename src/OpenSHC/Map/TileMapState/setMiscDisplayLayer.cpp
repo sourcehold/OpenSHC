@@ -12,17 +12,17 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB0C0
     void TileMapState::setMiscDisplayLayer(int buildingID)
     {
-        int rotation = this->mapOrientation / 2;
+        int const rotation = this->mapOrientation / 2;
         if (DAT_BuildingsState::instance.buildings[buildingID].unknownStockpileOrSignpostRelated == 0) {
             return;
         }
 
-        int x = DAT_BuildingsState::instance.buildings[buildingID].x;
-        int y = DAT_BuildingsState::instance.buildings[buildingID].y;
-        int size = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
-        OpenSHC::Map::Buildings::BuildingTypeShort type
+        int const x = DAT_BuildingsState::instance.buildings[buildingID].x;
+        int const y = DAT_BuildingsState::instance.buildings[buildingID].y;
+        int const size = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
+        OpenSHC::Map::Buildings::BuildingTypeShort const type
             = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
-        int typeInt = type;
+        int const typeInt = type;
         int workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[rotation + size * 4];
         int displayTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[rotation + size * 4];
         int extraTile = -1;
@@ -47,13 +47,11 @@ namespace Map {
         case OpenSHC::Map::Buildings::BT_SHIELD:
         case OpenSHC::Map::Buildings::BT_UNKNOWN4:
             // these carry the worker on the display tile and the display on the worker tile
-            {
-                int const swap = displayTile;
-                displayTile = workerTile;
-                workerTile = swap;
-                break;
-            }
+            displayTile = workerTile;
+            workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset2[rotation + size * 4];
+            break;
         case OpenSHC::Map::Buildings::BT_DRAWBRIDGE:
+            workerTile = DAT_TerrainDefinedData::instance.orientationRelativeBuildingTileOffset1[rotation + size * 4];
             switch (rotation) {
             case 0:
                 displayTile = 19;
