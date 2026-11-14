@@ -29,8 +29,9 @@
 #define NEIGHBOUR_FLAGS_MASK_RIVER_OR_FORD 0x300000 // L_RIVER | L_FORD
 #define NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE 0x100 // L_WALL_OR_GATEHOUSE
 
-// the original was built without optimisation: frame pointer, locals off ebp, sub esp, 0x118
-#pragma optimize("", off)
+// the original was optimised, but a jump from the handwritten asm to a C label (warning C4740) switches global
+// optimisation off for the whole function: frame pointer, locals off ebp, sub esp, 0x118. The asm jump to
+// wallAlpha below is that flow.
 
 // the original indexes directionTranslationMatrix as one flat array of eight entries per row
 #define DIRECTION_OFFSET(Y, DIRECTION) (this->directionTranslationMatrix[0][(Y) * 8 + (DIRECTION)])
@@ -174,10 +175,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
     {
-        // The original keeps all of these at fixed frame offsets. MSVC lays out the locals of an unoptimised function
-        // by hash bucket of the name and then by declaration order, so every name here was picked to fall into one
-        // bucket (hence the odd suffixes) and they are declared from the lowest slot up. Renaming one moves the
-        // whole frame.
+        // The original keeps all of these at fixed frame offsets. MSVC lays out the locals of a function without global
+        // optimisation by hash bucket of the name and then by declaration order, so every name here was picked to fall
+        // into one bucket (hence the odd suffixes) and they are declared from the lowest slot up. Renaming one moves
+        // the whole frame.
         int heightStepA;
         int rightAlphaTile;
         int leftAlphaTileRef;
@@ -1054,7 +1055,7 @@ namespace Map {
                                             + bankBase_
                                             + (((this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0) >> 5) - 4 & 7) * 8 - 1;
                                         break;
-                                    case OpenSHC::Map::Enums::MO_WEST:
+                                    default:
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5]
                                             + bankBase_
                                             + (((this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0) >> 5) - 6 & 7) * 8 - 1;
@@ -1300,7 +1301,7 @@ namespace Map {
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
                                         = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x2000;
                                     if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x80) != 0) {
-                                        goto wallAlpha;
+                                        __asm jmp wallAlpha
                                     }
                                     continue;
                                 }
@@ -1723,5 +1724,3 @@ namespace Map {
 
 }
 }
-
-#pragma optimize("", on)
