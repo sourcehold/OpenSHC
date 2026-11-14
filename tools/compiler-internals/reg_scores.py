@@ -109,7 +109,7 @@ if not args or (not probe and not find and not advise and not rankdiff and not w
         and not whycost and not inv):
     sys.exit(__doc__)
 src = os.path.abspath(args[0])
-out = (common.ROOT / common.TMP / 'regscores').resolve()
+out = (common.ROOT / common.TMP / ('regscores' + ('_' + os.environ['QD_OUT'] if os.environ.get('QD_OUT') else ''))).resolve()
 out.mkdir(parents=True, exist_ok=True)
 
 
