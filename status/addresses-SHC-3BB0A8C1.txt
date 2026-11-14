@@ -41099,7 +41099,7 @@ SHC_3BB0A8C1_0x004FC9E0 | 97.0% | asm macro via this, resolvers
 
 SHC_3BB0A8C1_0x004FDB00 | 92.8% | asm macro via this, resolvers
 
-SHC_3BB0A8C1_0x004FF080 | 96.5% | Style pass, asm differs
+SHC_3BB0A8C1_0x004FF080 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 

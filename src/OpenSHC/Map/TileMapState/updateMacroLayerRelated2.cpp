@@ -100,7 +100,8 @@ namespace Map {
                                           + this->DAT_SomeY]
                                       .addXgetTile
                                 + DAT_TerrainDefinedData::instance.MacroLayerScanOffsets[i].x + corner;
-                            this->MacroLayer[scanTile] = random * 4096 + i * 64 + 16;
+                            this->MacroLayer[scanTile] = random * 4096;
+                            this->MacroLayer[scanTile] += i * 64 + 16;
                         }
                     }
                 }
