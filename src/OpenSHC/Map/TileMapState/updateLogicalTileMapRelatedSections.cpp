@@ -103,17 +103,16 @@ namespace Map {
                 if (this->disableElevationRendering == 0) {
                     // look up the light's diagonal for anything standing high enough to shadow us
                     int walkTile = tile;
-                    int* direction = this->directionTranslationMatrix[row] + this->screenSouthEastDirection;
-                    for (int depth = 0; depth < 128; depth += 16) {
-                        walkTile += *direction;
+                    for (int step = 0; step < 8; step++) {
+                        walkTile += this->directionTranslationMatrix[row + step * this->orientedRowStep]
+                                                                    [this->screenSouthEastDirection];
                         if ((this->LogicLayer[walkTile] & (L_BORDER | L_BORDER_EDGE)) != 0) {
                             break;
                         }
-                        if (screenY <= this->heightBasedScreenYOffset[this->HeightLayer[walkTile]] - depth - 16) {
+                        if (screenY <= this->heightBasedScreenYOffset[this->HeightLayer[walkTile]] - step * 16 - 16) {
                             this->ShowHiLayer[tile] = 0xff;
                             break;
                         }
-                        direction += this->orientedRowStep * 8;
                     }
                     if (height == 0) {
                         continue;
@@ -158,8 +157,8 @@ namespace Map {
                 }
                 this->MiscDisplayLayer[tile] &= 0xfffc;
 
-                BOOLEnum stepLeft = FALSE;
                 BOOLEnum stepRight = FALSE;
+                BOOLEnum stepLeft = FALSE;
                 int shadowTile = this->directionTranslationMatrix[row][this->screenSouthEastDirection] + tile;
                 int lowest = 250;
                 if (this->heightBasedScreenYOffset[this->HeightLayer[shadowTile]] < 250) {
