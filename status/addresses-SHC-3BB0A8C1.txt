@@ -16963,7 +16963,7 @@ SHC_3BB0A8C1_0x0044F850 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044FBF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00451E00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00451E00 | 92.5% | gynt's asm with the zoomed path's surface pointer fixed; stack slots of the asm-only column offset and the C locals
 
 SHC_3BB0A8C1_0x00452900 | 100.0% | Reimplemented
 
@@ -17003,7 +17003,7 @@ SHC_3BB0A8C1_0x00454EE0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00454EF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00454F00 | 0.0% | Pending
+SHC_3BB0A8C1_0x00454F00 | 96.5% | the record index as a local, the pointers in the original's order; the test's index folded into its address
 
 SHC_3BB0A8C1_0x00455050 | 100.0% | Reimplemented
 
@@ -17029,7 +17029,7 @@ SHC_3BB0A8C1_0x004558E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00455930 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004559B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004559B0 | 93.1% | one sharing condition for the original's shared blocks; the header pointer's base and one re-test
 
 SHC_3BB0A8C1_0x00455B70 | 0.0% | Pending
 
