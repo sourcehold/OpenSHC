@@ -31,7 +31,8 @@ namespace Map {
         brush = 200;
         int const baseTile = tile;
         uint const baseY = y;
-        for (int index = 0; index < brushSize; index++) {
+        int index;
+        for (index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
             if ((this->LogicLayer[tile] & (L_BORDER | L_BORDER_EDGE)) == 0) {
@@ -48,7 +49,7 @@ namespace Map {
         int const average = (int)(brush + highest) / 2;
         tile = baseTile;
         y = baseY;
-        for (int index = 0; index < brushSize; index++) {
+        for (index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
             int const brushTile = *(int volatile*)&tile;
