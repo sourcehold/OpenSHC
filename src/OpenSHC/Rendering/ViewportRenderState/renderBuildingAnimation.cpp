@@ -1,0 +1,68 @@
+#include "../ViewportRenderState.func.hpp"
+
+#include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
+
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_CurrentlyRenderedSpriteID.hpp"
+#include "OpenSHC/Globals/DAT_RenderedUnitOwner.hpp"
+#include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+
+namespace OpenSHC {
+namespace Rendering {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004E3870
+    void ViewportRenderState::renderBuildingAnimation(
+        int buildingID, int screenX, int screenY, int tile, BOOLEnum clipToBuilding)
+    {
+        if (DAT_BuildingsState::instance.buildings[buildingID].renderAnimation == 0) {
+            return;
+        }
+        if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
+            return;
+        }
+        if (DAT_TileMapState::instance.disableElevationRendering != FALSE) {
+            return;
+        }
+        if (DAT_BuildingsState::instance.buildings[buildingID].drawBridgeState1 != 0) {
+            return;
+        }
+
+        if (clipToBuilding != FALSE) {
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::temporarySaveMapSurfaceHeightRangeUnk,
+                DAT_TextureRenderCoreObject::ptr)
+            ();
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
+                DAT_TextureRenderCoreObject::ptr)
+            ((screenY - 39 < 0) ? 0 : screenY - 39, Enums::VC_MAP_SURFACE_HEIGHT);
+        }
+
+        DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
+        DAT_CurrentlyRenderedSpriteID::instance = DAT_BuildingsState::instance.buildings[buildingID].spriteID2;
+        if (DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength != 0) {
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithBlending, DAT_TextureRenderCoreObject::ptr)
+            ((OpenSHC::IO::Graphics::GmID)DAT_CurrentlyRenderedSpriteID::instance,
+                DAT_BuildingsState::instance.buildings[buildingID].animationFrame,
+                DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
+                DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY,
+                DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength);
+        } else {
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)
+            ((OpenSHC::DE::SHCDE::eGM)DAT_CurrentlyRenderedSpriteID::instance,
+                DAT_BuildingsState::instance.buildings[buildingID].animationFrame,
+                DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
+                DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY);
+        }
+        if (clipToBuilding != FALSE) {
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::TextureRenderCore_Func::restoreMapSurfaceHeightRangeFromTemporaryUnk,
+                DAT_TextureRenderCoreObject::ptr)
+            ();
+        }
+    }
+
+}
+}

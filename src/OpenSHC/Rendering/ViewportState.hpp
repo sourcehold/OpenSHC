@@ -18,7 +18,7 @@ namespace Rendering {
         undefined4 field_0x0; // 0x00000000 length: 4
         int mouseTileX; // 0x00000004 length: 4
         int mouseTileY; // 0x00000008 length: 4
-        int mouseTile; // 0x0000000C length: 4
+        int mouseFlatTile; // 0x0000000C length: 4
         int previousMouseTile; // 0x00000010 length: 4
         undefined4 field_0x14; // 0x00000014 length: 4
         undefined4 field_0x18; // 0x00000018 length: 4
