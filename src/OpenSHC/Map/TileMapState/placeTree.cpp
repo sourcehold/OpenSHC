@@ -39,15 +39,15 @@ namespace Map {
             return;
         }
 
-        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int const baseTile = tile;
         int const stage = MACRO_CALL_MEMBER(
             OpenSHC::Map::LandscapeState_Func::getValueFrom0UpTo3ForTreeTypeAndTreeStage, DAT_LandscapeState::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
                 DAT_LandscapeState::ptr)((short)treeType),
             3);
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[stage];
-        if ((this->LogicLayer[baseTile]
+        if ((this->LogicLayer[tile]
                 & (L_SEA | L_PLAIN1_AND_FARM | L_BORDER | L_BORDER_EDGE | L_ROCKY | L_WALL_OR_GATEHOUSE | L_BUILDING
                     | L_TREE_VARIATION | L_BOULDERS | L_PEBBLES | L_IRON | L_RIVER | L_FORD | L_KEEP_NON_MANOR_HOUSE
                     | L_MARSH | L_MOAT))
