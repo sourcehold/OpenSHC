@@ -37,7 +37,6 @@ namespace Map {
             int index = 0;
             while (true) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 2);
-                index++;
                 int tile
                     = DAT_ViewportRenderState::instance
                           .translationMatrix[DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].y
@@ -51,6 +50,7 @@ namespace Map {
                 this->BuildingLayer[tile] = (ushort)buildingID;
                 this->BuildingWasLayer[tile] = (uchar)buildingType;
                 this->ChangedLayer[tile] = 2;
+                index++;
                 if (index >= this->constructionTileCount) {
                     break;
                 }
