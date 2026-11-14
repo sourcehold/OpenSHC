@@ -16,6 +16,7 @@ namespace Map {
         MC_MAP_EAST = 2, // 0x00000002
         MC_MAP_SOUTH = 4, // 0x00000004
         MC_MAP_WEST = 6, // 0x00000006
+        MC_MAP_SIZE_100 = 100, // 0x00000064
         MC_MAP_SIZE_160 = 160, // 0x000000A0
         MC_MAP_SIZE_200 = 200, // 0x000000C8
         MC_MAP_SIZE_300 = 300, // 0x0000012C
