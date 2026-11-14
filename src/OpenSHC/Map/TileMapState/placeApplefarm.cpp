@@ -25,8 +25,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_NONE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00515740
-    void TileMapState::placeApplefarm(int playerID, uint x, uint y, BuildingType buildingType, undefined4 buildingSize,
-        int variation, int averageHeight)
+    void TileMapState::placeApplefarm(int playerID, uint x, uint y, BuildingTypeShort buildingType,
+        undefined4 buildingSize, int variation, int averageHeight)
     {
         int index = 0;
         int buildingID = MACRO_CALL_MEMBER(
