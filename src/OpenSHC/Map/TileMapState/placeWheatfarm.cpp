@@ -83,12 +83,11 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
         // not enough idle peasants for the workers: tell the local player
+        Game::Player::PlayerData const& player = DAT_GameState::instance.playerDataArray[playerID];
         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
             && DAT_BuildingsState::instance.buildings[buildingID].buildingTypeBasedEmployeeCount
-                > DAT_GameState::instance.playerDataArray[playerID].availablePeasantsAtFire
-            && (DAT_GameState::instance.playerDataArray[playerID].populationCap
-                    <= DAT_GameState::instance.playerDataArray[playerID].currentPopulation
-                || DAT_GameState::instance.playerDataArray[playerID].popularity < 5000)) {
+                > player.availablePeasantsAtFire
+            && (player.populationCap <= player.currentPopulation || player.popularity < 5000)) {
             MACRO_CALL_MEMBER(OpenSHC::UI::BottomLeftTextDisplayState_Func::setBottomLeftTextDisplayText,
                 DAT_BottomLeftTextDisplayState::ptr)(1, OpenSHC::DE::SHCDE::TEXT_PANEL_FEEDBACK, 1, 0, 100, 6000);
         }
