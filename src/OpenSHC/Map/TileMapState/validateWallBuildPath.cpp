@@ -62,11 +62,8 @@ namespace Map {
             this->buildingPlacementFail = TRUE;
             return;
         }
-        if (x2 > 399) {
-            this->buildingPlacementFail = TRUE;
-            return;
-        }
-        if (y2 > 399) {
+        bool const endOutsideMap = x2 > 399 || y2 > 399;
+        if (endOutsideMap) {
             this->buildingPlacementFail = TRUE;
             return;
         }
@@ -75,10 +72,7 @@ namespace Map {
             return;
         }
 
-        uint x = x1;
-        uint y = y1;
-        int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        this->DAT_SomeTile = *translation + x1;
+        this->DAT_SomeTile = DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1;
         this->DAT_SomeY = y1;
         if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
             // a stair needs an enclosed wall to lean against, and enough height on it
@@ -107,8 +101,10 @@ namespace Map {
         int leftX = x1 - x2;
         int downY = y2 - y1;
         int rightX = x2 - x1;
+        uint x = x1;
+        uint y = y1;
         do {
-            int const tile = *translation + x;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             uint const logic = this->LogicLayer[tile];
             if ((logic & (L_PLAIN1_AND_FARM | L_BORDER)) != 0) {
                 return;
@@ -237,14 +233,12 @@ namespace Map {
                     }
                 } else if (stepY > 0) {
                     if ((int)y >= (int)y2) {
-                        translation -= 3;
-                        upY -= 1;
                         y -= 1;
+                        upY -= 1;
                         downY += 1;
                     } else {
-                        translation += 3;
-                        upY += 1;
                         y += 1;
+                        upY += 1;
                         downY -= 1;
                     }
                 } else {
@@ -264,14 +258,12 @@ namespace Map {
                 }
                 if (stepY != 0) {
                     if ((int)y >= (int)y2) {
-                        translation -= 3;
-                        upY -= 1;
                         y -= 1;
+                        upY -= 1;
                         downY += 1;
                     } else {
-                        translation += 3;
-                        upY += 1;
                         y += 1;
+                        upY += 1;
                         downY -= 1;
                     }
                 }
