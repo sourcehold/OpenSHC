@@ -89,10 +89,8 @@ namespace Map {
                     if (steps <= 0) {
                         this->DAT_WallTileCountCurrentDrag -= 1;
                     } else {
-                        if (steps > 10) {
-                            steps = 10;
-                        }
-                        this->ConstructionGFXLayer[tile] = steps + GMFirstPictureIndex::instance[6] + 8;
+                        this->ConstructionGFXLayer[tile]
+                            = (steps > 10 ? 10 : steps) + GMFirstPictureIndex::instance[6] + 8;
                     }
                 }
             }
