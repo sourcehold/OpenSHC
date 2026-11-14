@@ -31,10 +31,10 @@ namespace Map {
         int const last = tileCount - 1;
         int x = 0;
         int y = 0;
-        int run = 1;
+        int run;
         int index = last;
         int diagonal;
-        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][2] = index;
                 index--;
@@ -56,9 +56,8 @@ namespace Map {
 
         x = maxCoord;
         y = 0;
-        run = 1;
         index = last;
-        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][3] = index;
                 index--;
@@ -81,8 +80,7 @@ namespace Map {
         x = maxCoord;
         y = maxCoord;
         int secondIndex = last;
-        run = 1;
-        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][4] = secondIndex;
                 secondIndex--;
@@ -105,8 +103,7 @@ namespace Map {
         x = 0;
         y = maxCoord;
         secondIndex = last;
-        run = 1;
-        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][5] = secondIndex;
                 secondIndex--;
