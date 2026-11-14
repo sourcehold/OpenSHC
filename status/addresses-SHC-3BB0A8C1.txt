@@ -6819,7 +6819,7 @@ SHC_3BB0A8C1_0x004276F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00427740 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00427810 | 0.0% | Pending
+SHC_3BB0A8C1_0x00427810 | 58.8% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x00427CB2 | 0.0% | Pending
 
@@ -6889,7 +6889,7 @@ SHC_3BB0A8C1_0x00428A50 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00428A60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00428AC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00428AC0 | 42.5% | gynt's draft, mechanical pass; register allocation and structure
 
 SHC_3BB0A8C1_0x00429630 | 100.0% | Reimplemented
 
@@ -7481,7 +7481,7 @@ SHC_3BB0A8C1_0x0042D138 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042D13C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0042D140 | 0.0% | Pending
+SHC_3BB0A8C1_0x0042D140 | 46.8% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x0042D554 | 0.0% | Pending
 
@@ -11145,7 +11145,7 @@ SHC_3BB0A8C1_0x00434300 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00434340 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00434350 | 0.0% | Pending
+SHC_3BB0A8C1_0x00434350 | 67.1% | compiles again, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004347F0 | 100.0% | Reimplemented
 
@@ -12943,7 +12943,7 @@ SHC_3BB0A8C1_0x004387D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00438B60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00438BE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00438BE0 | 40.9% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x0043907C | 0.0% | Pending
 
@@ -13661,7 +13661,7 @@ SHC_3BB0A8C1_0x004409B4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004409C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00440A50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00440A50 | 46.3% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x00440AE0 | 0.0% | Pending
 
@@ -14157,7 +14157,7 @@ SHC_3BB0A8C1_0x0044305C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00443060 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00443070 | 0.0% | Pending
+SHC_3BB0A8C1_0x00443070 | 53.2% | compiles again, mechanical pass; structure
 
 SHC_3BB0A8C1_0x00443778 | 0.0% | Pending
 
@@ -14351,7 +14351,7 @@ SHC_3BB0A8C1_0x00443A2D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00443A2E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00443A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00443A30 | 23.3% | gynt's draft, mechanical pass; register allocation and structure
 
 SHC_3BB0A8C1_0x004442A4 | 0.0% | Pending
 
@@ -18835,7 +18835,7 @@ SHC_3BB0A8C1_0x00461520 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00461550 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00461570 | 0.0% | Pending
+SHC_3BB0A8C1_0x00461570 | 40.9% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x00461750 | 0.0% | Pending
 
@@ -19763,7 +19763,7 @@ SHC_3BB0A8C1_0x00464300 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00464370 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004643F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004643F0 | 49.0% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x0046481C | 0.0% | Pending
 
@@ -19995,7 +19995,7 @@ SHC_3BB0A8C1_0x00466E20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00466F60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00467040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00467040 | 93.3% | register allocation in the shared tail (reset and command parameters) and in the sell branch
 
 SHC_3BB0A8C1_0x004672F0 | 0.0% | Pending
 
@@ -23837,7 +23837,7 @@ SHC_3BB0A8C1_0x00493E16 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00493E17 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00493E20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00493E20 | 61.5% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x0049404E | 0.0% | Pending
 
@@ -24113,7 +24113,7 @@ SHC_3BB0A8C1_0x004948C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00494920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00494950 | 0.0% | Pending
+SHC_3BB0A8C1_0x00494950 | 64.2% | strcat intrinsic, mechanical pass; structure
 
 SHC_3BB0A8C1_0x00494DB0 | 0.0% | Pending
 
@@ -25795,7 +25795,7 @@ SHC_3BB0A8C1_0x004AC650 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AC6E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AC7A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AC7A0 | 52.8% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004AD110 | 0.0% | Pending
 
@@ -25811,7 +25811,7 @@ SHC_3BB0A8C1_0x004AD780 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AD7C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AD920 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AD920 | 53.3% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004ADD90 | 100.0% | Reimplemented
 
@@ -25879,7 +25879,7 @@ SHC_3BB0A8C1_0x004AE950 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AEA10 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AEA50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AEA50 | 71.2% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004AEB20 | 0.0% | Pending
 
@@ -25979,7 +25979,7 @@ SHC_3BB0A8C1_0x004B1410 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B1471 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B14C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B14C0 | 60.5% | compiles again, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004B18D0 | 100.0% | Reimplemented
 
@@ -27641,7 +27641,7 @@ SHC_3BB0A8C1_0x004B9530 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B9610 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B9620 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B9620 | 64.0% | compiles again, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004B9AA8 | 0.0% | Pending
 
@@ -33185,7 +33185,7 @@ SHC_3BB0A8C1_0x004C0CE6 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C0CE7 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C0CF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C0CF0 | 53.8% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004C1070 | 100.0% | Reimplemented
 
@@ -35925,7 +35925,7 @@ SHC_3BB0A8C1_0x004D8228 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D822C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D8250 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D8250 | 42.4% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004D839E | 0.0% | Pending
 
@@ -36013,7 +36013,7 @@ SHC_3BB0A8C1_0x004D8DC0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D8DF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D8EC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D8EC0 | 35.2% | gynt's draft, mechanical pass; structure
 
 SHC_3BB0A8C1_0x004D91D0 | 100.0% | Reimplemented
 
