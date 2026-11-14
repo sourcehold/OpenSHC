@@ -49,7 +49,7 @@ ELEM_HEAD = '0x10d0fab0'
 ADD_STACK_ELEMENT = '0x10be9190'
 COLOR_ENTRY = '0x10beaef0'
 
-out = (common.ROOT / common.TMP / 'slotprobe').resolve()
+out = (common.ROOT / common.TMP / ('slotprobe' + ('_' + os.environ['QD_OUT'] if os.environ.get('QD_OUT') else ''))).resolve()
 out.mkdir(parents=True, exist_ok=True)
 BS = chr(92)
 Q = chr(34)

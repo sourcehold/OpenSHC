@@ -12,6 +12,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
@@ -30,6 +31,7 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Enums::CardinalDirection;
     using OpenSHC::Map::Enums::MapOrientation;
     using OpenSHC::Map::Enums::MapOrientationInt;
@@ -610,7 +612,7 @@ namespace Map {
         void planMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
-            int playerID, uint x, uint y, BuildingType buildingType, uint width, int variation, int height);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, uint width, int variation, int height);
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
