@@ -26,27 +26,26 @@ namespace Map {
     void TileMapState::useEraserBrush(uint x, uint y, int brush)
     {
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        uint const baseY = y;
         int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        uint const baseX = x;
-        x = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(x);
+        uint const baseY = y;
+        int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
+        MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tile);
 
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, (int*)&x, (int*)&y, baseTile, baseY);
-            int const organism = this->OrganismLayer[x];
+                1, index, &tile, (int*)&y, baseTile, baseY);
+            int const organism = this->OrganismLayer[tile];
             if (organism != 0) {
                 // tree ids come first, rock ids are biased by 2000
                 if (organism >= 2000) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeRock, DAT_LandscapeState::ptr)(
                         organism - 2000);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                        DAT_PathFindingState::ptr)(8, baseX, y);
+                        DAT_PathFindingState::ptr)(8, x, y);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::removeTree, DAT_LandscapeState::ptr)(organism);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
-                        DAT_PathFindingState::ptr)(3, baseX, y);
+                        DAT_PathFindingState::ptr)(3, x, y);
                 }
                 DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
             }
@@ -55,10 +54,10 @@ namespace Map {
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, (int*)&x, (int*)&y, baseTile, baseY);
+                1, index, &tile, (int*)&y, baseTile, baseY);
             uint const brushY = y;
             this->placementOnWall = 0;
-            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, baseX, brushY);
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, x, brushY);
             if (this->buildingPlacementFail != FALSE) {
                 continue;
             }
@@ -100,15 +99,15 @@ namespace Map {
                     DAT_BuildingsState::ptr)(this->cursorTargetID);
             } else {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::spawnEraserTileEffect, this)(
-                    0, DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile + baseX);
+                    0, DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile + x);
             }
         }
 
         y = baseY;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, (int*)&x, (int*)&y, baseTile, baseY);
-            for (int unit = DAT_TileMapState::instance.UnitLayer[x]; unit != 0;
+                1, index, &tile, (int*)&y, baseTile, baseY);
+            for (int unit = DAT_TileMapState::instance.UnitLayer[tile]; unit != 0;
                 unit = DAT_UnitsState::instance.units[unit].nextUnitOnTheSameTile) {
                 DAT_UnitsState::instance.units[unit].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
             }
