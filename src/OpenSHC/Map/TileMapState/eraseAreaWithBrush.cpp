@@ -34,9 +34,9 @@ namespace Map {
         }
 
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
+        int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         uint const savedY = y;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int const baseTile = tile;
 
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
