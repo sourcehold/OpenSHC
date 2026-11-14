@@ -20,16 +20,19 @@ namespace Map {
         }
 
         for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.field_0x372c); index++) {
-            int const offsetX = DAT_TerrainDefinedData::instance.field_0x372c[index].x;
-            uint neighbourY = DAT_TerrainDefinedData::instance.field_0x372c[index].y + y;
-            uint neighbourX = offsetX + x;
+            XYPair offset;
+            offset.x = DAT_TerrainDefinedData::instance.field_0x372c[index].x;
+            offset.y = DAT_TerrainDefinedData::instance.field_0x372c[index].y;
+            uint const neighbourY = offset.y + y;
+            uint const neighbourX = offset.x + x;
             if (neighbourX > 399 || neighbourY > 399) {
                 continue;
             }
             if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] == 0) {
                 continue;
             }
-            int neighbour = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile + offsetX + x;
+            int const neighbour
+                = DAT_ViewportRenderState::instance.translationMatrix[neighbourY].addXgetTile + offset.x + x;
             if ((this->LogicLayer[neighbour] & L_RIVER) == 0) {
                 continue;
             }
