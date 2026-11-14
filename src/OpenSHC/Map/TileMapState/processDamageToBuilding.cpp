@@ -56,8 +56,8 @@ namespace Map {
     BOOLEnum TileMapState::processDamageToBuilding(int tile, uint xPosition, uint yPosition, int damageUnk,
         int suppressDamage, int playerID, BOOLEnum aiBuildDelayRelated, int unitID)
     {
-        BOOLEnum destroyed = FALSE;
         int replaced = 0;
+        BOOLEnum volatile destroyed = FALSE;
         // a negative player id is a request to spare that player's own team
         BOOLEnum spareOwnTeam = FALSE;
         if (playerID < 0) {
@@ -110,10 +110,13 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight,
                     OpenSHC::Map::Buildings::BT_DRAWBRIDGE, 0);
                 if (bridge != 0) {
-                    this->showNoRubbleWhenDestroyingBuilding
-                        = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                              [(short)DAT_BuildingsState::instance.buildings[bridge].buildingType]
-                        == 0;
+                    if (DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
+                            [(short)DAT_BuildingsState::instance.buildings[bridge].buildingType]
+                        != 0) {
+                        this->showNoRubbleWhenDestroyingBuilding = FALSE;
+                    } else {
+                        this->showNoRubbleWhenDestroyingBuilding = TRUE;
+                    }
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(bridge);
                     int second = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
@@ -158,33 +161,19 @@ namespace Map {
             }
 
             short remaining = DAT_BuildingsState::instance.buildings[buildingID].currentHealth;
-            if (remaining > 0) {
-                // a siege tower's rider takes the damage with it
-                if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                        == OpenSHC::Map::Buildings::BT_SIEGETOWER_PLACED
-                    && DAT_BuildingsState::instance.buildings[buildingID].unitRefID != 0
-                    && DAT_BuildingsState::instance.buildings[buildingID].unitRefUID
-                        == DAT_UnitsState::instance.units[DAT_BuildingsState::instance.buildings[buildingID].unitRefID]
-                            .uid
-                    && DAT_BuildingsState::instance.buildings[buildingID].maxHealth != 0) {
-                    DAT_UnitsState::instance.units[DAT_BuildingsState::instance.buildings[buildingID].unitRefID].health
-                        = ((int)remaining
-                              * DAT_UnitsState::instance
-                                  .units[DAT_BuildingsState::instance.buildings[buildingID].unitRefID]
-                                  .maxHealth)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth;
-                }
-            } else {
-
+            if (remaining <= 0) {
                 if (DAT_BuildingsState::instance.buildings[buildingID].owner
                     == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     MACRO_CALL(OpenSHC::Map::Version_Func::UpdateDestroyedBuildingCountData)(1);
                 }
-                int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                 if (aiBuildDelayRelated == TRUE
-                    && DAT_GameState::instance.playerDataArray[owner].resourceRebuildDelay == 0) {
-                    DAT_GameState::instance.playerDataArray[owner].resourceRebuildDelay = 1;
+                    && DAT_GameState::instance.playerDataArray[DAT_BuildingsState::instance.buildings[buildingID].owner]
+                            .resourceRebuildDelay
+                        == 0) {
+                    DAT_GameState::instance.playerDataArray[DAT_BuildingsState::instance.buildings[buildingID].owner]
+                        .resourceRebuildDelay = 1;
                 }
+                int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                 int destroyedType = (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType;
                 if (destroyedType != OpenSHC::Map::Buildings::BT_UNKNOWN3
                     && (destroyedType <= 85 || destroyedType > 89)) {
@@ -329,9 +318,9 @@ namespace Map {
                         goto destroyNormally;
                     }
                     // a smelter with oil in it goes up, and a full one throws burning oil about
-                    uint smelterTile = DAT_BuildingsState::instance.buildings[buildingID].currentTilePositionAdjusted;
                     int smelterX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
                     int smelterOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+                    uint smelterTile = DAT_BuildingsState::instance.buildings[buildingID].currentTilePositionAdjusted;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
                     int smelterY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
@@ -461,6 +450,18 @@ namespace Map {
                         DAT_BuildingsState::ptr)(buildingID);
                     destroyed = TRUE;
                 } break;
+                }
+            } else if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                == OpenSHC::Map::Buildings::BT_SIEGETOWER_PLACED) {
+                // a siege tower's rider takes the damage with it
+                int rider = DAT_BuildingsState::instance.buildings[buildingID].unitRefID;
+                if (rider != 0
+                    && DAT_BuildingsState::instance.buildings[buildingID].unitRefUID
+                        == DAT_UnitsState::instance.units[rider].uid
+                    && DAT_BuildingsState::instance.buildings[buildingID].maxHealth != 0) {
+                    DAT_UnitsState::instance.units[rider].health
+                        = ((int)remaining * DAT_UnitsState::instance.units[rider].maxHealth)
+                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth;
                 }
             }
         } else {
