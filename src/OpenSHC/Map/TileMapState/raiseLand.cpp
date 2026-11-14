@@ -25,11 +25,10 @@ namespace Map {
     {
         int const baseTile = tile;
         int const brushSize = DAT_TerrainDefinedData::instance.BrushSizeArray[brush];
-        // the original reuses the brush parameter to hold the base y
-        brush = y;
+        uint const baseY = y;
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, &tile, (int*)&y, baseTile, brush);
+                1, index, &tile, (int*)&y, baseTile, baseY);
             int const brushTile = *(int volatile*)&tile;
             uint const logic = this->LogicLayer[brushTile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
