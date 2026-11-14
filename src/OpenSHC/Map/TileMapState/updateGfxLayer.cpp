@@ -30,8 +30,8 @@
 #define NEIGHBOUR_FLAGS_MASK_WALL_OR_GATEHOUSE 0x100 // L_WALL_OR_GATEHOUSE
 
 // the original was optimised, but a jump from the handwritten asm to a C label (warning C4740) switches global
-// optimisation off for the whole function: frame pointer, locals off ebp, sub esp, 0x118. The asm jump to
-// wallAlpha below is that flow.
+// optimisation off for the whole function: frame pointer, locals off ebp, sub esp, 0x118. The asm jumps to
+// wallAlpha below are that flow.
 
 // the original indexes directionTranslationMatrix as one flat array of eight entries per row
 #define DIRECTION_OFFSET(Y, DIRECTION) (this->directionTranslationMatrix[0][(Y) * 8 + (DIRECTION)])
@@ -1301,7 +1301,7 @@ namespace Map {
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
                                         = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x2000;
                                     if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x80) != 0) {
-                                        __asm jmp wallAlpha
+                                        __asm jmp wallAlpha __asm jmp wallAlpha
                                     }
                                     continue;
                                 }
