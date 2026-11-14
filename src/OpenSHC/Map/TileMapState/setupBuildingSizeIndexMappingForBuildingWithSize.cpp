@@ -17,6 +17,7 @@ namespace Map {
         if (buildingSize <= 1) {
             return;
         }
+        int const maxCoord = buildingSize - 1;
 
         // pass 0: the unrotated footprint, in reading order
         for (int y = 0; y < buildingSize; y++) {
@@ -32,7 +33,8 @@ namespace Map {
         int y = 0;
         int run = 1;
         int index = last;
-        for (int diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        int diagonal;
+        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][2] = index;
                 index--;
@@ -41,22 +43,22 @@ namespace Map {
                     y++;
                 }
             }
-            if (diagonal < buildingSize - 1) {
+            if (diagonal < maxCoord) {
                 run++;
                 y = 0;
                 x = diagonal + 1;
             } else {
                 run--;
-                x = buildingSize - 1;
-                y = (1 - (buildingSize - 1)) + diagonal;
+                x = maxCoord;
+                y = 1 - maxCoord + diagonal;
             }
         }
 
-        x = buildingSize - 1;
+        x = maxCoord;
         y = 0;
         run = 1;
         index = last;
-        for (int diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][3] = index;
                 index--;
@@ -65,22 +67,22 @@ namespace Map {
                     y--;
                 }
             }
-            if (diagonal < buildingSize - 1) {
+            if (diagonal < maxCoord) {
                 run++;
-                x = buildingSize - 1;
+                x = maxCoord;
                 y = diagonal + 1;
             } else {
                 run--;
-                x = (buildingSize - 1) + (buildingSize - 2) - diagonal;
-                y = buildingSize - 1;
+                x = maxCoord + buildingSize - 2 - diagonal;
+                y = maxCoord;
             }
         }
 
-        x = buildingSize - 1;
-        y = buildingSize - 1;
+        x = maxCoord;
+        y = maxCoord;
         run = 1;
         index = last;
-        for (int diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][4] = index;
                 index--;
@@ -89,22 +91,22 @@ namespace Map {
                     y--;
                 }
             }
-            if (diagonal < buildingSize - 1) {
+            if (diagonal < maxCoord) {
                 run++;
                 x = buildingSize - 2 - diagonal;
-                y = buildingSize - 1;
+                y = maxCoord;
             } else {
                 run--;
                 x = 0;
-                y = (buildingSize - 2 - diagonal) + (buildingSize - 1);
+                y = maxCoord + (buildingSize - 2 - diagonal);
             }
         }
 
         x = 0;
-        y = buildingSize - 1;
+        y = maxCoord;
         run = 1;
         index = last;
-        for (int diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
+        for (diagonal = 0; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
                 DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][5] = index;
                 index--;
@@ -113,13 +115,13 @@ namespace Map {
                     y++;
                 }
             }
-            if (diagonal < buildingSize - 1) {
+            if (diagonal < maxCoord) {
                 run++;
                 x = 0;
                 y = buildingSize - 2 - diagonal;
             } else {
                 run--;
-                x = (1 - (buildingSize - 1)) + diagonal;
+                x = 1 - maxCoord + diagonal;
                 y = 0;
             }
         }
