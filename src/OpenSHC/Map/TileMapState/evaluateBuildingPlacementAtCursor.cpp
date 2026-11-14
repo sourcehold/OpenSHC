@@ -173,8 +173,9 @@ namespace Map {
             this->buildingPlacementFail = TRUE;
         }
         if (buildingID != 0) {
-            if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
-                && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT) {
+            bool const isRegularGame = DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
+                && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT;
+            if (isRegularGame) {
                 switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
                 case OpenSHC::Map::Buildings::BT_UNKNOWN1:
                 case OpenSHC::Map::Buildings::BT_MANORHOUSE:
