@@ -20117,7 +20117,7 @@ SHC_3BB0A8C1_0x004690E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00469290 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004692E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004692E0 | 89.7% | Asm differs: the stripe index is read as a dword where the original sign-extends its low byte, and the second branch keeps other registers
 
 SHC_3BB0A8C1_0x004694A0 | 0.0% | Pending
 
@@ -22253,7 +22253,7 @@ SHC_3BB0A8C1_0x0047C5D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047C670 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047C860 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047C860 | 65.3% | Asm differs
 
 SHC_3BB0A8C1_0x0047CA80 | 100.0% | Reimplemented
 
@@ -22311,7 +22311,7 @@ SHC_3BB0A8C1_0x0047D0E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D100 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047D190 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D190 | 66.9% | Register mismatch: the original keeps the right column in ebp and reloads x
 
 SHC_3BB0A8C1_0x0047D330 | 100.0% | Reimplemented
 
@@ -23623,7 +23623,7 @@ SHC_3BB0A8C1_0x004934E5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004934F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00493560 | 0.0% | Pending
+SHC_3BB0A8C1_0x00493560 | 96.3% | Only the spill slot of the bar's x differs (the original uses y's home)
 
 SHC_3BB0A8C1_0x00493690 | 100.0% | Reimplemented
 
@@ -25537,7 +25537,7 @@ SHC_3BB0A8C1_0x004AAB20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AAB40 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AAB50 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AAB50 | 41.0% | Asm differs
 
 SHC_3BB0A8C1_0x004AB440 | 100.0% | Reimplemented
 
@@ -25921,7 +25921,7 @@ SHC_3BB0A8C1_0x004AF820 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AF840 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AF860 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AF860 | 78.7% | Register mismatch: durationSum stays in a register where the original keeps elementState
 
 SHC_3BB0A8C1_0x004AFA50 | 100.0% | Reimplemented
 
@@ -25929,13 +25929,13 @@ SHC_3BB0A8C1_0x004AFA80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AFB00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004AFB30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AFB30 | 82.0% | Asm differs
 
 SHC_3BB0A8C1_0x004AFDA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AFE10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B0390 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B0390 | 62.0% | Asm differs
 
 SHC_3BB0A8C1_0x004B07C0 | 100.0% | Reimplemented
 
@@ -25989,7 +25989,7 @@ SHC_3BB0A8C1_0x004B1990 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B19E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B1AC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B1AC0 | 76.1% | Register mismatch: the original keeps y in ebp and the group counter in y's home
 
 SHC_3BB0A8C1_0x004B1C30 | 100.0% | Reimplemented
 
