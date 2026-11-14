@@ -85,8 +85,8 @@ namespace Map {
 
         do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
-            int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
-                + this->buildingX + x;
+            int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile;
+            tile += this->buildingX + x;
             uint const logic = this->LogicLayer[tile];
             if ((logic & (L_BORDER | L_BORDER_EDGE)) != 0) {
                 return;
