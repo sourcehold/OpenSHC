@@ -93,7 +93,8 @@ namespace Map {
                             DAT_EntityState::ptr)(brushTile);
                         this->LogicLayer[brushTile] &= ~(
                             L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
-                        this->HeightLayer[brushTile] = this->DefaultHeightLayer[brushTile];
+                        byte& height = this->HeightLayer[brushTile];
+                        height = this->DefaultHeightLayer[brushTile];
                         this->DamageLayer[brushTile] = 0;
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -103,7 +104,8 @@ namespace Map {
                         break;
                     }
                     this->HeightLayer[brushTile] -= 1;
-                    if (*(char volatile*)&this->DamageLayer[brushTile] < 200) {
+                    char const& damageLevel = this->DamageLayer[brushTile];
+                    if (damageLevel < 200) {
                         this->DamageLayer[brushTile] += 1;
                     }
                 }
