@@ -5,9 +5,9 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Map/Buildings/Building.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTargetMarker.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/Enums/BuildingTargetMarker.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
@@ -104,7 +104,7 @@ namespace Rendering {
                 }
             }
             short const targetMarker = DAT_BuildingsState::instance.buildings[buildingID].targetMarker;
-            if (targetMarker == OpenSHC::Map::Buildings::BTM_UNIT_TARGET) {
+            if (targetMarker == OpenSHC::Map::Buildings::Enums::BTM_UNIT_TARGET) {
                 int const maskImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 16;
                 int const overlayImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -114,8 +114,9 @@ namespace Rendering {
                             .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                         - heightOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].targetMarker = OpenSHC::Map::Buildings::BTM_NONE;
-            } else if (targetMarker == OpenSHC::Map::Buildings::BTM_ENGINEER_TARGET) {
+                DAT_BuildingsState::instance.buildings[buildingID].targetMarker
+                    = OpenSHC::Map::Buildings::Enums::BTM_NONE;
+            } else if (targetMarker == OpenSHC::Map::Buildings::Enums::BTM_ENGINEER_TARGET) {
                 int const maskImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 132;
                 int const overlayImage = DAT_TileMapState::instance.cursorOverlayAnimationFrame + 116;
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
@@ -125,7 +126,8 @@ namespace Rendering {
                             .BuildingHeights[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                         - heightOffset - 42,
                     OpenSHC::IO::Graphics::GID_FLOATS_NEW, maskImage, 0);
-                DAT_BuildingsState::instance.buildings[buildingID].targetMarker = OpenSHC::Map::Buildings::BTM_NONE;
+                DAT_BuildingsState::instance.buildings[buildingID].targetMarker
+                    = OpenSHC::Map::Buildings::Enums::BTM_NONE;
             }
         }
         int frame;
