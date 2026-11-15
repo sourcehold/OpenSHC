@@ -55,7 +55,7 @@ namespace Map {
         for (int index = 0; index < brushSize; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 1, index, &tile, (int*)&y, baseTile, baseY);
-            uint const brushY = y;
+            uint const brushY = *(uint volatile*)&y;
             this->placementOnWall = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateBuildingPlacementAtTile, this)(0, x, brushY);
             if (this->buildingPlacementFail != FALSE) {
