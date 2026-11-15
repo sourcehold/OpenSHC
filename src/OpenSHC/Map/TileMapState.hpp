@@ -12,6 +12,10 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/Map/Enums/MapOrientation.hpp"
+#include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
@@ -27,6 +31,10 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Buildings::BuildingTypeShort;
+    using OpenSHC::Map::Enums::CardinalDirection;
+    using OpenSHC::Map::Enums::MapOrientation;
+    using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -108,7 +116,7 @@ namespace Map {
         undefined4 rockOrientation; // 0x00554890 length: 4
         undefined4 editorRockType; // 0x00554894 length: 4
         undefined4 lastTime; // 0x00554898 length: 4
-        int mapOrientation; // 0x0055489C length: 4
+        MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
         int screenSouthEastDirection; // 0x005548A4 length: 4
         int screenEastDirection; // 0x005548A8 length: 4
@@ -302,7 +310,7 @@ namespace Map {
 
         BOOLEnum hasHigherPlainNeighborWithWallOrGatehouse(int param_1, int param_2, int param_3);
 
-        int getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
+        CardinalDirection getOrientationThatIsWallTowerOrGatehouse(uint x, uint y);
 
         void renderWallDragPreview(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
@@ -401,7 +409,7 @@ namespace Map {
 
         void updateMacroLayerRelated2();
 
-        byte setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y);
+        uint setBitFlagBasedOnWallTowerGatehouseOrKeep(int x, int y);
 
         uint returnSomeHeight(int tile, int param_2);
 
@@ -473,7 +481,7 @@ namespace Map {
 
         void updateShowHiLayerOrResetChangedLayer();
 
-        void changeMapOrientation(int mapOrientation);
+        void changeMapOrientation(MapOrientation mapOrientation);
 
         void increaseHeightForTunnelWithBrush(int tile, uint x, uint y, int increment);
 
@@ -491,7 +499,7 @@ namespace Map {
 
         int getMaxWallHeightInBrushArea(int param_1, uint param_2);
 
-        void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, undefined4 command);
+        void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
         void placeWalls(int playerID, uint x1, uint y1, uint x2, uint y2, MappersEnum wallType, int tileCountUnk);
 
@@ -500,13 +508,13 @@ namespace Map {
         void setupBuildingSizeIndexMapping();
 
         void checkBuildingCanBePlacedHere(
-            int playerID, uint x, uint y__fertileLandCount, MappersEnum commandBuildingType, int buildingSize);
+            int playerID, uint x, uint y, MappersEnum commandBuildingType, int buildingSize);
 
         void evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y);
 
         void updateBuildingPlacementRotationPreview(int param_1, int param_2);
 
-        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, MappersEnum type, int size);
+        void setConstructionGFXLayerBasedOnPlacementChecks(int x, int y, short type, int size);
 
         void updateBuildingGraphicsLayer(int buildingID);
 
@@ -604,7 +612,7 @@ namespace Map {
         void planMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
-            int param_1, uint param_2, uint param_3, undefined4 param_4, uint param_5, int param_6, int param_7);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, uint width, int variation, int height);
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
@@ -621,7 +629,7 @@ namespace Map {
             int param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, undefined4 param_5, int param_6, int param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 

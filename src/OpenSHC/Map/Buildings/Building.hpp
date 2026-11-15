@@ -11,8 +11,8 @@
 #include "OpenSHC/Game/Resources/ResourceTypeShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFlagSlot.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
-#include "OpenSHC/Map/Buildings/BuildingTargetMarkerShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/Enums/BuildingTargetMarkerShort.hpp"
 #include "OpenSHC/Map/Buildings/Enums/DefensiveTowerEngineTypeByte.hpp"
 
 namespace OpenSHC {
@@ -22,8 +22,8 @@ namespace Map {
         using OpenSHC::Game::Resources::ResourceTypeShort;
         using OpenSHC::Map::Buildings::BuildingFlagSlot;
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
-        using OpenSHC::Map::Buildings::BuildingTargetMarkerShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
+        using OpenSHC::Map::Buildings::Enums::BuildingTargetMarkerShort;
         using OpenSHC::Map::Buildings::Enums::DefensiveTowerEngineTypeByte;
 
 #pragma pack(push, 1)
@@ -217,7 +217,7 @@ namespace Map {
             int insideUnitUID[4]; // 0x000002E8 length: 16
             short hasUnitsOntop; // 0x000002F8 length: 2
             short tileScanCountdown; // 0x000002FA length: 2
-            undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
+            short wheatFieldIndexToGrow; // 0x000002FC length: 2
             short statueCommemoratingPlayerID; // 0x000002FE length: 2
             short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2
