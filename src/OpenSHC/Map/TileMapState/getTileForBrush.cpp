@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -21,14 +22,14 @@ namespace Map {
             return;
         }
 
-        if (index >= 37) {
+        if (index >= countof(DAT_TerrainDefinedData::instance.field_0xc)) {
             index = 0;
         }
         int brushStep = DAT_TerrainDefinedData::instance.field_0xc[index];
         if (brushStep == 15) {
             return;
         }
-        if (brushStep < 8) {
+        if (brushStep < OpenSHC::Map::Enums::CD_UPPER_LIMIT) {
             *tilePointer += this->directionTranslationMatrix[*yPointer][brushStep];
             *yPointer += DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[brushStep].int_.yOffset;
             return;

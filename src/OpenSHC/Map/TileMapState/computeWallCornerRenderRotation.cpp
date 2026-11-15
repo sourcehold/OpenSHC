@@ -1,5 +1,6 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -11,7 +12,8 @@ namespace Map {
         int tileUnk = this->DAT_SomeTile;
         int y = this->DAT_SomeY;
         int result = 0;
-        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(tileUnk, y, 2)) {
+        if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(
+                tileUnk, y, OpenSHC::Map::Enums::CD_EAST)) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 if ((x & 0xf) == 0xf) {
                     result = 2;
@@ -38,7 +40,7 @@ namespace Map {
                 }
             }
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isWallConnectionHeightValid, this)(
-                       tileUnk, y, 0)) {
+                       tileUnk, y, OpenSHC::Map::Enums::CD_NORTH)) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 if ((y & 0xf) == 0xf) {
                     result = 1;
@@ -65,10 +67,10 @@ namespace Map {
                 }
             }
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                       tileUnk, y, 2)) {
+                       tileUnk, y, OpenSHC::Map::Enums::CD_EAST)) {
             result = 48;
         } else if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getWallFlagForOrientedDirection, this)(
-                       tileUnk, y, 4)) {
+                       tileUnk, y, OpenSHC::Map::Enums::CD_SOUTH)) {
             result = 63;
         } else {
             result = 33;

@@ -1,36 +1,44 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F89C0
     BOOLEnum TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int twoOrFour)
     {
-        int direction = 0;
-        if (twoOrFour == 2) {
+        int direction = OpenSHC::Map::Enums::CD_NORTH;
+        if (twoOrFour == OpenSHC::Map::Enums::CD_EAST) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
-                direction = 2;
+                direction = OpenSHC::Map::Enums::CD_EAST;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
-                direction = 4;
+                direction = OpenSHC::Map::Enums::CD_SOUTH;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
-                direction = 6;
+                direction = OpenSHC::Map::Enums::CD_WEST;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
-                direction = 0;
+                direction = OpenSHC::Map::Enums::CD_NORTH;
             }
-        } else if (twoOrFour == 4) {
+        } else if (twoOrFour == OpenSHC::Map::Enums::CD_SOUTH) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
-                direction = 4;
+                direction = OpenSHC::Map::Enums::CD_SOUTH;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
-                direction = 6;
+                direction = OpenSHC::Map::Enums::CD_WEST;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
-                direction = 0;
+                direction = OpenSHC::Map::Enums::CD_NORTH;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
-                direction = 2;
+                direction = OpenSHC::Map::Enums::CD_EAST;
             }
         } else {
             return FALSE;
         }
-        return (uint)this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] >> 8 & TRUE;
+        if ((this->LogicLayer[this->directionTranslationMatrix[y][direction] + tileUnk] & L_WALL_OR_GATEHOUSE) != 0) {
+            return TRUE;
+        }
+        return FALSE;
     }
 
 }

@@ -69,9 +69,9 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ShortValue, DAT_LowLevelMemory::ptr)(
             MC_MAP_TILES_COUNT, 1, this->PillarGFXLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(this->HeightLayer), '\b', this->HeightLayer);
+            sizeof(this->HeightLayer), 8, this->HeightLayer);
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            sizeof(this->DefaultHeightLayer), '\b', this->DefaultHeightLayer);
+            sizeof(this->DefaultHeightLayer), 8, this->DefaultHeightLayer);
         DAT_PathFindingState::instance.searchGeneration = 1;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
             sizeof(DAT_TileMapState::instance.WalkLayer), 0, DAT_TileMapState::instance.WalkLayer);
