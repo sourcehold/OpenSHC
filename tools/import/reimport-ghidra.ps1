@@ -1,8 +1,9 @@
 param(
+    # Read the program straight from this .gzf with pyghidra
     [Parameter(Mandatory = $false)]
-    [string]$Sarif = "Stronghold Crusader.exe.sarif",
-    # Read the program straight from a .gzf with pyghidra (no SARIF export, no cache)
-    [string]$Gzf = "",
+    [string]$Gzf = "Stronghold Crusader.exe.gzf",
+    # Read the program from this SARIF export instead of from the .gzf (see gzftosarif.py)
+    [string]$Sarif = "",
     [string]$OutputDir = "src",
     [bool]$ClearCache = $true,
     [bool]$OverwriteAll = $true,
@@ -10,11 +11,16 @@ param(
     [bool]$MakeBackup = $true,
     [bool]$Interactive = $false,
     [bool]$DryRun = $false,
-    [bool]$GenerateSarif = $false,
     [string]$ScriptPath = "tools\import\ghidra-importer.py"
 )
 
 . .\tools\import\utils\backup-item.ps1
+
+$InputFile = if ($Sarif) { $Sarif } else { $Gzf }
+if (-not (Test-Path -PathType Leaf $InputFile)) {
+    Write-Error "Input file not found: $InputFile"
+    exit 1
+}
 
 $pyArgs = New-Object System.Collections.Generic.List[System.String]
 if ($Interactive) {
@@ -24,12 +30,12 @@ if ($Interactive) {
 
 $pyArgs += "$ScriptPath"
 
-if ($Gzf) {
-    $pyArgs += "--gzf"
-    $pyArgs += $Gzf
-} else {
+if ($Sarif) {
     $pyArgs += "--sarif"
     $pyArgs += $Sarif
+} else {
+    $pyArgs += "--gzf"
+    $pyArgs += $Gzf
 }
 
 $pyArgs += "--output-dir"
@@ -70,12 +76,7 @@ if ($DryRun) {
         $hppFiles | Remove-Item
     }
 
-    if($GenerateSarif -and -not $Gzf) {
-        Write-Output "Generating sarif file from gzf"
-        & python .\tools\import\gzftosarif.py --sarif $Sarif
-    }
-
-    Write-Output "Converting $(if ($Gzf) { $Gzf } else { $Sarif }) to .hpp files"
+    Write-Output "Converting $InputFile to .hpp files"
     # Execute the export
     & python $pyArgs
 
