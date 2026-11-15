@@ -20,13 +20,13 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00501CD0
-    void TileMapState::increaseHeightForTunnelWithBrush(int tile, uint x, uint y, int increment)
+    void TileMapState::increaseHeightForTunnelWithBrush(int tile, int x, int y, int increment)
     {
         int baseTile = tile;
-        uint baseY = y;
+        int baseY = y;
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                0, index, &tile, (int*)&y, baseTile, baseY);
+                0, index, &tile, &y, baseTile, baseY);
             int const brushTile = tile;
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                 continue;

@@ -11,7 +11,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FBD80
-    void TileMapState::getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, uint y)
+    void TileMapState::getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, int y)
     {
         if (square != 0) {
             MACRO_CALL_MEMBER(
@@ -26,7 +26,7 @@ namespace Map {
             index = 0;
         }
         int brushStep = DAT_TerrainDefinedData::instance.field_0xc[index];
-        if (brushStep == 15) {
+        if (brushStep == OpenSHC::Map::Enums::CD_UNSPECIFIED) {
             return;
         }
         if (brushStep < OpenSHC::Map::Enums::CD_UPPER_LIMIT) {

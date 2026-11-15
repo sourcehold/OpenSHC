@@ -9,10 +9,10 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F89C0
-    BOOLEnum TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int twoOrFour)
+    BOOLEnum TileMapState::getWallFlagForOrientedDirection(int tileUnk, int y, int screenDirection)
     {
         int direction = OpenSHC::Map::Enums::CD_NORTH;
-        if (twoOrFour == OpenSHC::Map::Enums::CD_EAST) {
+        if (screenDirection == OpenSHC::Map::Enums::CD_EAST) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 direction = OpenSHC::Map::Enums::CD_EAST;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {
@@ -22,7 +22,7 @@ namespace Map {
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                 direction = OpenSHC::Map::Enums::CD_NORTH;
             }
-        } else if (twoOrFour == OpenSHC::Map::Enums::CD_SOUTH) {
+        } else if (screenDirection == OpenSHC::Map::Enums::CD_SOUTH) {
             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 direction = OpenSHC::Map::Enums::CD_SOUTH;
             } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_EAST) {

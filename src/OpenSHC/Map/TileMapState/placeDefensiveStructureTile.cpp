@@ -29,7 +29,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005034A0
-    void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
+    void TileMapState::placeDefensiveStructureTile(int playerID, int x, int y, MappersEnum mapper)
     {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallPlacementAtTile, this)(playerID, x, y, mapper);
         if (this->illegalBuild) {

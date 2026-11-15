@@ -13,15 +13,15 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00500980
-    BOOLEnum TileMapState::findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2)
+    BOOLEnum TileMapState::findNearestValidDigTileNearTarget(int x1, int y1, int x2, int y2)
     {
-        if (x1 > MC_MAP_XY_LIMIT_INCLUSIVE || y1 > MC_MAP_XY_LIMIT_INCLUSIVE) {
+        if (x1 < 0 || x1 > MC_MAP_XY_LIMIT_INCLUSIVE || y1 < 0 || y1 > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return FALSE;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y1 * MC_MAP_XY_LIMIT + x1] == 0) {
             return FALSE;
         }
-        if (x2 > MC_MAP_XY_LIMIT_INCLUSIVE || y2 > MC_MAP_XY_LIMIT_INCLUSIVE
+        if (x2 < 0 || x2 > MC_MAP_XY_LIMIT_INCLUSIVE || y2 < 0 || y2 > MC_MAP_XY_LIMIT_INCLUSIVE
             || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y2 * MC_MAP_XY_LIMIT + x2] == 0) {
             return FALSE;
         }

@@ -11,9 +11,9 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
-    void TileMapState::triggerLoweredView(int requestedView)
+    void TileMapState::triggerLoweredView(OpenSHC::Map::Enums::LoweredViewTransition requestedView)
     {
-        int view = OpenSHC::Map::Enums::LVT_SET_NORMAL;
+        OpenSHC::Map::Enums::LoweredViewTransition view = OpenSHC::Map::Enums::LVT_SET_NORMAL;
         if (this->flatViewToggleValue2 == 0) {
             view = requestedView;
         }

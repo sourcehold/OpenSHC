@@ -23,7 +23,7 @@ namespace Map {
                 this->rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
             }
         }
-        if (now < (int)(this->lastTime + 1000)) {
+        if (now < this->lastTime + 1000) {
             return;
         }
 

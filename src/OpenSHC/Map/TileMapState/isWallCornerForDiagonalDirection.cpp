@@ -8,7 +8,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8780
-    uint TileMapState::isWallCornerForDiagonalDirection(int tile, int y, int direction)
+    BOOLEnum TileMapState::isWallCornerForDiagonalDirection(int tile, int y, int direction)
     {
         int first = OpenSHC::Map::Enums::CD_NORTH;
         int second = OpenSHC::Map::Enums::CD_NORTH;

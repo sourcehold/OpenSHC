@@ -9,7 +9,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFB10
-    uint TileMapState::getTotalHeightAtTile(int tile)
+    int TileMapState::getTotalHeightAtTile(int tile)
     {
         int buildingID = this->BuildingLayer[tile];
         if (buildingID != 0) {

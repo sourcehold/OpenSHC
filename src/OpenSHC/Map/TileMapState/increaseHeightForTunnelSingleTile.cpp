@@ -20,7 +20,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F80E0
-    void TileMapState::increaseHeightForTunnelSingleTile(int tile, uint x, uint y, int increment)
+    void TileMapState::increaseHeightForTunnelSingleTile(int tile, int x, int y, int increment)
     {
         if ((this->LogicLayer[tile]
                 & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_RIVER | L_FORD | L_KEEP_NON_MANOR_HOUSE | L_MARSH | L_MOAT))

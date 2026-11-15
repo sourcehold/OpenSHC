@@ -16,10 +16,10 @@ namespace Map {
     CardinalDirection TileMapState::getOrientationThatIsWallTowerOrGatehouse(uint x, uint y)
     {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
-            return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+            return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
-            return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+            return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -32,7 +32,7 @@ namespace Map {
                 return orientation;
             }
         }
-        return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+        return OpenSHC::Map::Enums::CD_UNSPECIFIED;
     }
 
 }

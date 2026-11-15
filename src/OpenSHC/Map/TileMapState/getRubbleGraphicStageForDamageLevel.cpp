@@ -13,7 +13,7 @@ namespace Map {
     using OpenSHC::Map::Enums::MO_WEST;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FA460
-    undefined4 TileMapState::getRubbleGraphicStageForDamageLevel(int rotation)
+    int TileMapState::getRubbleGraphicStageForDamageLevel(int rotation)
     {
         int result = 0;
         int orientation = this->mapOrientation;
