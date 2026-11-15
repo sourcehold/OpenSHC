@@ -24,8 +24,9 @@ namespace Map {
 
         // count, per rotation, how many of its four anchor tiles carry usable wall
         int walls[4];
-        for (int rotation = 0; rotation < 4; rotation++) {
-            walls[rotation] = 0;
+        int* volatile wall = walls;
+        for (int rotation = 0; rotation < 4; rotation++, wall++) {
+            *wall = 0;
             {
                 int const tileY = DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 1] + y;
                 if ((uint)(DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 0] + x) <= 399
@@ -42,7 +43,7 @@ namespace Map {
                            & (L_STOCKPILEUnk | L_STAIRS))
                         == 0) {
                     wallTileCount++;
-                    walls[rotation] = 1;
+                    *wall = 1;
                 }
             }
             {
@@ -60,7 +61,7 @@ namespace Map {
                             + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 2] + x]
                            & (L_STOCKPILEUnk | L_STAIRS))
                         == 0) {
-                    walls[rotation] += 1;
+                    *wall += 1;
                     wallTileCount++;
                 }
             }
@@ -79,7 +80,7 @@ namespace Map {
                             + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 4] + x]
                            & (L_STOCKPILEUnk | L_STAIRS))
                         == 0) {
-                    walls[rotation] += 1;
+                    *wall += 1;
                     wallTileCount++;
                 }
             }
@@ -98,7 +99,7 @@ namespace Map {
                             + DAT_TerrainDefinedData::instance.field_0x1e4c[rotation * 8 + 6] + x]
                            & (L_STOCKPILEUnk | L_STAIRS))
                         == 0) {
-                    walls[rotation] += 1;
+                    *wall += 1;
                     wallTileCount++;
                 }
             }

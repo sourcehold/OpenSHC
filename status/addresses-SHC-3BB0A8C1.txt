@@ -39653,7 +39653,7 @@ SHC_3BB0A8C1_0x004F9DF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F9F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FA000 | 57.6% | corner unroll, slots differ
+SHC_3BB0A8C1_0x004FA000 | 68.7% | final else 8; y reload
 
 SHC_3BB0A8C1_0x004FA2D0 | 100.0% | Reimplemented
 
