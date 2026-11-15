@@ -1,5 +1,6 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -18,6 +19,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_EDGES;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00507350
     void TileMapState::resetTileAndClearMoat(int tile)
@@ -54,7 +56,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(x, y);
             this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
         }
-        this->MiscDisplayLayer[tile] &= ~0x3c0;
+        this->MiscDisplayLayer[tile] &= ~MD_SEA_EDGES;
     }
 
 }

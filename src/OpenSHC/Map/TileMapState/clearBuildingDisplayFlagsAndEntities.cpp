@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -8,6 +9,8 @@
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Map::LogicHelpers::MD_BUILDING_TILES;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB360
     void TileMapState::clearBuildingDisplayFlagsAndEntities(int buildingID, int destroyEntities)
@@ -17,21 +20,18 @@ namespace Map {
         int buildingY = DAT_BuildingsState::instance.buildings[buildingID].y;
         uint widthOrHeight = DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, widthOrHeight);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + buildingY].addXgetTile
                 + this->buildingX + buildingX;
-            this->MiscDisplayLayer[tileUnk] &= ~0xc;
+            this->MiscDisplayLayer[tileUnk] &= ~MD_BUILDING_TILES;
             if (destroyEntities == 1) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Entities::EntityState_Func::destroyEntitiesOnTile, DAT_EntityState::ptr)(tileUnk);
             }
             buildingSizeTileIndex++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
     }
 
 }

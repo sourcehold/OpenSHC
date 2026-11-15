@@ -12,7 +12,7 @@ namespace Map {
     {
         int buildingSizeTileIndex = 0;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
             int targetedTile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -29,10 +29,7 @@ namespace Map {
             buildingSizeTileIndex++;
             this->BuildingWasLayer[targetedTile] = 0;
             this->ChangedLayer[targetedTile] = 2;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
     }
 
 }

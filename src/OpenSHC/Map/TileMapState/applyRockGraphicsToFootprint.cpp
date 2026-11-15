@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -10,6 +11,7 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::Enums::CD_UPPER_LIMIT;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB770
@@ -19,13 +21,13 @@ namespace Map {
         int rockY = DAT_LandscapeState::instance.rocks[rockID].y;
         int orientation = DAT_LandscapeState::instance.rocks[rockID].orientation + this->mapOrientation;
         int index = 0;
-        if (orientation >= 8) {
-            orientation -= 8;
+        if (orientation >= CD_UPPER_LIMIT) {
+            orientation -= CD_UPPER_LIMIT;
         }
         int size = DAT_LandscapeState::instance.rocks[rockID].size;
         int surface = (orientation / 2) * size * size;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_LandscapeState::instance.rocks[rockID].size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
@@ -50,10 +52,7 @@ namespace Map {
                 }
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
     }
 
 }

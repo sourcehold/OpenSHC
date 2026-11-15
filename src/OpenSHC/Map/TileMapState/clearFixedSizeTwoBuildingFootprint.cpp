@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
@@ -13,13 +15,14 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_RUBBLE_INNERUnk;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAE50
     void TileMapState::clearFixedSizeTwoBuildingFootprint(int x, int y)
     {
         int buildingSizeTileIndex = 0;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 2);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -31,14 +34,11 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[buildingID].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else {
-                this->MiscDisplayLayer[tile] |= 0x4000;
+                this->MiscDisplayLayer[tile] |= MD_RUBBLE_INNERUnk;
             }
             buildingSizeTileIndex++;
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
     }
 
 }
