@@ -3079,7 +3079,11 @@ jump displacement after the first call shifted too. `get()` in `src/precomp/Func
 and the member `GameFunction` macro; one alone leaves calls to disabled callees indirect). Optimised functions are
 unaffected because they inlined `get()` already. Measured with reccmp: `setBitFlagBasedOnWallTowerGatehouseOrKeep`,
 `setTerrain`, `updateGFXLayers`, `updateMacroLayerRelated` and `updateGfxLayer` (C4740) went from 92.8-98.1% to
-100%, and nothing else in the TileMapState build list moved.
+100%, and nothing else in the TileMapState build list moved. A build of all 2515 sources under `src/OpenSHC`
+with each header (2533 functions) agreed: those five better, and the only two "worse" functions
+(`UI::Menu::Constructor_Menu`, `handleMenuItems`) differ solely in a `cmp .., 0x11000000` immediate that reccmp
+now prints as a symbol name, because the layout shift put a compiler-generated destructor of our DLL at that VA.
+The bytes are unchanged.
 
 ### Loop unrolling: `!=` is not a counted loop, and loads == stores vetoes the unroll
 
