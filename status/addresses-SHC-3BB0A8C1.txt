@@ -41095,15 +41095,15 @@ SHC_3BB0A8C1_0x004FC7C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FC810 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FC9E0 | 97.0% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FC9E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004FDB00 | 92.8% | asm macro via this, resolvers
+SHC_3BB0A8C1_0x004FDB00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FF080 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FF420 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004FF870 | 98.1% | resolver call get/call eax
+SHC_3BB0A8C1_0x004FF870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004FF990 | 100.0% | Reimplemented
 
@@ -42155,11 +42155,11 @@ SHC_3BB0A8C1_0x00508030 | 98.0% | imul register naming
 
 SHC_3BB0A8C1_0x00508250 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00508540 | 99.2% | jl loop end needs unroll
+SHC_3BB0A8C1_0x00508540 | 99.3% | jl loop end needs unroll
 
 SHC_3BB0A8C1_0x00508590 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00508760 | 78.9% | int locals for short field rea
+SHC_3BB0A8C1_0x00508760 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00508870 | 100.0% | Reimplemented
 
@@ -42767,7 +42767,7 @@ SHC_3BB0A8C1_0x00508DD0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00508EC0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00509180 | 95.7% | near-jz macro jump form
+SHC_3BB0A8C1_0x00509180 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0050A74E | 0.0% | Pending
 
@@ -44741,7 +44741,7 @@ SHC_3BB0A8C1_0x005127D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00512920 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00512940 | 93.1% | resolver call get/call eax
+SHC_3BB0A8C1_0x00512940 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00514480 | 100.0% | Reimplemented
 
