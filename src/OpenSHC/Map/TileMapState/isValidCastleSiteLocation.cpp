@@ -66,7 +66,7 @@ namespace Map {
                 continue;
             }
 
-            uint const brushY = y;
+            uint const brushY = *(uint volatile*)&y;
             int const tileX = brushTile - DAT_ViewportRenderState::instance.translationMatrix[brushY].addXgetTile;
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR
                 && DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SIEGE_THAT
