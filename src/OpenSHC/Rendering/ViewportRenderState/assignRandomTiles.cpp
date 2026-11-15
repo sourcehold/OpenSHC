@@ -19,9 +19,9 @@ namespace Rendering {
             if (this->landscapeAnimationRandomTileArray[i] == 0) {
                 int randomTile = (MACRO_CALL(OpenSHC::OS_Func::_rand)() << 15 | MACRO_CALL(OpenSHC::OS_Func::_rand)())
                     % Map::MC_MAP_TILES_COUNT;
-                if ((DAT_TileMapState::instance.LogicLayer[randomTile] & Map::LogicHelpers::L_SEA) != 0
-                    && (DAT_TileMapState::instance.MiscDisplayLayer[randomTile] & Map::LogicHelpers::MD_SEA_EDGES) == 0
-                    && (DAT_TileMapState::instance.Logic2Layer[randomTile] & Map::LogicHelpers::L2_PLATEAU_HIGH) == 0) {
+                if ((DAT_TileMapState::instance.LogicLayer[randomTile] & Map::LogicHelpers::L_SEA)
+                    && !(DAT_TileMapState::instance.MiscDisplayLayer[randomTile] & Map::LogicHelpers::MD_SEA_EDGES)
+                    && !(DAT_TileMapState::instance.Logic2Layer[randomTile] & Map::LogicHelpers::L2_PLATEAU_HIGH)) {
                     this->landscapeAnimationRandomTileArray[i] = randomTile;
                     this->landscapeSeaWhiteCapsAnimationFrames[i] = 0;
                 }

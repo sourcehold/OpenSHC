@@ -131,7 +131,7 @@ namespace Rendering {
             }
         }
         int frame;
-        if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+        if (!DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics) {
             switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
             case OpenSHC::Map::Buildings::BT_GATEHOUSELARGE:
                 if (5
@@ -519,9 +519,9 @@ namespace Rendering {
                 }
             }
         }
-        if ((DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag != 0)
-            && (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                == OpenSHC::Map::Buildings::BT_OXTETHER)) {
+        if (DAT_BuildingsState::instance.buildings[buildingID].displayOwnerFlag
+            && DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                == OpenSHC::Map::Buildings::BT_OXTETHER) {
             DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
             frame = DAT_BuildingsState::instance.buildings[buildingID].overlayImageID;
             DAT_CurrentlyRenderedSpriteID::instance = OpenSHC::IO::Graphics::GID_ANIM_FLAG_SMALL;
@@ -537,7 +537,7 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
             return;
         }
-        if (DAT_TileMapState::instance.disableElevationRendering != FALSE) {
+        if (DAT_TileMapState::instance.disableElevationRendering) {
             return;
         }
         DAT_CurrentlyRenderedSpriteID::instance = (GmID)DAT_BuildingsState::instance.buildings[buildingID].spriteID2;
@@ -561,7 +561,7 @@ namespace Rendering {
         }
         buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         if (buildingType == OpenSHC::Map::Buildings::BT_TOWER2) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+            if (!DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics) {
                 int frame = DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2;
                 if (frame != 0) {
                     MACRO_CALL_MEMBER(
@@ -576,7 +576,7 @@ namespace Rendering {
                 }
             }
         } else if (buildingType == OpenSHC::Map::Buildings::BT_TOWER3) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+            if (!DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics) {
                 int frame = DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2;
                 if (frame != 0) {
                     MACRO_CALL_MEMBER(
@@ -591,7 +591,7 @@ namespace Rendering {
                 }
             }
         } else if (buildingType == OpenSHC::Map::Buildings::BT_TOWER4) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+            if (!DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics) {
                 int frame = DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2;
                 if (frame != 0) {
                     MACRO_CALL_MEMBER(
@@ -606,7 +606,7 @@ namespace Rendering {
                 }
             }
         } else if (buildingType == OpenSHC::Map::Buildings::BT_TOWER5) {
-            if (DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics == 0) {
+            if (!DAT_BuildingsState::instance.buildings[buildingID].useOffsetGraphics) {
                 int frame = DAT_BuildingsState::instance.buildings[buildingID].extraAnimationSprite2;
                 if (frame != 0) {
                     MACRO_CALL_MEMBER(

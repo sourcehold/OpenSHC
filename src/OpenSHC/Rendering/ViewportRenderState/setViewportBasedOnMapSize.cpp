@@ -28,7 +28,7 @@ namespace Rendering {
             * Enums::VC_TILE_ROW_PIXEL_HEIGHT;
         int minViewportX = (mapBorder / 2 + 1) * Enums::VC_TILE_PIXEL_WIDTH;
         int minViewportY = mapBorder * Enums::VC_TILE_ROW_PIXEL_HEIGHT + Enums::VC_TILE_PIXEL_HEIGHT;
-        if (this->viewportState.isZoomedOutUnk != 0) {
+        if (this->viewportState.isZoomedOutUnk) {
             minViewportX = (mapBorder / 2 - 4) * Enums::VC_TILE_PIXEL_WIDTH;
         }
 
@@ -69,7 +69,7 @@ namespace Rendering {
 
         if (DAT_TileMapState::instance.mapSize == Map::MC_MAP_SIZE_160
             && DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_1024x768
-            && this->viewportState.isZoomedOutUnk != 0) {
+            && this->viewportState.isZoomedOutUnk) {
             minViewportY -= 10;
             maxViewportY -= 10;
         }
@@ -81,7 +81,7 @@ namespace Rendering {
             this->viewportState.viewportY = (minViewportY - maxViewportY) / 2 + maxViewportY;
         }
 
-        if (this->viewportState.isZoomedOutUnk == 0) {
+        if (!this->viewportState.isZoomedOutUnk) {
             this->viewportState.currentCameraOffsetX
                 = (DAT_ViewportRenderState::instance.viewportState.viewportX & (Enums::VC_TILE_PIXEL_WIDTH - 1))
                 + Enums::VC_MAP_SURFACE_MARGIN_X;

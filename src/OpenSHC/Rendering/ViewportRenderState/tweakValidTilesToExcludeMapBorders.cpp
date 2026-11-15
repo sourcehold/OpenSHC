@@ -13,14 +13,13 @@ namespace Rendering {
     {
         for (int y = 0; y < Map::MC_MAP_XY_LIMIT; y++) {
             for (int x = 0; x < Map::MC_MAP_XY_LIMIT; x++) {
-                if (this->DAT_BinaryTileMap400x400[y * Map::MC_MAP_XY_LIMIT + x] == 0) {
+                if (!this->DAT_BinaryTileMap400x400[y * Map::MC_MAP_XY_LIMIT + x]) {
                     continue;
                 }
                 int tile = this->translationMatrix[y].addXgetTile + x;
                 this->tileTranslationMatrix_YComponent[tile] = (short)y;
-                if ((DAT_TileMapState::instance.LogicLayer[tile]
-                        & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE))
-                    != 0) {
+                if (DAT_TileMapState::instance.LogicLayer[tile]
+                    & (Map::LogicHelpers::L_BORDER | Map::LogicHelpers::L_BORDER_EDGE)) {
                     this->DAT_BinaryTileMap400x400[y * Map::MC_MAP_XY_LIMIT + x] = 0;
                 }
             }

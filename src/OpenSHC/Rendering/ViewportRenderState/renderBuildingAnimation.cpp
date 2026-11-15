@@ -22,20 +22,20 @@ namespace Rendering {
         if (DAT_BuildingsState::instance.buildings[buildingID].animationFrame == 0) {
             return;
         }
-        if (DAT_TileMapState::instance.disableElevationRendering != FALSE) {
+        if (DAT_TileMapState::instance.disableElevationRendering) {
             return;
         }
         if (DAT_BuildingsState::instance.buildings[buildingID].drawBridgeState1 != 0) {
             return;
         }
 
-        if (clipToBuilding != FALSE) {
+        if (clipToBuilding) {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::temporarySaveMapSurfaceHeightRangeUnk,
                 DAT_TextureRenderCoreObject::ptr)
             ();
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setMapSurfaceHeightRange,
                 DAT_TextureRenderCoreObject::ptr)
-            ((screenY - 39 < 0) ? 0 : screenY - 39, Enums::VC_MAP_SURFACE_HEIGHT);
+            (screenY - 39 < 0 ? 0 : screenY - 39, Enums::VC_MAP_SURFACE_HEIGHT);
         }
 
         DAT_RenderedUnitOwner::instance = DAT_BuildingsState::instance.buildings[buildingID].playerColorUnk;
@@ -56,7 +56,7 @@ namespace Rendering {
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetX + screenX,
                 DAT_BuildingsState::instance.buildings[buildingID].spriteOffetY + screenY);
         }
-        if (clipToBuilding != FALSE) {
+        if (clipToBuilding) {
             MACRO_CALL_MEMBER(
                 OpenSHC::UI::Rendering::TextureRenderCore_Func::restoreMapSurfaceHeightRangeFromTemporaryUnk,
                 DAT_TextureRenderCoreObject::ptr)
