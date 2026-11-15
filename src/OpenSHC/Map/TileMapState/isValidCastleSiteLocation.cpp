@@ -48,7 +48,7 @@ namespace Map {
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
                 0, index, &tile, (int*)&y, baseTile, baseY);
-            int const brushTile = tile;
+            int const brushTile = *(int volatile*)&tile;
             if (this->OrganismLayer[brushTile] != 0) {
                 continue;
             }
