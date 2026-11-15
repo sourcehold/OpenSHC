@@ -66,17 +66,17 @@ namespace Map {
             }
 
             this->HeightLayer[brushTile] += 1;
-            byte const& height = this->HeightLayer[brushTile];
+            byte& height = this->HeightLayer[brushTile];
             if (mapper == 0) {
                 // mapper min
-                this->HeightLayer[brushTile] = 8;
+                height = 8;
                 this->Logic2Layer[brushTile] &= 0xf3;
             } else if (mapper == 1) {
                 // mapper max, bug:fixme: is 156 really the maximum height?
-                this->HeightLayer[brushTile] = 156;
+                height = 156;
                 this->LogicLayer[brushTile] |= 0x8000;
             } else if (mapper == 5) {
-                this->HeightLayer[brushTile] = 100;
+                height = 100;
             } else if (mapper == 2) {
                 // scale towards the brush average, in eighths of the ratio to it
                 int ratio = 100;
@@ -87,7 +87,7 @@ namespace Map {
                 if (ratio > 156) {
                     ratio = 156;
                 }
-                this->HeightLayer[brushTile] = (byte)ratio;
+                height = (byte)ratio;
             }
 
             if ((this->LogicLayer[brushTile] & L_ROCKY) != 0) {
