@@ -41655,7 +41655,7 @@ SHC_3BB0A8C1_0x005034A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00503720 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x005037B0 | 93.4% | fix gatehouse tile x; regalloc
+SHC_3BB0A8C1_0x005037B0 | 95.5% | slot weights; keep/gate slots
 
 SHC_3BB0A8C1_0x005046A0 | 0.0% | Pending
 
