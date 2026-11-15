@@ -27,7 +27,7 @@ namespace Map {
         int const stored = DAT_BuildingsState::instance.buildings[buildingID].currentNumberOfResource
             - DAT_BuildingsState::instance.buildings[buildingID].someResourceNumber;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int const tile
@@ -296,11 +296,7 @@ namespace Map {
                         + this->buildingRotationRelatedValue - 1;
                 }
             }
-            index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (++index < this->constructionTileCount);
     }
 
 }
