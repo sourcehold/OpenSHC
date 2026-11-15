@@ -44,18 +44,20 @@ namespace Map {
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 60;
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] |= L_CRENEL;
-            this->HeightLayer[tile] += 98;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            byte& height = this->HeightLayer[tile];
+            height += 98;
+            if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if ((x & 1) == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
             this->LogicLayer[tile] |= L_CRENEL;
-            this->HeightLayer[tile] += 68;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            byte& height = this->HeightLayer[tile];
+            height += 68;
+            if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if ((x & 1) == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {

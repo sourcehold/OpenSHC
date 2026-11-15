@@ -12,6 +12,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
@@ -30,6 +31,7 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Enums::CardinalDirection;
     using OpenSHC::Map::Enums::MapOrientation;
     using OpenSHC::Map::Enums::MapOrientationInt;
@@ -413,6 +415,10 @@ namespace Map {
 
         uint getTotalHeightAtTile(int tile);
 
+        // a second function with getTotalHeightAtTile's body, which the original's linker folded into the same
+        // address; it has no game address of its own and therefore no resolver
+        uint getTotalHeightAtTile2(int tile);
+
         int getTotalHeightAt(int tile, int playerID);
 
         uint getHeightAtTileIncludingOwnersBuildings(int tile, int playerID);
@@ -610,7 +616,7 @@ namespace Map {
         void planMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
-            int playerID, uint x, uint y, BuildingType buildingType, uint width, int variation, int height);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, uint width, int variation, int height);
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
@@ -627,7 +633,7 @@ namespace Map {
             int param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, undefined4 param_5, int param_6, int param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 

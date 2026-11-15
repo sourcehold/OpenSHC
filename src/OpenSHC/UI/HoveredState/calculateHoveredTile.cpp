@@ -136,7 +136,7 @@ namespace UI {
                 // any other mapper is a building placement preview, in the element's rotation
                 DAT_TileMapState::instance.skipPlacementFailChecks = 1;
                 DAT_TileMapState::instance.uiBuildingRotation = this->elements[i].rotationOrExtraInfo;
-                // the type goes as a word (movzx), though the header's parameter is a MappersEnum
+                // the type goes as a word (movzx)
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setConstructionGFXLayerBasedOnPlacementChecks,
                     DAT_TileMapState::ptr)(this->elements[i].x, this->elements[i].y,
                     (Commands::MappersEnum)(ushort)this->elements[i].type, this->elements[i].size);
