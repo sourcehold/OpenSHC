@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -16,6 +17,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F93E0
     void TileMapState::destroyWallsOfPlayer(int playerID)
@@ -24,7 +26,7 @@ namespace Map {
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 continue;
             }
-            if ((this->WallOwnerLayer[tile] & 7) + 1 != playerID) {
+            if ((this->WallOwnerLayer[tile] & WO_OWNER_MASK) + 1 != playerID) {
                 continue;
             }
 
@@ -34,7 +36,7 @@ namespace Map {
                 &= ~(L_WALL_OR_GATEHOUSE | L_CRENEL | L_STAIRS | L_UNKNOWN_WALL_RELATED | L_CRENEL_VARIATIONUnk);
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
             this->DamageLayer[tile] = 0;
-            uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+            int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
             DAT_TileMapState::instance.field_0x554a30 = 1;
             int x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;

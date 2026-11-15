@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -25,6 +26,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005034A0
     void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
@@ -45,17 +47,17 @@ namespace Map {
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] |= L_CRENEL;
             this->HeightLayer[tile] += 98;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if ((x & 1) == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
             this->LogicLayer[tile] |= L_CRENEL;
             this->HeightLayer[tile] += 68;
-            if ((int)(x & 1) == 1 && (y & 1) == 0) {
+            if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
-            } else if ((int)(x & 1) == 0 && (y & 1) == 1) {
+            } else if ((x & 1) == 0 && (y & 1) == 1) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_STAIR1) {
@@ -90,7 +92,7 @@ namespace Map {
         if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             this->LogicLayer[tile] |= L_UNKNOWN_WALL_RELATED;
         }
-        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (playerID - 1);
+        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~WO_OWNER_MASK) | (playerID - 1);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
             DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);

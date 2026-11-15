@@ -39,7 +39,7 @@ namespace Map {
                 if (this->pitchDitches[id].field_0x12 == 20) {
                     this->pitchDitches[id].state += 1;
                     this->pitchDitches[id].field_0x12 = 0;
-                    uint height = DAT_TileMapState::instance.HeightLayer[tile];
+                    int height = DAT_TileMapState::instance.HeightLayer[tile];
                     for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.field_0x376c); i++) {
                         int neighbour = DAT_ViewportRenderState::instance
                                             .translationMatrix[this->pitchDitches[id].y

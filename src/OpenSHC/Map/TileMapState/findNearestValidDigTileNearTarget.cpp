@@ -26,12 +26,11 @@ namespace Map {
             return FALSE;
         }
 
-        int area = (short)this
-                       ->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1];
+        int area = this->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1];
         int targetTile = DAT_ViewportRenderState::instance.translationMatrix[y2].addXgetTile + x2;
         int bestDistance = 10000;
         int bestIndex = -1;
-        uint targetHeight = this->HeightLayer[targetTile];
+        int targetHeight = this->HeightLayer[targetTile];
         int targetBuildingID = this->BuildingLayer[targetTile];
         if (targetBuildingID != 0) {
             targetHeight
@@ -46,14 +45,14 @@ namespace Map {
             if (this->PathConnectionLayer[tile] != area) {
                 continue;
             }
-            uint height = this->HeightLayer[tile];
+            int height = this->HeightLayer[tile];
             int buildingID = this->BuildingLayer[tile];
             if (buildingID != 0) {
                 height
                     += MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::getBuildingHeightForBuildingID,
                         DAT_BuildingsState::ptr)(buildingID);
             }
-            if ((int)height >= (int)(targetHeight + 16) || (int)height <= (int)(targetHeight - 16)) {
+            if (height >= targetHeight + 16 || height <= targetHeight - 16) {
                 continue;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,

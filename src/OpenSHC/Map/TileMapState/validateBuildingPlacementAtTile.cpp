@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -12,6 +13,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9DF0
     void TileMapState::validateBuildingPlacementAtTile(int playerID, int x, int y)
@@ -24,7 +26,7 @@ namespace Map {
             this->buildingPlacementFail = TRUE;
         }
         if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0 && this->BuildingLayer[tile] == 0) {
-            if ((this->WallOwnerLayer[tile] & 7) + 1 != playerID) {
+            if ((this->WallOwnerLayer[tile] & WO_OWNER_MASK) + 1 != playerID) {
                 return;
             }
             this->buildingPlacementFail = FALSE;

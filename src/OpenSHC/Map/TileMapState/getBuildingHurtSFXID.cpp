@@ -7,6 +7,8 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8210
     uint TileMapState::getBuildingHurtSFXID(int tileUnk)
     {
@@ -49,7 +51,10 @@ namespace Map {
                 return 1;
             }
         }
-        return (uint)this->LogicLayer[tileUnk] >> 7 & 2;
+        if ((this->LogicLayer[tileUnk] & L_WALL_OR_GATEHOUSE) != 0) {
+            return 2;
+        }
+        return 0;
     }
 
 }
