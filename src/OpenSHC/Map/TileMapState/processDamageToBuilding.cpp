@@ -528,7 +528,8 @@ namespace Map {
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
             DAT_PathFindingState::ptr)(7, xPosition, yPosition);
-        return replaced != 0 ? FALSE : destroyed;
+        BOOLEnum const result = destroyed;
+        return replaced != 0 ? FALSE : result;
     }
 
 }
