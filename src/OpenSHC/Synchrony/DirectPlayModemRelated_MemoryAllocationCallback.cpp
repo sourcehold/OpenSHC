@@ -19,6 +19,7 @@ BOOLEnum __stdcall Synchrony::DirectPlayModemRelated_MemoryAllocationCallback(
 {
     char* entry = data;
     if (MACRO_CALL(OS_Func::isEqualGUID)(guidDataType, &GUID_DPAID_Modem::instance)) {
+        // A for loop with the step in its header compiles differently (95.6%).
         while (strlen(entry) != 0) {
             if (DAT_GameSynchronyState::instance.modemScrollbarCount >= 30) {
                 return FALSE;
