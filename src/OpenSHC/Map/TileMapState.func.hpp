@@ -7,6 +7,8 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterialInt.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransitionInt.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
@@ -21,6 +23,8 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingType;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::Map::Enums::CardinalDirection;
+        using OpenSHC::Map::Enums::HitSoundMaterialInt;
+        using OpenSHC::Map::Enums::LoweredViewTransitionInt;
         using OpenSHC::Map::Enums::MapOrientation;
         using OpenSHC::Map::LogicHelpers::Logic1;
         using OpenSHC::Map::LogicHelpers::Logic2;
@@ -60,8 +64,8 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F6F90, &TileMapState::setMapSize)
         setMapSize;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F6FD0, &TileMapState::triggerLoweredView)
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(LoweredViewTransitionInt), false,
+            Address::SHC_3BB0A8C1_0x004F6FD0, &TileMapState::triggerLoweredView)
         triggerLoweredView;
 
         MACRO_FUNCTION_RESOLVER(
@@ -88,7 +92,7 @@ namespace Map {
             &TileMapState::computeTileLuminescence)
         computeTileLuminescence;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x004F80E0,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x004F80E0,
             &TileMapState::increaseHeightForTunnelSingleTile)
         increaseHeightForTunnelSingleTile;
 
@@ -100,8 +104,8 @@ namespace Map {
             &TileMapState::resetTileToDefaultState)
         resetTileToDefaultState;
 
-        MACRO_FUNCTION_RESOLVER(
-            uint (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F8210, &TileMapState::getBuildingHurtSFXID)
+        MACRO_FUNCTION_RESOLVER(HitSoundMaterialInt (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F8210,
+            &TileMapState::getBuildingHurtSFXID)
         getBuildingHurtSFXID;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F8300,
@@ -124,7 +128,7 @@ namespace Map {
             &TileMapState::isWallCornerForCardinalDirection)
         isWallCornerForCardinalDirection;
 
-        MACRO_FUNCTION_RESOLVER(uint (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8780,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x004F8780,
             &TileMapState::isWallCornerForDiagonalDirection)
         isWallCornerForDiagonalDirection;
 
@@ -208,7 +212,7 @@ namespace Map {
             &TileMapState::checkDrawbridgePlacement)
         checkDrawbridgePlacement;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FA460,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FA460,
             &TileMapState::getRubbleGraphicStageForDamageLevel)
         getRubbleGraphicStageForDamageLevel;
 
@@ -292,11 +296,11 @@ namespace Map {
             &TileMapState::renderWallPlacementPreview)
         renderWallPlacementPreview;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FBC30,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004FBC30,
             &TileMapState::getCastleBuildRangeForMapSize)
         getCastleBuildRangeForMapSize;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int*, int*, int, uint), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int*, int*, int, int), false,
             Address::SHC_3BB0A8C1_0x004FBD80, &TileMapState::getTileForBrush)
         getTileForBrush;
 
@@ -353,7 +357,7 @@ namespace Map {
         returnSomeHeight;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FFB10, &TileMapState::getTotalHeightAtTile)
+            int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004FFB10, &TileMapState::getTotalHeightAtTile)
         getTotalHeightAtTile;
 
         MACRO_FUNCTION_RESOLVER(
@@ -456,11 +460,11 @@ namespace Map {
             &TileMapState::swapPitchOwnership)
         swapPitchOwnership;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(uint, uint, uint, uint), false,
-            Address::SHC_3BB0A8C1_0x00500980, &TileMapState::findNearestValidDigTileNearTarget)
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x00500980,
+            &TileMapState::findNearestValidDigTileNearTarget)
         findNearestValidDigTileNearTarget;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, uint), false, Address::SHC_3BB0A8C1_0x00500B50,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00500B50,
             &TileMapState::computeTileAlongAxisOffset)
         computeTileAlongAxisOffset;
 
@@ -492,7 +496,7 @@ namespace Map {
             &TileMapState::changeMapOrientation)
         changeMapOrientation;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, int), false, Address::SHC_3BB0A8C1_0x00501CD0,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int, int), false, Address::SHC_3BB0A8C1_0x00501CD0,
             &TileMapState::increaseHeightForTunnelWithBrush)
         increaseHeightForTunnelWithBrush;
 
@@ -520,7 +524,7 @@ namespace Map {
             &TileMapState::useTerrainHeightBrush)
         useTerrainHeightBrush;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, uint), false, Address::SHC_3BB0A8C1_0x00502950,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00502950,
             &TileMapState::getMaxWallHeightInBrushArea)
         getMaxWallHeightInBrushArea;
 
@@ -532,7 +536,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00502F30, &TileMapState::placeWalls)
         placeWalls;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, MappersEnum), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int, MappersEnum), false,
             Address::SHC_3BB0A8C1_0x005034A0, &TileMapState::placeDefensiveStructureTile)
         placeDefensiveStructureTile;
 
