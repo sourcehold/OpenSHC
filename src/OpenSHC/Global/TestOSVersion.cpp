@@ -1,4 +1,4 @@
-#include "OpenSHC/Global.func.hpp"
+#include "../Global.func.hpp"
 
 namespace OpenSHC {
 

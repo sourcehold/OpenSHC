@@ -50,19 +50,19 @@ void Synchrony::InitSkirmishLobbyData()
     DAT_GameCore::instance.gameMode_2 = Game::GM_SKIRMISH_AND_MULTIPLAYER;
     DAT_GameSynchronyState::instance.lobbyMapSortOrder = 6;
     INT_00b95ab8::instance = 0;
-    for (int i = 0; i < 20; ++i) {
+    for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray); ++i) {
         DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray[i]
             = DAT_RenderingDefinedData::instance
                   .SkirmishIntensityRelatedArray[0][DAT_GameSynchronyState::instance.skirmishTechLevel][i];
     }
-    for (int i = 0; i < 10; ++i) {
+    for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1); ++i) {
         DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1[i]
             = DAT_RenderingDefinedData::instance
                   .SkirmishIntensityRelatedArray2[DAT_GameSynchronyState::instance.skirmishTechLevel][i];
     }
     DAT_GameSynchronyState::instance.skirmishStartGold
         = DAT_RenderingDefinedData::instance.StartGold[DAT_GameSynchronyState::instance.skirmishTechLevel / 2];
-    for (int i = 0; i < 9; ++i) {
+    for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
         DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
     }
     if (DAT_GameSynchronyState::instance.isHost) {

@@ -1,6 +1,7 @@
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Input/MouseState.func.hpp"
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
@@ -97,10 +98,11 @@ namespace Map {
             }
             return;
         }
+        bool missionWon = false;
         if (DAT_GameCore::instance.missionNumber1to20 == 16) {
             if (DAT_GameState::instance.mapAndTime.militaryCampaignStage == 0) {
                 int hits = 0;
-                for (int i = 1; i < 9; ++i) {
+                for (int i = 1; i < countof(DAT_GameState::instance.mapAndTime.emenyHitArray); ++i) {
                     hits += DAT_GameState::instance.mapAndTime.emenyHitArray[i];
                 }
                 if (hits >= 8) {
@@ -156,7 +158,7 @@ namespace Map {
                         && DAT_GameState::instance.mapAndTime.year == DAT_GameState::instance.mapAndTime.yearCopy)
                     || DAT_GameState::instance.mapAndTime.year > DAT_GameState::instance.mapAndTime.yearCopy) {
                     DAT_GameState::instance.mapAndTime.militaryCampaignStage = 5;
-                    goto missionWon;
+                    missionWon = true;
                 }
             } else if (DAT_GameState::instance.mapAndTime.militaryCampaignStage == 3) {
                 if (DAT_GameState::instance.playerDataArray[2].lordKilledByPlayerID != 0) {
@@ -248,7 +250,7 @@ namespace Map {
                         && DAT_GameState::instance.mapAndTime.year == DAT_GameState::instance.mapAndTime.yearCopy)
                     || DAT_GameState::instance.mapAndTime.year > DAT_GameState::instance.mapAndTime.yearCopy) {
                     DAT_GameState::instance.mapAndTime.militaryCampaignStage = 7;
-                    goto missionWon;
+                    missionWon = true;
                 }
             } else if (DAT_GameState::instance.mapAndTime.militaryCampaignStage == 5) {
                 if (DAT_GameState::instance.playerDataArray[2].lordKilledByPlayerID != 0) {
@@ -317,7 +319,7 @@ namespace Map {
                         && DAT_GameState::instance.mapAndTime.year == DAT_GameState::instance.mapAndTime.yearCopy)
                     || DAT_GameState::instance.mapAndTime.year > DAT_GameState::instance.mapAndTime.yearCopy) {
                     DAT_GameState::instance.mapAndTime.militaryCampaignStage = 5;
-                    goto missionWon;
+                    missionWon = true;
                 }
             }
         } else if (DAT_GameCore::instance.missionNumber1to20 == 19) {
@@ -392,7 +394,7 @@ namespace Map {
                         && DAT_GameState::instance.mapAndTime.year == DAT_GameState::instance.mapAndTime.yearCopy)
                     || DAT_GameState::instance.mapAndTime.year > DAT_GameState::instance.mapAndTime.yearCopy) {
                     DAT_GameState::instance.mapAndTime.militaryCampaignStage = 6;
-                    goto missionWon;
+                    missionWon = true;
                 }
             }
         } else if (DAT_GameCore::instance.missionNumber1to20 == 20) {
@@ -491,13 +493,13 @@ namespace Map {
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_NEW_TEXT2, 23),
                         (char*)s__005a5339, (char*)s__005a5339);
-                    goto missionWon;
+                    missionWon = true;
                 }
             }
         }
-        return;
-
-    missionWon:
+        if (!missionWon) {
+            return;
+        }
         DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].playerDeathRelated
             = 1;
         DAT_GameState::instance.mapAndTime.unknownCountdown01 = 240;

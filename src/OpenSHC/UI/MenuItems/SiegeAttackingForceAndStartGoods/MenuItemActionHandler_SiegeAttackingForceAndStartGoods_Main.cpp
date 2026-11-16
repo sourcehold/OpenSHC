@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
@@ -42,7 +43,7 @@ namespace UI {
                     DAT_MenuModalComposition2::instance.textIndex
                         = DAT_MissionAestheticsDefinedData::instance
                               .field_0x3554[DAT_MapPropertiesState::instance.indexStored];
-                    DAT_MenuModalComposition2::instance.textGroup = 199;
+                    DAT_MenuModalComposition2::instance.textGroup = DE::SHCDE::TEXT_SCENARIO;
                     MACRO_CALL_MEMBER(
                         UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
                         UI::Enums::MMT_OVERLAY_SLIDER, DAT_ButtonX::instance - 37, DAT_ButtonY::instance + 25);
@@ -67,7 +68,7 @@ namespace UI {
                     DAT_MenuModalComposition2::instance.textIndex
                         = DAT_MissionAestheticsDefinedData::instance
                               .InvasionUnitLimits[DAT_MapPropertiesState::instance.indexStored + 4];
-                    DAT_MenuModalComposition2::instance.textGroup = 199;
+                    DAT_MenuModalComposition2::instance.textGroup = DE::SHCDE::TEXT_SCENARIO;
                     MACRO_CALL_MEMBER(
                         UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
                         UI::Enums::MMT_OVERLAY_SLIDER, DAT_ButtonX::instance - 37, DAT_ButtonY::instance + 25);
@@ -94,7 +95,7 @@ namespace UI {
                     DAT_MenuModalComposition2::instance.textIndex
                         = (int)DAT_MissionAestheticsDefinedData::instance
                               .field_0xa64[30][11 + DAT_MapPropertiesState::instance.indexStored];
-                    DAT_MenuModalComposition2::instance.textGroup = 199;
+                    DAT_MenuModalComposition2::instance.textGroup = DE::SHCDE::TEXT_SCENARIO;
                     MACRO_CALL_MEMBER(
                         UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
                         UI::Enums::MMT_OVERLAY_SLIDER, DAT_ButtonX::instance - 37, DAT_ButtonY::instance + 25);

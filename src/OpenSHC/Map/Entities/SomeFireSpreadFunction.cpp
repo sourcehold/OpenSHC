@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_EntityDefinedData.hpp"
@@ -26,8 +27,8 @@ namespace Map {
         y += DAT_EntityDefinedData::instance.XYOffsetsInAllDirections[random & 0x3f][1];
         uint const tileX = x / 8;
         uint const tileY = y / 8;
-        bool const onMap = tileX <= 399 && tileY <= 399
-            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] != 0;
+        bool const onMap = tileX <= MC_MAP_XY_LIMIT_INCLUSIVE && tileY <= MC_MAP_XY_LIMIT_INCLUSIVE
+            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * MC_MAP_XY_LIMIT + tileX] != 0;
         if (!onMap) {
             return 0;
         }

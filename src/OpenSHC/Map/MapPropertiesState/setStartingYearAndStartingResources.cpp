@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -15,20 +16,20 @@ namespace Map {
     {
         DAT_MapPropertiesState::instance.SEC_StartingYear = 1181;
         DAT_GameState::instance.mapAndTime.year = 1181;
-        for (int i = 0; i < 25; ++i) {
+        for (int i = 0; i < countof(DAT_MapPropertiesState::instance.SEC_StartingResources); ++i) {
             DAT_MapPropertiesState::instance.SEC_StartingResources[i] = 0;
         }
-        for (int i = 0; i < 25; ++i) {
+        for (int i = 0; i < countof(DAT_MapPropertiesState::instance.SEC_Section1065.tradeabilityArray); ++i) {
             DAT_MapPropertiesState::instance.SEC_Section1065.tradeabilityArray[i] = 1;
         }
         DAT_MapPropertiesState::instance.SEC_StartingMonth = 0;
         DAT_GameState::instance.mapAndTime.month = 0;
         DAT_MapPropertiesState::instance.eventsCount = 0;
         // the siege information is a block of 20 unit counts
-        for (int i = 0; i < 20; ++i) {
+        for (int i = 0; i < countof(DAT_MapPropertiesState::instance.SEC_SiegeInformation); ++i) {
             DAT_MapPropertiesState::instance.SEC_SiegeInformation[i] = 0;
         }
-        for (int i = 0; i < 6; ++i) {
+        for (int i = 0; i < countof(DAT_MapPropertiesState::instance.SEC_Section1067.siegeEngineCounts); ++i) {
             DAT_MapPropertiesState::instance.SEC_Section1067.siegeEngineCounts[i] = 0;
         }
         DAT_MapPropertiesState::instance.SEC_StartingPopularity = 100;
@@ -39,7 +40,7 @@ namespace Map {
         MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(yearText);
         DAT_MapPropertiesState::instance.eventListSelection = -1;
         DAT_MapPropertiesState::instance.eventListScrollOffset = 0;
-        for (int i = 0; i < 100; ++i) {
+        for (int i = 0; i < countof(this->buildingAvailability); ++i) {
             this->buildingAvailability[i] = 1;
         }
         MACRO_CALL_MEMBER(MapPropertiesState_Func::commitBuildingAvailability, this)();

@@ -1,8 +1,9 @@
+#include "../HistoricMissionPicture.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
-#include "OpenSHC/UI/MenuViews/HistoricMissionPicture.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 

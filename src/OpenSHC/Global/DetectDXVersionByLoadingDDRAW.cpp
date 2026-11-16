@@ -1,4 +1,5 @@
-#include "OpenSHC/Global.func.hpp"
+#include "../Global.func.hpp"
+
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/IID_IDirectDraw7.hpp"

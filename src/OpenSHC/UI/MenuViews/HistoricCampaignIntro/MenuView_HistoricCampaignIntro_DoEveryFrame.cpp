@@ -1,11 +1,13 @@
+#include "../HistoricCampaignIntro.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
-#include "OpenSHC/UI/MenuViews/HistoricCampaignIntro.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00eb0b20.hpp"
 #include "OpenSHC/Globals/DAT_00ed2780.hpp"
@@ -70,19 +72,19 @@ namespace UI {
                         switch (DAT_GameCore::instance.historicCampaignNumber) {
                         case 1:
                             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk,
-                                DAT_SoundSystemState::ptr)("fx\\speech\\intro_01.wav", 1);
+                                DAT_SoundSystemState::ptr)(S_FX_SPEECH_INTRO_01_WAV_005AB144, 1);
                             break;
                         case 2:
                             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk,
-                                DAT_SoundSystemState::ptr)("fx\\speech\\intro_02.wav", 1);
+                                DAT_SoundSystemState::ptr)(S_FX_SPEECH_INTRO_02_WAV_005AB12C, 1);
                             break;
                         case 3:
                             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk,
-                                DAT_SoundSystemState::ptr)("fx\\speech\\intro_03.wav", 1);
+                                DAT_SoundSystemState::ptr)(S_FX_SPEECH_INTRO_03_WAV_005AB114, 1);
                             break;
                         case 4:
                             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::playSoundOnStream3Unk,
-                                DAT_SoundSystemState::ptr)("fx\\speech\\intro_04.wav", 1);
+                                DAT_SoundSystemState::ptr)(S_FX_SPEECH_INTRO_04_WAV_005AB0FC, 1);
                             break;
                         }
                     }

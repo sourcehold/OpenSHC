@@ -1,6 +1,6 @@
-#pragma warning(disable : 4996)
-
 #include "../General.func.hpp"
+
+#pragma warning(disable : 4996)
 
 #include "OpenSHC/Game/Skirmish.func.hpp"
 #include "OpenSHC/Synchrony/Commands.func.hpp"
@@ -9,6 +9,8 @@
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonBackgroundBlendStrength.hpp"
 #include "OpenSHC/Globals/DAT_ButtonW.hpp"
@@ -129,34 +131,34 @@ namespace UI {
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 0) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 94),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 5) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 94),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 96));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 10) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 94),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 97));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 20) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 94),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 98));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 98));
                 }
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -172,15 +174,15 @@ namespace UI {
                     (Commands::GameCommandType)52);
                 sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                     MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)79, 99),
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 99),
                     DAT_GameSynchronyState::instance.skirmishStrongWalls != 0
                         ? MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                              DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)74, 13)
+                              DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13)
                         : MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                              DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                              DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -203,7 +205,7 @@ namespace UI {
                     (undefined*)&DAT_GameSynchronyState::instance.skirmishPoints,
                     (Util::FunctionTypes::NoArgCallback*)MACRO_CALL(
                         Synchrony::Commands_Func::QueueChangeGameIntensityOrBalance));
-                DAT_MenuModalComposition2::instance.textGroup = 79;
+                DAT_MenuModalComposition2::instance.textGroup = DE::SHCDE::TEXT_XPLAY_WAITING_ROOM;
                 DAT_MenuModalComposition2::instance.textIndex = 88;
                 MACRO_CALL_MEMBER(
                     UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
@@ -214,15 +216,15 @@ namespace UI {
                     (Commands::GameCommandType)52);
                 sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                     MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)252, 5),
+                        DE::SHCDE::TEXT_SKIRMISH_MISC, 5),
                     DAT_GameSynchronyState::instance.skirmishNoCowThrowing != 0
                         ? MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                              DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)74, 13)
+                              DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13)
                         : MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                              DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                              DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -239,19 +241,19 @@ namespace UI {
                 if (DAT_GameSynchronyState::instance.skirmishNoDogs != 0) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 6),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 6),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)74, 13));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 6),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 6),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 }
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -268,19 +270,19 @@ namespace UI {
                 if (DAT_GameSynchronyState::instance.skirmishExtremeMode != 0) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 13),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 13),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)74, 13));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 13),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 13),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 }
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -297,19 +299,19 @@ namespace UI {
                 if (DAT_GameSynchronyState::instance.skirmishExtremeMode != 0) {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 14),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 14),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)74, 13));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 14),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 14),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 }
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -328,93 +330,93 @@ namespace UI {
                     (Commands::GameCommandType)52);
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 0) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)79, 95, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 1) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)79, 96, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 2) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)79, 97, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 3) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)79, 98, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 98, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 4) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)252, 8, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_SKIRMISH_MISC, 8, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 if (DAT_GameSynchronyState::instance.skirmishNoRushSetting == 5) {
                     MACRO_CALL_MEMBER(Text::TextManager_Func::renderInGameText2, DAT_TextManagerObject::ptr)(
-                        (DE::SHCDE::eTextSections)252, 9, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
-                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, 12117749, 0, 18, FALSE,
-                        (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
+                        DE::SHCDE::TEXT_SKIRMISH_MISC, 9, DAT_ButtonX::instance + DAT_ButtonW::instance - 20,
+                        DAT_ButtonY::instance + 7, Text::TTA_RIGHT, OpenSHC::Rendering::Colors::COL_B8E6F5, 0, 18,
+                        FALSE, (((int)DAT_ButtonBackgroundBlendStrength::instance - 32) * 32) / 32 + 32);
                 }
                 switch (DAT_GameSynchronyState::instance.skirmishNoRushSetting) {
                 case 0: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 95));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                     break;
                 }
                 case 1: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 96));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96));
                     break;
                 }
                 case 2: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 97));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97));
                     break;
                 }
                 case 3: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)79, 98));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 98));
                     break;
                 }
                 case 4: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 8));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 8));
                     break;
                 }
                 case 5: {
                     sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 7),
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)((DE::SHCDE::eTextSections)252, 9));
+                            DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 9));
                     break;
                 }
                 }
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::copyIntoTextArray, DAT_UserTextHandlerState::ptr)(
                     DAT_GameSynchronyState::instance.receivedChatMessage);
-                for (int i = 0; i < 9; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                     DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
                 }
                 DAT_GameSynchronyState::instance
@@ -425,7 +427,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(Text::UserTextHandler_Func::clearEntry, DAT_UserTextHandlerState::ptr)(
                     DAT_UserTextHandlerState::instance.textArrayIndex);
             }
-            for (int i = 0; i < 9; ++i) {
+            for (int i = 0; i < countof(DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray); ++i) {
                 DAT_GameSynchronyState::instance.DAT_ChatMessageReceiverArray[i] = 1;
             }
         }

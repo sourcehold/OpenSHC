@@ -16,7 +16,7 @@ namespace Map {
         int EntityState::createSeagull(int x, int y)
         {
             int seagullID = 1;
-            for (; seagullID < 100; ++seagullID) {
+            for (; seagullID < countof(this->seagullArray); ++seagullID) {
                 if (this->seagullArray[seagullID].field_0x8 == 0) {
                     break;
                 }
@@ -25,7 +25,7 @@ namespace Map {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         sizeof(this->seagullArray[seagullID]), 0, &this->seagullArray[seagullID]);
                 }
-                if (seagullID >= 99) {
+                if (seagullID >= countof(this->seagullArray) - 1) {
                     return 0;
                 }
             }

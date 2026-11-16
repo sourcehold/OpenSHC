@@ -3,6 +3,7 @@
 #include "OpenSHC/Global.func.hpp"
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
+#include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonX.hpp"
@@ -108,7 +109,7 @@ namespace UI {
                 break;
             }
 
-            DAT_MenuModalComposition2::instance.textGroup = 199;
+            DAT_MenuModalComposition2::instance.textGroup = DE::SHCDE::TEXT_SCENARIO;
             DAT_MenuModalComposition2::instance.textIndex = textIndex;
             MACRO_CALL_MEMBER(UI::MenuModalComposition_Func::setExtraActiveModalDialog, DAT_MenuModalComposition2::ptr)(
                 UI::Enums::MMT_OVERLAY_SLIDER, DAT_ButtonX::instance - 62, DAT_ButtonY::instance + 25);

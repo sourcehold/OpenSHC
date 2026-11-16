@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/UserTextHandler.func.hpp"
 #include "OpenSHC/string-literals.hpp"

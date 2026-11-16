@@ -1,9 +1,10 @@
+#include "../FindingNetworkSessions.func.hpp"
+
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Input/MouseState.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
-#include "OpenSHC/UI/MenuItems/FindingNetworkSessions.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/Commands/GameCommandType.hpp"
 #include "OpenSHC/DirectPlay/EnumSessionsFlagsEnum.hpp"
