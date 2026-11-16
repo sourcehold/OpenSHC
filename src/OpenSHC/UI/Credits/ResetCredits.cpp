@@ -9,7 +9,7 @@
 #include "OpenSHC/Globals/DWORD_00eb9ac4.hpp"
 #include "OpenSHC/Globals/INT_00eb1230.hpp"
 #include "OpenSHC/Globals/INT_00eb9ac0.hpp"
-#include "OpenSHC/Globals/INT_00ec083c.hpp"
+#include "OpenSHC/Globals/FLOAT_00ec083c.hpp"
 #include "OpenSHC/Globals/INT_00ed27a4.hpp"
 
 namespace OpenSHC {
@@ -23,7 +23,7 @@ namespace UI {
                 DAT_ARRAY_00ec0348::instance[i].type = 0;
             }
             DAT_UnknownBinkCount::instance = 0;
-            INT_00ec083c::instance = 0.0f;
+            FLOAT_00ec083c::instance = 0.0f;
             DAT_UnknownBinkIndex::instance = 0;
             DAT_NumberOfStoredMenuStrings::instance = 0;
             INT_00ed27a4::instance = 0;

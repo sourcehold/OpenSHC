@@ -987,7 +987,7 @@ PUBLIC ?instance@?$Extern@I$0ONDBLM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA
 
@@ -1513,7 +1513,7 @@ PUBLIC ?instance@?$Extern@M$0OMAIDE@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@H$0OMAIDI@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@H$0OMAIDM@@StructResolver@@2HA
+PUBLIC ?instance@?$Extern@M$0OMAIDM@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@$$BY0CFI@UGFXRelatedBuffer1@Graphics@IO@OpenSHC@@$0OMAIEA@@StructResolver@@2PAUGFXRelatedBuffer1@Graphics@IO@OpenSHC@@A
 
@@ -2674,7 +2674,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA EQU 00ED31C0h
 
-?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA EQU 00ED31C4h
+?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA EQU 00ED31C4h
 
 ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA EQU 00ED31C8h
 
@@ -3200,7 +3200,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0OMAIDI@@StructResolver@@2HA EQU 00EC0838h
 
-?instance@?$Extern@H$0OMAIDM@@StructResolver@@2HA EQU 00EC083Ch
+?instance@?$Extern@M$0OMAIDM@@StructResolver@@2MA EQU 00EC083Ch
 
 ?instance@?$Extern@$$BY0CFI@UGFXRelatedBuffer1@Graphics@IO@OpenSHC@@$0OMAIEA@@StructResolver@@2PAUGFXRelatedBuffer1@Graphics@IO@OpenSHC@@A EQU 00EC0840h
 
