@@ -79,8 +79,8 @@ namespace UI {
                 return;
             // each rock steps the brush up to the next odd size; one shared round-up for the five loses the match
             case OpenSHC::Commands::M_MAPPER_BIGROCK1:
-                DAT_TileMapState::instance.editorRockType = 1;
-                DAT_TileMapState::instance.rockOrientation = 0;
+                DAT_TileMapState::instance.editorRockType = OpenSHC::Map::Enums::ERT_BIGROCK1;
+                DAT_TileMapState::instance.rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
                 DAT_TileMapState::instance.currentMapperCommand = command;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 3;
@@ -91,8 +91,8 @@ namespace UI {
                 }
                 return;
             case OpenSHC::Commands::M_MAPPER_BIGROCK2:
-                DAT_TileMapState::instance.editorRockType = 2;
-                DAT_TileMapState::instance.rockOrientation = 2;
+                DAT_TileMapState::instance.editorRockType = OpenSHC::Map::Enums::ERT_BIGROCK2;
+                DAT_TileMapState::instance.rockOrientation = OpenSHC::Map::Enums::MO_EAST;
                 DAT_TileMapState::instance.currentMapperCommand = command;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 3;
@@ -103,8 +103,8 @@ namespace UI {
                 }
                 return;
             case OpenSHC::Commands::M_MAPPER_BIGROCK3:
-                DAT_TileMapState::instance.editorRockType = 3;
-                DAT_TileMapState::instance.rockOrientation = 4;
+                DAT_TileMapState::instance.editorRockType = OpenSHC::Map::Enums::ERT_BIGROCK3;
+                DAT_TileMapState::instance.rockOrientation = OpenSHC::Map::Enums::MO_SOUTH;
                 DAT_TileMapState::instance.currentMapperCommand = command;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 3;
@@ -115,8 +115,8 @@ namespace UI {
                 }
                 return;
             case OpenSHC::Commands::M_MAPPER_BIGROCK4:
-                DAT_TileMapState::instance.editorRockType = 4;
-                DAT_TileMapState::instance.rockOrientation = 6;
+                DAT_TileMapState::instance.editorRockType = OpenSHC::Map::Enums::ERT_BIGROCK4;
+                DAT_TileMapState::instance.rockOrientation = OpenSHC::Map::Enums::MO_WEST;
                 DAT_TileMapState::instance.currentMapperCommand = command;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 3;
@@ -127,8 +127,8 @@ namespace UI {
                 }
                 return;
             case OpenSHC::Commands::M_MAPPER_BIGROCK5:
-                DAT_TileMapState::instance.editorRockType = 5;
-                DAT_TileMapState::instance.rockOrientation = 0;
+                DAT_TileMapState::instance.editorRockType = OpenSHC::Map::Enums::ERT_BIGROCK5;
+                DAT_TileMapState::instance.rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
                 DAT_TileMapState::instance.currentMapperCommand = command;
                 if (DAT_TileMapState::instance.editorActiveBrush == 2) {
                     DAT_TileMapState::instance.editorActiveBrush = 3;

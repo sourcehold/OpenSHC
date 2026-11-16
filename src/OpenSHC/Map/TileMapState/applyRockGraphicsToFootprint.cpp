@@ -36,12 +36,12 @@ namespace Map {
                 if (this->disableElevationRendering == 0) {
                     this->GfxLayer[tile]
                         = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingOrientedPartIndex + surface
                         - 1;
                 } else if (DAT_LandscapeState::instance.rocks[rockID].size == 1) {
                     this->GfxLayer[tile]
                         = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
-                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingRotationRelatedValue + surface
+                        + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingOrientedPartIndex + surface
                         - 1;
                 } else {
                     this->GfxLayer[tile]

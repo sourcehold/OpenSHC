@@ -6,6 +6,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterial.hpp"
 #include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
@@ -99,8 +100,8 @@ namespace Map {
             &TileMapState::resetTileToDefaultState)
         resetTileToDefaultState;
 
-        MACRO_FUNCTION_RESOLVER(
-            int (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F8210, &TileMapState::getBuildingHurtSFXID)
+        MACRO_FUNCTION_RESOLVER(OpenSHC::Map::Enums::HitSoundMaterial (TileMapState::*)(int), false,
+            Address::SHC_3BB0A8C1_0x004F8210, &TileMapState::getBuildingHurtSFXID)
         getBuildingHurtSFXID;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F8300,

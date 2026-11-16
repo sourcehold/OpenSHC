@@ -77,7 +77,7 @@ namespace Map {
             this->RandomLayer[tile] = SEC_RNG::instance.currentNumber2;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(OpenSHC::Map::Enums::MO_NORTH);
-        this->DAT_FutureMapOrientation = OpenSHC::Map::Enums::CD_UPPER_LIMIT;
+        this->DAT_FutureMapOrientation = OpenSHC::Map::Enums::MO_UPPER_LIMIT;
     }
 
 }

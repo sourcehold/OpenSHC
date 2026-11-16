@@ -24,8 +24,7 @@ namespace Map {
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.SomeOrientationOrderArray); index++) {
-            CardinalDirection const orientation
-                = (CardinalDirection)DAT_TerrainDefinedData::instance.SomeOrientationOrderArray[index];
+            CardinalDirection const orientation = DAT_TerrainDefinedData::instance.SomeOrientationOrderArray[index];
             int neighbour = this->directionTranslationMatrix[y][orientation] + rowTile;
             if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0
                 && (this->LogicLayer[neighbour] & (L_STOCKPILEUnk | L_CRENEL_VARIATIONUnk)) == 0) {

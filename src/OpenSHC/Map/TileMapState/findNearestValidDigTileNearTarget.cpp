@@ -38,9 +38,9 @@ namespace Map {
                     DAT_BuildingsState::ptr)(targetBuildingID);
         }
 
-        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.field_0x378c); index++) {
-            int fromXPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].x + x2;
-            int fromYPosition = DAT_TerrainDefinedData::instance.field_0x378c[index].y + y2;
+        for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.twoTileAxisOffsets); index++) {
+            int fromXPosition = DAT_TerrainDefinedData::instance.twoTileAxisOffsets[index].x + x2;
+            int fromYPosition = DAT_TerrainDefinedData::instance.twoTileAxisOffsets[index].y + y2;
             int tile = DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile + fromXPosition;
             if (this->PathConnectionLayer[tile] != area) {
                 continue;
@@ -64,12 +64,12 @@ namespace Map {
         }
 
         if (bestIndex <= -1) {
-            this->field_0x5549a8 = x2;
-            this->field_0x5549ac = y2;
+            this->destinationNearTargetX = x2;
+            this->destinationNearTargetY = y2;
             return FALSE;
         }
-        this->field_0x5549a8 = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].x + x2;
-        this->field_0x5549ac = DAT_TerrainDefinedData::instance.field_0x378c[bestIndex].y + y2;
+        this->destinationNearTargetX = DAT_TerrainDefinedData::instance.twoTileAxisOffsets[bestIndex].x + x2;
+        this->destinationNearTargetY = DAT_TerrainDefinedData::instance.twoTileAxisOffsets[bestIndex].y + y2;
         return TRUE;
     }
 

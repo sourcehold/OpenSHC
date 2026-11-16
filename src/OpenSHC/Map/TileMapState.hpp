@@ -13,6 +13,8 @@
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/Map/Enums/EditorRockType.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterial.hpp"
 #include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
@@ -112,8 +114,8 @@ namespace Map {
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
         undefined4 gateOrientationVariant; // 0x0055488C length: 4
-        undefined4 rockOrientation; // 0x00554890 length: 4
-        undefined4 editorRockType; // 0x00554894 length: 4
+        OpenSHC::Map::Enums::MapOrientation rockOrientation; // 0x00554890 length: 4
+        OpenSHC::Map::Enums::EditorRockType editorRockType; // 0x00554894 length: 4
         int lastTime; // 0x00554898 length: 4
         MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
@@ -177,13 +179,13 @@ namespace Map {
         int DAT_WallTileCountCurrentDrag; // 0x00554988 length: 4
         undefined4 buildingX; // 0x0055498C length: 4
         undefined4 buildingY; // 0x00554990 length: 4
-        undefined4 buildingRotationRelatedValue; // 0x00554994 length: 4
+        undefined4 buildingOrientedPartIndex; // 0x00554994 length: 4
         undefined4 placementOnWall; // 0x00554998 length: 4
         undefined4 placementOnMoat; // 0x0055499C length: 4
         undefined4 savedCursorTile; // 0x005549A0 length: 4
         int showNoRubbleWhenDestroyingBuilding; // 0x005549A4 length: 4
-        undefined4 field_0x5549a8; // 0x005549A8 length: 4
-        undefined4 field_0x5549ac; // 0x005549AC length: 4
+        int destinationNearTargetX; // 0x005549A8 length: 4
+        int destinationNearTargetY; // 0x005549AC length: 4
         int wallPlacementCost; // 0x005549B0 length: 4
         int DAT_TempBuildingRotation; // 0x005549B4 length: 4
         int field_0x5549b8; // 0x005549B8 length: 4
@@ -285,7 +287,7 @@ namespace Map {
 
         void resetTileToDefaultState(int param_1, uint param_2, uint param_3);
 
-        int getBuildingHurtSFXID(int buildingID);
+        OpenSHC::Map::Enums::HitSoundMaterial getBuildingHurtSFXID(int tile);
 
         void rotateFearFactorBuildingVariations();
 
@@ -339,7 +341,7 @@ namespace Map {
 
         void checkDrawbridgePlacement(int x, int y);
 
-        int getRubbleGraphicStageForDamageLevel(int param_1);
+        int getRubbleGraphicStageForDamageLevel(int fencePiece);
 
         int getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType);
 

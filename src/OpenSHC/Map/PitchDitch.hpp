@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include "OpenSHC/Map/PitchDitchStateShort.hpp"
+
 namespace OpenSHC {
 namespace Map {
 
@@ -21,8 +23,8 @@ namespace Map {
         short x; // 0x0000000A length: 2
         short y; // 0x0000000C length: 2
         short rng; // 0x0000000E length: 2
-        short state; // 0x00000010 length: 2
-        short field_0x12; // 0x00000012 length: 2
+        PitchDitchStateShort state; // 0x00000010 length: 2
+        short burnTimer; // 0x00000012 length: 2
 
     } PitchDitch;
 #pragma pack(pop)
