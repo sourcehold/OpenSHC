@@ -51,10 +51,10 @@ namespace Game {
                     break;
                 }
             }
-            if (DAT_LastTeamMemberIndex::instance >= DAT_AlliesCount::instance) {
+            if ((int)DAT_LastTeamMemberIndex::instance >= DAT_AlliesCount::instance) {
                 DAT_LastTeamMemberIndex::instance = DAT_AlliesCount::instance - 1;
             }
-            if (DAT_LastTeamMemberIndex::instance < 0) {
+            if ((int)DAT_LastTeamMemberIndex::instance < 0) {
                 DAT_LastTeamMemberIndex::instance = 0;
             }
         }
