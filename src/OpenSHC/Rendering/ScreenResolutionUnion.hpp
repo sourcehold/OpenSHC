@@ -8,9 +8,8 @@
 
 #pragma once
 
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
-
 #include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
