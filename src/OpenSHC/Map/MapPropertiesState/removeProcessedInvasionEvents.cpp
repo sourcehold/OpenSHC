@@ -1,25 +1,9 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
+
+#include "OpenSHC/Map/ScenarioEventConditionsCopy.hpp"
 
 namespace OpenSHC {
 namespace Map {
-
-    using OpenSHC::Game::ScenarioEvents::ScenarioEventCondition;
-
-    namespace {
-
-        // the part of a scenario event up to the end of its condition list
-        struct ScenarioEventConditionsCopy {
-            IngameEventHeader header;
-            int actionData;
-            int scenarioEventType;
-            byte allOrAnyCondition;
-            byte magic;
-            byte repeat;
-            byte repeatMonths;
-            ScenarioEventCondition conditions[40];
-        };
-
-    }
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004C1320
     void MapPropertiesState::removeProcessedInvasionEvents()
@@ -30,7 +14,8 @@ namespace Map {
             }
             ScenarioEventConditionsCopy copy;
             memcpy(&copy, &this->scenarioEvents[i], sizeof(copy));
-            for (int condition = 0; condition < 40; ++condition) {
+            for (int condition = 0; condition < countof(this->scenarioEvents[i].data.scenario.conditions);
+                ++condition) {
                 this->scenarioEvents[i].data.scenario.conditions[condition].enabled = 0;
                 this->scenarioEvents[i].data.scenario.conditions[condition].value = 0;
                 this->scenarioEvents[i].data.scenario.conditions[condition].subType = 0;

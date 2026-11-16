@@ -1,5 +1,6 @@
+#include "../Map.func.hpp"
+
 #include "OpenSHC/Input/MouseState.func.hpp"
-#include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/UI/DisplayElements.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"

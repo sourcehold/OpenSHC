@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 

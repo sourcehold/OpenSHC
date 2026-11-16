@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"

@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "../EntityState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

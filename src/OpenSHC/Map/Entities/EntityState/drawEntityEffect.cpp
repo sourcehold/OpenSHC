@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "../EntityState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"

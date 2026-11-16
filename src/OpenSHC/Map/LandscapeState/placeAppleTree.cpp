@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/LandscapeState.func.hpp"
+#include "../LandscapeState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
 

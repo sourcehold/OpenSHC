@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Entities.func.hpp"
+#include "../Entities.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentEntityID.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"

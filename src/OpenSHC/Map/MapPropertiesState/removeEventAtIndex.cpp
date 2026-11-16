@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
+#include "../MapPropertiesState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

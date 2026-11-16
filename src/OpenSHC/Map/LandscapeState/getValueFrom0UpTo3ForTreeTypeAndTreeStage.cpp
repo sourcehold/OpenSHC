@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/LandscapeState.func.hpp"
+#include "../LandscapeState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Trees.func.hpp"
+#include "../Trees.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentTreeID.hpp"
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"

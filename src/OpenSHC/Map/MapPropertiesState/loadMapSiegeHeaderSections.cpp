@@ -1,6 +1,7 @@
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/IO/FilePackager.func.hpp"
 #include "OpenSHC/IO/ResourceManager.func.hpp"
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_MapDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"

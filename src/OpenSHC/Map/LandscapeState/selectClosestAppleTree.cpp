@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/LandscapeState.func.hpp"
+#include "../LandscapeState.func.hpp"
+
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
