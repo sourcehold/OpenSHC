@@ -103,9 +103,9 @@ namespace Synchrony {
             }
         }
         if (requestedResource
-            == DAT_GameState::instance.playerDataArray[senderPlayerID].requestedGoodsArray1Unk[receiverPlayerID]) {
-            DAT_GameState::instance.playerDataArray[senderPlayerID].requestedGoodsArray1Unk[receiverPlayerID] = 0;
-            DAT_GameState::instance.playerDataArray[senderPlayerID].requestedGoodsArray2Unk[receiverPlayerID] = 0;
+            == DAT_GameState::instance.playerDataArray[senderPlayerID].goodsRequestTypeByPlayer[receiverPlayerID]) {
+            DAT_GameState::instance.playerDataArray[senderPlayerID].goodsRequestTypeByPlayer[receiverPlayerID] = 0;
+            DAT_GameState::instance.playerDataArray[senderPlayerID].goodsRequestAmountByPlayer[receiverPlayerID] = 0;
         }
         MACRO_CALL_MEMBER(AI::AICState_Func::playThanksBikFromPlayerToPlayer, DAT_AICState::ptr)(
             receiverPlayerID, senderPlayerID);
