@@ -82,11 +82,13 @@ namespace Synchrony {
             false, Address::SHC_3BB0A8C1_0x004AD2F0, &OpenSHC::Synchrony::Actions::ProcessAllyRequestAttackDefense)
         ProcessAllyRequestAttackDefense;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int askedPlayerID, int param_2, int amount, int askee), false,
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(int askedPlayerID, ResourceTypeMin1 requestedResource, int amount, int askee), false,
             Address::SHC_3BB0A8C1_0x004AD7C0, &OpenSHC::Synchrony::Actions::ProcessAllyRequestingGoods)
         ProcessAllyRequestingGoods;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ResourceType param_2, int param_3, int param_4), false,
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(int receiverPlayerID, ResourceType requestedResource, int amount, int senderPlayerID), false,
             Address::SHC_3BB0A8C1_0x004ADDD0, &OpenSHC::Synchrony::Actions::ProcessAllyGoodsRequest)
         ProcessAllyGoodsRequest;
 

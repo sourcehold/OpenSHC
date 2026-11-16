@@ -9,11 +9,13 @@
 #pragma once
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
 namespace OpenSHC {
 namespace Synchrony {
     namespace Actions {
 
         using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::Game::Resources::ResourceTypeMin1;
 
         void __cdecl RemovePositionOfPlayer(int playerID);
 
@@ -50,9 +52,11 @@ namespace Synchrony {
         void __cdecl ProcessAllyRequestAttackDefense(
             int targetPlayerID, int playerID, int requestedByPlayerID, int param_4);
 
-        void __cdecl ProcessAllyRequestingGoods(int askedPlayerID, int param_2, int amount, int askee);
+        void __cdecl ProcessAllyRequestingGoods(
+            int askedPlayerID, ResourceTypeMin1 requestedResource, int amount, int askee);
 
-        void __cdecl ProcessAllyGoodsRequest(int param_1, ResourceType param_2, int param_3, int param_4);
+        void __cdecl ProcessAllyGoodsRequest(
+            int receiverPlayerID, ResourceType requestedResource, int amount, int senderPlayerID);
 
         void __cdecl ProcessAllyDeniesRequest(int param_1, int param_2);
 
