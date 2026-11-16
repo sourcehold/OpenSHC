@@ -1,4 +1,4 @@
-#include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.func.hpp"
+#include "../InGameEventUnionVersion.func.hpp"
 
 namespace OpenSHC {
 namespace Game {
@@ -15,7 +15,7 @@ namespace Game {
             *(short*)&this->data.scenario.allOrAnyCondition = 1;
             this->data.scenario.repeat = 0;
             ScenarioEventCondition* condition = this->data.scenario.conditions;
-            for (int i = 0; i < 40; ++i) {
+            for (int i = 0; i < countof(this->data.scenario.conditions); ++i) {
                 condition->enabled = 0;
                 condition->value = 0;
                 condition->subType = 0;

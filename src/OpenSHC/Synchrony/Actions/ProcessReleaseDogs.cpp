@@ -13,7 +13,7 @@ namespace Synchrony {
     using namespace OpenSHC::Map::Units;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00466430
-    void Actions::ProcessReleaseDogs(int param_1, int buildingID, int buildingUID)
+    void Actions::ProcessReleaseDogs(int displayColor, int buildingID, int buildingUID)
     {
         int const x = DAT_BuildingsState::instance.buildings[buildingID].x;
         int const y = DAT_BuildingsState::instance.buildings[buildingID].y;
@@ -21,12 +21,12 @@ namespace Synchrony {
             return;
         }
         DAT_BuildingsState::instance.buildings[buildingID].flagonsOfAleOrCheeseOrReleaseDogs = 1;
-        for (int i = 0; i < 4; ++i) {
+        for (int i = 0; i < countof(DAT_BuildingsState::instance.buildings[buildingID].insideUnitID); ++i) {
             DAT_BuildingsState::instance.buildings[buildingID].insideUnitID[i] = 0;
             DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[i] = 0;
         }
-        int const dog0ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-            0, param_1, x * 8, y * 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
+        int const dog0ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, displayColor, x * 8,
+            y * 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
         if (dog0ID != 0) {
             DAT_UnitsState::instance.units[dog0ID].workplaceBuildingID_1 = (short)buildingID;
             DAT_UnitsState::instance.units[dog0ID].workplaceBuildingUID
@@ -35,8 +35,8 @@ namespace Synchrony {
             DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[0]
                 = DAT_UnitsState::instance.units[dog0ID].uid;
         }
-        int const dog1ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, x * 8 + 8,
-            y * 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
+        int const dog1ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, displayColor,
+            x * 8 + 8, y * 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
         if (dog1ID != 0) {
             DAT_UnitsState::instance.units[dog1ID].workplaceBuildingID_1 = (short)buildingID;
             DAT_UnitsState::instance.units[dog1ID].workplaceBuildingUID
@@ -45,7 +45,7 @@ namespace Synchrony {
             DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[1]
                 = DAT_UnitsState::instance.units[dog1ID].uid;
         }
-        int const dog2ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, x * 8,
+        int const dog2ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, displayColor, x * 8,
             y * 8 + 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
         if (dog2ID != 0) {
             DAT_UnitsState::instance.units[dog2ID].workplaceBuildingID_1 = (short)buildingID;
@@ -55,8 +55,8 @@ namespace Synchrony {
             DAT_BuildingsState::instance.buildings[buildingID].insideUnitUID[2]
                 = DAT_UnitsState::instance.units[dog2ID].uid;
         }
-        int const dog3ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, param_1, x * 8 + 8,
-            y * 8 + 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
+        int const dog3ID = MACRO_CALL_MEMBER(UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(0, displayColor,
+            x * 8 + 8, y * 8 + 8, DAT_BuildingsState::instance.buildings[buildingID].terrainHeightUnk, UT_CAGEDOG);
         if (dog3ID != 0) {
             DAT_UnitsState::instance.units[dog3ID].workplaceBuildingID_1 = (short)buildingID;
             DAT_UnitsState::instance.units[dog3ID].workplaceBuildingUID

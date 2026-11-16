@@ -11,7 +11,7 @@ namespace OpenSHC {
 // FUNCTION: STRONGHOLDCRUSADER 0x0042A8E0
 void Synchrony::SetAIPlayerNickNames()
 {
-    for (int player = 1; player < 9; ++player) {
+    for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); ++player) {
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[player] != -1
             || DAT_GameSynchronyState::instance.currentAIArray[player] == AI::AIT_NULL) {
             continue;

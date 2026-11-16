@@ -1,4 +1,5 @@
-#include "OpenSHC/Game/Skirmish.func.hpp"
+#include "../Skirmish.func.hpp"
+
 #include "OpenSHC/UI/GreatestLord.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -18,22 +19,22 @@ namespace Game {
             DAT_SkMasterDataEntry::instance.skMasterScore = MACRO_CALL(UI::GreatestLord_Func::ComputeSkMasterScore)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID);
             int activePlayerCount = 0;
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_GameSynchronyState::instance.finalResults.active); ++player) {
                 if (DAT_GameSynchronyState::instance.finalResults.active[player] == 0) {
                     break;
                 }
                 ++activePlayerCount;
             }
             DAT_SkMasterDataEntry::instance.activePlayerCount = activePlayerCount;
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_SkMasterDataEntry::instance.array1); ++player) {
                 DAT_SkMasterDataEntry::instance.array1[player]
                     = DAT_GameState::instance.mapAndTime.playerGroupArray[player];
             }
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_SkMasterDataEntry::instance.aiArray); ++player) {
                 DAT_SkMasterDataEntry::instance.aiArray[player]
                     = DAT_GameSynchronyState::instance.currentAIArray[player];
             }
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_SkMasterDataEntry::instance.aliveArray); ++player) {
                 DAT_SkMasterDataEntry::instance.aliveArray[player]
                     = DAT_GameState::instance.mapAndTime.playerIsAlive[player];
             }

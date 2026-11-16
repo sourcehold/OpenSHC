@@ -16,16 +16,18 @@ namespace OpenSHC {
 namespace Synchrony {
 
     using OpenSHC::Game::Resources::ResourceType;
+    using OpenSHC::Game::Resources::ResourceTypeMin1;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004AD7C0
-    void Actions::ProcessAllyRequestingGoods(int askedPlayerID, int param_2, int amount, int askee)
+    void Actions::ProcessAllyRequestingGoods(
+        int askedPlayerID, ResourceTypeMin1 requestedResource, int amount, int askee)
     {
-        if (param_2 + 1 == Game::Resources::RT_GOLD) {
+        if (requestedResource + 1 == Game::Resources::RT_GOLD) {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[askedPlayerID] == -1) {
                 return;
             }
             DAT_GameState::instance.playerDataArray[askedPlayerID].requestedGoodsArray1Unk[askee]
-                = (short)(param_2 + 1);
+                = (short)(requestedResource + 1);
             DAT_GameState::instance.playerDataArray[askedPlayerID].requestedGoodsArray2Unk[askee] = (short)amount;
             if (askedPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 strcpy(DAT_GameSynchronyState::instance.receivedChatMessage,
@@ -38,7 +40,7 @@ namespace Synchrony {
         }
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[askedPlayerID] != -1) {
             DAT_GameState::instance.playerDataArray[askedPlayerID].requestedGoodsArray1Unk[askee]
-                = (short)(param_2 + 1);
+                = (short)(requestedResource + 1);
             DAT_GameState::instance.playerDataArray[askedPlayerID].requestedGoodsArray2Unk[askee] = (short)amount;
             if (askedPlayerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                 strcpy(DAT_GameSynchronyState::instance.receivedChatMessage,
@@ -52,13 +54,15 @@ namespace Synchrony {
         MACRO_CALL_MEMBER(AI::AICState_Func::playGoodsSentBikFromPlayerToPlayer, DAT_AICState::ptr)(
             askedPlayerID, askee);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceGain, DAT_BuildingsState::ptr)(
-            askee, (ResourceType)(param_2 + 1), amount);
+            askee, (ResourceType)(requestedResource + 1), amount);
         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss, DAT_BuildingsState::ptr)(
-            askedPlayerID, (ResourceType)(param_2 + 1), amount, 0);
-        DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[askee] += MACRO_CALL_MEMBER(
-            Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(askedPlayerID, param_2 + 1, amount);
-        DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[askedPlayerID] += MACRO_CALL_MEMBER(
-            Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(askedPlayerID, param_2 + 1, amount);
+            askedPlayerID, (ResourceType)(requestedResource + 1), amount, 0);
+        DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[askee]
+            += MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
+                askedPlayerID, requestedResource + 1, amount);
+        DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[askedPlayerID]
+            += MACRO_CALL_MEMBER(Game::GameStateStructures_Func::getSellPrice, DAT_GameState::ptr)(
+                askedPlayerID, requestedResource + 1, amount);
     }
 
 }

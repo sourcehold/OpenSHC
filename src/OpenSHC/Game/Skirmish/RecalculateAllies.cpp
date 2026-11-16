@@ -1,4 +1,5 @@
-#include "OpenSHC/Game/Skirmish.func.hpp"
+#include "../Skirmish.func.hpp"
+
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_AlliesCount.hpp"
@@ -26,7 +27,8 @@ namespace Game {
             int const team
                 = DAT_GameState::instance.mapAndTime.playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID];
             DAT_AlliesCount::instance = 0;
-            for (int player = 1; player < 9; ++player) {
+            for (int player = 1; player < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray);
+                ++player) {
                 if (player == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     continue;
                 }
@@ -45,14 +47,14 @@ namespace Game {
                 }
                 DAT_SomeTeamMemberPlayerIDArray::instance[DAT_AlliesCount::instance] = player;
                 DAT_AlliesCount::instance += 1;
-                if ((int)DAT_AlliesCount::instance >= 6) {
+                if (DAT_AlliesCount::instance >= 6) {
                     break;
                 }
             }
-            if ((int)DAT_LastTeamMemberIndex::instance >= (int)DAT_AlliesCount::instance) {
+            if (DAT_LastTeamMemberIndex::instance >= DAT_AlliesCount::instance) {
                 DAT_LastTeamMemberIndex::instance = DAT_AlliesCount::instance - 1;
             }
-            if ((int)DAT_LastTeamMemberIndex::instance < 0) {
+            if (DAT_LastTeamMemberIndex::instance < 0) {
                 DAT_LastTeamMemberIndex::instance = 0;
             }
         }

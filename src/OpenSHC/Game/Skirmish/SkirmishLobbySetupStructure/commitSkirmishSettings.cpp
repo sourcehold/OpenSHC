@@ -14,7 +14,7 @@ namespace Game {
             this->mapu4int2 = DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes;
             this->mbr_0x4 = DAT_GameState::instance.mapAndTime.skirmishFogOfWar;
             strcpy(this->mapName, DAT_GameSynchronyState::instance.mapName);
-            for (int player = 0; player < 9; ++player) {
+            for (int player = 0; player < countof(this->roundTableOrderArray); ++player) {
                 this->roundTableOrderArray[player] = DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[player];
                 this->playerGroupArray[player] = DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[player];
                 this->currentAIArray[player] = DAT_GameSynchronyState::instance.currentAIArray[player];
@@ -32,7 +32,7 @@ namespace Game {
             this->currentAdvantageBalance = DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance;
             this->currentAdvantageGroup = DAT_GameSynchronyState::instance.skirmishGameIntensityType;
             this->mbr_0x80 = DAT_GameSynchronyState::instance.skirmishTechLevel;
-            for (int player = 0; player < 9; ++player) {
+            for (int player = 0; player < countof(this->playerLordTypeArray); ++player) {
                 this->playerLordTypeArray[player] = DAT_GameCore::instance.selectedLordTypes[player];
             }
             this->mbr_0xf0 = DAT_GameCore::instance.field_0x2340;

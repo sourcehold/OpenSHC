@@ -1,4 +1,5 @@
-#include "OpenSHC/Synchrony/Actions.func.hpp"
+#include "../Actions.func.hpp"
+
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
 

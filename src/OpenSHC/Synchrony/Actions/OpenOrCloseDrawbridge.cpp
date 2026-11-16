@@ -1,5 +1,6 @@
+#include "../Actions.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Synchrony/Actions.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 

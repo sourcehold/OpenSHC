@@ -1,5 +1,6 @@
+#include "../Synchrony.func.hpp"
+
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/Synchrony.func.hpp"
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/string-literals.hpp"
 

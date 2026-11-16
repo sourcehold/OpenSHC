@@ -1,4 +1,4 @@
-#include "OpenSHC/Game/Skirmish.func.hpp"
+#include "../Skirmish.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_SkMasterDataEntry.hpp"

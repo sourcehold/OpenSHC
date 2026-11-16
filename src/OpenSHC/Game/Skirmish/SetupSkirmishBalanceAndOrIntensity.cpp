@@ -1,4 +1,5 @@
-#include "OpenSHC/Game/Skirmish.func.hpp"
+#include "../Skirmish.func.hpp"
+
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -56,21 +57,21 @@ namespace Game {
 
             switch (DAT_GameSynchronyState::instance.skirmishGameIntensityType) {
             case 1:
-                for (int i = 0; i < 20; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray); ++i) {
                     DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray[i]
                         = DAT_RenderingDefinedData::instance
                               .SkirmishIntensityRelatedArray[0][DAT_GameSynchronyState::instance.skirmishTechLevel][i];
                 }
                 break;
             case 2:
-                for (int i = 0; i < 20; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray); ++i) {
                     DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray[i]
                         = DAT_RenderingDefinedData::instance
                               .SkirmishIntensityRelatedArray[1][DAT_GameSynchronyState::instance.skirmishTechLevel][i];
                 }
                 break;
             case 3:
-                for (int i = 0; i < 20; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray); ++i) {
                     DAT_GameSynchronyState::instance.skirmishIntensityRelatedArray[i]
                         = DAT_RenderingDefinedData::instance
                               .SkirmishIntensityRelatedArray[2][DAT_GameSynchronyState::instance.skirmishTechLevel][i];
@@ -80,26 +81,26 @@ namespace Game {
 
             switch (DAT_GameSynchronyState::instance.skirmishGameIntensityType2) {
             case 0:
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1); ++i) {
                     DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1[i] = 0;
                 }
                 break;
             case 1:
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1); ++i) {
                     DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1[i]
                         = DAT_RenderingDefinedData::instance
                               .SkirmishIntensityRelatedArray2[DAT_GameSynchronyState::instance.skirmishTechLevel][i];
                 }
                 break;
             case 2:
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1); ++i) {
                     DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1[i]
                         = DAT_RenderingDefinedData::instance.SkirmishIntensityRelatedArray2[5
                             + DAT_GameSynchronyState::instance.skirmishTechLevel][i];
                 }
                 break;
             case 3:
-                for (int i = 0; i < 10; ++i) {
+                for (int i = 0; i < countof(DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1); ++i) {
                     DAT_GameSynchronyState::instance.skirmishBalanceRelatedArrayUnk1[i]
                         = DAT_RenderingDefinedData::instance.SkirmishIntensityRelatedArray2[10
                             + DAT_GameSynchronyState::instance.skirmishTechLevel][i];

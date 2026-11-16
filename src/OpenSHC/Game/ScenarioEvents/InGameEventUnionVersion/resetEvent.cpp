@@ -1,4 +1,4 @@
-#include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.func.hpp"
+#include "../InGameEventUnionVersion.func.hpp"
 
 namespace OpenSHC {
 namespace Game {
@@ -13,7 +13,7 @@ namespace Game {
             this->header.tl_type = 1;
             this->data.invasion.crusaderArabian = 0;
             this->data.invasion.totalUnitCount = 0;
-            for (int i = 0; i < 24; ++i) {
+            for (int i = 0; i < countof(this->data.invasion.unitCountsPerUnitType); ++i) {
                 this->data.invasion.unitCountsPerUnitType[i] = 0;
             }
             this->data.invasion.invasionPoint = 0;

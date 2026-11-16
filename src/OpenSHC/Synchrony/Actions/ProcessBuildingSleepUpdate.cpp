@@ -1,6 +1,7 @@
+#include "../Actions.func.hpp"
+
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/Synchrony/Actions.func.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -14,7 +15,7 @@ namespace Synchrony {
     // FUNCTION: STRONGHOLDCRUSADER 0x004660F0
     void Actions::ProcessBuildingSleepUpdate(int playerID, int buildingType)
     {
-        if (buildingType >= 91) {
+        if (buildingType >= Map::Buildings::BT_CESSPIT) {
             return;
         }
         if (DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[buildingType]) {

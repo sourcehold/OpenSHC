@@ -1,4 +1,4 @@
-#include "OpenSHC/Synchrony.func.hpp"
+#include "../Synchrony.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00df423c.hpp"
 #include "OpenSHC/Globals/DAT_00df4240.hpp"
