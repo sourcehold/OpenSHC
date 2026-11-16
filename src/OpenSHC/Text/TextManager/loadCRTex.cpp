@@ -23,7 +23,7 @@ namespace Text {
         this->helpTextLinkActive = FALSE;
         this->textSurfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
         this->field_0x1348 = 0;
-        int file = MACRO_CALL(OS_Func::_ucrt_open)(s_cr_tex_005a6334, _O_BINARY, 0);
+        int file = MACRO_CALL(OS_Func::_ucrt_open)(S_CR_TEX_005A6334, _O_BINARY, 0);
         if (file == -1) {
             return;
         }
