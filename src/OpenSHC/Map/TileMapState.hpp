@@ -12,16 +12,18 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnumInt.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
-#include "OpenSHC/Map/Enums/EditorRockType.hpp"
-#include "OpenSHC/Map/Enums/HitSoundMaterial.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterialInt.hpp"
 #include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransitionInt.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
 #include "OpenSHC/Map/PitchDitch.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -33,11 +35,16 @@ namespace Map {
     using OpenSHC::Map::PitchDitch;
     using OpenSHC::Map::Buildings::BuildingFailReasonEnumInt;
     using OpenSHC::Map::Buildings::BuildingType;
+    using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Enums::CardinalDirection;
+    using OpenSHC::Map::Enums::HitSoundMaterialInt;
+    using OpenSHC::Map::Enums::LoweredViewTransition;
+    using OpenSHC::Map::Enums::LoweredViewTransitionInt;
     using OpenSHC::Map::Enums::MapOrientation;
     using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
+    using OpenSHC::Map::Rocks::Enums::EditorRockType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -114,8 +121,8 @@ namespace Map {
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
         undefined4 gateOrientationVariant; // 0x0055488C length: 4
-        OpenSHC::Map::Enums::MapOrientation rockOrientation; // 0x00554890 length: 4
-        OpenSHC::Map::Enums::EditorRockType editorRockType; // 0x00554894 length: 4
+        MapOrientation rockOrientation; // 0x00554890 length: 4
+        EditorRockType editorRockType; // 0x00554894 length: 4
         int lastTime; // 0x00554898 length: 4
         MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
@@ -124,11 +131,11 @@ namespace Map {
         int screenSouthDirection; // 0x005548AC length: 4
         int screenSouthWestDirection; // 0x005548B0 length: 4
         int orientedRowStep; // 0x005548B4 length: 4
-        OpenSHC::Map::Enums::LoweredViewTransition refreshCertainTileMap; // 0x005548B8 length: 4
-        OpenSHC::Map::Enums::LoweredViewTransition refreshCertainTileMap_old; // 0x005548BC length: 4
+        LoweredViewTransition refreshCertainTileMap; // 0x005548B8 length: 4
+        LoweredViewTransition refreshCertainTileMap_old; // 0x005548BC length: 4
         undefined4 counter1; // 0x005548C0 length: 4
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
-        undefined4 disableElevationRendering; // 0x005548C8 length: 4
+        BOOLEnum disableElevationRendering; // 0x005548C8 length: 4
         undefined4 flatViewToggleValue1; // 0x005548CC length: 4
         undefined4 field_0x5548d0; // 0x005548D0 length: 4
         undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
@@ -267,7 +274,7 @@ namespace Map {
 
         void setMapSize(int size);
 
-        void triggerLoweredView(OpenSHC::Map::Enums::LoweredViewTransition param_1);
+        void triggerLoweredView(LoweredViewTransitionInt param_1);
 
         void toggleFlatView(int param_1);
 
@@ -287,7 +294,7 @@ namespace Map {
 
         void resetTileToDefaultState(int param_1, uint param_2, uint param_3);
 
-        OpenSHC::Map::Enums::HitSoundMaterial getBuildingHurtSFXID(int tile);
+        HitSoundMaterialInt getBuildingHurtSFXID(int int_);
 
         void rotateFearFactorBuildingVariations();
 
@@ -613,7 +620,7 @@ namespace Map {
         void planMoat(undefined4 playerID, int tile, uint tileY);
 
         void placeKillingPit(
-            int playerID, uint x, uint y, BuildingType buildingType, uint width, int variation, int height);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, uint width, int variation, int height);
 
         void placeKeep(int playerID, uint x, uint y, BuildingType type, uint size, int orientation, int xyValue);
 
@@ -630,7 +637,7 @@ namespace Map {
             int param_6, undefined4 param_7);
 
         void placeApplefarm(
-            int playerID, uint x, uint y, BuildingType buildingType, undefined4 param_5, int param_6, int param_7);
+            int playerID, uint x, uint y, BuildingTypeShort buildingType, undefined4 param_5, int param_6, int param_7);
 
         void clearBuildingFromTerrain(int buildingID);
 

@@ -13,6 +13,8 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::PitchDitchStateShort;
+
 #pragma pack(push, 1)
     // SIZE: 0x00000014
     typedef struct PitchDitch {

@@ -1,7 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Map/Enums/EditorRockType.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -12,7 +12,7 @@ namespace Map {
     void TileMapState::rotateFearFactorBuildingVariations()
     {
         int now = timeGetTime();
-        if (this->editorRockType == OpenSHC::Map::Enums::ERT_BIGROCK5) {
+        if (this->editorRockType == OpenSHC::Map::Rocks::Enums::ERT_BIGROCK5) {
             if (this->rockOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 this->rockOrientation = OpenSHC::Map::Enums::MO_EAST;
             } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_EAST) {
@@ -33,7 +33,7 @@ namespace Map {
         } else {
             this->gateOrientationVariant = 80;
         }
-        if (this->editorRockType == OpenSHC::Map::Enums::ERT_NONE) {
+        if (this->editorRockType == OpenSHC::Map::Rocks::Enums::ERT_NONE) {
             if (this->rockOrientation == OpenSHC::Map::Enums::MO_NORTH) {
                 this->rockOrientation = OpenSHC::Map::Enums::MO_EAST;
             } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_EAST) {

@@ -97662,7 +97662,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31DC = 0x00ED31DC,
     // label: DAT_BuildingSizeIndexMapping
     // location:
-    // type: /int[14][169][6]
+    // type: OpenSHC/Map/Buildings/BuildingSizeIndexMapping[14][169]
     SHC_3BB0A8C1_0x00ED31E0 = 0x00ED31E0,
     // label: DAT_CurrentTribeID
     // location:

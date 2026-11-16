@@ -12,7 +12,7 @@ namespace OpenSHC {
 namespace Map {
     typedef enum PitchDitchState {
 
-        PDS_REMOVE = -1, // 0xFFFFFFFF
+        PDS_REMOVE = -1, // 0x-0000001
         PDS_PLACED = 0, // 0x00000000
         PDS_READY = 1, // 0x00000001
         PDS_BURNING = 2, // 0x00000002

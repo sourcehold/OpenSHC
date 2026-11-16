@@ -5,9 +5,10 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
-#include "OpenSHC/Map/Enums/HitSoundMaterial.hpp"
-#include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterialInt.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransitionInt.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
@@ -20,7 +21,10 @@ namespace Map {
         using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::Map::Enums::CardinalDirection;
+        using OpenSHC::Map::Enums::HitSoundMaterialInt;
+        using OpenSHC::Map::Enums::LoweredViewTransitionInt;
         using OpenSHC::Map::Enums::MapOrientation;
         using OpenSHC::Map::LogicHelpers::Logic1;
         using OpenSHC::Map::LogicHelpers::Logic2;
@@ -60,7 +64,7 @@ namespace Map {
             void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F6F90, &TileMapState::setMapSize)
         setMapSize;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(OpenSHC::Map::Enums::LoweredViewTransition), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(LoweredViewTransitionInt), false,
             Address::SHC_3BB0A8C1_0x004F6FD0, &TileMapState::triggerLoweredView)
         triggerLoweredView;
 
@@ -100,8 +104,8 @@ namespace Map {
             &TileMapState::resetTileToDefaultState)
         resetTileToDefaultState;
 
-        MACRO_FUNCTION_RESOLVER(OpenSHC::Map::Enums::HitSoundMaterial (TileMapState::*)(int), false,
-            Address::SHC_3BB0A8C1_0x004F8210, &TileMapState::getBuildingHurtSFXID)
+        MACRO_FUNCTION_RESOLVER(HitSoundMaterialInt (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F8210,
+            &TileMapState::getBuildingHurtSFXID)
         getBuildingHurtSFXID;
 
         MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x004F8300,
@@ -718,7 +722,7 @@ namespace Map {
             &TileMapState::planMoat)
         planMoat;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, uint, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingTypeShort, uint, int, int), false,
             Address::SHC_3BB0A8C1_0x00514520, &TileMapState::placeKillingPit)
         placeKillingPit;
 
@@ -742,7 +746,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005154D0, &TileMapState::placeDairyfarm)
         placeDairyfarm;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingType, undefined4, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, uint, uint, BuildingTypeShort, undefined4, int, int), false,
             Address::SHC_3BB0A8C1_0x00515740, &TileMapState::placeApplefarm)
         placeApplefarm;
 

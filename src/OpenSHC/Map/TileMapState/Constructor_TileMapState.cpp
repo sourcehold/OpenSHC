@@ -1,8 +1,8 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
-#include "OpenSHC/Map/Enums/EditorRockType.hpp"
 #include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -38,7 +38,7 @@ namespace Map {
         this->gateOrientationVariant = 80;
         this->lastTime = timeGetTime();
         this->rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
-        this->editorRockType = OpenSHC::Map::Enums::ERT_NONE;
+        this->editorRockType = OpenSHC::Map::Rocks::Enums::ERT_NONE;
         this->cursorAnimationTime = timeGetTime();
         this->cursorOverlayAnimationFrame = 1;
         this->temporaryTerrainTypeIndex = 0;
