@@ -9,12 +9,14 @@
 #pragma once
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
 #include "OpenSHC/Synchrony/Actions.hpp"
 namespace OpenSHC {
 namespace Synchrony {
     namespace Actions_Func {
 
         using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::Game::Resources::ResourceTypeMin1;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x004285C0,
             &OpenSHC::Synchrony::Actions::RemovePositionOfPlayer)
