@@ -43,7 +43,7 @@ namespace Synchrony {
         void __cdecl ProcessTowerRepair(
             int playerID, int buildingID, int requiredWood, int requiredStone, int gameObjectID);
 
-        void __cdecl ProcessReleaseDogs(int param_1, int buildingID, int buildingUID);
+        void __cdecl ProcessReleaseDogs(int displayColor, int buildingID, int buildingUID);
 
         void __cdecl ProcessAllyAcceptsRequest(int param_1, int param_2);
 

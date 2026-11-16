@@ -66,7 +66,7 @@ namespace Synchrony {
             Address::SHC_3BB0A8C1_0x00466260, &OpenSHC::Synchrony::Actions::ProcessTowerRepair)
         ProcessTowerRepair;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int buildingID, int buildingUID), false,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int displayColor, int buildingID, int buildingUID), false,
             Address::SHC_3BB0A8C1_0x00466430, &OpenSHC::Synchrony::Actions::ProcessReleaseDogs)
         ProcessReleaseDogs;
 
