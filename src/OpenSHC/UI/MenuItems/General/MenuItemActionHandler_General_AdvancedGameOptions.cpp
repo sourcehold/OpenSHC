@@ -1,6 +1,6 @@
-#include "../General.func.hpp"
-
 #pragma warning(disable : 4996)
+
+#include "../General.func.hpp"
 
 #include "OpenSHC/Game/Skirmish.func.hpp"
 #include "OpenSHC/Synchrony/Commands.func.hpp"
@@ -11,6 +11,7 @@
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonBackgroundBlendStrength.hpp"
 #include "OpenSHC/Globals/DAT_ButtonW.hpp"
@@ -129,28 +130,28 @@ namespace UI {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 0) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 95));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 5) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 96));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 10) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 97));
                 }
                 if (DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes == 20) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 94),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -172,7 +173,7 @@ namespace UI {
                 DAT_GameSynchronyState::instance.skirmishStrongWalls ^= 1;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
-                sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                     MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                         DE::SHCDE::TEXT_XPLAY_WAITING_ROOM, 99),
                     DAT_GameSynchronyState::instance.skirmishStrongWalls != 0
@@ -214,7 +215,7 @@ namespace UI {
                 DAT_GameSynchronyState::instance.skirmishNoCowThrowing ^= 1;
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
-                sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                     MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
                         DE::SHCDE::TEXT_SKIRMISH_MISC, 5),
                     DAT_GameSynchronyState::instance.skirmishNoCowThrowing != 0
@@ -239,13 +240,13 @@ namespace UI {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
                 if (DAT_GameSynchronyState::instance.skirmishNoDogs != 0) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 6),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 6),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -268,13 +269,13 @@ namespace UI {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
                 if (DAT_GameSynchronyState::instance.skirmishExtremeMode != 0) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 13),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 13),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -297,13 +298,13 @@ namespace UI {
                 MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                     (Commands::GameCommandType)52);
                 if (DAT_GameSynchronyState::instance.skirmishExtremeMode != 0) {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 14),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_GAME_OPTIONS, 13));
                 } else {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 14),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -366,7 +367,7 @@ namespace UI {
                 }
                 switch (DAT_GameSynchronyState::instance.skirmishNoRushSetting) {
                 case 0: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -374,7 +375,7 @@ namespace UI {
                     break;
                 }
                 case 1: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -382,7 +383,7 @@ namespace UI {
                     break;
                 }
                 case 2: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -390,7 +391,7 @@ namespace UI {
                     break;
                 }
                 case 3: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -398,7 +399,7 @@ namespace UI {
                     break;
                 }
                 case 4: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
@@ -406,7 +407,7 @@ namespace UI {
                     break;
                 }
                 case 5: {
-                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, "%s :%s",
+                    sprintf(DAT_GameSynchronyState::instance.receivedChatMessage, s__s__s_005a228c,
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_SKIRMISH_MISC, 7),
                         MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
