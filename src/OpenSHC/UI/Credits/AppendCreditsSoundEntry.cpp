@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
@@ -10,7 +10,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DA7A0
         void AppendCreditsSoundEntry(SHC_SoundStreamInt soundStream, int x)
         {
-            if (DAT_UnknownBinkCount::instance < 288) {
+            if (DAT_UnknownBinkCount::instance < countof(DAT_ARRAY_00eb9b68::instance)) {
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = 17;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = soundStream;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].x = x;

@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
@@ -11,7 +11,7 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DA8D0
         void AppendCreditsImageTransitionCommand(int command, int gfxIndex, int x, int y, int field10)
         {
-            if (DAT_UnknownBinkCount::instance < 288 && gfxIndex >= 0
+            if (DAT_UnknownBinkCount::instance < countof(DAT_ARRAY_00eb9b68::instance) && gfxIndex >= 0
                 && (command == 5 || command == 6 || command == 7)) {
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = command;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = gfxIndex;

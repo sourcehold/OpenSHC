@@ -1,4 +1,4 @@
-#include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
+#include "../AIMessageQueue.func.hpp"
 
 namespace OpenSHC {
 namespace Rendering {

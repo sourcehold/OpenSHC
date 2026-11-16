@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
@@ -11,7 +11,8 @@ namespace UI {
         void AppendCreditsShowImageCommand(
             int command, int gfxIndex, int x, int y, int width, int height, undefined4 unused, int field10)
         {
-            if (DAT_UnknownBinkCount::instance < 288 && gfxIndex >= 0 && command == 41) {
+            if (DAT_UnknownBinkCount::instance < countof(DAT_ARRAY_00eb9b68::instance) && gfxIndex >= 0
+                && command == 41) {
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = 41;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = gfxIndex;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field_0x38 = 0;

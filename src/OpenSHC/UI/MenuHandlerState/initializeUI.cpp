@@ -1,5 +1,6 @@
+#include "../MenuHandlerState.func.hpp"
+
 #include "OpenSHC/UI/Menu.func.hpp"
-#include "OpenSHC/UI/MenuHandlerState.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
 #include "OpenSHC/UI/Rendering/AlphaAndButtonSurface.func.hpp"
 

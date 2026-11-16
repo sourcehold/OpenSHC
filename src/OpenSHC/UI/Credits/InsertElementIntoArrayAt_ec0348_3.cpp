@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00ec0348.hpp"
 

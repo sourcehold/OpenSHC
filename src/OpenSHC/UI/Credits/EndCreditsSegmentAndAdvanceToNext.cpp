@@ -1,6 +1,7 @@
+#include "../Credits.func.hpp"
+
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
-#include "OpenSHC/UI/Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00ed2bd8.hpp"
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"

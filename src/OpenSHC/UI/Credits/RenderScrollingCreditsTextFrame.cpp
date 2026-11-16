@@ -1,5 +1,6 @@
+#include "../Credits.func.hpp"
+
 #include "OpenSHC/Text/TextManager.func.hpp"
-#include "OpenSHC/UI/Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00eb9b28.hpp"
 #include "OpenSHC/Globals/DAT_00eb9b2c.hpp"

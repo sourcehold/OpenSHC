@@ -7,6 +7,10 @@
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
+#include "OpenSHC/UI/Enums/BuildMenuTabType.hpp"
+#include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
+#include "OpenSHC/UI/Enums/MenuViewType.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_00ee1090.hpp"
@@ -38,7 +42,9 @@ namespace UI {
     {
         int const activeMenuTab = DAT_GameCore::instance.activeMenuTab.tabType;
         int const menuViewType = DAT_GameCore::instance.currentMenuViewType;
-        if (param_1 == 0 && menuViewType == 16 && (activeMenuTab == 1 || activeMenuTab == 44)) {
+        if (param_1 == 0 && menuViewType == Enums::MVT_BUILDING_AND_STATUS_MENU
+            && (activeMenuTab == Enums::BASMTT_BARRACKS_OR_MPMENU_MODEM
+                || activeMenuTab == Enums::BASMTT_MERCENARYPOST)) {
             return;
         }
         if (this->currentlyDisplayedTextIsDisplayedUnk == 0) {
@@ -50,7 +56,7 @@ namespace UI {
             DAT_ButtonX::instance += DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX;
             DAT_ButtonY::instance += DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY;
         }
-        if (menuViewType == 14 && activeMenuTab == 61) {
+        if (menuViewType == Enums::MVT_BUILD_MENU && activeMenuTab == Enums::BMTT_SOLDIERS) {
             DAT_ButtonX::instance += 130;
             DAT_ButtonY::instance -= 2;
         }
@@ -64,17 +70,19 @@ namespace UI {
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance + 260, DAT_ButtonY::instance,
-                    TTA_CENTER, 12119803, 0, 18, FALSE);
+                    TTA_CENTER, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
                 if (DAT_GameSynchronyState::instance.currentGameMode != 0
                     && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                     break;
                 }
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)((eTextSections)22, 2,
-                    DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, FALSE);
+                    DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0,
+                    18, FALSE);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber, DAT_TextManagerObject::ptr)(
                     DAT_TroopDefinedData::instance
                         .BarracksUnitCost[this->currentlyDisplayedUnktextExtraObject.unitsAndWeaponsType],
-                    DAT_ButtonX::instance + 6, DAT_ButtonY::instance, 12119803, 0, 18, TRUE);
+                    DAT_ButtonX::instance + 6, DAT_ButtonY::instance, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18,
+                    TRUE);
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 124,
@@ -87,7 +95,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance,
-                    TTA_LEFT, 12119803, 0, 18, FALSE);
+                    TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             }
             break;
         }
@@ -98,17 +106,19 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance + 260, DAT_ButtonY::instance + 152,
-                TTA_CENTER, 12119803, 0, 18, FALSE);
+                TTA_CENTER, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             if (DAT_GameSynchronyState::instance.currentGameMode != 0
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                 break;
             }
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)((eTextSections)22, 2,
-                DAT_ButtonX::instance + 10, DAT_ButtonY::instance + 152, TTA_LEFT, 12119803, 0, 18, FALSE);
+                DAT_ButtonX::instance + 10, DAT_ButtonY::instance + 152, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             MACRO_CALL_MEMBER(TextManager_Func::renderNumber, DAT_TextManagerObject::ptr)(
                 DAT_TroopDefinedData::instance
                     .NonEuroUnitCost[this->currentlyDisplayedUnktextExtraObject.unitsAndWeaponsType],
-                DAT_ButtonX::instance + 16, DAT_ButtonY::instance + 152, 12119803, 0, 18, TRUE);
+                DAT_ButtonX::instance + 16, DAT_ButtonY::instance + 152, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18,
+                TRUE);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 GM_INTERFACE_ICONS2, 124,
@@ -116,18 +126,18 @@ namespace UI {
                 DAT_ButtonY::instance + 152);
             break;
         case 13:
-            if (menuViewType == 20 && DAT_MenuModalComposition1::instance.activeModalDialogID == -1
+            if (menuViewType == Enums::MVT_LOBBY_MENU && DAT_MenuModalComposition1::instance.activeModalDialogID == -1
                 && DAT_TextManagerObject::instance.gameLanguage != 0
                 && DAT_TextManagerObject::instance.gameLanguage != 1) {
                 MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance - 50, DAT_ButtonY::instance,
-                    DAT_ButtonW::instance + 100, 12119803, 0, 18, 0);
+                    DAT_ButtonW::instance + 100, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, 0);
             } else {
                 MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance,
-                    DAT_ButtonW::instance, 12119803, 0, 18, 0);
+                    DAT_ButtonW::instance, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, 0);
             }
             break;
         case 1:
@@ -146,12 +156,12 @@ namespace UI {
                 MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance,
-                    DAT_ButtonY::instance - height + 24, 480, 12119803, 0, 18, 0);
+                    DAT_ButtonY::instance - height + 24, 480, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, 0);
             } else {
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance,
-                    TTA_LEFT, 12119803, 0, 18, FALSE);
+                    TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             }
             break;
         case 10:
@@ -162,7 +172,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance,
-                    TTA_LEFT, 12119803, 0, 18, FALSE);
+                    TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             }
             break;
         case 7:
@@ -175,11 +185,12 @@ namespace UI {
                     DAT_TextManagerObject::instance.field_0x24 = 1;
                     MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                         (eTextSections)7, this->currentlyDisplayedUnkTextNumInGroup_0x8 - 309, DAT_ButtonX::instance,
-                        DAT_ButtonY::instance, DAT_ButtonW::instance, 13433599, 0, 18, 0);
+                        DAT_ButtonY::instance, DAT_ButtonW::instance, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
                     DAT_TextManagerObject::instance.field_0x24 = 1;
                     MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                         (eTextSections)250, this->currentlyDisplayedUnkTextNumInGroup_0x8 - 301, DAT_ButtonX::instance,
-                        DAT_ButtonY::instance + height, DAT_ButtonW::instance, 13433599, 0, 18, 0);
+                        DAT_ButtonY::instance + height, DAT_ButtonW::instance, OpenSHC::Rendering::Colors::COL_CCFAFF,
+                        0, 18, 0);
                     break;
                 }
                 DAT_TextManagerObject::instance.field_0x24 = 1;
@@ -188,12 +199,12 @@ namespace UI {
                     && DAT_GameCore::instance.directDrawStatus < 1792) {
                     MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                         (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4, 344, DAT_ButtonX::instance,
-                        DAT_ButtonY::instance, DAT_ButtonW::instance, 13433599, 0, 18, 0);
+                        DAT_ButtonY::instance, DAT_ButtonW::instance, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 18, 0);
                 } else {
                     MACRO_CALL_MEMBER(TextManager_Func::renderMultilineText3Unk, DAT_TextManagerObject::ptr)(
                         (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                         this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance,
-                        DAT_ButtonW::instance, 13433599, 0, 17, 0);
+                        DAT_ButtonW::instance, OpenSHC::Rendering::Colors::COL_CCFAFF, 0, 17, 0);
                 }
             } else {
                 this->currentlyDisplayedTextIsDisplayedUnk = 0;
@@ -203,7 +214,7 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             break;
         case 2: {
             Map::Buildings::BuildingType const buildingType
@@ -223,7 +234,7 @@ namespace UI {
                 != 0) {
                 wood = 0;
             }
-            if (DAT_GameCore::instance.gameMode_2 == 1) {
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR) {
                 iron = 0;
                 gold = 0;
                 pitch = 0;
@@ -245,11 +256,12 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             int offset = 30;
             if (wood != 0) {
-                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    wood, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(wood,
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 126,
@@ -257,20 +269,22 @@ namespace UI {
                     DAT_ButtonY::instance - 6);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_WOOD],
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 30;
             }
             if (stone != 0) {
-                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    stone, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(stone,
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 123,
@@ -278,18 +292,20 @@ namespace UI {
                     DAT_ButtonY::instance - 4);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(stoneOwned,
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 30;
             }
             if (iron != 0) {
-                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    iron, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(iron,
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 125,
@@ -297,20 +313,22 @@ namespace UI {
                     DAT_ButtonY::instance - 4);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_IRON],
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 30;
             }
             if (pitch != 0) {
-                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    pitch, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(pitch,
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 155,
@@ -318,20 +336,22 @@ namespace UI {
                     DAT_ButtonY::instance - 10);
                 offset += 26;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_PITCH],
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 10;
             }
             if (gold != 0) {
-                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                    gold, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(gold,
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 124,
@@ -339,13 +359,14 @@ namespace UI {
                     DAT_ButtonY::instance + 6);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(goldOwned,
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             }
             break;
         }
@@ -353,48 +374,51 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 GM_INTERFACE_ICONS2, 123,
                 DAT_TextManagerObject::instance.currentXOffset_0x0 + DAT_ButtonX::instance + 30,
                 DAT_ButtonY::instance - 4);
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_close_005a2778, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_close_005a2778, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .startResources[RT_STONE],
-                    DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB,
+                    0, 18, TRUE, 0);
             } else {
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_STONE],
-                    DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB,
+                    0, 18, TRUE, 0);
             }
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_open_005a2774, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_open_005a2774, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             break;
         case 9:
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 GM_INTERFACE_ICONS2, 126,
                 DAT_TextManagerObject::instance.currentXOffset_0x0 + DAT_ButtonX::instance + 30,
                 DAT_ButtonY::instance - 4);
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_close_005a2778, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_close_005a2778, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .currentResources[RT_WOOD],
-                DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0,
+                18, TRUE, 0);
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_open_005a2774, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_open_005a2774, DAT_ButtonX::instance + 62, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             break;
         case 11: {
             int cost = 0;
@@ -413,23 +437,25 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
-            MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                cost, DAT_ButtonX::instance + 30, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
+            MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(cost,
+                DAT_ButtonX::instance + 30, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0,
+                18, TRUE, 0);
             MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                 GM_INTERFACE_ICONS2, 124,
                 DAT_TextManagerObject::instance.currentXOffset_0x0 + DAT_ButtonX::instance + 32,
                 DAT_ButtonY::instance - 4);
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_close_005a2778, DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_close_005a2778, DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .currentResources[RT_GOLD],
-                DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0,
+                18, TRUE, 0);
             MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                s_brace_open_005a2774, DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18,
-                TRUE, 0);
+                s_brace_open_005a2774, DAT_ButtonX::instance + 64, DAT_ButtonY::instance, TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             break;
         }
         case 3: {
@@ -449,7 +475,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                     this->currentlyDisplayedUnkTextNumInGroup_0x8 + textOffset, DAT_ButtonX::instance + scroll,
-                    DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, FALSE);
+                    DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
                 int percentage;
                 if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentPopulation
@@ -507,7 +533,7 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                     (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4, textOffset + 4, DAT_ButtonX::instance,
-                    DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, FALSE);
+                    DAT_ButtonY::instance, TTA_LEFT, OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             }
             break;
         }
@@ -517,11 +543,12 @@ namespace UI {
             MACRO_CALL_MEMBER(TextManager_Func::renderText, DAT_TextManagerObject::ptr)(
                 (eTextSections)this->currentlyDisplayedUnkTextGroupIndex_0x4,
                 this->currentlyDisplayedUnkTextNumInGroup_0x8, DAT_ButtonX::instance, DAT_ButtonY::instance, TTA_LEFT,
-                12119803, 0, 18, FALSE);
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, FALSE);
             int offset = 30;
             if (woodCost != 0) {
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(woodCost,
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 126,
@@ -529,20 +556,22 @@ namespace UI {
                     DAT_ButtonY::instance - 6);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_WOOD],
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 30;
             }
             if (stoneCost != 0) {
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(stoneCost,
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 offset += 2;
                 MACRO_CALL_MEMBER(Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
                     GM_INTERFACE_ICONS2, 123,
@@ -550,15 +579,16 @@ namespace UI {
                     DAT_ButtonY::instance - 4);
                 offset += 32;
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803,
-                    0, 18, TRUE, 0);
+                    s_brace_close_005a2778, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                     DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .currentResources[RT_STONE],
-                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0, 18, TRUE, 0);
+                    DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
                 MACRO_CALL_MEMBER(TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT, 12119803, 0,
-                    18, TRUE, 0);
+                    s_brace_open_005a2774, DAT_ButtonX::instance + offset, DAT_ButtonY::instance, TTA_LEFT,
+                    OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
             }
             break;
         }

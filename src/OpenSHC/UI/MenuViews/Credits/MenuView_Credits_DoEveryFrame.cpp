@@ -1,7 +1,8 @@
+#include "../Credits.func.hpp"
+
 #include "OpenSHC/Game/GameCore.func.hpp"
 #include "OpenSHC/Text/TextEditorState.func.hpp"
 #include "OpenSHC/UI/MenuModalComposition.func.hpp"
-#include "OpenSHC/UI/MenuViews/Credits.func.hpp"
 #include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"

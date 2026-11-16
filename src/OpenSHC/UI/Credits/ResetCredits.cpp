@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_00eb0e40.hpp"
 #include "OpenSHC/Globals/DAT_00ed2bd8.hpp"
@@ -7,9 +7,9 @@
 #include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkIndex.hpp"
 #include "OpenSHC/Globals/DWORD_00eb9ac4.hpp"
+#include "OpenSHC/Globals/FLOAT_00ec083c.hpp"
 #include "OpenSHC/Globals/INT_00eb1230.hpp"
 #include "OpenSHC/Globals/INT_00eb9ac0.hpp"
-#include "OpenSHC/Globals/FLOAT_00ec083c.hpp"
 #include "OpenSHC/Globals/INT_00ed27a4.hpp"
 
 namespace OpenSHC {

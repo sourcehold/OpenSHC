@@ -7,6 +7,7 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/GameLanguage.hpp"
 #include "OpenSHC/WindowsHelper/Enums/CodePage.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_WideCharMultiByteState.hpp"
@@ -22,7 +23,7 @@ namespace Text {
         this->helpTextLinkActive = FALSE;
         this->textSurfaceTarget = Rendering::Enums::RT_SCREEN_MENU;
         this->field_0x1348 = 0;
-        int file = MACRO_CALL(OS_Func::_ucrt_open)("cr.tex", _O_BINARY, 0);
+        int file = MACRO_CALL(OS_Func::_ucrt_open)(s_cr_tex_005a6334, _O_BINARY, 0);
         if (file == -1) {
             return;
         }
@@ -33,7 +34,7 @@ namespace Text {
             DAT_WideCharMultiByteState::ptr)(this->textStart, wideText, 351000);
         this->alternativeCodePageUsedUnk = FALSE;
         this->gameLanguage = GL_ENGLISH;
-        if (MACRO_CALL(OS_Func::__stricmp)("polish",
+        if (MACRO_CALL(OS_Func::__stricmp)(s_polish_005a632c,
                 MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {
             this->codePage = WindowsHelper::Enums::CP_WINDOWS_1250;
@@ -41,27 +42,27 @@ namespace Text {
             MACRO_CALL_MEMBER(Util::WideCharMultiByteState_Func::wideCharToMultiByteWithSize,
                 DAT_WideCharMultiByteState::ptr)(this->textStart, wideText, 351000);
             this->gameLanguage = GL_POLISH;
-        } else if (MACRO_CALL(OS_Func::__stricmp)("english",
+        } else if (MACRO_CALL(OS_Func::__stricmp)(s_english_005a6324,
                        MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(
                            DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {
             this->gameLanguage = GL_ENGLISH;
-        } else if (MACRO_CALL(OS_Func::__stricmp)("american",
+        } else if (MACRO_CALL(OS_Func::__stricmp)(s_american_005a6318,
                        MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(
                            DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {
             this->gameLanguage = GL_AMERICAN;
-        } else if (MACRO_CALL(OS_Func::__stricmp)("german",
+        } else if (MACRO_CALL(OS_Func::__stricmp)(s_german_005a6310,
                        MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(
                            DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {
             this->gameLanguage = GL_GERMAN;
-        } else if (MACRO_CALL(OS_Func::__stricmp)("french",
+        } else if (MACRO_CALL(OS_Func::__stricmp)(s_french_005a6308,
                        MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(
                            DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {
             this->gameLanguage = GL_FRENCH;
-        } else if (MACRO_CALL(OS_Func::__stricmp)("italian",
+        } else if (MACRO_CALL(OS_Func::__stricmp)(s_italian_005a6300,
                        MACRO_CALL_MEMBER(TextManager_Func::getTextStringInGroupAtOffset, this)(
                            DE::SHCDE::TEXT_LANGUAGE, 0))
             == 0) {

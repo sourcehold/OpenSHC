@@ -1,4 +1,5 @@
-#include "OpenSHC/Rendering.func.hpp"
+#include "../Rendering.func.hpp"
+
 #include "OpenSHC/UI/Rendering.func.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
 
@@ -32,27 +33,27 @@ namespace Rendering {
         COL_BLACK::instance.shortValue = 0;
         if (DAT_WindowAndDirectDraw::instance.colorBitMode == RGB_555) {
             COL_RED::instance.shortValue = (short)64512;
-            COL_LIME::instance.shortValue = (short)992;
-            COL_DARK_GREEN::instance.shortValue = (short)480;
-            COL_WHITE::instance.shortValue = (short)32767;
-            COL_BRIGHT_YELLOW::instance.shortValue = (short)29447;
-            COL_MODERATE_GREEN::instance.shortValue = (short)13063;
-            COL_DARK_CYAN_GREY::instance.shortValue = (short)13807;
-            COL_VERY_DARK_GREY::instance.shortValue = (short)7399;
-            COL_MAGENTA::instance.shortValue = (short)31775;
-            COL_VIVID_BLUE::instance.shortValue = (short)4703;
-            COL_VERY_SOFT_YELLOW::instance.shortValue = (short)30647;
+            COL_LIME::instance.shortValue = 992;
+            COL_DARK_GREEN::instance.shortValue = 480;
+            COL_WHITE::instance.shortValue = 32767;
+            COL_BRIGHT_YELLOW::instance.shortValue = 29447;
+            COL_MODERATE_GREEN::instance.shortValue = 13063;
+            COL_DARK_CYAN_GREY::instance.shortValue = 13807;
+            COL_VERY_DARK_GREY::instance.shortValue = 7399;
+            COL_MAGENTA::instance.shortValue = 31775;
+            COL_VIVID_BLUE::instance.shortValue = 4703;
+            COL_VERY_SOFT_YELLOW::instance.shortValue = 30647;
         } else {
             COL_RED::instance.shortValue = (short)63488;
-            COL_LIME::instance.shortValue = (short)1984;
-            COL_DARK_GREEN::instance.shortValue = (short)960;
+            COL_LIME::instance.shortValue = 1984;
+            COL_DARK_GREEN::instance.shortValue = 960;
             COL_WHITE::instance.shortValue = (short)65535;
             COL_BRIGHT_YELLOW::instance.shortValue = (short)50695;
-            COL_MODERATE_GREEN::instance.shortValue = (short)17927;
-            COL_DARK_CYAN_GREY::instance.shortValue = (short)31695;
-            COL_VERY_DARK_GREY::instance.shortValue = (short)14791;
+            COL_MODERATE_GREEN::instance.shortValue = 17927;
+            COL_DARK_CYAN_GREY::instance.shortValue = 31695;
+            COL_VERY_DARK_GREY::instance.shortValue = 14791;
             COL_MAGENTA::instance.shortValue = (short)63519;
-            COL_VIVID_BLUE::instance.shortValue = (short)9407;
+            COL_VIVID_BLUE::instance.shortValue = 9407;
             COL_VERY_SOFT_YELLOW::instance.shortValue = (short)61303;
         }
         COL_LIGHT_GREY::instance.shortValue

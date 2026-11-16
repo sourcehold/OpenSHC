@@ -1,4 +1,4 @@
-#include "OpenSHC/UI/Credits.func.hpp"
+#include "../Credits.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ARRAY_00eb9b68.hpp"
 #include "OpenSHC/Globals/DAT_NumberOfStoredMenuStrings.hpp"
@@ -12,8 +12,8 @@ namespace UI {
         void AppendCreditsTextCommand(
             int command, int textIndex, int field6, int field13, int x, int y, int width, int field12)
         {
-            if (DAT_UnknownBinkCount::instance < 288 && textIndex >= 0
-                && textIndex < (int)DAT_NumberOfStoredMenuStrings::instance) {
+            if (DAT_UnknownBinkCount::instance < countof(DAT_ARRAY_00eb9b68::instance) && textIndex >= 0
+                && textIndex < DAT_NumberOfStoredMenuStrings::instance) {
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].commandType = command;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].soundStream = textIndex;
                 DAT_ARRAY_00eb9b68::instance[DAT_UnknownBinkCount::instance].field_0x18 = field6;
