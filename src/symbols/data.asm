@@ -999,7 +999,7 @@ PUBLIC ?instance@?$Extern@PAVMenuView@UI@OpenSHC@@$0ONDBNI@@StructResolver@@2PAV
 
 PUBLIC ?instance@?$Extern@K$0ONDBNM@@StructResolver@@2KA
 
-PUBLIC ?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA
+PUBLIC ?instance@?$Extern@$$BY1O@KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@$0ONDBOA@@StructResolver@@2PAY0KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA
 
@@ -2686,7 +2686,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@K$0ONDBNM@@StructResolver@@2KA EQU 00ED31DCh
 
-?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA EQU 00ED31E0h
+?instance@?$Extern@$$BY1O@KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@$0ONDBOA@@StructResolver@@2PAY0KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@A EQU 00ED31E0h
 
 ?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA EQU 00EE0FB0h
 
