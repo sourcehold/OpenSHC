@@ -974,7 +974,8 @@ namespace UI {
                                                              || ((BVar5 == Map::Buildings::BT_SIEGETOWER
                                                                  || (BVar5 == Map::Buildings::BT_SHIELD))))
                                                         || (BVar5 == Map::Buildings::BT_OILSMELTER))))) {
-                                            DAT_BuildingsState::instance.buildings[_shooterID].field_0xc2 = 2;
+                                            DAT_BuildingsState::instance.buildings[_shooterID].targetMarker
+                                                = OpenSHC::Map::Buildings::Enums::BTM_ENGINEER_TARGET;
                                             DAT_TileMapState::instance.pendingUnitCommand = 2;
                                             DAT_TileMapState::instance.cursorOverlayImageBase = -2;
                                             local_20 = -1;
