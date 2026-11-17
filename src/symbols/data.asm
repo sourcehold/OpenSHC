@@ -987,7 +987,7 @@ PUBLIC ?instance@?$Extern@I$0ONDBLM@@StructResolver@@2IA
 
 PUBLIC ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA
+PUBLIC ?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA
 
 PUBLIC ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA
 
@@ -999,7 +999,7 @@ PUBLIC ?instance@?$Extern@PAVMenuView@UI@OpenSHC@@$0ONDBNI@@StructResolver@@2PAV
 
 PUBLIC ?instance@?$Extern@K$0ONDBNM@@StructResolver@@2KA
 
-PUBLIC ?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA
+PUBLIC ?instance@?$Extern@$$BY1O@KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@$0ONDBOA@@StructResolver@@2PAY0KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@A
 
 PUBLIC ?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA
 
@@ -1513,7 +1513,7 @@ PUBLIC ?instance@?$Extern@M$0OMAIDE@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@H$0OMAIDI@@StructResolver@@2HA
 
-PUBLIC ?instance@?$Extern@H$0OMAIDM@@StructResolver@@2HA
+PUBLIC ?instance@?$Extern@M$0OMAIDM@@StructResolver@@2MA
 
 PUBLIC ?instance@?$Extern@$$BY0CFI@UGFXRelatedBuffer1@Graphics@IO@OpenSHC@@$0OMAIEA@@StructResolver@@2PAUGFXRelatedBuffer1@Graphics@IO@OpenSHC@@A
 
@@ -2674,7 +2674,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0ONDBMA@@StructResolver@@2HA EQU 00ED31C0h
 
-?instance@?$Extern@I$0ONDBME@@StructResolver@@2IA EQU 00ED31C4h
+?instance@?$Extern@H$0ONDBME@@StructResolver@@2HA EQU 00ED31C4h
 
 ?instance@?$Extern@I$0ONDBMI@@StructResolver@@2IA EQU 00ED31C8h
 
@@ -2686,7 +2686,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@K$0ONDBNM@@StructResolver@@2KA EQU 00ED31DCh
 
-?instance@?$Extern@$$BY2O@KJ@5H$0ONDBOA@@StructResolver@@2PAY1KJ@5HA EQU 00ED31E0h
+?instance@?$Extern@$$BY1O@KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@$0ONDBOA@@StructResolver@@2PAY0KJ@UBuildingSizeIndexMapping@Buildings@Map@OpenSHC@@A EQU 00ED31E0h
 
 ?instance@?$Extern@H$0OOAPLA@@StructResolver@@2HA EQU 00EE0FB0h
 
@@ -3200,7 +3200,7 @@ _TEXT SEGMENT
 
 ?instance@?$Extern@H$0OMAIDI@@StructResolver@@2HA EQU 00EC0838h
 
-?instance@?$Extern@H$0OMAIDM@@StructResolver@@2HA EQU 00EC083Ch
+?instance@?$Extern@M$0OMAIDM@@StructResolver@@2MA EQU 00EC083Ch
 
 ?instance@?$Extern@$$BY0CFI@UGFXRelatedBuffer1@Graphics@IO@OpenSHC@@$0OMAIEA@@StructResolver@@2PAUGFXRelatedBuffer1@Graphics@IO@OpenSHC@@A EQU 00EC0840h
 

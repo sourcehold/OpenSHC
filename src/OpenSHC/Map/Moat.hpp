@@ -22,7 +22,7 @@ namespace Map {
         undefined1 padding_0xa[2]; // 0x0000000A length: 2
         char owner; // 0x0000000C length: 1
         char fillProgress; // 0x0000000D length: 1
-        byte stage; // 0x0000000E length: 1
+        char stage; // 0x0000000E length: 1
         char someCountDown; // 0x0000000F length: 1
 
     } Moat;

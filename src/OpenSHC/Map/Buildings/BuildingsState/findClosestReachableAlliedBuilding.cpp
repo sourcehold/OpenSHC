@@ -21,7 +21,7 @@ namespace Map {
             int closestBuildingID = 0;
             int closestDistance = 1000;
             int const fromArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
                 if (this->buildings[buildingID].logicalState == 0
                     || this->buildings[buildingID].logicalState == BLS_REMOVE) {
@@ -47,7 +47,7 @@ namespace Map {
                     + this->buildings[buildingID].buildingEntryX;
                 if (MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                         DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, fromArea,
-                        (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                        DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
                     != 0) {
                     closestDistance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                     closestBuildingID = buildingID;

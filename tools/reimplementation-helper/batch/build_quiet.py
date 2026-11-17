@@ -1,4 +1,4 @@
-"""Build OpenSHC.dll and print only compiler errors (full log: build-RelWithDebInfo/batch/build.log).
+"""Build OpenSHC.dll and print only compiler and cmake errors (full log: build-RelWithDebInfo/batch/build.log).
 
 usage: build_quiet.py [--keep-going] [--max N]
 
@@ -23,6 +23,11 @@ A build that fails without naming any source line gets one more plain retry. cma
 verification dies with an access violation ("Access violation" + U1077 return code 0xffffffff) on the
 first build after cmake/openshc-sources.txt.local changes, which is every first build of a new
 selection; the reconfigure crashed, not the compile, and a plain re-run succeeds.
+
+A failed cmake configure is BUILD_FAIL too, with cmake's own error lines printed. build.bat stops
+before compiling anything, so the log has no compiler error to find; a fresh worktree without the
+MSVC1400-SP1 submodule ("Running 'nmake' '-?' failed") used to come back BUILD_OK in a second.
+It is not retried, and --keep-going skips its /K run, which would overwrite build.bat's log.
 """
 
 import argparse
@@ -36,15 +41,19 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--keep-going", action="store_true")
 parser.add_argument("--max", type=int, default=60)
 args = parser.parse_args()
+# the log is read with errors="replace", and a cp1252 pipe has no byte for the U+FFFD that leaves
+sys.stdout.reconfigure(errors="replace")
 
 log = TMP / "build.log"
+# build.bat prints this, and stops, when the cmake configure step exits with a code of 1 or more
+CONFIGURE_FAILED_RE = re.compile(r"\[ERROR\] CMake configure failed")
 
 
 def run_build(endpoint=None):
     with open(log, "w") as out:
         subprocess.run(win_cmd(r".\build.bat RelWithDebInfo OpenSHC.dll"),
                        stdout=out, stderr=subprocess.STDOUT, env=build_env(endpoint))
-    if args.keep_going:
+    if args.keep_going and not CONFIGURE_FAILED_RE.search(log.read_text(errors="replace")):
         with open(log, "w") as out:
             subprocess.run(win_cmd(r".\cmakew --build --preset RelWithDebInfo --target OpenSHC.dll -- /K"),
                            stdout=out, stderr=subprocess.STDOUT, env=build_env(endpoint))
@@ -70,11 +79,32 @@ def compile_errors(text):
             if re.search(r" error |warning C4700|warning C4715", line) and "U1077" not in line]
 
 
+CMAKE_ERROR_RE = re.compile(r"^CMake Error")
+
+
+def configure_errors(text):
+    """cmake's error lines, each with the indented block under it (the cause), 12 lines at most.
+
+    Without any, as when cmakew finds no cmake to run, the [ERROR] lines of build.bat and cmakew.
+    """
+    picked = []
+    left = 0
+    for line in text.splitlines():
+        if CMAKE_ERROR_RE.search(line):
+            left = 12
+        elif line.strip() and not line[0].isspace():
+            left = 0
+        if left and line.strip():
+            picked.append(line)
+            left -= 1
+    return picked or [line for line in text.splitlines() if line.startswith("[ERROR]")]
+
+
 def failing(text):
-    return bool(re.search(r" error |U1077", text))
+    return bool(re.search(r" error |U1077", text) or CONFIGURE_FAILED_RE.search(text))
 
 
-if failing(text) and not compile_errors(text):
+if failing(text) and not compile_errors(text) and not CONFIGURE_FAILED_RE.search(text):
     # Nothing named a source line, so the compile is not what failed: cmake's glob verification
     # crashed during the reconfigure. It succeeds on a plain re-run.
     print("note: build failed without a compiler error, retrying once", file=sys.stderr)
@@ -83,6 +113,10 @@ if failing(text) and not compile_errors(text):
 errors = compile_errors(text)
 for line in errors[:args.max]:
     print(re.sub(r"^.*src.OpenSHC.", "", line))
+if CONFIGURE_FAILED_RE.search(text):
+    print("cmake configure failed:")
+    for line in configure_errors(text)[:args.max]:
+        print("  " + line.strip())
 failed = failing(text)
 print("BUILD_FAIL" if failed else "BUILD_OK")
 # exit non-zero so `build_quiet.py && reccmp_report.py ...` stops here: a failed build

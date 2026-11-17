@@ -33,8 +33,8 @@ namespace Map {
                 return MACRO_CALL_MEMBER(
                            Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                            DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                           (short)DAT_TileMapState::instance.PathConnectionLayer[param_2],
-                           (short)DAT_TileMapState::instance.PathConnectionLayer[buildingTile], 0)
+                           DAT_TileMapState::instance.PathConnectionLayer[param_2],
+                           DAT_TileMapState::instance.PathConnectionLayer[buildingTile], 0)
                     == 0;
             }
             default:
