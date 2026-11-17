@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
@@ -11,83 +10,84 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandParameterLocation;
-    using OpenSHC::Commands::GameCommandParameterReadWrite;
-    using OpenSHC::Commands::GameCommandScheduling;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00480BE0
     void Commands::AnnounceTeamsAndPositions()
     {
-        int _isHost;
-        byte local_10[9];
+        // three values of the sender's slot, whether the sender is the host, the nine teams and the eight positions
         DAT_GameSynchronyState::instance.DAT_CommandSize = 33;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue
-                    + DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+                DAT_GameSynchronyState::ptr)(
+                &DAT_GameSynchronyState::instance
+                    .DAT_PlayerSlotArraySomeValue[DAT_GameSynchronyState::instance.currentPlayerSlotID],
+                sizeof(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[0]),
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(
-                DAT_GameSynchronyState::instance.currentAIArray + DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.aiVariationArray
-                    + DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.isHost, 4,
+                &DAT_GameSynchronyState::instance.currentAIArray[DAT_GameSynchronyState::instance.currentPlayerSlotID],
+                sizeof(DAT_GameSynchronyState::instance.currentAIArray[0]),
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray, 9,
+                DAT_GameSynchronyState::ptr)(
+                &DAT_GameSynchronyState::instance
+                    .aiVariationArray[DAT_GameSynchronyState::instance.currentPlayerSlotID],
+                sizeof(DAT_GameSynchronyState::instance.aiVariationArray[0]),
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.playerPositionsArray, 8,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.isHost,
+                sizeof(DAT_GameSynchronyState::instance.isHost), OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray,
+                sizeof(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray),
+                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.playerPositionsArray,
+                sizeof(DAT_GameSynchronyState::instance.playerPositionsArray),
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
-            ;
             return;
         }
-        if ((DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE)
-            && (DAT_GameSynchronyState::instance.protocolInvokerPlayerID - 1U <= 7)) {
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue
-                    + DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(
-                DAT_GameSynchronyState::instance.currentAIArray + DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.aiVariationArray
-                    + DAT_GameSynchronyState::instance.currentPlayerSlotID,
-                4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(&_isHost, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(local_10, 9, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.playerPositionsArray, 8,
-                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            if (_isHost != 0) {
-                memcpy(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray, local_10, 9);
-            }
-        };
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE
+            || DAT_GameSynchronyState::instance.protocolInvokerPlayerID < 1
+            || DAT_GameSynchronyState::instance.protocolInvokerPlayerID > 8) {
+            return;
+        }
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(
+            &DAT_GameSynchronyState::instance
+                .DAT_PlayerSlotArraySomeValue[DAT_GameSynchronyState::instance.protocolInvokerPlayerID],
+            sizeof(DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[0]),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(
+            &DAT_GameSynchronyState::instance.currentAIArray[DAT_GameSynchronyState::instance.currentPlayerSlotID],
+            sizeof(DAT_GameSynchronyState::instance.currentAIArray[0]),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(
+            &DAT_GameSynchronyState::instance.aiVariationArray[DAT_GameSynchronyState::instance.currentPlayerSlotID],
+            sizeof(DAT_GameSynchronyState::instance.aiVariationArray[0]),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        BOOLEnum senderIsHost;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&senderIsHost, sizeof(senderIsHost),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        char receivedGroups[9];
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(receivedGroups, sizeof(receivedGroups),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(DAT_GameSynchronyState::instance.playerPositionsArray,
+            sizeof(DAT_GameSynchronyState::instance.playerPositionsArray),
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        // only the host's teams are taken over
+        if (senderIsHost) {
+            memcpy(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray, receivedGroups,
+                sizeof(DAT_GameSynchronyState::instance.DAT_PlayerGroupArray));
+        }
     }
 
 }
