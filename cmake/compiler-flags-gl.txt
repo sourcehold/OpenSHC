@@ -141,3 +141,7 @@ src/OpenSHC/UI/MenuItems/InGameMenu/MenuItemRenderFunction_InGameMenu_MainButton
 src/OpenSHC/UI/MenuItems/Roundtable/MenuItemActionHandler_Roundtable_Main.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/isAIPlayer.cpp
 src/OpenSHC/Map/Units/UpdateGhost.cpp
+src/OpenSHC/Map/Units/UpdateHopsFarmer.cpp
+src/OpenSHC/Map/Units/ComputeGoodsProduced.cpp
+src/OpenSHC/Map/Units/IncrementAndOptionalUpdateAVValueRelated.cpp
+src/OpenSHC/Map/Units/SetStateToFreetimeWalking.cpp
