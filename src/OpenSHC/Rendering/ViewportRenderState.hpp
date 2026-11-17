@@ -54,19 +54,19 @@ namespace Rendering {
         int screenPixelWidth; // 0x0018B730 length: 4
         int screenPixelHeight; // 0x0018B734 length: 4
         undefined4 field_0x18b738; // 0x0018B738 length: 4
-        int interval_03_160; // 0x0018B73C length: 4
-        undefined4 previousIntervalTime_03; // 0x0018B740 length: 4
-        int interval_04_180; // 0x0018B744 length: 4
-        undefined4 previousIntervalTime_04; // 0x0018B748 length: 4
-        int interval_01_80; // 0x0018B74C length: 4
-        undefined4 previousIntervalTime_01; // 0x0018B750 length: 4
-        int interval_02_100; // 0x0018B754 length: 4
-        undefined4 previousIntervalTime_02; // 0x0018B758 length: 4
-        int unknownCounterUntil_0x20; // 0x0018B75C length: 4
-        int unknownCounterUntil_0x24; // 0x0018B760 length: 4
-        int field_0x18b764; // 0x0018B764 length: 4
-        int unknownCounterUntil_0x10; // 0x0018B768 length: 4
-        int unknownCounterUntil_0x200; // 0x0018B76C length: 4
+        int animationFrame36Interval; // 0x0018B73C length: 4
+        undefined4 animationFrame36PreviousTime; // 0x0018B740 length: 4
+        int slowAnimationInterval; // 0x0018B744 length: 4
+        undefined4 slowAnimationPreviousTime; // 0x0018B748 length: 4
+        int animationFrame16Interval; // 0x0018B74C length: 4
+        undefined4 animationFrame16PreviousTime; // 0x0018B750 length: 4
+        int animationFrame32Interval; // 0x0018B754 length: 4
+        undefined4 animationFrame32PreviousTime; // 0x0018B758 length: 4
+        int animationFrame32; // 0x0018B75C length: 4
+        int animationFrame36; // 0x0018B760 length: 4
+        BOOLEnum slowAnimationTicked; // 0x0018B764 length: 4
+        int animationFrame16; // 0x0018B768 length: 4
+        int animationFrame512; // 0x0018B76C length: 4
         int unitBatchedRenderCounterUntil6; // 0x0018B770 length: 4
         UnitRenderHelpStructure unitBatch1[500]; // 0x0018B774 length: 16000
         UnitRenderHelpStructure unitBatch2[500]; // 0x0018F5F4 length: 16000
@@ -104,12 +104,12 @@ namespace Rendering {
 
         void renderAssassinClimbingOverlay(int param_1);
 
-        void scheduleUnitForBatchedRendering(undefined4 unitIDOrStatus, undefined4 drawX, undefined4 drawY,
-            undefined4 imageID, undefined4 blendStrength, undefined4 gmID, int param_7);
+        void scheduleUnitForBatchedRendering(
+            int unitIDOrStatus, int drawX, int drawY, int imageID, int blendStrength, int gmID, int batchesEarlier);
 
         void renderGmOverlayBuilding2(int param_1, int param_2, int param_3, int param_4);
 
-        void renderBuildingAnimation(int param_1, int param_2, int param_3, undefined4 param_4, int param_5);
+        void renderBuildingAnimation(int buildingID, int screenX, int screenY, int tile, BOOLEnum clipToBuilding);
 
         void renderGmOverlayBuilding(int tileIndex, int xUnk, int yUnk, int param_4);
 

@@ -17,6 +17,7 @@ namespace Map {
             MO_EAST = 2, // 0x00000002
             MO_SOUTH = 4, // 0x00000004
             MO_WEST = 6, // 0x00000006
+            MO_UPPER_LIMIT = 8, // 0x00000008
             MO_NONE = 15 // 0x0000000F
 
         } MapOrientation;
