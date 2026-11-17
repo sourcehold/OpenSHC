@@ -86,7 +86,7 @@ namespace UI {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Rendering::ViewportRenderState_Func::setupMouseTileXY, DAT_ViewportRenderState::ptr)();
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::noop1, DAT_TileMapState::ptr)(
-                    DAT_ViewportRenderState::instance.viewportState.mouseTile);
+                    DAT_ViewportRenderState::instance.viewportState.mouseFlatTile);
                 if (DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_BIGROCK1
                     && DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_BIGROCK2
                     && DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_BIGROCK3
@@ -109,11 +109,11 @@ namespace UI {
             }
             if ((DAT_MouseState::instance.leftClickStart == 0)
                 && (DAT_ViewportRenderState::instance.viewportState.previousMouseTile
-                    == DAT_ViewportRenderState::instance.viewportState.mouseTile)) {
+                    == DAT_ViewportRenderState::instance.viewportState.mouseFlatTile)) {
                 return;
             }
             DAT_ViewportRenderState::instance.viewportState.previousMouseTile
-                = DAT_ViewportRenderState::instance.viewportState.mouseTile;
+                = DAT_ViewportRenderState::instance.viewportState.mouseFlatTile;
             MACRO_CALL_MEMBER(
                 OpenSHC::Rendering::ViewportRenderState_Func::setupMouseTileXY, DAT_ViewportRenderState::ptr)();
             int iVar2 = DAT_ViewportRenderState::instance.viewportState.mouseTileY;

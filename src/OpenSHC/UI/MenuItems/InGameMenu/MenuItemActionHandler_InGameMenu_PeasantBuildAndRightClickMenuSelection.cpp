@@ -192,7 +192,7 @@ namespace UI {
                     DAT_TileMapState::instance.currentMapperCommand = OpenSHC::Commands::M_MAPPER_NULL;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::noop1, DAT_TileMapState::ptr)(
-                    DAT_ViewportRenderState::instance.viewportState.mouseTile);
+                    DAT_ViewportRenderState::instance.viewportState.mouseFlatTile);
                 if (!DAT_MouseState::instance.leftClickState) {
                     if (DAT_UnitsState::instance
                             .unitCountOfSelection[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -210,11 +210,11 @@ namespace UI {
                 } else if (DAT_TileMapState::instance.currentMapperCommand != OpenSHC::Commands::M_MAPPER_NULL) {
                     if ((DAT_MouseState::instance.leftClickStart == 0)
                         && (DAT_ViewportRenderState::instance.viewportState.previousMouseTile
-                            == DAT_ViewportRenderState::instance.viewportState.mouseTile)) {
+                            == DAT_ViewportRenderState::instance.viewportState.mouseFlatTile)) {
                         return;
                     }
                     DAT_ViewportRenderState::instance.viewportState.previousMouseTile
-                        = DAT_ViewportRenderState::instance.viewportState.mouseTile;
+                        = DAT_ViewportRenderState::instance.viewportState.mouseFlatTile;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Rendering::ViewportRenderState_Func::setupMouseTileXY, DAT_ViewportRenderState::ptr)();
                 }
