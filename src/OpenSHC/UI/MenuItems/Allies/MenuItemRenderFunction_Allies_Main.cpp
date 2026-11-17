@@ -57,7 +57,7 @@ namespace UI {
                 return;
             }
             if (DAT_AlliesCount::instance < 1 && param_1 != -1) {
-                DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = TRUE;
                 DAT_ButtonCurrentlyInteracting::instance = FALSE;
             }
             if ((param_1 == 110) || (param_1 == 111)) {
@@ -75,10 +75,10 @@ namespace UI {
                                 [DAT_SomeTeamMemberPlayerIDArray::instance[DAT_LastTeamMemberIndex::instance]]
                             .isNotNervousByEnemyTroopValue
                         == 0) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
                 MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderButtonImageWithBlending)();
             }
             if (param_1 == 200) {
@@ -92,7 +92,7 @@ namespace UI {
                     18, FALSE);
                 DAT_TextManagerObject::instance.textSurfaceTarget = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
             }
-            DAT_ButtonUnknownZero::instance = 0;
+            DAT_ButtonUnknownZero::instance = FALSE;
             if (19 < (uint)param_1) {
                 MACRO_CALL(
                     OpenSHC::UI::Rendering_Func::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk)();
@@ -119,7 +119,7 @@ namespace UI {
                 }
                 iVar3 = param_1 - 1;
                 if (DAT_AlliesCount::instance <= iVar3) {
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                 }
                 iVar6 = 0;
                 iVar2 = DAT_SomeTeamMemberPlayerIDArray::instance[iVar3];
@@ -225,7 +225,7 @@ namespace UI {
                 return;
             }
             if (param_1 != 10) {
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
             }
             iVar3 = DAT_ButtonX::instance;
             iVar2 = DAT_ButtonY::instance;

@@ -96,7 +96,7 @@ namespace UI {
             if (10 < param_1) {
                 iVar3
                     = (int)*(char*)((int)DAT_GameSynchronyState::instance.mapSendRequestStatePerPlayer + param_1 + 26);
-                DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = TRUE;
                 if (iVar3 < 1) {
                     return;
                 }
@@ -182,7 +182,7 @@ namespace UI {
             }
             if (0 < param_1) {
                 iVar3 = (int)(char)DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[param_1];
-                DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = TRUE;
                 if (iVar3 < 1) {
                     return;
                 }
@@ -235,7 +235,7 @@ namespace UI {
                     return;
                 }
                 iVar3 = (int)*(char*)((int)DAT_GameSynchronyState::ptr + (1089092 - param_1));
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
                 if (iVar3 < 1) {
                     return;
                 }
@@ -251,7 +251,7 @@ namespace UI {
                     return;
                 }
                 if (DAT_GameSynchronyState::instance.currentAIArray[iVar3] == OpenSHC::AI::AITA_NULL) {
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 DAT_CurrentButtonGmDataIndex::instance = 627;
@@ -275,23 +275,23 @@ namespace UI {
                     (iVar3 / 32) + 32);
             }
             if (param_1 < -199) {
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
                 if (!DAT_GameSynchronyState::instance.isHost) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 iVar3 = (int)*(char*)((int)DAT_GameSynchronyState::ptr + (1088892 - param_1));
                 if (iVar3 < 1) {
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[iVar3] != -1) {
                     if (iVar3 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                        DAT_ButtonUnknownZero::instance = 1;
+                        DAT_ButtonUnknownZero::instance = TRUE;
                         return;
                     }
                     if (DAT_GameSynchronyState::instance.slotActionPending[iVar3] != 0) {
-                        DAT_ButtonUnknownZero::instance = 0;
+                        DAT_ButtonUnknownZero::instance = FALSE;
                         return;
                     }
                     iVar3 = (DAT_ButtonBackgroundBlendStrength::instance - 32) * 32;
@@ -299,7 +299,7 @@ namespace UI {
                         (iVar3 / 32) + 32);
                 }
                 if (iVar3 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 BVar2 = MACRO_CALL_MEMBER(
@@ -312,7 +312,7 @@ namespace UI {
                     (iVar3 / 32) + 32);
             }
             if (param_1 == -101) {
-                DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = TRUE;
                 if ((DAT_GameSynchronyState::instance.isHost)
                     && (DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE)) {
                     for (int iVar3 = 1; iVar3 < countof(DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray);
@@ -325,7 +325,7 @@ namespace UI {
             } else {
                 if (param_1 == -102) {
                     if (!DAT_GameSynchronyState::instance.isHost) {
-                        DAT_ButtonUnknownZero::instance = 1;
+                        DAT_ButtonUnknownZero::instance = TRUE;
                         return;
                     }
                     if (DAT_MenuModalComposition1::instance.activeModalDialogID != OpenSHC::UI::Enums::MMT_NONE
@@ -338,11 +338,11 @@ namespace UI {
                     if (param_1 != -103)
                         goto LAB_00427f4c;
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SKIRMISH_SINGLE_PLAYER) {
-                        DAT_ButtonUnknownZero::instance = 1;
+                        DAT_ButtonUnknownZero::instance = TRUE;
                     }
                 }
             LAB_00427f46:
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
             }
         LAB_00427f4c:
             if (!DAT_GameSynchronyState::instance.isHost) {

@@ -46,10 +46,10 @@ namespace UI {
             BVar1 = MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::isMapperAvailable,
                 DAT_MapPropertiesState::ptr)((OpenSHC::Commands::MappersEnum)mapperValue);
             if (!BVar1) {
-                DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = TRUE;
                 return;
             }
-            DAT_ButtonUnknownZero::instance = 0;
+            DAT_ButtonUnknownZero::instance = FALSE;
             switch ((int)DAT_CurrentButtonGmDataIndex::instance) {
             case 376:
                 // Without an engineer selected the button hides, as in the original (jne to the shared hide).
@@ -74,7 +74,7 @@ namespace UI {
                         DAT_CurrentButtonGmDataIndex::instance = 377;
                         MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                                 MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                        DAT_ButtonUnknownZero::instance = 0;
+                        DAT_ButtonUnknownZero::instance = FALSE;
                         return;
                     }
                 }
@@ -89,7 +89,7 @@ namespace UI {
                         uVar3 != 0)) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 break;
@@ -122,7 +122,7 @@ namespace UI {
                 LAB_00438e95:
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber, DAT_TextManagerObject::ptr)(
                         iVar2, xPosition, yPosition, uVar3, color2, fontSize, BVar1);
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 break;
@@ -142,7 +142,7 @@ namespace UI {
                             DAT_00ee1090::instance = 198;
                             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                            DAT_ButtonUnknownZero::instance = 0;
+                            DAT_ButtonUnknownZero::instance = FALSE;
                             return;
                         }
                     } else {
@@ -153,7 +153,7 @@ namespace UI {
                             DAT_00ee1090::instance = 201;
                             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                            DAT_ButtonUnknownZero::instance = 0;
+                            DAT_ButtonUnknownZero::instance = FALSE;
                             return;
                         }
                         uVar3
@@ -190,7 +190,7 @@ namespace UI {
                                 iVar2 == 0)) {
                             MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                                     MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                            DAT_ButtonUnknownZero::instance = 0;
+                            DAT_ButtonUnknownZero::instance = FALSE;
                             return;
                         }
                     }
@@ -200,7 +200,7 @@ namespace UI {
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
                 if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 if (DAT_TribesState::instance.tribes[DAT_TribesState::instance.DAT_CurrentTribeID].unitStance
@@ -209,7 +209,7 @@ namespace UI {
                     DAT_ButtonCurrentlyInteracting::instance = TRUE;
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 goto LAB_00438f47;
@@ -217,7 +217,7 @@ namespace UI {
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
                 if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 if (DAT_TribesState::instance.tribes[DAT_TribesState::instance.DAT_CurrentTribeID].unitStance
@@ -226,7 +226,7 @@ namespace UI {
                     DAT_ButtonCurrentlyInteracting::instance = TRUE;
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 goto LAB_00438f47;
@@ -234,7 +234,7 @@ namespace UI {
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
                 if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 if (DAT_TribesState::instance.tribes[DAT_TribesState::instance.DAT_CurrentTribeID].unitStance
@@ -243,31 +243,31 @@ namespace UI {
                     DAT_ButtonCurrentlyInteracting::instance = TRUE;
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
             LAB_00438f47:
                 DAT_ButtonCurrentlyInteracting::instance = FALSE;
                 MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
                 return;
             case 216:
                 if (DAT_UnitsState::instance.hasEngineerSelected) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
                 if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 if (DAT_TribesState::instance.patrolButtonPressed) {
                     DAT_ButtonCurrentlyInteracting::instance = TRUE;
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                    DAT_ButtonUnknownZero::instance = 0;
+                    DAT_ButtonUnknownZero::instance = FALSE;
                     return;
                 }
                 goto LAB_00438ec1;
@@ -278,34 +278,34 @@ namespace UI {
             case 215:
             case 558:
                 if (DAT_UnitsState::instance.hasEngineerSelected != TRUE) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 uVar3 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::returnFirstSelectedEngineer, DAT_UnitsState::ptr)();
                 if (uVar3 == 0) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 goto LAB_00438ec1;
             default:
                 if (DAT_UnitsState::instance.hasEngineerSelected) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
                 UVar4 = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getUnitTypeOfFirstSelectedUnit, DAT_UnitsState::ptr)();
                 if (UVar4 == OpenSHC::Map::Units::UT_INVALID) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
             LAB_00438ec1:
                 MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                         MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
-                DAT_ButtonUnknownZero::instance = 0;
+                DAT_ButtonUnknownZero::instance = FALSE;
                 return;
             }
-            DAT_ButtonUnknownZero::instance = 1;
+            DAT_ButtonUnknownZero::instance = TRUE;
         }
 
     }

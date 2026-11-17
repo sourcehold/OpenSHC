@@ -203,7 +203,7 @@ namespace UI {
             default:
                 goto switchD_0042d163_caseD_ffffff9d;
             }
-            DAT_ButtonUnknownZero::instance = 0;
+            DAT_ButtonUnknownZero::instance = FALSE;
             MACRO_CALL(OpenSHC::UI::Rendering_Func::RenderCurrentButtonToScreenMenuWithBlendingUnk)(iVar1 + 32);
         switchD_0042d163_caseD_ffffff9d:
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
