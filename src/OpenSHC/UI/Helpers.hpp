@@ -109,6 +109,8 @@ namespace UI {
 
         void __cdecl ResetTutorialActionTrackers();
 
+        void __cdecl InitTutorialState();
+
         void __cdecl SetTutorialHintActiveWithTimestamp();
 
         void __cdecl UpdateTutorialStepAndProgress();

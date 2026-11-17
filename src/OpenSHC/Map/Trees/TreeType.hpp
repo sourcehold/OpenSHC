@@ -18,6 +18,16 @@ namespace Map {
             TT_UNKNOWN_2 = 2, // 0x00000002
             TT_UNKNOWN_3 = 3, // 0x00000003
             TT_UNKNOWN_4 = 4, // 0x00000004
+            TT_UNKNOWN_5 = 5, // 0x00000005
+            TT_UNKNOWN_6 = 6, // 0x00000006
+            TT_UNKNOWN_7 = 7, // 0x00000007
+            TT_UNKNOWN_8 = 8, // 0x00000008
+            TT_UNKNOWN_9 = 9, // 0x00000009
+            TT_UNKNOWN_10 = 10, // 0x0000000A
+            TT_UNKNOWN_11 = 11, // 0x0000000B
+            TT_UNKNOWN_12 = 12, // 0x0000000C
+            TT_UNKNOWN_13 = 13, // 0x0000000D
+            TT_UNKNOWN_14 = 14, // 0x0000000E
             TT_APPLEUnk = 15, // 0x0000000F
             TT_UNKNOWN_16 = 16, // 0x00000010
             TT_UNKNOWN_17 = 17, // 0x00000011

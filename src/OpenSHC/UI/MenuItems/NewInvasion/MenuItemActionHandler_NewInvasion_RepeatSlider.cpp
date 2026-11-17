@@ -1,0 +1,36 @@
+#include "../NewInvasion.func.hpp"
+
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuItems {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x004B94A0
+        void NewInvasion::MenuItemActionHandler_NewInvasion_RepeatSlider(
+            int unused, int scrollbarEvent, int* minValue, int* maxValue, int* currentValue)
+        {
+            switch (scrollbarEvent) {
+            case 1:
+                *minValue = 0;
+                *maxValue = 120;
+                *currentValue
+                    = DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
+                          .data.invasion.repeatMonths;
+                return;
+            case 2:
+            case 3:
+                DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
+                    .data.invasion.repeatMonths = *currentValue;
+                return;
+            case 4:
+                *currentValue
+                    = DAT_MapPropertiesState::instance.scenarioEvents[DAT_MapPropertiesState::instance.currentEventID]
+                          .data.invasion.repeatMonths;
+                *maxValue = 120;
+            }
+        }
+
+    }
+}
+}

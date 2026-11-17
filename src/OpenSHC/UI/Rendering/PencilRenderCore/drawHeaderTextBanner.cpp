@@ -30,7 +30,7 @@ namespace UI {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00475CC0
         void PencilRenderCore::drawHeaderTextBanner(
-            int textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height)
+            eTextSections textGroupIndex, int textNumInGroup, int xPos, int yPos, int width, int height)
         {
             // drawHeaderBanner's banner, with a text centred on it
             // The banner is one tile inside the box at the top and on both sides; width becomes the banner's own.
@@ -76,7 +76,7 @@ namespace UI {
                 yPos + 9, OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, BANNER_CAP_MASK, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                    DAT_TextManagerObject::ptr)((OpenSHC::DE::SHCDE::eTextSections)textGroupIndex, textNumInGroup),
+                    DAT_TextManagerObject::ptr)(textGroupIndex, textNumInGroup),
                 width / 2 + left, yPos + 14, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
                 BANNER_TEXT_FONT_SIZE, FALSE, 0);
         }
