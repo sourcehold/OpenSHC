@@ -88,6 +88,7 @@ namespace Audio {
             SEID_RABBIT_DIE1 = 92, // 0x0000005C
             SEID_BURNING_MAN_SCREAM = 97, // 0x00000061
             SEID_BURNING_MAN_SCREAM2 = 100, // 0x00000064
+            SEID_UNKNOWN_0x67 = 103, // 0x00000067
             SEID_CATAPULT_SHOOT = 106, // 0x0000006A
             SEID_TREBUCHET_DESTROYED = 111, // 0x0000006F
             SEID_SIEGE_EQUIPMENT_DESTROYED = 112, // 0x00000070
@@ -106,7 +107,9 @@ namespace Audio {
             SEID_UNKNOWN_0x80 = 128, // 0x00000080
             SEID_UNKNOWN_0x87 = 135, // 0x00000087
             SEID_CHICKEN1 = 137, // 0x00000089
+            SEID_UNKNOWN_0x8C = 140, // 0x0000008C
             SEID_GATEHOUSE_CLOSE = 141, // 0x0000008D
+            SEID_UNKNOWN_0x8E = 142, // 0x0000008E
             SEID_GATEHOUSE_OPEN = 143, // 0x0000008F
             SEID_CHILDREN_PLAY_MAYPOLE = 144, // 0x00000090
             SEID_SWORDSMAN_SWORD_SWING = 145, // 0x00000091
@@ -209,7 +212,9 @@ namespace Audio {
             SEID_UNKNOWN_0xFE = 254, // 0x000000FE
             SEID_UNKNOWN_0xFF = 255, // 0x000000FF
             SEID_UNKNOWN_0x100 = 256, // 0x00000100
-            SEID_UNKNOWN_0x101 = 257 // 0x00000101
+            SEID_UNKNOWN_0x101 = 257, // 0x00000101
+            SEID_UNKNOWN_0x104 = 260, // 0x00000104
+            SEID_UNKNOWN_0x105 = 261 // 0x00000105
 
         } SoundEffectID;
 

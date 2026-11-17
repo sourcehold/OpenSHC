@@ -26,7 +26,7 @@ namespace Map {
             int originY; // 0x0000000C length: 4
             int tile; // 0x00000010 length: 4
             int variation; // 0x00000014 length: 4
-            int id; // 0x00000018 length: 4
+            int nextFloaterID; // 0x00000018 length: 4
 
         } Floater;
 #pragma pack(pop)

@@ -34446,6 +34446,8 @@ enum {
     // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC6C0 = 0x004BC6C0,
+    // label: InitTutorialState
+    // location: OpenSHC/UI/Helpers
     // type: function
     SHC_3BB0A8C1_0x004BC6F0 = 0x004BC6F0,
     // label: SetTutorialHintActiveWithTimestamp
@@ -96114,7 +96116,7 @@ enum {
     // location:
     // type: OpenSHC/WindowsHelper/Enums/BOOLEnum
     SHC_3BB0A8C1_0x00B98408 = 0x00B98408,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B9840C = 0x00B9840C,
     // type: WinDef/DWORD
     SHC_3BB0A8C1_0x00B98410 = 0x00B98410,
@@ -96587,7 +96589,7 @@ enum {
     SHC_3BB0A8C1_0x00DF33E0 = 0x00DF33E0,
     // label: DAT_PerformanceCounterFrequency
     // location:
-    // type: winnt/LARGE_INTEGER
+    // type: ntddk_32/_LARGE_INTEGER
     SHC_3BB0A8C1_0x00DF33E8 = 0x00DF33E8,
     // label: COL_LIGHT_GREY
     // location:
@@ -97439,7 +97441,7 @@ enum {
     SHC_3BB0A8C1_0x00EC0834 = 0x00EC0834,
     // type: /int
     SHC_3BB0A8C1_0x00EC0838 = 0x00EC0838,
-    // type: /int
+    // type: /float
     SHC_3BB0A8C1_0x00EC083C = 0x00EC083C,
     // type: OpenSHC/IO/Graphics/GFXRelatedBuffer1[600]
     SHC_3BB0A8C1_0x00EC0840 = 0x00EC0840,
@@ -97549,7 +97551,7 @@ enum {
     SHC_3BB0A8C1_0x00ED3154 = 0x00ED3154,
     // label: DAT_RenderedUnitOwner
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3158 = 0x00ED3158,
     // type: /int
     SHC_3BB0A8C1_0x00ED315C = 0x00ED315C,
@@ -97588,7 +97590,7 @@ enum {
     SHC_3BB0A8C1_0x00ED317C = 0x00ED317C,
     // label: DAT_CurrentlyRenderedSpriteID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3180 = 0x00ED3180,
     // label: DAT_CurrentRockID
     // location:
@@ -97634,7 +97636,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31C0 = 0x00ED31C0,
     // label: DAT_ButtonBlendStrength
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED31C4 = 0x00ED31C4,
     // label: DAT_StopHandlingMenuItems
     // location:
@@ -97660,7 +97662,7 @@ enum {
     SHC_3BB0A8C1_0x00ED31DC = 0x00ED31DC,
     // label: DAT_BuildingSizeIndexMapping
     // location:
-    // type: /int[14][169][6]
+    // type: OpenSHC/Map/Buildings/BuildingSizeIndexMapping[14][169]
     SHC_3BB0A8C1_0x00ED31E0 = 0x00ED31E0,
     // label: DAT_CurrentTribeID
     // location:

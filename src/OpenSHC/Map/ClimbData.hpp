@@ -8,14 +8,18 @@
 
 #pragma once
 
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000204
     typedef struct ClimbData {
 
-        int canBeUsed; // 0x00000000 length: 4
+        BOOLEnum canBeUsed; // 0x00000000 length: 4
         int type; // 0x00000004 length: 4
         int climbDataRelated; // 0x00000008 length: 4
         int buildingID; // 0x0000000C length: 4

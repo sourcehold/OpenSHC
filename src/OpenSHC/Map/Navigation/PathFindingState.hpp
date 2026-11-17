@@ -136,7 +136,7 @@ namespace Map {
 
             uint commitUnitPathPlanUsingWalkLayer(uint param_1, int param_2, int param_3);
 
-            BOOLEnum updateSeparateAreaTileMap(int forceUpdate);
+            BOOLEnum updateSeparateAreaTileMap(BOOLEnum forceUpdate);
 
             BOOLEnum updatePathLinkageLayerBasedOnBuildingsUnk(int yUnk, int tile);
 
@@ -179,13 +179,13 @@ namespace Map {
             void computeTotalUnitsWithinDistance(
                 int playerID, int sameTeamUnits, int someLogicalTileProperty, int tile, int distance);
 
-            void computeNextRallyPointDestination(int unitID, int xPos, int yPos);
+            void computeNextRallyPointDestination(int unitID, uint xPos, uint yPos);
 
             BOOLEnum findDirectNeighbourWalkableTile(uint x, uint y);
 
-            void findPathableTileWithoutUnitWithBuildingAtXY(int unitID, int x, int y);
+            void findPathableTileWithoutUnitWithBuildingAtXY(int unitID, uint x, uint y);
 
-            void findFreeTileOnDefensiveStructure(int unitID, int x, int y);
+            void findFreeTileOnDefensiveStructure(int unitID, uint x, uint y);
 
             void findWalkableTileThatDoesNotContainUnit(int unitID, uint x, uint y, int considerUnits);
 

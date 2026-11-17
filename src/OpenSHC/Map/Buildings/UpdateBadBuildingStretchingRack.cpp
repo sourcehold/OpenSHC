@@ -8,7 +8,6 @@
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentBuildingID.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
-#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -16,19 +15,20 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00419290
     void Buildings::UpdateBadBuildingStretchingRack()
     {
-        int const owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
+        int owner = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].playerColorUnk = 0;
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(
             DAT_CurrentBuildingID::instance);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
             DAT_CurrentBuildingID::instance);
         int const buildingID = DAT_CurrentBuildingID::instance;
+        // indexing by the global rather than buildingID is required for 100% match
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength = 0;
+        DAT_BuildingsState::instance.buildings[buildingID].renderBlendStrength = 0;
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::updateBuildingSignpostCounter,
-            DAT_BuildingsState::ptr)(DAT_CurrentBuildingID::instance, 1);
-        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation
-            = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -3;
+            DAT_BuildingsState::ptr)(buildingID, 1);
+        short* renderPtr = &DAT_BuildingsState::instance.buildings[buildingID].renderAnimation;
+        *renderPtr = DAT_GameState::instance.playerDataArray[owner].fearFactorLevel <= -3;
         DAT_BuildingsState::instance.buildings[buildingID].animationFrame
             = (char)DAT_BuildingDefinedData::instance.BadBuildingStretchingRackAnimationFrames
                   [DAT_BuildingsState::instance.buildings[buildingID].animationIndex];

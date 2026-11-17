@@ -86,8 +86,6 @@ src/OpenSHC/Map/Buildings/BuildingsState/isFearFactorBuilding.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/isReligiousBuilding.cpp
 src/OpenSHC/Map/Buildings/BuildingsState/updateBuildingSignpostCounter.cpp
 src/OpenSHC/Map/Buildings/UpdateApothecary.cpp
-src/OpenSHC/Map/Buildings/UpdateBadBuildingGibbet.cpp
-src/OpenSHC/Map/Buildings/UpdateBadBuildingStretchingRack.cpp
 src/OpenSHC/Map/Buildings/UpdateFireBallistaBuilding.cpp
 src/OpenSHC/Map/Buildings/UpdateGoodBuildingDancingBear.cpp
 src/OpenSHC/Map/Buildings/UpdateHopsFarm.cpp
@@ -113,6 +111,9 @@ src/OpenSHC/UI/MenuItems/BuildMenu/MenuItemActionHandler_BuildMenu_UnitActionBut
 src/OpenSHC/UI/Rendering/RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk.cpp
 src/OpenSHC/UI/Rendering/TextureRenderCore/transformTilesetToRGB565.cpp
 src/OpenSHC/UI/Rendering/TextureRenderCore/transformTileObjectToRGB565.cpp
+src/OpenSHC/UI/Rendering/TextureRenderCore/renderGmWithPreparedAlphaMask.cpp
+src/OpenSHC/UI/Rendering/TextureRenderCore/renderInterfaceOrBuildingOccupationArea.cpp
+src/OpenSHC/UI/Rendering/InitBlendFilterArraysUnk.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_WorkshopWeaponSelection.cpp
@@ -120,3 +121,18 @@ src/OpenSHC/UI/MenuItems/General/MenuItemRenderFunction_General_RenderCurrentBut
 src/OpenSHC/UI/DisplayElements/RenderTimeUntilDefeatDisplayElement.cpp
 src/OpenSHC/UI/DisplayElements/GetIfDisplayElementStateNotZero.cpp
 src/OpenSHC/UI/DisplayElements/FindDisplayElementWithID.cpp
+src/OpenSHC/UI/HoveredState/clearHoveredState.cpp
+src/OpenSHC/UI/HoveredState/Constructor_HoveredState.cpp
+src/OpenSHC/UI/Rendering/RenderCurrentButtonOnScreenMenu.cpp
+src/OpenSHC/UI/Rendering/RenderCurrentButtonToScreenMenuWithBlendingUnk.cpp
+src/OpenSHC/Map/Units/UnitsState/checkIfCitizenUnitIsAliveBasedOnState.cpp
+src/OpenSHC/Map/Units/UnitsState/hasTunnelerNotFinishedDigging.cpp
+src/OpenSHC/Map/Units/UnitsState/hasUnitReachedDestination.cpp
+src/OpenSHC/Map/Units/UnitsState/commitUnitLocation.cpp
+src/OpenSHC/Map/Units/UnitsState/makeUnitStopWalkingByClearingPathProgressState.cpp
+src/OpenSHC/Map/Units/UnitsState/resumeMovementIfNoAttackTarget.cpp
+src/OpenSHC/Map/Units/UpdateBurningMan.cpp
+src/OpenSHC/Map/Units/UpdateMiner.cpp
+src/OpenSHC/Map/Units/UpdateQuarryMason.cpp
+src/OpenSHC/Map/Units/UpdateDrunkard.cpp
+src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
