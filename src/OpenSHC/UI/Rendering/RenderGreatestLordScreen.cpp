@@ -289,16 +289,18 @@ namespace UI {
                 DAT_PencilRenderCore::ptr)(DAT_MenuHandlerState::instance.x, DAT_MenuHandlerState::instance.y,
                 DAT_MenuHandlerState::instance.x + 800, DAT_MenuHandlerState::instance.y + 600, 16);
             // "Greatest Lord"
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(225, 1, DAT_MenuHandlerState::instance.x + 40, y, 720, 720);
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                OpenSHC::DE::SHCDE::TEXT_MP_RANK, 1, DAT_MenuHandlerState::instance.x + 40, y, 720, 720);
         } else {
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox,
                 DAT_PencilRenderCore::ptr)(DAT_MenuHandlerState::instance.x - 112,
                 DAT_MenuHandlerState::instance.y - 84, DAT_MenuHandlerState::instance.x + 912,
                 DAT_MenuHandlerState::instance.y + 684, 16);
             // "Greatest Lord"
-            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner,
-                DAT_PencilRenderCore::ptr)(225, 1, DAT_MenuHandlerState::instance.x - 104, y - 30, 1008, 0);
+            MACRO_CALL_MEMBER(
+                OpenSHC::UI::Rendering::PencilRenderCore_Func::drawHeaderTextBanner, DAT_PencilRenderCore::ptr)(
+                OpenSHC::DE::SHCDE::TEXT_MP_RANK, 1, DAT_MenuHandlerState::instance.x - 104, y - 30, 1008, 0);
             y += 20;
         }
         y += 190;
@@ -487,18 +489,19 @@ namespace UI {
         }
 
         if (CHAR_00eb0e44::instance == '\0') {
-            if (DAT_00eb9af8::instance == 0 && DAT_GameSynchronyState::instance.finalResults.yearStart != 0) {
+            if (DAT_00eb9af8::instance == 0
+                && DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart != 0) {
                 // fixme: the original writes the date into the (no longer needed) statistic orders
                 char* const dateText = (char*)tables.statOrder[0];
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(dateText, s__s__d____s__d_005aaf3c,
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_GameSynchronyState::instance.finalResults.monthStart),
-                    DAT_GameSynchronyState::instance.finalResults.yearStart,
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset, DAT_TextManagerObject::ptr)(
-                        OpenSHC::DE::SHCDE::TEXT_MONTHS, DAT_GameSynchronyState::instance.finalResults.monthEnd),
-                    DAT_GameSynchronyState::instance.finalResults.yearEnd);
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                        DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthStart),
+                    DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart,
+                    MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
+                        DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
+                        DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthEnd),
+                    DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearEnd);
                 if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
