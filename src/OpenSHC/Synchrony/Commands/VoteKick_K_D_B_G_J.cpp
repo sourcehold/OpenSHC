@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Game/GameCore.func.hpp"
@@ -17,20 +16,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandParameterLocation;
-    using OpenSHC::Commands::GameCommandParameterReadWrite;
-    using OpenSHC::Commands::GameCommandScheduling;
-    using OpenSHC::UI::Enums::MenuViewType;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00485140
     void Commands::VoteKick_K_D_B_G_J()
     {
@@ -41,28 +26,30 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            // every message still waiting to be sent is dropped
             if (DAT_GameSynchronyState::instance.DPLAYX_4A != NULL) {
-                ((IDirectPlay4A*)DAT_GameSynchronyState::instance.DPLAYX_4A)->CancelMessage(0, 0);
+                DAT_GameSynchronyState::instance.DPLAYX_4A->CancelMessage(0, 0);
             }
             DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
             return;
         }
-        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
-                OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0) {
-                DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 7;
-                MACRO_CALL(
-                    OpenSHC::UI::MenuItems::General_Func::MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk)(
-                    0x16);
-                return;
-            }
-            memset(DAT_GameState::instance.mapAndTime.playerIsAlive, 0,
-                sizeof(DAT_GameState::instance.mapAndTime.playerIsAlive));
-            MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
-                OpenSHC::UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
+            return;
         }
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 4,
+            OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        if (DAT_GameSynchronyState::instance.DAT_GameCommandParam0 == 0) {
+            DAT_MenuTextInputState::instance.DAT_MenuOptionsActionParameter = 7;
+            MACRO_CALL(
+                OpenSHC::UI::MenuItems::General_Func::MenuItemActionHandler_General_LaunchOrQuitMultiplayerGameUnk)(22);
+            return;
+        }
+        // nobody is left alive, and the mission ends
+        memset(DAT_GameState::instance.mapAndTime.playerIsAlive, 0,
+            sizeof(DAT_GameState::instance.mapAndTime.playerIsAlive));
+        MACRO_CALL_MEMBER(OpenSHC::Game::GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
+            OpenSHC::UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
     }
 
 }
