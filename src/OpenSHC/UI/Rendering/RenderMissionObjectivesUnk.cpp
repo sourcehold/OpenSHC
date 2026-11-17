@@ -98,9 +98,8 @@ namespace UI {
                     numberWidth = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeNumberTextWidth,
                         DAT_TextManagerObject::ptr)(INT_ARRAY_00ed2fc8::instance[objective], 18);
                     if (DAT_GameCore::instance.gameSuspended == 1) {
-                        numberWidth = numberWidth
-                            + MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth,
-                                DAT_TextManagerObject::ptr)((char*)s___005aaf78, 18);
+                        numberWidth += MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth,
+                            DAT_TextManagerObject::ptr)((char*)s___005aaf78, 18);
                         switch (objective) {
                         case OpenSHC::Game::ScenarioEvents::Enums::SECI_POPULATION:
                             value = DAT_GameState::instance
@@ -132,9 +131,8 @@ namespace UI {
                                         .fearFactorLevel;
                             break;
                         }
-                        numberWidth = numberWidth
-                            + MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeNumberTextWidth,
-                                DAT_TextManagerObject::ptr)(value, 18);
+                        numberWidth += MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeNumberTextWidth,
+                            DAT_TextManagerObject::ptr)(value, 18);
                     }
                     if (numberWidth + column > boxX - 5) {
                         boxX = numberWidth + column + 5;
@@ -160,9 +158,8 @@ namespace UI {
                             + 6;
                     }
                     if (DAT_GameCore::instance.gameSuspended == 1) {
-                        numberWidth = numberWidth
-                            + MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth,
-                                DAT_TextManagerObject::ptr)((char*)s___005aaf78, 18);
+                        numberWidth += MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth,
+                            DAT_TextManagerObject::ptr)((char*)s___005aaf78, 18);
                         int resource = INT_ARRAY_00eb1238::instance[objective];
                         if (resource == Game::Resources::RT_PARTIALPITCH) {
                             resource = Game::Resources::RT_PITCH;
@@ -170,9 +167,8 @@ namespace UI {
                         value = DAT_GameState::instance
                                     .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                                     .currentResources[resource];
-                        numberWidth = numberWidth
-                            + MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeNumberTextWidth,
-                                DAT_TextManagerObject::ptr)(value, 18);
+                        numberWidth += MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeNumberTextWidth,
+                            DAT_TextManagerObject::ptr)(value, 18);
                     }
                     if (numberWidth + column > boxX - 5) {
                         boxX = numberWidth + column + 5;

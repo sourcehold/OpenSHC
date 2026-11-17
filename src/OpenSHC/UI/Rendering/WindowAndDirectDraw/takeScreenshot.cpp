@@ -6,7 +6,7 @@
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/IO/ResourceManager.func.hpp"
 #include "OpenSHC/OS.func.hpp"
-#include "OpenSHC/string-macros.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_ResourceManager.hpp"
@@ -27,7 +27,7 @@ namespace UI {
                 strcat(path, S_SCREEN_CAPTURE_BMP_005A6538);
             } else {
                 char fileName[1000];
-                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(fileName, S_SCREEN_CAPTURE__03D_BMP_005A6520, screenshotNumber);
+                MACRO_CALL(OpenSHC::OS_Func::_sprintf)(fileName, s_screen_capture__03d_bmp_005a6520, screenshotNumber);
                 strcat(path, fileName);
             }
 

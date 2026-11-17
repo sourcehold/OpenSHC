@@ -47,9 +47,8 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
         >= DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end) {
         DAT_RenderMap_RowsLeft::instance = DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - drawY;
         // fixme: always adds 0, the original subtracts the already shortened row count
-        height = height
-            + (DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end - DAT_RenderMap_RowsLeft::instance
-                - drawY);
+        height += (DAT_TextureRenderCoreObject::instance.mapGameSurfaceHeightRange.end
+            - DAT_RenderMap_RowsLeft::instance - drawY);
     }
     // rows to bytes: tile objects are 15 dwords per row
     skip *= 60;
@@ -87,16 +86,16 @@ void Rendering::BlitMapImageWithVerticalClipAndYOffset()
         add edi, eax
         mov edx, firstRows
         cmp edx, 0
-        jle nrm_454359
-nrm_4541d6:
+        jle next_image
+row_start:
         mov eax, DAT_RenderMap_WhatToDraw::instance
         cmp eax, 1
-        je nrm_45428f
+        je copy_right_half
         cmp eax, 2
-        je nrm_4542e7
+        je copy_left_half
         cmp eax, 3
-        je nrm_45433d
-nrm_4541f6:
+        je copy_middle
+copy_whole_row:
         mov eax, dword ptr [esi]
         mov ebx, dword ptr [esi + 4]
         mov ecx, dword ptr [esi + 8]
@@ -131,9 +130,9 @@ nrm_4541f6:
         add edi, 0x1fb0
         sub edx, 1
         cmp edx, 0
-        jle nrm_454359
-        jmp nrm_4541f6
-nrm_45428f:
+        jle next_image
+        jmp copy_whole_row
+copy_right_half:
         mov ebx, dword ptr [esi + 0x1c]
         mov ecx, dword ptr [esi + 0x20]
         mov dword ptr [edi + 0xddec], ebx
@@ -154,9 +153,9 @@ nrm_45428f:
         add edi, 0x1fb0
         sub edx, 1
         cmp edx, 0
-        jle nrm_454359
-        jmp nrm_45428f
-nrm_4542e7:
+        jle next_image
+        jmp copy_right_half
+copy_left_half:
         mov eax, dword ptr [esi]
         mov ebx, dword ptr [esi + 4]
         mov ecx, dword ptr [esi + 8]
@@ -177,27 +176,27 @@ nrm_4542e7:
         add edi, 0x1fb0
         sub edx, 1
         cmp edx, 0
-        jle nrm_454359
-        jmp nrm_4542e7
-nrm_45433d:
+        jle next_image
+        jmp copy_left_half
+copy_middle:
         mov ebx, dword ptr [esi + 0x1c]
         mov dword ptr [edi + 0xddec], ebx
         add esi, 0x3c
         add edi, 0x1fb0
         sub edx, 1
         cmp edx, 0
-        jle nrm_454359
-        jmp nrm_45433d
-nrm_454359:
+        jle next_image
+        jmp copy_middle
+next_image:
         cmp DAT_RenderMap_RowsLeft::instance, 0
-        jle nrm_45437f
+        jle done
         mov edx, DAT_RenderMap_RowsLeft::instance
         mov DAT_RenderMap_RowsLeft::instance, 0
         mov esi, dword ptr nextImage
         mov eax, dword ptr nextSkip
         add esi, eax
-        jmp nrm_4541d6
-nrm_45437f:
+        jmp row_start
+done:
         }
         // clang-format on
         return;
@@ -219,20 +218,20 @@ nrm_45437f:
         add edi, eax
         mov edx, firstRows
         cmp edx, 0
-        jle zm_4545eb
-zm_4543ba:
+        jle zoom_next_image
+zoom_row_start:
         mov eax, DAT_RenderMap_WhatToDraw::instance
         cmp eax, 1
-        je zm_4544ac
+        je zoom_right_half
         cmp eax, 2
-        je zm_454536
+        je zoom_left_half
         cmp eax, 3
-        je zm_4545b3
-zm_4543da:
+        je zoom_middle
+zoom_whole_row:
         mov eax, ecx
         and eax, 1
         cmp eax, 0
-        jne zm_454448
+        jne zoom_whole_row_odd
         mov ax, word ptr [esi]
         mov bx, word ptr [esi + 8]
         mov word ptr [edi], ax
@@ -253,9 +252,9 @@ zm_4543da:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4543da
-zm_454448:
+        jle zoom_next_image
+        jmp zoom_whole_row
+zoom_whole_row_odd:
         add edi, 0x1fb0
         mov ax, word ptr [esi + 4]
         mov bx, word ptr [esi + 0xc]
@@ -275,12 +274,12 @@ zm_454448:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4543da
-zm_4544ac:
+        jle zoom_next_image
+        jmp zoom_whole_row
+zoom_right_half:
         mov eax, ecx
         and eax, 1
-        jne zm_4544f0
+        jne zoom_right_half_odd
         mov ax, word ptr [esi + 0x20]
         mov bx, word ptr [esi + 0x28]
         mov word ptr [edi + 0x5f20], ax
@@ -293,9 +292,9 @@ zm_4544ac:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4544ac
-zm_4544f0:
+        jle zoom_next_image
+        jmp zoom_right_half
+zoom_right_half_odd:
         add edi, 0x1fb0
         mov ax, word ptr [esi + 0x1c]
         mov bx, word ptr [esi + 0x24]
@@ -309,12 +308,12 @@ zm_4544f0:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4544ac
-zm_454536:
+        jle zoom_next_image
+        jmp zoom_right_half
+zoom_left_half:
         mov eax, ecx
         and eax, 1
-        jne zm_454574
+        jne zoom_left_half_odd
         mov ax, word ptr [esi]
         mov bx, word ptr [esi + 8]
         mov word ptr [edi], ax
@@ -327,9 +326,9 @@ zm_454536:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_454536
-zm_454574:
+        jle zoom_next_image
+        jmp zoom_left_half
+zoom_left_half_odd:
         add edi, 0x1fb0
         mov ax, word ptr [esi + 4]
         mov bx, word ptr [esi + 0xc]
@@ -343,19 +342,19 @@ zm_454574:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_454536
-zm_4545b3:
+        jle zoom_next_image
+        jmp zoom_left_half
+zoom_middle:
         mov eax, ecx
         and eax, 1
-        jne zm_4545ca
+        jne zoom_middle_odd
         add esi, 0x3c
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4545b3
-zm_4545ca:
+        jle zoom_next_image
+        jmp zoom_middle
+zoom_middle_odd:
         add edi, 0x1fb0
         mov ax, word ptr [esi + 0x1c]
         mov word ptr [edi + 0x5f1e], ax
@@ -363,18 +362,18 @@ zm_4545ca:
         add ecx, 1
         sub edx, 1
         cmp edx, 0
-        jle zm_4545eb
-        jmp zm_4545b3
-zm_4545eb:
+        jle zoom_next_image
+        jmp zoom_middle
+zoom_next_image:
         cmp DAT_RenderMap_RowsLeft::instance, 0
-        jle zm_454611
+        jle zoom_done
         mov edx, DAT_RenderMap_RowsLeft::instance
         mov DAT_RenderMap_RowsLeft::instance, 0
         mov esi, dword ptr nextImage
         mov eax, dword ptr nextSkip
         add esi, eax
-        jmp zm_4543ba
-zm_454611:
+        jmp zoom_row_start
+zoom_done:
     }
     // clang-format on
 }
