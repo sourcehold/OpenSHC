@@ -35475,7 +35475,7 @@ SHC_3BB0A8C1_0x004D1950 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D1A00 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D1D60 | 62.4% | register permutation
+SHC_3BB0A8C1_0x004D1D60 | 66.9% | register names only: ebp/ebx and edi/esi swapped
 
 SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented
 

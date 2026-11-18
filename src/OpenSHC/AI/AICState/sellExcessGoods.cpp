@@ -1,10 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/AI/AIType.hpp"
-#include "OpenSHC/AI/AITypeInt.hpp"
 #include "OpenSHC/AI/Trading/AIResourceTradeCategory.hpp"
-#include "OpenSHC/AI/Trading/AIResourceTradeCategoryInt.hpp"
-#include "OpenSHC/AI/Trading/ResourceAICResourceMappingEntry.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 
@@ -14,12 +11,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::AI::AIC::AICSpecification;
-    using OpenSHC::AI::Trading::AIResourceTradeCategory;
-    using OpenSHC::AI::Trading::AIResourceTradeCategoryInt;
-    using OpenSHC::AI::Trading::ResourceAICResourceMappingEntry;
     using OpenSHC::Game::Player::PlayerData;
     using OpenSHC::Game::Resources::ResourceType;
 
@@ -32,15 +23,13 @@ namespace AI {
         }
 
         int aicIndex = aiType - 1;
-        // Measured: indexing currentResources and resourcesToAcquireArray through playerDataArray[playerID]
-        // instead of one flat offset from playerDataArray[0] costs quick_diff 0.659 -> 0.644. The original
-        // computes the offset once and reuses it for both arrays.
-        int playerResourceBase = playerID * (sizeof(PlayerData) / sizeof(int));
-        for (int i = 0; i < 20; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping); ++i) {
             ResourceType resourceType
                 = (ResourceType)DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].game;
             int variance = this->aics[aicIndex].maxResourceVariance;
-            int resourceOffset = (playerResourceBase + resourceType) * sizeof(int);
+            // one flat offset from playerDataArray[0] for currentResources and resourcesToAcquireArray: the
+            // original computes (the player's ints + the resource) * 4 once and uses it for both arrays
+            int resourceOffset = (playerID * (sizeof(PlayerData) / sizeof(int)) + resourceType) * sizeof(int);
 
             int amount;
             if (DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].aic
@@ -68,7 +57,7 @@ namespace AI {
                 // Nervous and low on gold: keep a quarter of the food and up to 10000 weapons, sell everything else
                 if (DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].aic
                     == OpenSHC::AI::Trading::AIRTC_FOOD) {
-                    amount = amount / 4;
+                    amount /= 4;
                 } else if (DAT_SkirmishDefinedData::instance.AIResourceTradeAICMapping[i].aic
                     == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
                     amount = 10000;
@@ -85,7 +74,7 @@ namespace AI {
                         == OpenSHC::AI::Trading::AIRTC_WEAPONS) {
                         amount = 0;
                     } else {
-                        amount = amount / 4;
+                        amount /= 4;
                     }
                 }
                 variance = 0;
@@ -95,7 +84,7 @@ namespace AI {
             }
 
             // Resources the AIC always sells are kept at zero
-            for (int j = 0; j < 15; j++) {
+            for (int j = 0; j < 15; ++j) {
                 if (resourceType == (&this->aics[aicIndex].sellResource01)[j]) {
                     amount = 0;
                     variance = 0;
@@ -106,7 +95,7 @@ namespace AI {
             if (*(int*)((char*)DAT_GameState::instance.playerDataArray[0].currentResources + resourceOffset) > amount) {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sellGoods, this)(playerID, resourceType,
                     ((int*)DAT_GameState::instance.playerDataArray[0]
-                            .currentResources)[playerResourceBase + resourceType]
+                            .currentResources)[playerID * (sizeof(PlayerData) / sizeof(int)) + resourceType]
                         - amount + variance);
                 return;
             }
