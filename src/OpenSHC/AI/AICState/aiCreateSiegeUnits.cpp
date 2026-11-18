@@ -46,7 +46,8 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
             return;
 
-        for (int siegeIndex = 0; siegeIndex < 4; siegeIndex++) {
+        for (int siegeIndex = 0; siegeIndex < countof(DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray);
+            ++siegeIndex) {
             int siegeUnitType = DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].unitType;
             int locationCount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                                     [DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray[siegeIndex].slot];
@@ -56,8 +57,7 @@ namespace AI {
             else if (locationCount <= 0)
                 continue;
 
-            // Measured: the for-loop form of rule 9, `for (; i < locationCount; i++)` with the `i++` moved to
-            // the step, costs quick_diff 0.988 -> 0.696. The while stays, as in generateSiegeCreationInformation.
+            // a while: with the step in a for header the function loses the match
             while (i < locationCount) {
                 int index = i;
                 i++;
