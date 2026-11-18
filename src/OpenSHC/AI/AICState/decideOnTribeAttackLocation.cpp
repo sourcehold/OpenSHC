@@ -45,7 +45,7 @@ namespace AI {
             int y = 0;
             int unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe, DAT_TribesState::ptr)(tribeID, 0);
-            // the callee returns a bool in al; the generated header declares BOOLEnum
+            // the original tests only al after this call
             if (unitID != 0
                 && (byte)MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::pathFindingToAttackCastleIncludingMoat,
@@ -100,8 +100,11 @@ namespace AI {
             int destinationY = DAT_GameState::instance.playerDataArray[targetPlayer]
                                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
                                    .yEntry;
-            if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(tribeID,
-                    DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX))
+            // in a local of its own: written inside the call, it loses the match
+            int campgroundTile
+                = DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile + destinationX;
+            if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
+                    tribeID, campgroundTile))
                 return;
 
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
@@ -113,15 +116,12 @@ namespace AI {
             DAT_GameState::ptr)(targetPlayer);
         int destinationTile;
         if (buildingID != 0) {
-            // fixme: the original reads this once with movsx into an int; an int copy does that but lets MSVC fold
-            // both campground arms into one, which the original keeps apart. The reference keeps the arms apart.
-            short const& targetUnitIDRef = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            if (targetUnitIDRef != 0) {
+            int targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            if (targetUnitID != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::pathfindingForAttacksUnk,
                     DAT_PathFindingState::ptr)(tribeID, buildingID, 1,
-                    (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
-                            .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
-                            .tile],
+                    (short)DAT_TileMapState::instance
+                        .PathConnectionLayer[DAT_UnitsState::instance.units[targetUnitID].tile],
                     targetPlayer);
                 if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile2OrAHelper == 0)
                     destinationTile = DAT_ViewportRenderState::instance
@@ -157,13 +157,14 @@ namespace AI {
         int destinationY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[destinationTile];
         int destinationX
             = destinationTile - DAT_ViewportRenderState::instance.translationMatrix[destinationY].addXgetTile;
-        if (!MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
+        // tested this way round, so that sendUnitsToCampfire is the last statement: the other way loses the match
+        if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::canNavigateUnitsFromTileToTargetTile, this)(
                 tribeID, destinationTile)) {
-            MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, targetPlayer);
+            MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
+                tribeID, destinationX, destinationY, 1);
             return;
         }
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(
-            tribeID, destinationX, destinationY, 1);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, targetPlayer);
     }
 }
 }
