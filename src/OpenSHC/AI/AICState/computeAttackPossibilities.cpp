@@ -19,7 +19,7 @@ namespace AI {
         // the first use reads the field directly, which keeps the multiply in its own register
         int const& attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            80400, '\0', DAT_TileMapState::instance.AIInfoLayer);
+            sizeof(DAT_TileMapState::instance.AIInfoLayer), 0, DAT_TileMapState::instance.AIInfoLayer);
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackPrimeInfo, this)(
             playerID, DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::recomputeTargetedBuildingTilesArray,
@@ -28,11 +28,16 @@ namespace AI {
             playerID, attackedPlayerID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::computeSiegeSpotScores, DAT_TroopValueState::ptr)(
             attackedPlayerID, playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setScale3, DAT_TroopValueState::ptr)(1, playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setTown2, DAT_TroopValueState::ptr)(1, playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setGate2, DAT_TroopValueState::ptr)(1, playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setWide3, DAT_TroopValueState::ptr)(1, playerID);
-        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setMoat3, DAT_TroopValueState::ptr)(1, playerID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setScale3, DAT_TroopValueState::ptr)(
+            TRUE, playerID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setTown2, DAT_TroopValueState::ptr)(
+            TRUE, playerID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setGate2, DAT_TroopValueState::ptr)(
+            TRUE, playerID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setWide3, DAT_TroopValueState::ptr)(
+            TRUE, playerID);
+        MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::setMoat3, DAT_TroopValueState::ptr)(
+            TRUE, playerID);
         MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::calculateAttackVectorsToCampFireOfPlayer,
             DAT_GameState::ptr)(attackedPlayerID);
     }

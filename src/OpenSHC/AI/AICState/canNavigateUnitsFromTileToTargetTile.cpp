@@ -14,12 +14,11 @@ namespace AI {
     BOOLEnum AICState::canNavigateUnitsFromTileToTargetTile(int tribeID, int tile)
     {
         int owner = DAT_TribesState::instance.tribes[tribeID].owner;
-        int fromArea = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
+        int fromArea = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance
                 .units[DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID]
                 .tile];
         return MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                   DAT_PathFindingState::ptr)(
-                   owner, fromArea, (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                   DAT_PathFindingState::ptr)(owner, fromArea, DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
             != 0;
     }
 }

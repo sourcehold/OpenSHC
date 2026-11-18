@@ -21,7 +21,7 @@ namespace AI {
         int highestQuarryID = 0;
         int highestStonePerTether = 0;
         if (MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
-                DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_OXTETHER, 1)
+                DAT_BuildingsState::ptr)(playerID, OpenSHC::Map::Buildings::BT_OXTETHER, TRUE)
             >= 10)
             return FALSE;
 

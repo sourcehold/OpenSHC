@@ -29,10 +29,10 @@ namespace AI {
                         .yEntry;
         this->aiBorderTilesIndex = 0;
         MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            8000, '\0', this->aiBorderTiles);
+            sizeof(this->aiBorderTiles), 0, this->aiBorderTiles);
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::recomputeAIPathCostToAttackedKeep, this)(playerID, 1);
 
-        for (int i = 0; i < (int)this->aiBorderTilesIndex; i++) {
+        for (int i = 0; i < this->aiBorderTilesIndex; i++) {
             int tile = this->aiBorderTiles[i].tile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                 DAT_DirectionAlgorithmState::ptr)(keepX, keepY,
@@ -47,7 +47,7 @@ namespace AI {
 
         int shortestDistanceTile = 0;
         int shortestDistance = 100000;
-        for (int i = 0; i < (int)this->aiBorderTilesIndex; i++) {
+        for (int i = 0; i < this->aiBorderTilesIndex; i++) {
             int distance = this->aiBorderTiles[i].distance;
             if (distance < shortestDistance) {
                 shortestDistanceTile = this->aiBorderTiles[i].tile;

@@ -17,8 +17,8 @@ namespace AI {
             return FALSE;
         int aicIndex = aiType - 1;
 
-        int farmCount
-            = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countFarms, DAT_BuildingsState::ptr)(playerID, 1);
+        int farmCount = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countFarms, DAT_BuildingsState::ptr)(
+            playerID, TRUE);
         if (farmCount <= 0)
             return TRUE;
         if (farmCount >= this->aics[aicIndex].maxFarms)

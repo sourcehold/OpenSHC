@@ -218,7 +218,7 @@ namespace AI {
             DAT_GameState::instance.playerDataArray[playerID].snoozedBuildings[BT_MILL] = true;
         }
 
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0) {
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending) {
             return;
         }
 

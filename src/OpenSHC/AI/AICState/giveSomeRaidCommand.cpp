@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -37,7 +38,8 @@ namespace AI {
             return FALSE;
 
         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
-            DAT_UnitsState::ptr)(tribeIndex, 9, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid);
+            DAT_UnitsState::ptr)(tribeIndex, OpenSHC::Map::Units::UIT_ATTACK_BUILDING, buildingID,
+            DAT_BuildingsState::instance.buildings[buildingID].uid);
         DAT_TribesState::instance.tribes[tribeIndex].targetBuildingUID
             = DAT_BuildingsState::instance.buildings[buildingID].uid;
         DAT_TribesState::instance.tribes[tribeIndex].unitStance = OpenSHC::Map::Units::Behavior::USE_DEFENSIVE;

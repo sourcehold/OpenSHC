@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/AIVUnitType.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
@@ -27,7 +28,7 @@ namespace AI {
         int guildID = DAT_GameState::instance.playerDataArray[playerID]
                           .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
                           .id;
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
         if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD] < 30)
             return;
@@ -42,7 +43,9 @@ namespace AI {
             return;
         if (DAT_BuildingsState::instance.buildings[smelterID].buildingType != Map::Buildings::BT_OILSMELTER)
             return;
-        int amount = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount[1] + 1;
+        int amount = DAT_GameState::instance.playerDataArray[playerID]
+                         .aivUnitLocationSlotLocationCount[OpenSHC::AI::AIVUT_ENGINEER]
+            + 1;
         if (amount <= 1)
             return;
 

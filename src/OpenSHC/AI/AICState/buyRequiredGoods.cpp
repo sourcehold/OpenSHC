@@ -18,8 +18,9 @@ namespace AI {
             return;
         int aicIndex = aiType - 1;
 
-        for (int i = 0; i < 25; i++) {
-            int resourceType = DAT_SkirmishDefinedData::instance.ResourceAcquisitionPreferenceOrder[i];
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.ResourceAcquisitionPreferenceOrder); i++) {
+            ResourceType resourceType
+                = (ResourceType)DAT_SkirmishDefinedData::instance.ResourceAcquisitionPreferenceOrder[i];
             if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && i < 12)
                 continue;
 
@@ -34,19 +35,17 @@ namespace AI {
                     || DAT_GameState::instance.playerDataArray[playerID].popularity
                         >= this->aics[aicIndex].criticalPopularity)
                 && DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
-                && DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+                && !DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
                 continue;
 
             if (DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
                 < MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::getBuyPrice, DAT_GameState::ptr)(
                     playerID, resourceType, amount)) {
-                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::requestGoods, this)(
-                    playerID, (ResourceType)resourceType, amount * 2);
+                MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::requestGoods, this)(playerID, resourceType, amount * 2);
                 continue;
             }
 
-            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::buyGoods, this)(
-                    playerID, (ResourceType)resourceType, amount)) {
+            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::buyGoods, this)(playerID, resourceType, amount)) {
                 DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[resourceType] = 0;
                 return;
             }

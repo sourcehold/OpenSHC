@@ -77,7 +77,7 @@ namespace AI {
 
                 if (DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState
                     == OpenSHC::AI::AIRUC_RAIDING) {
-                    DAT_GameState::instance.playerDataArray[playerID].canStartSpending = 1;
+                    DAT_GameState::instance.playerDataArray[playerID].canStartSpending = TRUE;
                 } else {
                     // only spend on recruiting while gold is above the AIC's threshold
                     DAT_GameState::instance.playerDataArray[playerID].canStartSpending

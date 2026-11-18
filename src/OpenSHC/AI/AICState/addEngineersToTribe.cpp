@@ -16,7 +16,7 @@ namespace AI {
                 continue;
             if (DAT_UnitsState::instance.units[unitID].owner != playerID)
                 continue;
-            if (DAT_UnitsState::instance.units[unitID].dying != 0)
+            if (DAT_UnitsState::instance.units[unitID].dying)
                 continue;
             if (DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_E_ENGINEER)
                 continue;

@@ -24,7 +24,7 @@ namespace AI {
             return FALSE;
 
         int count = MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::countBuildingsForPlayer,
-            DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT, 1);
+            DAT_BuildingsState::ptr)(playerID, Map::Buildings::BT_WOODCUTTERSHUT, TRUE);
         if (count <= 0) {
             count = 1;
         } else {

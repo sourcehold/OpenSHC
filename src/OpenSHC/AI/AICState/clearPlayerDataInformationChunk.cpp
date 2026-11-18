@@ -14,7 +14,9 @@ namespace AI {
         for (int i = 0; i < countof(DAT_GameSynchronyState::instance.currentPlayerFullIDArray); i++) {
             if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[i] != -1
                 || DAT_GameSynchronyState::instance.currentAIArray[i] == 0)
-                MACRO_CALL(OpenSHC::OS_Func::_memset)(&DAT_GameState::instance.playerDataArray[i].aiFarmIndex, 0, 3748);
+                MACRO_CALL(OpenSHC::OS_Func::_memset)(&DAT_GameState::instance.playerDataArray[i].aiFarmIndex, 0,
+                    offsetof(Game::Player::PlayerData, monkTribeIDUnk)
+                        - offsetof(Game::Player::PlayerData, aiFarmIndex));
         }
     }
 

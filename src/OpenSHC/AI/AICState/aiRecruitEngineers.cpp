@@ -21,7 +21,7 @@ namespace AI {
             return;
         if (!DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
         if (this->aics[aiType - 1].defSiegeEngineGoldThreshold
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
