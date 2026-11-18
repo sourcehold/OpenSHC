@@ -11089,7 +11089,7 @@ SHC_3BB0A8C1_0x00433230 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00433260 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00433370 | 0.0% | Pending
+SHC_3BB0A8C1_0x00433370 | 85.2% | the store at 0x0043351E reads ecx where the original reads eax
 
 SHC_3BB0A8C1_0x00433550 | 0.0% | Pending
 
