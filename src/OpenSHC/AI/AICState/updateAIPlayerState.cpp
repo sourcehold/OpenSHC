@@ -6,7 +6,6 @@
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -16,9 +15,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D49E0
     void AICState::updateAIPlayerState(int playerID)
     {
@@ -27,6 +23,7 @@ namespace AI {
         int _aicIndex = DAT_GameState::instance.playerDataArray[playerID].aiType - 1;
 
         // an ally asked for help and is still alive: drop everything and go to their keep
+        // fixme: != 1 is redundant beside == 2, but the original makes both compares
         if (DAT_GameState::instance.playerDataArray[playerID].requestStateUnk != 1
             && DAT_GameState::instance.playerDataArray[playerID].requestStateUnk == 2
             && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(
@@ -49,9 +46,9 @@ namespace AI {
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAttackCoordinationLevel, this)(playerID);
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackStrength, this)(playerID);
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setCurrentAttackRaidParameter, this)(playerID);
-                ++DAT_GameState::instance
-                      .playerDataArray[DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID]
-                      .attackedByPlayerArrayUnk[playerID][0];
+                // read into a local first: without it the scratch registers of this increment come out swapped
+                int attackedPlayerID = DAT_GameState::instance.playerDataArray[playerID].attackedPlayerID;
+                ++DAT_GameState::instance.playerDataArray[attackedPlayerID].attackedByPlayerArrayUnk[playerID][0];
             } else {
                 // send own units back to keep or campfire
                 MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::aiRetreatUnits, this)(playerID);
@@ -270,12 +267,21 @@ namespace AI {
         if (_aiPlayerState == 9) {
             // retreating: back to idle once the units are home (or after 20 ticks)
             DAT_GameState::instance.playerDataArray[playerID].attackTicker++;
-            if (DAT_GameState::instance.playerDataArray[playerID].attackTicker < 20
-                && !MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::percentageNonMovingTribesGTEAICSpecified, this)(
-                    playerID)
-                && !MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::hasNoTroopsOrAllAreDiggers, this)(playerID))
+            // reset at each exit, not after one combined test: written once, the compiler keeps 1 in a register
+            // instead of 0
+            if (DAT_GameState::instance.playerDataArray[playerID].attackTicker >= 20) {
+                DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 0;
                 return;
-            DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 0;
+            }
+            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::percentageNonMovingTribesGTEAICSpecified, this)(
+                    playerID)) {
+                DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 0;
+                return;
+            }
+            if (MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::hasNoTroopsOrAllAreDiggers, this)(playerID)) {
+                DAT_GameState::instance.playerDataArray[playerID].aiPlayerState = 0;
+                return;
+            }
         }
     }
 
