@@ -93,7 +93,7 @@ namespace Map {
                     continue;
                 }
                 this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                this->totalUnitsInSelection += 1;
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner
                     == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     return;

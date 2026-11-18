@@ -30,20 +30,20 @@ namespace Map {
             if (DAT_UnitsState::instance.units[unitID_2].dying) {
                 return FALSE;
             }
-            if (DAT_UnitsState::instance.units[unitID_1].state.generic == (UnitState)0xcf) {
+            if (DAT_UnitsState::instance.units[unitID_1].state.generic == (UnitState)207) {
                 return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].state.generic
                 == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
                 return FALSE;
             }
-            DAT_UnitsState::instance.units[unitID_1].movementType_OR_targetUnitID = (short)unitID_2;
-            DAT_UnitsState::instance.units[unitID_1].targetedUnitID__OR__engineerMannedSiegeEngineRef = (short)unitID_2;
+            DAT_UnitsState::instance.units[unitID_1].movementType_OR_targetUnitID = unitID_2;
+            DAT_UnitsState::instance.units[unitID_1].targetedUnitID__OR__engineerMannedSiegeEngineRef = unitID_2;
             DAT_UnitsState::instance.units[unitID_1]
                 .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                 = DAT_UnitsState::instance.units[unitID_2].uid;
             DAT_UnitsState::instance.units[unitID_2].huntedBy = DAT_UnitsState::instance.units[unitID_2].huntedBy + 1;
-            DAT_UnitsState::instance.units[unitID_1].state.generic = (UnitState)0xcf;
+            DAT_UnitsState::instance.units[unitID_1].state.generic = (UnitState)207;
             DAT_UnitsState::instance.units[unitID_1].destinationNeeded
                 = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
             return TRUE;

@@ -1,0 +1,73 @@
+#include "../UnitsState.func.hpp"
+
+#include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Map/Units/UnitLogicState.hpp"
+
+#include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_UnitPropertiesDefinedData.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using OpenSHC::Map::Units::UnitLogicState;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x005345A0
+        int UnitsState::findEligibleUnitByTimeAndLocation(
+            int unitID, int playerID, int unitXPosition, int unitYPosition, int zero1, int zero2)
+        {
+            int _bestUnitID = 0;
+            int _bestScore = 0;
+            for (int _candidateUnitID = 1; _candidateUnitID < this->maxUnitCount; ++_candidateUnitID) {
+                if (this->units[_candidateUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                    continue;
+                }
+                if (this->units[_candidateUnitID].dying != 0) {
+                    continue;
+                }
+                if (this->units[_candidateUnitID].owner != playerID) {
+                    continue;
+                }
+                if (DAT_UnitPropertiesDefinedData::instance.SomeUnitStatMatrix5[this->units[_candidateUnitID].unitType]
+                    != 0) {
+                    continue;
+                }
+                if (_candidateUnitID == unitID) {
+                    continue;
+                }
+                if (zero2 == 1) {
+                    if (this->units[_candidateUnitID].field_0x2ac != 1) {
+                        continue;
+                    }
+                } else if (zero2 == 10) {
+                    if (this->units[_candidateUnitID].field_0x2ac != 10) {
+                        continue;
+                    }
+                }
+                // signed shift in the original (0x00534636 sar)
+                int _score
+                    = (int)(DAT_GameCore::instance.mapTimeInTicks - this->units[_candidateUnitID].someMatchTimeVariable)
+                    >> 5;
+                if (zero1 != 0) {
+                    int _distance = MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        DAT_DirectionAlgorithmState::ptr)(
+                        unitXPosition, unitYPosition, this->units[_candidateUnitID].x, this->units[_candidateUnitID].y);
+                    _score = _score - (_distance / 4);
+                }
+                if (_score > _bestScore) {
+                    _bestScore = _score;
+                    _bestUnitID = _candidateUnitID;
+                }
+            }
+            if (_bestUnitID != 0) {
+                this->units[_bestUnitID].someMatchTimeVariable = DAT_GameCore::instance.mapTimeInTicks;
+                return _bestUnitID;
+            }
+            return 0;
+        }
+
+    }
+}
+}

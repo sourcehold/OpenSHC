@@ -20,11 +20,11 @@ namespace Map {
                     && this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2 == 0
                     && this->units[DAT_CurrentUnitSlotID::instance].state.generic
                         != OpenSHC::Map::Units::States::US_JESTER_ROAM_TO
-                    && (short)this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType
+                    && this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType
                     && this->units[DAT_CurrentUnitSlotID::instance].drawX != 0
                     && this->units[DAT_CurrentUnitSlotID::instance].owner == playerID) {
                     this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                    this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                    this->totalUnitsInSelection += 1;
                 }
             }
         }

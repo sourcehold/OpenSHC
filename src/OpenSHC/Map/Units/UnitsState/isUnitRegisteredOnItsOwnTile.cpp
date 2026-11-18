@@ -15,7 +15,7 @@ namespace Map {
         BOOLEnum UnitsState::isUnitRegisteredOnItsOwnTile(int unitID)
         {
             int _tile = this->units[unitID].tile;
-            int _otherUnitID = (short)DAT_TileMapState::instance.UnitLayer[_tile];
+            int _otherUnitID = DAT_TileMapState::instance.UnitLayer[_tile];
             if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                 return TRUE;
             }
@@ -25,11 +25,10 @@ namespace Map {
             if (_tile == 0) {
                 return FALSE;
             }
-            while (_otherUnitID != 0) {
+            for (; _otherUnitID != 0; _otherUnitID = this->units[_otherUnitID].nextUnitOnTheSameTile) {
                 if (_otherUnitID == unitID) {
                     return TRUE;
                 }
-                _otherUnitID = (short)this->units[_otherUnitID].nextUnitOnTheSameTile;
             }
             return FALSE;
         }
