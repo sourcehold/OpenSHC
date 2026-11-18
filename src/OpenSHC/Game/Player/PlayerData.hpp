@@ -399,7 +399,7 @@ namespace Game {
             short mercenaryAssemblyPoints[7][2]; // 0x00003950 length: 28
             int moatsOwned; // 0x0000396C length: 4
             int attackTicker; // 0x00003970 length: 4
-            int canStartSpending; // 0x00003974 length: 4
+            BOOLEnum canStartSpending; // 0x00003974 length: 4
             short algoTreeCooldownUnk; // 0x00003978 length: 2
             short algoOasisCooldownUnk; // 0x0000397A length: 2
             short algoBoulderCooldown; // 0x0000397C length: 2
