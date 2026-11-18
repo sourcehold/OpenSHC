@@ -6763,7 +6763,7 @@ SHC_3BB0A8C1_0x004261E0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004262B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00426340 | 0.0% | Pending
+SHC_3BB0A8C1_0x00426340 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00426570 | 100.0% | Reimplemented
 
@@ -16647,7 +16647,7 @@ SHC_3BB0A8C1_0x0044A6E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044A720 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044A830 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044A830 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044AA70 | 100.0% | Reimplemented
 
@@ -16891,7 +16891,7 @@ SHC_3BB0A8C1_0x0044C3F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044C3F4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044C400 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044C400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044C410 | 100.0% | Reimplemented
 
@@ -20027,7 +20027,7 @@ SHC_3BB0A8C1_0x00467830 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00467850 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00467890 | 0.0% | Pending
+SHC_3BB0A8C1_0x00467890 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004679F0 | 0.0% | Pending
 
@@ -21445,7 +21445,7 @@ SHC_3BB0A8C1_0x004737B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00473830 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00473870 | 0.0% | Pending
+SHC_3BB0A8C1_0x00473870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00473A70 | 0.0% | Pending
 
@@ -34139,7 +34139,7 @@ SHC_3BB0A8C1_0x004C6294 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C6298 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C62A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C62A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C62C0 | 0.0% | Pending
 
@@ -36123,11 +36123,11 @@ SHC_3BB0A8C1_0x004DA17F | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DA180 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DA200 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA200 | 100.0% | Reimplemented (counted: only the loop-end symbol differs)
 
 SHC_3BB0A8C1_0x004DA2A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DA300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA300 | 100.0% | Reimplemented (counted: only the loop-end symbol differs)
 
 SHC_3BB0A8C1_0x004DA310 | 0.0% | Pending
 
@@ -36143,7 +36143,7 @@ SHC_3BB0A8C1_0x004DA6E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DA750 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DA7A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA7A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DA7E0 | 100.0% | Reimplemented
 
@@ -36155,31 +36155,31 @@ SHC_3BB0A8C1_0x004DA870 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DA8A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DA8D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA8D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DA9A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA9A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DA9F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DA9F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DAA80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAA80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DAAB0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004DAB00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAB00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DAB80 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAB80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DABB0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004DABF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DAC30 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAC30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DACF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DACF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DAD40 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAD40 | 100.0% | Reimplemented (counted: only the loop-end symbol and the 31.0f constant's name differ)
 
-SHC_3BB0A8C1_0x004DAE00 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DAE00 | 100.0% | Reimplemented (counted: only the loop-end symbol differs)
 
 SHC_3BB0A8C1_0x004DAE90 | 0.0% | Pending
 
@@ -36195,7 +36195,7 @@ SHC_3BB0A8C1_0x004DB210 | 100.0% | Reimplemented, only the loop's end address re
 
 SHC_3BB0A8C1_0x004DB300 | 100.0% | Reimplemented, only the float constant's address differs (same value)
 
-SHC_3BB0A8C1_0x004DB390 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB390 | 100.0% | Reimplemented (counted: only the 100.0 constant and _ftol2 symbol names differ)
 
 SHC_3BB0A8C1_0x004DB490 | 100.0% | Reimplemented, mismatches in float constants and functions
 
@@ -38647,7 +38647,7 @@ SHC_3BB0A8C1_0x004F4E00 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F4EF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F4F60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F4F60 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F61C0 | 0.0% | Pending
 
@@ -38729,9 +38729,9 @@ SHC_3BB0A8C1_0x004F69C8 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F69CC | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F69D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F69D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F6A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F6A20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F6A60 | 100.0% | Reimplemented
 

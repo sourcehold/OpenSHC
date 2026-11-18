@@ -21,6 +21,8 @@ namespace UI {
 
         UC* ucArrayPointer; // 0x00000000 length: 4
 
+        void loadMenuElement(int ucID, int* x, int* y, ushort* iconDeactivated, int ucPositionIndex);
+
     } UCPointerStruct;
 #pragma pack(pop)
 
