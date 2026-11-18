@@ -9,9 +9,12 @@
 #pragma once
 
 #include "OpenSHC/Rendering/ScreenResolutionArrayStruct.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Rendering {
+
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     using OpenSHC::Rendering::ScreenResolutionArrayStruct;
 
@@ -20,7 +23,7 @@ namespace Rendering {
     typedef union ScreenResolutionUnion {
 
         ScreenResolutionArrayStruct fields; // 0x00000000 length: 64
-        int array[16]; // 0x00000000 length: 64
+        BOOLEnum array[16]; // 0x00000000 length: 64
 
     } ScreenResolutionUnion;
 #pragma pack(pop)
