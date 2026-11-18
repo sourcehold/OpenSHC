@@ -7,7 +7,7 @@ namespace UI {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004AA540
     void MenuModalComposition::setSliderParameters2(
-        dword minimum, dword maximum, dword value, dword destination, undefined* callbackFunction)
+        dword minimum, dword maximum, dword value, dword destination, NoArgCallback* callbackFunction)
     {
         int const range = maximum - minimum;
         this->sliderMinimum = minimum;

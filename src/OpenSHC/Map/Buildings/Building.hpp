@@ -12,6 +12,7 @@
 #include "OpenSHC/Map/Buildings/BuildingFlagSlot.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalStateShort.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
+#include "OpenSHC/Map/Buildings/Enums/BuildingTargetMarkerShort.hpp"
 #include "OpenSHC/Map/Buildings/Enums/DefensiveTowerEngineTypeByte.hpp"
 
 namespace OpenSHC {
@@ -22,6 +23,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingFlagSlot;
         using OpenSHC::Map::Buildings::BuildingLogicalStateShort;
         using OpenSHC::Map::Buildings::BuildingTypeShort;
+        using OpenSHC::Map::Buildings::Enums::BuildingTargetMarkerShort;
         using OpenSHC::Map::Buildings::Enums::DefensiveTowerEngineTypeByte;
 
 #pragma pack(push, 1)
@@ -89,7 +91,7 @@ namespace Map {
             short tickRelatedVisuallyActiveIndicator; // 0x000000BC length: 2
             short renderBlendStrength; // 0x000000BE length: 2
             short recruitTimer; // 0x000000C0 length: 2
-            short field_0xc2; // 0x000000C2 length: 2
+            BuildingTargetMarkerShort targetMarker; // 0x000000C2 length: 2
             short noRubble; // 0x000000C4 length: 2
             undefined1 padding_0xc6[2]; // 0x000000C6 length: 2
             int miscDisplayLayerTile; // 0x000000C8 length: 4
@@ -215,7 +217,7 @@ namespace Map {
             int insideUnitUID[4]; // 0x000002E8 length: 16
             short hasUnitsOntop; // 0x000002F8 length: 2
             short tileScanCountdown; // 0x000002FA length: 2
-            undefined1 padding_0x2fc[2]; // 0x000002FC length: 2
+            short wheatFieldIndexToGrow; // 0x000002FC length: 2
             short statueCommemoratingPlayerID; // 0x000002FE length: 2
             short outpostRelatedUnk1; // 0x00000300 length: 2
             short tribeID; // 0x00000302 length: 2

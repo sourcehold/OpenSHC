@@ -30,6 +30,8 @@ The Game itself
 ------------------
 - :doc:`Load balancing of the core game engine <wiki/load-balancing-table>`
 - :doc:`Enemy awareness <wiki/game-mechanics/enemy-awareness>`
+- :doc:`The path linkage layer <wiki/engine/path-linkage-layer>`
+- :doc:`Separate areas: the area flood fill <wiki/engine/update-separate-area-tile-map>`
 - Graphics and Sound Systems
 - Modding Support
 - Multiplayer Architecture

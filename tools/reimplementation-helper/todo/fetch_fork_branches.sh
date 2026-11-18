@@ -1,17 +1,25 @@
 #!/usr/bin/env bash
-# Add every fork of the root repository as a remote and shallow-fetch its
-# reimpl/ branches, so that status_rollup.py sees them as ordinary
-# remote-tracking branches.
+# Add every fork of the root repository as a remote and shallow-fetch all of
+# its branches, so that status_rollup.py sees them as ordinary remote-tracking
+# branches.
+#
+# Every branch, not just reimpl/: finished work turns up on branches named for
+# whatever produced it (ci/, cishard/, civar/, buildings-update-...), and two
+# such branches on one fork alone held 300+ entries better than the rollup knew
+# about while only reimpl/ was fetched.
 #
 # Only branch tips are fetched: the rollup reads one file per ref, and nothing
 # from a fetched branch is ever executed.
 #
 # Requires: gh (authenticated via GH_TOKEN), git. Run from the repo root.
-# Usage: tools/reimplementation-helper/todo/fetch_fork_branches.sh <owner/repo>
+# Usage: tools/reimplementation-helper/todo/fetch_fork_branches.sh [owner/repo]
+#
+# The repository defaults to the project's own; pass another one to walk up from
+# a fork instead.
 
 set -euo pipefail
 
-repo_full_name="${1:?usage: fetch_fork_branches.sh <owner/repo>}"
+repo_full_name="${1:-sourcehold/OpenSHC}"
 
 # Walk up to the root repository, then enumerate its forks.
 root=$(gh repo view "$repo_full_name" --json parent,nameWithOwner \
@@ -45,4 +53,4 @@ while read -r repo; do
   fi
 done < /tmp/forks.txt
 
-echo "Total reimpl/ branches: $(git branch -r | grep -c '/reimpl/' || true)"
+echo "Total remote-tracking branches: $(git branch -r | grep -vc '-> ' || true)"

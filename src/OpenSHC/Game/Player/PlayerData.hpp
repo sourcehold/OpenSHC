@@ -87,8 +87,8 @@ namespace Game {
             int hasInitialResourceRecievingStarted; // 0x00000454 length: 4
             undefined1 padding_0x458[4]; // 0x00000458 length: 4
             int unkWheatFarmOrientation; // 0x0000045C length: 4
-            undefined1 unkHopFarmVariation; // 0x00000460 length: 1
-            undefined1 padding_0x461[7]; // 0x00000461 length: 7
+            int unkHopFarmVariation; // 0x00000460 length: 4
+            undefined1 padding_0x464[4]; // 0x00000464 length: 4
             int dairyFarmVariationMod4; // 0x00000468 length: 4
             int startResources[25]; // 0x0000046C length: 100
             int currentResources[25]; // 0x000004D0 length: 100
