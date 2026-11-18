@@ -2,13 +2,12 @@
 
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/AI/AINervousDestroyBuildingCategory.hpp"
-#include "OpenSHC/AI/AINervousDestroyBuildingCategoryInt.hpp"
 #include "OpenSHC/AI/AIRecruitUnitChoice.hpp"
 #include "OpenSHC/AI/AIStrengthType.hpp"
+#include "OpenSHC/AI/AITypeA.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -17,24 +16,18 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AINervousDestroyBuildingCategory;
-    using OpenSHC::AI::AINervousDestroyBuildingCategoryInt;
-    using OpenSHC::AI::AIRecruitUnitChoice;
-    using OpenSHC::AI::AIStrengthType;
-    using OpenSHC::Game::GameMode2;
-    using OpenSHC::Game::TrailType;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004D3320
     void AICState::updateAIStrengthState(int playerID, int aiRecruitUnitChoicePreference)
     {
         int _aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
-        if (_aiType == 0)
+        if (_aiType == AITA_NULL)
             return;
 
+        // the original tests only the low byte of this parameter
         if ((char)aiRecruitUnitChoicePreference == 0) {
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER)
                 return;
+            // compared with TRUE: the original tests isSkirmishTrail == 1
             if (DAT_GameCore::instance.isSkirmishTrail != TRUE)
                 return;
             if (DAT_GameCore::instance.currentTrailType != OpenSHC::Game::TT_EXTREME)
@@ -132,6 +125,7 @@ namespace AI {
         if (DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState != _aiRecruitUnitChoice)
             DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState = _aiRecruitUnitChoice;
 
+        // the original tests only the low byte of this parameter
         if ((char)aiRecruitUnitChoicePreference == 0)
             return;
 
@@ -179,7 +173,8 @@ namespace AI {
                 return;
             }
 
-            DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[2] = 20;
+            DAT_GameState::instance.playerDataArray[playerID].resourcesToAcquireArray[OpenSHC::Game::Resources::RT_WOOD]
+                = 20;
             DAT_GameState::instance.playerDataArray[playerID].aiStrengthFeeling = OpenSHC::AI::AIST_WEAK;
             DAT_GameState::instance.playerDataArray[playerID].aiRecruitUnitChoiceState = OpenSHC::AI::AIRUC_DEFENSIVE;
 
