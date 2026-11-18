@@ -11,32 +11,35 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CDB20
     int AICState::chooseRandomBuildingIDFromPlayersArrayOfBuildings(int playerID)
     {
-        int rng = SEC_RNG::instance.currentNumber2 & 7;
+        int const rng = SEC_RNG::instance.currentNumber2 & 7;
         int chosenBuildingID = 0;
-        int chosenPriority = 46;
-        short* buildings = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings;
-        for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; i++) {
-            int buildingID = *buildings++;
+        int chosenPriority = countof(DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1);
+        for (int i = 0; i < DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildingsTracker; ++i) {
+            int const buildingID = DAT_GameState::instance.playerDataArray[playerID].top100TargetableBuildings[i];
             if (buildingID == 0)
                 continue;
 
-            for (int j = 0; j < chosenPriority; j++) {
+            // The stores stay in each arm: one shared copy behind the three tests loses the match.
+            for (int j = 0; j < chosenPriority; ++j) {
                 if (rng <= 1) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                        != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet3[j])
-                        continue;
+                        == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet3[j]) {
+                        chosenPriority = j;
+                        chosenBuildingID = buildingID;
+                    }
                 } else if (rng <= 3) {
                     if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                        != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet2[j])
-                        continue;
+                        == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet2[j]) {
+                        chosenPriority = j;
+                        chosenBuildingID = buildingID;
+                    }
                 } else {
                     if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                        != DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j])
-                        continue;
+                        == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j]) {
+                        chosenPriority = j;
+                        chosenBuildingID = buildingID;
+                    }
                 }
-
-                chosenPriority = j;
-                chosenBuildingID = buildingID;
             }
         }
         return chosenBuildingID;
