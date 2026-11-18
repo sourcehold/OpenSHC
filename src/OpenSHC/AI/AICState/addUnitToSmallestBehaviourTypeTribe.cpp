@@ -2,6 +2,8 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/AIUnitBehaviourType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_SkirmishDefinedData.hpp"
@@ -19,22 +21,23 @@ namespace AI {
             return 0;
 
         int aicIndex = aiType - 1;
-        int firstSlot = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - 10];
+        int firstSlot
+            = DAT_SkirmishDefinedData::instance.AIUnitBehaviourTypeMapping[aiUnitBehaviourType - AIUBT_ENGINEERING];
         int selectedTribeID = 0;
         int selectedSlot = 0;
         int smallestSize = 1000;
         int groupsCount;
         switch (firstSlot) {
-        case 15:
+        case OpenSHC::AI::Tribes::AITI_BREACH_BASIC_05_01:
             groupsCount = this->aics[aicIndex].AttUnitPatrolGroupsCount;
             break;
-        case 186:
+        case OpenSHC::AI::Tribes::AITI_BREACH_08_01:
             groupsCount = this->aics[aicIndex].AttUnitBackupGroupsCount;
             break;
-        case 190:
+        case OpenSHC::AI::Tribes::AITI_BREACH_10_01:
             groupsCount = this->aics[aicIndex].AttUnitSiegeDefGroupsCount;
             break;
-        case 192:
+        case OpenSHC::AI::Tribes::AITI_BREACH_11_01:
             groupsCount = this->aics[aicIndex].AttMainGroupsCount;
             break;
         default:
@@ -44,18 +47,19 @@ namespace AI {
         if (groupsCount < 1)
             groupsCount = 1;
 
+        int resultTribeID = 0;
         if (groupsCount == 1) {
             int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[firstSlot];
             if (tribeID != 0
                 && DAT_TribesState::instance.tribes[tribeID].uid
                     == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[firstSlot])
                 return tribeID;
-            selectedTribeID
+            resultTribeID
                 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
         } else {
             // groupsCount becomes the end slot: the original keeps the bound in the register of groupsCount
-            groupsCount = groupsCount + firstSlot;
-            for (int slot = firstSlot; slot < groupsCount; slot++) {
+            groupsCount += firstSlot;
+            for (int slot = firstSlot; slot < groupsCount; ++slot) {
                 int tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[slot];
                 if (tribeID == 0
                     || DAT_TribesState::instance.tribes[tribeID].uid
@@ -71,16 +75,17 @@ namespace AI {
                     selectedSlot = slot;
                 }
             }
-            // the store below indexes by firstSlot; copying here (rather than setting selectedSlot in the
-            // single-tribe path) keeps the empty-loop edge on the shared exit, as in the original
+            // the loop's choice is copied out here, tribe and slot alike: the original reads both back from the
+            // stack on the loop's exit, and the stores below index by firstSlot
+            resultTribeID = selectedTribeID;
             firstSlot = selectedSlot;
         }
-        if (selectedTribeID <= 0)
+        if (resultTribeID <= 0)
             return 0;
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[firstSlot] = selectedTribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[firstSlot] = resultTribeID;
         DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[firstSlot]
-            = DAT_TribesState::instance.tribes[selectedTribeID].uid;
-        return selectedTribeID;
+            = DAT_TribesState::instance.tribes[resultTribeID].uid;
+        return resultTribeID;
     }
 }
 }
