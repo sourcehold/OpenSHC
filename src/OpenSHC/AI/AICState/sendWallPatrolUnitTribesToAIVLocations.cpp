@@ -2,10 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
-#include "OpenSHC/AI/AITypeInt.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
-#include "OpenSHC/AI/AIVUnitTypeInt.hpp"
-#include "OpenSHC/AI/Tribes/AIVUnitTypeMaxLocationPair.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -16,32 +13,26 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
     using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::AI::Tribes::AIVUnitTypeMaxLocationPair;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4340
     void AICState::sendWallPatrolUnitTribesToAIVLocations(int playerID)
     {
-        int aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
+        int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL) {
             return;
         }
 
-        int aicIndex = aiType - 1;
-        BOOLEnum enclosed = MACRO_CALL_MEMBER(
+        int const aicIndex = aiType - 1;
+        BOOLEnum const enclosed = MACRO_CALL_MEMBER(
             OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
 
-        for (int i = 0; i < 3; i++) {
-            // declared before j: the declaration order decides which of the two gets ebp (measured)
-            int patrolGroupIndex = 0;
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits); ++i) {
+            // Starts here, not in the header of its for loop: there it loses the match.
             int j = 0;
-            int count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
-                            [DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType];
+            int const count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
+                                  [DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].aivUnitType];
             int groups = count;
             if (count > this->aics[aicIndex].defWallPatrolGroups) {
                 groups = this->aics[aicIndex].defWallPatrolGroups;
@@ -55,8 +46,8 @@ namespace AI {
                 stepSize = 1;
             }
 
-            for (; j < groups; j++, patrolGroupIndex += stepSize) {
-                int tribeID
+            for (; j < groups; ++j) {
+                int const tribeID
                     = DAT_GameState::instance.playerDataArray[playerID]
                           .aiTribeIDs[DAT_SkirmishDefinedData::instance.MaxAIVLocationForPatrolUnits[i].tribeArrayOffset
                               + j];
@@ -70,8 +61,8 @@ namespace AI {
                     continue;
                 }
 
-                int slot
-                    = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + patrolGroupIndex)
+                int const slot
+                    = (DAT_GameState::instance.playerDataArray[playerID].defWallPatrolRallyTimeHits + j * stepSize)
                     % count;
                 if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker > 0 && !enclosed) {
                     MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendUnitsToCampfire, this)(tribeID, playerID);
