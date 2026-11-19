@@ -37,12 +37,13 @@ namespace UI {
                 DAT_MenuHandlerState::instance.x + 316, top + 70, OpenSHC::Text::TTA_CENTER, 0, 18, FALSE, 0);
         }
         // the stock of the four foods
+        int x = left + 12;
         for (int food = 0; food < 4; ++food) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .currentResources[DAT_ARRAY_0061818c::instance[food]],
-                left + 12 + food * 80, DAT_MenuHandlerState::instance.y + 549, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE,
-                0);
+                x, DAT_MenuHandlerState::instance.y + 549, OpenSHC::Text::TTA_LEFT, 0, 17, FALSE, 0);
+            x += 80;
         }
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
     }
