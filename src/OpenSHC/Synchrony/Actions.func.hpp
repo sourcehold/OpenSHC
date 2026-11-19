@@ -25,7 +25,7 @@ namespace Synchrony {
         ProcessRecruitUnit;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(undefined4 playerID, int buildingID, ushort producedItemType, int buildingUID), false,
+            void(__cdecl*)(undefined4 playerID, int buildingID, int producedItemType, int buildingUID), false,
             Address::SHC_3BB0A8C1_0x004652A0, &OpenSHC::Synchrony::Actions::SetBuildingProductionType)
         SetBuildingProductionType;
 

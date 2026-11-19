@@ -20,7 +20,7 @@ namespace Synchrony {
         void __cdecl ProcessRecruitUnit(int playerID, int unitType, undefined4 recruitmentBuildingID);
 
         void __cdecl SetBuildingProductionType(
-            undefined4 playerID, int buildingID, ushort producedItemType, int buildingUID);
+            undefined4 playerID, int buildingID, int producedItemType, int buildingUID);
 
         void __cdecl OpenOrCloseDrawbridge(undefined4 param_1, int buildingID, int value, int buildingUID);
 
