@@ -35293,7 +35293,7 @@ SHC_3BB0A8C1_0x004CDBC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004CDCA0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004CDCF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004CDCF0 | 99.0% | operand order of one compare (cmp ebp, [level])
 
 SHC_3BB0A8C1_0x004CDE60 | 100.0% | Reimplemented
 
@@ -35475,11 +35475,11 @@ SHC_3BB0A8C1_0x004D1950 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004D1A00 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004D1D60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D1D60 | 66.9% | register names only: ebp/ebx and edi/esi swapped
 
 SHC_3BB0A8C1_0x004D1F00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D2000 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D2000 | 99.7% | matches modulo TU symbol count
 
 SHC_3BB0A8C1_0x004D2080 | 0.0% | Pending
 
@@ -35511,7 +35511,7 @@ SHC_3BB0A8C1_0x004D2F80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D30E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D3320 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D3320 | 97.2% | one variable's register: ebp in the original, ebx in ours
 
 SHC_3BB0A8C1_0x004D3780 | 100.0% | Reimplemented
 
