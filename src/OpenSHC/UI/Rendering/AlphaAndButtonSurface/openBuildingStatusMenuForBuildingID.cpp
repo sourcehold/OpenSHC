@@ -414,6 +414,9 @@ namespace UI {
                     .releaseDogsFlag
                     = DAT_BuildingsState::instance.buildings[buildingID].flagonsOfAleOrCheeseOrReleaseDogs;
                 break;
+            case OpenSHC::Map::Buildings::BT_STATUE:
+                menuTab = 89;
+                break;
             case OpenSHC::Map::Buildings::BT_SHRINE:
                 menuTab = 90;
                 break;
@@ -426,18 +429,15 @@ namespace UI {
             case OpenSHC::Map::Buildings::BT_BEARCAVE:
                 menuTab = 94;
                 break;
-            case OpenSHC::Map::Buildings::BT_BARRACKS:
-                break;
-            default:
-                return FALSE;
             case OpenSHC::Map::Buildings::BT_SIEGETOWER_PLACED:
                 DAT_BuildingsState::instance.selectedBuildingID = buildingID;
                 DAT_BuildingsState::instance.selectedBuildingUID
                     = DAT_BuildingsState::instance.buildings[buildingID].uid;
                 return FALSE;
-            case OpenSHC::Map::Buildings::BT_STATUE:
-                menuTab = 89;
+            case OpenSHC::Map::Buildings::BT_BARRACKS:
                 break;
+            default:
+                return FALSE;
             }
         openMenu:
             MACRO_CALL_MEMBER(
