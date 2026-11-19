@@ -22335,9 +22335,9 @@ SHC_3BB0A8C1_0x0047D4A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D500 | 100.0% | Reimplemented, Security Cookie mismatches
 
-SHC_3BB0A8C1_0x0047D5B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D5B0 | 81.8% | register allocation: the original keeps the provider count and the slot in two registers
 
-SHC_3BB0A8C1_0x0047D6A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D6A0 | 75.1% | frame 4 bytes larger: the strlen test of the modem name takes a stack slot
 
 SHC_3BB0A8C1_0x0047DA70 | 100.0% | Reimplemented
 
@@ -22401,7 +22401,7 @@ SHC_3BB0A8C1_0x0047F6A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047F7E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047F860 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047F860 | 83.7% | register allocation: the original keeps a copy of x in its own stack slot
 
 SHC_3BB0A8C1_0x0047FB50 | 0.0% | Pending
 
@@ -23047,7 +23047,7 @@ SHC_3BB0A8C1_0x00486C40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00486C60 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00486F20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00486F20 | 97.7% | compare order: the AI test comes first here; with the player-ID test first, as in the original, MSVC bases the loop pointer on currentAIArray
 
 SHC_3BB0A8C1_0x00487080 | 100.0% | Reimplemented
 
@@ -23065,7 +23065,7 @@ SHC_3BB0A8C1_0x004874B0 | 100.0% | Reimplemented, only the GUID resolver names, 
 
 SHC_3BB0A8C1_0x00487555 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00487650 | 0.0% | Pending
+SHC_3BB0A8C1_0x00487650 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00487770 | 0.0% | Pending
 
@@ -23081,7 +23081,7 @@ SHC_3BB0A8C1_0x00488010 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004880E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004882A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004882A0 | 91.9% | register allocation: the original computes both averages before storing them
 
 SHC_3BB0A8C1_0x00488480 | 0.0% | Pending
 
@@ -23173,7 +23173,7 @@ SHC_3BB0A8C1_0x0048BF80 | 100.0% | Reimplemented, only the Winsock import thunks
 
 SHC_3BB0A8C1_0x0048C150 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0048C230 | 0.0% | Pending
+SHC_3BB0A8C1_0x0048C230 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0048C310 | 0.0% | Pending
 
@@ -23391,7 +23391,7 @@ SHC_3BB0A8C1_0x00490D90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0049102D | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00491040 | 0.0% | Pending
+SHC_3BB0A8C1_0x00491040 | 53.2% | block layout: the original puts the option handling between the character branches
 
 SHC_3BB0A8C1_0x004910A0 | 0.0% | Pending
 
@@ -35837,7 +35837,7 @@ SHC_3BB0A8C1_0x004D6EF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D6F20 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D6F60 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D6F60 | 62.2% | register allocation: the original keeps 0 in ebp; the loop end addresses resolve to other symbols
 
 SHC_3BB0A8C1_0x004D7200 | 100.0% | Reimplemented
 
