@@ -64,20 +64,20 @@ namespace UI {
                         int const buildingID
                             = DAT_TileMapState::instance.BuildingLayer[DAT_ViewportRenderState::instance
                                     .screenPointToTileNumber[column + rowBase]];
-                        if (buildingID != 0
-                            && OpenSHC::Map::Buildings::BT_MANORHOUSE
-                                <= DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                            && DAT_BuildingsState::instance.buildings[buildingID].buildingType
-                                <= OpenSHC::Map::Buildings::BT_KEEPFIVE) {
-                            int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                            if (this->DAT_MapU4B64.keepPositions[owner - 1].x == -1) {
-                                int const y = (row - firstRow) * heightFactor;
-                                if (scale == 1) {
-                                    this->DAT_MapU4B64.keepPositions[owner - 1].x = x;
-                                    this->DAT_MapU4B64.keepPositions[owner - 1].y = y;
-                                } else {
-                                    this->DAT_MapU4B64.keepPositions[owner - 1].x = x / scale;
-                                    this->DAT_MapU4B64.keepPositions[owner - 1].y = y / scale;
+                        if (buildingID != 0) {
+                            int const type = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+                            if (OpenSHC::Map::Buildings::BT_MANORHOUSE <= type
+                                && type <= OpenSHC::Map::Buildings::BT_KEEPFIVE) {
+                                int const owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
+                                if (this->DAT_MapU4B64.keepPositions[owner - 1].x == -1) {
+                                    int const y = (row - firstRow) * heightFactor;
+                                    if (scale == 1) {
+                                        this->DAT_MapU4B64.keepPositions[owner - 1].x = x;
+                                        this->DAT_MapU4B64.keepPositions[owner - 1].y = y;
+                                    } else {
+                                        this->DAT_MapU4B64.keepPositions[owner - 1].x = x / scale;
+                                        this->DAT_MapU4B64.keepPositions[owner - 1].y = y / scale;
+                                    }
                                 }
                             }
                         }
