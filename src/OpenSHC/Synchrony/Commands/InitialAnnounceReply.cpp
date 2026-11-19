@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
@@ -8,17 +7,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandScheduling;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00480640
     void Commands::InitialAnnounceReply()
     {
@@ -29,9 +17,10 @@ namespace Synchrony {
             DAT_GameSynchronyState::instance.DAT_CommandActionPlan = OpenSHC::Commands::GCS_EXECUTE;
             return;
         }
-        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
-            DAT_GameSynchronyState::instance.DAT_HostAnnounced = 1;
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
+            return;
         }
+        DAT_GameSynchronyState::instance.DAT_HostAnnounced = 1;
     }
 
 }
