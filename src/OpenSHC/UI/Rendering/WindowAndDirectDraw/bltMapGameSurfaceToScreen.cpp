@@ -24,12 +24,12 @@ namespace UI {
                 sourceRect.top = windowedY - 8;
                 sourceRect.right = windowedWidth + 32;
                 sourceRect.bottom = windowedHeigth + 8;
+                destinationRect.right = this->clientOnScreenCoords.left - cameraOffsetX + windowedWidth + 32;
+                destinationRect.left = this->clientOnScreenCoords.left - cameraOffsetX + windowedX - 32;
                 destinationRect.top = this->clientOnScreenCoords.top
-                    - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + sourceRect.top;
+                    - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + windowedY - 8;
                 destinationRect.bottom = this->clientOnScreenCoords.top
-                    - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + sourceRect.bottom;
-                destinationRect.left = this->clientOnScreenCoords.left - cameraOffsetX + sourceRect.left;
-                destinationRect.right = this->clientOnScreenCoords.left - cameraOffsetX + sourceRect.right;
+                    - DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + windowedHeigth + 8;
             } else {
                 sourceRect.left = 0;
                 sourceRect.top = 0;
