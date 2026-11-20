@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -16,23 +15,6 @@
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandParameterLocation;
-    using OpenSHC::Commands::GameCommandParameterReadWrite;
-    using OpenSHC::Commands::GameCommandScheduling;
-    using OpenSHC::Commands::MappersEnum;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "MappersEnum": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00482AA0
     void Commands::ClickCreateAnimal()
     {
@@ -50,8 +32,7 @@ namespace Synchrony {
             return;
         }
         if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam0
-                = DAT_GameSynchronyState::instance.DAT_CommandActionPlan;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 2,
                 OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
@@ -63,24 +44,24 @@ namespace Synchrony {
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam2, 1,
                 OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= ((GameCommandScheduling)399))
+            if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 >= 0
+                     && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= 399)
                     && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= 399))
                 && (DAT_ViewportRenderState::instance
                         .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 400
                             + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
-                    != '\0')) {
+                    != 0)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createAnimal, DAT_TribesState::ptr)(
                     (OpenSHC::Commands::MappersEnum)DAT_GameSynchronyState::instance.DAT_GameCommandParam2,
-                    (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam0)),
-                    (uint)((int)(DAT_GameSynchronyState::instance.DAT_GameCommandParam1)),
-                    (int)((uint)DAT_TileMapState::instance
-                            .HeightLayer[DAT_ViewportRenderState::instance
-                                             .translationMatrix[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
-                                             .addXgetTile
-                                + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]));
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
+                    DAT_GameSynchronyState::instance.DAT_GameCommandParam1,
+                    DAT_TileMapState::instance
+                        .HeightLayer[DAT_ViewportRenderState::instance
+                                         .translationMatrix[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
+                                         .addXgetTile
+                            + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]);
             }
         }
-        return;
     }
 
 }
