@@ -9,6 +9,7 @@
 #pragma once
 
 #include "OpenSHC/Map/Buildings/WheatFarm/WheatFarmFieldSpec.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/Map/GFX/UnkBytePair.hpp"
 #include "OpenSHC/Map/Location/GateTowerPlacement.hpp"
 #include "OpenSHC/Map/Location/Point8.hpp"
@@ -19,6 +20,7 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::Buildings::WheatFarm::WheatFarmFieldSpec;
+    using OpenSHC::Map::Enums::CardinalDirection;
     using OpenSHC::Map::GFX::UnkBytePair;
     using OpenSHC::Map::Location::GateTowerPlacement;
     using OpenSHC::Map::Location::Point8;
@@ -74,7 +76,7 @@ namespace Map {
         UnkBytePair TerrainFlagGraphicLookup[8]; // 0x00001D64 length: 16
         int MapSizes[5]; // 0x00001D74 length: 20
         undefined1 padding_0x1d88[164]; // 0x00001D88 length: 164
-        int SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
+        CardinalDirection SomeOrientationOrderArray[8]; // 0x00001E2C length: 32
         int field_0x1e4c[32]; // 0x00001E4C length: 128
         XYPair drawBridgeOffsets[4][9]; // 0x00001ECC length: 288
         int field_0x1fec[4][25]; // 0x00001FEC length: 400
@@ -88,7 +90,7 @@ namespace Map {
         int field_0x370c[8]; // 0x0000370C length: 32
         XYPair field_0x372c[8]; // 0x0000372C length: 64
         XYPair field_0x376c[4]; // 0x0000376C length: 32
-        XYPair field_0x378c[4]; // 0x0000378C length: 32
+        XYPair twoTileAxisOffsets[4]; // 0x0000378C length: 32
 
     } TerrainDefinedData;
 #pragma pack(pop)
