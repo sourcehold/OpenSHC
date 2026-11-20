@@ -212,7 +212,8 @@ namespace UI {
                     return;
                 }
             } else if (DAT_TileMapState::instance.currentMapperCommand == OpenSHC::Commands::M_MAPPER_NULL) {
-                // no mapper command: the click is handled below (an else-if on the command loses the match)
+                // no mapper command: the click is handled below. This arm stays empty on purpose: written as
+                // `else if (command != M_MAPPER_NULL) { ... }` without it, the match is lost
             } else {
                 if (!DAT_MouseState::instance.leftClickStart
                     && DAT_ViewportRenderState::instance.viewportState.previousMouseTile
