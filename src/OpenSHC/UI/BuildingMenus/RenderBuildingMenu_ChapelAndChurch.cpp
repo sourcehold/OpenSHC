@@ -7,10 +7,8 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
-#include "OpenSHC/Rendering/Colors/BGR24.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_00b98428.hpp"
 #include "OpenSHC/Globals/DAT_00b9842c.hpp"
@@ -35,143 +33,102 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::Map::Buildings::BuildingTypeShort;
-    using OpenSHC::Rendering::Colors::BGR24;
-    using OpenSHC::Text::TextAlignment;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0043C1E0
     void BuildingMenus::RenderBuildingMenu_ChapelAndChurch()
     {
-        BuildingTypeShort BVar2;
-        char* pcVar3;
-        int iVar4;
-        int iVar5;
-        TextAlignment TVar6;
-        BGR24 BVar7;
-        uint color;
-        int iVar8;
-        BOOLEnum BVar9;
-        int iVar10;
-        int blendStrength;
-        int iVar11;
-        iVar4 = DAT_BuildingsState::instance.menuSelectedBuildingID;
-        BVar2
+        int const buildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
+        BuildingTypeShort const buildingType
             = DAT_BuildingsState::instance.buildings[DAT_BuildingsState::instance.menuSelectedBuildingID].buildingType;
-        // "Cathedral"
-        if (BVar2 == OpenSHC::Map::Buildings::BT_CHAPEL) {
-            iVar11 = DAT_MenuHandlerState::instance.y + 467;
-            iVar8 = DAT_MenuHandlerState::instance.x + 25;
-            blendStrength = 0;
-            BVar9 = FALSE;
-            iVar10 = 16;
-            BVar7 = 0;
-            TVar6 = OpenSHC::Text::TTA_LEFT;
+        if (buildingType == OpenSHC::Map::Buildings::BT_CHAPEL) {
+            int const titleY = DAT_MenuHandlerState::instance.y + 467;
+            int const titleX = DAT_MenuHandlerState::instance.x + 25;
+            // "Chapel"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_CHURCH, 0),
-                iVar8, iVar11, TVar6, BVar7, iVar10, BVar9, blendStrength);
-        } else if (BVar2 == OpenSHC::Map::Buildings::BT_CHURCH) {
-            iVar11 = DAT_MenuHandlerState::instance.y + 467;
-            iVar8 = DAT_MenuHandlerState::instance.x + 25;
-            blendStrength = 0;
-            BVar9 = FALSE;
-            iVar10 = 16;
-            BVar7 = 0;
-            TVar6 = OpenSHC::Text::TTA_LEFT;
+                titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 16, FALSE, 0);
+        } else if (buildingType == OpenSHC::Map::Buildings::BT_CHURCH) {
+            int const titleY = DAT_MenuHandlerState::instance.y + 467;
+            int const titleX = DAT_MenuHandlerState::instance.x + 25;
+            // "Church"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_CHURCH, 3),
-                iVar8, iVar11, TVar6, BVar7, iVar10, BVar9, blendStrength);
-        } else if (BVar2 == OpenSHC::Map::Buildings::BT_CATHEDRAL) {
-            iVar11 = DAT_MenuHandlerState::instance.y + 467;
-            iVar8 = DAT_MenuHandlerState::instance.x + 25;
-            blendStrength = 0;
-            BVar9 = FALSE;
-            iVar10 = 16;
-            BVar7 = 0;
-            TVar6 = OpenSHC::Text::TTA_LEFT;
+                titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 16, FALSE, 0);
+        } else if (buildingType == OpenSHC::Map::Buildings::BT_CATHEDRAL) {
+            int const titleY = DAT_MenuHandlerState::instance.y + 467;
+            int const titleX = DAT_MenuHandlerState::instance.x + 25;
+            // "Cathedral"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_IN_CHURCH, 4),
-                iVar8, iVar11, TVar6, BVar7, iVar10, BVar9, blendStrength);
+                titleX, titleY, OpenSHC::Text::TTA_LEFT, 0, 16, FALSE, 0);
         }
 
-        if (DAT_BuildingsState::instance.buildings[iVar4].currentEmployeeCount == 0) {
-            iVar11 = 0;
-            BVar9 = FALSE;
-            iVar8 = 18;
-            BVar7 = 0;
-            TVar6 = OpenSHC::Text::TTA_LEFT;
-            iVar4 = DAT_MenuHandlerState::instance.y + 517;
-            iVar5 = DAT_MenuHandlerState::instance.x + 175;
+        if (DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount == 0) {
+            int const noticeY = DAT_MenuHandlerState::instance.y + 517;
+            int const noticeX = DAT_MenuHandlerState::instance.x + 175;
             // "No Wedding this month"
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 34),
-                iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+                noticeX, noticeY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             return;
         }
+        // a new couple each month
         if (DAT_GameState::instance.mapAndTime.month != INT_0061824c::instance) {
             INT_0061824c::instance = DAT_GameState::instance.mapAndTime.month;
             DAT_00b9843c::instance = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::chooseHusbandAndWife,
                 DAT_UnitsState::ptr)((int*)DAT_HusbandID::ptr, (int*)DAT_WifeID::ptr);
             if (DAT_00b9843c::instance == 0) {
-                // no wedding this month: render the notice and stop
-                iVar11 = 0;
-                BVar9 = FALSE;
-                iVar8 = 18;
-                BVar7 = 0;
-                TVar6 = OpenSHC::Text::TTA_LEFT;
-                iVar4 = DAT_MenuHandlerState::instance.y + 517;
-                iVar5 = DAT_MenuHandlerState::instance.x + 175;
+                int const noticeY = DAT_MenuHandlerState::instance.y + 517;
+                int const noticeX = DAT_MenuHandlerState::instance.x + 175;
                 // "No Wedding this month"
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 34),
-                    iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+                    noticeX, noticeY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
                 return;
             }
             DAT_HusbandUnitType::instance
                 = (UnitTypeInt)(short)DAT_UnitsState::instance.units[DAT_HusbandID::instance].unitType;
             DAT_WifeUnitType::instance
                 = (UnitTypeInt)(short)DAT_UnitsState::instance.units[DAT_WifeID::instance].unitType;
+            // the trade of the wife picks the text; each trade walks through its own ten texts
             switch (DAT_WifeUnitType::instance) {
             case OpenSHC::Map::Units::UT_BREWER:
                 ++DAT_00b98428::instance;
-                if (9 < DAT_00b98428::instance) {
+                if (DAT_00b98428::instance > 9) {
                     DAT_00b98428::instance = 0;
                 }
                 break;
             case OpenSHC::Map::Units::UT_TANNER:
                 ++DAT_00b9842c::instance;
-                if (9 < DAT_00b9842c::instance) {
+                if (DAT_00b9842c::instance > 9) {
                     DAT_00b9842c::instance = 0;
                 }
                 break;
             default:
                 ++DAT_00b98430::instance;
-                if (9 < DAT_00b98430::instance) {
+                if (DAT_00b98430::instance > 9) {
                     DAT_00b98430::instance = 0;
                 }
             }
         }
         if (DAT_00b9843c::instance != 0) {
-            if ((int)(short)DAT_UnitsState::instance.units[DAT_HusbandID::instance].unitType
+            // the wedding is off when one of the two changed trade
+            if ((short)DAT_UnitsState::instance.units[DAT_HusbandID::instance].unitType
                 != DAT_HusbandUnitType::instance) {
                 DAT_00b9843c::instance = 0;
             }
-            if ((int)(short)DAT_UnitsState::instance.units[DAT_WifeID::instance].unitType
-                != DAT_WifeUnitType::instance) {
+            if ((short)DAT_UnitsState::instance.units[DAT_WifeID::instance].unitType != DAT_WifeUnitType::instance) {
                 DAT_00b9843c::instance = 0;
             }
             if (DAT_00b9843c::instance != 0) {
                 MACRO_CALL_MEMBER(
                     OpenSHC::UI::Rendering::TextureRenderCore_Func::renderLoadedGfx, DAT_TextureRenderCoreObject::ptr)(
                     1, DAT_MenuHandlerState::instance.x + 371, DAT_MenuHandlerState::instance.y + 480);
-                iVar8 = 0;
-                iVar5 = 18;
-                color = 0;
-                iVar4 = 350;
                 if (DAT_WifeUnitType::instance != OpenSHC::Map::Units::UT_BREWER) {
                     if (DAT_WifeUnitType::instance == OpenSHC::Map::Units::UT_TANNER) {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineTextUnk,
@@ -185,14 +142,15 @@ namespace UI {
                             0);
                     }
                 } else {
-                    iVar11 = DAT_MenuHandlerState::instance.y + 559;
-                    iVar10 = DAT_MenuHandlerState::instance.x + 180;
+                    int const textY = DAT_MenuHandlerState::instance.y + 559;
+                    int const textX = DAT_MenuHandlerState::instance.x + 180;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderMultilineText5Unk, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                             DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, DAT_00b98428::instance + 1),
-                        iVar10, iVar11, iVar4, color, iVar5, iVar8);
+                        textX, textY, 350, 0, 18, 0);
                 }
+                // the pictures of the couple
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
                 DAT_CurrentlyRenderedSpriteID::instance = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::UnitsState_Func::getPeasantGmID, DAT_UnitsState::ptr)(DAT_HusbandID::instance);
@@ -206,69 +164,53 @@ namespace UI {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)((OpenSHC::DE::SHCDE::eGM)DAT_CurrentlyRenderedSpriteID::instance,
                     3, DAT_MenuHandlerState::instance.x + 145, DAT_MenuHandlerState::instance.y + 477);
-                iVar4 = DAT_HusbandID::instance;
-                byte bVar1 = DAT_UnitsState::instance.units[DAT_HusbandID::instance].firstNameIndex;
+                // the names of the two
+                int const husbandID = DAT_HusbandID::instance;
+                char const husbandName = (char)DAT_UnitsState::instance.units[DAT_HusbandID::instance].firstNameIndex;
                 DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
-                if ('\0' < (char)bVar1) {
-                    iVar10 = 0;
-                    BVar9 = FALSE;
-                    iVar11 = 18;
-                    BVar7 = 0;
-                    TVar6 = OpenSHC::Text::TTA_LEFT;
-                    iVar5 = DAT_MenuHandlerState::instance.y + 492;
-                    iVar8 = DAT_MenuHandlerState::instance.x + 215;
+                if (husbandName > 0) {
+                    int const nameY = DAT_MenuHandlerState::instance.y + 492;
+                    int const nameX = DAT_MenuHandlerState::instance.x + 215;
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)),
-                        iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
-                    bVar1 = DAT_UnitsState::instance.units[iVar4].rng1_to_70;
-                    if (bVar1 != 0) {
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, husbandName),
+                        nameX, nameY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
+                    char const surname = (char)DAT_UnitsState::instance.units[husbandID].rng1_to_70;
+                    if (surname != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                            OpenSHC::DE::SHCDE::TEXT_PEASANT_SURNAMES, (int)((char)bVar1),
-                            DAT_MenuHandlerState::instance.x + 220, DAT_MenuHandlerState::instance.y + 492,
-                            OpenSHC::Text::TTA_LEFT, 0, 18, TRUE);
+                            OpenSHC::DE::SHCDE::TEXT_PEASANT_SURNAMES, surname, DAT_MenuHandlerState::instance.x + 220,
+                            DAT_MenuHandlerState::instance.y + 492, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE);
                     }
                 }
-                iVar4 = DAT_WifeID::instance;
-                bVar1 = DAT_UnitsState::instance.units[DAT_WifeID::instance].firstNameIndex;
-                if ('\0' < (char)bVar1) {
-                    iVar10 = 0;
-                    BVar9 = FALSE;
-                    iVar11 = 18;
-                    BVar7 = 0;
-                    TVar6 = OpenSHC::Text::TTA_LEFT;
-                    iVar5 = DAT_MenuHandlerState::instance.y + 517;
-                    iVar8 = DAT_MenuHandlerState::instance.x + 230;
+                int const wifeID = DAT_WifeID::instance;
+                char const wifeName = (char)DAT_UnitsState::instance.units[DAT_WifeID::instance].firstNameIndex;
+                if (wifeName > 0) {
+                    int const nameY = DAT_MenuHandlerState::instance.y + 517;
+                    int const nameX = DAT_MenuHandlerState::instance.x + 230;
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
-                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, (int)((char)bVar1)),
-                        iVar8, iVar5, TVar6, BVar7, iVar11, BVar9, iVar10);
-                    bVar1 = DAT_UnitsState::instance.units[iVar4].rng1_to_70;
-                    if (bVar1 != 0) {
+                            DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_PEASANT_NAMES, wifeName),
+                        nameX, nameY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
+                    char const surname = (char)DAT_UnitsState::instance.units[wifeID].rng1_to_70;
+                    if (surname != 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderText2, DAT_TextManagerObject::ptr)(
-                            OpenSHC::DE::SHCDE::TEXT_PEASANT_SURNAMES, (int)((char)bVar1),
-                            DAT_MenuHandlerState::instance.x + 235, DAT_MenuHandlerState::instance.y + 517,
-                            OpenSHC::Text::TTA_LEFT, 0, 18, TRUE);
+                            OpenSHC::DE::SHCDE::TEXT_PEASANT_SURNAMES, surname, DAT_MenuHandlerState::instance.x + 235,
+                            DAT_MenuHandlerState::instance.y + 517, OpenSHC::Text::TTA_LEFT, 0, 18, TRUE);
                     }
                 }
-                // a wedding is on: don't show "No Wedding this month"
+                // a wedding is on: no "No Wedding this month"
                 if (DAT_00b9843c::instance != 0) {
                     return;
                 }
             }
         }
-        iVar11 = 0;
-        BVar9 = FALSE;
-        iVar8 = 18;
-        BVar7 = 0;
-        TVar6 = OpenSHC::Text::TTA_LEFT;
-        iVar4 = DAT_MenuHandlerState::instance.y + 517;
-        iVar5 = DAT_MenuHandlerState::instance.x + 175;
+        int const noticeY = DAT_MenuHandlerState::instance.y + 517;
+        int const noticeX = DAT_MenuHandlerState::instance.x + 175;
         // "No Wedding this month"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                 DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MARRIAGE, 34),
-            iVar5, iVar4, TVar6, BVar7, iVar8, BVar9, iVar11);
+            noticeX, noticeY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
     }
 
 }
