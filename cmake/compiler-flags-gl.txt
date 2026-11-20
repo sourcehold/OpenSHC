@@ -138,3 +138,10 @@ src/OpenSHC/Map/Units/UpdateDrunkard.cpp
 src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
 src/OpenSHC/Map/Units/UpdateMerchant.cpp
 src/OpenSHC/Map/Units/UpdateOx.cpp
+src/OpenSHC/Map/Units/UpdateMinerIronFetcher.cpp
+src/OpenSHC/Map/Units/ComputeGoodsProduced.cpp
+src/OpenSHC/Map/Units/IncrementAndOptionalUpdateAVValueRelated.cpp
+src/OpenSHC/Map/Units/SetStateToFreetimeWalking.cpp
+src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
+src/OpenSHC/Map/Units/UnitsState/isWorkplaceBuildingOnAdjacentTile.cpp
+src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
