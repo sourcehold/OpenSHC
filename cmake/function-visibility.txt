@@ -129,7 +129,6 @@ OpenSHC::Map::Units::UpdateInnkeeper
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateMerchant
-    OpenSHC::Game::GameStateStructures::activateTraderState
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateMerchantHorse
