@@ -5,7 +5,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00522C50
-        void TribesState::addRallyPoint(int tribeID, short destinationX, short destinationY, int step)
+        void TribesState::addRallyPoint(int tribeID, int destinationX, int destinationY, int step)
         {
             this->tribes[tribeID].rallyPointArray[step][0] = destinationX;
             this->tribes[tribeID].rallyPointArray[step][1] = destinationY;
