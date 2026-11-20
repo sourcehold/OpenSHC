@@ -1,4 +1,3 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Synchrony/Actions.func.hpp"
@@ -6,31 +5,15 @@
 #include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandParameterLocation;
-    using OpenSHC::Commands::GameCommandParameterReadWrite;
-    using OpenSHC::Commands::GameCommandScheduling;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x0048FFD0
     void Commands::HostRemoveAIPlayerBySlotID()
     {
-        int local_4;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 4;
@@ -42,12 +25,13 @@ namespace Synchrony {
             return;
         }
         if ((DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE)
-            && (DAT_GameSynchronyState::instance.isHost == FALSE)) {
+            && (!DAT_GameSynchronyState::instance.isHost)) {
+            int readBuffer;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(&local_4, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+                DAT_GameSynchronyState::ptr)(&readBuffer, 4, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
                 OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            DAT_GameSynchronyState::instance.currentAIArray[local_4] = 0;
-            MACRO_CALL(OpenSHC::Synchrony::Actions_Func::RemovePositionOfPlayer)(local_4);
+            DAT_GameSynchronyState::instance.currentAIArray[readBuffer] = 0;
+            MACRO_CALL(OpenSHC::Synchrony::Actions_Func::RemovePositionOfPlayer)(readBuffer);
             MACRO_CALL_MEMBER(
                 OpenSHC::Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
         }
