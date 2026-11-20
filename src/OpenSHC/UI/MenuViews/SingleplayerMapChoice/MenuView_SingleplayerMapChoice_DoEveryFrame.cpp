@@ -50,15 +50,13 @@ namespace UI {
                 if (DAT_00b960dc::instance != 0) {
                     DAT_GameCore::instance.hasMenuRenderedUnk = 1;
                     if ((int)DAT_00b960dc::instance < 0) {
-                        DAT_ButtonBackgroundBlendStrength::instance = DAT_ButtonBackgroundBlendStrength::instance
-                            - (timeGetTime() - DWORD_00b95b1c::instance) / 40;
+                        DAT_ButtonBackgroundBlendStrength::instance -= (timeGetTime() - DWORD_00b95b1c::instance) / 40;
                         if (DAT_ButtonBackgroundBlendStrength::instance <= 0) {
                             DAT_ButtonBackgroundBlendStrength::instance = 0;
                             DAT_00b960dc::instance = 0;
                         }
                     } else {
-                        DAT_ButtonBackgroundBlendStrength::instance = DAT_ButtonBackgroundBlendStrength::instance
-                            + (timeGetTime() - DWORD_00b95b1c::instance) / 40;
+                        DAT_ButtonBackgroundBlendStrength::instance += (timeGetTime() - DWORD_00b95b1c::instance) / 40;
                         if (DAT_ButtonBackgroundBlendStrength::instance >= 32) {
                             DAT_ButtonBackgroundBlendStrength::instance = 32;
                             DAT_GameCore::instance.menuSwitchDelay = 0;
@@ -120,24 +118,27 @@ namespace UI {
                     }
                     DAT_MouseState::instance.waitCursorToggle = 0;
                     DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber = count;
-                    int scrollOffset = 0;
-                    DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset = scrollOffset;
+                    DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset = 0;
                     DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = -1;
                     DAT_GameSynchronyState::instance.skirmishRelated1 = 0;
                     if (count != 0) {
                         DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = 0;
                         if (strlen(DAT_GameCore::instance.standaloneFilename) != 0 && selected >= 0) {
-                            // scrolled so that the selected map is in the table's 13 rows
+                            // scrolled so that the selected map is in the table's 13 rows; the globals count, and
+                            // each arm calls the table (a local counter or one call behind the test measures lower)
                             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = selected;
                             while (DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected >= 13) {
                                 --DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected;
-                                ++scrollOffset;
-                                DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset = scrollOffset;
+                                ++DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset;
                             }
+                            MACRO_CALL(OpenSHC::UI::MenuItems::SinglePlayerMapChoice_Func::
+                                    MenuItemActionHandler_SingleplayerMapChoice_MapTable)(
+                                DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
+                        } else {
+                            MACRO_CALL(OpenSHC::UI::MenuItems::SinglePlayerMapChoice_Func::
+                                    MenuItemActionHandler_SingleplayerMapChoice_MapTable)(
+                                DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
                         }
-                        MACRO_CALL(OpenSHC::UI::MenuItems::SinglePlayerMapChoice_Func::
-                                MenuItemActionHandler_SingleplayerMapChoice_MapTable)(
-                            DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected);
                         DAT_GameSynchronyState::instance.skirmishRelated1 = 1;
                         DAT_GameCore::instance.standaloneFilename[0] = '\0';
                     }
