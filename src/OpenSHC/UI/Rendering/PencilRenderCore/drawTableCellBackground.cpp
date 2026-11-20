@@ -50,6 +50,15 @@ namespace UI {
                         TABLE_CELL_MIDDLE_PICTURE, x, DAT_ButtonY::instance,
                         OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, TABLE_CELL_MIDDLE_MASK, blendStrength);
                 }
+                // the right piece is written in this arm and once more behind the other one (written once behind both,
+                // the second arm's three scratch registers come out rotated)
+                if (DAT_ButtonW::instance > TABLE_CELL_PIECE_WIDTH + 1) {
+                    MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
+                        DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3,
+                        TABLE_CELL_RIGHT_PICTURE, x, DAT_ButtonY::instance,
+                        OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_3, TABLE_CELL_MIDDLE_MASK, blendStrength);
+                }
+                return;
             } else if (DAT_ButtonCurrentlyInteracting::instance) {
                 if (DAT_ButtonW::instance > TABLE_CELL_PIECE_WIDTH) {
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
