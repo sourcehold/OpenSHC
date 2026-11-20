@@ -78,10 +78,11 @@ namespace UI {
                 break;
             case 1:
                 if (phase == 1) {
-                    int const next = DAT_RenderingDefinedData::instance
-                                         .ScribeAnimationFrames1[DAT_GameCore::instance.scribeAnimationFrame2];
-                    if (next != 0) {
-                        frame = next;
+                    if (DAT_RenderingDefinedData::instance
+                            .ScribeAnimationFrames1[DAT_GameCore::instance.scribeAnimationFrame2]
+                        != 0) {
+                        frame = DAT_RenderingDefinedData::instance
+                                    .ScribeAnimationFrames1[DAT_GameCore::instance.scribeAnimationFrame2];
                         DAT_GameCore::instance.scribeAnimationFrame = frame;
                     } else {
                         DAT_GameCore::instance.taxesSettingUnk = 0;
@@ -90,10 +91,11 @@ namespace UI {
                 break;
             case 2:
                 if (phase == 1) {
-                    int const next = DAT_RenderingDefinedData::instance
-                                         .ScribeAnimationFrames2[DAT_GameCore::instance.scribeAnimationFrame2];
-                    if (next != 0) {
-                        frame = next;
+                    if (DAT_RenderingDefinedData::instance
+                            .ScribeAnimationFrames2[DAT_GameCore::instance.scribeAnimationFrame2]
+                        != 0) {
+                        frame = DAT_RenderingDefinedData::instance
+                                    .ScribeAnimationFrames2[DAT_GameCore::instance.scribeAnimationFrame2];
                         DAT_GameCore::instance.scribeAnimationFrame = frame;
                     } else {
                         DAT_GameCore::instance.taxesSettingUnk = 0;
@@ -102,10 +104,11 @@ namespace UI {
                 break;
             case 3:
                 if (phase == 1) {
-                    int const next = DAT_RenderingDefinedData::instance
-                                         .ScribeAnimationFrames3[DAT_GameCore::instance.scribeAnimationFrame2];
-                    if (next != 0) {
-                        frame = next;
+                    if (DAT_RenderingDefinedData::instance
+                            .ScribeAnimationFrames3[DAT_GameCore::instance.scribeAnimationFrame2]
+                        != 0) {
+                        frame = DAT_RenderingDefinedData::instance
+                                    .ScribeAnimationFrames3[DAT_GameCore::instance.scribeAnimationFrame2];
                         DAT_GameCore::instance.scribeAnimationFrame = frame;
                     } else {
                         DAT_GameCore::instance.taxesSettingUnk = 0;
