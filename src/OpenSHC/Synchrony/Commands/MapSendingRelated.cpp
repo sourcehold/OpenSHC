@@ -1,35 +1,18 @@
-#include "../../Synchrony.func.hpp"
 #include "../Commands.func.hpp"
 
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
 namespace OpenSHC {
 namespace Synchrony {
 
-    using OpenSHC::Commands::GameCommandParameterLocation;
-    using OpenSHC::Commands::GameCommandParameterReadWrite;
-    using OpenSHC::Commands::GameCommandScheduling;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
-    /*
-      WARNING: Enum "DPSEND_EnumInt": Some values do not have unique names
-     */
-    /*
-      WARNING: Enum "DPERRInt": Some values do not have unique names
-     */
-    /*
-      decompilerscript: committed: 2025-01-30 21:57:43.216000
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00485E80
     void Commands::MapSendingRelated()
     {
-        char local_1;
         DAT_GameSynchronyState::instance.DAT_CommandSize = 1;
         DAT_GameSynchronyState::instance.DAT_GameCommandArray[DAT_GameSynchronyState::instance.DAT_CurrentGameCommandID]
             .time = 0;
@@ -39,21 +22,25 @@ namespace Synchrony {
                 OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
             return;
         }
-        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_EXECUTE) {
-            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
-                DAT_GameSynchronyState::ptr)(&local_1, 1, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
-                OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
-            if (((DAT_GameSynchronyState::instance.isHost != FALSE)
-                    && (DAT_GameSynchronyState::instance
-                            .field290_0x109e20[DAT_GameSynchronyState::instance.protocolInvokerPlayerID] = 2,
-                        local_1 == '\x01'))
-                && (DAT_GameSynchronyState::instance
-                        .mapSendingFileHandles[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
-                    != (FILE*)0x0)) {
-                DAT_GameSynchronyState::instance
-                    .mapSendingByteBufferAddress[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
-                    = DAT_GameSynchronyState::instance.mapSendingFileSize;
-            }
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
+            return;
+        }
+        char readBuffer;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&readBuffer, 1, OpenSHC::Commands::GCPL_FIXED_COMMAND_DATA_ADDRESS,
+            OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        if (!DAT_GameSynchronyState::instance.isHost) {
+            return;
+        }
+        DAT_GameSynchronyState::instance
+            .mapSendRequestStatePerPlayer[DAT_GameSynchronyState::instance.protocolInvokerPlayerID] = 2;
+        if (readBuffer == 1
+            && DAT_GameSynchronyState::instance
+                    .mapSendingFileHandles[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
+                != NULL) {
+            DAT_GameSynchronyState::instance
+                .mapSendingByteBufferAddress[DAT_GameSynchronyState::instance.protocolInvokerPlayerID]
+                = DAT_GameSynchronyState::instance.mapSendingFileSize;
         }
     }
 
