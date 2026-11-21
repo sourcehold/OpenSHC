@@ -138,3 +138,4 @@ src/OpenSHC/Map/Units/UpdateDrunkard.cpp
 src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
 src/OpenSHC/Map/Units/UpdateMerchant.cpp
 src/OpenSHC/Map/Units/UpdateSwordsman.cpp
+src/OpenSHC/Map/Units/UpdateArabianSwordsman.cpp
