@@ -137,3 +137,6 @@ src/OpenSHC/Map/Units/UpdateQuarryMason.cpp
 src/OpenSHC/Map/Units/UpdateDrunkard.cpp
 src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
 src/OpenSHC/Map/Units/UpdateMerchant.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/isAIPlayer.cpp
+src/OpenSHC/Map/Units/UpdateTrebuchet.cpp
