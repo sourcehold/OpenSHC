@@ -26,12 +26,13 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x0056A3F0
     void Units::UpdateMangonel()
     {
-        int owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
+        int const owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
         DAT_GameState::instance.playerDataArray[owner].armySize++;
         DAT_GameState::instance.playerDataArray[owner].currentSiegeWeaponCount++;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime = 1;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].calculatedOwnerPlayerIndex = owner;
-        UnitStateShort state = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic;
+        UnitStateShort const state = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic;
+        // used by the unmanned state only (declared in its block, it loses the match)
         int engineersInPlace = 0;
         if (state == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = -1;
@@ -70,14 +71,14 @@ namespace Map {
                         = OpenSHC::Map::Units::States::US_STAND_UPUnk;
                     return;
                 }
-                int building = MACRO_CALL_MEMBER(
+                int const building = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Buildings::BuildingsState_Func::findClosestEnemyBuildingWithinRadius,
                     DAT_BuildingsState::ptr)(DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner,
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x,
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y, 68);
                 if (building != 0) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetID_OR_targetBuildingID
-                        = (short)building;
+                        = building;
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                         = DAT_BuildingsState::instance.buildings[building].uid;
@@ -142,7 +143,7 @@ namespace Map {
                         .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
                     == 2) {
                 for (int i = 0; i < 2; ++i) {
-                    int engineer
+                    int const engineer
                         = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i];
                     if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerUIDRef[i]
                         != DAT_UnitsState::instance.units[engineer].uid) {
@@ -159,7 +160,7 @@ namespace Map {
                         > 16) {
                         break;
                     }
-                    // set in both arms (initialised with one arm's value, the match is lost)
+                    // dx and dy are set in both arms: initialised with one arm's value, they lose the match
                     int dx;
                     if (DAT_UnitsState::instance.units[engineer].microXPosition
                         > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition) {
@@ -188,7 +189,7 @@ namespace Map {
                 }
                 if (engineersInPlace == 2) {
                     for (int i = 0; i < 2; ++i) {
-                        int engineer
+                        int const engineer
                             = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i];
                         DAT_UnitsState::instance.units[engineer].animationCycleNumber = 0;
                         DAT_UnitsState::instance.units[engineer].state.generic
@@ -213,54 +214,58 @@ namespace Map {
             // man the mangonel with two of the owner's engineers standing next to it
             int engineers[2];
             int found = 0;
-            for (int i = 1; i < DAT_UnitsState::instance.maxUnitCount; ++i) {
-                if (DAT_UnitsState::instance.units[i].logicalState == OpenSHC::Map::Units::ULS_NORMAL
-                    && DAT_UnitsState::instance.units[i].dying == 0 && DAT_UnitsState::instance.units[i].owner == owner
-                    && DAT_UnitsState::instance.units[i].unitType == OpenSHC::Map::Units::UT_E_ENGINEER
-                    && DAT_UnitsState::instance.units[i].targetingType == OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT
-                    && DAT_UnitsState::instance.units[i].targetedUnitID__OR__engineerMannedSiegeEngineRef
-                        == DAT_CurrentUnitSlotID::instance
-                    && abs(DAT_UnitsState::instance.units[i].terrainOrClimbHeight
+            for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; ++unitID) {
+                if (DAT_UnitsState::instance.units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL
+                    || DAT_UnitsState::instance.units[unitID].dying != 0
+                    || DAT_UnitsState::instance.units[unitID].owner != owner
+                    || DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_E_ENGINEER
+                    || DAT_UnitsState::instance.units[unitID].targetingType
+                        != OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT
+                    || DAT_UnitsState::instance.units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef
+                        != DAT_CurrentUnitSlotID::instance
+                    || abs(DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight
                            - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].terrainOrClimbHeight
                            - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].buildingHeight
-                           + DAT_UnitsState::instance.units[i].buildingHeight)
-                        <= 16) {
-                    int dx;
-                    if (DAT_UnitsState::instance.units[i].microXPosition
-                        > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition) {
-                        dx = DAT_UnitsState::instance.units[i].microXPosition
-                            - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition;
-                    } else {
-                        dx = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition
-                            - DAT_UnitsState::instance.units[i].microXPosition;
-                    }
-                    int dy;
-                    if (DAT_UnitsState::instance.units[i].microYPosition
-                        > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition) {
-                        dy = DAT_UnitsState::instance.units[i].microYPosition
-                            - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition;
-                    } else {
-                        dy = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition
-                            - DAT_UnitsState::instance.units[i].microYPosition;
-                    }
-                    int distance = dy;
-                    if (dx > dy) {
-                        distance = dx;
-                    }
-                    if (distance < 30) {
-                        engineers[found] = i;
-                        found++;
-                        if (found >= 2) {
-                            break;
-                        }
-                    }
+                           + DAT_UnitsState::instance.units[unitID].buildingHeight)
+                        > 16) {
+                    continue;
+                }
+                int dx;
+                if (DAT_UnitsState::instance.units[unitID].microXPosition
+                    > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition) {
+                    dx = DAT_UnitsState::instance.units[unitID].microXPosition
+                        - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition;
+                } else {
+                    dx = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition
+                        - DAT_UnitsState::instance.units[unitID].microXPosition;
+                }
+                int dy;
+                if (DAT_UnitsState::instance.units[unitID].microYPosition
+                    > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition) {
+                    dy = DAT_UnitsState::instance.units[unitID].microYPosition
+                        - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition;
+                } else {
+                    dy = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition
+                        - DAT_UnitsState::instance.units[unitID].microYPosition;
+                }
+                int distance = dy;
+                if (dx > dy) {
+                    distance = dx;
+                }
+                if (distance >= 30) {
+                    continue;
+                }
+                engineers[found] = unitID;
+                found++;
+                if (found >= 2) {
+                    break;
                 }
             }
             if (found != 2) {
                 return;
             }
             for (int i = 0; i < countof(engineers); ++i) {
-                int engineer = engineers[i];
+                int const engineer = engineers[i];
                 DAT_UnitsState::instance.units[engineer].animationCycleNumber = 0;
                 DAT_UnitsState::instance.units[engineer].disappearFadeAlphaCountdown = 0;
                 DAT_UnitsState::instance.units[engineer].updateTickTracker = 0;
@@ -269,12 +274,13 @@ namespace Map {
                 DAT_UnitsState::instance.units[engineer].cachedState = OpenSHC::Map::Units::States::US_AIM_WEAPONUnk;
                 DAT_UnitsState::instance.units[engineer].targetingType
                     = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
-                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i] = (short)engineer;
+                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i] = engineer;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerUIDRef[i]
                     = DAT_UnitsState::instance.units[engineer].uid;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::deselectUnit, DAT_UnitsState::ptr)(engineer);
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::clearOrDeselectUnitFromSelection,
-                    DAT_UnitsState::ptr)(DAT_UnitsState::instance.units[engineer].owner, engineer, 0);
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::UnitsState_Func::clearOrDeselectUnitFromSelection, DAT_UnitsState::ptr)(
+                    DAT_UnitsState::instance.units[engineer].owner, engineer, OpenSHC::Map::Units::UT_NONE);
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                 = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
@@ -341,10 +347,10 @@ namespace Map {
                         .uid
                     == DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID) {
-                int halfSize = (int)DAT_BuildingsState::instance
-                                   .buildings[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
-                                           .targetID_OR_targetBuildingID]
-                                   .widthOrHeight
+                int const halfSize = (int)DAT_BuildingsState::instance
+                                         .buildings[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
+                                                 .targetID_OR_targetBuildingID]
+                                         .widthOrHeight
                     / 2;
                 targetX = DAT_BuildingsState::instance
                               .buildings[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
@@ -357,8 +363,8 @@ namespace Map {
                               .y
                     + halfSize;
             }
-            int distanceY = targetY - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y;
-            int distanceX = targetX - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x;
+            int const distanceY = targetY - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].y;
+            int const distanceX = targetX - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].x;
             if (distanceX * distanceX + distanceY * distanceY > 70 * 70) {
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc = -40;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
@@ -474,7 +480,7 @@ namespace Map {
                 for (int i = 0; i < DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                     .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300;
                     ++i) {
-                    int engineer
+                    int const engineer
                         = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i];
                     if (DAT_UnitsState::instance.units[engineer].uid
                         != DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerUIDRef[i]) {
@@ -550,7 +556,8 @@ namespace Map {
             for (int i = 0; i < DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                 .digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300;
                 ++i) {
-                int engineer = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i];
+                int const engineer
+                    = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerRef[i];
                 if (DAT_UnitsState::instance.units[engineer].uid
                     == DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].manningEngineerUIDRef[i]) {
                     DAT_UnitsState::instance.units[engineer].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
@@ -558,7 +565,6 @@ namespace Map {
             }
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].logicalState
                 = OpenSHC::Map::Units::ULS_REMOVE;
-            return;
         }
     }
 
