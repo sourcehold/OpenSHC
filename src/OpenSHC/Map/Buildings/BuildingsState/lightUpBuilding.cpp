@@ -24,8 +24,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0041C810
         BOOLEnum BuildingsState::lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds)
         {
-            int const type = this->buildings[buildingID].buildingType;
-            switch (type) {
+            int const buildingType = this->buildings[buildingID].buildingType;
+            switch (buildingType) {
             case BT_CAMPFIRE:
             case BT_PARADEGROUND:
             case BT_CAMPGROUND:
@@ -51,7 +51,7 @@ namespace Map {
                 return FALSE;
             }
             if (spareGrounds != 0) {
-                switch (type) {
+                switch (buildingType) {
                 case BT_CAMPFIRE:
                 case BT_PARADEGROUND:
                 case BT_CAMPGROUND:
@@ -65,7 +65,7 @@ namespace Map {
             this->buildings[buildingID].fireDuration = 1;
             this->buildings[buildingID].ifFireThenResponsiblePlayer = burnerPlayerID;
             if (this->buildings[buildingID].owner == DAT_GameSynchronyState::instance.currentPlayerSlotID
-                && DAT_GameCore::instance.mapTimeInTicks
+                && (int)DAT_GameCore::instance.mapTimeInTicks
                         - DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
                     > 800) {
                 DAT_GameState::instance.playerDataArray[this->buildings[buildingID].owner].ignitionTime
@@ -75,7 +75,7 @@ namespace Map {
             int const x = this->buildings[buildingID].x;
             int const y = this->buildings[buildingID].y;
             int i = 0;
-            do {
+            while (true) {
                 MACRO_CALL_MEMBER(TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                     i, this->buildings[buildingID].widthOrHeight);
                 int const tile
@@ -94,7 +94,10 @@ namespace Map {
                     }
                 }
                 ++i;
-            } while (i < DAT_TileMapState::instance.constructionTileCount);
+                if (i >= DAT_TileMapState::instance.constructionTileCount) {
+                    break;
+                }
+            }
             return TRUE;
         }
 
