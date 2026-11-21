@@ -39,13 +39,13 @@ namespace Map {
         int dy;
         int const unitID = DAT_CurrentUnitSlotID::instance;
         int const owner = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner;
-        DAT_GameState::instance.playerDataArray[owner].armySize += 1;
-        DAT_GameState::instance.playerDataArray[owner].currentSiegeWeaponCount += 1;
+        DAT_GameState::instance.playerDataArray[owner].armySize++;
+        DAT_GameState::instance.playerDataArray[owner].currentSiegeWeaponCount++;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime = 1;
         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].calculatedOwnerPlayerIndex = owner;
         UnitStateShort const state = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic;
         // counted by the unmanned state only (declared in its block, it loses the match)
-        int present = 0;
+        int engineersInPlace = 0;
         if (state == OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk) {
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = -1;
             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed = 0;
@@ -77,7 +77,7 @@ namespace Map {
                 return;
             }
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc < 0) {
-                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc += 1;
+                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc++;
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                     = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 return;
@@ -86,8 +86,7 @@ namespace Map {
                     .currentPlayerFullIDArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].owner]
                 == -1) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::harassBuildingsWithSiegeAI,
-                        DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance)
-                    != 0) {
+                        DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance)) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].state.generic
                         = OpenSHC::Map::Units::States::US_STATE_2Unk;
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber = 0;
@@ -95,8 +94,10 @@ namespace Map {
                 }
                 DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc = -40;
             } else {
-                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5 == 5
-                    || DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5 == 22) {
+                if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5
+                        == OpenSHC::Map::Units::UIT_ATTACK_LAND
+                    || DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5
+                        == OpenSHC::Map::Units::UIT_THROW_COW) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetingType
                         = (char)DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5;
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5 = 0;
@@ -107,7 +108,7 @@ namespace Map {
                             DAT_UnitsState::ptr)(DAT_CurrentUnitSlotID::instance)) {
                         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootBeforeStop = 10;
                     } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootBeforeStop > 0) {
-                        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootBeforeStop -= 1;
+                        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootBeforeStop--;
                     } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootBeforeStop == 0) {
                         DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3bc = -80;
                         return;
@@ -163,23 +164,24 @@ namespace Map {
                             > 16) {
                         break;
                     }
-                    short ownX = DAT_UnitsState::instance.units[unitID].microXPosition;
+                    short const ownX = DAT_UnitsState::instance.units[unitID].microXPosition;
                     if (DAT_UnitsState::instance.units[engineer].microXPosition > ownX) {
                         dx = DAT_UnitsState::instance.units[engineer].microXPosition - ownX;
                     } else {
                         dx = ownX - DAT_UnitsState::instance.units[engineer].microXPosition;
                     }
-                    short ownY = DAT_UnitsState::instance.units[unitID].microYPosition;
+                    short const ownY = DAT_UnitsState::instance.units[unitID].microYPosition;
                     if (DAT_UnitsState::instance.units[engineer].microYPosition > ownY) {
                         dy = DAT_UnitsState::instance.units[engineer].microYPosition - ownY;
                     } else {
                         dy = ownY - DAT_UnitsState::instance.units[engineer].microYPosition;
                     }
                     if (max(dx, dy) < 30) {
-                        present += 1;
+                        // state 6 keeps `+= 1` on its three counters (as `++` they move the search's registers)
+                        engineersInPlace += 1;
                     }
                 }
-                if (present == 3) {
+                if (engineersInPlace == 3) {
                     for (int i = 0; i < 3; ++i) {
                         int const engineer = DAT_UnitsState::instance.units[unitID].manningEngineerRef[i];
                         DAT_UnitsState::instance.units[engineer].animationCycleNumber = 0;
@@ -208,40 +210,43 @@ namespace Map {
             // look for three engineers of the same player next to the trebuchet
             int crewCount[9] = { 0 };
             int crew[9][3];
-            int i;
-            for (i = 1; i < DAT_UnitsState::instance.maxUnitCount; ++i) {
-                if (DAT_UnitsState::instance.units[i].logicalState != OpenSHC::Map::Units::ULS_NORMAL
-                    || DAT_UnitsState::instance.units[i].dying != 0
-                    || DAT_UnitsState::instance.units[i].unitType != OpenSHC::Map::Units::UT_E_ENGINEER
-                    || DAT_UnitsState::instance.units[i].targetingType != OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT
-                    || DAT_UnitsState::instance.units[i].targetedUnitID__OR__engineerMannedSiegeEngineRef != unitID
-                    || abs(DAT_UnitsState::instance.units[i].terrainOrClimbHeight
+            // createTribe reads units[searched] after the search
+            int searched = 1;
+            for (; searched < DAT_UnitsState::instance.maxUnitCount; ++searched) {
+                if (DAT_UnitsState::instance.units[searched].logicalState != OpenSHC::Map::Units::ULS_NORMAL
+                    || DAT_UnitsState::instance.units[searched].dying != 0
+                    || DAT_UnitsState::instance.units[searched].unitType != OpenSHC::Map::Units::UT_E_ENGINEER
+                    || DAT_UnitsState::instance.units[searched].targetingType
+                        != OpenSHC::Map::Units::UIT_MAN_SIEGE_EQUIPMENT
+                    || DAT_UnitsState::instance.units[searched].targetedUnitID__OR__engineerMannedSiegeEngineRef
+                        != unitID
+                    || abs(DAT_UnitsState::instance.units[searched].terrainOrClimbHeight
                            - DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight
                            - DAT_UnitsState::instance.units[unitID].buildingHeight
-                           + DAT_UnitsState::instance.units[i].buildingHeight)
+                           + DAT_UnitsState::instance.units[searched].buildingHeight)
                         > 16) {
                     continue;
                 }
-                if (DAT_UnitsState::instance.units[i].microXPosition
+                if (DAT_UnitsState::instance.units[searched].microXPosition
                     > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition) {
-                    dx = DAT_UnitsState::instance.units[i].microXPosition
+                    dx = DAT_UnitsState::instance.units[searched].microXPosition
                         - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition;
                 } else {
                     dx = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microXPosition
-                        - DAT_UnitsState::instance.units[i].microXPosition;
+                        - DAT_UnitsState::instance.units[searched].microXPosition;
                 }
-                if (DAT_UnitsState::instance.units[i].microYPosition
+                if (DAT_UnitsState::instance.units[searched].microYPosition
                     > DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition) {
-                    dy = DAT_UnitsState::instance.units[i].microYPosition
+                    dy = DAT_UnitsState::instance.units[searched].microYPosition
                         - DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition;
                 } else {
                     dy = DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].microYPosition
-                        - DAT_UnitsState::instance.units[i].microYPosition;
+                        - DAT_UnitsState::instance.units[searched].microYPosition;
                 }
-                if (max(dx, dy) < 30 && crewCount[DAT_UnitsState::instance.units[i].owner] < 3) {
-                    crew[DAT_UnitsState::instance.units[i].owner][crewCount[DAT_UnitsState::instance.units[i].owner]]
-                        = i;
-                    crewCount[DAT_UnitsState::instance.units[i].owner] += 1;
+                if (max(dx, dy) < 30 && crewCount[DAT_UnitsState::instance.units[searched].owner] < 3) {
+                    crew[DAT_UnitsState::instance.units[searched].owner]
+                        [crewCount[DAT_UnitsState::instance.units[searched].owner]] = searched;
+                    crewCount[DAT_UnitsState::instance.units[searched].owner] += 1;
                 }
             }
             int crewOwner = DAT_UnitsState::instance.units[unitID].owner;
@@ -271,9 +276,10 @@ namespace Map {
                 if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].displayColorPlayerID != 0) {
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].displayColorPlayerID = newOwner;
                 }
-                // the original passes the owner of units[i], with i left over from the search above
+                // fixme: the original passes units[searched].owner with searched = maxUnitCount after the search, not
+                // the new owner
                 int const tribe = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createTribe,
-                    DAT_TribesState::ptr)(DAT_UnitsState::instance.units[i].owner, 0);
+                    DAT_TribesState::ptr)(DAT_UnitsState::instance.units[searched].owner, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                     tribe, DAT_CurrentUnitSlotID::instance);
                 crewOwner = newOwner;
@@ -497,7 +503,7 @@ namespace Map {
                         != OpenSHC::Map::Units::UIT_THROW_COW
                     && DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3b0 == 0) {
                     if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition > 0) {
-                        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition -= 1;
+                        DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition--;
                         MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::shootProjectile, DAT_UnitsState::ptr)(
                             DAT_CurrentUnitSlotID::instance, OpenSHC::Map::Entities::ET_TREBUCHET,
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootTargetMicroX,
@@ -524,7 +530,7 @@ namespace Map {
                             if (cow != 0) {
                                 DAT_UnitsState::instance.units[cow].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
                             }
-                            DAT_GameState::instance.playerDataArray[owner].availableCows -= 1;
+                            DAT_GameState::instance.playerDataArray[owner].availableCows--;
                         } else {
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3b0 = 0;
                         }
@@ -533,7 +539,7 @@ namespace Map {
                     BOOLEnum shoot = TRUE;
                     if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3b0 == 0) {
                         if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition > 0) {
-                            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition -= 1;
+                            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].stoneAmmunition--;
                         } else if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                             && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
                                 DAT_GameSynchronyState::ptr)(owner)) {
@@ -551,7 +557,8 @@ namespace Map {
                             DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].shootTargetZ);
                     }
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3b0 = 0;
-                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5 = 3;
+                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].field_0x3c5
+                        = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                     DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].targetingType
                         = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
                 }
@@ -620,15 +627,15 @@ namespace Map {
                     if (owner == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_GameState::instance.mapAndTime
                             .hitsDealtToPlayerArray[DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
-                                    .lastEncounteredEnemyPlayerID] += 1;
+                                    .lastEncounteredEnemyPlayerID]++;
                     } else if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance]
                                    .lastEncounteredEnemyPlayerID
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                        DAT_GameState::instance.mapAndTime.emenyHitArray[owner] += 1;
+                        DAT_GameState::instance.mapAndTime.emenyHitArray[owner]++;
                     }
                 }
             }
-            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber += 1;
+            DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber++;
             if (DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].animationCycleNumber <= 200) {
                 return;
             }
@@ -638,11 +645,11 @@ namespace Map {
         }
         if (state == OpenSHC::Map::Units::States::US_DISAPPEAR
             || state == OpenSHC::Map::Units::States::US_JESTER_ROAM_TO) {
-            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown += 1;
+            DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown++;
             if ((char)DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown > 32) {
                 DAT_UnitsState::instance.units[unitID].disappearFadeAlphaCountdown = 32;
             }
-            DAT_UnitsState::instance.units[unitID].updateTickTracker += 1;
+            DAT_UnitsState::instance.units[unitID].updateTickTracker++;
             if (DAT_UnitsState::instance.units[unitID].updateTickTracker > 32) {
                 DAT_UnitsState::instance.units[unitID].logicalState = OpenSHC::Map::Units::ULS_REMOVE;
             }
