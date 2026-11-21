@@ -128,11 +128,13 @@ namespace UI {
                 OpenSHC::Rendering::ViewportRenderState_Func::setupMouseTileXY, DAT_ViewportRenderState::ptr)();
             // read in this order (another order loses the match); x and y below are the snapped tile
             int const snap = DAT_TileMapState::instance.editorSnapToMode;
-            Map::Enums::MapOrientationInt const orientation = DAT_TileMapState::instance.mapOrientation;
+            // read in each arm of the click test (read in front of it, the match drops)
+            Map::Enums::MapOrientationInt orientation;
             int const tileY = DAT_ViewportRenderState::instance.viewportState.mouseTileY;
             int const tileX = DAT_ViewportRenderState::instance.viewportState.mouseTileX;
             // the click starts: its tile is kept, and whether it is on sea or on the unnamed 0x40 kind
             if (DAT_MouseState::instance.leftClickStart) {
+                orientation = DAT_TileMapState::instance.mapOrientation;
                 DAT_TileMapState::instance.DAT_ClickedTileX = tileX;
                 DAT_TileMapState::instance.DAT_ClickedTileY = tileY;
                 if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
@@ -144,6 +146,8 @@ namespace UI {
                         DAT_TileMapState::instance.editorAffectType = 1;
                     }
                 }
+            } else {
+                orientation = DAT_TileMapState::instance.mapOrientation;
             }
             // copies: with one pair of variables every case below is merged into the last one
             int x = tileX;
