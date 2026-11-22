@@ -185,6 +185,7 @@ OpenSHC::Map::Units::UpdateDrunkard
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
 OpenSHC::Map::Units::UpdateCatapult
+    OpenSHC::Synchrony::GameSynchronyState::isAIPlayer
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::deselectUnit
 OpenSHC::Map::Units::UpdateTrebuchet
