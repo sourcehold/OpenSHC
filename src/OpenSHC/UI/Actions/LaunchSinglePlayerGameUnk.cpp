@@ -136,29 +136,29 @@ namespace UI {
             DAT_GameState::instance.mapAndTime.mercRecruitable[i]
                 = DAT_MapPropertiesState::instance.SEC_MercRecruitable[i];
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[0]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_ARCHER - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_0 = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[1]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_XBOW - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_b = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[2]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_SPEAR - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_2 = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[3]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_PIKE - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_b = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[4]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_MACE - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_4 = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[5]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_SWORD - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
         }
-        if (DAT_GameState::instance.mapAndTime.euroRecruitable[6]) {
+        if (DAT_GameState::instance.mapAndTime.euroRecruitable[Map::Units::UT_E_KNIGHT - Map::Units::UT_E_ARCHER]) {
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
             DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_c = TRUE;
