@@ -253,7 +253,7 @@ namespace Map {
             if (crewCount[crewOwner] != 3) {
                 // the trebuchet is captured by the engineers of another player
                 int newOwner = 1;
-                // both exit tests in the body, in the original's order (in the loop header they lose the match)
+                // both exit tests in the body, the bound first (in the loop header they lose the match)
                 for (;;) {
                     if (newOwner >= 9) {
                         return;
@@ -280,6 +280,8 @@ namespace Map {
                 // the new owner
                 int const tribe = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createTribe,
                     DAT_TribesState::ptr)(DAT_UnitsState::instance.units[searched].owner, 0);
+                // fixme: the original passes the tribe as unitID and the trebuchet as tribeID (the parameters
+                // are (unitID, tribeID), as main's callers pass them)
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                     tribe, DAT_CurrentUnitSlotID::instance);
                 crewOwner = newOwner;
