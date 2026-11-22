@@ -387,6 +387,7 @@ namespace UI {
                                 }
                             }
                         } else {
+                            // Every other pixel at half the position (a plain loop skipping odd ones loses the match).
                             for (offsetX = pixelX & 1; offsetX < widthFactor; offsetX += 2) {
                                 px = pixelX + offsetX;
                                 if (px >= 0 && px < width * widthFactor) {
@@ -510,6 +511,7 @@ namespace UI {
                                 }
                             }
                         } else {
+                            // Every other pixel at half the position (a plain loop skipping odd ones loses the match).
                             for (offsetX = pixelX & 1; offsetX < widthFactor; offsetX += 2) {
                                 px = pixelX + offsetX;
                                 if (px >= 0 && px < width * widthFactor) {
