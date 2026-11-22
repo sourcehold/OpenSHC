@@ -29,8 +29,8 @@ namespace UI {
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
 
-    // A row of the second minimap buffer in bytes, for the assembly (it cannot name a qualified constant).
-    enum { BUFFER_ROW_BYTES = Map::MC_MAP_XY_LIMIT };
+    // A row of the minimap buffers (200 pixels) in bytes, for the assembly (it cannot name a qualified constant).
+    enum { BUFFER_ROW_BYTES = Map::MC_MAP_XY_LIMIT / 2 * sizeof(ushort) };
 
     // Draws a strip of the screen tile rows into the second minimap buffer: what stands on each tile, in its light.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5330
@@ -59,7 +59,7 @@ namespace UI {
             isRGB565 = TRUE;
         }
         if (DAT_TileMapState::instance.mapSize <= Map::MC_MAP_SIZE_200) {
-            firstRow = 100;
+            firstRow = (Map::MC_MAP_XY_LIMIT - Map::MC_MAP_SIZE_200) / 2;
             columnDivisor = 1;
         }
         int const viewportHeight = DAT_ViewportRenderState::instance.viewportState.viewportHeight;
