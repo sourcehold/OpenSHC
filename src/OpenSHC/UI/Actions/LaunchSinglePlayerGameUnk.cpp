@@ -58,12 +58,12 @@ namespace UI {
             Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
         DAT_GameSynchronyState::instance.currentPlayerSlotID = playerSlot;
         // set before the map is loaded (in this order: in ascending order two of the stores move)
-        DAT_MapPropertiesState::instance.SEC_XbowProducible_save = 1;
-        DAT_MapPropertiesState::instance.SEC_PikeProducible_save = 1;
-        DAT_MapPropertiesState::instance.SEC_SwordProducible_save = 1;
-        DAT_MapPropertiesState::instance.SEC_BowProducible_save = 1;
-        DAT_MapPropertiesState::instance.SEC_SpearProducible_save = 1;
-        DAT_MapPropertiesState::instance.SEC_MaceProducible_save = 1;
+        DAT_MapPropertiesState::instance.SEC_XbowProducible_save = TRUE;
+        DAT_MapPropertiesState::instance.SEC_PikeProducible_save = TRUE;
+        DAT_MapPropertiesState::instance.SEC_SwordProducible_save = TRUE;
+        DAT_MapPropertiesState::instance.SEC_BowProducible_save = TRUE;
+        DAT_MapPropertiesState::instance.SEC_SpearProducible_save = TRUE;
+        DAT_MapPropertiesState::instance.SEC_MaceProducible_save = TRUE;
         for (int i = 0; i < countof(DAT_MapPropertiesState::instance.SEC_MercRecruitable); ++i) {
             DAT_MapPropertiesState::instance.barracksRecruitability.array.barracksRecruitability[i] = 1;
             DAT_MapPropertiesState::instance.SEC_MercRecruitable[i] = 1;
@@ -87,18 +87,18 @@ namespace UI {
         MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMap, DAT_MapPropertiesState::ptr)(mapFileName);
         DAT_GameCore::instance.selectedLordType_2Unk = DAT_GameCore::instance.selectedLordTypeUnk;
         // set again behind the loaded map's settings, with the game's own copies: every weapon can be made
-        DAT_MapPropertiesState::instance.SEC_XbowProducible_save = 1;
-        DAT_GameCore::instance.xbowProducible_logic = 1;
-        DAT_MapPropertiesState::instance.SEC_BowProducible_save = 1;
-        DAT_GameCore::instance.bowProducible_logic = 1;
-        DAT_MapPropertiesState::instance.SEC_PikeProducible_save = 1;
-        DAT_GameCore::instance.pikeProducible_logic = 1;
-        DAT_MapPropertiesState::instance.SEC_SpearProducible_save = 1;
-        DAT_GameCore::instance.spearProducible_logic = 1;
-        DAT_MapPropertiesState::instance.SEC_SwordProducible_save = 1;
-        DAT_GameCore::instance.swordProducible_logic = 1;
-        DAT_MapPropertiesState::instance.SEC_MaceProducible_save = 1;
-        DAT_GameCore::instance.maceProducible_logic = 1;
+        DAT_MapPropertiesState::instance.SEC_XbowProducible_save = TRUE;
+        DAT_GameCore::instance.xbowProducible_logic = TRUE;
+        DAT_MapPropertiesState::instance.SEC_BowProducible_save = TRUE;
+        DAT_GameCore::instance.bowProducible_logic = TRUE;
+        DAT_MapPropertiesState::instance.SEC_PikeProducible_save = TRUE;
+        DAT_GameCore::instance.pikeProducible_logic = TRUE;
+        DAT_MapPropertiesState::instance.SEC_SpearProducible_save = TRUE;
+        DAT_GameCore::instance.spearProducible_logic = TRUE;
+        DAT_MapPropertiesState::instance.SEC_SwordProducible_save = TRUE;
+        DAT_GameCore::instance.swordProducible_logic = TRUE;
+        DAT_MapPropertiesState::instance.SEC_MaceProducible_save = TRUE;
+        DAT_GameCore::instance.maceProducible_logic = TRUE;
         // The mission type picked in the map choice: 0 just build, 1 economic, 2 siege, 3 invasion.
         // The difficulty is remembered for each.
         switch (DAT_MapMissionType::instance) {
@@ -119,16 +119,17 @@ namespace UI {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::createChainedMissionOutcomeEvents,
                 DAT_MapPropertiesState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
         }
+        // the nine flags: which weapons, armour and horses the recruitable units need
         // cleared in front of the loop (behind it the loop's copies take the register that holds the zero)
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_0 = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_b = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_2 = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_b = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_4 = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = 0;
-        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_c = 0;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_0 = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_b = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_2 = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_b = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_4 = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = FALSE;
+        DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_c = FALSE;
         for (int i = 0; i < countof(DAT_GameState::instance.mapAndTime.euroRecruitable); ++i) {
             DAT_GameState::instance.mapAndTime.euroRecruitable[i]
                 = DAT_MapPropertiesState::instance.barracksRecruitability.array.barracksRecruitability[i];
@@ -136,31 +137,31 @@ namespace UI {
                 = DAT_MapPropertiesState::instance.SEC_MercRecruitable[i];
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[0]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_0 = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_0 = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[1]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_b = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_b = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[2]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_2 = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_2 = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[3]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_b = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_b = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[4]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_4 = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_4 = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_1_a = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[5]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
         }
         if (DAT_GameState::instance.mapAndTime.euroRecruitable[6]) {
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = 1;
-            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_c = 1;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_a = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_3_a_and_6_b = TRUE;
+            DAT_GameState::instance.mapAndTime.euroRecruitableCopy_index_6_c = TRUE;
         }
         if (!useStandaloneFilename) {
             strcpy(DAT_GameCore::instance.standaloneFilename,
