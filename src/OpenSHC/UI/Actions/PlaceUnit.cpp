@@ -10,6 +10,7 @@
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -34,10 +35,11 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004381D0
     void Actions::PlaceUnit()
     {
-        if (DAT_TileMapState::instance.DAT_ClickedTileX > 399 || DAT_TileMapState::instance.DAT_ClickedTileY > 399
-            || DAT_ViewportRenderState::instance
-                    .DAT_BinaryTileMap400x400[DAT_TileMapState::instance.DAT_ClickedTileY * 400
-                        + DAT_TileMapState::instance.DAT_ClickedTileX]
+        if (DAT_TileMapState::instance.DAT_ClickedTileX > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+            || DAT_TileMapState::instance.DAT_ClickedTileY > OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
+            || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[DAT_TileMapState::instance.DAT_ClickedTileY
+                       * OpenSHC::Map::MC_MAP_XY_LIMIT
+                   + DAT_TileMapState::instance.DAT_ClickedTileX]
                 == 0) {
             return;
         }
@@ -244,23 +246,23 @@ namespace UI {
                     DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile, 13);
                 return;
             }
-            // not allowed here: the same pictures with 24 in the third byte of the variation
+            // not allowed here: the same pictures drawn blended (the high half of the variation is a blend strength)
             if (gmID == OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER) {
                 if (secondImageID > 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile, 29 + (24 << 16));
+                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile, 29 | (24 << 16));
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(
-                    OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile, 29 + (24 << 16));
+                    OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile, 29 | (24 << 16));
                 return;
             }
             if (secondImageID > 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                    DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile, 13 + (24 << 16));
+                    DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile, 13 | (24 << 16));
             }
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile, 13 + (24 << 16));
+                DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile, 13 | (24 << 16));
             return;
         }
         // the drag has stopped: pay and place
@@ -284,7 +286,7 @@ namespace UI {
                 if (DAT_TileMapState::instance.currentMapperCommand
                     == OpenSHC::Commands::M_MAPPER_PEOPLE_ENGINEERS_POTS) {
                     // the engineers with pots start with oil in them
-                    for (int i = 0; i < (int)DAT_TileMapState::instance.unitPlacementCount; ++i) {
+                    for (int i = 0; i < DAT_TileMapState::instance.unitPlacementCount; ++i) {
                         DAT_UnitsState::instance
                             .units[MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                                 DAT_TribesState::ptr)(tribeID, i)]
