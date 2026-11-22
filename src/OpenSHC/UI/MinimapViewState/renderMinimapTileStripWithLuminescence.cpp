@@ -3,7 +3,10 @@
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Rendering/ColorChannelMask.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_MiniMapDefinedData.hpp"
@@ -16,14 +19,18 @@ namespace UI {
 
     using namespace Map::LogicHelpers;
 
-    // The channels' bits in an RGB555 and in an RGB565 colour.
-    enum {
-        RGB555_RED = 31744, // 0x7c00
-        RGB555_GREEN = 992, // 0x03e0
-        RGB565_RED = 63488, // 0xf800
-        RGB565_GREEN = 2016, // 0x07e0
-        RGB_BLUE = 31 // 0x001f
-    };
+    using OpenSHC::Rendering::CCM_RGB555_GREEN;
+    using OpenSHC::Rendering::CCM_RGB555_RED;
+    using OpenSHC::Rendering::CCM_RGB565_GREEN;
+    using OpenSHC::Rendering::CCM_RGB565_RED;
+    using OpenSHC::Rendering::CCM_RGB_BLUE;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_LONG_ROW;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_SHORT_ROW;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
+
+    // A row of the second minimap buffer in bytes, for the assembly (it cannot name a qualified constant).
+    enum { BUFFER_ROW_BYTES = Map::MC_MAP_XY_LIMIT };
 
     // Draws a strip of the screen tile rows into the second minimap buffer: what stands on each tile, in its light.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5330
@@ -33,25 +40,25 @@ namespace UI {
         // These five in this order before the buffer and the strip rows (after them, the stack slots change).
         int firstRow = 0;
         BOOLEnum isRGB565 = FALSE;
-        int rowBase = 8;
+        int rowBase = VC_SCREEN_POINT_TABLE_START;
         int scale = 1;
         int columnDivisor = 2;
         // The assembly below takes the buffer's address from this local.
         ushort* const buffer = this->field_0x44;
         // the strip covers rows stripStart% .. stripStart + stripLength% of the 400 screen tile rows
         // (int): the original divides signed (stripStart is a uint in the header).
-        int const firstStripRow = (int)(stripStart * 400) / 100;
-        int const endStripRow = (int)((stripStart + stripLength) * 400) / 100;
+        int const firstStripRow = (int)(stripStart * Map::MC_MAP_XY_LIMIT) / 100;
+        int const endStripRow = (int)((stripStart + stripLength) * Map::MC_MAP_XY_LIMIT) / 100;
         if (flags & 4) {
             // zoomed out: half the size
             scale = 2;
         }
-        int const columns = 400 / widthFactor * scale;
-        int const rowCount = scale * 200;
+        int const columns = Map::MC_MAP_XY_LIMIT / widthFactor * scale;
+        int const rowCount = scale * Map::MC_MAP_SIZE_200;
         if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
             isRGB565 = TRUE;
         }
-        if (DAT_TileMapState::instance.mapSize <= 200) {
+        if (DAT_TileMapState::instance.mapSize <= Map::MC_MAP_SIZE_200) {
             firstRow = 100;
             columnDivisor = 1;
         }
@@ -59,19 +66,19 @@ namespace UI {
         // The global again (from the first local, viewportHeight + 1 is added up anew in every row).
         int const otherParity = DAT_ViewportRenderState::instance.viewportState.viewportHeight + 1;
         int rowParity = otherParity;
-        // rowBase first holds the orientation's offset into the screen tile table (in a variable of its own, the row
-        // base's sum has its operands the other way round).
+        // rowBase first holds the orientation's offset into the screen tile table, which holds one table per
+        // orientation (in a variable of its own, the row base's sum has its operands the other way round).
         if (DAT_TileMapState::instance.mapOrientation != Map::Enums::MO_NORTH) {
             if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_WEST) {
-                rowBase = 80408;
+                rowBase = VC_SCREEN_POINT_TABLE_START + VC_SCREEN_POINT_TABLE_SIZE;
             } else if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_SOUTH) {
-                rowBase = 160808;
+                rowBase = VC_SCREEN_POINT_TABLE_START + 2 * VC_SCREEN_POINT_TABLE_SIZE;
             } else if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_EAST) {
-                rowBase = 241208;
+                rowBase = VC_SCREEN_POINT_TABLE_START + 3 * VC_SCREEN_POINT_TABLE_SIZE;
             }
         }
         int const firstColumn = firstRow / 2;
-        rowBase = firstColumn * 401 + rowBase + 1;
+        rowBase = firstColumn * (VC_SCREEN_POINT_SHORT_ROW + VC_SCREEN_POINT_LONG_ROW) + rowBase + 1;
         int rowLength;
         // rowBase steps in the header, so that the continues below step it too.
         for (int row = firstRow; row < rowCount - firstRow; ++row, rowBase += rowLength) {
@@ -81,11 +88,11 @@ namespace UI {
             if (rowParity == otherParity) {
                 rowParity = viewportHeight;
                 rowX = widthFactor / 2;
-                rowLength = 200;
+                rowLength = VC_SCREEN_POINT_SHORT_ROW;
             } else {
                 rowParity = otherParity;
                 rowX = 0;
-                rowLength = 201;
+                rowLength = VC_SCREEN_POINT_LONG_ROW;
             }
             if (row < firstStripRow) {
                 continue;
@@ -155,37 +162,37 @@ namespace UI {
                     // Red's and green's masks right after their caps, blue's in the mix. Blue and the mix in
                     // both arms (written once behind them, the registers of the whole block change).
                     if (!isRGB565) {
-                        red = (color & RGB555_RED) * brightness / 100;
-                        if (red > RGB555_RED) {
-                            red = RGB555_RED;
+                        red = (color & CCM_RGB555_RED) * brightness / 100;
+                        if (red > CCM_RGB555_RED) {
+                            red = CCM_RGB555_RED;
                         }
-                        red &= RGB555_RED;
-                        green = (color & RGB555_GREEN) * brightness / 100;
-                        if (green > RGB555_GREEN) {
-                            green = RGB555_GREEN;
+                        red &= CCM_RGB555_RED;
+                        green = (color & CCM_RGB555_GREEN) * brightness / 100;
+                        if (green > CCM_RGB555_GREEN) {
+                            green = CCM_RGB555_GREEN;
                         }
-                        green &= RGB555_GREEN;
-                        blue = (color & RGB_BLUE) * brightness / 100;
-                        if (blue > RGB_BLUE) {
-                            blue = RGB_BLUE;
+                        green &= CCM_RGB555_GREEN;
+                        blue = (color & CCM_RGB_BLUE) * brightness / 100;
+                        if (blue > CCM_RGB_BLUE) {
+                            blue = CCM_RGB_BLUE;
                         }
-                        color = (ushort)(blue & RGB_BLUE | green | red);
+                        color = (ushort)(blue & CCM_RGB_BLUE | green | red);
                     } else {
-                        red = (color & RGB565_RED) * brightness / 100;
-                        if (red > RGB565_RED) {
-                            red = RGB565_RED;
+                        red = (color & CCM_RGB565_RED) * brightness / 100;
+                        if (red > CCM_RGB565_RED) {
+                            red = CCM_RGB565_RED;
                         }
-                        red &= RGB565_RED;
-                        green = (color & RGB565_GREEN) * brightness / 100;
-                        if (green > RGB565_GREEN) {
-                            green = RGB565_GREEN;
+                        red &= CCM_RGB565_RED;
+                        green = (color & CCM_RGB565_GREEN) * brightness / 100;
+                        if (green > CCM_RGB565_GREEN) {
+                            green = CCM_RGB565_GREEN;
                         }
-                        green &= RGB565_GREEN;
-                        blue = (color & RGB_BLUE) * brightness / 100;
-                        if (blue > RGB_BLUE) {
-                            blue = RGB_BLUE;
+                        green &= CCM_RGB565_GREEN;
+                        blue = (color & CCM_RGB_BLUE) * brightness / 100;
+                        if (blue > CCM_RGB_BLUE) {
+                            blue = CCM_RGB_BLUE;
                         }
-                        color = (ushort)(blue & RGB_BLUE | green | red);
+                        color = (ushort)(blue & CCM_RGB_BLUE | green | red);
                     }
                 }
                 // A tile without a colour takes the terrain picture's pixel, once, at the first pixel it draws.
@@ -199,7 +206,8 @@ namespace UI {
                         }
                         for (int offsetY = 0; offsetY < heightFactor; ++offsetY) {
                             if (color == 0) {
-                                color = this->minimapPixelBuffer[(y + offsetY) * 400 / 2 + x + offsetX];
+                                color
+                                    = this->minimapPixelBuffer[(y + offsetY) * Map::MC_MAP_XY_LIMIT / 2 + x + offsetX];
                             }
                             __asm {
                                 mov edi, buffer
@@ -209,7 +217,7 @@ namespace UI {
                                 add edi, eax
                                 mov eax, y
                                 add eax, offsetY
-                                mov edx, 400
+                                mov edx, BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
@@ -227,7 +235,7 @@ namespace UI {
                         for (int offsetY = 0; offsetY < heightFactor; ++offsetY) {
                             int const halfY = (y + offsetY) / scale;
                             if (color == 0) {
-                                color = this->minimapPixelBuffer[halfY * 400 / 2 + halfX];
+                                color = this->minimapPixelBuffer[halfY * Map::MC_MAP_XY_LIMIT / 2 + halfX];
                             }
                             __asm {
                                 mov edi, buffer
@@ -235,7 +243,7 @@ namespace UI {
                                 add eax, eax
                                 add edi, eax
                                 mov eax, halfY
-                                mov edx, 400
+                                mov edx, BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
