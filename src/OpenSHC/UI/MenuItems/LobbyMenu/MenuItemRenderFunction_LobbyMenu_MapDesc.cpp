@@ -30,36 +30,6 @@ namespace OpenSHC {
 namespace UI {
     namespace MenuItems {
 
-        // The box, its outline and the scroll bar's column: inlined in the original, with the four edges as parameters
-        // in this order. Plain `inline` is not expanded for this body; written into the function the match is lost.
-        __forceinline static void drawDescriptionFrame(int bottom, int top, int left, int right)
-        {
-            // the box ends where the scroll bar's column begins; a local, so that it is stored where it is defined,
-            // as the original stores it
-            int const boxRight = right - 20;
-            // written the long way round, as the original computes them (for the texts it is the strength itself)
-            MACRO_CALL_MEMBER(
-                OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
-                left, top, boxRight, bottom, (DAT_ButtonBackgroundBlendStrength::instance - 32) * 16 / 32 + 32);
-            // the lines only once the menu is fully blended in: the outline, then the column and its two button squares
-            if (DAT_ButtonBackgroundBlendStrength::instance == 0) {
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    left - 1, top - 1, right + 1, top - 1, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    left - 1, bottom + 1, right + 1, bottom + 1, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    left - 1, top, left - 1, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    right + 1, top, right + 1, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    boxRight, top, boxRight, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    boxRight, top + 20, right, top + 20, COL_VERY_SOFT_YELLOW::instance.shortValue);
-                MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                    boxRight, bottom - 20, right, bottom - 20, COL_VERY_SOFT_YELLOW::instance.shortValue);
-            }
-        }
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004285F0
         void LobbyMenu::MenuItemRenderFunction_LobbyMenu_MapDesc(int buttonID, ...)
         {
@@ -68,7 +38,42 @@ namespace UI {
             }
             int const x = DAT_ButtonX::instance;
             int const y = DAT_ButtonY::instance;
-            drawDescriptionFrame(DAT_ButtonH::instance + y + 122, y + 3, x - 110, DAT_ButtonW::instance + x + 101);
+            // the box, its outline and the scroll bar's column. The edges are declared right, left, top, bottom: in the
+            // order bottom, top, left, right, their registers differ from the original's
+            {
+                int const right = DAT_ButtonW::instance + x + 101;
+                int const left = x - 110;
+                int const top = y + 3;
+                int const bottom = DAT_ButtonH::instance + y + 122;
+                // written the long way round, as the original computes them (for the texts it is the strength itself)
+                MACRO_CALL_MEMBER(
+                    OpenSHC::UI::Rendering::PencilRenderCore_Func::drawBlendedBlackBox, DAT_PencilRenderCore::ptr)(
+                    left, top, right - 20, bottom, (DAT_ButtonBackgroundBlendStrength::instance - 32) * 16 / 32 + 32);
+                // the lines only once the menu is fully blended in: the outline, then the column and its two squares
+                if (DAT_ButtonBackgroundBlendStrength::instance == 0) {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        left - 1, top - 1, right + 1, top - 1, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        left - 1, bottom + 1, right + 1, bottom + 1, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        left - 1, top, left - 1, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        right + 1, top, right + 1, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        right - 20, top, right - 20, bottom, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        right - 20, top + 20, right, top + 20, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
+                        right - 20, bottom - 20, right, bottom - 20, COL_VERY_SOFT_YELLOW::instance.shortValue);
+                }
+            }
             if (DAT_GameSynchronyState::instance.DAT_MapSelectionTotalNumber == 0
                 || DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected == -1) {
                 return;
