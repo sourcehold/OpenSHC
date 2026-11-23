@@ -45,7 +45,7 @@ namespace UI {
         }
         int secondImageID = -1;
         int tribeType = -1;
-        UnitType unitType = (UnitType)-1;
+        UnitType unitType = OpenSHC::Map::Units::UT_INVALID;
         int imageID = 1;
         // declared between the two that start at 1: with both on one side of this line the match is lost
         int const tile
