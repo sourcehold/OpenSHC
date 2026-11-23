@@ -70,9 +70,8 @@ namespace Map {
                     }
                 }
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::tryAttackUnitID, DAT_UnitsState::ptr)(
-                    slot, prey)
-                == 0) {
+            if (!MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::tryAttackUnitID, DAT_UnitsState::ptr)(
+                    slot, prey)) {
                 DAT_UnitsState::instance.units[slot].state.generic = OpenSHC::Map::Units::States::US_UNKNOWN_205;
             }
             return;
