@@ -1895,7 +1895,8 @@ namespace UI {
                     }
                     if (DAT_TileMapState::instance.pendingUnitCommand == 12) {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
-                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, 34,
+                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
+                            Map::Units::UIT_LIGHT_PITCH,
                             (undefined4)((int)(DAT_ViewportRenderState::instance.viewportState.somePitchDitchID)),
                             (undefined4)((int)(DAT_TileMapState::instance
                                     .pitchDitches[DAT_ViewportRenderState::instance.viewportState.somePitchDitchID]
@@ -1912,7 +1913,8 @@ namespace UI {
                     if (DAT_TileMapState::instance.pendingUnitCommand == 2) {
                         int const buildingID = DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID;
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
-                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, 15, buildingID,
+                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
+                            Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
                             DAT_BuildingsState::instance.buildings[buildingID].uid);
                         if ((DAT_BuildingsState::instance.buildings[buildingID].buildingType
                                 != Map::Buildings::BT_OILSMELTER)
@@ -1927,8 +1929,8 @@ namespace UI {
                         }
                     } else if (DAT_TileMapState::instance.pendingUnitCommand == 3) {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
-                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, 16,
-                            DAT_TileMapState::instance.instructionTargetUnitID,
+                            DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
+                            Map::Units::UIT_MAN_SIEGE_EQUIPMENT, DAT_TileMapState::instance.instructionTargetUnitID,
                             (undefined4)((
                                 int)(DAT_UnitsState::instance.units[DAT_TileMapState::instance.instructionTargetUnitID]
                                     .uid)));
@@ -2084,7 +2086,7 @@ namespace UI {
                             int const buildingID = DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID;
                             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
                                 DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID,
-                                (undefined4)((int)(commandType)), buildingID,
+                                (Map::Units::UnitInstructionType)commandType, buildingID,
                                 DAT_BuildingsState::instance.buildings[buildingID].uid);
                             if (buildingID
                                 && DAT_BuildingsState::instance.buildings[buildingID].buildingType
@@ -2147,7 +2149,7 @@ namespace UI {
                     DAT_UnitsState::instance.unitControlsRelated = DAT_UnitsState::instance.pendingUnitControlMode;
                 engineerTileCommand:
                     MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::queueDisbandAndAttackCommand4Params,
-                        DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, 20,
+                        DAT_UnitsState::ptr)(DAT_TribesState::instance.DAT_CurrentTribeID, Map::Units::UIT_THROW_OIL,
                         (undefined4)((int)(DAT_ViewportRenderState::instance.viewportState.mouseX)),
                         (undefined4)((int)(DAT_ViewportRenderState::instance.viewportState.mouseY)));
                     DAT_TileMapState::instance.cursorOverlayImageBase = 0;
