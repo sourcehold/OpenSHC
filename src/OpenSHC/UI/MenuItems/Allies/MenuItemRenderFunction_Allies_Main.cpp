@@ -166,7 +166,7 @@ namespace UI {
                     }
                     int resource
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .requestedGoodsArray1Unk[button];
+                              .goodsRequestTypeByPlayer[button];
                     if (resource == OpenSHC::Game::Resources::RT_PITCH) {
                         resource = OpenSHC::Game::Resources::RT_PARTIALPITCH;
                     }
@@ -265,7 +265,7 @@ namespace UI {
                 // the resource it asks for: "Requests", the amount, the resource's picture and its name
                 int resource
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                          .requestedGoodsArray1Unk[button];
+                          .goodsRequestTypeByPlayer[button];
                 if (resource == OpenSHC::Game::Resources::RT_PITCH) {
                     resource = OpenSHC::Game::Resources::RT_PARTIALPITCH;
                 }
@@ -284,7 +284,7 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Text::TextManager_Func::renderLeftAlignedNumberToScreen, DAT_TextManagerObject::ptr)(
                         DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                            .requestedGoodsArray2Unk[button],
+                            .goodsRequestAmountByPlayer[button],
                         x + 5, y, OpenSHC::Rendering::Colors::COL_CCFAFF, 18, TRUE);
                     MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGMWithAlphaMask,
                         DAT_TextureRenderCoreObject::ptr)(OpenSHC::IO::Graphics::GID_INTERFACE_ICONS_2, resource + 580,
