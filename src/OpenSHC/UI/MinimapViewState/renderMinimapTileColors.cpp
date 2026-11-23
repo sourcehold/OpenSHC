@@ -3,7 +3,9 @@
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
+#include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_MiniMapDefinedData.hpp"
@@ -16,6 +18,11 @@ namespace UI {
 
     using namespace Map::LogicHelpers;
 
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_LONG_ROW;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_SHORT_ROW;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
+    using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
+
     // The channels' bits in an RGB555 and in an RGB565 colour.
     enum {
         RGB555_RED = 31744, // 0x7c00
@@ -24,6 +31,9 @@ namespace UI {
         RGB565_GREEN = 2016, // 0x07e0
         RGB_BLUE = 31 // 0x001f
     };
+
+    // A row of the minimap buffer (200 pixels) in bytes, for the assembly (it cannot name a qualified constant).
+    enum { BUFFER_ROW_BYTES = Map::MC_MAP_XY_LIMIT / 2 * sizeof(ushort) };
 
     // Draws a strip of the screen tile rows into the minimap pixel buffer, each tile in its terrain's colour and light.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B58D0
@@ -35,24 +45,24 @@ namespace UI {
         // These five in this order before the strip rows (after them, isRGB565 takes stripLength's stack slot).
         int firstRow = 0;
         BOOLEnum isRGB565 = FALSE;
-        int rowBase = 8;
+        int rowBase = VC_SCREEN_POINT_TABLE_START;
         int scale = 1;
         int columnDivisor = 2;
         // the strip covers rows stripStart% .. stripStart + stripLength% of the 400 screen tile rows
-        int const firstStripRow = stripStart * 400 / 100;
+        int const firstStripRow = stripStart * Map::MC_MAP_XY_LIMIT / 100;
         // (int) for a signed division (divided unsigned, the match is lost).
-        int const endStripRow = (int)(stripStart + stripLength) * 400 / 100;
+        int const endStripRow = (int)(stripStart + stripLength) * Map::MC_MAP_XY_LIMIT / 100;
         if (flags & 4) {
             // zoomed out: half the size
             scale = 2;
         }
-        int const columns = 400 / widthFactor * scale;
-        int const rowCount = scale * 200;
+        int const columns = Map::MC_MAP_XY_LIMIT / widthFactor * scale;
+        int const rowCount = scale * Map::MC_MAP_SIZE_200;
         if (DAT_WindowAndDirectDraw::instance.colorBitMode == OpenSHC::Rendering::RGB_565) {
             isRGB565 = TRUE;
         }
-        if (DAT_TileMapState::instance.mapSize <= 200) {
-            firstRow = 100;
+        if (DAT_TileMapState::instance.mapSize <= Map::MC_MAP_SIZE_200) {
+            firstRow = (Map::MC_MAP_XY_LIMIT - Map::MC_MAP_SIZE_200) / 2;
             columnDivisor = 1;
         }
         int const viewportHeight = DAT_ViewportRenderState::instance.viewportState.viewportHeight;
@@ -60,18 +70,18 @@ namespace UI {
         int const otherParity = DAT_ViewportRenderState::instance.viewportState.viewportHeight + 1;
         int rowParity = otherParity;
         // rowBase first holds the orientation's offset into the screen tile table (a variable of its own for the
-        // offset takes another stack slot); north writes the 8 again (left out, the match is lost).
+        // offset takes another stack slot); north sets the table's start again (left out, the match is lost).
         if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_NORTH) {
-            rowBase = 8;
+            rowBase = VC_SCREEN_POINT_TABLE_START;
         } else if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_WEST) {
-            rowBase = 80408;
+            rowBase = VC_SCREEN_POINT_TABLE_START + VC_SCREEN_POINT_TABLE_SIZE;
         } else if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_SOUTH) {
-            rowBase = 160808;
+            rowBase = VC_SCREEN_POINT_TABLE_START + 2 * VC_SCREEN_POINT_TABLE_SIZE;
         } else if (DAT_TileMapState::instance.mapOrientation == Map::Enums::MO_EAST) {
-            rowBase = 241208;
+            rowBase = VC_SCREEN_POINT_TABLE_START + 3 * VC_SCREEN_POINT_TABLE_SIZE;
         }
         int const firstColumn = firstRow / 2;
-        rowBase = firstColumn * 401 + rowBase + 1;
+        rowBase = firstColumn * (VC_SCREEN_POINT_SHORT_ROW + VC_SCREEN_POINT_LONG_ROW) + rowBase + 1;
         int rowLength;
         // rowBase steps in the header (as the body's last statement it is stepped before the row's own values).
         for (int row = firstRow; row < rowCount - firstRow; ++row, rowBase += rowLength) {
@@ -81,11 +91,11 @@ namespace UI {
             if (rowParity == otherParity) {
                 rowParity = viewportHeight;
                 rowX = widthFactor / 2;
-                rowLength = 200;
+                rowLength = VC_SCREEN_POINT_SHORT_ROW;
             } else {
                 rowParity = otherParity;
                 rowX = 0;
-                rowLength = 201;
+                rowLength = VC_SCREEN_POINT_LONG_ROW;
             }
             if (row < firstStripRow) {
                 continue;
@@ -209,7 +219,7 @@ namespace UI {
                                 add edi, eax
                                 mov eax, y
                                 add eax, offsetY
-                                mov edx, 400
+                                mov edx, BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
@@ -232,7 +242,7 @@ namespace UI {
                                 add eax, eax
                                 add edi, eax
                                 mov eax, halfY
-                                mov edx, 400
+                                mov edx, BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
