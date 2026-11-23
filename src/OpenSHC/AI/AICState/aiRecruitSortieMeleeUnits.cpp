@@ -31,7 +31,7 @@ namespace AI {
             return;
         if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
-        UnitType unitType = this->aics[aicIndex].SortieUnitMelee;
+        UnitType unitType = (UnitType)this->aics[aicIndex].SortieUnitMelee;
         if (unitType == OpenSHC::Map::Units::UT_E_ENGINEER || unitType == OpenSHC::Map::Units::UT_E_LADDER
             || unitType == OpenSHC::Map::Units::UT_TUNNELER)
             return;
