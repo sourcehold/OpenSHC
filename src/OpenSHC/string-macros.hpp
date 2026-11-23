@@ -1049,9 +1049,7 @@
 #define S_NULL_CHIMP_SKETCH_TGX_005A062C "null_chimp_sketch.tgx"
 
 // STRING: STRONGHOLDCRUSADER 0x005a0648
-#define S_CHIMP00_NULL_TGXCHIMP00_NULL_TGX_005A0648                                                                    \
-    "chimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null."    \
-    "tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgx"
+#define S_CHIMP00_NULL_TGXCHIMP00_NULL_TGX_005A0648 "chimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgxchimp00_null.tgx"
 
 // STRING: STRONGHOLDCRUSADER 0x005a06fc
 #define S_CHIMP66_FIREEATER_TGX_005A06FC "chimp66_fireeater.tgx"
@@ -8235,6 +8233,9 @@
 // STRING: STRONGHOLDCRUSADER 0x005ab0ec
 #define S_C1PIC_TGX_005AB0EC "c1pic.tgx"
 
+// STRING: STRONGHOLDCRUSADER 0x005ab0fc
+#define S_FX_SPEECH_INTRO_04_WAV_005AB0FC "fx\\speech\\intro_04.wav"
+
 // STRING: STRONGHOLDCRUSADER 0x005ab114
 #define S_FX_SPEECH_INTRO_03_WAV_005AB114 "fx\\speech\\intro_03.wav"
 
@@ -9566,3 +9567,4 @@
 
 // STRING: STRONGHOLDCRUSADER 0x005b2814
 #define S_COMPARESTRINGW_005B2814 "CompareStringW"
+
