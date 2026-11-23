@@ -3,7 +3,6 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentFramerate.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -19,86 +18,72 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AF860
     void DisplayElements::RenderDebugNumbersDisplayElement(int posX, int posY, DWORD elementState)
     {
-        int* _millisecLoopPointer;
-        int _tickRateSum;
-        int _averageMillisecLoopMain;
-        dword _lastGameLoopDuration;
-        dword _lastGameTickRate;
-        int _loopAddressByteCounter;
-        _lastGameTickRate = DAT_GameCore::instance.gameTicksThisLoop;
-        _lastGameLoopDuration = DAT_GameLoopStopwatch::instance.duration_0x0;
-        DAT_GameLoopDurationBuffer::instance[INT_GameLoopTimeDataIndex::instance] = _lastGameLoopDuration;
-        DAT_TickRateBuffer::instance[INT_GameLoopTimeDataIndex::instance] = _lastGameTickRate;
+        dword const lastGameTickRate = DAT_GameCore::instance.gameTicksThisLoop;
+        dword const lastGameLoopDuration = DAT_GameLoopStopwatch::instance.duration_0x0;
+        DAT_GameLoopDurationBuffer::instance[INT_GameLoopTimeDataIndex::instance] = lastGameLoopDuration;
+        DAT_TickRateBuffer::instance[INT_GameLoopTimeDataIndex::instance] = lastGameTickRate;
         ++INT_GameLoopTimeDataIndex::instance;
-        _tickRateSum = 0;
-        int _gameLoopDurationBufferSum = 0;
+        int durationSum = 0;
+        int tickRateSum = 0;
         if (INT_GameLoopTimeDataIndex::instance == 100) {
             INT_GameLoopTimeDataIndex::instance = 0;
         }
-        // Maybe this is an enrolled loop? -TheRedDaemon
-        int _loopIndex = 0;
-        do {
-            _gameLoopDurationBufferSum = _gameLoopDurationBufferSum + DAT_GameLoopDurationBuffer::instance[_loopIndex]
-                + DAT_GameLoopDurationBuffer::instance[_loopIndex + 1]
-                + DAT_GameLoopDurationBuffer::instance[_loopIndex + 2]
-                + DAT_GameLoopDurationBuffer::instance[_loopIndex + 4]
-                + DAT_GameLoopDurationBuffer::instance[_loopIndex + 3];
-            _tickRateSum = _tickRateSum + DAT_TickRateBuffer::instance[_loopIndex + 4]
-                + DAT_TickRateBuffer::instance[_loopIndex + 3] + DAT_TickRateBuffer::instance[_loopIndex + 2]
-                + DAT_TickRateBuffer::instance[_loopIndex + 1] + DAT_TickRateBuffer::instance[_loopIndex];
-            _loopIndex += 5;
-        } while (_loopIndex < 100);
-        _averageMillisecLoopMain = _gameLoopDurationBufferSum / 100;
+        for (int i = 0; i < countof(DAT_GameLoopDurationBuffer::instance); ++i) {
+            durationSum += DAT_GameLoopDurationBuffer::instance[i];
+            tickRateSum += DAT_TickRateBuffer::instance[i];
+        }
+        int averageDuration = durationSum / 100;
         if ((int)elementState != -1000) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                _lastGameLoopDuration, posX, posY + 5, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF,
+                lastGameLoopDuration, posX, posY + 5, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF,
                 0, 15, FALSE, 0);
         }
-        int _maxLoopDurationOfTheLast100 = -1;
-        _millisecLoopPointer = DAT_GameLoopDurationBuffer::instance;
+        // The maximum is never used, but the original computes it. A pointer walk five entries at a time, as in the
+        // original (a plain loop over the entries loses the match)
+        int maxDuration = -1;
+        int* entry = DAT_GameLoopDurationBuffer::instance;
         do {
-            if (_millisecLoopPointer[0] > _maxLoopDurationOfTheLast100) {
-                _maxLoopDurationOfTheLast100 = _millisecLoopPointer[0];
+            if (entry[0] > maxDuration) {
+                maxDuration = entry[0];
             }
-            if (_millisecLoopPointer[1] > _maxLoopDurationOfTheLast100) {
-                _maxLoopDurationOfTheLast100 = _millisecLoopPointer[1];
+            if (entry[1] > maxDuration) {
+                maxDuration = entry[1];
             }
-            if (_millisecLoopPointer[2] > _maxLoopDurationOfTheLast100) {
-                _maxLoopDurationOfTheLast100
-                    = _millisecLoopPointer[2]; // written out as in the draft; not tried as a loop
+            if (entry[2] > maxDuration) {
+                maxDuration = entry[2];
             }
-            if (_millisecLoopPointer[3] > _maxLoopDurationOfTheLast100) {
-                _maxLoopDurationOfTheLast100 = _millisecLoopPointer[3];
+            if (entry[3] > maxDuration) {
+                maxDuration = entry[3];
             }
-            if (_millisecLoopPointer[4] > _maxLoopDurationOfTheLast100) {
-                _maxLoopDurationOfTheLast100 = _millisecLoopPointer[4];
+            if (entry[4] > maxDuration) {
+                maxDuration = entry[4];
             }
-            _millisecLoopPointer += 5;
-        } while (_millisecLoopPointer < DAT_GameLoopDurationBuffer::instance + 100);
+            entry += 5;
+        } while (entry < DAT_GameLoopDurationBuffer::instance + 100);
         if ((int)elementState != -1000) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                _averageMillisecLoopMain, posX + 48, posY, OpenSHC::Text::TTA_LEFT,
+                averageDuration, posX + 48, posY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0,
+                17, FALSE, 0);
+        }
+        if (averageDuration == 0) {
+            averageDuration = 1;
+        }
+        if ((int)elementState != -1000) {
+            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
+                1000 / averageDuration, posX + 48, posY + 20, OpenSHC::Text::TTA_LEFT,
                 OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE, 0);
         }
-        if (_averageMillisecLoopMain == 0) {
-            _averageMillisecLoopMain = 1;
+        DAT_CurrentFramerate::instance = 1000 / averageDuration;
+        if (tickRateSum == 0) {
+            tickRateSum = 1;
+        }
+        int durationPerTick = durationSum / tickRateSum;
+        if (durationPerTick == 0) {
+            durationPerTick = 1;
         }
         if ((int)elementState != -1000) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                1000 / _averageMillisecLoopMain, posX + 48, posY + 20, OpenSHC::Text::TTA_LEFT,
-                OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE, 0);
-        }
-        DAT_CurrentFramerate::instance = 1000 / _averageMillisecLoopMain;
-        if (_tickRateSum == 0) {
-            _tickRateSum = 1;
-        }
-        int _someRelationBetweenLoopDurationAndTickrate = _gameLoopDurationBufferSum / _tickRateSum;
-        if (_someRelationBetweenLoopDurationAndTickrate == 0) {
-            _someRelationBetweenLoopDurationAndTickrate = 1;
-        }
-        if ((int)elementState != -1000) {
-            MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
-                1000 / _someRelationBetweenLoopDurationAndTickrate, posX + 48, posY + 40, OpenSHC::Text::TTA_LEFT,
+                1000 / durationPerTick, posX + 48, posY + 40, OpenSHC::Text::TTA_LEFT,
                 OpenSHC::Rendering::Colors::COL_0080FF, 0, 17, FALSE, 0);
         }
     }
