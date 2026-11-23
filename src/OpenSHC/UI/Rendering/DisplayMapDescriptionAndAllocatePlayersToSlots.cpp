@@ -31,9 +31,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004410D0
     void Rendering::DisplayMapDescriptionAndAllocatePlayersToSlots()
     {
-        if (DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
-                    + DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected
-                >= 0
+        // both read up front, the scroll offset first: the plain sum loads them the other way round
+        int const scrollOffset = DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset;
+        int const relativeSelected = DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected;
+        if (relativeSelected + scrollOffset >= 0
             || (!DAT_GameSynchronyState::instance.isHost && strlen(DAT_GameSynchronyState::instance.mapName) != 0)) {
             char mapFileName[1008];
             strcpy(mapFileName, DAT_GameSynchronyState::instance.mapName);
