@@ -162,11 +162,12 @@ namespace IO {
                         break;
                     }
 
-                    int receiver;
+                    int receiver1;
+                    int receiver2;
                     char* _Str2 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex + 1], &receiver);
+                        this->loadedMapNames[_currentMapIndex + 1], &receiver1);
                     char* _Str1 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex], &receiver);
+                        this->loadedMapNames[_currentMapIndex], &receiver2);
                     if (MACRO_CALL(OS_Func::__stricmp)(_Str1, _Str2) > 0) {
                         MACRO_CALL_MEMBER(ResourceManager_Func::swapMapDataWithNextMap, this)(_currentMapIndex);
                         _hasSwapped = TRUE;
