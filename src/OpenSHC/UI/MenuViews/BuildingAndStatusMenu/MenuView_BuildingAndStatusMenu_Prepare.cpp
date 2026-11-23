@@ -70,8 +70,8 @@ namespace UI {
             DAT_00b96108::instance = 0;
             DAT_00b95b68::instance = 0;
             if (DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_PEASANT
-                && (DAT_GameCore::instance.activeMenuTab.tabType < 71
-                    || DAT_GameCore::instance.activeMenuTab.tabType > 79)) {
+                && (DAT_GameCore::instance.activeMenuTab.tabType < OpenSHC::UI::Enums::BASMTT_STATUS_OVERVIEW
+                    || DAT_GameCore::instance.activeMenuTab.tabType > OpenSHC::UI::Enums::BASMTT_STATUS_RELIGION)) {
                 int const buildingID = DAT_BuildingsState::instance.menuSelectedBuildingID;
                 BuildingTypeShort const* const type = &DAT_BuildingsState::instance.buildings[buildingID].buildingType;
                 if (DAT_RenderingDefinedData::instance
