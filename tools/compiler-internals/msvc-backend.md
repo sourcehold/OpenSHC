@@ -1558,6 +1558,28 @@ recognising, because it looks like a code-shape defect and is not one. If a func
 `xor +N` with the stores otherwise matching, check whether the original is reusing a known-zero
 variable's register before looking for a source cause.
 
+**A local's initial value can decide whether a constant gets a register of its own.**
+`AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID` (`0x00463310`) was one instruction off:
+the original pushes `esi`, which holds 1, as the second argument of
+`extendResourceCountdownForPlayerBuildingsOfType` (`push esi` at `0x004633BD`), and ours pushed the
+immediate 1. With `menuTab` initialised to 1 at the top, `menuTab` is the one candidate in `esi`
+(`+0x0c` key 175 in `reg_scores.py`, the highest in the function). The two compares against 1 reuse
+that register's known value, but the push does not: the argument stays `push 1` whether it is
+written `1`, `menuTab`, `TRUE`, `1u` or `(dword)1`. In the source that matches, `menuTab` has no
+initial value, and its 1 is assigned in the one arm of the later switch that relied on the initial
+value (`BT_BARRACKS`). Declared that way, `menuTab` still gets `esi` (key 176), but it is live only
+from its assignments on, and the probe lists one candidate more: a `(temp)` that also gets `esi`
+where `menuTab` is not live (by its place, the constant 1). The compares and the push then use it,
+and the function matches (quick_diff 1.0000; 100% in #484).
+
+So when the original uses a register for a constant that we write as an immediate, look for a local
+initialised to that constant. Drop the initial value and assign the constant only where the code
+relied on it: assigned early instead, in both arms of the test on the building's owner, it was worse
+(quick_diff 0.9929 against 0.9964). Compile once with `/w14701` to confirm that every path still
+assigns the local before use (C4701 stays quiet). The section above found that no spelling of the
+same value moves the allocator; an initial value is a different handle, because it changes which
+candidates there are. So far this is one function.
+
 ## Two slot-layout leads that were not source defects
 
 Both functions whose frames still disagreed after the jump-table fix turned out not to be
