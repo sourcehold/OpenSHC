@@ -43,7 +43,7 @@ namespace AI {
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != OpenSHC::Map::Buildings::BT_ENGINEERSGUILD)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
 
         for (int siegeIndex = 0; siegeIndex < countof(DAT_SkirmishDefinedData::instance.SiegeEngineMetaInfoArray);
