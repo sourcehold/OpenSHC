@@ -62,7 +62,7 @@ namespace IO {
             return;
         }
 
-        while (this->mapFileCounter < 500) {
+        for (; this->mapFileCounter < 500;) {
             MACRO_CALL_MEMBER(LowLevelMemory_Func::copyStringUntilFirstDot, DAT_LowLevelMemory::ptr)(
                 _win32FindData.cFileName, this->loadedMapNames[this->mapFileCounter]);
 
@@ -88,41 +88,37 @@ namespace IO {
                 && this->loadedMapNames[this->mapFileCounter][7] >= '0'
                 && this->loadedMapNames[this->mapFileCounter][7] <= '9') {
 
+                bool removeMap = false;
                 if (this->loadedMapNames[this->mapFileCounter][7] == '1') {
-                    if (this->loadedMapNames[this->mapFileCounter][8] < '0'
-                        || this->loadedMapNames[this->mapFileCounter][8] > '9'
-                        || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
-                        if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            goto keepMap;
-                        }
+                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '0'
+                            && this->loadedMapNames[this->mapFileCounter][8] <= '9'
+                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
+                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                        removeMap = true;
                     }
                 } else if (this->loadedMapNames[this->mapFileCounter][7] == '2') {
-                    if (this->loadedMapNames[this->mapFileCounter][8] < '0'
-                        || this->loadedMapNames[this->mapFileCounter][8] > '1'
-                        || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
-                        if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            goto keepMap;
-                        }
+                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '0'
+                            && this->loadedMapNames[this->mapFileCounter][8] <= '1'
+                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
+                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                        removeMap = true;
                     }
                 } else if (this->loadedMapNames[this->mapFileCounter][7] == '3') {
-                    if (this->loadedMapNames[this->mapFileCounter][8] < '3'
-                        || this->loadedMapNames[this->mapFileCounter][8] > '7'
-                        || this->loadedMapNames[this->mapFileCounter][9] != '\0') {
-                        if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                            goto keepMap;
-                        }
+                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '3'
+                            && this->loadedMapNames[this->mapFileCounter][8] <= '7'
+                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
+                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                        removeMap = true;
                     }
-                } else {
-                    if (this->loadedMapNames[this->mapFileCounter][8] != '\0') {
-                        goto keepMap;
-                    }
+                } else if (this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                    removeMap = true;
                 }
 
-                MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    1000, '\0', this->loadedMapNames[this->mapFileCounter]);
-                --this->mapFileCounter;
-
-            keepMap:; // best matching solution so far
+                if (removeMap) {
+                    MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                        1000, '\0', this->loadedMapNames[this->mapFileCounter]);
+                    --this->mapFileCounter;
+                }
             }
 
             ++this->mapFileCounter;
@@ -149,7 +145,7 @@ namespace IO {
         }
 
         if (_originalMaps) {
-            do {
+            for (; _mapIndex < 500;) {
                 ++_mapIndex;
                 if (!_hasSwapped) {
                     break;
@@ -173,9 +169,9 @@ namespace IO {
                         _hasSwapped = TRUE;
                     }
                 }
-            } while (_mapIndex < 500);
+            }
         } else {
-            do {
+            for (; _mapIndex < 500;) {
                 ++_mapIndex;
                 if (!_hasSwapped) {
                     break;
@@ -196,7 +192,7 @@ namespace IO {
                         _hasSwapped = TRUE;
                     }
                 }
-            } while (_mapIndex < 500);
+            }
         }
         FindClose(_handle);
     }
