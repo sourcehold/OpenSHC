@@ -19159,7 +19159,7 @@ SHC_3BB0A8C1_0x004630D0 | 93.5% | Alpha branch's pixel index is reassociated
 
 SHC_3BB0A8C1_0x00463270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00463310 | 86.1% | One push: esi (menu tab's 1) in the original, the immediate 1 in ours; constant reuse, no source form (msvc-backend.md: which constant gets the callee-saved register)
+SHC_3BB0A8C1_0x00463310 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004637E8 | 0.0% | Pending
 
