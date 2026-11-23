@@ -6,6 +6,7 @@
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 
@@ -66,7 +67,7 @@ namespace Synchrony {
         case 1:
             MACRO_CALL(OpenSHC::Synchrony::Actions_Func::ProcessAllyRequestingGoods)(
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam1,
-                DAT_GameSynchronyState::instance.DAT_GameCommandParam2,
+                (OpenSHC::Game::Resources::ResourceTypeMin1)DAT_GameSynchronyState::instance.DAT_GameCommandParam2,
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam3,
                 DAT_GameSynchronyState::instance.DAT_GameCommandParam4);
             break;
