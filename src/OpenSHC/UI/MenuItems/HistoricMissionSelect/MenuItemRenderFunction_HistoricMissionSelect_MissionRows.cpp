@@ -32,7 +32,7 @@ namespace UI {
                 && DAT_MenuModalComposition1::instance.activeModalDialogID == OpenSHC::UI::Enums::MMT_NONE) {
                 // a mission not reached yet is drawn greyed, with no text
                 if (!DAT_GameCore::instance.unlockAllHistoricalCampaigns
-                    && (int)(DAT_00b96100::instance - row - 1)
+                    && DAT_00b96100::instance - row - 1
                         > (&DAT_GameCore::instance.scenarioProgress.progressCallToArms)[DAT_00b95b2c::instance]) {
                     DAT_ButtonCurrentlyInteracting::instance = FALSE;
                     DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue
