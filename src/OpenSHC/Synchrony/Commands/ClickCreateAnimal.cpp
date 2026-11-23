@@ -6,6 +6,7 @@
 #include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -45,10 +46,11 @@ namespace Synchrony {
                 DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam2, 1,
                 OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
             if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 >= 0
-                     && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= 399)
-                    && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= 399))
+                     && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE)
+                    && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE))
                 && (DAT_ViewportRenderState::instance
-                        .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 400
+                        .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1
+                                * Map::MC_MAP_XY_LIMIT
                             + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                     != 0)) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::createAnimal, DAT_TribesState::ptr)(

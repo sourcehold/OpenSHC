@@ -9,6 +9,7 @@
 #include "OpenSHC/Commands/GameCommandScheduling.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
@@ -65,10 +66,11 @@ namespace Synchrony {
             DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam4, 1,
             OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
         if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 >= 0
-                 && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= 399)
-                && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= 399))
+                 && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE)
+                && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE))
             && (DAT_ViewportRenderState::instance
-                    .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1 * 400
+                    .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1
+                            * Map::MC_MAP_XY_LIMIT
                         + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
                 != 0)) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, DAT_TileMapState::ptr)(
