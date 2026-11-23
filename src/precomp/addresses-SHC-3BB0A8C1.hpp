@@ -43959,8 +43959,8 @@ enum {
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F4CD0 = 0x004F4CD0,
-    // label: setUCValues
-    // location: UCPointerStruct
+    // label: loadMenuElement
+    // location: OpenSHC/UI/UCPointerStruct
     // type: function
     SHC_3BB0A8C1_0x004F4D70 = 0x004F4D70,
     // label: setBottomLeftTextDisplayText

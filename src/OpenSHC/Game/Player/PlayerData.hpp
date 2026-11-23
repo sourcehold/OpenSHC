@@ -346,8 +346,8 @@ namespace Game {
             AISiegeUnitCreation aiSiegeCreationInformation[4][5]; // 0x0000368C length: 400
             int attackAssaultDelayRelatedValue; // 0x0000381C length: 4
             BOOLEnum isNotNervousByEnemyTroopValue; // 0x00003820 length: 4
-            short requestedGoodsArray1Unk[10]; // 0x00003824 length: 20
-            short requestedGoodsArray2Unk[10]; // 0x00003838 length: 20
+            short goodsRequestTypeByPlayer[10]; // 0x00003824 length: 20
+            short goodsRequestAmountByPlayer[10]; // 0x00003838 length: 20
             int requestStateUnk; // 0x0000384C length: 4
             int requestedAttackTargetUnk; // 0x00003850 length: 4
             int unitPatrolRecommandRelatedDelayValue; // 0x00003854 length: 4
@@ -399,7 +399,7 @@ namespace Game {
             short mercenaryAssemblyPoints[7][2]; // 0x00003950 length: 28
             int moatsOwned; // 0x0000396C length: 4
             int attackTicker; // 0x00003970 length: 4
-            int canStartSpending; // 0x00003974 length: 4
+            BOOLEnum canStartSpending; // 0x00003974 length: 4
             short algoTreeCooldownUnk; // 0x00003978 length: 2
             short algoOasisCooldownUnk; // 0x0000397A length: 2
             short algoBoulderCooldown; // 0x0000397C length: 2

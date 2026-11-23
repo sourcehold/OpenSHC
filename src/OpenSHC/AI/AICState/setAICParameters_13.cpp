@@ -86,9 +86,9 @@ namespace AI {
         this->aics[aicIndex].RecruitInterval = 4;
         this->aics[aicIndex].RecruitIntervalStrong = 1;
         this->aics[aicIndex].SortieUnitRangedMin = 5;
-        this->aics[aicIndex].SortieUnitRanged = 70;
+        this->aics[aicIndex].SortieUnitRanged = OpenSHC::Map::Units::UT_A_ARCHER;
         this->aics[aicIndex].SortieUnitMeleeMin = 15;
-        this->aics[aicIndex].SortieUnitMelee = 70;
+        this->aics[aicIndex].SortieUnitMelee = OpenSHC::Map::Units::UT_A_ARCHER;
         this->aics[aicIndex].DefDiggingUnitMax = 60;
         this->aics[aicIndex].DefDiggingUnit = 71;
         this->aics[aicIndex].DefWalls = 80;
