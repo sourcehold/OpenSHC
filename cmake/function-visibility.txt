@@ -123,6 +123,9 @@ OpenSHC::Map::Units::UpdateBurningMan
 OpenSHC::Map::Units::UpdateCamel
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateOx
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateMiner
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
@@ -186,6 +189,11 @@ OpenSHC::Map::Units::UpdateSwordsman
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateKnight
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateMinerIronFetcher
+    OpenSHC::Map::Units::IncrementAndOptionalUpdateAVValueRelated
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::isWorkplaceBuildingOnAdjacentTile
 OpenSHC::Map::Units::UpdateDrunkard
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
