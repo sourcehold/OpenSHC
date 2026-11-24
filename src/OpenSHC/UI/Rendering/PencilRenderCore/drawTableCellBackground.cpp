@@ -18,15 +18,13 @@ namespace UI {
 
         // Pictures in GID_INTERFACE_ICONS_3, 20 pixels wide: a highlighted cell's ends and middles (the right end
         // uses the middle's mask), or a run of stripe 69 or 71 by the row; each picture is followed by its mask.
-        enum {
-            TABLE_CELL_LEFT_PICTURE = 73,
-            TABLE_CELL_MIDDLE_PICTURE = 74,
-            TABLE_CELL_RIGHT_PICTURE = 75,
-            TABLE_CELL_LEFT_MASK = 76,
-            TABLE_CELL_MIDDLE_MASK = 77,
-            TABLE_CELL_STRIPE_PICTURES = 69,
-            TABLE_CELL_PIECE_WIDTH = 20
-        };
+        int const TABLE_CELL_LEFT_PICTURE = 73;
+        int const TABLE_CELL_MIDDLE_PICTURE = 74;
+        int const TABLE_CELL_RIGHT_PICTURE = 75;
+        int const TABLE_CELL_LEFT_MASK = 76;
+        int const TABLE_CELL_MIDDLE_MASK = 77;
+        int const TABLE_CELL_STRIPE_PICTURES = 69;
+        int const TABLE_CELL_PIECE_WIDTH = 20;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004692E0
         void PencilRenderCore::drawTableCellBackground(BOOLEnum isSelected, int indexToGetStripes, int blendStrength)
