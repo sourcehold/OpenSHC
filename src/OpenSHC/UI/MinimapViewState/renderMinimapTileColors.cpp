@@ -4,8 +4,10 @@
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+#include "OpenSHC/Rendering/ColorChannelMask.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
 #include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
+#include "OpenSHC/UI/Enums/MinimapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_MiniMapDefinedData.hpp"
@@ -18,22 +20,18 @@ namespace UI {
 
     using namespace Map::LogicHelpers;
 
+    using OpenSHC::Rendering::CCM_RGB555_GREEN;
+    using OpenSHC::Rendering::CCM_RGB555_RED;
+    using OpenSHC::Rendering::CCM_RGB565_GREEN;
+    using OpenSHC::Rendering::CCM_RGB565_RED;
+    using OpenSHC::Rendering::CCM_RGB_BLUE;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_LONG_ROW;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_SHORT_ROW;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
 
-    // The channels' bits in an RGB555 and in an RGB565 colour.
-    enum {
-        RGB555_RED = 31744, // 0x7c00
-        RGB555_GREEN = 992, // 0x03e0
-        RGB565_RED = 63488, // 0xf800
-        RGB565_GREEN = 2016, // 0x07e0
-        RGB_BLUE = 31 // 0x001f
-    };
-
-    // A row of the minimap buffer (200 pixels) in bytes, for the assembly (it cannot name a qualified constant).
-    enum { BUFFER_ROW_BYTES = Map::MC_MAP_XY_LIMIT / 2 * sizeof(ushort) };
+    // A row of the minimap buffer (200 pixels) in bytes, named here for the assembly (it cannot name a qualified one).
+    using OpenSHC::UI::Enums::MMC_BUFFER_ROW_BYTES;
 
     // Draws a strip of the screen tile rows into the minimap pixel buffer, each tile in its terrain's colour and light.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B58D0
@@ -169,37 +167,37 @@ namespace UI {
                     // Red's and green's masks right after their caps (inside the mix, they move to the end). Blue's
                     // stays in the mix, where the original masks it last.
                     if (!isRGB565) {
-                        red = (color & RGB555_RED) * brightness / 100;
-                        if (red > RGB555_RED) {
-                            red = RGB555_RED;
+                        red = (color & CCM_RGB555_RED) * brightness / 100;
+                        if (red > CCM_RGB555_RED) {
+                            red = CCM_RGB555_RED;
                         }
-                        red &= RGB555_RED;
-                        green = (color & RGB555_GREEN) * brightness / 100;
-                        if (green > RGB555_GREEN) {
-                            green = RGB555_GREEN;
+                        red &= CCM_RGB555_RED;
+                        green = (color & CCM_RGB555_GREEN) * brightness / 100;
+                        if (green > CCM_RGB555_GREEN) {
+                            green = CCM_RGB555_GREEN;
                         }
-                        green &= RGB555_GREEN;
-                        blue = (color & RGB_BLUE) * brightness / 100;
-                        if (blue > RGB_BLUE) {
-                            blue = RGB_BLUE;
+                        green &= CCM_RGB555_GREEN;
+                        blue = (color & CCM_RGB_BLUE) * brightness / 100;
+                        if (blue > CCM_RGB_BLUE) {
+                            blue = CCM_RGB_BLUE;
                         }
-                        color = (ushort)(blue & RGB_BLUE | green | red);
+                        color = (ushort)(blue & CCM_RGB_BLUE | green | red);
                     } else {
-                        red = (color & RGB565_RED) * brightness / 100;
-                        if (red > RGB565_RED) {
-                            red = RGB565_RED;
+                        red = (color & CCM_RGB565_RED) * brightness / 100;
+                        if (red > CCM_RGB565_RED) {
+                            red = CCM_RGB565_RED;
                         }
-                        red &= RGB565_RED;
-                        green = (color & RGB565_GREEN) * brightness / 100;
-                        if (green > RGB565_GREEN) {
-                            green = RGB565_GREEN;
+                        red &= CCM_RGB565_RED;
+                        green = (color & CCM_RGB565_GREEN) * brightness / 100;
+                        if (green > CCM_RGB565_GREEN) {
+                            green = CCM_RGB565_GREEN;
                         }
-                        green &= RGB565_GREEN;
-                        blue = (color & RGB_BLUE) * brightness / 100;
-                        if (blue > RGB_BLUE) {
-                            blue = RGB_BLUE;
+                        green &= CCM_RGB565_GREEN;
+                        blue = (color & CCM_RGB_BLUE) * brightness / 100;
+                        if (blue > CCM_RGB_BLUE) {
+                            blue = CCM_RGB_BLUE;
                         }
-                        color = (ushort)(blue & RGB_BLUE | green | red);
+                        color = (ushort)(blue & CCM_RGB_BLUE | green | red);
                     }
                 }
                 // The pixel stores are handwritten assembly in the original, transcribed from the binary.
@@ -219,7 +217,7 @@ namespace UI {
                                 add edi, eax
                                 mov eax, y
                                 add eax, offsetY
-                                mov edx, BUFFER_ROW_BYTES
+                                mov edx, MMC_BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
@@ -242,7 +240,7 @@ namespace UI {
                                 add eax, eax
                                 add edi, eax
                                 mov eax, halfY
-                                mov edx, BUFFER_ROW_BYTES
+                                mov edx, MMC_BUFFER_ROW_BYTES
                                 mul edx
                                 add edi, eax
                                 mov ax, color
