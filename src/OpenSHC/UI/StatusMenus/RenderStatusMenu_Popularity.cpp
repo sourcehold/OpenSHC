@@ -28,7 +28,7 @@ namespace UI {
         // the rows of the active events, in counting order: carnival, marriage, jester, plague, lions, bandits, fire
         // (seven locals lose the match: the original keeps them side by side in its frame)
         int eventRows[7];
-        // the active events: how many, and the row of the list each one is shown in
+        // the active events: how many, and the next free row of the list
         int activeEvents = 0;
         int nextRow = 0;
         // the gold and the title's place are read before the draw-buffer store, as the original does (read where
@@ -127,7 +127,7 @@ namespace UI {
             int const rations
                 = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                       .rationsSetting;
-            // one compare per value, as the original ((rations - 2) * 100 loses the match)
+            // one compare per value, as the original (`(rations - 2) * 100` loses the match)
             if (rations == 4) {
                 foodValue = 200;
             } else if (rations == 3) {
@@ -334,7 +334,7 @@ namespace UI {
         int aleValue;
         int const aleCoverage = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::computeAleCoverage,
             DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
-        // one compare per value, as the original (`aleCoverage / 25 * 50` loses the match)
+        // a ladder, as the original (`aleCoverage / 25 * 50` loses the match)
         if (aleCoverage < 25) {
             aleValue = 0;
         } else if (aleCoverage < 50) {
