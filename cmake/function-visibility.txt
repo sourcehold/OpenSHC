@@ -139,6 +139,9 @@ OpenSHC::Map::Units::UpdateLady
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::changeDestinationByAmount
+OpenSHC::Map::Units::UpdateBatteringRam
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::deselectUnit
 OpenSHC::Map::Units::UpdateJuggler
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
