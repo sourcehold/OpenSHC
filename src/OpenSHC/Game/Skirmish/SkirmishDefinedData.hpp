@@ -62,8 +62,8 @@ namespace Game {
             CampaignTrailMission WarchestTrailMissions[30]; // 0x00001D34 length: 4320
             CampaignTrailMission ExtremeTrailMissions[20]; // 0x00002E14 length: 2880
             ResourceAICResourceMappingEntry AIResourceTradeAICMapping[20]; // 0x00003954 length: 160
-            ResourceTypeInt ResourceAcquisitionPreferenceOrder[20]; // 0x000039F4 length: 80
-            int field_0x3a44[6]; // 0x00003A44 length: 24
+            ResourceTypeInt ResourceAcquisitionPreferenceOrder[25]; // 0x000039F4 length: 100
+            int field_0x3a58; // 0x00003A58 length: 4
             AIUnitBehaviourRequiredMapEntry attackUnitRequired[11]; // 0x00003A5C length: 88
             UnitTypeInt SomeAIUnitTypeArray[20]; // 0x00003AB4 length: 80
             int AITribeIDOffsetForAIVUnitType[20]; // 0x00003B04 length: 80
