@@ -55,6 +55,8 @@ OpenSHC::UI::Rendering::TextureRenderCore::renderInterfaceOrBuildingOccupationAr
     OpenSHC::UI::Rendering::InitBlendFilterArraysUnk
 OpenSHC::UI::Rendering::TextureRenderCore::renderGmWithPreparedAlphaMask
     OpenSHC::UI::Rendering::InitBlendFilterArraysUnk
+OpenSHC::UI::Rendering::TextureRenderCore::renderUnitAnimationWithBlendingUnk
+    OpenSHC::UI::Rendering::InitBlendFilterArraysUnk
 OpenSHC::UI::Rendering::TextureRenderCore::transformTilesetToRGB565
     OpenSHC::UI::Rendering::TextureRenderCore::transformTileObjectToRGB565
 OpenSHC::Game::GameStateStructures::clearEnemyRelatedStructures
