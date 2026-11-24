@@ -19,9 +19,9 @@ namespace AI {
         int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired == FALSE)
+        if (!DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
         if (this->aics[aiType - 1].defSiegeEngineGoldThreshold
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]

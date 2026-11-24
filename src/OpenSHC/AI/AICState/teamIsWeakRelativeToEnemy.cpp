@@ -27,12 +27,13 @@ namespace AI {
             if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID)) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 70)
                     return FALSE;
-            } else if (DAT_GameCore::instance.mapTimeInTicks < 12000) {
+            } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 300)
                     return FALSE;
             } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 100) {
                 return FALSE;
             }
+            return TRUE;
         } else {
             // without enemy ranged troops there is no reason to become nervous
             if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100)
@@ -40,14 +41,14 @@ namespace AI {
             if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID)) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 50)
                     return FALSE;
-            } else if (DAT_GameCore::instance.mapTimeInTicks < 12000) {
+            } else if ((int)DAT_GameCore::instance.mapTimeInTicks < 12000) {
                 if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 250)
                     return FALSE;
             } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 75) {
                 return FALSE;
             }
+            return TRUE;
         }
-        return TRUE;
     }
 }
 }
