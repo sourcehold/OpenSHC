@@ -37,8 +37,7 @@ namespace UI {
             int field_0x30; // 0x00000030 length: 4
             int field_0x34; // 0x00000034 length: 4
             int field_0x38; // 0x00000038 length: 4
-            char* binkFileName; // 0x0000003C length: 4
-            undefined1 padding_0x40[28]; // 0x00000040 length: 28
+            char binkFileName[32]; // 0x0000003C length: 32
 
         } CreditsRelatedStructure2;
 #pragma pack(pop)
