@@ -19,7 +19,7 @@ namespace AI {
                 continue;
             }
             for (int j = 0; j < bestPriority; j++) {
-                if ((short)DAT_BuildingsState::instance.buildings[buildingID].buildingType
+                if (DAT_BuildingsState::instance.buildings[buildingID].buildingType
                     == DAT_SkirmishDefinedData::instance.BuildingTargetPrioritySet1[j]) {
                     // Found a better match; lowering the bound also ends this loop
                     bestPriority = j;
