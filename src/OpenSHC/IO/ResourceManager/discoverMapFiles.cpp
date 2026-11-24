@@ -28,17 +28,17 @@ namespace IO {
         FILETIME_UNION filetimeBias;
         filetimeBias.ft_scalar = 0;
 
-        scan._missionMaps = FALSE;
-        scan._originalMaps = FALSE;
+        scan.missionMaps = FALSE;
+        scan.originalMaps = FALSE;
         scan.originalMapsScanned = FALSE;
 
         if (!MACRO_CALL(OS_Func::__stricmp)(param_1, s_maps_map_005a64b0)) {
-            scan._missionMaps = TRUE;
-            scan._originalMaps = TRUE;
+            scan.missionMaps = TRUE;
+            scan.originalMaps = TRUE;
         }
         if (!MACRO_CALL(OS_Func::__stricmp)(param_1, s_mapsExtreme_map_005a649c)) {
-            scan._missionMaps = TRUE;
-            scan._originalMaps = TRUE;
+            scan.missionMaps = TRUE;
+            scan.originalMaps = TRUE;
         }
 
         // the whole time part appears like something that should be part of the std libray, but I found nothing
@@ -58,8 +58,8 @@ namespace IO {
             500000, 0, manager->loadedMapNames);
 
         WIN32_FIND_DATAA _win32FindData;
-        scan._handle = FindFirstFileA(param_1, &_win32FindData);
-        if (scan._handle == INVALID_HANDLE_VALUE) {
+        scan.handle = FindFirstFileA(param_1, &_win32FindData);
+        if (scan.handle == INVALID_HANDLE_VALUE) {
             return;
         }
 
@@ -82,7 +82,7 @@ namespace IO {
             // since all strings are of type ptr, I can not get the length of the string during runtime via sizeof
             // "magic numbers" here consider the length of "mission" and in relation to that
 
-            if (scan._missionMaps
+            if (scan.missionMaps
                 && !MACRO_CALL(OS_Func::__strnicmp)(manager->loadedMapNames[manager->mapFileCounter], s_mission_005a6494, 7)
                 && manager->loadedMapNames[manager->mapFileCounter][7] >= '0'
                 && manager->loadedMapNames[manager->mapFileCounter][7] <= '9') {
@@ -121,10 +121,10 @@ namespace IO {
             }
 
             ++manager->mapFileCounter;
-            if (FindNextFileA(scan._handle, &_win32FindData)) {
+            if (FindNextFileA(scan.handle, &_win32FindData)) {
                 continue;
             }
-            if (!scan._originalMaps || scan.originalMapsScanned) {
+            if (!scan.originalMaps || scan.originalMapsScanned) {
                 break;
             }
             scan.originalMapsScanned = TRUE;
@@ -135,13 +135,13 @@ namespace IO {
 
             // The game replaces the first search handle here, even if opening the second search fails.
             // Both paths use this replacement handle for the final FindClose after sorting.
-            scan._handle = FindFirstFileA(path.c_str(), &_win32FindData);
-            if ((reinterpret_cast<UINT_PTR>(scan._handle) + 1u) == 0) {
+            scan.handle = FindFirstFileA(path.c_str(), &_win32FindData);
+            if ((reinterpret_cast<UINT_PTR>(scan.handle) + 1u) == 0) {
                 break;
             }
         }
 
-        if (scan._originalMaps) {
+        if (scan.originalMaps) {
             for (; _mapIndex < 500;) {
                 ++_mapIndex;
                 if (!_hasSwapped) {
@@ -158,7 +158,7 @@ namespace IO {
                     char* _Str2 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
                         manager->loadedMapNames[_currentMapIndex + 1], &scan.originalMapsScanned);
                     char* _Str1 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        manager->loadedMapNames[_currentMapIndex], &scan._missionMaps);
+                        manager->loadedMapNames[_currentMapIndex], &scan.missionMaps);
                     if (MACRO_CALL(OS_Func::__stricmp)(_Str1, _Str2) > 0) {
                         MACRO_CALL_MEMBER(ResourceManager_Func::swapMapDataWithNextMap, this)(_currentMapIndex);
                         _hasSwapped = TRUE;
@@ -189,7 +189,7 @@ namespace IO {
                 }
             }
         }
-        FindClose(scan._handle);
+        FindClose(scan.handle);
     }
 
 } // namespace IO
