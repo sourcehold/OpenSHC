@@ -86,6 +86,7 @@ namespace Audio {
             SEID_HORSE_DIE1 = 90, // 0x0000005A
             SEID_HORSE_DIE2 = 91, // 0x0000005B
             SEID_RABBIT_DIE1 = 92, // 0x0000005C
+            SEID_UNKNOWN_0x60 = 96, // 0x00000060
             SEID_BURNING_MAN_SCREAM = 97, // 0x00000061
             SEID_BURNING_MAN_SCREAM2 = 100, // 0x00000064
             SEID_UNKNOWN_0x67 = 103, // 0x00000067
@@ -208,6 +209,7 @@ namespace Audio {
             SEID_UNIT_DAMAGE3 = 248, // 0x000000F8
             SEID_UNIT_DAMAGE4 = 249, // 0x000000F9
             SEID_UNKNOWN_0xFB = 251, // 0x000000FB
+            SEID_UNKNOWN_0xFC = 252, // 0x000000FC
             SEID_UNKNOWN_0xFD = 253, // 0x000000FD
             SEID_UNKNOWN_0xFE = 254, // 0x000000FE
             SEID_UNKNOWN_0xFF = 255, // 0x000000FF
