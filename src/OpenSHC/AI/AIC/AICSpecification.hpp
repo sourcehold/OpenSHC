@@ -9,12 +9,14 @@
 #pragma once
 
 #include "OpenSHC/AI/AIC/AITargetChoiceInt.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
 namespace OpenSHC {
 namespace AI {
     namespace AIC {
 
         using OpenSHC::AI::AIC::AITargetChoiceInt;
+        using OpenSHC::Map::Units::UnitTypeInt;
 
 #pragma pack(push, 1)
         // SIZE: 0x000002A4
@@ -104,9 +106,9 @@ namespace AI {
             int recruitProbAttackWeak; // 0x00000144 length: 4
             int recruitProbAttackStrong; // 0x00000148 length: 4
             int SortieUnitRangedMin; // 0x0000014C length: 4
-            int SortieUnitRanged; // 0x00000150 length: 4
+            UnitTypeInt SortieUnitRanged; // 0x00000150 length: 4
             int SortieUnitMeleeMin; // 0x00000154 length: 4
-            int SortieUnitMelee; // 0x00000158 length: 4
+            UnitTypeInt SortieUnitMelee; // 0x00000158 length: 4
             int DefDiggingUnitMax; // 0x0000015C length: 4
             int DefDiggingUnit; // 0x00000160 length: 4
             int RecruitInterval; // 0x00000164 length: 4

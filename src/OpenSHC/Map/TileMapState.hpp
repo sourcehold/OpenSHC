@@ -144,7 +144,7 @@ namespace Map {
         int editorActiveBrush; // 0x005548E0 length: 4
         MappersEnum currentMapperCommand; // 0x005548E4 length: 4
         undefined4 DAT_BuildingSize; // 0x005548E8 length: 4
-        undefined4 unitPlacementCount; // 0x005548EC length: 4
+        int unitPlacementCount; // 0x005548EC length: 4
         BOOLEnum mapperMax; // 0x005548F0 length: 4
         undefined4 rockFlagStartNumber; // 0x005548F4 length: 4
         int unknownBrushRelated; // 0x005548F8 length: 4
