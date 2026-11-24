@@ -13,8 +13,9 @@ What it prints, and why each part matters (msvc-backend.md, "The slot tiebreak, 
   later one adds 1 to its weight and moves it ahead of same-size elements with strictly lower
   weight. So the list ends up size ascending, weight descending, and among equal weights in the
   order the elements reached their final weight. An __asm block is a single tuple whose operand
-  sets are: its def-set (locals it writes, iterated in name-hash order), its use-list (locals it
-  reads, reverse order of first mention), and the def-set again - each symbol counts once per set.
+  sets are: its def-set (every local that any __asm block of the function writes, if declared in a
+  block that contains this one; iterated in name-hash order), its use-list (locals it reads, in
+  reverse order of first mention), and the def-set again - each symbol counts once per set.
 * the `symStackElements` list at `ColorStackElements` (0x10beaef0) entry, head to tail. Without
   the sort (below) this IS the slot order: head at the highest address.
 * whether `QSortColors` ran. It runs only for frames over 0x80 bytes or functions with a /GS
