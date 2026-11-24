@@ -94059,6 +94059,14 @@ enum {
     // label: DAT_ButtonGmDataArray
     // location:
     SHC_3BB0A8C1_0x00B333E0 = 0x00B333E0,
+    // label: DAT_WavEuropeanUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37AF8 = 0x00B37AF8,
+    // label: DAT_WavArabianUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37BD8 = 0x00B37BD8,
     // type: /pointer
     SHC_3BB0A8C1_0x00B37CB8 = 0x00B37CB8,
     // label: DAT_TextInputDefinedData
@@ -96730,7 +96738,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4288 = 0x00DF4288,
     // label: DAT_SentOrRequestedGoodsAmount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF428C = 0x00DF428C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4290 = 0x00DF4290,
