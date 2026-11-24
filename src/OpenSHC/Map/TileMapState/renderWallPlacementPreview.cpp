@@ -107,7 +107,7 @@ namespace Map {
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
                 + this->buildingX + x]
-                = this->buildingRotationRelatedValue + GMFirstPictureIndex::instance[56] + variationStep + base - 1;
+                = this->buildingOrientedPartIndex + GMFirstPictureIndex::instance[56] + variationStep + base - 1;
             index++;
             if (index >= this->constructionTileCount) {
                 break;

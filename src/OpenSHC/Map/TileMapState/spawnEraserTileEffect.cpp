@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
@@ -19,6 +20,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STAIRS;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_DESTROY_PENDING;
 
     using OpenSHC::Map::Entities::EntityType;
 
@@ -27,7 +29,7 @@ namespace Map {
     {
         uint y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
         int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-        this->MiscDisplayLayer[tile] &= ~0x400;
+        this->MiscDisplayLayer[tile] &= ~MD_DESTROY_PENDING;
         if (this->UnitLayer[tile] != 0) {
             return;
         }

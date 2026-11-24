@@ -7,20 +7,25 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::Enums::HSM_NONE;
+    using OpenSHC::Map::Enums::HSM_STONE;
+    using OpenSHC::Map::Enums::HSM_WOOD;
+    using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8210
-    uint TileMapState::getBuildingHurtSFXID(int tileUnk)
+    OpenSHC::Map::Enums::HitSoundMaterialInt TileMapState::getBuildingHurtSFXID(int tile)
     {
-        short buildingID = this->BuildingLayer[tileUnk];
+        short buildingID = this->BuildingLayer[tile];
         if (buildingID != 0) {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState == 0) {
-                return 0;
+                return HSM_NONE;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState
                 == OpenSHC::Map::Buildings::BLS_REMOVE) {
-                return 0;
+                return HSM_NONE;
             }
             if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth == 0) {
-                return 0;
+                return HSM_NONE;
             }
 
             switch (DAT_BuildingsState::instance.buildings[buildingID].buildingType) {
@@ -44,12 +49,15 @@ namespace Map {
             case OpenSHC::Map::Buildings::BT_TOWER4:
             case OpenSHC::Map::Buildings::BT_TOWER5:
             case OpenSHC::Map::Buildings::BT_OUTPOST_EUROPEAN:
-                return 2;
+                return HSM_STONE;
             default:
-                return 1;
+                return HSM_WOOD;
             }
         }
-        return (uint)this->LogicLayer[tileUnk] >> 7 & 2;
+        if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
+            return HSM_STONE;
+        }
+        return HSM_NONE;
     }
 
 }

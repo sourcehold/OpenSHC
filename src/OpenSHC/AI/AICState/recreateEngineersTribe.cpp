@@ -1,5 +1,7 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
+
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 
@@ -12,11 +14,14 @@ namespace AI {
         if (0 >= DAT_GameState::instance.playerDataArray[playerID].totalAttackingEngineerTroops) {
             return;
         }
-        int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        int const tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01];
         if (tribeID != 0) {
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12]) {
-                DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12] = 0;
+                != DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01]) {
+                DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01] = 0;
             }
         }
         MACRO_CALL_MEMBER(AICState_Func::addEngineersToTribe, this)(playerID);

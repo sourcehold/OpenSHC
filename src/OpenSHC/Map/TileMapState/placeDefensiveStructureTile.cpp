@@ -4,6 +4,8 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
+#include "OpenSHC/Map/Walls/WallConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -25,9 +27,14 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
+    using OpenSHC::Map::Walls::WALL_HIGH_CRENAL_HEIGHT;
+    using OpenSHC::Map::Walls::WALL_HIGH_HEIGHT;
+    using OpenSHC::Map::Walls::WALL_LOW_CRENAL_HEIGHT;
+    using OpenSHC::Map::Walls::WALL_LOW_HEIGHT;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005034A0
-    void TileMapState::placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum mapper)
+    void TileMapState::placeDefensiveStructureTile(int playerID, int x, int y, MappersEnum mapper)
     {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::validateWallPlacementAtTile, this)(playerID, x, y, mapper);
         if (this->illegalBuild) {
@@ -39,13 +46,13 @@ namespace Map {
         this->DamageLayer[tile] = 0;
         this->HeightLayer[tile] = this->DefaultHeightLayer[tile];
         if (command == OpenSHC::Commands::M_MAPPER_WALL) {
-            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 90;
+            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + WALL_HIGH_HEIGHT;
         } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + 60;
+            this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + WALL_LOW_HEIGHT;
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] |= L_CRENEL;
             byte& height = this->HeightLayer[tile];
-            height += 98;
+            height += WALL_HIGH_CRENAL_HEIGHT;
             if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((x & 1) == 0 && (y & 1) == 1) {
@@ -54,7 +61,7 @@ namespace Map {
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
             this->LogicLayer[tile] |= L_CRENEL;
             byte& height = this->HeightLayer[tile];
-            height += 68;
+            height += WALL_LOW_CRENAL_HEIGHT;
             if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((x & 1) == 0 && (y & 1) == 1) {
@@ -92,7 +99,7 @@ namespace Map {
         if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
             this->LogicLayer[tile] |= L_UNKNOWN_WALL_RELATED;
         }
-        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~7) | (playerID - 1);
+        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~WO_OWNER_MASK) | (playerID - 1);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
             DAT_PathFindingState::ptr)(y, tile);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tile);

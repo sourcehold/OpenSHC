@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+
 namespace OpenSHC {
 namespace Map {
 
@@ -9,19 +11,19 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8640
     BOOLEnum TileMapState::isTileEnclosedByWalls(int tile, int y)
     {
-        int offset = this->directionTranslationMatrix[y][0] + tile;
+        int offset = this->directionTranslationMatrix[y][OpenSHC::Map::Enums::CD_NORTH] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
             return TRUE;
         }
-        offset = this->directionTranslationMatrix[y][4] + tile;
+        offset = this->directionTranslationMatrix[y][OpenSHC::Map::Enums::CD_SOUTH] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
             return TRUE;
         }
-        offset = this->directionTranslationMatrix[y][2] + tile;
+        offset = this->directionTranslationMatrix[y][OpenSHC::Map::Enums::CD_EAST] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
             return TRUE;
         }
-        offset = this->directionTranslationMatrix[y][6] + tile;
+        offset = this->directionTranslationMatrix[y][OpenSHC::Map::Enums::CD_WEST] + tile;
         if ((this->LogicLayer[offset] & L_WALL_OR_GATEHOUSE) != 0 && (this->LogicLayer[offset] & L_STOCKPILEUnk) == 0) {
             return TRUE;
         }

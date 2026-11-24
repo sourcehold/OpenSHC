@@ -21,7 +21,8 @@ namespace Map {
             CD_SOUTHWEST = 5, // 0x00000005
             CD_WEST = 6, // 0x00000006
             CD_NORTHWEST = 7, // 0x00000007
-            CD_UPPER_LIMIT = 8 // 0x00000008
+            CD_UPPER_LIMIT = 8, // 0x00000008
+            CD_UNSPECIFIED = 15 // 0x0000000F
 
         } CardinalDirection;
 

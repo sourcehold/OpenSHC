@@ -6,7 +6,7 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FBC30
-    undefined4 TileMapState::getCastleBuildRangeForMapSize()
+    int TileMapState::getCastleBuildRangeForMapSize()
     {
         switch (this->mapSize) {
         case MC_MAP_SIZE_160:

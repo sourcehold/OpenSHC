@@ -1,6 +1,8 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -16,7 +18,7 @@ namespace Map {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupBuildingSizeIndexMapping, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupTileMapSections, this)();
         this->editorActiveBrush = 7;
-        this->refreshCertainTileMap = 2;
+        this->refreshCertainTileMap = OpenSHC::Map::Enums::LVT_SET_NORMAL;
         this->counter1 = 0;
         this->mapperMax = FALSE;
         this->editorSnapToMode = 0;
@@ -29,14 +31,14 @@ namespace Map {
         this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
         this->forceUpdateTextureTilemap = TRUE;
         this->forceUpdateGFXLayers = TRUE;
-        this->refreshCertainTileMap_old = 4;
+        this->refreshCertainTileMap_old = OpenSHC::Map::Enums::LVT_RAISE;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
         this->moatTileCount = 0;
         this->skipPlacementCheck = 0;
         this->gateOrientationVariant = 80;
         this->lastTime = timeGetTime();
-        this->rockOrientation = 0;
-        this->editorRockType = 0;
+        this->rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
+        this->editorRockType = OpenSHC::Map::Rocks::Enums::ERT_NONE;
         this->cursorAnimationTime = timeGetTime();
         this->cursorOverlayAnimationFrame = 1;
         this->temporaryTerrainTypeIndex = 0;

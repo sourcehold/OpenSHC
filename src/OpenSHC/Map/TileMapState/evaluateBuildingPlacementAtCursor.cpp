@@ -48,16 +48,17 @@ namespace Map {
         // the flat view has no ray hit, so the tile under the mouse is used directly
         int buildingID;
         if (this->flatViewToggleValue1 != 0) {
-            buildingID = this->BuildingLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile];
+            buildingID = this->BuildingLayer[DAT_ViewportRenderState::instance.viewportState.mouseFlatTile];
             wallTile = 0;
-            if ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile]
+            if ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseFlatTile]
                     & L_WALL_OR_GATEHOUSE)
                     != 0
-                && ((DAT_TileMapState::instance.LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseTile]
+                && ((DAT_TileMapState::instance
+                            .LogicLayer[DAT_ViewportRenderState::instance.viewportState.mouseFlatTile]
                         & L_STOCKPILEUnk)
                         == 0
                     || buildingID == 0)) {
-                wallTile = DAT_ViewportRenderState::instance.viewportState.mouseTile;
+                wallTile = DAT_ViewportRenderState::instance.viewportState.mouseFlatTile;
                 DAT_ViewportRenderState::instance.viewportState.cursorWallTile = wallTile;
             }
         } else {

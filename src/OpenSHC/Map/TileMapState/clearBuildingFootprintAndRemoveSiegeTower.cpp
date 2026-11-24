@@ -23,7 +23,7 @@ namespace Map {
     {
         int tileIndex = 0;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
@@ -39,10 +39,7 @@ namespace Map {
                 DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             }
             tileIndex++;
-            if (tileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (tileIndex < this->constructionTileCount);
     }
 
 }

@@ -43,7 +43,7 @@ namespace Map {
             this->pitchDitches[pitchDitchID].tile
                 = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->pitchDitches[pitchDitchID].state = 0;
-            this->pitchDitches[pitchDitchID].field_0x12 = 0;
+            this->pitchDitches[pitchDitchID].burnTimer = 0;
             this->pitchDitches[pitchDitchID].rng = SEC_RNG::instance.currentNumber2;
             PitchDitch const& pitchDitch = this->pitchDitches[pitchDitchID];
             if (this->HeightLayer[pitchDitch.tile] > 4) {

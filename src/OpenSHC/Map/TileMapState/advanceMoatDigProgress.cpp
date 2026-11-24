@@ -9,6 +9,7 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::LogicHelpers::L2_NONE;
     using OpenSHC::Map::LogicHelpers::L_MOAT;
     using OpenSHC::Map::LogicHelpers::L_MOAT_DUG_OR_PLANNED;
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
@@ -26,7 +27,7 @@ namespace Map {
             this->LogicLayer[this->moats[moatID].tile] &= ~L_MOAT_DUG_OR_PLANNED;
             this->LogicLayer[this->moats[moatID].tile] &= ~L_PLAIN2_AND_PITCH;
             this->LogicLayer[this->moats[moatID].tile] |= L_MOAT;
-            this->Logic2Layer[this->moats[moatID].tile] = 0;
+            this->Logic2Layer[this->moats[moatID].tile] = L2_NONE;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                 DAT_PathFindingState::ptr)(2, this->moats[moatID].x, this->moats[moatID].y);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,

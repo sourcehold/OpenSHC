@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/SEC_RNG.hpp"
@@ -76,7 +77,7 @@ namespace Map {
             this->RandomLayer[tile] = SEC_RNG::instance.currentNumber2;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(OpenSHC::Map::Enums::MO_NORTH);
-        this->DAT_FutureMapOrientation = 8;
+        this->DAT_FutureMapOrientation = OpenSHC::Map::Enums::MO_UPPER_LIMIT;
     }
 
 }

@@ -22,8 +22,8 @@ namespace Map {
         // pass 0: the unrotated footprint, in reading order
         for (int y = 0; y < buildingSize; y++) {
             for (int x = 0; x < buildingSize; x++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][0] = x;
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][1] = y;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].x = x;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].y = y;
             }
         }
 
@@ -36,7 +36,7 @@ namespace Map {
         int diagonal;
         for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][2] = index;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].orientedPartIndex[0] = index;
                 index--;
                 if (step < run - 1) {
                     x--;
@@ -59,7 +59,7 @@ namespace Map {
         index = last;
         for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][3] = index;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].orientedPartIndex[1] = index;
                 index--;
                 if (step < run - 1) {
                     x--;
@@ -82,7 +82,8 @@ namespace Map {
         int secondIndex = last;
         for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][4] = secondIndex;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].orientedPartIndex[2]
+                    = secondIndex;
                 secondIndex--;
                 if (step < run - 1) {
                     x++;
@@ -105,7 +106,8 @@ namespace Map {
         secondIndex = last;
         for (diagonal = 0, run = 1; diagonal < buildingSize * 2 - 1; diagonal++) {
             for (int step = 0; step < run; step++) {
-                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x][5] = secondIndex;
+                DAT_BuildingSizeIndexMapping::instance[buildingSize][y * buildingSize + x].orientedPartIndex[3]
+                    = secondIndex;
                 secondIndex--;
                 if (step < run - 1) {
                     x++;

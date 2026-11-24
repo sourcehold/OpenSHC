@@ -16,7 +16,7 @@ namespace Map {
             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findAccessibleAreaNearBuildingLocation,
                 DAT_BuildingsState::ptr)(x, y, buildingSize);
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, buildingSize);
             int tileUnk = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -25,10 +25,7 @@ namespace Map {
                 this->PathConnectionLayer[tileUnk] = area;
             }
             buildingSizeTileIndex++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
     }
 
 }

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -11,13 +12,15 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_PLAIN2_AND_PITCH;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_RUBBLE_EDGEUnk;
+    using OpenSHC::Map::LogicHelpers::MD_RUBBLE_INNERUnk;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00500890
     void TileMapState::destroyPitchDitch(int pitchDitchID)
     {
         this->LogicLayer[this->pitchDitches[pitchDitchID].tile] &= ~L_PLAIN2_AND_PITCH;
-        this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= ~0x2000;
-        this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= ~0x4000;
+        this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= ~MD_RUBBLE_EDGEUnk;
+        this->MiscDisplayLayer[this->pitchDitches[pitchDitchID].tile] &= ~MD_RUBBLE_INNERUnk;
         if ((this->LogicLayer[this->pitchDitches[pitchDitchID].tile] & L_WALL_OR_GATEHOUSE) == 0
             && this->BuildingLayer[this->pitchDitches[pitchDitchID].tile] == 0) {
             this->HeightLayer[this->pitchDitches[pitchDitchID].tile]

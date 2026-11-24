@@ -5,6 +5,7 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L2_BEACH;
     using OpenSHC::Map::LogicHelpers::L2_EARTH_AND_STONES;
+    using OpenSHC::Map::LogicHelpers::L2_NONE;
     using OpenSHC::Map::LogicHelpers::L2_OASIS_GRASS;
     using OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH;
     using OpenSHC::Map::LogicHelpers::L2_PLATEAU_MEDIUM;
@@ -23,7 +24,7 @@ namespace Map {
         this->forceUpdateMacroLayerFlag = FALSE;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(
             L_DEFAULT_EARTH_OR_TEXTURE, L2_SCRUB, 0);
-        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_MARSH, L_NONE, 0);
+        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_MARSH, L2_NONE, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(
             L_NONE, L2_EARTH_AND_STONES, 0);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateMacroLayerRelated, this)(L_NONE, L2_OASIS_GRASS, 0);

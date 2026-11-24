@@ -16,22 +16,22 @@ namespace Map {
     CardinalDirection TileMapState::getOrientationThatIsWallTowerOrGatehouse(uint x, uint y)
     {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
-            return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+            return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
-            return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+        if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]) {
+            return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
 
         int rowTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         for (int index = 0; index < countof(DAT_TerrainDefinedData::instance.SomeOrientationOrderArray); index++) {
-            int orientation = DAT_TerrainDefinedData::instance.SomeOrientationOrderArray[index];
+            CardinalDirection const orientation = DAT_TerrainDefinedData::instance.SomeOrientationOrderArray[index];
             int neighbour = this->directionTranslationMatrix[y][orientation] + rowTile;
             if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0
                 && (this->LogicLayer[neighbour] & (L_STOCKPILEUnk | L_CRENEL_VARIATIONUnk)) == 0) {
-                return (CardinalDirection)orientation;
+                return orientation;
             }
         }
-        return (CardinalDirection)OpenSHC::Map::Enums::MO_NONE;
+        return OpenSHC::Map::Enums::CD_UNSPECIFIED;
     }
 
 }

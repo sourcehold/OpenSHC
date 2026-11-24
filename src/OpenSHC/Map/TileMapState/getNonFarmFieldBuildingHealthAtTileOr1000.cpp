@@ -29,9 +29,8 @@ namespace Map {
         if (DAT_BuildingsState::instance.buildings[buildingID].currentHealth == 0) {
             return 1000;
         }
-        if (DAT_BuildingDefinedData::instance
-                .BuildingTypeHasHealth[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
-            == 0) {
+        if (!DAT_BuildingDefinedData::instance
+                .BuildingTypeHasHealth[DAT_BuildingsState::instance.buildings[buildingID].buildingType]) {
             return 1000;
         }
 

@@ -379,10 +379,10 @@ namespace Map {
             if (this->uiBuildingRotation != 15) {
                 this->ConstructionGFXLayer[tile] = (short)(rotation * size * size)
                     + (short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1] + (short)sprite
-                    + (short)this->buildingRotationRelatedValue - 1;
+                    + (short)this->buildingOrientedPartIndex - 1;
             } else {
                 this->ConstructionGFXLayer[tile] = (short)GMFirstPictureIndex::instance[this->buildingSpriteSheetID_1]
-                    + (short)sprite + (short)this->buildingRotationRelatedValue - 1;
+                    + (short)sprite + (short)this->buildingOrientedPartIndex - 1;
             }
             if (skipPlacementFailChecks != 0) {
                 this->MiscDisplayLayer[tile] |= 0x8000;
@@ -407,7 +407,7 @@ namespace Map {
                           .addXgetTile
                     + this->buildingX + tower1X + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[52];
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[52];
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -448,7 +448,7 @@ namespace Map {
                           .addXgetTile
                     + this->buildingX + tower2X + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[52];
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[52];
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -593,7 +593,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + originY].addXgetTile
                     + this->buildingX + x;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 72;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 72;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -609,7 +609,7 @@ namespace Map {
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                     + this->buildingX + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 122;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 122;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -624,7 +624,7 @@ namespace Map {
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                     + this->buildingX + x;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 97;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 97;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -641,7 +641,7 @@ namespace Map {
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                     + this->buildingX + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 147;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 147;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -658,7 +658,7 @@ namespace Map {
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                     + this->buildingX + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 172;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 172;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -675,7 +675,7 @@ namespace Map {
                 int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                     + this->buildingX + originX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 296;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 296;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -723,7 +723,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuildingY].addXgetTile
                     + this->buildingX + outbuildingX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 23;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 23;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -743,7 +743,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuilding2Y].addXgetTile
                     + this->buildingX + outbuilding2X;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 25;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[7] + 25;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -795,7 +795,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuildingY].addXgetTile
                     + this->buildingX + outbuildingX;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[6] + 23;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[6] + 23;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }
@@ -815,7 +815,7 @@ namespace Map {
                     = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + outbuilding2Y].addXgetTile
                     + this->buildingX + outbuilding2X;
                 this->ConstructionGFXLayer[tile]
-                    = (short)this->buildingRotationRelatedValue + (short)GMFirstPictureIndex::instance[7] + 25;
+                    = (short)this->buildingOrientedPartIndex + (short)GMFirstPictureIndex::instance[7] + 25;
                 if (skipPlacementFailChecks != 0) {
                     this->MiscDisplayLayer[tile] |= 0x8000;
                 }

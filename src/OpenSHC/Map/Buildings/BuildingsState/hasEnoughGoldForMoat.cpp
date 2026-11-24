@@ -9,7 +9,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040CAC0
-        uint BuildingsState::hasEnoughGoldForMoat()
+        BOOLEnum BuildingsState::hasEnoughGoldForMoat()
         {
             int gold;
             int stone;

@@ -1558,6 +1558,28 @@ recognising, because it looks like a code-shape defect and is not one. If a func
 `xor +N` with the stores otherwise matching, check whether the original is reusing a known-zero
 variable's register before looking for a source cause.
 
+**A local's initial value can decide whether a constant gets a register of its own.**
+`AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID` (`0x00463310`) was one instruction off:
+the original pushes `esi`, which holds 1, as the second argument of
+`extendResourceCountdownForPlayerBuildingsOfType` (`push esi` at `0x004633BD`), and ours pushed the
+immediate 1. With `menuTab` initialised to 1 at the top, `menuTab` is the one candidate in `esi`
+(`+0x0c` key 175 in `reg_scores.py`, the highest in the function). The two compares against 1 reuse
+that register's known value, but the push does not: the argument stays `push 1` whether it is
+written `1`, `menuTab`, `TRUE`, `1u` or `(dword)1`. In the source that matches, `menuTab` has no
+initial value, and its 1 is assigned in the one arm of the later switch that relied on the initial
+value (`BT_BARRACKS`). Declared that way, `menuTab` still gets `esi` (key 176), but it is live only
+from its assignments on, and the probe lists one candidate more: a `(temp)` that also gets `esi`
+where `menuTab` is not live (by its place, the constant 1). The compares and the push then use it,
+and the function matches (quick_diff 1.0000; 100% in #484).
+
+So when the original uses a register for a constant that we write as an immediate, look for a local
+initialised to that constant. Drop the initial value and assign the constant only where the code
+relied on it: assigned early instead, in both arms of the test on the building's owner, it was worse
+(quick_diff 0.9929 against 0.9964). Compile once with `/w14701` to confirm that every path still
+assigns the local before use (C4701 stays quiet). The section above found that no spelling of the
+same value moves the allocator; an initial value is a different handle, because it changes which
+candidates there are. So far this is one function.
+
 ## Two slot-layout leads that were not source defects
 
 Both functions whose frames still disagreed after the jump-table fix turned out not to be
@@ -2523,13 +2545,17 @@ first with weight >= the new one. Net effect: size ascending, weight descending,
 weights **the element that reached its final weight first comes first**, i.e. gets the higher
 address. Declaration order and initialisation order are nowhere in it (both re-tested: no change).
 
-**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol
-counts once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list
-that `CollectStackElements` flattens as: the *def-set* (every local the block writes) as a nested
-set, then the *use-list* (every local the block reads, in reverse order of first mention), then the
-def-set again. For the walk in `tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18
-symbols. The written locals therefore get +3 from the block, read-only ones +1, write-only ones +2;
-a local's C-side references add 1 each before and after.
+**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol counts
+once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list that
+`CollectStackElements` flattens as: the *def-set* as a nested set, then the *use-list* (every local
+the block reads, in reverse order of first mention), then the def-set again. The def-set is not only
+what the block itself writes: it holds every local that *any* `__asm` block of the function writes,
+as long as that local is declared in a block that contains this one, wherever in that block the
+declaration stands (see "A block scope moves an asm-written local" below). For the walk in
+`tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18 symbols. A local in the def-set
+therefore gets +3 from the block if the block also reads it and +2 if not, whether the block writes
+it or only another block does; a local the block only reads, and no asm block writes, gets +1. A
+local's C-side references add 1 each before and after.
 
 **4. The def-set is iterated in hash order of the symbol name.** The second def-set pass is the
 *last* reference of every asm-written local that the C code does not touch afterwards, so their
@@ -2576,6 +2602,19 @@ The `_tile`/`_cY` case is the warning about the ranking: in the three macro user
 followed declaration order, which only happens when two names hash to the same bucket - the
 `name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
 what settled each one.
+
+**A block scope moves an asm-written local.** A local that any asm block writes goes into the
+def-set of every asm block inside the block that declares it, so a local written by only some of
+the blocks weighs more than its own references suggest, and moving its declaration within the same
+block changes nothing. Declaring it in an inner block that holds only the asm that uses it does. In
+`TextureRenderCore::renderUnitAnimationWithBlendingUnk` (`0x00451E00`: four asm blocks, a 0x1c
+frame, so no sort) only the last two blocks write `columnOffset`. Declared at the top it weighs 10
+(+2 from each of the four def-sets, +1 from each of its two use-lists) and takes `-4`, pushing the
+three locals the original has above it (weights 7, 7 and 6) down one slot each. Declared at
+function level after the `if` that holds the first two blocks, or just before the third, it still
+weighs 10. Declared inside the `else` that holds the last two blocks it weighs 6, lands behind the
+other three, and every local sits at the original's offset. This function is the only one the rule
+has been traced on so far. One `slot_probe.py` run shows the weight; a build confirms the layout.
 
 ### The rule, as code: `simulate()`, `regime()`, and the regression tests
 
@@ -3179,3 +3218,137 @@ Reusing a parameter for a later coordinate moves that value's spills into the pa
 - Editing a header under `src/precomp/` does **not** rebuild the PCH: `cmake_pch.cxx.obj.d` is empty, so the
   build reports `BUILD_OK`, recompiles nothing that matters and reccmp shows the old code. Delete
   `build-RelWithDebInfo/CMakeFiles/OpenSHC.dll.dir/cmake_pch.cxx.obj` and `cmake_pch.cxx.pch` first.
+
+## The TU symbol count decides some register choices (`shift_sweep.py`, `color_probe.py`)
+
+`placeDefensiveStructureTile` (TileMapState, PR #366) was 100% before a merge of `main` and 96.3% after it, with
+the `.cpp` byte-identical and the IL identical up to `regalloc`. The merge had only added three enums to headers
+the file includes. None of them is used by the function; what they changed is **how many symbols the front end
+had numbered before the function**, and that number reaches the register allocator through a hash.
+
+### The chain, in c2.dll
+
+1. **`GrgImmedTupleHash`** (0x10b5c050) files every constant operand into the 64-bucket `_ImmedHashTable`
+   (0x10d12170). An address constant (tuple kind 3, the `&Instance<...>::instance` of a resolver global) hashes
+   by `[[[tuple+0x18]+8]]+0x28 & 0x3f` - a symbol number counted over the whole translation unit. Measured: an
+   `enum` with one enumerator adds 2 to it, a `typedef` 1, a `#define` 0, and only declarations *before* the
+   function count (four dummy enums after the last `#include` moved the result; the same four after the body
+   did not).
+2. **`CreateGlobregs`** (0x10b5abe0) walks that table bucket by bucket and frees every immediate candidate that
+   turned out worthless (`ColRemoveGlobregFromHashTable`, 0x10b18790, called from 0x10b5ac39). The bucket
+   decides where each one lands in the free order.
+3. **`GrgNewGlobreg`** (0x10b5b7b0) reuses `_FreeGlobs` last-in-first-out and **keeps the freed record's number**
+   (`+0x1c`). The same `CreateGlobregs` call then creates the candidates for the real symbols (`this`, `tile`,
+   `x`, temporaries), so they receive a permutation of the freed numbers.
+4. What the number does **not** change: the colouring key `+0x0c`, the benefit `+0x40`, the symbol id `+0x44`,
+   and therefore `InsertInList`'s serve order, whose tie-break is the id. `color_probe.py --compare` on a bad
+   and a good shift shows all of them equal right up to the pass that diverges.
+5. What it does change: any **greedy** pass that visits candidates in number order - walking `_GlobregHash`
+   (0x10d15090, bucket `number & 0x3ff`, chained through `+0x30`) or `bsf` over a bitset of numbers - where
+   acting on one candidate changes what the pass can do with a later one. Two were caught doing it.
+
+### Pass 1: `FoldTooCheapDefs` (0x10b0da80) - `placeDefensiveStructureTile`
+
+Phase 2 of `FoldTooCheapDefs` walks `_GlobregHash` and folds each cheap single-definition candidate back into its
+uses (`ComponentKilled` 0x10b19fe0 as the veto, then `DoFoldDef` 0x10b195e0 -> `CmdDoFoldDef`). This function
+has two such candidates, one built on the other (`tuple_dump.py` at `FoldTooCheapDefs` entry; the `t` numbers
+are the candidate numbers):
+
+```
+shift 0 (bad)                              shift 46 (good)
+lea  t8,  dword ptr [this + tile]          lea  t11, dword ptr [this + tile]
+mov  byte ptr [t8 + 3313824], t1           mov  byte ptr [t11 + 3313824], t1
+lea  t21, dword ptr [t8 + 2751024]         lea  t8,  dword ptr [t11 + 2751024]     ; &HeightLayer[tile]
+mov  t3,  byte ptr [t8 + 2831424]          mov  t21, byte ptr [t11 + 2831424]
+mov  byte ptr [t21], t3                    mov  byte ptr [t8], t21                 ; ... and ~16 more uses
+```
+
+With the inner `lea` (A) numbered lower, it is folded first: every `[A + d]` becomes `[this + tile + d]`, which
+turns the outer `lea` (B) from a based address (`0x27c`) into an indexed one (`0x27d`). `CmdDoFoldDef`'s end
+block notices and sets B's never-fold bit (byte `+5 |= 4`, the write at 0x10c248f5, caught with `--watch 0x1b`),
+so B is skipped when the walk reaches it. With B numbered lower, B folds first (into `[A + 2751024]`) and A
+after it, and both disappear:
+
+```
+color_probe.py ... --compare                       (A = shift 0, B = shift 46)
+FOLD    A: 46#2 34#6 1d#8 5c#f 62#17 75#1a 68#1e 6d#25 56#26
+        B: 56#2 34#3 46#6 1b#8 1d#b 5c#f 62#17 6d#1a 68#1e 75#23
+CK 4.0  id=1e tile   A [key 385, refs 0x26, benefit 76]    B [key 451, refs 0x38, benefit 112]
+        id=e  this   A [key 311, refs 0x25, benefit 74]    B [key 383, refs 0x37, benefit 110]
+```
+
+The surviving B is gone again before colouring proper, but it is still there when `Spillcosts` counts
+references, so 18 uses each of `tile` and `this` are booked against B instead. The lower keys reorder the tail
+of the serve list, the `x & 1` temporaries tie with `x` and take `eax` instead of `ecx` (`CPRDONE` in the same
+comparison), a `mov eax, ecx` copy survives, and `FgDoCommonTailMerge` can no longer merge the two crenel arms'
+identical tails - seven instructions more:
+
+```
+shift 0 (ours, 96.3%)                      shift 46 (= original)
+add  byte ptr [esi+edi+2751024], 98        add  byte ptr [esi+edi+2751024], 98
+mov  eax, ecx                            $LN54:
+and  eax, 1                                and  ecx, 1
+je   $LN18                                 je   $LN18
+test bl, 1                                 test bl, 1
+jne  $LN18                                 jne  $LN18
+or   dword ptr [edi+esi*4+1462624], 0x400000   or   dword ptr [edi+esi*4+1462624], 0x400000
+jmp  $LN52                                 jmp  $LN52
+...                                        ...
+add  byte ptr [esi+edi+2751024], 68        add  byte ptr [esi+edi+2751024], 68
+mov  eax, ecx                              jmp  $LN54          ; the second arm reuses the first's tail
+and  eax, 1
+... (the whole tail again)
+```
+
+### Pass 2: `SpillObvious` (0x10b11560) - the sliders and `DisplayMapDescriptionAndAllocatePlayersToSlots`
+
+`SpillObvious` spills every candidate with fewer than two references (`+0x24 < 2`) in `bsf` order (the `Spill`
+call at 0x10b115d6, `CmdSubstDef` at 0x10b11630; `eax` is the candidate at both). Each spill inserts its reload
+right before the use, so the spill order is the order of the loads. In
+`MenuItemRenderFunction_GameplayOptions_SpeedSlider`, `thumbX = thumbXPos + DAT_ButtonX::instance`:
+
+```
+SPILL   A: 7(thumbXPos)#3 29(thumbWidth)#6 8(DAT_ButtonX)#7 ...          shift 0  (= original)
+        B: 29(thumbWidth)#6 8(DAT_ButtonX)#7 7(thumbXPos)#8 ...          shift 30
+
+shift 0                                    shift 30
+mov  ecx, dword ptr [DAT_ButtonX]          mov  ecx, dword ptr [thumbXPos]
+mov  eax, dword ptr [thumbXPos]            mov  eax, dword ptr [DAT_ButtonX]
+add  eax, ecx                              add  eax, ecx
+```
+
+Serve order, `ChoosePhysReg` costs and chosen registers are identical in both runs; only the load order flips,
+so the two operands trade registers.
+
+### Periodic in 64, and how many functions it reaches
+
+Because the only path is `number & 0x3f`, the outcome repeats every 64 symbols - predicted and confirmed for
+nine combinations of dummy enums and typedefs on `placeDefensiveStructureTile`, including 32 enums = 64
+typedefs = 128 typedefs = no change. `shift_sweep.py --all` screened all 2469 marked functions at shifts
+0/17/34/51 (no compile errors), then swept the six that varied over the full period:
+
+| function | shift 0 | best | shifts at best (of 64) |
+|---|---|---|---|
+| `placeDefensiveStructureTile` | 0.9630 | **1.0000** | 39: 13-23, 25-52 |
+| `MenuItemRenderFunction_GameplayOptions_SpeedSlider` | 1.0000 | 1.0000 | 21: 0-14, 16-19, 62-63 |
+| `MenuItemRenderFunction_SoundOptions_VolumeSlider` | 1.0000 | 1.0000 | 21: 0-10, 12-15, 58-63 |
+| `MenuItemActionHandler_UnusedChooseAvailableKeeps_Main` | 1.0000 | 1.0000 | 50: 0-48, 63 |
+| `DisplayMapDescriptionAndAllocatePlayersToSlots` | 0.9507 | 0.9686 | 45 |
+| `UpdateFireBallistaBuilding` | 0.9936 | 0.9936 | 55 |
+
+About 0.25% of functions, and only one is held below a reachable 100% today; three sit at 100% by luck and an
+unrelated header edit can knock them down (the two sliders hardest). A function whose sensitive window is
+narrower than 17 shifts can slip between the screen's four points, so six is a lower bound.
+
+### What to do with it
+
+- A header-only change that moves one function's match is a candidate for this. Check with
+  `shift_sweep.py OUT.jsonl FILE.cpp --name FUNC` (0-63 by default, about 30 s at `-j 12`).
+- If any shift reaches 1.0, the source is right: record the function as "matches modulo TU symbol count" in the
+  commit remark, like "only call targets differ". Do **not** pad the translation unit with dummy declarations
+  or steer the enum/typedef count by hand - the next header edit anywhere above the function moves it again.
+  Converting enums to `#define`s does not fix it either; it only removes symbols, which helps or hurts by luck.
+- To see which pass decides it for a new case: `color_probe.py FILE.cpp --name FUNC` and again with
+  `--shift N` for a good N, then `color_probe.py --compare A.txt B.txt`. The first checkpoint where a
+  candidate differs by more than its number, and the first event list that differs, name the pass. `--watch ID`
+  puts a hardware breakpoint on that candidate's flag byte and prints the stack of every write.

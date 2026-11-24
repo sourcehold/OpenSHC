@@ -9,24 +9,28 @@ namespace Map {
     void TileMapState::getBuildingSizeIndexMappingData(int buildingSizeTileIndex, int buildingWidthOrHeight)
     {
         this->constructionTileCount = buildingWidthOrHeight * buildingWidthOrHeight;
-        this->buildingX = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][0];
-        this->buildingY = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][1];
+        this->buildingX = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex].x;
+        this->buildingY = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex].y;
         switch (this->mapOrientation) {
         case OpenSHC::Map::Enums::MO_NORTH:
-            this->buildingRotationRelatedValue
-                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][2];
+            this->buildingOrientedPartIndex
+                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex]
+                      .orientedPartIndex[0];
             return;
         case OpenSHC::Map::Enums::MO_EAST:
-            this->buildingRotationRelatedValue
-                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][3];
+            this->buildingOrientedPartIndex
+                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex]
+                      .orientedPartIndex[1];
             return;
         case OpenSHC::Map::Enums::MO_SOUTH:
-            this->buildingRotationRelatedValue
-                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][4];
+            this->buildingOrientedPartIndex
+                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex]
+                      .orientedPartIndex[2];
             return;
         case OpenSHC::Map::Enums::MO_WEST:
-            this->buildingRotationRelatedValue
-                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex][5];
+            this->buildingOrientedPartIndex
+                = DAT_BuildingSizeIndexMapping::instance[buildingWidthOrHeight][buildingSizeTileIndex]
+                      .orientedPartIndex[3];
         }
     }
 

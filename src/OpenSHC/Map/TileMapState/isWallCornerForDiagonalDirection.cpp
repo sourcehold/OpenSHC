@@ -1,37 +1,39 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+
 namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_CRENEL;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8780
-    uint TileMapState::isWallCornerForDiagonalDirection(int tile, int y, int direction)
+    BOOLEnum TileMapState::isWallCornerForDiagonalDirection(int tile, int y, int direction)
     {
-        int first = 0;
-        int second = 0;
-        int third = 0;
-        int fourth = 0;
-        if (direction == 1) {
-            first = 4;
-            second = 6;
-            third = 0;
-            fourth = 2;
-        } else if (direction == 3) {
-            first = 0;
-            second = 6;
-            third = 4;
-            fourth = 2;
-        } else if (direction == 5) {
-            first = 0;
-            second = 2;
-            third = 4;
-            fourth = 6;
-        } else if (direction == 7) {
-            first = 4;
-            second = 2;
-            third = 0;
-            fourth = 6;
+        int first = OpenSHC::Map::Enums::CD_NORTH;
+        int second = OpenSHC::Map::Enums::CD_NORTH;
+        int third = OpenSHC::Map::Enums::CD_NORTH;
+        int fourth = OpenSHC::Map::Enums::CD_NORTH;
+        if (direction == OpenSHC::Map::Enums::CD_NORTHEAST) {
+            first = OpenSHC::Map::Enums::CD_SOUTH;
+            second = OpenSHC::Map::Enums::CD_WEST;
+            third = OpenSHC::Map::Enums::CD_NORTH;
+            fourth = OpenSHC::Map::Enums::CD_EAST;
+        } else if (direction == OpenSHC::Map::Enums::CD_SOUTHEAST) {
+            first = OpenSHC::Map::Enums::CD_NORTH;
+            second = OpenSHC::Map::Enums::CD_WEST;
+            third = OpenSHC::Map::Enums::CD_SOUTH;
+            fourth = OpenSHC::Map::Enums::CD_EAST;
+        } else if (direction == OpenSHC::Map::Enums::CD_SOUTHWEST) {
+            first = OpenSHC::Map::Enums::CD_NORTH;
+            second = OpenSHC::Map::Enums::CD_EAST;
+            third = OpenSHC::Map::Enums::CD_SOUTH;
+            fourth = OpenSHC::Map::Enums::CD_WEST;
+        } else if (direction == OpenSHC::Map::Enums::CD_NORTHWEST) {
+            first = OpenSHC::Map::Enums::CD_SOUTH;
+            second = OpenSHC::Map::Enums::CD_EAST;
+            third = OpenSHC::Map::Enums::CD_NORTH;
+            fourth = OpenSHC::Map::Enums::CD_WEST;
         }
 
         if ((this->LogicLayer[this->directionTranslationMatrix[y][first] + tile] & L_CRENEL) == 0) {
@@ -43,7 +45,10 @@ namespace Map {
         if ((this->LogicLayer[this->directionTranslationMatrix[y][third] + tile] & L_CRENEL) != 0) {
             return FALSE;
         }
-        return ~((uint)this->LogicLayer[this->directionTranslationMatrix[y][fourth] + tile] >> 9) & 1;
+        if ((this->LogicLayer[this->directionTranslationMatrix[y][fourth] + tile] & L_CRENEL) != 0) {
+            return FALSE;
+        }
+        return TRUE;
     }
 
 }

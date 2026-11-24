@@ -1,5 +1,6 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -10,18 +11,18 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F6FD0
-    void TileMapState::triggerLoweredView(int requestedView)
+    void TileMapState::triggerLoweredView(OpenSHC::Map::Enums::LoweredViewTransitionInt requestedView)
     {
-        int view = 2;
-        if (this->flatViewToggleValue2 == 0) {
-            view = requestedView;
+        OpenSHC::Map::Enums::LoweredViewTransition view = OpenSHC::Map::Enums::LVT_SET_NORMAL;
+        if (!this->flatViewToggleValue2) {
+            view = (OpenSHC::Map::Enums::LoweredViewTransition)requestedView;
         }
         if (this->refreshCertainTileMap_old == view) {
             return;
         }
         this->refreshCertainTileMap = view;
         this->counter1 = 0;
-        if (view != 3) {
+        if (view != OpenSHC::Map::Enums::LVT_LOWER) {
             return;
         }
         if (DAT_GameCore::instance.gamePausedLogical != 0) {

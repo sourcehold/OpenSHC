@@ -29,9 +29,10 @@ namespace Map {
                 this->temporaryTerrainTypeArray[this->temporaryTerrainTypeIndex] = tile;
                 int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int const height = this->HeightLayer[tile];
-                for (int index = 0; index < countof(DAT_ClimbLogicDefinedData::instance.field_0x2c); index++) {
-                    int neighbour
-                        = this->directionTranslationMatrix[row][DAT_ClimbLogicDefinedData::instance.field_0x2c[index]]
+                for (int index = 0; index < countof(DAT_ClimbLogicDefinedData::instance.neighbourSearchOrder);
+                    index++) {
+                    int neighbour = this->directionTranslationMatrix[row][DAT_ClimbLogicDefinedData::instance
+                                            .neighbourSearchOrder[index]]
                         + tile;
                     if ((this->LogicLayer[neighbour] & L_RIVER) != 0 && this->HeightLayer[neighbour] > height + 80) {
                         this->temporaryTerrainTypeBinaryArray[this->temporaryTerrainTypeIndex] = 0;

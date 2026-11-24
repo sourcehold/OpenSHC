@@ -15,7 +15,7 @@ namespace Map {
     {
         int buildingSizeTileIndex = 0;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int tileUnk = DAT_ViewportRenderState::instance
@@ -27,10 +27,7 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].y + this->buildingY, tileUnk);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoat, this)(tileUnk);
             buildingSizeTileIndex++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
 
         short buildingType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
         if (buildingType == OpenSHC::Map::Buildings::BT_GATEHOUSELARGE) {

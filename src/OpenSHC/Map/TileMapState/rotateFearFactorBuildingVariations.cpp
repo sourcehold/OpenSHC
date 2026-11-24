@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -10,19 +11,19 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F8300
     void TileMapState::rotateFearFactorBuildingVariations()
     {
-        DWORD now = timeGetTime();
-        if (this->editorRockType == 5) {
-            if (this->rockOrientation == 0) {
-                this->rockOrientation = 2;
-            } else if (this->rockOrientation == 2) {
-                this->rockOrientation = 4;
-            } else if (this->rockOrientation == 4) {
-                this->rockOrientation = 6;
+        int now = timeGetTime();
+        if (this->editorRockType == OpenSHC::Map::Rocks::Enums::ERT_BIGROCK5) {
+            if (this->rockOrientation == OpenSHC::Map::Enums::MO_NORTH) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_EAST;
+            } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_EAST) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_SOUTH;
+            } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_WEST;
             } else {
-                this->rockOrientation = 0;
+                this->rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
             }
         }
-        if ((int)now < (int)(this->lastTime + 1000)) {
+        if (now < this->lastTime + 1000) {
             return;
         }
 
@@ -32,15 +33,15 @@ namespace Map {
         } else {
             this->gateOrientationVariant = 80;
         }
-        if (this->editorRockType == 0) {
-            if (this->rockOrientation == 0) {
-                this->rockOrientation = 2;
-            } else if (this->rockOrientation == 2) {
-                this->rockOrientation = 4;
-            } else if (this->rockOrientation == 4) {
-                this->rockOrientation = 6;
+        if (this->editorRockType == OpenSHC::Map::Rocks::Enums::ERT_NONE) {
+            if (this->rockOrientation == OpenSHC::Map::Enums::MO_NORTH) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_EAST;
+            } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_EAST) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_SOUTH;
+            } else if (this->rockOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
+                this->rockOrientation = OpenSHC::Map::Enums::MO_WEST;
             } else {
-                this->rockOrientation = 0;
+                this->rockOrientation = OpenSHC::Map::Enums::MO_NORTH;
             }
         }
 

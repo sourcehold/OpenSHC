@@ -1,5 +1,6 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -12,19 +13,19 @@ namespace Map {
     BOOLEnum TileMapState::isWallConnectionHeightValid(int tile, int y, int direction)
     {
         int tileHeight = this->HeightLayer[tile];
-        int firstDirection = 0;
-        int secondDirection = 0;
-        if (direction == 0) {
-            secondDirection = 4;
-        } else if (direction == 2) {
-            firstDirection = 2;
-            secondDirection = 6;
-        } else if (direction == 4) {
-            firstDirection = 0;
-            secondDirection = direction;
-        } else if (direction == 6) {
-            firstDirection = 2;
-            secondDirection = 6;
+        int firstDirection = OpenSHC::Map::Enums::CD_NORTH;
+        int secondDirection = OpenSHC::Map::Enums::CD_NORTH;
+        if (direction == OpenSHC::Map::Enums::CD_NORTH) {
+            secondDirection = OpenSHC::Map::Enums::CD_SOUTH;
+        } else if (direction == OpenSHC::Map::Enums::CD_EAST) {
+            firstDirection = OpenSHC::Map::Enums::CD_EAST;
+            secondDirection = OpenSHC::Map::Enums::CD_WEST;
+        } else if (direction == OpenSHC::Map::Enums::CD_SOUTH) {
+            firstDirection = OpenSHC::Map::Enums::CD_NORTH;
+            secondDirection = OpenSHC::Map::Enums::CD_SOUTH;
+        } else if (direction == OpenSHC::Map::Enums::CD_WEST) {
+            firstDirection = OpenSHC::Map::Enums::CD_EAST;
+            secondDirection = OpenSHC::Map::Enums::CD_WEST;
         }
 
         int first = this->directionTranslationMatrix[y][firstDirection] + tile;

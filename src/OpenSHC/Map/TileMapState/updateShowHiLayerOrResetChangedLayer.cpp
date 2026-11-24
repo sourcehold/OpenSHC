@@ -1,16 +1,24 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+
 #include "OpenSHC/Globals/DAT_RotateMapOrPullDownTerrain.hpp"
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Map::Enums::LVT_LOWER;
+    using OpenSHC::Map::Enums::LVT_NONE;
+    using OpenSHC::Map::Enums::LVT_RAISE;
+    using OpenSHC::Map::Enums::LVT_SET_LOWERED;
+    using OpenSHC::Map::Enums::LVT_SET_NORMAL;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00501A20
     void TileMapState::updateShowHiLayerOrResetChangedLayer()
     {
         BOOLEnum importHeight = FALSE;
         this->refreshRelatedTwo = 0;
-        if (this->refreshCertainTileMap == 0) {
+        if (this->refreshCertainTileMap == LVT_NONE) {
             return;
         }
 
@@ -18,11 +26,11 @@ namespace Map {
         this->refreshCertainTileMap_old = this->refreshCertainTileMap;
         this->refreshRelatedOne = 0;
         for (int row = 0; row < countof(this->heightBasedScreenYOffset); row++) {
-            int target = ((uint)row >> 2) + 1;
+            int const loweredOffset = row / 4 + 1;
             int step;
-            if (this->refreshCertainTileMap == 3) {
-                step = this->heightBasedScreenYOffset[row] - target;
-            } else if (this->refreshCertainTileMap == 4) {
+            if (this->refreshCertainTileMap == LVT_LOWER) {
+                step = this->heightBasedScreenYOffset[row] - loweredOffset;
+            } else if (this->refreshCertainTileMap == LVT_RAISE) {
                 step = row - this->heightBasedScreenYOffset[row];
             } else {
                 step = 0;
@@ -47,16 +55,16 @@ namespace Map {
                 step = 0;
             }
 
-            if (this->refreshCertainTileMap == 1) {
-                this->heightBasedScreenYOffset[row] = target;
-            } else if (this->refreshCertainTileMap == 2) {
+            if (this->refreshCertainTileMap == LVT_SET_LOWERED) {
+                this->heightBasedScreenYOffset[row] = loweredOffset;
+            } else if (this->refreshCertainTileMap == LVT_SET_NORMAL) {
                 this->heightBasedScreenYOffset[row] = row;
-            } else if (this->refreshCertainTileMap == 3) {
+            } else if (this->refreshCertainTileMap == LVT_LOWER) {
                 this->heightBasedScreenYOffset[row] -= step;
-                if (this->heightBasedScreenYOffset[row] > target) {
+                if (this->heightBasedScreenYOffset[row] > loweredOffset) {
                     importHeight = TRUE;
                 }
-            } else if (this->refreshCertainTileMap == 4) {
+            } else if (this->refreshCertainTileMap == LVT_RAISE) {
                 this->heightBasedScreenYOffset[row] += step;
                 if (this->heightBasedScreenYOffset[row] != row) {
                     importHeight = TRUE;
@@ -66,13 +74,13 @@ namespace Map {
 
         this->refreshRelatedTwo = 1;
         if (!importHeight) {
-            if (this->refreshCertainTileMap == 4 || this->refreshCertainTileMap == 2) {
+            if (this->refreshCertainTileMap == LVT_RAISE || this->refreshCertainTileMap == LVT_SET_NORMAL) {
                 this->refreshRelatedOne = 1;
             } else {
                 this->refreshRelatedOne = 0;
                 this->refreshRelatedTwo = 2;
             }
-            this->refreshCertainTileMap = 0;
+            this->refreshCertainTileMap = LVT_NONE;
             this->forceUpdateLogicalAndMiscDisplayLayers = TRUE;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setChangedLayerToThreeAndMapping0x40x40, this)();
             this->counter1 = 0;

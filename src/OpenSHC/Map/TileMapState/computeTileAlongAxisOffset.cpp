@@ -5,15 +5,18 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::Enums::CD_NORTH;
+    using OpenSHC::Map::Enums::CD_SOUTH;
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00500B50
-    int TileMapState::computeTileAlongAxisOffset(int tileUnk, int addend, uint offset)
+    int TileMapState::computeTileAlongAxisOffset(int tileUnk, int addend, int offset)
     {
         int yStep = 1;
-        int direction = 4;
+        int direction = CD_SOUTH;
         int y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tileUnk];
-        if ((int)offset < 0) {
+        if (offset < 0) {
             yStep = -1;
-            direction = 0;
+            direction = CD_NORTH;
         }
 
         int count = abs(offset);

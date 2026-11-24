@@ -29,17 +29,17 @@ namespace Map {
                 continue;
             }
             int tile = this->pitchDitches[id].tile;
-            if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) == 0 || this->pitchDitches[id].state == -1) {
+            if ((this->LogicLayer[tile] & L_PLAIN2_AND_PITCH) == 0 || this->pitchDitches[id].state == PDS_REMOVE) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::destroyPitchDitch, this)(id);
-            } else if (this->pitchDitches[id].state == 0) {
+            } else if (this->pitchDitches[id].state == PDS_PLACED) {
                 this->pitchDitches[id].state += 1;
-                this->pitchDitches[id].field_0x12 = 0;
-            } else if (this->pitchDitches[id].state == 2) {
-                this->pitchDitches[id].field_0x12 += 1;
-                if (this->pitchDitches[id].field_0x12 == 20) {
+                this->pitchDitches[id].burnTimer = 0;
+            } else if (this->pitchDitches[id].state == PDS_BURNING) {
+                this->pitchDitches[id].burnTimer += 1;
+                if (this->pitchDitches[id].burnTimer == 20) {
                     this->pitchDitches[id].state += 1;
-                    this->pitchDitches[id].field_0x12 = 0;
-                    uint height = DAT_TileMapState::instance.HeightLayer[tile];
+                    this->pitchDitches[id].burnTimer = 0;
+                    int height = DAT_TileMapState::instance.HeightLayer[tile];
                     for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.field_0x376c); i++) {
                         int neighbour = DAT_ViewportRenderState::instance
                                             .translationMatrix[this->pitchDitches[id].y
@@ -51,22 +51,22 @@ namespace Map {
                         }
                         int other = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(
                             neighbour);
-                        if (other == 0 || this->pitchDitches[other].state != 1) {
+                        if (other == 0 || this->pitchDitches[other].state != PDS_READY) {
                             continue;
                         }
                         if (abs(height - DAT_TileMapState::instance.HeightLayer[neighbour]) < 25) {
                             MACRO_CALL(OpenSHC::Map::Entities_Func::SetPlaceOnFire)(this->pitchDitches[other].owner,
                                 this->pitchDitches[other].x * 8, this->pitchDitches[other].y * 8,
                                 DAT_TileMapState::instance.HeightLayer[this->pitchDitches[other].tile], 3);
-                            this->pitchDitches[other].state = 2;
+                            this->pitchDitches[other].state = PDS_BURNING;
                         }
                     }
                 }
-            } else if (this->pitchDitches[id].state == 3) {
-                this->pitchDitches[id].field_0x12 += 1;
-                if (this->pitchDitches[id].field_0x12 == 200) {
+            } else if (this->pitchDitches[id].state == PDS_BURNT_OUT) {
+                this->pitchDitches[id].burnTimer += 1;
+                if (this->pitchDitches[id].burnTimer == 200) {
                     DAT_TileMapState::instance.HeightLayer[tile] = DAT_TileMapState::instance.DefaultHeightLayer[tile];
-                    this->pitchDitches[id].state = -1;
+                    this->pitchDitches[id].state = PDS_REMOVE;
                 }
             }
         }
