@@ -22253,7 +22253,7 @@ SHC_3BB0A8C1_0x0047C5D0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0047C670 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047C860 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047C860 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047CA80 | 100.0% | Reimplemented
 
@@ -22311,7 +22311,7 @@ SHC_3BB0A8C1_0x0047D0E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D100 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0047D190 | 0.0% | Pending
+SHC_3BB0A8C1_0x0047D190 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0047D330 | 100.0% | Reimplemented
 
