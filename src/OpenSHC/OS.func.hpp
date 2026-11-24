@@ -136,7 +136,7 @@ namespace OS_Func {
         Address::SHC_3BB0A8C1_0x005815C6, &OpenSHC::OS::_ucrt_read)
     _ucrt_read;
 
-    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char* _Filename, int _OpenFlag, int _PMode), REIMPLEMENTED_CRT,
+    MACRO_FUNCTION_RESOLVER(int(__cdecl*)(char const* _Filename, int _OpenFlag, int _PMode), REIMPLEMENTED_CRT,
         Address::SHC_3BB0A8C1_0x005816C3, &OpenSHC::OS::_ucrt_open)
     _ucrt_open;
 
