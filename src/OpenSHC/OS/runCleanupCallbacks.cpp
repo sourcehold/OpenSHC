@@ -1,4 +1,4 @@
-#include "../CrtStatics.hpp"
+#include "../OS.func.hpp"
 
 namespace OpenSHC {
 namespace CrtStatics {
