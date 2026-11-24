@@ -233,7 +233,7 @@ namespace Map {
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationTickCounter > 3) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationTickCounter = 0;
         }
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[0] == 0) {
+        if (workerID == 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 0;
         } else {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationTickCounter == 0) {

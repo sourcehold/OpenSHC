@@ -63,7 +63,7 @@ namespace Map {
 
         // Most of the animation tables are declared byte, but the original reads them signed
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 0) {
-            int const index = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex;
+            short const index = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex;
             char const frame = DAT_GameSynchronyState::instance.currentGameMode == 0
                 ? (char)DAT_BuildingDefinedData::instance.AnimTannerSolitary[index]
                 : (char)DAT_BuildingDefinedData::instance.AnimTanner[index];
@@ -72,7 +72,7 @@ namespace Map {
             } else {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationFrame = frame;
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 0) {
+            if (index == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength = 31;
             } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderBlendStrength
                 > 0) {

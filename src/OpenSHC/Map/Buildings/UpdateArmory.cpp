@@ -172,8 +172,8 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].overlayImageID = 0;
         int bows = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                        .resources[OpenSHC::Game::Resources::RT_BOW];
-        int crossbows = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                            .resources[OpenSHC::Game::Resources::RT_CROSSBOW];
+        short crossbows = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                              .resources[OpenSHC::Game::Resources::RT_CROSSBOW];
         int spears = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                          .resources[OpenSHC::Game::Resources::RT_SPEAR];
         int pikes = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]

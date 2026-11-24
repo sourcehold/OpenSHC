@@ -55,6 +55,7 @@ namespace Map {
         // The puller (state, campgroundVclock), the ox (field_0x11a, extraAnimationFrame1), the pryer
         // (killingPitField, extraAnimationFrame2) and the mason (field_0x11e, extraAnimationFrame3) wait on each
         // other. The QuarryAnimationFrames* tables are declared byte, but the original reads them signed
+        int done = 0;
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workers[1] == 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock = 0;
@@ -64,7 +65,6 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock = 0;
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 1;
         } else {
-            int done = 0;
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].state == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].campgroundVclock = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 1;
@@ -181,7 +181,7 @@ namespace Map {
         }
 
         {
-            int done = 0;
+            done = 0;
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x11a == 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame1 = 0;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2 = 122;

@@ -71,7 +71,7 @@ namespace Map {
             int const centerX = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].x + half;
             int const xEnd = centerX + 8;
             int const centerY = half + DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].y;
-            int const yEnd = centerY + 8;
+            short const yEnd = centerY + 8;
             int const yStart = centerY - 8;
             for (int x = centerX - 8; x < xEnd; ++x) {
                 for (int y = yStart; y < yEnd; ++y) {
@@ -196,34 +196,42 @@ namespace Map {
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit,
                                 DAT_UnitsState::ptr)(unitID, destinationX, destinationY, 0);
                         }
-                        for (int i = 0; i < 4; ++i) {
-                            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].insideUnitID[i]
-                                    <= 0
-                                || DAT_UnitsState::instance
-                                        .units[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                                .insideUnitID[i]]
-                                        .uid
-                                    != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                        .insideUnitUID[i]) {
-                                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].insideUnitID[i]
-                                    = unitID;
-                                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].insideUnitUID[i]
-                                    = DAT_UnitsState::instance.units[unitID].uid;
-                                break;
-                            }
-                            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[i] <= 0
-                                || DAT_UnitsState::instance
-                                        .units[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                                .workerID[i]]
-                                        .uid
-                                    != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
-                                        .workerUID[i]) {
-                                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[i]
-                                    = unitID;
-                                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerUID[i]
-                                    = DAT_UnitsState::instance.units[unitID].uid;
-                                break;
-                            }
+                        {
+                            int i = 0;
+                            do {
+                                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                            .insideUnitID[i]
+                                        <= 0
+                                    || DAT_UnitsState::instance
+                                            .units[DAT_BuildingsState::instance
+                                                    .buildings[DAT_CurrentBuildingID::instance]
+                                                    .insideUnitID[i]]
+                                            .uid
+                                        != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                            .insideUnitUID[i]) {
+                                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                        .insideUnitID[i] = unitID;
+                                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                        .insideUnitUID[i] = DAT_UnitsState::instance.units[unitID].uid;
+                                    break;
+                                }
+                                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[i]
+                                        <= 0
+                                    || DAT_UnitsState::instance
+                                            .units[DAT_BuildingsState::instance
+                                                    .buildings[DAT_CurrentBuildingID::instance]
+                                                    .workerID[i]]
+                                            .uid
+                                        != DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
+                                            .workerUID[i]) {
+                                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerID[i]
+                                        = unitID;
+                                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].workerUID[i]
+                                        = DAT_UnitsState::instance.units[unitID].uid;
+                                    break;
+                                }
+                                ++i;
+                            } while (i < 4);
                         }
                     }
                 }

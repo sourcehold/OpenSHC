@@ -102,16 +102,15 @@ namespace Map {
                     DAT_PathFindingState::ptr)(-1, x, y);
                 DAT_UnitsState::instance.units[workerID].tile = DAT_PathFindingState::instance.ALG_ResultTile;
                 DAT_UnitsState::instance.units[workerID].nextTileUnk = DAT_PathFindingState::instance.ALG_ResultTile;
-                DAT_UnitsState::instance.units[workerID].x = DAT_PathFindingState::instance.ALG_ResultX;
-                DAT_UnitsState::instance.units[workerID].mimicCurrentXPosition
-                    = DAT_PathFindingState::instance.ALG_ResultX;
+                int const ALG_ResultXValue = DAT_PathFindingState::instance.ALG_ResultX;
+                DAT_UnitsState::instance.units[workerID].x = ALG_ResultXValue;
+                DAT_UnitsState::instance.units[workerID].mimicCurrentXPosition = ALG_ResultXValue;
                 DAT_UnitsState::instance.units[workerID].terrainOrClimbHeight
                     = DAT_TileMapState::instance.HeightLayer[DAT_PathFindingState::instance.ALG_ResultTile];
                 DAT_UnitsState::instance.units[workerID].y = DAT_PathFindingState::instance.ALG_ResultY;
                 DAT_UnitsState::instance.units[workerID].mimicCurrentYPosition
                     = DAT_PathFindingState::instance.ALG_ResultY;
-                DAT_UnitsState::instance.units[workerID].microXPosition
-                    = DAT_PathFindingState::instance.ALG_ResultX * 8 + 4;
+                DAT_UnitsState::instance.units[workerID].microXPosition = ALG_ResultXValue * 8 + 4;
                 DAT_UnitsState::instance.units[workerID].microYPosition
                     = DAT_PathFindingState::instance.ALG_ResultY * 8 + 4;
                 DAT_UnitsState::instance.units[workerID].totalSizeOfPathPlan = 0;

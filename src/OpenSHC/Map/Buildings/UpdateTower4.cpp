@@ -46,7 +46,7 @@ namespace Map {
         // assignment via a local stack pointer is required for a closer match
         int* buildingProgressPtr = &DAT_BuildingsState::instance.buildings[buildingID].buildingProgress;
         *buildingProgressPtr += 1;
-        if (DAT_BuildingsState::instance.buildings[buildingID].buildingProgress >= 40) {
+        if (*buildingProgressPtr >= 40) {
             DAT_BuildingsState::instance.buildings[buildingID].buildingProgress = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::computeBuildingEntranceFlagsForOrientations,
                 DAT_BuildingsState::ptr)(buildingID);
@@ -71,8 +71,8 @@ namespace Map {
             cracks = 8;
         }
         if (cracks != 0) {
+            int seed = DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1;
             if (cracks > 0) {
-                int seed = DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1;
                 int slot = seed >> 8;
                 for (int i = cracks; i != 0; --i) {
                     damage[slot & 7] = (seed & 0xf) + 1;
@@ -89,9 +89,9 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].overlayImageID = damage[6];
             DAT_BuildingsState::instance.buildings[buildingID].extraOverlayImage10 = damage[7];
         }
+        int i = 0;
         if (DAT_BuildingsState::instance.field_0x18e074 != 0) {
             // Mark the tiles listed for the current map orientation, clear the rest
-            int i = 0;
             do {
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(i, 6);
@@ -117,7 +117,7 @@ namespace Map {
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tileScanCountdown > 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tileScanCountdown -= 1;
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].tileScanCountdown == 0) {
-                int i = 0;
+                i = 0;
                 int unitsOnTop = 0;
                 do {
                     MACRO_CALL_MEMBER(

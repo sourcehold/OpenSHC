@@ -67,8 +67,8 @@ namespace Map {
             cracks = 8;
         }
         if (cracks != 0) {
+            int seed = DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1;
             if (cracks > 0) {
-                int seed = DAT_BuildingsState::instance.buildings[buildingID].fireRelatedRNG1;
                 int slot = seed >> 8;
                 for (int i = cracks; i != 0; --i) {
                     damage[slot & 7] = (seed & 0xf) + 1;
