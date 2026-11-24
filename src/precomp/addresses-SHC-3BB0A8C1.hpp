@@ -87054,8 +87054,10 @@ enum {
     SHC_3BB0A8C1_0x005AB0E0 = 0x005AB0E0,
     // type: /string
     SHC_3BB0A8C1_0x005AB0EC = 0x005AB0EC,
+    // type: /float
+    SHC_3BB0A8C1_0x005AB0F8 = 0x005AB0F8,
     // type: /string
-    SHC_3BB0A8C1_0x005AB0FA = 0x005AB0FA,
+    SHC_3BB0A8C1_0x005AB0FC = 0x005AB0FC,
     // type: /string
     SHC_3BB0A8C1_0x005AB114 = 0x005AB114,
     // type: /string
