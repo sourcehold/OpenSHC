@@ -567,7 +567,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00537130, &UnitsState::queueDisbandAndAttackCommand3Params)
             queueDisbandAndAttackCommand3Params;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(undefined4, undefined4, undefined4, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitInstructionType, int, int), false,
                 Address::SHC_3BB0A8C1_0x00537160, &UnitsState::queueDisbandAndAttackCommand4Params)
             queueDisbandAndAttackCommand4Params;
 

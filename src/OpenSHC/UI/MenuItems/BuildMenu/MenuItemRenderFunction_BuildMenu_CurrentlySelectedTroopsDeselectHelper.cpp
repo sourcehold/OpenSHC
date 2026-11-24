@@ -1,5 +1,4 @@
-#include "OpenSHC/UI/MenuItems/BuildMenu.func.hpp"
-#include "OpenSHC/Map/Units/Selection/UnitSelectionEnumInt.hpp"
+#include "../BuildMenu.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ButtonUnknownZero.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
@@ -9,19 +8,17 @@ namespace UI {
     namespace MenuItems {
         namespace BuildMenu {
 
-            using Map::Units::Selection::UnitSelectionEnumInt;
-
             // FUNCTION: STRONGHOLDCRUSADER 0x00439390
-            void MenuItemRenderFunction_BuildMenu_CurrentlySelectedTroopsDeselectHelper(
-                UnitSelectionEnumInt selectionIndex, ...)
+            void MenuItemRenderFunction_BuildMenu_CurrentlySelectedTroopsDeselectHelper(int slotID, ...)
             {
                 if (DAT_UnitsState::instance.nHasOwnedUnitInSelection == 0) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                    DAT_ButtonUnknownZero::instance = TRUE;
                     return;
                 }
-                DAT_ButtonUnknownZero::instance = 0;
-                if (DAT_UnitsState::instance.selectionUnitType[selectionIndex] == -1) {
-                    DAT_ButtonUnknownZero::instance = 1;
+                DAT_ButtonUnknownZero::instance = FALSE;
+                // the deselect buttons are slot IDs 20 to 27
+                if (DAT_UnitsState::instance.selectionSlots[slotID - 20] == -1) {
+                    DAT_ButtonUnknownZero::instance = TRUE;
                 }
             }
 

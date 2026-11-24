@@ -81,7 +81,7 @@ namespace OS {
 
     int __cdecl _ucrt_read(int fileDescriptor, void* destination, size_t size);
 
-    int __cdecl _ucrt_open(char* _Filename, int _OpenFlag, int _PMode);
+    int __cdecl _ucrt_open(char const* _Filename, int _OpenFlag, int _PMode);
 
     void __cdecl _srand(ulong param_1);
 
