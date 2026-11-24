@@ -6,7 +6,9 @@ namespace OpenSHC {
 int __cdecl OS::_atexit(_atexit_t* callback)
 {
     typedef _atexit_t* (__cdecl* OnExit)(_atexit_t*);
-    return reinterpret_cast<OnExit>(&trampoline<Address::SHC_3BB0A8C1_0x0057FA26>)(callback) ? 0 : -1;
+    if (reinterpret_cast<OnExit>(&trampoline<Address::SHC_3BB0A8C1_0x0057FA26>)(callback))
+        return 0;
+    return -1;
 }
 
 } // namespace OpenSHC

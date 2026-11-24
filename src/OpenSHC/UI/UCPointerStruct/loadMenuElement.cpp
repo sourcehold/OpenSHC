@@ -13,7 +13,7 @@ namespace UI {
         *iconDeactivatedPtrUnk = 0;
 
         int selectedPosition = 0;
-        while (uc->defaultPosition.x != -1) {
+        for (; uc->defaultPosition.x != -1; ++uc) {
             if (uc->id == ucId) {
                 if (ucPositionIndex == 0 || uc->ucPositionArray[ucPositionIndex - 1].x == -1) {
                     *xPosPtr = uc->defaultPosition.x;
@@ -23,7 +23,6 @@ namespace UI {
                 selectedPosition = ucPositionIndex;
                 break;
             }
-            ++uc;
         }
         if (selectedPosition != 0) {
             *xPosPtr = uc->ucPositionArray[selectedPosition - 1].x;
