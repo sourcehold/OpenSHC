@@ -113,6 +113,7 @@ src/OpenSHC/UI/Rendering/TextureRenderCore/transformTilesetToRGB565.cpp
 src/OpenSHC/UI/Rendering/TextureRenderCore/transformTileObjectToRGB565.cpp
 src/OpenSHC/UI/Rendering/TextureRenderCore/renderGmWithPreparedAlphaMask.cpp
 src/OpenSHC/UI/Rendering/TextureRenderCore/renderInterfaceOrBuildingOccupationArea.cpp
+src/OpenSHC/UI/Rendering/TextureRenderCore/renderUnitAnimationWithBlendingUnk.cpp
 src/OpenSHC/UI/Rendering/InitBlendFilterArraysUnk.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_DrawbridgeOpenClose.cpp
 src/OpenSHC/UI/MenuItems/BuildingAndStatusMenu/MenuItemRenderFunction_BuildingAndStatusMenu_GatehouseOpenClose.cpp
@@ -161,6 +162,9 @@ src/OpenSHC/Map/Units/UpdateArabianSwordsman.cpp
 src/OpenSHC/Map/Units/UpdateHorseArcher.cpp
 src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
 src/OpenSHC/Map/Units/UpdateMangonel.cpp
+src/OpenSHC/Map/Units/UpdateHorseArcher_DoShooting.cpp
+src/OpenSHC/Map/Units/UpdateSiegeTent.cpp
+src/OpenSHC/Map/Units/UpdateBatteringRam.cpp
 src/OpenSHC/Map/Units/UpdateOx.cpp
 src/OpenSHC/Map/Units/UpdateMinerIronFetcher.cpp
 src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
