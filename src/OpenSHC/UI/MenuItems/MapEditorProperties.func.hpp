@@ -26,7 +26,7 @@ namespace UI {
                     MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox)
             MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox;
 
-            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x0042EDF0,
+            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x0042EDF0,
                 &OpenSHC::UI::MenuItems::MapEditorProperties::
                     MenuItemActionHandler_MapEditorProperties_MapDescriptionBox)
             MenuItemActionHandler_MapEditorProperties_MapDescriptionBox;
