@@ -95392,7 +95392,7 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00B95B28 = 0x00B95B28,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B95B2C = 0x00B95B2C,
     // type: /int
     SHC_3BB0A8C1_0x00B95B34 = 0x00B95B34,
@@ -95474,7 +95474,7 @@ enum {
     SHC_3BB0A8C1_0x00B960F8 = 0x00B960F8,
     // type: /int
     SHC_3BB0A8C1_0x00B960FC = 0x00B960FC,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B96100 = 0x00B96100,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96108 = 0x00B96108,

@@ -137,6 +137,7 @@ src/OpenSHC/Map/Units/UpdateMiner.cpp
 src/OpenSHC/Map/Units/UpdateQuarryMason.cpp
 src/OpenSHC/Map/Units/UpdateDrunkard.cpp
 src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
+src/OpenSHC/Map/Units/UpdateLion.cpp
 src/OpenSHC/Map/Units/UpdateMerchant.cpp
 src/OpenSHC/Map/Units/UpdateKnight.cpp
 src/OpenSHC/Map/Units/UpdateCageDog.cpp
@@ -165,8 +166,15 @@ src/OpenSHC/Map/Units/UpdateMangonel.cpp
 src/OpenSHC/Map/Units/UpdateHorseArcher_DoShooting.cpp
 src/OpenSHC/Map/Units/UpdateSiegeTent.cpp
 src/OpenSHC/Map/Units/UpdateBatteringRam.cpp
+src/OpenSHC/Map/Units/UpdateCatapult.cpp
+src/OpenSHC/Map/Units/UpdateAssassin.cpp
 src/OpenSHC/Synchrony/Commands/CommandSwitchTeams.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/countPlayersInSameTeam.cpp
 src/OpenSHC/Synchrony/GameSynchronyState/addChatMessageToDisplayList.cpp
+src/OpenSHC/Map/Units/UpdateOx.cpp
+src/OpenSHC/Map/Units/UpdateMinerIronFetcher.cpp
+src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
+src/OpenSHC/Map/Units/UnitsState/isWorkplaceBuildingOnAdjacentTile.cpp
+src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
 src/OpenSHC/UI/MenuItems/TextEditor/MenuItemActionHandler_TextEditor_TextInputRelatedUnk.cpp
 src/OpenSHC/Text/TextEditorState/helpToken.cpp
