@@ -194,6 +194,9 @@ OpenSHC::Map::Units::UpdateTrebuchet
 OpenSHC::Map::Units::UpdateMangonel
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateLion
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateBallista
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::deselectUnit
