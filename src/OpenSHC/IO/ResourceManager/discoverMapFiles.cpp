@@ -19,23 +19,32 @@ namespace IO {
     // FUNCTION: STRONGHOLDCRUSADER 0x00477EE0
     void ResourceManager::discoverMapFiles(char const* param_1)
     {
+        struct ScanState {
+            BOOLEnum _missionMaps;
+            BOOLEnum _originalMaps;
+            HANDLE _handle;
+            __declspec(align(4)) WORD fatDate;
+            __declspec(align(4)) WORD fatTime;
+            BOOLEnum originalMapsScanned;
+        } scan;
+        ResourceManager* __restrict manager = this;
         BOOLEnum _hasSwapped = TRUE;
         int _mapIndex = 0;
 
         FILETIME_UNION filetimeBias;
         filetimeBias.ft_scalar = 0;
 
-        BOOLEnum _missionMaps = FALSE;
-        BOOLEnum _originalMaps = FALSE;
-        BOOLEnum originalMapsScanned = FALSE;
+        scan._missionMaps = FALSE;
+        scan._originalMaps = FALSE;
+        scan.originalMapsScanned = FALSE;
 
         if (!MACRO_CALL(OS_Func::__stricmp)(param_1, s_maps_map_005a64b0)) {
-            _missionMaps = TRUE;
-            _originalMaps = TRUE;
+            scan._missionMaps = TRUE;
+            scan._originalMaps = TRUE;
         }
         if (!MACRO_CALL(OS_Func::__stricmp)(param_1, s_mapsExtreme_map_005a649c)) {
-            _missionMaps = TRUE;
-            _originalMaps = TRUE;
+            scan._missionMaps = TRUE;
+            scan._originalMaps = TRUE;
         }
 
         // the whole time part appears like something that should be part of the std libray, but I found nothing
@@ -50,120 +59,112 @@ namespace IO {
         }
         filetimeBias.ft_scalar *= 600000000; // transform into filetime ticks
 
-        this->mapFileCounter = 0;
+        manager->mapFileCounter = 0;
         MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            500000, 0, this->loadedMapNames);
-
-        HANDLE _handle;
+            500000, 0, manager->loadedMapNames);
 
         WIN32_FIND_DATAA _win32FindData;
-        _handle = FindFirstFileA(param_1, &_win32FindData);
-        if (_handle == INVALID_HANDLE_VALUE) {
+        scan._handle = FindFirstFileA(param_1, &_win32FindData);
+        if (scan._handle == INVALID_HANDLE_VALUE) {
             return;
         }
 
-        for (; this->mapFileCounter < 500;) {
+        for (; manager->mapFileCounter < 500;) {
             MACRO_CALL_MEMBER(LowLevelMemory_Func::copyStringUntilFirstDot, DAT_LowLevelMemory::ptr)(
-                _win32FindData.cFileName, this->loadedMapNames[this->mapFileCounter]);
+                _win32FindData.cFileName, manager->loadedMapNames[manager->mapFileCounter]);
 
             {
                 FILETIME_UNION currentFileTime;
                 currentFileTime.ft_struct = _win32FindData.ftLastWriteTime;
                 currentFileTime.ft_scalar += filetimeBias.ft_scalar;
 
-                WORD fatDate;
-                WORD fatTime;
-                FileTimeToDosDateTime(&currentFileTime.ft_struct, &fatDate, &fatTime);
+                FileTimeToDosDateTime(&currentFileTime.ft_struct, &scan.fatDate, &scan.fatTime);
 
                 // this might indicate that they used a struct here to handle the time
                 // although other usages use it like a number
-                this->mapFileTimes[this->mapFileCounter] = (fatDate << 16) + fatTime;
+                manager->mapFileTimes[manager->mapFileCounter] = (scan.fatDate << 16) + scan.fatTime;
             }
 
             // since all strings are of type ptr, I can not get the length of the string during runtime via sizeof
             // "magic numbers" here consider the length of "mission" and in relation to that
 
-            if (_missionMaps
-                && !MACRO_CALL(OS_Func::__strnicmp)(this->loadedMapNames[this->mapFileCounter], s_mission_005a6494, 7)
-                && this->loadedMapNames[this->mapFileCounter][7] >= '0'
-                && this->loadedMapNames[this->mapFileCounter][7] <= '9') {
+            if (scan._missionMaps
+                && !MACRO_CALL(OS_Func::__strnicmp)(manager->loadedMapNames[manager->mapFileCounter], s_mission_005a6494, 7)
+                && manager->loadedMapNames[manager->mapFileCounter][7] >= '0'
+                && manager->loadedMapNames[manager->mapFileCounter][7] <= '9') {
 
                 bool removeMap = false;
-                if (this->loadedMapNames[this->mapFileCounter][7] == '1') {
-                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '0'
-                            && this->loadedMapNames[this->mapFileCounter][8] <= '9'
-                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
-                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                if (manager->loadedMapNames[manager->mapFileCounter][7] == '1') {
+                    if ((manager->loadedMapNames[manager->mapFileCounter][8] >= '0'
+                            && manager->loadedMapNames[manager->mapFileCounter][8] <= '9'
+                            && manager->loadedMapNames[manager->mapFileCounter][9] == '\0')
+                        || manager->loadedMapNames[manager->mapFileCounter][8] == '\0') {
                         removeMap = true;
                     }
-                } else if (this->loadedMapNames[this->mapFileCounter][7] == '2') {
-                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '0'
-                            && this->loadedMapNames[this->mapFileCounter][8] <= '1'
-                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
-                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                } else if (manager->loadedMapNames[manager->mapFileCounter][7] == '2') {
+                    if ((manager->loadedMapNames[manager->mapFileCounter][8] >= '0'
+                            && manager->loadedMapNames[manager->mapFileCounter][8] <= '1'
+                            && manager->loadedMapNames[manager->mapFileCounter][9] == '\0')
+                        || manager->loadedMapNames[manager->mapFileCounter][8] == '\0') {
                         removeMap = true;
                     }
-                } else if (this->loadedMapNames[this->mapFileCounter][7] == '3') {
-                    if ((this->loadedMapNames[this->mapFileCounter][8] >= '3'
-                            && this->loadedMapNames[this->mapFileCounter][8] <= '7'
-                            && this->loadedMapNames[this->mapFileCounter][9] == '\0')
-                        || this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                } else if (manager->loadedMapNames[manager->mapFileCounter][7] == '3') {
+                    if ((manager->loadedMapNames[manager->mapFileCounter][8] >= '3'
+                            && manager->loadedMapNames[manager->mapFileCounter][8] <= '7'
+                            && manager->loadedMapNames[manager->mapFileCounter][9] == '\0')
+                        || manager->loadedMapNames[manager->mapFileCounter][8] == '\0') {
                         removeMap = true;
                     }
-                } else if (this->loadedMapNames[this->mapFileCounter][8] == '\0') {
+                } else if (manager->loadedMapNames[manager->mapFileCounter][8] == '\0') {
                     removeMap = true;
                 }
 
                 if (removeMap) {
                     MACRO_CALL_MEMBER(LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        1000, '\0', this->loadedMapNames[this->mapFileCounter]);
-                    --this->mapFileCounter;
+                        1000, '\0', manager->loadedMapNames[manager->mapFileCounter]);
+                    --manager->mapFileCounter;
                 }
             }
 
-            ++this->mapFileCounter;
-            if (FindNextFileA(_handle, &_win32FindData)) {
+            ++manager->mapFileCounter;
+            if (FindNextFileA(scan._handle, &_win32FindData)) {
                 continue;
             }
-            if (!_originalMaps || originalMapsScanned) {
+            if (!scan._originalMaps || scan.originalMapsScanned) {
                 break;
             }
-            originalMapsScanned = TRUE;
+            scan.originalMapsScanned = TRUE;
 
             // required, otherwise copy elision will not work
-            std::string path(this->paths_getDocumentsMapsFolderString(TRUE));
+            std::string path(manager->paths_getDocumentsMapsFolderString(TRUE));
             path.append(s__map_005a648c);
 
-            // FIXME: Assuming it did not get lost in the recomp process, since the func does not perfectly match, then
-            //   this is a resource leak here. The older handle does not get closed properly
-
-            // does this truly overwrite?
-            _handle = FindFirstFileA(path.c_str(), &_win32FindData);
-            if (_handle == INVALID_HANDLE_VALUE) {
+            // The game replaces the first search handle here, even if opening the second search fails.
+            // Both paths use this replacement handle for the final FindClose after sorting.
+            scan._handle = FindFirstFileA(path.c_str(), &_win32FindData);
+            if ((reinterpret_cast<UINT_PTR>(scan._handle) + 1u) == 0) {
                 break;
             }
         }
 
-        if (_originalMaps) {
+        if (scan._originalMaps) {
             for (; _mapIndex < 500;) {
                 ++_mapIndex;
                 if (!_hasSwapped) {
                     break;
                 }
                 _hasSwapped = FALSE;
-                for (int _currentMapIndex = 0; _currentMapIndex < this->mapFileCounter - _mapIndex;
+                for (int _currentMapIndex = 0; _currentMapIndex < manager->mapFileCounter - _mapIndex;
                     ++_currentMapIndex) {
-                    if (this->loadedMapNames[_currentMapIndex][0] == '\0'
-                        || this->loadedMapNames[_currentMapIndex + 1][0] == '\0') {
+                    if (manager->loadedMapNames[_currentMapIndex][0] == '\0'
+                        || manager->loadedMapNames[_currentMapIndex + 1][0] == '\0') {
                         break;
                     }
 
-                    int receiver1;
-                    int receiver2;
                     char* _Str2 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex + 1], &receiver1);
+                        manager->loadedMapNames[_currentMapIndex + 1], &scan.originalMapsScanned);
                     char* _Str1 = MACRO_CALL(Global_Func::GetStringBasedOnHardcodedMaps)(
-                        this->loadedMapNames[_currentMapIndex], &receiver2);
+                        manager->loadedMapNames[_currentMapIndex], &scan._missionMaps);
                     if (MACRO_CALL(OS_Func::__stricmp)(_Str1, _Str2) > 0) {
                         MACRO_CALL_MEMBER(ResourceManager_Func::swapMapDataWithNextMap, this)(_currentMapIndex);
                         _hasSwapped = TRUE;
@@ -178,15 +179,15 @@ namespace IO {
                 }
                 _hasSwapped = FALSE;
 
-                for (int _currentMapIndex = 0; _currentMapIndex < this->mapFileCounter - _mapIndex;
+                for (int _currentMapIndex = 0; _currentMapIndex < manager->mapFileCounter - _mapIndex;
                     ++_currentMapIndex) {
-                    if (this->loadedMapNames[_currentMapIndex][0] == '\0'
-                        || this->loadedMapNames[_currentMapIndex + 1][0] == '\0') {
+                    if (manager->loadedMapNames[_currentMapIndex][0] == '\0'
+                        || manager->loadedMapNames[_currentMapIndex + 1][0] == '\0') {
                         break;
                     }
 
                     if (MACRO_CALL(OS_Func::__stricmp)(
-                            this->loadedMapNames[_currentMapIndex], this->loadedMapNames[_currentMapIndex + 1])
+                            manager->loadedMapNames[_currentMapIndex], manager->loadedMapNames[_currentMapIndex + 1])
                         > 0) {
                         MACRO_CALL_MEMBER(ResourceManager_Func::swapMapDataWithNextMap, this)(_currentMapIndex);
                         _hasSwapped = TRUE;
@@ -194,7 +195,7 @@ namespace IO {
                 }
             }
         }
-        FindClose(_handle);
+        FindClose(scan._handle);
     }
 
 } // namespace IO
