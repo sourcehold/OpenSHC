@@ -9,6 +9,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Map/Floaters/FloaterVariationFlags.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -231,38 +232,56 @@ namespace UI {
                 if (gmID == OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER) {
                     if (secondImageID > 0) {
                         MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                            DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile, 29);
+                            DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile,
+                            OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                                | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT
+                                | OpenSHC::Map::Floaters::FVF_RENDERED_OWNER_0);
                     }
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(
-                        OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile, 29);
+                        DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile,
+                        OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                            | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT
+                            | OpenSHC::Map::Floaters::FVF_RENDERED_OWNER_0);
                     return;
                 }
                 if (secondImageID > 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile, 13);
+                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile,
+                        OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                            | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT);
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                    DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile, 13);
+                    DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile,
+                    OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT);
                 return;
             }
             // not allowed here: the same pictures drawn blended (the high half of the variation is a blend strength)
             if (gmID == OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER) {
                 if (secondImageID > 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile, 29 | (24 << 16));
+                        DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 71, tile,
+                        OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                            | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT
+                            | OpenSHC::Map::Floaters::FVF_RENDERED_OWNER_0 | (24 << 16));
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                    DAT_ViewportRenderState::ptr)(
-                    OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile, 29 | (24 << 16));
+                    DAT_ViewportRenderState::ptr)(OpenSHC::IO::Graphics::GID_BODY_SIEGE_TOWER, imageID, 0, 0, tile,
+                    OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT | OpenSHC::Map::Floaters::FVF_RENDERED_OWNER_0
+                        | (24 << 16));
                 return;
             }
             if (secondImageID > 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                    DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile, 13 | (24 << 16));
+                    DAT_ViewportRenderState::ptr)(secondGmID, secondImageID, 0, 0, tile,
+                    OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT | (24 << 16));
             }
             MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile, 13 | (24 << 16));
+                DAT_ViewportRenderState::ptr)(gmID, imageID, 0, 0, tile,
+                OpenSHC::Map::Floaters::FVF_SECOND_PASS | OpenSHC::Map::Floaters::FVF_SET_RENDERED_OWNER
+                    | OpenSHC::Map::Floaters::FVF_USE_TOTAL_HEIGHT | (24 << 16));
             return;
         }
         // the drag has stopped: pay and place
