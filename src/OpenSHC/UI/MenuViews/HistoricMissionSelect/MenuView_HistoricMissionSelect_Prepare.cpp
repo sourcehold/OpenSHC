@@ -4,11 +4,11 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/string-literals.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95b2c.hpp"
-#include "OpenSHC/Globals/DAT_00b96100.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
+#include "OpenSHC/Globals/INT_00b95b2c.hpp"
+#include "OpenSHC/Globals/INT_00b96100.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -37,8 +37,8 @@ namespace UI {
             } else {
                 chapter = 3;
             }
-            DAT_00b95b2c::instance = chapter;
-            DAT_00b96100::instance = chapter * 5 + 1;
+            INT_00b95b2c::instance = chapter;
+            INT_00b96100::instance = chapter * 5 + 1;
         }
 
     }
