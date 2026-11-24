@@ -656,6 +656,31 @@ If the value is assigned to another object, the compiler tries to avoid creating
 
 As a result, such cases do not use the resolver. The limitation through this is accepted, although, it should be noted in the status entry for the caller.
 
+### Static Initialization of Global Data
+
+A global that sits fully initialized in `.data` (relocated function pointers included) and has no `??__E` dynamic
+initializer does **not** prove the original used a brace aggregate. At `/O2`, MSVC2005 constant-folds an inline
+constructor into static data, so these all compile to byte-identical `.data` with no code:
+
+```cpp
+MenuItem items[] = {
+    { MIT_GROUP, 0, 0, 0, 0, onClick, 0, onRender },        // aggregate (or a macro expanding to one)
+    MenuItem(onClick, onRender),                             // inline constructor, even one assigning a union member in its body
+    GmButton(141, 117, MMB_CRUSADER, 351, 0xe5),             // inline factory returning MenuItem by value
+};
+```
+
+What does **not** fold is a derived class sliced into the array (`struct GmImageButton : MenuItem { ... }` used as an
+element): it gets a `??__E` dynamic initializer building a temporary and copying it in with `rep movsd`. So a global
+with no initializer function rules out slicing, but cannot tell aggregates from constructors. Constructors the program
+never calls elsewhere are discarded at link time and leave no trace either.
+
+A union field is one place the two forms do differ in source: in a C++98 brace initializer only the union's *first*
+member can be initialized, so a table mixing callback signatures in one union field needs a cast for every other
+signature, while a constructor can assign whichever member it likes. Found on the `MenuItem` tables in
+`RenderingDefinedData` (the menu objects themselves, `Menu`, `MenuView` and `MenuModal`, do have dynamic initializers,
+because their constructors walk the table or register on a global list).
+
 ### Stack
 
 The stack of the function is an important orientation for decompilation.
