@@ -1,5 +1,7 @@
 #include "../AICState.func.hpp"
 
+#include "OpenSHC/AI/AITypeA.hpp"
+
 namespace OpenSHC {
 namespace AI {
 
@@ -8,37 +10,37 @@ namespace AI {
     {
         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::wipeAICMemory, this)();
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_01, this)(1);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_01, this)(OpenSHC::AI::AITA_RAT);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_02, this)(2);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_02, this)(OpenSHC::AI::AITA_SNAKE);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_03, this)(3);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_03, this)(OpenSHC::AI::AITA_PIG);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_04, this)(4);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_04, this)(OpenSHC::AI::AITA_WOLF);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_05, this)(5);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_05, this)(OpenSHC::AI::AITA_SALADIN);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_06, this)(6);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_06, this)(OpenSHC::AI::AITA_CALIPH);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_07, this)(7);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_07, this)(OpenSHC::AI::AITA_SULTAN);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_08, this)(8);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_08, this)(OpenSHC::AI::AITA_RICHARD);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_09, this)(9);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_09, this)(OpenSHC::AI::AITA_FREDERICK);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_10, this)(10);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_10, this)(OpenSHC::AI::AITA_PHILIPP);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_11, this)(0xb);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_11, this)(OpenSHC::AI::AITA_WAZIR);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_12, this)(0xc);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_12, this)(OpenSHC::AI::AITA_EMIR);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_13, this)(0xd);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_13, this)(OpenSHC::AI::AITA_NIZAR);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_14, this)(0xe);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_14, this)(OpenSHC::AI::AITA_SHERIFF);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_15, this)(0xf);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_15, this)(OpenSHC::AI::AITA_MARSHAL);
 
-        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_16, this)(0x10);
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::setAICParameters_16, this)(OpenSHC::AI::AITA_ABBOT);
     }
 
 }
