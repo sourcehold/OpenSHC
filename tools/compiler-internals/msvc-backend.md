@@ -1558,6 +1558,28 @@ recognising, because it looks like a code-shape defect and is not one. If a func
 `xor +N` with the stores otherwise matching, check whether the original is reusing a known-zero
 variable's register before looking for a source cause.
 
+**A local's initial value can decide whether a constant gets a register of its own.**
+`AlphaAndButtonSurface::openBuildingStatusMenuForBuildingID` (`0x00463310`) was one instruction off:
+the original pushes `esi`, which holds 1, as the second argument of
+`extendResourceCountdownForPlayerBuildingsOfType` (`push esi` at `0x004633BD`), and ours pushed the
+immediate 1. With `menuTab` initialised to 1 at the top, `menuTab` is the one candidate in `esi`
+(`+0x0c` key 175 in `reg_scores.py`, the highest in the function). The two compares against 1 reuse
+that register's known value, but the push does not: the argument stays `push 1` whether it is
+written `1`, `menuTab`, `TRUE`, `1u` or `(dword)1`. In the source that matches, `menuTab` has no
+initial value, and its 1 is assigned in the one arm of the later switch that relied on the initial
+value (`BT_BARRACKS`). Declared that way, `menuTab` still gets `esi` (key 176), but it is live only
+from its assignments on, and the probe lists one candidate more: a `(temp)` that also gets `esi`
+where `menuTab` is not live (by its place, the constant 1). The compares and the push then use it,
+and the function matches (quick_diff 1.0000; 100% in #484).
+
+So when the original uses a register for a constant that we write as an immediate, look for a local
+initialised to that constant. Drop the initial value and assign the constant only where the code
+relied on it: assigned early instead, in both arms of the test on the building's owner, it was worse
+(quick_diff 0.9929 against 0.9964). Compile once with `/w14701` to confirm that every path still
+assigns the local before use (C4701 stays quiet). The section above found that no spelling of the
+same value moves the allocator; an initial value is a different handle, because it changes which
+candidates there are. So far this is one function.
+
 ## Two slot-layout leads that were not source defects
 
 Both functions whose frames still disagreed after the jump-table fix turned out not to be
@@ -2523,13 +2545,17 @@ first with weight >= the new one. Net effect: size ascending, weight descending,
 weights **the element that reached its final weight first comes first**, i.e. gets the higher
 address. Declaration order and initialisation order are nowhere in it (both re-tested: no change).
 
-**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol
-counts once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list
-that `CollectStackElements` flattens as: the *def-set* (every local the block writes) as a nested
-set, then the *use-list* (every local the block reads, in reverse order of first mention), then the
-def-set again. For the walk in `tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18
-symbols. The written locals therefore get +3 from the block, read-only ones +1, write-only ones +2;
-a local's C-side references add 1 each before and after.
+**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol counts
+once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list that
+`CollectStackElements` flattens as: the *def-set* as a nested set, then the *use-list* (every local
+the block reads, in reverse order of first mention), then the def-set again. The def-set is not only
+what the block itself writes: it holds every local that *any* `__asm` block of the function writes,
+as long as that local is declared in a block that contains this one, wherever in that block the
+declaration stands (see "A block scope moves an asm-written local" below). For the walk in
+`tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18 symbols. A local in the def-set
+therefore gets +3 from the block if the block also reads it and +2 if not, whether the block writes
+it or only another block does; a local the block only reads, and no asm block writes, gets +1. A
+local's C-side references add 1 each before and after.
 
 **4. The def-set is iterated in hash order of the symbol name.** The second def-set pass is the
 *last* reference of every asm-written local that the C code does not touch afterwards, so their
@@ -2576,6 +2602,19 @@ The `_tile`/`_cY` case is the warning about the ranking: in the three macro user
 followed declaration order, which only happens when two names hash to the same bucket - the
 `name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
 what settled each one.
+
+**A block scope moves an asm-written local.** A local that any asm block writes goes into the
+def-set of every asm block inside the block that declares it, so a local written by only some of
+the blocks weighs more than its own references suggest, and moving its declaration within the same
+block changes nothing. Declaring it in an inner block that holds only the asm that uses it does. In
+`TextureRenderCore::renderUnitAnimationWithBlendingUnk` (`0x00451E00`: four asm blocks, a 0x1c
+frame, so no sort) only the last two blocks write `columnOffset`. Declared at the top it weighs 10
+(+2 from each of the four def-sets, +1 from each of its two use-lists) and takes `-4`, pushing the
+three locals the original has above it (weights 7, 7 and 6) down one slot each. Declared at
+function level after the `if` that holds the first two blocks, or just before the third, it still
+weighs 10. Declared inside the `else` that holds the last two blocks it weighs 6, lands behind the
+other three, and every local sits at the original's offset. This function is the only one the rule
+has been traced on so far. One `slot_probe.py` run shows the weight; a build confirms the layout.
 
 ### The rule, as code: `simulate()`, `regime()`, and the regression tests
 
