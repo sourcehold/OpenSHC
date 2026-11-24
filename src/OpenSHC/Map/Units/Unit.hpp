@@ -194,7 +194,7 @@ namespace Map {
             int manningEngineerUIDRef[4]; // 0x0000031C length: 16
             byte isStalked; // 0x0000032C length: 1
             char field_0x32d; // 0x0000032D length: 1
-            byte disappearFadeAlphaCountdown; // 0x0000032E length: 1
+            char disappearFadeAlphaCountdown; // 0x0000032E length: 1
             byte engineerManningSiegeStateRef_checkType; // 0x0000032F length: 1
             int someMatchTimeVariable; // 0x00000330 length: 4
             undefined1 padding_0x334[2]; // 0x00000334 length: 2
@@ -312,7 +312,7 @@ namespace Map {
             short assassinHeightDifference; // 0x00000414 length: 2
             short assassinClimbingUpUnk_OR_previousFacingDirection; // 0x00000416 length: 2
             short field_0x418; // 0x00000418 length: 2
-            undefined2 field_0x41a; // 0x0000041A length: 2
+            short field_0x41a; // 0x0000041A length: 2
             int field_0x41c; // 0x0000041C length: 4
             int field_0x420; // 0x00000420 length: 4
             short horseArcherShootingVariation; // 0x00000424 length: 2

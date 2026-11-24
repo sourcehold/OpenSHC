@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
@@ -14,7 +15,7 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF270
     void AICState::aiCommandTribe13DefensiveWave(int playerID)
     {
-        int tribeIndex = 13;
+        int tribeIndex = OpenSHC::AI::Tribes::AITI_BREACH_BASIC_03_01;
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == AITA_NULL)
             return;
         int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[tribeIndex];
