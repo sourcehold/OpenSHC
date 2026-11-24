@@ -31,13 +31,13 @@ namespace UI {
         undefined4 fileListContext; // 0x00000000 length: 4
         undefined4 savedListOffset1; // 0x00000004 length: 4
         undefined4 savedListSelection1; // 0x00000008 length: 4
-        undefined4 savedListSortOrder1; // 0x0000000C length: 4
+        int savedListSortOrder1; // 0x0000000C length: 4
         undefined4 savedListOffset2; // 0x00000010 length: 4
         undefined4 savedListSelection2; // 0x00000014 length: 4
-        undefined4 savedListSortOrder2; // 0x00000018 length: 4
+        int savedListSortOrder2; // 0x00000018 length: 4
         undefined4 savedListOffset3; // 0x0000001C length: 4
         undefined4 savedListSelection3; // 0x00000020 length: 4
-        undefined4 savedListSortOrder3; // 0x00000024 length: 4
+        int savedListSortOrder3; // 0x00000024 length: 4
         ScreenResolutionEnumInt menuCurrentlySelectedResolution; // 0x00000028 length: 4
         undefined4 unknownZoomRelatedFlag01; // 0x0000002C length: 4
         undefined4 pendingGameSpeedLevel; // 0x00000030 length: 4
@@ -55,7 +55,7 @@ namespace UI {
         MenuModalTypeInt currentModalDialog; // 0x0000005C length: 4
         MenuModalTypeInt previousModalDialogs[5]; // 0x00000060 length: 20
         int fileListEntryCount; // 0x00000074 length: 4
-        undefined4 fileListSortOrder; // 0x00000078 length: 4
+        int fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
         int fileListVisibleRowCount; // 0x00000084 length: 4
