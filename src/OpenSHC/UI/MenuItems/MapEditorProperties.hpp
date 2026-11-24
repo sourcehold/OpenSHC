@@ -20,7 +20,7 @@ namespace UI {
 
             void __cdecl MenuItemRenderFunction_MapEditorProperties_MapDescriptionBox(int param_1, ...);
 
-            void __cdecl MenuItemActionHandler_MapEditorProperties_MapDescriptionBox();
+            void __cdecl MenuItemActionHandler_MapEditorProperties_MapDescriptionBox(int param_1, ...);
 
             void __cdecl MenuItemActionHandler_MapEditorProperties_MapDescriptionScrollbar(
                 int param_1, int param_2, int* minValue, int* maxValue, int* currentValue);

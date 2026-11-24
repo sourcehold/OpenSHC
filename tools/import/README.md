@@ -4,19 +4,19 @@ The tools listed in this directory are for importing a Ghidra program into src/O
 
 ## Usage
 
-0. Install `ghidra-skink` and pyghidra, and set `GHIDRA_INSTALL_DIR` to your Ghidra installation (needed by pyghidra):
+0. Install the dependencies and set `GHIDRA_INSTALL_DIR` to your Ghidra installation (needed by pyghidra):
 
-```py
-python -m pip install -r requirements.txt
-python -m pip install pyghidra
-```
+    ```py
+    python -m pip install -r requirements.txt
+    ```
+
 
 1. Export the program from Ghidra as a .gzf (File > Export Program..., format "Ghidra Zip File") to `Stronghold Crusader.exe.gzf`.
 2. Execute the following from PowerShell to cleanly convert the .gzf file into header files:
 
-```pwsh
- & .\tools\import\reimport-ghidra.ps1 -OverwriteAll $true
-```
+    ```pwsh
+    & .\tools\import\reimport-ghidra.ps1 -OverwriteAll $true
+    ```
 
 Use `-Gzf "path/to/gzf/file.gzf"` to read a different .gzf file.
 

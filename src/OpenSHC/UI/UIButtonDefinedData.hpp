@@ -16,7 +16,7 @@ namespace UI {
     using OpenSHC::UI::Rendering::ButtonGmData;
 
 #pragma pack(push, 1)
-    // SIZE: 0x0000490C
+    // SIZE: 0x0000474C
     typedef struct UIButtonDefinedData {
 
         int field_0x0; // 0x00000000 length: 4
@@ -33,12 +33,10 @@ namespace UI {
         int field_0x2c; // 0x0000002C length: 4
         undefined1 padding_0x30[4]; // 0x00000030 length: 4
         ButtonGmData ButtonGmDataArray[650]; // 0x00000034 length: 18200
-        char wavEuropeanUnitRecruitment[7][32]; // 0x0000474C length: 224
-        char wavArabianUnitRecruitment[7][32]; // 0x0000482C length: 224
 
     } UIButtonDefinedData;
 #pragma pack(pop)
 
-    static_assert_cpp98_obj(sizeof(UIButtonDefinedData) == 18700, UIButtonDefinedData);
+    static_assert_cpp98_obj(sizeof(UIButtonDefinedData) == 18252, UIButtonDefinedData);
 } // namespace UI
 } // namespace OpenSHC
