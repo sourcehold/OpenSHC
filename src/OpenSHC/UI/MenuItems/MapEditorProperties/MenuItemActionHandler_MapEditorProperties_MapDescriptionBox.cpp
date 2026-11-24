@@ -18,7 +18,7 @@ namespace UI {
     namespace MenuItems {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0042EDF0
-        void MapEditorProperties::MenuItemActionHandler_MapEditorProperties_MapDescriptionBox()
+        void MapEditorProperties::MenuItemActionHandler_MapEditorProperties_MapDescriptionBox(int unused, ...)
         {
             if (!DAT_GameCore::instance.U2_mapType_singleOrMulti || !DAT_GameCore::instance.mapLoadedForEditor
                 || DAT_MenuTextInputState::instance.currentModalDialog != UI::Enums::MMT_NO_MENU

@@ -528,6 +528,10 @@ x &= 0xf;
 x++;
 ```
 
+## 30. Add float constants to reccmp
+Float constants are used in x87 code. Add their address type (`float`)
+and size to `reccmp/float-literals.csv` such that reccmp can process appropriately.
+
 ---
 
 ## Measuring
