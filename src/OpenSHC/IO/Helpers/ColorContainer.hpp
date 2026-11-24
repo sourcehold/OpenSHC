@@ -17,15 +17,15 @@ namespace IO {
         using OpenSHC::IO::Helpers::ColorUnion;
 
 #pragma pack(push, 1)
-        // SIZE: 0x00000004
+        // SIZE: 0x00000002
         typedef struct ColorContainer {
 
-            ColorUnion data; // 0x00000000 length: 4
+            ColorUnion data; // 0x00000000 length: 2
 
         } ColorContainer;
 #pragma pack(pop)
 
-        static_assert_cpp98_obj(sizeof(ColorContainer) == 4, ColorContainer);
+        static_assert_cpp98_obj(sizeof(ColorContainer) == 2, ColorContainer);
     } // namespace Helpers
 } // namespace IO
 } // namespace OpenSHC

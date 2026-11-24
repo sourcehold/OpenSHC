@@ -16,16 +16,26 @@ namespace UI {
     using OpenSHC::UI::UC;
 
 #pragma pack(push, 1)
-    // SIZE: 0x00000004
-    typedef struct UCPointerStruct {
 
+    // SIZE: 0x00000004
+    class UCPointerStruct {
+    public:
         UC* ucArrayPointer; // 0x00000000 length: 4
 
-        void loadMenuElement(int ucID, int* x, int* y, ushort* iconDeactivated, int ucPositionIndex);
+    private:
+        UCPointerStruct(UCPointerStruct const&);
+        void operator=(UCPointerStruct const&);
 
-    } UCPointerStruct;
-#pragma pack(pop)
+    public:
+        UCPointerStruct() {};
+        ~UCPointerStruct() {};
+
+        void loadMenuElement(int ucId, int* xPosPtr, int* yPosPtr, ushort* iconDeactivatedPtrUnk, int ucPositionIndex);
+    };
 
     static_assert_cpp98_obj(sizeof(UCPointerStruct) == 4, UCPointerStruct);
+
+#pragma pack(pop)
+
 } // namespace UI
 } // namespace OpenSHC
