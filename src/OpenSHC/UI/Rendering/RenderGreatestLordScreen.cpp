@@ -12,6 +12,7 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
+#include "OpenSHC/UI/Rendering/GreatestLordTablesUnk.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/CHAR_00eb0e44.hpp"
@@ -36,21 +37,6 @@ namespace OpenSHC {
 namespace UI {
 
     using OpenSHC::DE::SHCDE::eTextSections;
-
-    // The tables behind the Greatest Lord screen, one entry per player slot (index 0 unused). The original keeps them
-    // in one block of the stack frame, and its statistic orders are filled by one strided loop, so they are one
-    // struct here rather than separate arrays.
-    struct GreatestLordTablesUnk {
-        int points[9];
-        int stars[9];
-        int overallOrder[9];
-        int kills[9];
-        int losses[9];
-        // Player order per statistic, best first: 0 kills, 1 buildings burned, 2 food, 3 gold, 4 max population,
-        // 5 wood, 6 stone, 7 iron, 8 pitch, 9 unused, 10 losses, 11 weapons, 12 buildings lost, 13 troops,
-        // 14 goods received, 15 goods sent.
-        int statOrder[16][9];
-    };
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D5810
     void Rendering::RenderGreatestLordScreen()
