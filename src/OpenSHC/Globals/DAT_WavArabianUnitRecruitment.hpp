@@ -13,7 +13,7 @@
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(char[7][32], false, 0x00B37BD8) DAT_WavArabianUnitRecruitment;
+MACRO_STRUCT_RESOLVER(char[7][32], false, Address::SHC_3BB0A8C1_0x00B37BD8) DAT_WavArabianUnitRecruitment;
 } // namespace OpenSHC
 
-MACRO_STRUCT_INSTANCE(0x00B37BD8);
+MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00B37BD8);
