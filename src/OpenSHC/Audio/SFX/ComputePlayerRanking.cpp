@@ -56,12 +56,13 @@ namespace Audio {
                 if (bestIndex < 0) {
                     return 0;
                 }
-                // Clearing playerID before the equality check keeps playerID in ebp (~88.4% norm vs ~52.1% norm)
-                int const bestPlayerID = entries[bestIndex].playerID;
-                entries[bestIndex].playerID = 0;
-                if (bestPlayerID == playerID) {
+                int const selectedPlayer = entries[bestIndex].playerID;
+                if (selectedPlayer == playerID) {
+                    // This local store is elided by VC8 but keeps the original register allocation.
+                    deadPlayersUnk[selectedPlayer] = FALSE;
                     return rank + 1;
                 }
+                entries[bestIndex].playerID = 0;
             }
             return 0;
         }
