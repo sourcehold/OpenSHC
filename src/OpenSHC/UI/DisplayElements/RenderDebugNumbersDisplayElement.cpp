@@ -18,13 +18,14 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004AF860
     void DisplayElements::RenderDebugNumbersDisplayElement(int posX, int posY, DWORD elementState)
     {
+        // Declared first, ahead of the two buffer writes (declared at the wrap test, the sums take other registers).
+        int durationSum = 0;
+        int tickRateSum = 0;
         dword const lastGameTickRate = DAT_GameCore::instance.gameTicksThisLoop;
         dword const lastGameLoopDuration = DAT_GameLoopStopwatch::instance.duration_0x0;
         DAT_GameLoopDurationBuffer::instance[INT_GameLoopTimeDataIndex::instance] = lastGameLoopDuration;
         DAT_TickRateBuffer::instance[INT_GameLoopTimeDataIndex::instance] = lastGameTickRate;
         ++INT_GameLoopTimeDataIndex::instance;
-        int durationSum = 0;
-        int tickRateSum = 0;
         if (INT_GameLoopTimeDataIndex::instance == 100) {
             INT_GameLoopTimeDataIndex::instance = 0;
         }
@@ -41,8 +42,8 @@ namespace UI {
         // The maximum is never used, but the original computes it. A pointer walk five entries at a time, as in the
         // original (a plain loop over the entries loses the match)
         int maxDuration = -1;
-        int* entry = DAT_GameLoopDurationBuffer::instance;
-        do {
+        for (int* entry = DAT_GameLoopDurationBuffer::instance; entry < DAT_GameLoopDurationBuffer::instance + 100;
+            entry += 5) {
             if (entry[0] > maxDuration) {
                 maxDuration = entry[0];
             }
@@ -58,8 +59,7 @@ namespace UI {
             if (entry[4] > maxDuration) {
                 maxDuration = entry[4];
             }
-            entry += 5;
-        } while (entry < DAT_GameLoopDurationBuffer::instance + 100);
+        }
         if ((int)elementState != -1000) {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 averageDuration, posX + 48, posY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0080FF, 0,
