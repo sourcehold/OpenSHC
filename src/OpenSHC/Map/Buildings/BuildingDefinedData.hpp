@@ -53,7 +53,7 @@ namespace Map {
             TruncatedInt BuildingFlag1Defaults[110]; // 0x000015BC length: 440
             BOOLEnum field_0x1774[110]; // 0x00001774 length: 440
             TruncatedInt BuildingFlag4Defaults[110]; // 0x0000192C length: 440
-            int BuildingTypeHasHealth[110]; // 0x00001AE4 length: 440
+            BOOLEnum BuildingTypeHasHealth[110]; // 0x00001AE4 length: 440
             int BuildingIsGateHouseArray[110]; // 0x00001C9C length: 440
             int BuildingIsKeepArray[110]; // 0x00001E54 length: 440
             BOOLEnum IsGateOrTowerArray[110]; // 0x0000200C length: 440

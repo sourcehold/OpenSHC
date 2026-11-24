@@ -136,9 +136,9 @@ namespace Map {
         undefined4 counter1; // 0x005548C0 length: 4
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
         BOOLEnum disableElevationRendering; // 0x005548C8 length: 4
-        undefined4 flatViewToggleValue1; // 0x005548CC length: 4
+        BOOLEnum flatViewToggleValue1; // 0x005548CC length: 4
         undefined4 field_0x5548d0; // 0x005548D0 length: 4
-        undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
+        BOOLEnum flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
         int savedEditorActiveBrush; // 0x005548DC length: 4
         int editorActiveBrush; // 0x005548E0 length: 4
@@ -276,7 +276,7 @@ namespace Map {
 
         void triggerLoweredView(LoweredViewTransitionInt param_1);
 
-        void toggleFlatView(int param_1);
+        void toggleFlatView(BOOLEnum flatView);
 
         void noop1(undefined4 param_1);
 
@@ -393,7 +393,7 @@ namespace Map {
 
         int getCastleBuildRangeForMapSize();
 
-        void getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, int y);
+        void getTileForBrush(BOOLEnum square, int index, int* tilePointer, int* yPointer, int baseTile, int y);
 
         BOOLEnum isTileSuitableForBrushPlacement(int tile, uint x, uint y);
 
@@ -590,7 +590,7 @@ namespace Map {
 
         void updateMacroLayer();
 
-        int createMoatData(undefined4 playerID, uint x, uint y, int filled);
+        int createMoatData(undefined4 playerID, uint x, uint y, BOOLEnum filled);
 
         BOOLEnum findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
 
