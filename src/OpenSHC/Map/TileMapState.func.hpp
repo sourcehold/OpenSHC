@@ -69,7 +69,7 @@ namespace Map {
         triggerLoweredView;
 
         MACRO_FUNCTION_RESOLVER(
-            void (TileMapState::*)(int), false, Address::SHC_3BB0A8C1_0x004F70B0, &TileMapState::toggleFlatView)
+            void (TileMapState::*)(BOOLEnum), false, Address::SHC_3BB0A8C1_0x004F70B0, &TileMapState::toggleFlatView)
         toggleFlatView;
 
         MACRO_FUNCTION_RESOLVER(
@@ -300,7 +300,7 @@ namespace Map {
             &TileMapState::getCastleBuildRangeForMapSize)
         getCastleBuildRangeForMapSize;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int, int*, int*, int, int), false,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(BOOLEnum, int, int*, int*, int, int), false,
             Address::SHC_3BB0A8C1_0x004FBD80, &TileMapState::getTileForBrush)
         getTileForBrush;
 
@@ -666,7 +666,7 @@ namespace Map {
             void (TileMapState::*)(), false, Address::SHC_3BB0A8C1_0x00511020, &TileMapState::updateMacroLayer)
         updateMacroLayer;
 
-        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(undefined4, uint, uint, int), false,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(undefined4, uint, uint, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x005110B0, &TileMapState::createMoatData)
         createMoatData;
 

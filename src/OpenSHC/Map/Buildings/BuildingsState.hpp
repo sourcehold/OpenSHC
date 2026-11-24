@@ -116,9 +116,9 @@ namespace Map {
 
             int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(int playerID, BuildingType buildingType, int includeBool);
+            int countBuildingsForPlayer(int playerID, BuildingType buildingType, BOOLEnum excludeAIVPlaced);
 
-            int countFarms(int playerID, int param_2);
+            int countFarms(int playerID, BOOLEnum excludeAIVPlaced);
 
             int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
@@ -205,7 +205,7 @@ namespace Map {
 
             void subtractPitchAndMoatFromStartingGoldInSiegeThatMode();
 
-            uint hasEnoughGoldForMoat();
+            BOOLEnum hasEnoughGoldForMoat();
 
             int getFarmThatHasTile(int tile);
 
