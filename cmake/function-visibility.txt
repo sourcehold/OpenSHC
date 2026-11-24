@@ -111,6 +111,8 @@ OpenSHC::IO::DecoderState::decodeData
     OpenSHC::IO::LowLevelMemory::copyData
 OpenSHC::Synchrony::GameSynchronyState::processSyncPacket
     OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
+OpenSHC::Synchrony::Commands::CommandSwitchTeams
+    OpenSHC::Synchrony::GameSynchronyState::countPlayersInSameTeam
 OpenSHC::Synchrony::GameSynchronyState::receiveAllTransmittedCommands
     OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
 OpenSHC::Map::TileMapState::updateMoatCountdownTimers
