@@ -149,7 +149,7 @@ namespace Audio {
                                     }
                                 }
 
-                                int sfxIndex;
+                                int sfxIndex = 0;
                                 if (candidateCount == 0) {
                                     sfxIndex = musicSetIndex + 34;
                                 } else {

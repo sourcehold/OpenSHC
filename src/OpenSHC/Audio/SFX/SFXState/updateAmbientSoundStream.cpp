@@ -73,7 +73,11 @@ namespace Audio {
                         DAT_SFXAmbientEventCountersRescaled::instance[i] = datum >> 4;
                     }
                     if (i == 6) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = (datum > 1) ? 100 : 0;
+                        if (datum > 1) {
+                            DAT_SFXAmbientEventCountersRescaled::instance[i] = 100;
+                        } else {
+                            DAT_SFXAmbientEventCountersRescaled::instance[i] = 0;
+                        }
                     }
                     if (DAT_SFXAmbientEventCountersRescaled::instance[i] > 99) {
                         DAT_SFXAmbientEventCountersRescaled::instance[i] = 99;
