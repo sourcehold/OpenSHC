@@ -137,6 +137,7 @@ src/OpenSHC/Map/Units/UpdateQuarryMason.cpp
 src/OpenSHC/Map/Units/UpdateDrunkard.cpp
 src/OpenSHC/Map/Units/UpdateInnkeeper.cpp
 src/OpenSHC/Map/Units/UpdateMerchant.cpp
+src/OpenSHC/Map/Units/UpdateKnight.cpp
 src/OpenSHC/Map/Units/UpdateCageDog.cpp
 src/OpenSHC/Map/Units/UnitsState/tryAttackUnitID.cpp
 src/OpenSHC/Map/Units/UpdateHunterDog.cpp
@@ -149,4 +150,15 @@ src/OpenSHC/Map/Units/UpdateHopsFarmer.cpp
 src/OpenSHC/Map/Units/ComputeGoodsProduced.cpp
 src/OpenSHC/Map/Units/IncrementAndOptionalUpdateAVValueRelated.cpp
 src/OpenSHC/Map/Units/SetStateToFreetimeWalking.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Map/Units/UpdateTrebuchet.cpp
+src/OpenSHC/Map/Units/UpdateFireBallista.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Map/Units/UpdateBallista.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Map/Units/UpdateSwordsman.cpp
+src/OpenSHC/Map/Units/UpdateArabianSwordsman.cpp
+src/OpenSHC/Map/Units/UpdateHorseArcher.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Map/Units/UpdateMangonel.cpp
 src/OpenSHC/Map/Units/UpdateSiegeTent.cpp
