@@ -51,6 +51,9 @@ namespace Map {
                 US_UNKNOWN_203 = 203, // 0x000000CB
                 US_UNKNOWN_204 = 204, // 0x000000CC
                 US_UNKNOWN_205 = 205, // 0x000000CD
+                US_UNKNOWN_206 = 206, // 0x000000CE
+                US_UNKNOWN_207 = 207, // 0x000000CF
+                US_UNKNOWN_208 = 208, // 0x000000D0
                 US_UNKNOWN_209 = 209, // 0x000000D1
                 UnitStateInt__US_APPLEFARMER_PLUCK_APPLES = 2, // 0x00000002
                 UnitStateInt__US_Appear = 122, // 0x0000007A
