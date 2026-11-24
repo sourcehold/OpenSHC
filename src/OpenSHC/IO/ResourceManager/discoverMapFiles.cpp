@@ -1,6 +1,7 @@
 #include "../ResourceManager.func.hpp"
 
 #include "OpenSHC/Global.func.hpp"
+#include "OpenSHC/IO/Helpers/ScanState.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/string-literals.hpp"
@@ -19,14 +20,7 @@ namespace IO {
     // FUNCTION: STRONGHOLDCRUSADER 0x00477EE0
     void ResourceManager::discoverMapFiles(char const* param_1)
     {
-        struct ScanState {
-            BOOLEnum _missionMaps;
-            BOOLEnum _originalMaps;
-            HANDLE _handle;
-            __declspec(align(4)) WORD fatDate;
-            __declspec(align(4)) WORD fatTime;
-            BOOLEnum originalMapsScanned;
-        } scan;
+        Helpers::ScanState scan;
         ResourceManager* __restrict manager = this;
         BOOLEnum _hasSwapped = TRUE;
         int _mapIndex = 0;
