@@ -15,9 +15,6 @@ namespace OpenSHC {
 namespace AI {
 
     using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::AI::AIVUnitTypeInt;
-    using OpenSHC::AI::Tribes::AIVUnitTypeMaxLocationPair;
-    using OpenSHC::Map::Units::Behavior::UnitStanceEnum;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D4220
@@ -26,7 +23,7 @@ namespace AI {
         BOOLEnum const enclosed = MACRO_CALL_MEMBER(
             OpenSHC::Game::GameStateStructures_Func::checkKeepEnclosed, DAT_GameState::ptr)(playerID);
 
-        for (int i = 0; i < 6; i++) {
+        for (int i = 0; i < countof(DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits); i++) {
             int const count = DAT_GameState::instance.playerDataArray[playerID].aivUnitLocationSlotLocationCount
                                   [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType];
             for (int j = 0; j < count; j++) {
@@ -38,8 +35,7 @@ namespace AI {
                     && DAT_TribesState::instance.tribes[tribeID].uid
                         == DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs
                             [DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].tribeArrayOffset + j]) {
-                    if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
-                        || enclosed != FALSE) {
+                    if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0 || enclosed) {
                         MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::sendTribeToAIVLocationSlot, this)(tribeID,
                             (AIVUnitType)DAT_SkirmishDefinedData::instance.MaxAIVLocationForGroundUnits[i].aivUnitType,
                             j);
@@ -49,8 +45,7 @@ namespace AI {
                 }
 
                 // NOTE: the original sets the stance even when the tribe is invalid (tribeID may be 0)
-                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0
-                    || enclosed != FALSE) {
+                if (DAT_GameState::instance.playerDataArray[playerID].aiNervousActionsTracker <= 0 || enclosed) {
                     DAT_TribesState::instance.tribes[tribeID].unitStance
                         = OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE;
                 } else {

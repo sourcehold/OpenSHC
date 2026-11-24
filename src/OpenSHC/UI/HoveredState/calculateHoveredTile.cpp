@@ -5,6 +5,7 @@
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/IO/Graphics/GmID.hpp"
+#include "OpenSHC/Map/Floaters/FloaterVariationFlags.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
@@ -34,21 +35,22 @@ namespace UI {
                     DAT_ViewportRenderState::ptr)(IO::Graphics::GID_BODY_MANGONEL, 1, 0, 0,
                     DAT_ViewportRenderState::instance.translationMatrix[this->elements[i].y].addXgetTile
                         + this->elements[i].x,
-                    5);
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER);
                 break;
             case Commands::M_MAPPER_BALLISTA:
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(IO::Graphics::GID_BODY_BALLISTA, 1, 0, 0,
                     DAT_ViewportRenderState::instance.translationMatrix[this->elements[i].y].addXgetTile
                         + this->elements[i].x,
-                    5);
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER);
                 break;
             case Commands::M_MAPPER_BRAZIER:
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(IO::Graphics::GID_BODY_BRAZIER, 1, 15, 7,
                     DAT_ViewportRenderState::instance.translationMatrix[this->elements[i].y].addXgetTile
                         + this->elements[i].x,
-                    29);
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | Map::Floaters::FVF_USE_TOTAL_HEIGHT | Map::Floaters::FVF_RENDERED_OWNER_0);
                 break;
             case Commands::M_MAPPER_FLAG_TYPE0:
             case Commands::M_MAPPER_FLAG_TYPE1:
@@ -79,7 +81,9 @@ namespace UI {
                     break;
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
-                    DAT_ViewportRenderState::ptr)(IO::Graphics::GID_ANIM_FLAGS, imageID, flagX, flagY, tile, 13);
+                    DAT_ViewportRenderState::ptr)(IO::Graphics::GID_ANIM_FLAGS, imageID, flagX, flagY, tile,
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | Map::Floaters::FVF_USE_TOTAL_HEIGHT);
                 break;
             }
             case Commands::M_MAPPER_HEADS:
@@ -88,7 +92,8 @@ namespace UI {
                     DAT_ViewportRenderState::ptr)(IO::Graphics::GID_ANIM_HEADS, imageID, 15, 7,
                     DAT_ViewportRenderState::instance.translationMatrix[this->elements[i].y].addXgetTile
                         + this->elements[i].x,
-                    29);
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER
+                        | Map::Floaters::FVF_USE_TOTAL_HEIGHT | Map::Floaters::FVF_RENDERED_OWNER_0);
                 break;
             case Commands::M_MAPPER_CATAPULT:
             case Commands::M_MAPPER_TREBUCHET:
@@ -129,7 +134,8 @@ namespace UI {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::createFloatingLayerElement,
                     DAT_ViewportRenderState::ptr)(IO::Graphics::GID_BODY_TENT, 1, imageX, imageY,
-                    DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x, 5);
+                    DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x,
+                    Map::Floaters::FVF_SECOND_PASS | Map::Floaters::FVF_SET_RENDERED_OWNER);
                 break;
             }
             default:

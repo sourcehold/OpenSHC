@@ -11,14 +11,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00523590
         void TribesState::updateAnimalHerdBehaviorState(int tribeID)
         {
-            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby > 0) {
+            // A scare tick counter (0..800), not a flag: the original tests it for non-zero (> 0 loses the match)
+            if (tribeID <= 0 || this->tribes[tribeID].predatorNearby != 0) {
                 return;
             }
-            int unitSelectionIndex = 0;
-            while (unitSelectionIndex < this->tribes[tribeID].size) {
+            for (int unitSelectionIndex = 0; unitSelectionIndex < this->tribes[tribeID].size;) {
                 int const unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe, this)(
                     tribeID, unitSelectionIndex);
-                unitSelectionIndex = unitSelectionIndex + 1;
+                // Stepped here, right after the call (in the loop's header, the match is lost).
+                ++unitSelectionIndex;
                 if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
                     && !DAT_UnitsState::instance.units[unitID].dying
                     && DAT_UnitsState::instance.units[unitID].antelopeBasedRngValue == 2) {

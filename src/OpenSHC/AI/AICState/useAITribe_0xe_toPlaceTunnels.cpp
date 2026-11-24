@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -15,10 +16,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::Tribes::AITribeType;
-    using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
     using OpenSHC::Map::Units::UnitInstructionType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CF180
@@ -26,17 +23,16 @@ namespace AI {
     {
         if (DAT_GameState::instance.playerDataArray[playerID].aiType == OpenSHC::AI::AIT_NULL)
             return;
-        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0xe];
+        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                  .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_04_01];
         if (aiTribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[aiTribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0xe])
+            != DAT_GameState::instance.playerDataArray[playerID]
+                .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_04_01])
             return;
-        int countdown = DAT_TribesState::instance.tribes[aiTribeID].size;
-
-        while (DAT_TribesState::instance.tribes[aiTribeID].size != 0) {
-            if (countdown <= 0)
-                break;
+        for (int countdown = DAT_TribesState::instance.tribes[aiTribeID].size;
+            DAT_TribesState::instance.tribes[aiTribeID].size != 0 && countdown > 0;) {
 
             int const unitID = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(aiTribeID);
