@@ -22,7 +22,7 @@ namespace AI {
         }
 
         MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playBikVideoFromPlayer, DAT_VideoBikQueue::ptr)(
-            playerID, DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 0x21);
+            playerID, DAT_GameState::instance.playerDataArray[playerID].aiType - 1, 33);
     }
 }
 }

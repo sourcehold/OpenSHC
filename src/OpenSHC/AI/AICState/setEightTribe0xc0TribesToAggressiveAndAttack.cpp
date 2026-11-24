@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
@@ -19,12 +20,14 @@ namespace AI {
         }
 
         for (int i = 0; i < 8; i++) {
-            int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[i + 0xc0];
+            int const tribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                    .aiTribeIDs[i + OpenSHC::AI::Tribes::AITI_BREACH_11_01];
             if (tribeID == 0) {
                 continue;
             }
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 0xc0]) {
+                != DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeUIDs[i + OpenSHC::AI::Tribes::AITI_BREACH_11_01]) {
                 continue;
             }
             if (DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID == 0) {

@@ -14,7 +14,7 @@ namespace AI {
     {
         int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == OpenSHC::AI::AIT_NULL)
-            return (UnitType)0;
+            return OpenSHC::Map::Units::UT_NONE;
         int const aicIndex = aiType - 1;
 
         if (unitBehaviourType == OpenSHC::AI::AIUBT_ENGINEERING)
