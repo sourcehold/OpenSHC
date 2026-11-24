@@ -9,6 +9,8 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/Rendering/ColorMode.hpp"
 #include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
+#include "OpenSHC/UI/Enums/MinimapConstants.hpp"
+#include "OpenSHC/UI/MiniMap/PlayerUnitColors.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -29,10 +31,11 @@ namespace UI {
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_SHORT_ROW;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
+    using OpenSHC::UI::MiniMap::PlayerUnitColors;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    // A row of the minimap picture (200 pixels) in bytes, for the assembly (it cannot name a qualified constant).
-    enum { PICTURE_ROW_BYTES = Map::MC_MAP_XY_LIMIT / 2 * sizeof(ushort) };
+    // A row of the minimap picture (200 pixels) in bytes, named here for the assembly (it cannot name a qualified one).
+    using OpenSHC::UI::Enums::MMC_BUFFER_ROW_BYTES;
 
     // Draws the minimap: the terrain picture, every unit as a dot in its player's colour, and the viewport's box.
     // FUNCTION: STRONGHOLDCRUSADER 0x004B66C0
@@ -226,7 +229,7 @@ namespace UI {
             add esi, eax
             mov eax, sourceY
             sub eax, sourceRowBase
-            mov edx, PICTURE_ROW_BYTES
+            mov edx, MMC_BUFFER_ROW_BYTES
             mul edx
             add esi, eax
             mov edx, blitHeight
@@ -239,7 +242,7 @@ namespace UI {
             add ebx, 2
             dec ecx
             jne next_pixel
-            add esi, PICTURE_ROW_BYTES
+            add esi, MMC_BUFFER_ROW_BYTES
             add edi, DAT_PencilRenderCore::instance.horizontalByteSize
             dec edx
             jne next_row
@@ -253,7 +256,6 @@ namespace UI {
             }
         }
         // per player four animation frames in the two colour modes
-        typedef ushort PlayerUnitColors[4][2];
         PlayerUnitColors const* const playerColors
             = (PlayerUnitColors const*)DAT_MiniMapDefinedData::instance.PlayerColorColors;
         uint color;
