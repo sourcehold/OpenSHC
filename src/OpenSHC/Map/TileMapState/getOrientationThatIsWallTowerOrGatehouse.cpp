@@ -18,7 +18,7 @@ namespace Map {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
+        if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]) {
             return OpenSHC::Map::Enums::CD_UNSPECIFIED;
         }
 

@@ -33,7 +33,7 @@ namespace Map {
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + rockY].addXgetTile + rockX
                 + this->buildingX;
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
-                if (this->disableElevationRendering == 0) {
+                if (!this->disableElevationRendering) {
                     this->GfxLayer[tile]
                         = GMFirstPictureIndex::instance[DAT_LandscapeState::instance.rocks[rockID].unknownGMID]
                         + DAT_LandscapeState::instance.rocks[rockID].gfx + this->buildingOrientedPartIndex + surface

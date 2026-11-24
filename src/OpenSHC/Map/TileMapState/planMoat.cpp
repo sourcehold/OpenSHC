@@ -49,7 +49,7 @@ namespace Map {
 
         int moatX = tile - DAT_ViewportRenderState::instance.translationMatrix[tileY].addXgetTile;
         if ((logic & (L_MOAT_DUG_OR_PLANNED | L_MOAT)) == 0 && this->HeightLayer[tile] <= 12) {
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, 0)
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::createMoatData, this)(playerID, moatX, tileY, FALSE)
                 != 0) {
                 this->LogicLayer[tile] |= L_MOAT_DUG_OR_PLANNED;
             }

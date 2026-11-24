@@ -17,7 +17,7 @@ namespace Map {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return 0;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
+        if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]) {
             return 0;
         }
 
@@ -27,9 +27,8 @@ namespace Map {
             return existingMoatID;
         }
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT
-            && MACRO_CALL_MEMBER(
-                   OpenSHC::Map::Buildings::BuildingsState_Func::hasEnoughGoldForMoat, DAT_BuildingsState::ptr)()
-                == 0) {
+            && !MACRO_CALL_MEMBER(
+                OpenSHC::Map::Buildings::BuildingsState_Func::hasEnoughGoldForMoat, DAT_BuildingsState::ptr)()) {
             return 0;
         }
 
@@ -46,7 +45,7 @@ namespace Map {
             this->moats[moatID].y = y;
             this->moats[moatID].tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
             this->moats[moatID].zeroOrTwo = 2;
-            if (filled != 0) {
+            if (filled) {
                 this->moats[moatID].stage = 2;
                 this->moats[moatID].fillProgress = 4;
             } else {

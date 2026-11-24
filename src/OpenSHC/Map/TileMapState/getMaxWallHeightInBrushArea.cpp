@@ -15,7 +15,7 @@ namespace Map {
         int maxWallHeight = 0;
         for (int index = 1; index < 5; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                1, index, &tile, &y, baseTile, baseY);
+                TRUE, index, &tile, &y, baseTile, baseY);
             if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) == 0) {
                 continue;
             }

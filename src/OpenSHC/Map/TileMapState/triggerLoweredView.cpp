@@ -14,7 +14,7 @@ namespace Map {
     void TileMapState::triggerLoweredView(OpenSHC::Map::Enums::LoweredViewTransitionInt requestedView)
     {
         OpenSHC::Map::Enums::LoweredViewTransition view = OpenSHC::Map::Enums::LVT_SET_NORMAL;
-        if (this->flatViewToggleValue2 == 0) {
+        if (!this->flatViewToggleValue2) {
             view = (OpenSHC::Map::Enums::LoweredViewTransition)requestedView;
         }
         if (this->refreshCertainTileMap_old == view) {

@@ -26,7 +26,7 @@ namespace Map {
         int baseY = y;
         for (int index = 0; index < 9; index++) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTileForBrush, this)(
-                0, index, &tile, &y, baseTile, baseY);
+                FALSE, index, &tile, &y, baseTile, baseY);
             int const brushTile = tile;
             if ((this->LogicLayer[tile] & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                 continue;

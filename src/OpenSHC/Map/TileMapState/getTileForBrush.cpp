@@ -13,7 +13,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004FBD80
     void TileMapState::getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, int y)
     {
-        if (square != 0) {
+        if (square) {
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::PathFindingState_Func::getTileInSquareBrush, DAT_PathFindingState::ptr)(
                 index, baseTile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile, y);

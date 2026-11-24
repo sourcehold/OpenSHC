@@ -15,7 +15,7 @@ namespace Map {
         if (x > MC_MAP_XY_LIMIT_INCLUSIVE || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
             return;
         }
-        if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
+        if (!DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x]) {
             return;
         }
 
@@ -26,8 +26,8 @@ namespace Map {
             uint footprintY = this->buildingY + y;
             uint footprintX = this->buildingX + x;
             if (footprintX <= MC_MAP_XY_LIMIT_INCLUSIVE && footprintY <= MC_MAP_XY_LIMIT_INCLUSIVE
-                && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[footprintY * MC_MAP_XY_LIMIT + footprintX]
-                    != 0) {
+                && DAT_ViewportRenderState::instance
+                    .DAT_BinaryTileMap400x400[footprintY * MC_MAP_XY_LIMIT + footprintX]) {
                 int const height
                     = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[footprintY].addXgetTile
                         + this->buildingX + x];
