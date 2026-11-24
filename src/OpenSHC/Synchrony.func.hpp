@@ -55,7 +55,7 @@ namespace Synchrony_Func {
         Address::SHC_3BB0A8C1_0x0047DF40, &OpenSHC::Synchrony::EnumSessionsCallback_addSession_async)
     EnumSessionsCallback_addSession_async;
 
-    MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(int* param_1, undefined4 param_2, char* param_3), false,
+    MACRO_FUNCTION_RESOLVER(BOOLEnum(__stdcall*)(GUID* guidDataType, DWORD dataSize, char* data, void* context), false,
         Address::SHC_3BB0A8C1_0x0047E160, &OpenSHC::Synchrony::DirectPlayModemRelated_MemoryAllocationCallback)
     DirectPlayModemRelated_MemoryAllocationCallback;
 

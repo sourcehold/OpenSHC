@@ -34,8 +34,8 @@ namespace UI {
         dword modalDragDropUnk; // 0x00000030 length: 4
         dword mouseRelativeX; // 0x00000034 length: 4
         dword mouseRelativeY; // 0x00000038 length: 4
-        dword sliderMinimum; // 0x0000003C length: 4
-        dword sliderMaximum; // 0x00000040 length: 4
+        int sliderMinimum; // 0x0000003C length: 4
+        int sliderMaximum; // 0x00000040 length: 4
         undefined1 padding_0x44[8]; // 0x00000044 length: 8
         int textGroup; // 0x0000004C length: 4
         int textIndex; // 0x00000050 length: 4

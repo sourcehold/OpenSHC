@@ -145,7 +145,7 @@ namespace Map {
 
             void setUnitStance(int tribeID, UnitStanceEnum unitStance);
 
-            void addRallyPoint(int tribeID, short destinationX, short destinationY, int step);
+            void addRallyPoint(int tribeID, int destinationX, int destinationY, int step);
 
             void snapshotSelectionTribeAndComputeStance(int playerID);
 

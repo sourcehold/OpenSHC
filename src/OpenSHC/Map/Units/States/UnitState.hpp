@@ -29,6 +29,7 @@ namespace Map {
                 US_MOVE_TO_DESTINATION = 101, // 0x00000065
                 US_MELEE_ATTACK = 106, // 0x0000006A
                 US_MELEE_ATTACK_WALL = 107, // 0x0000006B
+                US_UNKNOWN_108 = 108, // 0x0000006C
                 US_JESTER_ROAM_TO = 109, // 0x0000006D
                 US_DISAPPEAR = 110, // 0x0000006E
                 US_DEATH_01 = 111, // 0x0000006F
@@ -37,6 +38,8 @@ namespace Map {
                 US_STONE_DEATH_01 = 114, // 0x00000072
                 US_STONE_DEATH_02 = 115, // 0x00000073
                 US_STONE_DEATH_03 = 116, // 0x00000074
+                US_UNKNOWN_117 = 117, // 0x00000075
+                US_UNKNOWN_120 = 120, // 0x00000078
                 US_UNKNOWN_121 = 121, // 0x00000079
                 US_APPEAR = 122, // 0x0000007A
                 US_DIG = 125, // 0x0000007D
@@ -44,6 +47,14 @@ namespace Map {
                 US_ASSASSIN_CLIMBING_UP = 127, // 0x0000007F
                 US_ASSASSIN_START_CLIMBING_DOWN = 128, // 0x00000080
                 US_ASSASSIN_CLIMBING_DOWN = 129, // 0x00000081
+                US_UNKNOWN_202 = 202, // 0x000000CA
+                US_UNKNOWN_203 = 203, // 0x000000CB
+                US_UNKNOWN_204 = 204, // 0x000000CC
+                US_UNKNOWN_205 = 205, // 0x000000CD
+                US_UNKNOWN_206 = 206, // 0x000000CE
+                US_UNKNOWN_207 = 207, // 0x000000CF
+                US_UNKNOWN_208 = 208, // 0x000000D0
+                US_UNKNOWN_209 = 209, // 0x000000D1
                 UnitStateInt__US_APPLEFARMER_PLUCK_APPLES = 2, // 0x00000002
                 UnitStateInt__US_Appear = 122, // 0x0000007A
                 UnitStateInt__US_Dig = 125 // 0x0000007D

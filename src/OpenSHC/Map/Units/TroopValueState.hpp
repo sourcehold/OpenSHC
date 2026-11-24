@@ -91,11 +91,11 @@ namespace Map {
 
             undefined4 findEnemyWalls(int unitID);
 
-            void setScale3(int one, int playerID);
+            void setScale3(BOOLEnum includeAll, int playerID);
 
             undefined4 findNearestAvailableScalePoint(int unitID);
 
-            void setTown2(int param_1, int playerID);
+            void setTown2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
@@ -107,15 +107,15 @@ namespace Map {
 
             int findEnemyLord(int unitID);
 
-            void setGate2(int param_1, int param_2);
+            void setGate2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyTowersOrGates(int unitID);
 
-            void setWide3(int param_1, int param_2);
+            void setWide3(BOOLEnum includeAll, int playerID);
 
             undefined4 getClosestWideValueBasedOnPlayer(int playerID);
 
-            void setMoat3(int checkAgainstNonZero, int playerID);
+            void setMoat3(BOOLEnum includeAll, int playerID);
 
             undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
 

@@ -11,12 +11,12 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00537160
         void UnitsState::queueDisbandAndAttackCommand4Params(
-            undefined4 commandParam0, undefined4 commandParam1, undefined4 commandParam2, undefined4 commandParam3)
+            int tribeID, UnitInstructionType instruction, int targetID, int targetUID)
         {
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = commandParam0;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = commandParam1;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = commandParam2;
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = commandParam3;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = tribeID;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = instruction;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = targetID;
+            DAT_GameSynchronyState::instance.DAT_GameCommandParam3 = targetUID;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
                 OpenSHC::Commands::GCT_DISBAND_AND_ATTACK_UNITS);
         }

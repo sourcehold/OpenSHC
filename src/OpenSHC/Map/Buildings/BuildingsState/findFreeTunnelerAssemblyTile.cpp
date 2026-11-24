@@ -27,7 +27,7 @@ namespace Map {
                     int const x = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].x + assemblyX;
                     int const y = DAT_BuildingDefinedData::instance.SearchRelatedXYOffsets_1[i].y + assemblyY;
                     int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-                    int const occupantID = (short)DAT_TileMapState::instance.UnitLayer[tile];
+                    int const occupantID = DAT_TileMapState::instance.UnitLayer[tile];
                     if (occupantID != 0 && occupantID != unitID
                         && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {
                         continue;
@@ -35,9 +35,8 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(
                             Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                             DAT_PathFindingState::ptr)(playerID,
-                            (short)DAT_TileMapState::instance
-                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                            (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                            DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
                         != 0) {
                         this->DAT_TempXOffset = x;
                         this->DAT_TempYOffset = y;
@@ -61,7 +60,7 @@ namespace Map {
                     continue;
                 }
                 int const occupantID
-                    = (short)DAT_TileMapState::instance
+                    = DAT_TileMapState::instance
                           .UnitLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
                 if (occupantID != 0 && occupantID != unitID
                     && DAT_UnitsState::instance.units[unitID].movementRelated == 8) {

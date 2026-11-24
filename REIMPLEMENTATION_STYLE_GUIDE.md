@@ -88,7 +88,7 @@ In case of uncertainty, check the matching.
 fillMemory_ByteValue(14836, '\0', &this->playerDataArray[playerID]);
 
 // yes
-fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), '\0', &this->playerDataArray[playerID]);
+fillMemory_ByteValue(sizeof(this->playerDataArray[playerID]), 0, &this->playerDataArray[playerID]);
 ```
 
 **neutral**, and it binds the call to the layout of the structure.
@@ -493,11 +493,44 @@ if (someCondition) {
 
 **measure**. Also needs interpretation of the code to understand what for-loop could replace it.
 
-## 26. Only use '\0' if strings and chars are involved
+## 26. Favor `i < countof(this->array)` instead of magic values
+```cpp
+// no
+for (int i = 0; i < 5; ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+
+// yes
+for (int i = 0; i < countof(this->previousModalDialogs); ++i) {
+    this->previousModalDialogs[i] = OpenSHC::UI::Enums::MMT_NO_MENU;
+}
+```
+
+**neutral** when our supplied `countof` is used.
+
+## 27. Only use '\0' if strings and chars are involved
 Else write 0 instead of '\0'.
 
-## 27. Remove unused `using` declarations
+## 28. Remove unused `using` declarations
 If the type or namespace is unused, remove the `using` declaration in the cpp file.
+
+## 29. Use self-add and other self-operations
+```cpp
+// no
+x = x + 4;
+x = x | 0x1;
+x = x & 0xf;
+x = x + 1;
+// yes
+x += 4;
+x |= 0x1;
+x &= 0xf;
+x++;
+```
+
+## 30. Add float constants to reccmp
+Float constants are used in x87 code. Add their address type (`float`)
+and size to `reccmp/float-literals.csv` such that reccmp can process appropriately.
 
 ---
 
@@ -518,7 +551,7 @@ python build_quiet.py && python reccmp_report.py --run cmp base.json    # the nu
   what can be considered almost "100% Reimplemented" if reccmp itself doesn't show 100%.
 - **`quick_diff.py` is for ranking variants of one file**, not for judging a file in absolute terms. It
   compiles without LTCG and without the real link, so on some functions it disagrees with reccmp outright:
-- `build_quiet.py` exits non-zero if compilation failed.
+- `build_quiet.py` exits non-zero if the cmake configure or the compilation failed.
 - Resolver flags are not committed. `enable_local_functions.py` and `Enable-Reimplemented-Data.ps1` have to be re-run after any
   `git checkout -- src/OpenSHC`, and a resolver left `true` with no `.cpp` in the build list is an
   unresolved external at link time. Never commit resolvers set to `true` nor local build lists.

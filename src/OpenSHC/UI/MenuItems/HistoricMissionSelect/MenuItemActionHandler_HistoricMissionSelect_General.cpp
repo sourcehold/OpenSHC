@@ -6,11 +6,11 @@
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/BOOL_CurrentMenuClickState.hpp"
-#include "OpenSHC/Globals/DAT_00b96100.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_MenuModalComposition1.hpp"
 #include "OpenSHC/Globals/DAT_MenuTextInputState.hpp"
+#include "OpenSHC/Globals/INT_00b96100.hpp"
 
 namespace OpenSHC {
 namespace UI {
@@ -25,7 +25,7 @@ namespace UI {
                 switch (button) {
                 default: {
                     BOOL_CurrentMenuClickState::instance = FALSE;
-                    DAT_GameCore::instance.missionNumber1to20 = DAT_00b96100::instance - button - 1;
+                    DAT_GameCore::instance.missionNumber1to20 = INT_00b96100::instance - button - 1;
                     DWORD const clickTime = timeGetTime();
                     if (DAT_GameCore::instance.missionNumber1to20
                             != DAT_MenuTextInputState::instance.lastClickedListIndex
