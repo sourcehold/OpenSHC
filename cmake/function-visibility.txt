@@ -77,6 +77,8 @@ OpenSHC::UI::Rendering::RenderCurrentButtonOnScreenMenu
     OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
 OpenSHC::UI::Rendering::RenderCurrentButtonToScreenMenuWithBlendingUnk
     OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
+OpenSHC::UI::MenuItems::InGameMenu::MenuItemRenderFunction_InGameMenu_MainButtons
+    OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
 OpenSHC::UI::MenuItems::MapEditorLandscaping::MenuItemRenderFunction_MapEditorLandscaping_GeneralButtons
     OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
 OpenSHC::UI::MenuItems::BuildingAndStatusMenu::MenuItemRenderFunction_BuildingAndStatusMenu_BarracksWeaponAvailability
@@ -113,8 +115,12 @@ OpenSHC::IO::DecoderState::decodeData
     OpenSHC::IO::LowLevelMemory::copyData
 OpenSHC::Synchrony::GameSynchronyState::processSyncPacket
     OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
+OpenSHC::Synchrony::Commands::CommandSwitchTeams
+    OpenSHC::Synchrony::GameSynchronyState::countPlayersInSameTeam
 OpenSHC::Synchrony::GameSynchronyState::receiveAllTransmittedCommands
     OpenSHC::Synchrony::GameSynchronyState::translateMultiplayerIDsIntoPlayerIDs
+OpenSHC::UI::MenuItems::Roundtable::MenuItemActionHandler_Roundtable_Main
+    OpenSHC::Synchrony::GameSynchronyState::isAIPlayer
 OpenSHC::Map::TileMapState::updateMoatCountdownTimers
     OpenSHC::Map::TileMapState::recountTotalOwnedMoats
 OpenSHC::UI::HoveredState::Constructor_HoveredState
@@ -137,6 +143,11 @@ OpenSHC::Map::Units::UpdateMerchant
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateMerchantHorse
     OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateFireWatch
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+OpenSHC::Map::Units::UpdateGhost
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateLady
     OpenSHC::Map::Units::UnitsState::makeUnitStopWalkingByClearingPathProgressState
@@ -201,9 +212,19 @@ OpenSHC::Map::Units::UpdateTrebuchet
 OpenSHC::Map::Units::UpdateMangonel
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateHunterDog
+    OpenSHC::Map::Units::UnitsState::makeUnitStopWalkingByClearingPathProgressState
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::hasTunnelerNotFinishedDigging
 OpenSHC::Map::Units::UpdateBallista
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
     OpenSHC::Map::Units::UnitsState::deselectUnit
+OpenSHC::Map::Units::UpdateCageDog
+    OpenSHC::Map::Units::UnitsState::makeUnitStopWalkingByClearingPathProgressState
+    OpenSHC::Map::Units::UnitsState::checkIfCitizenUnitIsAliveBasedOnState
+    OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
+    OpenSHC::Map::Units::UnitsState::tryAttackUnitID
 OpenSHC::Map::Units::UpdateSlave
     OpenSHC::Map::Units::UnitsState::hasUnitReachedDestination
 OpenSHC::Map::Units::UpdateAssassin

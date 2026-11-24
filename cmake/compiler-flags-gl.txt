@@ -165,5 +165,8 @@ src/OpenSHC/Map/Units/UpdateMangonel.cpp
 src/OpenSHC/Map/Units/UpdateHorseArcher_DoShooting.cpp
 src/OpenSHC/Map/Units/UpdateSiegeTent.cpp
 src/OpenSHC/Map/Units/UpdateBatteringRam.cpp
+src/OpenSHC/Synchrony/Commands/CommandSwitchTeams.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/countPlayersInSameTeam.cpp
+src/OpenSHC/Synchrony/GameSynchronyState/addChatMessageToDisplayList.cpp
 src/OpenSHC/UI/MenuItems/TextEditor/MenuItemActionHandler_TextEditor_TextInputRelatedUnk.cpp
 src/OpenSHC/Text/TextEditorState/helpToken.cpp
