@@ -63,6 +63,8 @@ OpenSHC::Game::GameStateStructures::clearEnemyRelatedStructures
     OpenSHC::Game::GameStateStructures::setVariousGameStateToInitialValues
 OpenSHC::Game::GameStateStructures::getSalesPrice
     OpenSHC::Game::GameStateStructures::getSellResourceAmount
+OpenSHC::UI::MenuItems::TextEditor::MenuItemActionHandler_TextEditor_TextInputRelatedUnk
+    OpenSHC::Text::TextEditorState::helpToken_getHelpTokenAdvanceLength
 OpenSHC::UI::MenuItems::General::MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface
     OpenSHC::UI::Rendering::ButtonGmData::getPictureNumberInGm
 OpenSHC::UI::Rendering::RenderCurrentNotActiveButtonWithPossibleAlphaTexOnCurrentSurfaceUnk
