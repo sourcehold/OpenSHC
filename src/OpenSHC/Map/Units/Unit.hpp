@@ -194,7 +194,7 @@ namespace Map {
             int manningEngineerUIDRef[4]; // 0x0000031C length: 16
             byte isStalked; // 0x0000032C length: 1
             char field_0x32d; // 0x0000032D length: 1
-            byte disappearFadeAlphaCountdown; // 0x0000032E length: 1
+            char disappearFadeAlphaCountdown; // 0x0000032E length: 1
             byte engineerManningSiegeStateRef_checkType; // 0x0000032F length: 1
             int someMatchTimeVariable; // 0x00000330 length: 4
             undefined1 padding_0x334[2]; // 0x00000334 length: 2
