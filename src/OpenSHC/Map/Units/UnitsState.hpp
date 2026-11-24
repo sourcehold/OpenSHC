@@ -14,6 +14,7 @@
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnum.hpp"
 #include "OpenSHC/Map/Units/Unit.hpp"
+#include "OpenSHC/Map/Units/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -87,7 +88,7 @@ namespace Map {
 
             int euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int param_4);
 
-            int nonEuroRecruit(UnitType unitType, undefined4 recruitmentBuilding, int playerID, int param_4);
+            int nonEuroRecruit(UnitType unitType, int recruitmentBuildingID, int playerID, int param_4);
 
             int disbandUnit(int unitID);
 
@@ -131,7 +132,7 @@ namespace Map {
 
             BOOLEnum setUnitFacingDirectionForTargetXandY(int unitID, int targetX, int targetY);
 
-            uint setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID);
+            BOOLEnum setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID);
 
             BOOLEnum isComputerManagedNonPeasant(int param_1);
 
@@ -290,7 +291,7 @@ namespace Map {
 
             void playerMakeUnitSelection(int playerID, int tribeID);
 
-            void getFirstSelectedUnitID(undefined4 param_1);
+            void getFirstSelectedUnitID(int unitID);
 
             void selectSiegeEngineAndPlayFeedback(int playerID, int unitID, int tribeID);
 
@@ -336,7 +337,7 @@ namespace Map {
 
             void queueClickNavigateMenuOrEscape(undefined4 param_1);
 
-            void clearOrDeselectUnitFromSelection(int playerID, uint unitID, int unitType);
+            void clearOrDeselectUnitFromSelection(int playerID, int unitID, int unitType);
 
             void clearSelectionCountsAndPlayerIDs();
 
@@ -349,13 +350,13 @@ namespace Map {
 
             void queueDisbandAndAttackCommand2Params(undefined4 param_1, undefined4 param_2);
 
-            void queueDisbandAndAttackCommand3Params(undefined4 param_1, undefined4 param_2, undefined4 param_3);
+            void queueDisbandAndAttackCommand3Params(int tribeID, UnitInstructionType instruction, int targetID);
 
             void queueDisbandAndAttackCommand4Params(
                 int tribeID, UnitInstructionType instruction, int targetID, int targetUID);
 
-            void queueDisbandAndAttackCommand5Params(undefined4 param_1, UnitInstructionType instruction,
-                undefined4 param_3, undefined4 param_4, undefined4 param_5);
+            void queueDisbandAndAttackCommand5Params(
+                int tribeID, UnitInstructionType instruction, int targetID, int targetUID, int instructionParamUnk);
 
             void relayTribeInstruction(
                 int tribeID, UnitInstructionType instructionType, int targetID_1, int targetID_2, int param_5);
@@ -418,7 +419,7 @@ namespace Map {
 
             void exitLadder(int unitID);
 
-            uint getUnitInHitBox(undefined4 param_1);
+            uint getUnitInHitBox(UnitHitBoxFilter filterMode);
 
             BOOLEnum setDestinationNearTargetedBuilding(int unitID, int param_2);
 
@@ -440,7 +441,7 @@ namespace Map {
 
             void clearHiddenFlagAndUpdatePosition(int unitID);
 
-            void setPositionOfUnit(int unitID, uint x, uint y, undefined4 height);
+            void setPositionOfUnit(int unitID, int x, int y, undefined4 height);
 
             void commitMimmicLocation(int unitID);
 
