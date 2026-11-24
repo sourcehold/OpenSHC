@@ -8,12 +8,18 @@
 
 #pragma once
 
+#include "OpenSHC/Rendering/ScreenResolutionEnumInt.hpp"
+#include "OpenSHC/UI/Enums/CursorTypeInt.hpp"
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/UI/Enums/MenuModalTypeInt.hpp"
+#include "OpenSHC/UI/ScrollSpeedInt.hpp"
 
 namespace OpenSHC {
 namespace UI {
 
+    using OpenSHC::Rendering::ScreenResolutionEnumInt;
+    using OpenSHC::UI::ScrollSpeedInt;
+    using OpenSHC::UI::Enums::CursorTypeInt;
     using OpenSHC::UI::Enums::MenuModalType;
     using OpenSHC::UI::Enums::MenuModalTypeInt;
 
@@ -25,17 +31,17 @@ namespace UI {
         undefined4 fileListContext; // 0x00000000 length: 4
         undefined4 savedListOffset1; // 0x00000004 length: 4
         undefined4 savedListSelection1; // 0x00000008 length: 4
-        undefined4 savedListSortOrder1; // 0x0000000C length: 4
+        int savedListSortOrder1; // 0x0000000C length: 4
         undefined4 savedListOffset2; // 0x00000010 length: 4
         undefined4 savedListSelection2; // 0x00000014 length: 4
-        undefined4 savedListSortOrder2; // 0x00000018 length: 4
+        int savedListSortOrder2; // 0x00000018 length: 4
         undefined4 savedListOffset3; // 0x0000001C length: 4
         undefined4 savedListSelection3; // 0x00000020 length: 4
-        undefined4 savedListSortOrder3; // 0x00000024 length: 4
-        undefined4 menuCurrentlySelectedResolution; // 0x00000028 length: 4
+        int savedListSortOrder3; // 0x00000024 length: 4
+        ScreenResolutionEnumInt menuCurrentlySelectedResolution; // 0x00000028 length: 4
         undefined4 unknownZoomRelatedFlag01; // 0x0000002C length: 4
         undefined4 pendingGameSpeedLevel; // 0x00000030 length: 4
-        undefined4 menuScrollSpeedSetting; // 0x00000034 length: 4
+        ScrollSpeedInt menuScrollSpeedSetting; // 0x00000034 length: 4
         undefined4 pendingSettingBubbleHelp; // 0x00000038 length: 4
         undefined1 pendingUnusedOption1; // 0x0000003C length: 1
         undefined1 padding_0x3d[3]; // 0x0000003D length: 3
@@ -43,13 +49,13 @@ namespace UI {
         undefined4 pendingStreamVolume0; // 0x00000044 length: 4
         undefined4 pendingStreamVolume1; // 0x00000048 length: 4
         undefined4 pendingStreamVolume3; // 0x0000004C length: 4
-        undefined4 menuCursorType; // 0x00000050 length: 4
+        CursorTypeInt menuCursorType; // 0x00000050 length: 4
         undefined4 DAT_GenieVoiceActiveMenuVar; // 0x00000054 length: 4
         undefined4 DAT_MenuOptionsActionParameter; // 0x00000058 length: 4
         MenuModalTypeInt currentModalDialog; // 0x0000005C length: 4
         MenuModalTypeInt previousModalDialogs[5]; // 0x00000060 length: 20
         int fileListEntryCount; // 0x00000074 length: 4
-        undefined4 fileListSortOrder; // 0x00000078 length: 4
+        int fileListSortOrder; // 0x00000078 length: 4
         int menuLoadGameRelativeSelectionIndex; // 0x0000007C length: 4
         int menuLoadGameRelativeSelectionOffset; // 0x00000080 length: 4
         int fileListVisibleRowCount; // 0x00000084 length: 4
