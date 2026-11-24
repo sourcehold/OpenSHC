@@ -2523,13 +2523,17 @@ first with weight >= the new one. Net effect: size ascending, weight descending,
 weights **the element that reached its final weight first comes first**, i.e. gets the higher
 address. Declaration order and initialisation order are nowhere in it (both re-tested: no change).
 
-**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol
-counts once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list
-that `CollectStackElements` flattens as: the *def-set* (every local the block writes) as a nested
-set, then the *use-list* (every local the block reads, in reverse order of first mention), then the
-def-set again. For the walk in `tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18
-symbols. The written locals therefore get +3 from the block, read-only ones +1, write-only ones +2;
-a local's C-side references add 1 each before and after.
+**3. An `__asm` block is one tuple whose operand sets supply the references, so each symbol counts
+once per set, not once per mention.** The asm tuple (opcode 0x2ce) carries a points-at list that
+`CollectStackElements` flattens as: the *def-set* as a nested set, then the *use-list* (every local
+the block reads, in reverse order of first mention), then the def-set again. The def-set is not only
+what the block itself writes: it holds every local that *any* `__asm` block of the function writes,
+as long as that local is declared in a block that contains this one, wherever in that block the
+declaration stands (see "A block scope moves an asm-written local" below). For the walk in
+`tracePathPlan...` that is 4 + 17 + 4 = 25 references for 18 symbols. A local in the def-set
+therefore gets +3 from the block if the block also reads it and +2 if not, whether the block writes
+it or only another block does; a local the block only reads, and no asm block writes, gets +1. A
+local's C-side references add 1 each before and after.
 
 **4. The def-set is iterated in hash order of the symbol name.** The second def-set pass is the
 *last* reference of every asm-written local that the C code does not touch afterwards, so their
@@ -2576,6 +2580,19 @@ The `_tile`/`_cY` case is the warning about the ranking: in the three macro user
 followed declaration order, which only happens when two names hash to the same bucket - the
 `name_rank.cpp` ranking puts them adjacent for that reason, and the probe on the real function is
 what settled each one.
+
+**A block scope moves an asm-written local.** A local that any asm block writes goes into the
+def-set of every asm block inside the block that declares it, so a local written by only some of
+the blocks weighs more than its own references suggest, and moving its declaration within the same
+block changes nothing. Declaring it in an inner block that holds only the asm that uses it does. In
+`TextureRenderCore::renderUnitAnimationWithBlendingUnk` (`0x00451E00`: four asm blocks, a 0x1c
+frame, so no sort) only the last two blocks write `columnOffset`. Declared at the top it weighs 10
+(+2 from each of the four def-sets, +1 from each of its two use-lists) and takes `-4`, pushing the
+three locals the original has above it (weights 7, 7 and 6) down one slot each. Declared at
+function level after the `if` that holds the first two blocks, or just before the third, it still
+weighs 10. Declared inside the `else` that holds the last two blocks it weighs 6, lands behind the
+other three, and every local sits at the original's offset. This function is the only one the rule
+has been traced on so far. One `slot_probe.py` run shows the weight; a build confirms the layout.
 
 ### The rule, as code: `simulate()`, `regime()`, and the regression tests
 
