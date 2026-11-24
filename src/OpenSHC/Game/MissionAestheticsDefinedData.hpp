@@ -114,7 +114,7 @@ namespace Game {
         int EventConditionMaxValue[40]; // 0x00002264 length: 160
         int EventConditionValueScale[40]; // 0x00002304 length: 160
         int EventConditionParamKind[40]; // 0x000023A4 length: 160
-        byte EventConditionOptionValues[32][100]; // 0x00002444 length: 3200
+        int EventConditionOptionValues[32][25]; // 0x00002444 length: 3200
         int field_0x30c4[25]; // 0x000030C4 length: 100
         int field_0x3128; // 0x00003128 length: 4
         int BuildingAvailabilityRowOrder[174]; // 0x0000312C length: 696
