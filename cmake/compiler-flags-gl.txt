@@ -161,3 +161,4 @@ src/OpenSHC/Map/Units/UpdateArabianSwordsman.cpp
 src/OpenSHC/Map/Units/UpdateHorseArcher.cpp
 src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
 src/OpenSHC/Map/Units/UpdateMangonel.cpp
+src/OpenSHC/Map/Units/UpdateBatteringRam.cpp
