@@ -110,7 +110,7 @@ namespace Map {
 
             void removeEntityFromTileLinkedList(int param_1);
 
-            void activateProjectileEntity(int entityID);
+            int activateProjectileEntity(int entityID);
 
             void deleteEntity(uint entityID);
 
