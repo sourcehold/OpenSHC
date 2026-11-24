@@ -6,74 +6,74 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FC810
-    int TileMapState::computeClimbRampRotation(int tileUnk, uint x, uint y)
+    int TileMapState::computeClimbRampRotation(int tile, uint x, uint y)
     {
-        int height;
-        if ((this->LogicLayer[tileUnk] & L_WALL_OR_GATEHOUSE) != 0) {
-            height = this->DefaultHeightLayer[tileUnk];
+        int tileHeight;
+        if ((this->LogicLayer[tile] & L_WALL_OR_GATEHOUSE) != 0) {
+            tileHeight = this->DefaultHeightLayer[tile];
         } else {
-            height = this->HeightLayer[tileUnk];
+            tileHeight = this->HeightLayer[tile];
         }
 
-        int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tileUnk;
-        int southHeight;
+        int neighbour = this->directionTranslationMatrix[y][this->screenSouthDirection] + tile;
+        int screenSouthHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            southHeight = this->DefaultHeightLayer[neighbour];
+            screenSouthHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            southHeight = this->HeightLayer[neighbour];
+            screenSouthHeight = this->HeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tileUnk;
-        int eastHeight;
+        neighbour = this->directionTranslationMatrix[y][this->screenEastDirection] + tile;
+        int screenEastHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            eastHeight = this->DefaultHeightLayer[neighbour];
+            screenEastHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            eastHeight = this->HeightLayer[neighbour];
+            screenEastHeight = this->HeightLayer[neighbour];
         }
 
-        neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tileUnk;
-        int southEastHeight;
+        neighbour = this->directionTranslationMatrix[y][this->screenSouthEastDirection] + tile;
+        int screenSouthEastHeight;
         if ((this->LogicLayer[neighbour] & L_WALL_OR_GATEHOUSE) != 0) {
-            southEastHeight = this->DefaultHeightLayer[neighbour];
+            screenSouthEastHeight = this->DefaultHeightLayer[neighbour];
         } else {
-            southEastHeight = this->HeightLayer[neighbour];
+            screenSouthEastHeight = this->HeightLayer[neighbour];
         }
 
-        uint rotation;
-        if (height > southHeight + 20 && southHeight < 136) {
-            if (height > eastHeight + 20 && eastHeight < 136) {
-                if (height > southEastHeight + 20 && southEastHeight < 136) {
-                    rotation = 5;
+        uint exposedFaces;
+        if (tileHeight > screenSouthHeight + 20 && screenSouthHeight < 136) {
+            if (tileHeight > screenEastHeight + 20 && screenEastHeight < 136) {
+                if (tileHeight > screenSouthEastHeight + 20 && screenSouthEastHeight < 136) {
+                    exposedFaces = 5;
                 } else {
-                    rotation = 3;
+                    exposedFaces = 3;
                 }
             } else {
-                rotation = 1;
+                exposedFaces = 1;
             }
-        } else if (height > eastHeight + 20 && eastHeight < 136) {
-            if (height > southHeight + 20 && southHeight < 136) {
-                rotation = 3;
+        } else if (tileHeight > screenEastHeight + 20 && screenEastHeight < 136) {
+            if (tileHeight > screenSouthHeight + 20 && screenSouthHeight < 136) {
+                exposedFaces = 3;
             } else {
-                rotation = 2;
+                exposedFaces = 2;
             }
-        } else if (southHeight < 136 || eastHeight < 136) {
-            if (height > southEastHeight + 20) {
-                rotation = 5;
+        } else if (screenSouthHeight < 136 || screenEastHeight < 136) {
+            if (tileHeight > screenSouthEastHeight + 20) {
+                exposedFaces = 5;
             } else {
-                rotation = 0;
+                exposedFaces = 0;
             }
         } else {
-            rotation = 4;
+            exposedFaces = 4;
         }
 
         if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH) {
-            if (rotation == 1) {
+            if (exposedFaces == 1) {
                 this->wallCornerRotation = 32 - (x & 0x1f);
             } else {
                 this->wallCornerRotation = 32 - (y & 0x1f);
             }
         } else if (this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
-            if (rotation == 1) {
+            if (exposedFaces == 1) {
                 this->wallCornerRotation = (x & 0x1f) + 1;
             } else {
                 this->wallCornerRotation = (y & 0x1f) + 1;
@@ -86,7 +86,7 @@ namespace Map {
         if ((int)this->wallCornerRotation > 31) {
             this->wallCornerRotation = 1;
         }
-        return rotation;
+        return exposedFaces;
     }
 
 }
