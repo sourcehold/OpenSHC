@@ -150,3 +150,5 @@ src/OpenSHC/Map/Units/UpdateHopsFarmer.cpp
 src/OpenSHC/Map/Units/ComputeGoodsProduced.cpp
 src/OpenSHC/Map/Units/IncrementAndOptionalUpdateAVValueRelated.cpp
 src/OpenSHC/Map/Units/SetStateToFreetimeWalking.cpp
+src/OpenSHC/Map/Units/UnitsState/deselectUnit.cpp
+src/OpenSHC/Map/Units/UpdateMangonel.cpp
