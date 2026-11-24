@@ -4,6 +4,7 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/AI/AIType.hpp"
 #include "OpenSHC/AI/AITypeInt.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
@@ -17,12 +18,7 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AIType;
-    using OpenSHC::AI::AITypeInt;
-    using OpenSHC::AI::Tribes::AITribeType;
     using OpenSHC::Commands::MappersEnum;
-    using OpenSHC::Map::Units::SomeTribeBehaviorType;
-    using OpenSHC::Map::Units::UnitInstructionType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004CEFD0
     void AICState::useAITribe_0x12_toPlaceSiegeTentsAndAssignEngineers(int playerID)
@@ -31,11 +27,13 @@ namespace AI {
         if (aiType == OpenSHC::AI::AIT_NULL)
             return;
         int const aicIndex = aiType - 1;
-        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[0x12];
+        int const aiTribeID = DAT_GameState::instance.playerDataArray[playerID]
+                                  .aiTribeIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01];
         if (aiTribeID == 0)
             return;
         if (DAT_TribesState::instance.tribes[aiTribeID].uid
-            != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[0x12])
+            != DAT_GameState::instance.playerDataArray[playerID]
+                .aiTribeUIDs[OpenSHC::AI::Tribes::AITI_BREACH_BASIC_07_01])
             return;
 
         int availableEngineers = DAT_TribesState::instance.tribes[aiTribeID].size;
@@ -45,7 +43,7 @@ namespace AI {
         for (int i = 0; i < 8; i++) {
             if ((&this->aics[aicIndex].SiegeEngine1)[i] <= 0)
                 break;
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < countof(DAT_SkirmishDefinedData::instance.SiegeEngineUnitType); j++) {
                 if ((&this->aics[aicIndex].SiegeEngine1)[i]
                     == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
                     requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];
@@ -70,7 +68,7 @@ namespace AI {
         for (int i = 0; i < 8; i++) {
             if ((&this->aics[aicIndex].SiegeEngine1)[i] <= 0)
                 return;
-            for (int j = 0; j < 6; j++) {
+            for (int j = 0; j < countof(DAT_SkirmishDefinedData::instance.SiegeEngineUnitType); j++) {
                 if ((&this->aics[aicIndex].SiegeEngine1)[i]
                     == DAT_SkirmishDefinedData::instance.SiegeEngineUnitType[j]) {
                     requiredEngineers = DAT_SkirmishDefinedData::instance.SiegeEngineTypeRequiredEngineers[j];
@@ -95,7 +93,8 @@ namespace AI {
 
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Units::TroopValueState_Func::placeSiegeTentOrTunnelAtSuitableLocationAndAssignEngineers,
-                DAT_TroopValueState::ptr)(tribeID, siegeEngineType, 60, (UnitInstructionType)15);
+                DAT_TroopValueState::ptr)(tribeID, siegeEngineType, 60,
+                OpenSHC::Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED);
         }
     }
 

@@ -39,7 +39,7 @@ namespace Synchrony {
         LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
 
     BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationCallback(
-        int* param_1, undefined4 param_2, char* param_3, undefined4 param_4);
+        GUID* guidDataType, DWORD dataSize, char* data, void* context);
 
     void __cdecl MemCopyFromParameter(char* dest, size_t size, undefined4 playerID);
 
