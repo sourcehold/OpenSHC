@@ -14,9 +14,8 @@
 namespace OpenSHC {
 namespace Rendering {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     using OpenSHC::Rendering::ScreenResolutionArrayStruct;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000040

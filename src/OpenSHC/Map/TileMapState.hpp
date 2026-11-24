@@ -14,12 +14,16 @@
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/Map/Enums/HitSoundMaterialInt.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransition.hpp"
+#include "OpenSHC/Map/Enums/LoweredViewTransitionInt.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
 #include "OpenSHC/Map/Enums/MapOrientationInt.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/Moat.hpp"
 #include "OpenSHC/Map/PitchDitch.hpp"
+#include "OpenSHC/Map/Rocks/Enums/EditorRockType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -33,10 +37,14 @@ namespace Map {
     using OpenSHC::Map::Buildings::BuildingType;
     using OpenSHC::Map::Buildings::BuildingTypeShort;
     using OpenSHC::Map::Enums::CardinalDirection;
+    using OpenSHC::Map::Enums::HitSoundMaterialInt;
+    using OpenSHC::Map::Enums::LoweredViewTransition;
+    using OpenSHC::Map::Enums::LoweredViewTransitionInt;
     using OpenSHC::Map::Enums::MapOrientation;
     using OpenSHC::Map::Enums::MapOrientationInt;
     using OpenSHC::Map::LogicHelpers::Logic1;
     using OpenSHC::Map::LogicHelpers::Logic2;
+    using OpenSHC::Map::Rocks::Enums::EditorRockType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
@@ -91,7 +99,7 @@ namespace Map {
         char mapping40x40[40][40]; // 0x00500230 length: 1600
         Moat moats[16000]; // 0x00500870 length: 256000
         int currentMoatCount; // 0x0053F070 length: 4
-        undefined4 moatTileCount; // 0x0053F074 length: 4
+        int moatTileCount; // 0x0053F074 length: 4
         undefined4 ALG_MoatXResult; // 0x0053F078 length: 4
         undefined4 ALG_MoatYResult; // 0x0053F07C length: 4
         int someMoatTile; // 0x0053F080 length: 4
@@ -113,9 +121,9 @@ namespace Map {
         undefined1 padding_0x554880[8]; // 0x00554880 length: 8
         undefined4 placedBuildingID; // 0x00554888 length: 4
         undefined4 gateOrientationVariant; // 0x0055488C length: 4
-        undefined4 rockOrientation; // 0x00554890 length: 4
-        undefined4 editorRockType; // 0x00554894 length: 4
-        undefined4 lastTime; // 0x00554898 length: 4
+        MapOrientation rockOrientation; // 0x00554890 length: 4
+        EditorRockType editorRockType; // 0x00554894 length: 4
+        int lastTime; // 0x00554898 length: 4
         MapOrientationInt mapOrientation; // 0x0055489C length: 4
         undefined4 DAT_FutureMapOrientation; // 0x005548A0 length: 4
         int screenSouthEastDirection; // 0x005548A4 length: 4
@@ -123,20 +131,20 @@ namespace Map {
         int screenSouthDirection; // 0x005548AC length: 4
         int screenSouthWestDirection; // 0x005548B0 length: 4
         int orientedRowStep; // 0x005548B4 length: 4
-        undefined4 refreshCertainTileMap; // 0x005548B8 length: 4
-        undefined4 refreshCertainTileMap_old; // 0x005548BC length: 4
+        LoweredViewTransition refreshCertainTileMap; // 0x005548B8 length: 4
+        LoweredViewTransition refreshCertainTileMap_old; // 0x005548BC length: 4
         undefined4 counter1; // 0x005548C0 length: 4
         undefined4 refreshRelatedOne; // 0x005548C4 length: 4
         BOOLEnum disableElevationRendering; // 0x005548C8 length: 4
-        undefined4 flatViewToggleValue1; // 0x005548CC length: 4
+        BOOLEnum flatViewToggleValue1; // 0x005548CC length: 4
         undefined4 field_0x5548d0; // 0x005548D0 length: 4
-        undefined4 flatViewToggleValue2; // 0x005548D4 length: 4
+        BOOLEnum flatViewToggleValue2; // 0x005548D4 length: 4
         undefined4 refreshRelatedTwo; // 0x005548D8 length: 4
         int savedEditorActiveBrush; // 0x005548DC length: 4
         int editorActiveBrush; // 0x005548E0 length: 4
         MappersEnum currentMapperCommand; // 0x005548E4 length: 4
         undefined4 DAT_BuildingSize; // 0x005548E8 length: 4
-        undefined4 unitPlacementCount; // 0x005548EC length: 4
+        int unitPlacementCount; // 0x005548EC length: 4
         BOOLEnum mapperMax; // 0x005548F0 length: 4
         undefined4 rockFlagStartNumber; // 0x005548F4 length: 4
         int unknownBrushRelated; // 0x005548F8 length: 4
@@ -178,13 +186,13 @@ namespace Map {
         int DAT_WallTileCountCurrentDrag; // 0x00554988 length: 4
         undefined4 buildingX; // 0x0055498C length: 4
         undefined4 buildingY; // 0x00554990 length: 4
-        undefined4 buildingRotationRelatedValue; // 0x00554994 length: 4
+        undefined4 buildingOrientedPartIndex; // 0x00554994 length: 4
         undefined4 placementOnWall; // 0x00554998 length: 4
         undefined4 placementOnMoat; // 0x0055499C length: 4
         undefined4 savedCursorTile; // 0x005549A0 length: 4
         int showNoRubbleWhenDestroyingBuilding; // 0x005549A4 length: 4
-        undefined4 field_0x5549a8; // 0x005549A8 length: 4
-        undefined4 field_0x5549ac; // 0x005549AC length: 4
+        int destinationNearTargetX; // 0x005549A8 length: 4
+        int destinationNearTargetY; // 0x005549AC length: 4
         int wallPlacementCost; // 0x005549B0 length: 4
         int DAT_TempBuildingRotation; // 0x005549B4 length: 4
         int field_0x5549b8; // 0x005549B8 length: 4
@@ -208,7 +216,7 @@ namespace Map {
         undefined4 field_0x554a04; // 0x00554A04 length: 4
         undefined4 field_0x554a08; // 0x00554A08 length: 4
         int mapSize; // 0x00554A0C length: 4
-        undefined4 field_0x554a10; // 0x00554A10 length: 4
+        int field_0x554a10; // 0x00554A10 length: 4
         undefined4 skipPlacementFailChecks; // 0x00554A14 length: 4
         undefined1 padding_0x554a18[4]; // 0x00554A18 length: 4
         undefined4 decorationVariantIndex; // 0x00554A1C length: 4
@@ -266,9 +274,9 @@ namespace Map {
 
         void setMapSize(int size);
 
-        void triggerLoweredView(int param_1);
+        void triggerLoweredView(LoweredViewTransitionInt param_1);
 
-        void toggleFlatView(int param_1);
+        void toggleFlatView(BOOLEnum flatView);
 
         void noop1(undefined4 param_1);
 
@@ -280,13 +288,13 @@ namespace Map {
 
         void computeTileLuminescence(int tile, int param_2);
 
-        void increaseHeightForTunnelSingleTile(int tile, uint x, uint y, int increment);
+        void increaseHeightForTunnelSingleTile(int tile, int x, int y, int increment);
 
         int getNonFarmFieldBuildingHealthAtTileOr1000(int tile);
 
         void resetTileToDefaultState(int param_1, uint param_2, uint param_3);
 
-        uint getBuildingHurtSFXID(int buildingID);
+        HitSoundMaterialInt getBuildingHurtSFXID(int int_);
 
         void rotateFearFactorBuildingVariations();
 
@@ -298,13 +306,13 @@ namespace Map {
 
         BOOLEnum isWallCornerForCardinalDirection(int param_1, int param_2, int param_3);
 
-        uint isWallCornerForDiagonalDirection(int param_1, int param_2, int param_3);
+        BOOLEnum isWallCornerForDiagonalDirection(int param_1, int param_2, int param_3);
 
         BOOLEnum isWallConnectionHeightValid(int tile, int y, int param_3);
 
         BOOLEnum hasOnlyTowerNeighborsNoWalls(int tile, int y);
 
-        BOOLEnum getWallFlagForOrientedDirection(int tile, int y, int twoOrFour);
+        BOOLEnum getWallFlagForOrientedDirection(int tile, int y, int screenDirection);
 
         BOOLEnum hasHigherNeighborWithStairs(int tile, int y, int direction);
 
@@ -340,7 +348,7 @@ namespace Map {
 
         void checkDrawbridgePlacement(int x, int y);
 
-        undefined4 getRubbleGraphicStageForDamageLevel(int param_1);
+        int getRubbleGraphicStageForDamageLevel(int fencePiece);
 
         int getBuildingSizeForCommandBuildingType(MappersEnum commandBuildingType);
 
@@ -383,9 +391,9 @@ namespace Map {
 
         void renderWallPlacementPreview(uint x, uint y, short param_3);
 
-        undefined4 getCastleBuildRangeForMapSize();
+        int getCastleBuildRangeForMapSize();
 
-        void getTileForBrush(int square, int index, int* tilePointer, int* yPointer, int baseTile, uint y);
+        void getTileForBrush(BOOLEnum square, int index, int* tilePointer, int* yPointer, int baseTile, int y);
 
         BOOLEnum isTileSuitableForBrushPlacement(int tile, uint x, uint y);
 
@@ -413,7 +421,7 @@ namespace Map {
 
         uint returnSomeHeight(int tile, int param_2);
 
-        uint getTotalHeightAtTile(int tile);
+        int getTotalHeightAtTile(int tile);
 
         int getTotalHeightAt(int tile, int playerID);
 
@@ -465,9 +473,9 @@ namespace Map {
 
         void swapPitchOwnership(int param_1, int param_2);
 
-        BOOLEnum findNearestValidDigTileNearTarget(uint x1, uint y1, uint x2, uint y2);
+        BOOLEnum findNearestValidDigTileNearTarget(int x1, int y1, int x2, int y2);
 
-        int computeTileAlongAxisOffset(int param_1, int param_2, uint param_3);
+        int computeTileAlongAxisOffset(int param_1, int param_2, int param_3);
 
         void setSignpostDistanceForCampaignMission();
 
@@ -483,7 +491,7 @@ namespace Map {
 
         void changeMapOrientation(MapOrientation mapOrientation);
 
-        void increaseHeightForTunnelWithBrush(int tile, uint x, uint y, int increment);
+        void increaseHeightForTunnelWithBrush(int tile, int x, int y, int increment);
 
         void raiseLand(int tile, uint y, uint brush, int change);
 
@@ -497,13 +505,13 @@ namespace Map {
 
         void useTerrainHeightBrush(int param_1, uint param_2, uint param_3, short param_4);
 
-        int getMaxWallHeightInBrushArea(int param_1, uint param_2);
+        int getMaxWallHeightInBrushArea(int param_1, int param_2);
 
         void validateWallBuildPath(int playerID, uint x1, uint y1, uint x2, uint y2, short command);
 
         void placeWalls(int playerID, uint x1, uint y1, uint x2, uint y2, MappersEnum wallType, int tileCountUnk);
 
-        void placeDefensiveStructureTile(int playerID, uint x, uint y, MappersEnum param_4);
+        void placeDefensiveStructureTile(int playerID, int x, int y, MappersEnum param_4);
 
         void setupBuildingSizeIndexMapping();
 
@@ -582,7 +590,7 @@ namespace Map {
 
         void updateMacroLayer();
 
-        int createMoatData(undefined4 playerID, uint x, uint y, int filled);
+        int createMoatData(undefined4 playerID, uint x, uint y, BOOLEnum filled);
 
         BOOLEnum findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
 

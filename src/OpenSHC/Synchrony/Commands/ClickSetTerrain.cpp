@@ -1,0 +1,97 @@
+#include "../Commands.func.hpp"
+
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
+#include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Commands/GameCommandParameterLocation.hpp"
+#include "OpenSHC/Commands/GameCommandParameterReadWrite.hpp"
+#include "OpenSHC/Commands/GameCommandScheduling.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
+
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+
+namespace OpenSHC {
+namespace Synchrony {
+
+    // also for moat placement in editor!
+    // FUNCTION: STRONGHOLDCRUSADER 0x004813C0
+    void Commands::ClickSetTerrain()
+    {
+        DAT_GameSynchronyState::instance.DAT_CommandSize = 10;
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan == OpenSHC::Commands::GCS_SCHEDULE_AND_SEND) {
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 2,
+                OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam1, 2,
+                OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam2, 1,
+                OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam3, 4,
+                OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+                DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam4, 1,
+                OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_SERIALIZE_INTO_PARAM_1);
+            return;
+        }
+        if (DAT_GameSynchronyState::instance.DAT_CommandActionPlan != OpenSHC::Commands::GCS_EXECUTE) {
+            return;
+        }
+        DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = 0;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam0, 2,
+            OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 0;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam1, 2,
+            OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = 0;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam2, 1,
+            OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam3, 4,
+            OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        DAT_GameSynchronyState::instance.DAT_GameCommandParam4 = OpenSHC::Map::LogicHelpers::L2_NONE;
+        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::serializeOrDeserializeCommandParameter,
+            DAT_GameSynchronyState::ptr)(&DAT_GameSynchronyState::instance.DAT_GameCommandParam4, 1,
+            OpenSHC::Commands::GCPL_DYNAMIC_COMMAND_DATA_ADDRESS, OpenSHC::Commands::GCPRW_DESERIALIZE_FROM_PARAM1);
+        if (((DAT_GameSynchronyState::instance.DAT_GameCommandParam0 >= 0
+                 && DAT_GameSynchronyState::instance.DAT_GameCommandParam0 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE)
+                && (DAT_GameSynchronyState::instance.DAT_GameCommandParam1 <= Map::MC_MAP_XY_LIMIT_INCLUSIVE))
+            && (DAT_ViewportRenderState::instance
+                    .DAT_BinaryTileMap400x400[DAT_GameSynchronyState::instance.DAT_GameCommandParam1
+                            * Map::MC_MAP_XY_LIMIT
+                        + DAT_GameSynchronyState::instance.DAT_GameCommandParam0]
+                != 0)) {
+            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, DAT_TileMapState::ptr)(
+                DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
+                (DAT_ViewportRenderState::instance
+                        .translationMatrix[DAT_GameSynchronyState::instance.DAT_GameCommandParam1]
+                        .addXgetTile
+                    + DAT_GameSynchronyState::instance.DAT_GameCommandParam0),
+                DAT_GameSynchronyState::instance.DAT_GameCommandParam1,
+                DAT_GameSynchronyState::instance.DAT_GameCommandParam2,
+                (OpenSHC::Map::LogicHelpers::Logic1)(DAT_GameSynchronyState::instance.DAT_GameCommandParam3),
+                (OpenSHC::Map::LogicHelpers::Logic2)(DAT_GameSynchronyState::instance.DAT_GameCommandParam4));
+            MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+                DAT_PathFindingState::ptr)(9, DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
+                DAT_GameSynchronyState::instance.DAT_GameCommandParam1);
+            if (DAT_GameSynchronyState::instance.DAT_GameCommandParam3 != OpenSHC::Map::LogicHelpers::L_MOAT) {
+                DAT_TileMapState::instance.forceUpdateMacroLayerFlag = TRUE;
+            }
+            MACRO_CALL_MEMBER(OpenSHC::UI::MinimapViewState_Func::triggerMinimapRedraw, DAT_MinimapViewState::ptr)(2);
+        }
+    }
+
+}
+}
