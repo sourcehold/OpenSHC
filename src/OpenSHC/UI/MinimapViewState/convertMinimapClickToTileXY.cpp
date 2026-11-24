@@ -34,7 +34,7 @@ namespace UI {
                 orientationOffset = 241200;
             }
             int const tile = DAT_ViewportRenderState::instance
-                                 .screenPointToTileNumber[*tileX / 32 + screenY / 16 * 401 + orientationOffset - 6];
+                                 .screenPointToTileNumber[*tileX / 32 + screenY / 16 * 401 + orientationOffset + 2];
             int const row = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             *tileY = row;
             *tileX = tile - DAT_ViewportRenderState::instance.translationMatrix[row].addXgetTile;

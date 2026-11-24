@@ -137,7 +137,7 @@ namespace Map {
 
             void playHurtSFXForUnit(int unitID);
 
-            int countLivingNondyingUnitsForPlayer(int param_1);
+            int countLivingNondyingUnitsForPlayer(int unitType);
 
             void triggerStoneTowerDeathForPlayer(int param_1);
 
@@ -352,7 +352,7 @@ namespace Map {
             void queueDisbandAndAttackCommand3Params(undefined4 param_1, undefined4 param_2, undefined4 param_3);
 
             void queueDisbandAndAttackCommand4Params(
-                undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4);
+                int tribeID, UnitInstructionType instruction, int targetID, int targetUID);
 
             void queueDisbandAndAttackCommand5Params(undefined4 param_1, UnitInstructionType instruction,
                 undefined4 param_3, undefined4 param_4, undefined4 param_5);

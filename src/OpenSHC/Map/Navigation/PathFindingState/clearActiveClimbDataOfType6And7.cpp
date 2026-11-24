@@ -7,8 +7,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A52D0
         void PathFindingState::clearActiveClimbDataOfType6And7()
         {
-            for (int climbID = 1; climbID < 200; ++climbID) {
-                if (this->climbData[climbID].canBeUsed != 0) {
+            for (int climbID = 1; climbID < countof(this->climbData); ++climbID) {
+                if (this->climbData[climbID].canBeUsed) {
                     if (this->climbData[climbID].type == 6) {
                         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(
                             climbID);

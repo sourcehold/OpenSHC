@@ -116,9 +116,9 @@ namespace Map {
 
             int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(int playerID, BuildingType buildingType, int includeBool);
+            int countBuildingsForPlayer(int playerID, BuildingType buildingType, BOOLEnum excludeAIVPlaced);
 
-            int countFarms(int playerID, int param_2);
+            int countFarms(int playerID, BOOLEnum excludeAIVPlaced);
 
             int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
@@ -390,7 +390,7 @@ namespace Map {
 
             void upgradeBuildingsForMapVersion(int receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingType buildingType,
+            int setupBuildingData(int playerID, uint x, uint y, int averageHeight, BuildingType buildingType,
                 uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);

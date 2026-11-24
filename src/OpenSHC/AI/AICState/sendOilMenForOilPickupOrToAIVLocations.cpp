@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AIVUnitType.hpp"
+#include "OpenSHC/AI/Tribes/AIVUnitTypeTribeArrayOffset.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 
@@ -13,9 +14,6 @@
 
 namespace OpenSHC {
 namespace AI {
-
-    using OpenSHC::AI::AIVUnitType;
-    using OpenSHC::Map::Units::UnitInstructionType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004D44E0
     void AICState::sendOilMenForOilPickupOrToAIVLocations(int playerID)
@@ -33,12 +31,14 @@ namespace AI {
 
         // Oil men tribes start at offset 71 in the tribe ID array
         for (int i = 1; i <= count; i++) {
-            int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[70 + i];
+            int const tribeID
+                = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[OpenSHC::AI::Tribes::OFFSET_OILMAN + i];
             if (tribeID == 0) {
                 continue;
             }
             if (DAT_TribesState::instance.tribes[tribeID].uid
-                != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[70 + i]) {
+                != DAT_GameState::instance.playerDataArray[playerID]
+                    .aiTribeUIDs[OpenSHC::AI::Tribes::OFFSET_OILMAN + i]) {
                 continue;
             }
 

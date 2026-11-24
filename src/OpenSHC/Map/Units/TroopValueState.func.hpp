@@ -101,7 +101,7 @@ namespace Map {
                 &TroopValueState::findEnemyWalls)
             findEnemyWalls;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00519DE0,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(BOOLEnum, int), false, Address::SHC_3BB0A8C1_0x00519DE0,
                 &TroopValueState::setScale3)
             setScale3;
 
@@ -109,7 +109,7 @@ namespace Map {
                 &TroopValueState::findNearestAvailableScalePoint)
             findNearestAvailableScalePoint;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00519F50,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(BOOLEnum, int), false, Address::SHC_3BB0A8C1_0x00519F50,
                 &TroopValueState::setTown2)
             setTown2;
 
@@ -133,7 +133,7 @@ namespace Map {
                 int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A220, &TroopValueState::findEnemyLord)
             findEnemyLord;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A2D0,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(BOOLEnum, int), false, Address::SHC_3BB0A8C1_0x0051A2D0,
                 &TroopValueState::setGate2)
             setGate2;
 
@@ -141,7 +141,7 @@ namespace Map {
                 &TroopValueState::findEnemyTowersOrGates)
             findEnemyTowersOrGates;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A550,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(BOOLEnum, int), false, Address::SHC_3BB0A8C1_0x0051A550,
                 &TroopValueState::setWide3)
             setWide3;
 
@@ -149,7 +149,7 @@ namespace Map {
                 &TroopValueState::getClosestWideValueBasedOnPlayer)
             getClosestWideValueBasedOnPlayer;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0051A720,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(BOOLEnum, int), false, Address::SHC_3BB0A8C1_0x0051A720,
                 &TroopValueState::setMoat3)
             setMoat3;
 

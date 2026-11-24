@@ -194,6 +194,10 @@ namespace UI {
             &OpenSHC::UI::Helpers::ResetTutorialActionTrackers)
         ResetTutorialActionTrackers;
 
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BC6F0, &OpenSHC::UI::Helpers::InitTutorialState)
+        InitTutorialState;
+
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x004BC770,
             &OpenSHC::UI::Helpers::SetTutorialHintActiveWithTimestamp)
         SetTutorialHintActiveWithTimestamp;
