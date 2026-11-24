@@ -43959,8 +43959,8 @@ enum {
     // location: OpenSHC/UI/MenuHandlerState
     // type: function
     SHC_3BB0A8C1_0x004F4CD0 = 0x004F4CD0,
-    // label: setUCValues
-    // location: UCPointerStruct
+    // label: loadMenuElement
+    // location: OpenSHC/UI/UCPointerStruct
     // type: function
     SHC_3BB0A8C1_0x004F4D70 = 0x004F4D70,
     // label: setBottomLeftTextDisplayText
@@ -87054,8 +87054,10 @@ enum {
     SHC_3BB0A8C1_0x005AB0E0 = 0x005AB0E0,
     // type: /string
     SHC_3BB0A8C1_0x005AB0EC = 0x005AB0EC,
+    // type: /float
+    SHC_3BB0A8C1_0x005AB0F8 = 0x005AB0F8,
     // type: /string
-    SHC_3BB0A8C1_0x005AB0FA = 0x005AB0FA,
+    SHC_3BB0A8C1_0x005AB0FC = 0x005AB0FC,
     // type: /string
     SHC_3BB0A8C1_0x005AB114 = 0x005AB114,
     // type: /string
@@ -94057,6 +94059,14 @@ enum {
     // label: DAT_ButtonGmDataArray
     // location:
     SHC_3BB0A8C1_0x00B333E0 = 0x00B333E0,
+    // label: DAT_WavEuropeanUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37AF8 = 0x00B37AF8,
+    // label: DAT_WavArabianUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37BD8 = 0x00B37BD8,
     // type: /pointer
     SHC_3BB0A8C1_0x00B37CB8 = 0x00B37CB8,
     // label: DAT_TextInputDefinedData
@@ -96728,7 +96738,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4288 = 0x00DF4288,
     // label: DAT_SentOrRequestedGoodsAmount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF428C = 0x00DF428C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4290 = 0x00DF4290,

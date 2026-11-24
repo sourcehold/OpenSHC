@@ -16,8 +16,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x004CE040
     void AICState::recomputeAIPathCostToAttackedKeep(int playerID, int useBorderDistance)
     {
