@@ -8231,6 +8231,9 @@ char const* const s_c2pic_tgx_005ab0e0 = S_C2PIC_TGX_005AB0E0;
 // 0x005ab0ec
 char const* const s_c1pic_tgx_005ab0ec = S_C1PIC_TGX_005AB0EC;
 
+// 0x005ab0fc
+char const* const s_fx_speech_intro_04_wav_005ab0fc = S_FX_SPEECH_INTRO_04_WAV_005AB0FC;
+
 // 0x005ab114
 char const* const s_fx_speech_intro_03_wav_005ab114 = S_FX_SPEECH_INTRO_03_WAV_005AB114;
 

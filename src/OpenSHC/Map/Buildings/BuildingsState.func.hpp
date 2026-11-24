@@ -87,12 +87,12 @@ namespace Map {
                 &BuildingsState::getEmptyBuildingCount)
             getEmptyBuildingCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, BOOLEnum), false,
                 Address::SHC_3BB0A8C1_0x0040A9B0, &BuildingsState::countBuildingsForPlayer)
             countBuildingsForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040AA10, &BuildingsState::countFarms)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BOOLEnum), false, Address::SHC_3BB0A8C1_0x0040AA10,
+                &BuildingsState::countFarms)
             countFarms;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AA80,

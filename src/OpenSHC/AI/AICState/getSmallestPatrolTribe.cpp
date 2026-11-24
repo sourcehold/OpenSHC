@@ -1,6 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeIndex.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
@@ -23,10 +24,12 @@ namespace AI {
                 break;
             }
 
-            int const tribeID = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[170 + i];
+            int const tribeID
+                = DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[OpenSHC::AI::Tribes::AITI_PAT_Unk + i];
             if (tribeID == 0
                 || DAT_TribesState::instance.tribes[tribeID].uid
-                    != DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[i + 170]) {
+                    != DAT_GameState::instance.playerDataArray[playerID]
+                        .aiTribeUIDs[i + OpenSHC::AI::Tribes::AITI_PAT_Unk]) {
                 selectedTribeID = MACRO_CALL_MEMBER(
                     OpenSHC::Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(playerID);
                 selectedIndex = i;
@@ -40,8 +43,9 @@ namespace AI {
             }
         }
 
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[selectedIndex + 170] = selectedTribeID;
-        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[selectedIndex + 170]
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeIDs[selectedIndex + OpenSHC::AI::Tribes::AITI_PAT_Unk]
+            = selectedTribeID;
+        DAT_GameState::instance.playerDataArray[playerID].aiTribeUIDs[selectedIndex + OpenSHC::AI::Tribes::AITI_PAT_Unk]
             = DAT_TribesState::instance.tribes[selectedTribeID].uid;
         return selectedTribeID;
     }
