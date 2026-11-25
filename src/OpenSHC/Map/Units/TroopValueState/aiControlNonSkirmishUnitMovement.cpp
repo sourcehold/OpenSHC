@@ -30,7 +30,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(TroopValueState_Func::updateAttackInfoTick, this)();
                 return;
             }
-            MACRO_CALL_MEMBER(TroopValueState_Func::recountAttackTroopValue, this)(0);
+            MACRO_CALL_MEMBER(TroopValueState_Func::recountAttackTroopValue, this)(FALSE);
             MACRO_CALL_MEMBER(TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             if (DAT_TroopValueState::instance.attackInfo.aiTroops == 0) {
                 DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
@@ -81,7 +81,7 @@ namespace Map {
                 if (DAT_TroopValueState::instance.attackInfo.nof_tribes[wave] != 0) {
                     DAT_TroopValueState::instance.attackInfo.index = wave;
                     int const waveAge = ++DAT_TroopValueState::instance.attackInfo.someIntArray2[wave - 1];
-                    if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated != 0 && waveAge > 10
+                    if (DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated && waveAge > 10
                         && DAT_TroopValueState::instance.attackInfo.value3Array01[wave] != 6) {
                         DAT_TroopValueState::instance.attackInfo.attackWaveTicker[wave] = 0;
                         DAT_TroopValueState::instance.attackInfo.value3Array01[wave] = 6;

@@ -189,7 +189,7 @@ namespace Audio {
                 } else if (0
                         < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .totalEnemyUnitsCount
-                    && DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated == 0) {
+                    && !DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(1);
                     MACRO_CALL_MEMBER(SoundSystem_Func::playBattleGloryMusicIfConditionsMet, this)();
                 }

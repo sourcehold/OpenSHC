@@ -40,7 +40,7 @@ namespace Map {
                     S_BATTLEHORN_WAV_005A77D8);
                 break;
             }
-            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 1;
+            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = TRUE;
         }
 
     }

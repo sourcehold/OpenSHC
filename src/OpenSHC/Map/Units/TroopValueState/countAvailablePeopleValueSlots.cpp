@@ -9,7 +9,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A0C0
-        void TroopValueState::countAvailablePeopleValueSlots(int param_1)
+        void TroopValueState::countAvailablePeopleValueSlots(BOOLEnum param_1)
         {
             DAT_TroopValueState::instance.attackInfo.people3 = 0;
             for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.people2; ++i) {
