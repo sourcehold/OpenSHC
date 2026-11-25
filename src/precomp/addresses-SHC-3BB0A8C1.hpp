@@ -87054,8 +87054,10 @@ enum {
     SHC_3BB0A8C1_0x005AB0E0 = 0x005AB0E0,
     // type: /string
     SHC_3BB0A8C1_0x005AB0EC = 0x005AB0EC,
+    // type: /float
+    SHC_3BB0A8C1_0x005AB0F8 = 0x005AB0F8,
     // type: /string
-    SHC_3BB0A8C1_0x005AB0FA = 0x005AB0FA,
+    SHC_3BB0A8C1_0x005AB0FC = 0x005AB0FC,
     // type: /string
     SHC_3BB0A8C1_0x005AB114 = 0x005AB114,
     // type: /string
@@ -94057,6 +94059,14 @@ enum {
     // label: DAT_ButtonGmDataArray
     // location:
     SHC_3BB0A8C1_0x00B333E0 = 0x00B333E0,
+    // label: DAT_WavEuropeanUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37AF8 = 0x00B37AF8,
+    // label: DAT_WavArabianUnitRecruitment
+    // location:
+    // type: /char[7][32]
+    SHC_3BB0A8C1_0x00B37BD8 = 0x00B37BD8,
     // type: /pointer
     SHC_3BB0A8C1_0x00B37CB8 = 0x00B37CB8,
     // label: DAT_TextInputDefinedData
@@ -95382,7 +95392,7 @@ enum {
     // location:
     // type: /int
     SHC_3BB0A8C1_0x00B95B28 = 0x00B95B28,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B95B2C = 0x00B95B2C,
     // type: /int
     SHC_3BB0A8C1_0x00B95B34 = 0x00B95B34,
@@ -95464,7 +95474,7 @@ enum {
     SHC_3BB0A8C1_0x00B960F8 = 0x00B960F8,
     // type: /int
     SHC_3BB0A8C1_0x00B960FC = 0x00B960FC,
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00B96100 = 0x00B96100,
     // type: /undefined4
     SHC_3BB0A8C1_0x00B96108 = 0x00B96108,
@@ -96728,7 +96738,7 @@ enum {
     SHC_3BB0A8C1_0x00DF4288 = 0x00DF4288,
     // label: DAT_SentOrRequestedGoodsAmount
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00DF428C = 0x00DF428C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00DF4290 = 0x00DF4290,

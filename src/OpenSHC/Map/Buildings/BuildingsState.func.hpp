@@ -255,7 +255,7 @@ namespace Map {
                 &BuildingsState::subtractPitchAndMoatFromStartingGoldInSiegeThatMode)
             subtractPitchAndMoatFromStartingGoldInSiegeThatMode;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040CAC0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040CAC0,
                 &BuildingsState::hasEnoughGoldForMoat)
             hasEnoughGoldForMoat;
 

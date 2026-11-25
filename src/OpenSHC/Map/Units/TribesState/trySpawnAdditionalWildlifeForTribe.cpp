@@ -26,7 +26,8 @@ namespace Map {
             if (tribeID <= 0) {
                 return FALSE;
             }
-            if (this->tribes[tribeID].predatorNearby > 0) {
+            // A scare tick counter (0..800), not a flag: the original tests it for non-zero (> 0 loses the match)
+            if (this->tribes[tribeID].predatorNearby != 0) {
                 return FALSE;
             }
             if (DAT_GameCore::instance.missionNumber1to20 == 38 && unitType == Map::Units::UT_CAMELSHBEAR) {
@@ -44,7 +45,7 @@ namespace Map {
             int const _spawnX = DAT_UnitsState::instance.units[_unitID].x;
             int const _spawnY = DAT_UnitsState::instance.units[_unitID].y;
             int const _spawnHeight = DAT_UnitsState::instance.units[_unitID].terrainOrClimbHeight;
-            this->tribes[tribeID].field_0x288 = this->tribes[tribeID].field_0x288 + 1;
+            ++this->tribes[tribeID].field_0x288;
             if (this->tribes[tribeID].field_0x288 < spawnIntervalTicks) {
                 return FALSE;
             }
