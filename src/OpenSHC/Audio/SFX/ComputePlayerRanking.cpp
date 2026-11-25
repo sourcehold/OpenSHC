@@ -40,6 +40,7 @@ namespace Audio {
                 ++count;
             }
 
+            // Must stay uninitialized for 100% match; initializing shrinks the frame and swaps edx/esi.
             int bestPoints;
             for (int rank = 0; rank < count; ++rank) {
                 int bestIndex = -1;
