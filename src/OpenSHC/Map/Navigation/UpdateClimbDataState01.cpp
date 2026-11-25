@@ -51,10 +51,10 @@ namespace Map {
                   [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].ladderDirection]
             + DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].bottomTilePosition;
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].area
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
+            = DAT_TileMapState::instance.PathConnectionLayer
                   [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].bottomTilePosition];
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].wallGroupAreaID
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
+            = DAT_TileMapState::instance.PathConnectionLayer
                   [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topTilePositionUnk];
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingArea = -1;
     }

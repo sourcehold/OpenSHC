@@ -20,7 +20,7 @@ namespace Map {
           reference measured 0.53 against 0.98 (quick_diff).
          */
         int const buildingID = DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID;
-        DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID = (short)DAT_CurrentClimbDataID::instance;
+        DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID = DAT_CurrentClimbDataID::instance;
         if (DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].sourceUID
             != DAT_BuildingsState::instance.buildings[buildingID].uid) {
             DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].canBeUsed = 0;
@@ -61,13 +61,13 @@ namespace Map {
                   .addXgetTile
             + DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topXPosition;
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].area
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
+            = DAT_TileMapState::instance.PathConnectionLayer
                   [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].bottomTilePosition];
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].wallGroupAreaID
-            = (short)DAT_TileMapState::instance.PathConnectionLayer
+            = DAT_TileMapState::instance.PathConnectionLayer
                   [DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].topTilePositionUnk];
         DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingArea
-            = (short)DAT_TileMapState::instance
+            = DAT_TileMapState::instance
                   .PathConnectionLayer[DAT_ViewportRenderState::instance
                                            .translationMatrix[DAT_BuildingsState::instance.buildings[buildingID].y + 1]
                                            .addXgetTile
