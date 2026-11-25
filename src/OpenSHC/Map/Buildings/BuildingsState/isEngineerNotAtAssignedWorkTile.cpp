@@ -11,7 +11,7 @@ namespace Map {
         BOOLEnum BuildingsState::isEngineerNotAtAssignedWorkTile(int param_1, int param_2, int param_3)
         {
             int tileIndex;
-            if (DAT_UnitsState::instance.units[param_2].field252_0x3c4 != 0) {
+            if (DAT_UnitsState::instance.units[param_2].field_0x3c4 != 0) {
                 tileIndex = 0;
             } else if (DAT_UnitsState::instance.units[param_2].resourceToDeposit != 0) {
                 tileIndex = 15 - param_3;

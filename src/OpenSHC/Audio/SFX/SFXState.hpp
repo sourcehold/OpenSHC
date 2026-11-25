@@ -78,7 +78,7 @@ namespace Audio {
 
             void playAmbientSoundStream2Unk(int ambientSoundIndexUnk);
 
-            int getSoundVolumeForFilename(char* soundFileName);
+            int getSoundVolumeForFilename(char const* soundFileName);
 
             void playUnitSpeechEffect(uint speechEffectID);
 

@@ -19,7 +19,7 @@ namespace Map {
         int index; // 0x00000004 length: 4
         int countdown; // 0x00000008 length: 4
         int counter; // 0x0000000C length: 4
-        int field4_0x10; // 0x00000010 length: 4
+        int field_0x10; // 0x00000010 length: 4
         int valueIs2; // 0x00000014 length: 4
         int valueIs1; // 0x00000018 length: 4
 

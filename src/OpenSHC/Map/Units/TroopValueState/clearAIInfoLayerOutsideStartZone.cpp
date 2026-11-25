@@ -14,7 +14,7 @@ namespace Map {
             int const startArea = DAT_TroopValueState::instance.attackInfo.startCon;
             for (int tile = 0; tile < OpenSHC::Map::MC_MAP_TILES_COUNT; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] != 0
-                    && (short)DAT_TileMapState::instance.PathConnectionLayer[tile] != startArea) {
+                    && DAT_TileMapState::instance.PathConnectionLayer[tile] != startArea) {
                     DAT_TileMapState::instance.AIInfoLayer[tile] = 0;
                 }
             }

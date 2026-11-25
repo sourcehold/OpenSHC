@@ -1,7 +1,7 @@
 
-#include "OpenSHC/IO/Graphics/GfxRef.hpp"
+#include "../TextureRenderCore.func.hpp"
+
 #include "OpenSHC/IO/Graphics/TgxToken.hpp"
-#include "OpenSHC/UI/Rendering/TextureRenderCore.hpp"
 
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 
@@ -13,7 +13,7 @@ namespace UI {
         BOOLEnum TextureRenderCore::checkIfGfxTgxStartsWithTransparentPixels(int gfxIndex)
         {
             int byteIndex = this->loadedGfxArray[gfxIndex].offsetInBuffer + 8;
-            byte checkByte = ((byte*)this->gmAndGfxImageDataBuffer)[byteIndex];
+            byte checkByte = this->gmAndGfxImageDataBuffer[byteIndex];
             if ((checkByte & OpenSHC::IO::Graphics::TT_TGX_PIXEL_HEADER)
                 == OpenSHC::IO::Graphics::TT_TRANSPARENT_PIXELS) {
                 return TRUE;

@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -23,7 +24,9 @@ namespace Map {
                 && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0
                 && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
-                int const keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
+                int const keepID = DAT_GameState::instance.playerDataArray[playerID]
+                                       .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                                       .id;
                 if (keepID == 0) {
                     return FALSE;
                 }
@@ -56,9 +59,8 @@ namespace Map {
                     if (MACRO_CALL_MEMBER(
                             Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
                             DAT_PathFindingState::ptr)(playerID,
-                            (short)DAT_TileMapState::instance
-                                .PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
-                            (short)DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
+                            DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile],
+                            DAT_TileMapState::instance.PathConnectionLayer[tile], 0)
                         != 0) {
                         this->DAT_TempXOffset = x;
                         this->DAT_TempYOffset = y;
@@ -71,7 +73,10 @@ namespace Map {
                 }
                 return FALSE;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].barracks.id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_BARRACKS]
+                    .id
+                <= 0) {
                 return FALSE;
             }
             if (requestedGroup == 6) {

@@ -8,7 +8,7 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040AA10
-        int BuildingsState::countFarms(int playerID, int param_2)
+        int BuildingsState::countFarms(int playerID, BOOLEnum excludeAIVPlaced)
         {
             int count = 0;
             for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {
@@ -17,7 +17,7 @@ namespace Map {
                     && (this->buildings[buildingID].buildingType == BT_WHEATFARM
                         || this->buildings[buildingID].buildingType == BT_APPLEFARM
                         || this->buildings[buildingID].buildingType == BT_DAIRYFARM)
-                    && (param_2 == 0 || this->buildings[buildingID].field200_0x2c8 == 0)) {
+                    && (!excludeAIVPlaced || this->buildings[buildingID].field_0x2c8 == 0)) {
                     ++count;
                 }
             }

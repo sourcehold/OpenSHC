@@ -21,7 +21,7 @@ namespace Game {
 
         void __cdecl SetupSkirmishMode(int skirmishTrailMission);
 
-        int __cdecl StoreLocalTime();
+        void __cdecl StoreLocalTime();
 
         BOOLEnum __cdecl StoreCurrentGameIntoTemporarySKMasterEntry(int score);
 

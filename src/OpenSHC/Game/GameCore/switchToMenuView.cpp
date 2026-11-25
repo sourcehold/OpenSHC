@@ -9,7 +9,6 @@
 #include "OpenSHC/UI/Helpers.func.hpp"
 #include "OpenSHC/UI/MenuHandlerState.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95954.hpp"
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
 #include "OpenSHC/Globals/DAT_CurrentMenuID_3.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -20,6 +19,7 @@
 #include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
+#include "OpenSHC/Globals/INT_00b95954.hpp"
 
 namespace OpenSHC {
 namespace Game {
@@ -235,11 +235,11 @@ namespace Game {
             return;
         case UI::Enums::MVT_CREDITS:
             MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setSomeSoundTime, DAT_SoundSystemState::ptr)();
-            if (DAT_00b95954::instance == 0) {
+            if (INT_00b95954::instance == 0) {
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier,
                     DAT_SoundSystemState::ptr)((DE::SHCDE::eMusicIDs)15, 100);
             }
-            if (DAT_00b95954::instance == 1) {
+            if (INT_00b95954::instance == 1) {
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::setupVolumeAndSoundIDWithMultiplier,
                     DAT_SoundSystemState::ptr)((DE::SHCDE::eMusicIDs)38, 100);
                 MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::markMusicChangePending, DAT_SoundSystemState::ptr)();

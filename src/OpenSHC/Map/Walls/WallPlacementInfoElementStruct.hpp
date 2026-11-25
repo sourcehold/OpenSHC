@@ -19,7 +19,7 @@ namespace Map {
             int tile_OR_pitchID; // 0x00000000 length: 4
             byte damage; // 0x00000004 length: 1
             byte height; // 0x00000005 length: 1
-            short field3_0x6; // 0x00000006 length: 2
+            short field_0x6; // 0x00000006 length: 2
             uint logic; // 0x00000008 length: 4
 
         } WallPlacementInfoElementStruct;

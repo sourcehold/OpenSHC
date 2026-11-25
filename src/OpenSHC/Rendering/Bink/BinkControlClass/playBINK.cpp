@@ -1,8 +1,8 @@
-#include "../../../Rendering.func.hpp"
+#include "../BinkControlClass.func.hpp"
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/IO/ResourceManager.func.hpp"
-#include "OpenSHC/Rendering/Bink/BinkControlClass.func.hpp"
+#include "OpenSHC/Rendering.func.hpp"
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/Rendering/Bink/UnsortedBinkFlag.hpp"
@@ -23,11 +23,10 @@ namespace Rendering {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00408ED0
         void BinkControlClass::playBINK(
-            int binkObjIndex, char* binkFileName, DWORD param_3, DWORD param_4, int xPos, int yPos, DWORD param_7)
+            int binkObjIndex, char const* binkFileName, DWORD param_3, DWORD param_4, int xPos, int yPos, DWORD param_7)
         {
             char* _videoFileName;
             HBINK _binkObjPtr;
-            int _fileSoundVolumne;
             MACRO_CALL_MEMBER(OpenSHC::IO::ResourceManager_Func::resolveResourceFileName, DAT_ResourceManager::ptr)(
                 OpenSHC::IO::FRT_BINKS, (char const*)((int)(binkFileName)));
             if (this->binkObjPtrArray[binkObjIndex] != (HBINK)0x0) {
@@ -49,9 +48,9 @@ namespace Rendering {
             }
             if ((DAT_SoundSystemState::instance.waveOutOpenUnk_0x8 != FALSE)
                 && (DAT_SoundSystemState::instance.soundActiveUnk_0x0 != 0)) {
-                _fileSoundVolumne = MACRO_CALL_MEMBER(
+                int const fileSoundVolume = MACRO_CALL_MEMBER(
                     OpenSHC::Audio::SFX::SFXState_Func::getSoundVolumeForFilename, DAT_SFXState::ptr)(binkFileName);
-                BinkSetVolume(this->binkObjPtrArray[binkObjIndex], 0, (long)((int)(_fileSoundVolumne * 250)));
+                BinkSetVolume(this->binkObjPtrArray[binkObjIndex], 0, (long)((int)(fileSoundVolume * 250)));
             }
             this->xPos[binkObjIndex] = xPos;
             this->yPos[binkObjIndex] = yPos;

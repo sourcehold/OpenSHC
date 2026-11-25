@@ -20,29 +20,29 @@ namespace Text {
         int finalTextWidth = 0;
         int _nextWordCutStartIndex = 0;
         int writtenWords = 0;
-        int local_68 = 0;
+        BOOLEnum stopRenderingUnk = FALSE;
         int _wordWidth = 0;
 
         int singleLineHeight = (this->lineHeight_0x14 * 38) >> 5;
         int yLineOffset = singleLineHeight;
         int whiteSpaceWidth = this->whiteSpaceWidth_0x1c;
 
-        int alternateLineHeight = DAT_TextManagerObject::instance.field13_0x34;
+        int alternateLineHeight = DAT_TextManagerObject::instance.field_0x34;
         if (alternateLineHeight) {
             singleLineHeight = alternateLineHeight;
         }
 
-        if (DAT_TextManagerObject::instance.field12_0x30) {
+        if (DAT_TextManagerObject::instance.field_0x30) {
             whiteSpaceWidth = 0;
         }
 
-        DAT_TextManagerObject::instance.field1_0x4 = 0;
+        DAT_TextManagerObject::instance.field_0x4 = 0;
         if (_textLength <= 0) {
             return 0;
         }
 
         if (_widthOfWholeText <= maxWidth) {
-            DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
+            DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
             if (modeUnk == 0) {
                 MACRO_CALL_MEMBER(FontSizeClass_Func::renderText, this)(
                     text, _textLength, _runXPos, _runYPos, color, blendStrength);
@@ -86,7 +86,8 @@ namespace Text {
                         }
                     } else {
 
-                        int iVar1 = MACRO_CALL_MEMBER(FontSizeClass_Func::getWidthOfText, this)(_wordReceiver, length);
+                        int measuredWordWidth
+                            = MACRO_CALL_MEMBER(FontSizeClass_Func::getWidthOfText, this)(_wordReceiver, length);
 
                         if (modeUnk == 0) {
                             MACRO_CALL_MEMBER(FontSizeClass_Func::renderText, this)(
@@ -94,7 +95,7 @@ namespace Text {
                         }
 
                         renderedChars += length;
-                        _runXPos += iVar1;
+                        _runXPos += measuredWordWidth;
 
                         if (renderedChars >= wordLength) {
                             break;
@@ -123,10 +124,10 @@ namespace Text {
                     yLineOffset += singleLineHeight;
                     writtenWords = 0;
 
-                    if (DAT_TextManagerObject::instance.field12_0x30) {
-                        local_68 = 1;
+                    if (DAT_TextManagerObject::instance.field_0x30) {
+                        stopRenderingUnk = TRUE;
                     }
-                } while (renderedChars < wordLength && local_68 == 0);
+                } while (renderedChars < wordLength && !stopRenderingUnk);
                 ++writtenWords;
                 _runXPos += whiteSpaceWidth;
                 continue;
@@ -143,8 +144,8 @@ namespace Text {
                 yLineOffset += singleLineHeight;
                 writtenWords = 0;
 
-                DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
-                if (DAT_TextManagerObject::instance.field12_0x30) {
+                DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
+                if (DAT_TextManagerObject::instance.field_0x30) {
                     break;
                 }
             }
@@ -156,7 +157,7 @@ namespace Text {
 
             ++writtenWords;
             _runXPos += _wordWidth + whiteSpaceWidth;
-        } while (_nextWordCutStartIndex < _textLength && local_68 == 0);
+        } while (_nextWordCutStartIndex < _textLength && !stopRenderingUnk);
 
         int possibleWidth = _runXPos - xPos;
         if (possibleWidth > finalTextWidth) {
@@ -164,7 +165,7 @@ namespace Text {
         }
 
         if (writtenWords != 0) {
-            DAT_TextManagerObject::instance.field1_0x4 += singleLineHeight;
+            DAT_TextManagerObject::instance.field_0x4 += singleLineHeight;
         }
 
         if (modeUnk == 1) {
