@@ -6,7 +6,7 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004B5100
     MinimapViewState* MinimapViewState::Constructor_MinimapViewState()
     {
-        this->field14_0x38 = 0;
+        this->field_0x38 = 0;
         this->someMiniMapCounterTill4 = 0;
         return this;
     }
