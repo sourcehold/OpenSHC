@@ -9,9 +9,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00401D70
     void Entities::UpdateArrowsSecondaryEntity()
     {
-        short animFrame
+        short const animFrame
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
-        short frameCount = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkThree_1;
+        short const frameCount = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkThree_1;
         if (animFrame >= frameCount) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
             return;

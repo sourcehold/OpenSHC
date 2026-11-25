@@ -14,7 +14,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00406FD0
     void Entities::UpdateEntityType8()
     {
-        short travelledDistance
+        short const travelledDistance
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].travelledDistance;
         if (travelledDistance < 14) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 8;

@@ -11,9 +11,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402730
     void Entities::UpdateEntity_41()
     {
-        int ownerID = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner;
+        int const ownerID = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkOne_1 = 2;
-        int animTick
+        int const animTick
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] <= 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
@@ -24,12 +24,13 @@ namespace Map {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 1;
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xbe = 46;
-        int displayValue = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].displayValue;
+        int const displayValue = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].displayValue;
         if (displayValue < 40) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0 = 130;
+        } else if (displayValue < 60) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0 = 129;
         } else {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0
-                = displayValue < 60 ? 129 : 128;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0 = 128;
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc8 = 22;
         short tick = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;

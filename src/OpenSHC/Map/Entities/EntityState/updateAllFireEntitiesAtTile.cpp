@@ -12,8 +12,8 @@ namespace Map {
         int EntityState::updateAllFireEntitiesAtTile(int tileUnk)
         {
             int iteration = 0;
-            int entityID = DAT_TileMapState::instance.EntityLayer[tileUnk];
-            while (entityID != 0) {
+            for (int entityID = DAT_TileMapState::instance.EntityLayer[tileUnk]; entityID != 0;
+                entityID = this->entityArray[entityID].nextEntityOnThisTileByID) {
                 if (++iteration >= 10) {
                     break;
                 }
@@ -25,7 +25,6 @@ namespace Map {
                 if (entityID == this->entityArray[entityID].nextEntityOnThisTileByID) {
                     break;
                 }
-                entityID = this->entityArray[entityID].nextEntityOnThisTileByID;
             }
             return 0;
         }

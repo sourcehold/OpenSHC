@@ -9,7 +9,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402580
     void Entities::UpdateEntity_31()
     {
-        short variant = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unitID_OR_seaGullID;
+        short const variant = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unitID_OR_seaGullID;
         if (variant == 0) {
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
                 >= 16) {

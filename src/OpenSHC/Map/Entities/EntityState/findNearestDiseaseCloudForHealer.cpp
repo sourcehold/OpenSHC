@@ -22,7 +22,7 @@ namespace Map {
         {
             int nearestCloudID = 0;
             int nearestDistance = 10000;
-            int unitArea
+            int const unitArea
                 = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState != 2
@@ -33,8 +33,7 @@ namespace Map {
                 }
                 short claimingHealerID = this->entityArray[entityID].unitID_healer;
                 if (claimingHealerID != 0) {
-                    if (this->entityArray[entityID].unitUID
-                            == DAT_UnitsState::instance.units[claimingHealerID].climbDataRelated
+                    if (this->entityArray[entityID].unitUID == DAT_UnitsState::instance.units[claimingHealerID].uid
                         && (DAT_UnitsState::instance.units[claimingHealerID].state.generic
                                 == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk
                             || DAT_UnitsState::instance.units[claimingHealerID].state.generic
@@ -43,7 +42,8 @@ namespace Map {
                     }
                     this->entityArray[entityID].unitID_healer = 0;
                 }
-                int cloudArea = (short)DAT_TileMapState::instance.PathConnectionLayer[this->entityArray[entityID].tile];
+                int const cloudArea
+                    = (short)DAT_TileMapState::instance.PathConnectionLayer[this->entityArray[entityID].tile];
                 if (cloudArea != unitArea
                     && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                              calculateCanPlayerUnitsNavigateToAreaFromArea,
@@ -53,7 +53,7 @@ namespace Map {
                     continue;
                 }
                 if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY) {
-                    int workplaceID = DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1;
+                    int const workplaceID = DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1;
                     if (workplaceID != 0) {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,

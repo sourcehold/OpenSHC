@@ -13,7 +13,7 @@ namespace Map {
     {
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = -1;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2++;
-        short animFrame
+        short const animFrame
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (animFrame < 8) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
@@ -54,7 +54,7 @@ namespace Map {
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
             = (short)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 16;
-        short linkedID
+        short const linkedID
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue;
         if (linkedID != 0) {
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].uidRef

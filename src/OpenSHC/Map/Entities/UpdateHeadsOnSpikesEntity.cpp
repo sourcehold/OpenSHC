@@ -19,11 +19,11 @@ namespace Map {
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_1 + 1;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2--;
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 == 0) {
-            short randomValue = SEC_RNG::instance.currentNumber2;
+            short const randomValue = SEC_RNG::instance.currentNumber2;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = randomValue % 500 + 300;
-            int targetTileX = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].xPosition
+            int const targetTileX = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].xPosition
                 + randomValue % 100 - 50;
-            int targetTileY = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition
+            int const targetTileY = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition
                 + (randomValue >> 8) % 100 - 50;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,

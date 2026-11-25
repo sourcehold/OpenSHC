@@ -11,9 +11,9 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402660
     void Entities::UpdateEntity_40()
     {
-        int ownerID = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner;
+        int const ownerID = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkOne_1 = 2;
-        int animTick
+        int const animTick
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] <= 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;

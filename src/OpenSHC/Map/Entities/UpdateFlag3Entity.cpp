@@ -11,7 +11,6 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402A20
     void Entities::UpdateFlag3Entity()
     {
-        int frameOffset;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset;
         if ((int)((byte)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition & 0x1f)
@@ -20,8 +19,8 @@ namespace Map {
                 = (short)DAT_LandscapeState::instance.wind.value;
         }
         switch (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker) {
-        case 0:
-            frameOffset
+        case 0: {
+            int const frameOffset
                 = DAT_EntityDefinedData::instance
                       .Flag3AnimationFrames1[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
                               .unknownAnimationFrameRelated];
@@ -33,9 +32,10 @@ namespace Map {
             }
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 += frameOffset - 1;
             return;
+        }
         case 1:
-        case 2:
-            frameOffset
+        case 2: {
+            int const frameOffset
                 = DAT_EntityDefinedData::instance
                       .Flag3AnimationFrames2[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
                               .unknownAnimationFrameRelated];
@@ -47,6 +47,7 @@ namespace Map {
             }
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 += frameOffset - 1;
             return;
+        }
         }
     }
 

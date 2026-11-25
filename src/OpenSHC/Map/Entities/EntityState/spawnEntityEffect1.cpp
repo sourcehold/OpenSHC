@@ -13,11 +13,11 @@ namespace Map {
             short x, short y, undefined4 height, undefined4 entityType, int graphicType1, int graphicType2)
         {
             int entityID;
-            for (entityID = this->everyTenTicks; entityID < 3000; entityID++) {
+            for (entityID = this->everyTenTicks; entityID < countof(this->entityArray); entityID++) {
                 if (this->entityArray[entityID].logicalState == 0) {
                     break;
                 }
-                if (entityID >= 2999) {
+                if (entityID >= countof(this->entityArray) - 1) {
                     return 0;
                 }
             }
@@ -40,7 +40,7 @@ namespace Map {
             this->entityArray[entityID].unkMinusOne = 0;
             MACRO_CALL_MEMBER(EntityState_Func::processEntityHitBuildingOrUnit, this)(entityID);
             MACRO_CALL_MEMBER(EntityState_Func::calculateEntityDrawOffset, this)(entityID);
-            uint savedCurrentEntityID = DAT_CurrentEntityID::instance;
+            uint const savedCurrentEntityID = DAT_CurrentEntityID::instance;
             DAT_CurrentEntityID::instance = entityID;
             ((void(
                 __cdecl*)())DAT_EntityDefinedData::instance.EntityCallbacks[this->entityArray[entityID].entityType])();

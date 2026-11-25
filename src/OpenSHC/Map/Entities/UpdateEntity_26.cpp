@@ -9,7 +9,7 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402260
     void Entities::UpdateEntity_26()
     {
-        short animTick
+        short const animTick
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (animTick < 20) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 20 - animTick;
@@ -26,7 +26,7 @@ namespace Map {
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne < 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne = 0;
         }
-        int nextFrame
+        int const nextFrame
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated + 1;
         if (nextFrame > 71) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;

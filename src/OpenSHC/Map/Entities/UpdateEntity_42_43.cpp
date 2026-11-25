@@ -13,7 +13,7 @@ namespace Map {
     void Entities::UpdateEntity_42_43()
     {
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkOne_1 = 2;
-        int animTick
+        int const animTick
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] <= 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
@@ -33,7 +33,7 @@ namespace Map {
                   + (GMFirstPictureIndex::instance[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
                              .field_0xbe]
                         + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0)
-                      * 0x10
+                      * 16
                   + 114)
                 / 2;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xcc = 50;

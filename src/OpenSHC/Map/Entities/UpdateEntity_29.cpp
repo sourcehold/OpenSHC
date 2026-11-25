@@ -29,7 +29,7 @@ namespace Map {
             + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection * 8;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 129;
-        short randomValue = SEC_RNG::instance.currentNumber2;
+        short const randomValue = SEC_RNG::instance.currentNumber2;
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 > 0) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2--;
             if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 == 0) {

@@ -1,6 +1,7 @@
 #include "../EntityState.func.hpp"
 
 #include "OpenSHC/Map/Entities/EntityType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 
@@ -11,7 +12,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004019D0
         void EntityState::destroyEntitiesOnTile(int tile)
         {
-            if ((DAT_TileMapState::instance.MiscDisplayLayer[tile] & 0x1000) == 0) {
+            if ((DAT_TileMapState::instance.MiscDisplayLayer[tile] & OpenSHC::Map::LogicHelpers::MD_DECORATION_ENTITY)
+                == 0) {
                 return;
             }
             for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
@@ -24,7 +26,8 @@ namespace Map {
                         || this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_HEADS_ON_SPIKES)
                     && this->entityArray[entityID].tile == tile) {
                     this->entityArray[entityID].logicalState = 3;
-                    DAT_TileMapState::instance.MiscDisplayLayer[tile] &= ~0x1000;
+                    DAT_TileMapState::instance.MiscDisplayLayer[tile]
+                        &= ~OpenSHC::Map::LogicHelpers::MD_DECORATION_ENTITY;
                 }
             }
         }
