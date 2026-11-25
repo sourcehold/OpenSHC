@@ -22,7 +22,8 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray);
             uint const maxUnitCount = DAT_UnitsState::instance.maxUnitCount;
             int unitID = 1;
-            // the guard compares unsigned, the loop condition signed
+            // do-while on purpose: the guard compares unsigned and the loop condition signed, and a for loop
+            // (with the guard or without it) no longer matches the original
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
                 int arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
                 do {
