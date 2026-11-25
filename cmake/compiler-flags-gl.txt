@@ -367,3 +367,4 @@ src/OpenSHC/Map/Units/UnitsState/unitIsInMoat.cpp
 src/OpenSHC/Map/Units/UnitsState/updateClimbing.cpp
 src/OpenSHC/Map/Units/UnitsState/upgradeMapFormatForUnits.cpp
 src/OpenSHC/Map/Units/UnitsState/writeSixToTileMap1104InAllDirections.cpp
+src/OpenSHC/Map/Units/CheckUnitProductionPaused.cpp
