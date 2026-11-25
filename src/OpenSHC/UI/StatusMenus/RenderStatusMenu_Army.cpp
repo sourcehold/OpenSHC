@@ -31,7 +31,8 @@ namespace UI {
         int const x = DAT_MenuHandlerState::instance.x;
         int const y = DAT_MenuHandlerState::instance.y;
         int const firstGroupIcon = DAT_00b95b68::instance * 9;
-        int const top = y + 447;
+        // the panel's top read on its own (as y + 447, the compiler folds it into y's uses and loses the match)
+        int const top = DAT_MenuHandlerState::instance.y + 447;
         ++DAT_00b9845c::instance;
         int nudge = 0;
         if (40 < DAT_00b9845c::instance) {

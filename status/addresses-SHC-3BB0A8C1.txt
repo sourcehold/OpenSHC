@@ -16373,7 +16373,7 @@ SHC_3BB0A8C1_0x00447D30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00447DC0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00447FA0 | 40.2% | Register allocation differs
+SHC_3BB0A8C1_0x00447FA0 | 43.2% | the top takes ebx in the loop where the original gives it to i * 46; both stepped values in slots
 
 SHC_3BB0A8C1_0x004482F0 | 0.0% | Pending
 
