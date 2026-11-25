@@ -1,0 +1,179 @@
+#include "../UnitsState.func.hpp"
+
+#include "OpenSHC/Map/Units/Selection/UnitHitBoxFilter.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/UnitLogicState.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
+
+#include "OpenSHC/Globals/DAT_CurrentUnitSlotID.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_MinimapViewState.hpp"
+#include "OpenSHC/Globals/DAT_MouseState.hpp"
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x0053D9C0
+        uint UnitsState::getUnitInHitBox(UnitHitBoxFilter filterMode)
+        {
+            int _hitboxXStart;
+            int _hitboxXEnd;
+            if (DAT_MouseState::instance.hitboxXStart > DAT_MouseState::instance.hitboxXEnd) {
+                _hitboxXStart = DAT_MouseState::instance.hitboxXEnd;
+                _hitboxXEnd = DAT_MouseState::instance.hitboxXStart;
+            } else {
+                _hitboxXStart = DAT_MouseState::instance.hitboxXStart;
+                _hitboxXEnd = DAT_MouseState::instance.hitboxXEnd;
+            }
+            int _hitboxYStart;
+            int _hitboxYEnd;
+            if (DAT_MouseState::instance.hitboxYStart > DAT_MouseState::instance.hitboxYEnd) {
+                _hitboxYStart = DAT_MouseState::instance.hitboxYEnd;
+                _hitboxYEnd = DAT_MouseState::instance.hitboxYStart;
+            } else {
+                _hitboxYStart = DAT_MouseState::instance.hitboxYStart;
+                _hitboxYEnd = DAT_MouseState::instance.hitboxYEnd;
+            }
+            for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
+                DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                    == OpenSHC::Map::Units::States::US_JESTER_ROAM_TO) {
+                    continue;
+                }
+                if (DAT_MinimapViewState::instance.minimapClickEnabled != 0) {
+                    if (abs(DAT_ViewportRenderState::instance.viewportState.mouseTileX
+                            - this->units[DAT_CurrentUnitSlotID::instance].x)
+                        >= 2) {
+                        continue;
+                    }
+                    if (abs(DAT_ViewportRenderState::instance.viewportState.mouseTileY
+                            - this->units[DAT_CurrentUnitSlotID::instance].y)
+                        >= 2) {
+                        continue;
+                    }
+                } else {
+                    if (this->units[DAT_CurrentUnitSlotID::instance].drawX == 0
+                        && this->units[DAT_CurrentUnitSlotID::instance].drawY == 0) {
+                        continue;
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].drawX
+                            + this->units[DAT_CurrentUnitSlotID::instance].drawXOffset
+                        >= _hitboxXEnd) {
+                        continue;
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].drawY
+                            + this->units[DAT_CurrentUnitSlotID::instance].someDrawYOffset
+                        >= _hitboxYEnd) {
+                        continue;
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].spriteWidthUnk
+                            + this->units[DAT_CurrentUnitSlotID::instance].drawX
+                            + this->units[DAT_CurrentUnitSlotID::instance].drawXOffset
+                        < _hitboxXStart) {
+                        continue;
+                    }
+                    if (this->units[DAT_CurrentUnitSlotID::instance].spriteHeightUnk
+                            + this->units[DAT_CurrentUnitSlotID::instance].drawY
+                            + this->units[DAT_CurrentUnitSlotID::instance].someDrawYOffset
+                        < _hitboxYStart) {
+                        continue;
+                    }
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_TOWER
+                    && this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                        == (OpenSHC::Map::Units::States::US_STAND_UPUnk | OpenSHC::Map::Units::States::US_IDLEUnk)) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_TUNNELER
+                    && (this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk
+                        || this->units[DAT_CurrentUnitSlotID::instance].state.generic
+                            == OpenSHC::Map::Units::States::US_STAND_UPUnk)) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_CAMELSHBEAR) {
+                    continue;
+                }
+                if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_ANTELOPESHDEER
+                    && MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::selectionHasNoRangedUnits, this)()
+                        != 0) {
+                    continue;
+                }
+                switch (filterMode) {
+                case OpenSHC::Map::Units::Selection::UHBF_ENEMY_TEAM:
+                    if (DAT_GameState::instance.mapAndTime
+                            .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]
+                        != DAT_GameState::instance.mapAndTime
+                            .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case OpenSHC::Map::Units::Selection::UHBF_ANY:
+                    return DAT_CurrentUnitSlotID::instance;
+                case OpenSHC::Map::Units::Selection::UHBF_OWN:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case OpenSHC::Map::Units::Selection::UHBF_ANY_PLAYER_SELECTABLE:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0
+                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_SELECTABLE:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                            == DAT_GameSynchronyState::instance.currentPlayerSlotID
+                        && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_SIEGE_ENGINE:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].owner
+                        == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_TREBUCHET
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_BATTERINGRAM
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_TOWER
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_MANGONEL
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_BALLISTA
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_FBALLISTA
+                            || this->units[DAT_CurrentUnitSlotID::instance].unitType
+                                == OpenSHC::Map::Units::UT_S_SHIELD) {
+                            return DAT_CurrentUnitSlotID::instance;
+                        }
+                    }
+                    break;
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_LADDERMAN:
+                    if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_LADDER
+                        && this->units[DAT_CurrentUnitSlotID::instance].owner
+                            == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
+                        return DAT_CurrentUnitSlotID::instance;
+                    }
+                    break;
+                }
+            }
+            return 0;
+        }
+
+    }
+}
+}

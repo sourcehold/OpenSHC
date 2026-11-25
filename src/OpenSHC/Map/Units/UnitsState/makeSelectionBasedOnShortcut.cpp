@@ -26,10 +26,10 @@ namespace Map {
                     continue;
                 }
                 if (this->units[_unitID].uid == DAT_GameState::instance.hotkeyTribes[section1099ID].units[i].uid
-                    && this->units[_unitID].unknownTestAgainst0_2 == 0
+                    && !this->units[_unitID].unknownTestAgainst0_2
                     && this->units[_unitID].disappearFadeAlphaCountdown == 0) {
                     this->units[_unitID].isSelected = 1;
-                    this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                    this->totalUnitsInSelection += 1;
                 } else {
                     DAT_GameState::instance.hotkeyTribes[section1099ID].units[i].id = -1;
                 }
