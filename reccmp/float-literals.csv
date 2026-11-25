@@ -1,0 +1,11 @@
+# x87 literals referenced by SFXState::updateAmbientSoundStream.
+# reccmp reads the values directly from the original image.
+address,type,size
+0x0059E858,float,8
+0x005A4DF0,float,4
+0x005A4E00,float,8
+0x005A4EDC,float,4
+0x005A4EE0,float,4
+0x005A4EE4,float,4
+0x005A4EE8,float,8
+0x005A4EF0,float,4
