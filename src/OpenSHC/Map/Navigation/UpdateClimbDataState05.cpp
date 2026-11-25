@@ -19,7 +19,7 @@ namespace Map {
           a `ClimbData&`: the original re-reads the global index for every field, and the
           reference measured 0.53 against 0.98 (quick_diff).
          */
-        int buildingID = DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID;
+        int const buildingID = DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID = (short)DAT_CurrentClimbDataID::instance;
         if (DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].sourceUID
             != DAT_BuildingsState::instance.buildings[buildingID].uid) {

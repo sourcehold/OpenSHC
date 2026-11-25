@@ -22,16 +22,16 @@ namespace Map {
                100 when the major axis is 0) */
             int axisRatioPercent;
             if (this->distanceX >= this->distanceY) {
-                int part = this->distanceY;
-                int whole = this->distanceX;
+                int const part = this->distanceY;
+                int const whole = this->distanceX;
                 if (whole == 0) {
                     axisRatioPercent = 100;
                 } else {
                     axisRatioPercent = part * 100 / whole;
                 }
             } else {
-                int part = this->distanceX;
-                int whole = this->distanceY;
+                int const part = this->distanceX;
+                int const whole = this->distanceY;
                 if (whole == 0) {
                     axisRatioPercent = 100;
                 } else {

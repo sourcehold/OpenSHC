@@ -1,5 +1,6 @@
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.func.hpp"
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
@@ -13,7 +14,7 @@ namespace Map {
     {
         if (outcomeMode == 2) {
             this->currentEventID = this->eventsCount;
-            this->eventsCount = this->eventsCount + 1;
+            ++this->eventsCount;
             this->editedEventType = 3;
             MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::initializeScenarioEvent,
                 &this->scenarioEvents[this->currentEventID])();
@@ -27,7 +28,7 @@ namespace Map {
             this->scenarioEvents[this->currentEventID].data.scenario.conditions[12].enabled = 1;
 
             this->currentEventID = this->eventsCount;
-            this->eventsCount = this->eventsCount + 1;
+            ++this->eventsCount;
             this->editedEventType = 3;
             MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::initializeScenarioEvent,
                 &this->scenarioEvents[this->currentEventID])();
@@ -43,7 +44,7 @@ namespace Map {
             this->scenarioEvents[this->currentEventID].data.scenario.conditions[15].enabled = 1;
         } else if (outcomeMode == 1) {
             this->currentEventID = this->eventsCount;
-            this->eventsCount = this->eventsCount + 1;
+            ++this->eventsCount;
             this->editedEventType = 3;
             MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::initializeScenarioEvent,
                 &this->scenarioEvents[this->currentEventID])();
@@ -59,7 +60,7 @@ namespace Map {
             this->scenarioEvents[this->currentEventID].data.scenario.conditions[12].enabled = 1;
 
             this->currentEventID = this->eventsCount;
-            this->eventsCount = this->eventsCount + 1;
+            ++this->eventsCount;
             this->editedEventType = 3;
             MACRO_CALL_MEMBER(OpenSHC::Game::ScenarioEvents::InGameEventUnionVersion_Func::initializeScenarioEvent,
                 &this->scenarioEvents[this->currentEventID])();

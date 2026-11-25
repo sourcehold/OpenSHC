@@ -1,5 +1,6 @@
+#include "../MapPropertiesState.func.hpp"
+
 #include "OpenSHC/Game/ScenarioEvents/InGameEventUnionVersion.func.hpp"
-#include "OpenSHC/Map/MapPropertiesState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 
