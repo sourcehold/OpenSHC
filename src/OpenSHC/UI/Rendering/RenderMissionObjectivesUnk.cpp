@@ -39,9 +39,11 @@ namespace UI {
     {
         int y = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 100;
         int value = 0;
-        int boxX = 300;
         int eventIndex = -1;
         int column = 200;
+        int boxX = 300;
+        // one counter for both passes (a counter per loop loses the match)
+        int objective;
         int const headerX = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 30;
         int const headerY = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 50;
         DAT_TextManagerObject::instance.field_0x24 = 1;
@@ -57,7 +59,7 @@ namespace UI {
                 headerX, headerY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
 
             // first pass: measure the texts for the number column and the tick boxes
-            for (int objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
+            for (objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
                 if (INT_ARRAY_00ed2630::instance[objective] == 0) {
                     continue;
                 }
@@ -178,7 +180,7 @@ namespace UI {
             }
 
             // second pass: draw them
-            for (int objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
+            for (objective = 0; objective < OpenSHC::Game::ScenarioEvents::Enums::SECI_WIN_TIMER; ++objective) {
                 if (INT_ARRAY_00ed2630::instance[objective] == 0) {
                     continue;
                 }
@@ -448,15 +450,17 @@ namespace UI {
         }
         // builder mode: the map name and its description, scrolled by pages
         int const offset = y - DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight - 30;
-        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
-            MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(
-                DAT_GameCore::instance.standaloneFilename, &eventIndex),
+        // the map name is read before the call (inline, the call comes after the pushes and loses the match)
+        char* const mapName = MACRO_CALL(OpenSHC::Global_Func::GetStringBasedOnHardcodedMaps)(
+            DAT_GameCore::instance.standaloneFilename, &eventIndex);
+        MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(mapName,
             DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 400,
             DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 10, OpenSHC::Text::TTA_CENTER,
             OpenSHC::Rendering::Colors::COL_CCFAFF, 17, FALSE, 0);
         // the visible height, rounded up to whole lines of 23 pixels
-        int pageHeight = 377 - offset;
-        pageHeight += 22 - (pageHeight + 22) % 23;
+        // the visible height in a value of its own (rounded in place, the registers rotate and lose the match)
+        int const visible = 377 - offset;
+        int const pageHeight = visible + 22 - (visible + 22) % 23;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::setScreenMenuSurfaceHeightRange,
             DAT_TextureRenderCoreObject::ptr)(DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + offset + 45,
             DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + pageHeight + offset + 45);
