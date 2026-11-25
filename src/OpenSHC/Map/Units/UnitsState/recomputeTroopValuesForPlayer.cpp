@@ -86,69 +86,74 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_CHILD:
                     continue;
                 }
-                if (this->units[unitID].owner == 0) {
-                    continue;
-                }
-                switch (this->units[unitID].unitType) {
-                case OpenSHC::Map::Units::UT_S_CATAPULT:
-                case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                case OpenSHC::Map::Units::UT_S_MANGONEL:
-                case OpenSHC::Map::Units::UT_S_TOWER:
-                case OpenSHC::Map::Units::UT_S_SHIELD:
-                case OpenSHC::Map::Units::UT_S_BALLISTA:
-                case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    /* count of currently manning engineers */
-                    if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
-                        == 0) {
-                        continue;
-                    }
-                }
-                if (this->units[unitID].isSelectable_OR_matchTime != 0) {
-                    DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                        DAT_DirectionAlgorithmState::ptr)(_campfireX, _campfireY,
-                        DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
-                    if (DAT_DirectionAlgorithmState::instance.distanceHigh < 60
-                        && (DAT_GameSynchronyState::instance
-                                    .currentPlayerFullIDArray[DAT_UnitsState::instance.units[unitID].owner]
-                                != -1
-                            || DAT_GameSynchronyState::instance
-                                    .currentAIArray[DAT_UnitsState::instance.units[unitID].owner]
-                                == 0
-                            || DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID == playerID)) {
-                        DAT_GameState::instance.playerDataArray[playerID]
-                            .totalEnemyTroopValueByPlayerID[DAT_UnitsState::instance.units[unitID].owner]
-                            += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                DAT_TroopValueState::ptr)(
-                                (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
-                        DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue += MACRO_CALL_MEMBER(
-                            OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType, DAT_TroopValueState::ptr)(
-                            (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
-                        UnitTypeShort _enemyUnitType = DAT_UnitsState::instance.units[unitID].unitType;
-                        if (_enemyUnitType != OpenSHC::Map::Units::UT_E_ARCHER
-                            && _enemyUnitType != OpenSHC::Map::Units::UT_E_XBOW
-                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_ARCHER
-                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_SLINGER
-                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_HARCHER
-                            && _enemyUnitType != OpenSHC::Map::Units::UT_A_FIRETHROWER) {
-                            DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue
-                                += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
-                                    DAT_TroopValueState::ptr)((UnitType)(short)_enemyUnitType);
+                /* neutral units are listed as enemies but carry no troop value */
+                if (this->units[unitID].owner != 0) {
+                    switch (this->units[unitID].unitType) {
+                    case OpenSHC::Map::Units::UT_S_CATAPULT:
+                    case OpenSHC::Map::Units::UT_S_TREBUCHET:
+                    case OpenSHC::Map::Units::UT_S_MANGONEL:
+                    case OpenSHC::Map::Units::UT_S_TOWER:
+                    case OpenSHC::Map::Units::UT_S_SHIELD:
+                    case OpenSHC::Map::Units::UT_S_BALLISTA:
+                    case OpenSHC::Map::Units::UT_S_FBALLISTA:
+                        /* count of currently manning engineers */
+                        if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300
+                            == 0) {
+                            continue;
                         }
                     }
-                } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
-                    DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
+                    if (this->units[unitID].isSelectable_OR_matchTime != 0) {
+                        DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                            DAT_DirectionAlgorithmState::ptr)(_campfireX, _campfireY,
+                            DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
+                        if (DAT_DirectionAlgorithmState::instance.distanceHigh < 60) {
+                            int const _owner = DAT_UnitsState::instance.units[unitID].owner;
+                            if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_owner] != -1
+                                || DAT_GameSynchronyState::instance.currentAIArray[_owner] == 0
+                                || DAT_UnitsState::instance.units[unitID].siegeTargetPlayerID == playerID) {
+                                DAT_GameState::instance.playerDataArray[playerID]
+                                    .totalEnemyTroopValueByPlayerID[DAT_UnitsState::instance.units[unitID].owner]
+                                    += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                        DAT_TroopValueState::ptr)(
+                                        (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
+                                DAT_GameState::instance.playerDataArray[playerID].totalEnemyTroopValue
+                                    += MACRO_CALL_MEMBER(OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                        DAT_TroopValueState::ptr)(
+                                        (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
+                                if (DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_E_ARCHER
+                                    && DAT_UnitsState::instance.units[unitID].unitType != OpenSHC::Map::Units::UT_E_XBOW
+                                    && DAT_UnitsState::instance.units[unitID].unitType
+                                        != OpenSHC::Map::Units::UT_A_ARCHER
+                                    && DAT_UnitsState::instance.units[unitID].unitType
+                                        != OpenSHC::Map::Units::UT_A_SLINGER
+                                    && DAT_UnitsState::instance.units[unitID].unitType
+                                        != OpenSHC::Map::Units::UT_A_HARCHER
+                                    && DAT_UnitsState::instance.units[unitID].unitType
+                                        != OpenSHC::Map::Units::UT_A_FIRETHROWER) {
+                                    DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue
+                                        += MACRO_CALL_MEMBER(
+                                            OpenSHC::Map::Units::TroopValueState_Func::getValueOfTroopType,
+                                            DAT_TroopValueState::ptr)(
+                                            (UnitType)(short)DAT_UnitsState::instance.units[unitID].unitType);
+                                }
+                            }
+                        }
+                    } else if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
+                        DAT_GameState::instance.playerDataArray[playerID].totalEnemyUnitsCount += 1;
+                    }
                 }
                 int _enemySlot = DAT_GameState::instance.playerDataArray[playerID].enemies;
-                if (_enemySlot < 2499) {
-                    DAT_GameState::instance.playerDataArray[playerID].enemies = _enemySlot + 1;
-                } else {
-                    _enemySlot = SEC_RNG::instance.currentNumber2 % 2500;
+                if (_enemySlot >= 2499) {
+                    int const _randomSlot = SEC_RNG::instance.currentNumber2 % 2500;
                     MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
-                    if (_enemySlot >= 2499) {
+                    if (_randomSlot >= 2499) {
                         continue;
                     }
+                    _enemySlot = _randomSlot;
+                } else {
+                    DAT_GameState::instance.playerDataArray[playerID].enemies = _enemySlot + 1;
                 }
                 DAT_GameState::instance.playerDataArray[playerID].enemyIDArray[_enemySlot] = unitID;
                 DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[playerID][_enemySlot]
