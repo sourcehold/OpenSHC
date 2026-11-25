@@ -24,7 +24,7 @@ namespace Map {
         // SIZE: 0x0001226C
         typedef struct UnitPropertiesDefinedData {
 
-            byte Frames_Shared_UnitClimbingDown[20]; // 0x00000000 length: 20
+            char Frames_Shared_UnitClimbingDown[20]; // 0x00000000 length: 20
             NoArgCallback* UpdateUnitFunctions[80]; // 0x00000014 length: 320
             int SPRITE_ID[80]; // 0x00000154 length: 320
             int GRAPHIC_SIZE[80]; // 0x00000294 length: 320

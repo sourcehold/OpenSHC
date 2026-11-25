@@ -297,7 +297,7 @@ namespace Map {
             byte field_0x3ff; // 0x000003FF length: 1
             short lastEncounteredEnemyPlayerID; // 0x00000400 length: 2
             byte unknownCountdown_0x402; // 0x00000402 length: 1
-            byte wasOnStoneGate; // 0x00000403 length: 1
+            char wasOnStoneGate; // 0x00000403 length: 1
             int currentTilePosition_2Unk; // 0x00000404 length: 4
             short counter; // 0x00000408 length: 2
             short field_0x40a; // 0x0000040A length: 2

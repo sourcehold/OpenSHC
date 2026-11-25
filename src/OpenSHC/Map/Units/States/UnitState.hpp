@@ -27,6 +27,7 @@ namespace Map {
                 US_SIT_DOWNUnk = 11, // 0x0000000B
                 US_STATE_12Unk = 12, // 0x0000000C
                 US_MOVE_TO_DESTINATION = 101, // 0x00000065
+                US_CLIMBING_LADDER = 104, // 0x00000068
                 US_MELEE_ATTACK = 106, // 0x0000006A
                 US_MELEE_ATTACK_WALL = 107, // 0x0000006B
                 US_UNKNOWN_108 = 108, // 0x0000006C
