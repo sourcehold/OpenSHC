@@ -16,6 +16,7 @@
 #include "OpenSHC/Map/AttackInfoSubArrayElement3.hpp"
 #include "OpenSHC/Map/AttackInfoSubElement.hpp"
 #include "OpenSHC/Map/Units/Attack/TribeSizesPerTribeType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -28,6 +29,7 @@ namespace Map {
     using OpenSHC::Map::AttackInfoSubArrayElement3;
     using OpenSHC::Map::AttackInfoSubElement;
     using OpenSHC::Map::Units::Attack::TribeSizesPerTribeType;
+    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)
     // SIZE: 0x0010375C
@@ -80,7 +82,7 @@ namespace Map {
         int unknownOne_0x20f90; // 0x00020F90 length: 4
         int scaleZone; // 0x00020F94 length: 4
         int attackWaveSweepActive; // 0x00020F98 length: 4
-        int attackAlarmPlayed; // 0x00020F9C length: 4
+        BOOLEnum attackAlarmPlayed; // 0x00020F9C length: 4
         int someCounter1; // 0x00020FA0 length: 4
         undefined1 padding_0x20fa4[4]; // 0x00020FA4 length: 4
         short nof_fpointsArray[50][8]; // 0x00020FA8 length: 800
@@ -88,7 +90,7 @@ namespace Map {
         short nof_fpointsArrayCopy[8]; // 0x000215E8 length: 16
         undefined1 padding_0x215f8[1600]; // 0x000215F8 length: 1600
         int nof_fpoints; // 0x00021C38 length: 4
-        int lowTroopValueRelated; // 0x00021C3C length: 4
+        BOOLEnum lowTroopValueRelated; // 0x00021C3C length: 4
         int size; // 0x00021C40 length: 4
         int value10; // 0x00021C44 length: 4
         int reservedTroopBudget; // 0x00021C48 length: 4
@@ -106,7 +108,7 @@ namespace Map {
         undefined1 padding_0x2ac18[1596]; // 0x0002AC18 length: 1596
         AttackInfoPitchRelated spottedEnemyTiles[100]; // 0x0002B254 length: 800
         int aiTickPhase; // 0x0002B574 length: 4
-        int unitsSentToKeepFlag; // 0x0002B578 length: 4
+        BOOLEnum unitsSentToKeepFlag; // 0x0002B578 length: 4
         short unitIDArray_0x2b57c[1000]; // 0x0002B57C length: 2000
         int unitIDIndex_0x2bd4c; // 0x0002BD4C length: 4
         int tileArray_0x2bd50[200]; // 0x0002BD50 length: 800
