@@ -1,5 +1,4 @@
 #include "../SFXState.func.hpp"
-#include "PriorityListEntry.hpp"
 
 #include "OpenSHC/Audio/MSS/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameCore.func.hpp"
@@ -20,6 +19,11 @@
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
+
+        struct PriorityListEntry {
+            int index;
+            int ambientEventCounterRescaled;
+        };
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044BCE0
         void SFXState::updateAmbientSoundStream()
@@ -52,6 +56,9 @@ namespace Audio {
             } else {
                 for (int i = 0; i < 10; ++i) {
                     int _datum = this->ambientEventCounters[i][0];
+                    /* These 10 slots appear to be per-frame sound event accumulators (e.g. how many
+                       sword clashes, arrows, fire crackles happened this frame), written by other
+                       systems and consumed here. */
                     DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum;
                     if (i == 4) {
                         DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum >> 2;
@@ -182,6 +189,13 @@ namespace Audio {
                     ++sortedCount;
                     continue;
                 }
+
+                // This structure may have been one loop. I was unable to create it.
+                // The closets I managed to do was running the loop as long as insertIndex < sortedCount and having the
+                // condition after be insertIndex >= sortedCount. This created almost the required structure, but the
+                // condition was wrong, since it would require and equals. So the most likely thing is that the original
+                // was able to proof that insertIndex could never be bigger then sortedCount. I have no idea how they
+                // managed to do that.
                 int insertIndex = 0;
                 if (sortedCount > 0) {
                     while (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex]
@@ -194,9 +208,10 @@ namespace Audio {
                         _prioritySortedList[sortedCount].ambientEventCounterRescaled
                             = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
                         ++sortedCount;
-                        goto outerLoopEnd;
+                        goto outerLoopEnd; // found no solution so far for this
                     }
                 }
+
                 if (insertIndex == sortedCount) {
                     _prioritySortedList[sortedCount].index = ambientEventIndex;
                     _prioritySortedList[sortedCount].ambientEventCounterRescaled
@@ -204,6 +219,7 @@ namespace Audio {
                     ++sortedCount;
                     continue;
                 }
+
                 for (int shiftIndex = sortedCount - 1; shiftIndex >= insertIndex; --shiftIndex) {
                     _prioritySortedList[shiftIndex + 1].index = _prioritySortedList[shiftIndex].index;
                     _prioritySortedList[shiftIndex + 1].ambientEventCounterRescaled
