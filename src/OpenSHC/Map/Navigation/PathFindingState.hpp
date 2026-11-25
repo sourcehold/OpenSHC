@@ -315,7 +315,7 @@ namespace Map {
                 uint tribeID, undefined4 targetUnitID, uint x, uint y, int unitCount, dword area, int playerID);
 
             void findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance(
-                int tile, int maxDestinations, int* area, int playerID, int shortenedDistance, int direction);
+                int tile, int maxDestinations, int area, int playerID, int shortenedDistance, int direction);
 
             void populateDestinationsArrayWithWallTileAndFreeTilePairInSameArea(
                 int tile, int maxDestinations, dword area, int playerID);

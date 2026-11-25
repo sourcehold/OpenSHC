@@ -18,6 +18,7 @@ from skink.export.classes.collect import collect_classes, collect_namespaced_fun
 from skink.export.enums.enumfamilies import EnumFamily, collect_enum_families
 import pathlib
 from skink.export.styles.style3.exporter import Exporter, BinaryContext, TransformationRules, FileRules
+from skink.utils.unique import unique
 
 from skink.export.context import DEFAULT, Context
 ctx: Context = DEFAULT.copy() # type: ignore
@@ -29,6 +30,7 @@ ctx.include.file_extension = ""
 import argparse
 parser = argparse.ArgumentParser()
 parser.add_argument("--sarif", required=False, default="Stronghold Crusader.exe.sarif")
+parser.add_argument("--gzf", required=False, default=None, help="Read the program from this .gzf with pyghidra instead of from --sarif")
 parser.add_argument("--clear-cache", required=False, action=argparse.BooleanOptionalAction, default=False)
 parser.add_argument("--output-dir", required=False, default='src')
 parser.add_argument("--verbose", default=False, action=argparse.BooleanOptionalAction)
@@ -48,9 +50,14 @@ if args.dry_run:
   print(args)
   exit(0)
 
-project = Project(args.sarif,
-                  cache_objects=args.cache,
-                  cache_path=".cache" if args.cache else None)
+if args.gzf:
+  # Read the program straight from the gzf with pyghidra, no SARIF export and no cache needed
+  logging.log(logging.INFO, f"reading program from: {args.gzf}")
+  project = Project.from_gzf(args.gzf)
+else:
+  project = Project(args.sarif,
+                    cache_objects=args.cache,
+                    cache_path=".cache" if args.cache else None)
 
 # TODO: permit_overwrite = False
 logging.log(logging.INFO, "processing all symbol results")
@@ -63,12 +70,7 @@ project.build_database(plan_symbols=SymbolsDatabasePlan(store_symbol_result=True
 logging.log(logging.INFO, "processing all symbol results: finished")
 
 logging.log(logging.INFO, "finding all by location")
-objs: List[BasicResult] = []
-objs_i = 0
-for obj in project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True):
-  if obj not in objs:
-    objs_i += 1
-    objs.append(obj)
+objs: List[BasicResult] = unique(project.find_all_by_location(location="/_HoldStrong", recursive=True, lookup_lsymbols=True))
 logging.log(logging.INFO, "finding all by location: finished")
 
 
@@ -351,7 +353,14 @@ def write_patches(output_dir: pathlib.Path):
   (output_dir / "OpenSHC/UI/Rendering/TextureRenderCore/" / "RGB555To565Asm.hpp").write_bytes(
     (pathlib.Path(__file__).parent / "injected-headers" / "RGB555To565Asm.hpp").read_bytes()
   )
-  pass # Overwrite hpp files in this function
+
+  (output_dir / "OpenSHC/Map/TileMapState/" / "NeighbourFlagsAsm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "NeighbourFlagsAsm.hpp").read_bytes()
+  )
+
+  (output_dir / "OpenSHC/Map/TileMapState/" / "NeighbourFlagsGlobalAsm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "NeighbourFlagsGlobalAsm.hpp").read_bytes()
+  )
 
 if not args.dry_run:
   # TODO: 

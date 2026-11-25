@@ -528,6 +528,10 @@ x &= 0xf;
 x++;
 ```
 
+## 30. Add float constants to reccmp
+Float constants are used in x87 code. Add their address type (`float`)
+and size to `reccmp/float-literals.csv` such that reccmp can process appropriately.
+
 ---
 
 ## Measuring
@@ -547,7 +551,7 @@ python build_quiet.py && python reccmp_report.py --run cmp base.json    # the nu
   what can be considered almost "100% Reimplemented" if reccmp itself doesn't show 100%.
 - **`quick_diff.py` is for ranking variants of one file**, not for judging a file in absolute terms. It
   compiles without LTCG and without the real link, so on some functions it disagrees with reccmp outright:
-- `build_quiet.py` exits non-zero if compilation failed.
+- `build_quiet.py` exits non-zero if the cmake configure or the compilation failed.
 - Resolver flags are not committed. `enable_local_functions.py` and `Enable-Reimplemented-Data.ps1` have to be re-run after any
   `git checkout -- src/OpenSHC`, and a resolver left `true` with no `.cpp` in the build list is an
   unresolved external at link time. Never commit resolvers set to `true` nor local build lists.

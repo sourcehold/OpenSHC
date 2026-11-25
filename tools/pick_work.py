@@ -7,10 +7,16 @@ derived from expected_cpp), so a batch of picks tends to land in one class.
 The rollup is fetched from the project's latest-sarif release by default;
 pass --tsv with a local path (or another URL) to override it.
 
+Every pick is reported with the URL of the place its best match lives, derived
+from the rollup's best_source (``main`` or a remote-tracking branch such as
+``owner-OpenSHC/reimpl/foo``) and the local git remotes. With --all-sources the
+local fork branches are scanned as well, so each pick lists every branch that
+has the function and the URL of the file on that branch.
+
 Usage:
     python pick_worst.py [-n N] [--tsv PATH_OR_URL] [--namespace NS]
                          [--include-done] [--max-pct P] [--spread]
-                         [--format table|tsv|json|addresses]
+                         [--all-sources] [--format table|tsv|json|addresses|urls]
 """
 
 import argparse
@@ -18,6 +24,8 @@ import csv
 import io
 import json
 import os
+import re
+import subprocess
 import sys
 import urllib.error
 import urllib.request
@@ -87,8 +95,165 @@ def load(source):
                 "cpp": cpp,
                 "namespace": namespace_of(cpp),
                 "function": function_of(cpp),
+                "url": "",
+                "sources": [],
             })
         return rows
+
+
+DEFAULT_REPO_URL = "https://github.com/sourcehold/OpenSHC"
+#: one entry per line: SHC_<hash>_0x<addr> | <pct>% | <status text>
+ENTRY = re.compile(r"^\s*(SHC_[0-9A-Fa-f]+_0x[0-9A-Fa-f]+)\s*\|\s*([0-9.]+)%\s*\|\s*(.*?)\s*$")
+STATUS_GLOB = re.compile(r"^status/addresses-SHC-[0-9A-Fa-f]+\.txt$")
+
+
+def git(args):
+    """-> (returncode, stdout); never raises, so a missing repo degrades gracefully."""
+    try:
+        p = subprocess.run(["git"] + args, capture_output=True, text=True,
+                           errors="replace")
+    except OSError:
+        return 1, ""
+    return p.returncode, p.stdout
+
+
+def web_base(url):
+    """git remote url -> browsable https base, or '' if it is not a known host."""
+    url = url.strip()
+    if url.startswith("git@"):
+        host, _, path = url[4:].partition(":")
+        url = "https://{}/{}".format(host, path)
+    elif url.startswith("ssh://git@"):
+        url = "https://" + url[len("ssh://git@"):]
+    if not url.startswith(("http://", "https://")):
+        return ""
+    return url[:-4].rstrip("/") if url.endswith(".git") else url.rstrip("/")
+
+
+def remote_bases():
+    """-> {remote name: browsable https base} for the local remotes."""
+    rc, out = git(["remote", "-v"])
+    bases = {}
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) >= 2 and parts[0] not in bases:
+            base = web_base(parts[1])
+            if base:
+                bases[parts[0]] = base
+    return bases
+
+
+def source_url(source, cpp, bases):
+    """'owner-OpenSHC/reimpl/foo' + a cpp path -> the URL of that file on GitHub.
+
+    'main' (the rollup's name for HEAD) is the project's own repository,
+    sourcehold/OpenSHC. Remote names never contain a slash, so the
+    first component of a remote-tracking branch is the remote.
+    """
+    if not source or source == "main":
+        # the rollup's 'main' is the project's own main, not whatever this
+        # checkout's origin happens to be
+        base, branch = DEFAULT_REPO_URL, "main"
+    else:
+        remote, _, branch = source.partition("/")
+        if not branch:
+            return ""
+        base = bases.get(remote)
+        if base is None:
+            # not fetched locally: rebuild owner/name from the remote name, which
+            # fetch_fork_branches made by replacing the slash with a dash
+            owner, _, name = remote.partition("-")
+            if not name:
+                return ""
+            base = "https://github.com/{}/{}".format(owner, name)
+    if cpp:
+        return "{}/blob/{}/{}".format(base, branch, cpp.replace("\\", "/"))
+    return "{}/tree/{}".format(base, branch)
+
+
+def reimpl_refs(filter_re):
+    """-> ['HEAD'] + the remote-tracking branches whose name matches the filter."""
+    rc, out = git(["branch", "-r", "--format=%(refname:short)"])
+    refs = [b.strip() for b in out.splitlines()
+            if b.strip() and "->" not in b and filter_re.search(b)]
+    return ["HEAD"] + sorted(refs)
+
+
+def ref_rows(ref, wanted):
+    """-> {shc id: (pct, status)} for the wanted ids in one ref's status files."""
+    rc, out = git(["ls-tree", "-r", "--name-only", ref, "--", "status"])
+    rows = {}
+    for path in out.splitlines():
+        path = path.strip()
+        if not STATUS_GLOB.match(path):
+            continue
+        rc, text = git(["show", "{}:{}".format(ref, path)])
+        if rc != 0:
+            continue
+        for line in text.splitlines():
+            m = ENTRY.match(line)
+            if m and m.group(1) in wanted:
+                rows[m.group(1)] = (float(m.group(2)), m.group(3).strip())
+    return rows
+
+
+def collect_sources(picks, pattern="", min_pct=None, progress=False,
+                    keep_duplicates=False):
+    """Fill each pick's 'sources' with every ref that reports the function.
+
+    Branch contents are taken as truth exactly as status_rollup.py does: nothing
+    is re-measured, only the per-address status files are read.
+
+    Most of these branches are cut from one another, so the same file turns up
+    verbatim on dozens of them. Sources are therefore grouped by the blob id of
+    the cpp on that branch: one entry per distinct version of the function,
+    carrying the other branches that hold the identical file in 'also_on'.
+    """
+    wanted = {r["shc_id"]: r for r in picks}
+    bases = remote_bases()
+    refs = reimpl_refs(re.compile(pattern))
+    for i, ref in enumerate(refs, 1):
+        if progress:
+            print("scanning {}/{}: {}".format(i, len(refs), ref),
+                  end="\r", file=sys.stderr)
+        for sid, (pct, status) in ref_rows(ref, wanted).items():
+            # every branch carries a status line for every address, so a branch
+            # that has not touched the function reports 0% and has no file
+            if pct <= (0.0 if min_pct is None else min_pct - 1e-9):
+                continue
+            row = wanted[sid]
+            source = "main" if ref == "HEAD" else ref
+            rc, blob = git(["rev-parse", "--verify", "--quiet",
+                            "{}:{}".format(ref, row["cpp"])])
+            row["sources"].append({
+                "source": source,
+                "pct": pct,
+                "status": status,
+                "url": source_url(source, row["cpp"], bases),
+                "blob": blob.strip() if rc == 0 else "",
+                "also_on": [],
+            })
+    if progress:
+        print(" " * 60, end="\r", file=sys.stderr)
+    for row in picks:
+        row["sources"].sort(key=lambda s: (-s["pct"], s["source"]))
+        if not keep_duplicates:
+            row["sources"] = dedupe_sources(row["sources"])
+    return picks
+
+
+def dedupe_sources(sources):
+    """Collapse sources whose cpp is byte-identical into one entry each."""
+    out, by_blob = [], {}
+    for src in sources:
+        first = by_blob.get(src["blob"]) if src["blob"] else None
+        if first is None:
+            if src["blob"]:
+                by_blob[src["blob"]] = src
+            out.append(src)
+        else:
+            first["also_on"].append(src["source"])
+    return out
 
 
 #: namespaces that hold generated / runtime glue rather than game logic
@@ -150,8 +315,17 @@ def render(picks, fmt):
         return json.dumps(picks, indent=2)
     if fmt == "addresses":
         return "\n".join(r["address"] for r in picks)
+    if fmt == "urls":
+        out = []
+        for r in picks:
+            for src in r["sources"] or [{"source": r["source"], "pct": r["pct"],
+                                         "url": r["url"], "also_on": []}]:
+                out.append("{}\t{:.1f}\t{}\t{}".format(
+                    r["address"], src["pct"], src["source"], src["url"]))
+        return "\n".join(out)
     if fmt == "tsv":
-        cols = ["address", "pct", "namespace", "function", "refs", "status", "cpp"]
+        cols = ["address", "pct", "namespace", "function", "refs", "status",
+                "source", "url", "cpp"]
         out = ["\t".join(cols)]
         out += ["\t".join(str(r[c]) for c in cols) for r in picks]
         return "\n".join(out)
@@ -166,6 +340,15 @@ def render(picks, fmt):
             r["pct"], r["address"], r["refs"], r["function"] or r["shc_id"]))
         if r["status"]:
             lines.append("           status: {}".format(r["status"]))
+        if r["sources"]:
+            for src in r["sources"]:
+                lines.append("           {:>6.1f}%  {}".format(
+                    src["pct"], src["url"] or src["source"]))
+                if src["also_on"]:
+                    lines.append("                    (identical on {} other "
+                                 "branch(es))".format(len(src["also_on"])))
+        elif r["url"]:
+            lines.append("           {:>6.1f}%  {}".format(r["pct"], r["url"]))
     counts = defaultdict(int)
     for r in picks:
         counts[r["namespace"]] += 1
@@ -201,7 +384,21 @@ def main(argv=None):
                     help="only consider rows with at least this many refs_at_100")
     ap.add_argument("--spread", action="store_true",
                     help="ignore namespace grouping; take the globally worst N")
-    ap.add_argument("--format", choices=["table", "tsv", "json", "addresses"],
+    ap.add_argument("--all-sources", action="store_true",
+                    help="scan the local fork branches and list every branch "
+                         "that has the function, with the URL of its file there "
+                         "(slow: one pass over every remote-tracking branch)")
+    ap.add_argument("--sources-filter", default="",
+                    help="regex narrowing the remote-tracking branches to scan "
+                         "with --all-sources (default: all of them)")
+    ap.add_argument("--sources-min-pct", type=float,
+                    help="with --all-sources, only list branches at or above "
+                         "this match percentage (default: above 0%%, i.e. every "
+                         "branch that has actually touched the function)")
+    ap.add_argument("--keep-duplicate-sources", action="store_true",
+                    help="with --all-sources, list every branch separately "
+                         "instead of collapsing branches whose file is identical")
+    ap.add_argument("--format", choices=["table", "tsv", "json", "addresses", "urls"],
                     default="table")
     ap.add_argument("--list-namespaces", action="store_true",
                     help="print a per-namespace badness summary instead of picks")
@@ -245,7 +442,18 @@ def main(argv=None):
                 min(x["pct"] for x in members), ns))
         return 0
 
-    print(render(select(pool, args.count, spread=args.spread), args.format))
+    picks = select(pool, args.count, spread=args.spread)
+
+    bases = remote_bases()
+    for row in picks:
+        row["url"] = source_url(row["source"], row["cpp"], bases)
+    if args.all_sources:
+        collect_sources(picks, pattern=args.sources_filter,
+                        min_pct=args.sources_min_pct,
+                        progress=sys.stderr.isatty(),
+                        keep_duplicates=args.keep_duplicate_sources)
+
+    print(render(picks, args.format))
     return 0
 
 

@@ -47,7 +47,7 @@ namespace UI {
                 int const allyPlayerID = DAT_SomeTeamMemberPlayerIDArray::instance[DAT_LastTeamMemberIndex::instance];
                 short const requestedResource
                     = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                          .requestedGoodsArray1Unk[allyPlayerID];
+                          .goodsRequestTypeByPlayer[allyPlayerID];
                 DAT_SentOrRequestedGoodsAmount::instance = 0;
                 DAT_00df4284::instance = 0;
                 if (requestedResource >= OpenSHC::Game::Resources::RT_WOOD) {
@@ -55,7 +55,7 @@ namespace UI {
                     DAT_RequestedGoodsByWhoArray::instance[0] = requestedResource - 1;
                     DAT_SentOrRequestedGoodsAmount::instance
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                              .requestedGoodsArray2Unk[allyPlayerID];
+                              .goodsRequestAmountByPlayer[allyPlayerID];
                 }
                 MACRO_CALL_MEMBER(OpenSHC::UI::MenuModalComposition_Func::activateModalDialog,
                     DAT_MenuModalComposition1::ptr)(OpenSHC::UI::Enums::MMT_ALLIES_SEND_GOODS, FALSE);
