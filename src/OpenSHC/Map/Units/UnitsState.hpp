@@ -13,8 +13,8 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnum.hpp"
+#include "OpenSHC/Map/Units/Selection/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/Unit.hpp"
-#include "OpenSHC/Map/Units/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -33,6 +33,7 @@ namespace Map {
         using OpenSHC::Map::Units::UnitInstructionType;
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnum;
+        using OpenSHC::Map::Units::Selection::UnitHitBoxFilter;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
 #pragma pack(push, 1)

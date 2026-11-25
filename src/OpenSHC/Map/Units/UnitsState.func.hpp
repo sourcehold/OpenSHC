@@ -7,6 +7,7 @@
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 #include "OpenSHC/Map/Units/Instructions/MatchSpeedInstructionEnum.hpp"
+#include "OpenSHC/Map/Units/Selection/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/Map/Units/UnitsState.hpp"
@@ -23,6 +24,7 @@ namespace Map {
             using OpenSHC::Map::Units::UnitInstructionType;
             using OpenSHC::Map::Units::UnitType;
             using OpenSHC::Map::Units::Instructions::MatchSpeedInstructionEnum;
+            using OpenSHC::Map::Units::Selection::UnitHitBoxFilter;
             using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
             // Constructor
@@ -447,8 +449,8 @@ namespace Map {
                 &UnitsState::playerMakeUnitSelection)
             playerMakeUnitSelection;
 
-            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00535DF0,
-                &UnitsState::getFirstSelectedUnitID)
+            MACRO_FUNCTION_RESOLVER(
+                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x00535DF0, &UnitsState::getFirstSelectedUnitID)
             getFirstSelectedUnitID;
 
             MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x00535E20,
@@ -571,8 +573,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00537160, &UnitsState::queueDisbandAndAttackCommand4Params)
             queueDisbandAndAttackCommand4Params;
 
-            MACRO_FUNCTION_RESOLVER(
-                void (UnitsState::*)(int, UnitInstructionType, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (UnitsState::*)(int, UnitInstructionType, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x005371A0, &UnitsState::queueDisbandAndAttackCommand5Params)
             queueDisbandAndAttackCommand5Params;
 
@@ -696,8 +697,8 @@ namespace Map {
                 void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0053D900, &UnitsState::exitLadder)
             exitLadder;
 
-            MACRO_FUNCTION_RESOLVER(
-                uint (UnitsState::*)(UnitHitBoxFilter), false, Address::SHC_3BB0A8C1_0x0053D9C0, &UnitsState::getUnitInHitBox)
+            MACRO_FUNCTION_RESOLVER(uint (UnitsState::*)(UnitHitBoxFilter), false, Address::SHC_3BB0A8C1_0x0053D9C0,
+                &UnitsState::getUnitInHitBox)
             getUnitInHitBox;
 
             MACRO_FUNCTION_RESOLVER(BOOLEnum (UnitsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0053DCC0,

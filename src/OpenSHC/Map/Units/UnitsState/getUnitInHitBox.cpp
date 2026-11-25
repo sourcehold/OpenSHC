@@ -1,7 +1,7 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Units/Selection/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
-#include "OpenSHC/Map/Units/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -112,7 +112,7 @@ namespace Map {
                     continue;
                 }
                 switch (filterMode) {
-                case OpenSHC::Map::Units::UHBF_ENEMY_TEAM:
+                case OpenSHC::Map::Units::Selection::UHBF_ENEMY_TEAM:
                     if (DAT_GameState::instance.mapAndTime
                             .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]
                         != DAT_GameState::instance.mapAndTime
@@ -120,28 +120,28 @@ namespace Map {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case OpenSHC::Map::Units::UHBF_ANY:
+                case OpenSHC::Map::Units::Selection::UHBF_ANY:
                     return DAT_CurrentUnitSlotID::instance;
-                case OpenSHC::Map::Units::UHBF_OWN:
+                case OpenSHC::Map::Units::Selection::UHBF_OWN:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case OpenSHC::Map::Units::UHBF_ANY_PLAYER_SELECTABLE:
+                case OpenSHC::Map::Units::Selection::UHBF_ANY_PLAYER_SELECTABLE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0
                         && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case OpenSHC::Map::Units::UHBF_OWN_SELECTABLE:
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_SELECTABLE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case OpenSHC::Map::Units::UHBF_OWN_SIEGE_ENGINE:
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_SIEGE_ENGINE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
@@ -162,7 +162,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::UHBF_OWN_LADDERMAN:
+                case OpenSHC::Map::Units::Selection::UHBF_OWN_LADDERMAN:
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_LADDER
                         && this->units[DAT_CurrentUnitSlotID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {

@@ -582,7 +582,7 @@ namespace Map {
 
         void renderPreviewMapperWithBrush(uint x, uint y, MappersEnum param_3);
 
-        void applyTreeBrushToLogicalLayer(int treeID, int noVariation);
+        void applyTreeBrushToLogicalLayer(int treeID, BOOLEnum noVariation);
 
         void eraseAreaWithBrush(uint param_1, uint param_2, uint param_3);
 

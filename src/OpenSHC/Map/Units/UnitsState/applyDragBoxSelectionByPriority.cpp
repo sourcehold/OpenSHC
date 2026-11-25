@@ -1,6 +1,6 @@
 #include "../UnitsState.func.hpp"
 
-#include "OpenSHC/Map/Units/DragBoxSelectionPriority.hpp"
+#include "OpenSHC/Map/Units/Selection/DragBoxSelectionPriority.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -12,6 +12,8 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
+
+        using OpenSHC::Map::Units::Selection::DragBoxSelectionPriority;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005347E0
         void UnitsState::applyDragBoxSelectionByPriority()
@@ -123,9 +125,9 @@ namespace Map {
             DragBoxSelectionPriority _priority;
             if (_otherOwnUnits != 0 || _catapults != 0 || _trebuchets != 0 || _siegeTowers != 0 || _batteringRams != 0
                 || _shields != 0 || _mangonels != 0 || _ballistas != 0 || _fireBallistas != 0) {
-                _priority = OpenSHC::Map::Units::DBSP_OWN_UNITS;
+                _priority = OpenSHC::Map::Units::Selection::DBSP_OWN_UNITS;
             } else {
-                _priority = OpenSHC::Map::Units::DBSP_OTHER_PLAYERS_UNITS;
+                _priority = OpenSHC::Map::Units::Selection::DBSP_OTHER_PLAYERS_UNITS;
             }
             this->totalUnitsInSelection = 0;
             for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
@@ -161,7 +163,7 @@ namespace Map {
                     continue;
                 }
                 switch (_priority) {
-                case OpenSHC::Map::Units::DBSP_OWN_UNITS:
+                case OpenSHC::Map::Units::Selection::DBSP_OWN_UNITS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_LORD
@@ -171,7 +173,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_CATAPULTS:
+                case OpenSHC::Map::Units::Selection::DBSP_CATAPULTS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -181,7 +183,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_TREBUCHETS:
+                case OpenSHC::Map::Units::Selection::DBSP_TREBUCHETS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -191,7 +193,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_SIEGE_TOWERS:
+                case OpenSHC::Map::Units::Selection::DBSP_SIEGE_TOWERS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_TOWER) {
@@ -200,7 +202,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_BATTERING_RAMS:
+                case OpenSHC::Map::Units::Selection::DBSP_BATTERING_RAMS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -210,7 +212,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_SHIELDS:
+                case OpenSHC::Map::Units::Selection::DBSP_SHIELDS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
@@ -219,7 +221,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_MANGONELS:
+                case OpenSHC::Map::Units::Selection::DBSP_MANGONELS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -229,7 +231,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_BALLISTAS:
+                case OpenSHC::Map::Units::Selection::DBSP_BALLISTAS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -239,7 +241,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_FIRE_BALLISTAS:
+                case OpenSHC::Map::Units::Selection::DBSP_FIRE_BALLISTAS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType
@@ -249,7 +251,7 @@ namespace Map {
                         }
                     }
                     break;
-                case OpenSHC::Map::Units::DBSP_OTHER_PLAYERS_UNITS:
+                case OpenSHC::Map::Units::Selection::DBSP_OTHER_PLAYERS_UNITS:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;

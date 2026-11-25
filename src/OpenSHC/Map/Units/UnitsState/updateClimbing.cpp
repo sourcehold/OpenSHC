@@ -1,6 +1,6 @@
 #include "../UnitsState.func.hpp"
 
-#include "OpenSHC/Map/ClimbDataType.hpp"
+#include "OpenSHC/Map/Enums/ClimbDataType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -29,7 +29,7 @@ namespace Map {
                 return FALSE;
             }
             this->units[unitID].climbingState = -1;
-            if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_LADDER) {
+            if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::Enums::CDT_LADDER) {
                 int _ladderUnitID
                     = DAT_TileMapState::instance
                           .UnitLayer[DAT_PathFindingState::instance.climbData[_climbDataID].bottomTilePosition];
@@ -57,19 +57,22 @@ namespace Map {
                 this->units[unitID].unknownStateCopyClimbRelated = this->units[unitID].state.generic;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_CLIMBING_LADDER;
                 this->units[unitID].animationCycleNumber = 0;
-            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_BUILDING_7Unk) {
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type
+                == OpenSHC::Map::Enums::CDT_BUILDING_7Unk) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                     unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
-            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_6Unk) {
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::Enums::CDT_6Unk) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                     unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
-            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_BUILDING_5Unk
-                || DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_BUILDING_4Unk
-                || DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::CDT_BUILDING_3Unk) {
+            } else if (DAT_PathFindingState::instance.climbData[_climbDataID].type
+                    == OpenSHC::Map::Enums::CDT_BUILDING_5Unk
+                || DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::Enums::CDT_BUILDING_4Unk
+                || DAT_PathFindingState::instance.climbData[_climbDataID].type
+                    == OpenSHC::Map::Enums::CDT_BUILDING_3Unk) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::exitLadder, this)(unitID);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(
                     unitID, this->units[unitID].destinationX_2Unk, this->units[unitID].destinationY_2Unk, 0);
