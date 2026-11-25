@@ -138,9 +138,9 @@ namespace Map {
         int inv_count; // 0x000306FC length: 4
         int value3Array01[50]; // 0x00030700 length: 200
         int attackWaveTicker[50]; // 0x000307C8 length: 200
-        byte nof_tribes[50]; // 0x00030890 length: 50
+        char nof_tribes[50]; // 0x00030890 length: 50
         byte unknownByteArray02[50]; // 0x000308C2 length: 50
-        byte attackWavePlayerIDArray[50]; // 0x000308F4 length: 50
+        char attackWavePlayerIDArray[50]; // 0x000308F4 length: 50
         byte someSinglePlayerScore[50][10]; // 0x00030926 length: 500
         short attackWaveSignpostShorts[50]; // 0x00030B1A length: 100
         undefined1 padding_0x30b7e[2]; // 0x00030B7E length: 2

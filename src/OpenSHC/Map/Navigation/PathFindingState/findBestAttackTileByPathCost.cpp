@@ -18,7 +18,7 @@ namespace Map {
     namespace Navigation {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004A01D0
-        dword PathFindingState::findBestAttackTileByPathCost(uint x, uint y, int playerID, uint cost)
+        int PathFindingState::findBestAttackTileByPathCost(uint x, uint y, int playerID, uint cost)
         {
             dword _candidate = 1000;
             int _bestScore = 1000;

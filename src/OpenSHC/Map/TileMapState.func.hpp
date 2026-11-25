@@ -670,7 +670,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x005110B0, &TileMapState::createMoatData)
         createMoatData;
 
-        MACRO_FUNCTION_RESOLVER(BOOLEnum (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x005111D0,
+        MACRO_FUNCTION_RESOLVER(int (TileMapState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x005111D0,
             &TileMapState::findNearestFriendlyMoatTileForDigging)
         findNearestFriendlyMoatTileForDigging;
 

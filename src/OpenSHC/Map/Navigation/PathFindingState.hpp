@@ -216,9 +216,9 @@ namespace Map {
 
             dword pathFindingRelated(int param_1, uint param_2, uint param_3, int param_4);
 
-            dword pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5);
+            int pathfindingRelated49ff20(uint x, uint y, int playerID, uint distanceUnk, int param_5);
 
-            dword findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4);
+            int findBestAttackTileByPathCost(uint param_1, uint param_2, int param_3, uint param_4);
 
             int findNearestEnemyBuildingWithinDistance(int param_1, int param_2, int param_3, int param_4);
 
