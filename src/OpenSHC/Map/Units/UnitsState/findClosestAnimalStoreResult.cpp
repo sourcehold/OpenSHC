@@ -22,8 +22,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00537AA0
         int UnitsState::findClosestAnimalStoreResult(int maxDistance, BOOLEnum excludeCows, uint x, uint y)
         {
-            int _bestUnitID = 0;
             int _bestScore = 10000;
+            int _bestUnitID = 0;
             if (x > 399 || y > 399) {
                 return 0;
             }
