@@ -13,7 +13,7 @@ namespace Map {
         int closestDistance = 1000;
         int closestTreeID = 0;
         for (int treeID = 1; treeID < this->maxTreeCount; ++treeID) {
-            if (this->trees[treeID].state == 2 && this->trees[treeID].treeType == Trees::TT_APPLEUnk
+            if (this->trees[treeID].state == 2 && this->trees[treeID].treeType == Trees::TT_TREE_APPLE
                 && this->trees[treeID].stage == 3) {
                 MACRO_CALL_MEMBER(Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(

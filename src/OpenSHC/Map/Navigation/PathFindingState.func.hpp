@@ -431,7 +431,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A79A0, &PathFindingState::pathPlanningForTribe)
             pathPlanningForTribe;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int*, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A7F50,
                 &PathFindingState::findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance)
             findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance;

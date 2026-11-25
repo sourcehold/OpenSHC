@@ -13,6 +13,7 @@ namespace Map {
     namespace Units {
         typedef enum UnitInstructionType {
 
+            UIT_NONE = 0, // 0x00000000
             UIT_NO_INSTRUCTION_OR_MOVEUnk = 3, // 0x00000003
             UIT_UNIT_ATTACK_UNIT = 4, // 0x00000004
             UIT_ATTACK_LAND = 5, // 0x00000005

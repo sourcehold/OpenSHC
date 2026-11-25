@@ -79,7 +79,7 @@ EVENTS = [
     ('epilog_attempt',  '0x10b321e0'),  # @FgTryEpilogMerge@20 entry
 ]
 
-out = (common.ROOT / common.TMP / 'mergeprobe').resolve()
+out = (common.ROOT / common.TMP / ('mergeprobe' + ('_' + os.environ['QD_OUT'] if os.environ.get('QD_OUT') else ''))).resolve()
 out.mkdir(parents=True, exist_ok=True)
 BS = chr(92)
 Q = chr(34)
