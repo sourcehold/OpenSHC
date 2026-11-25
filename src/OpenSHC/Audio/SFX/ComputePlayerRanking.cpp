@@ -1,6 +1,7 @@
 #include "../SFX.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Audio/SFX/PlayerRankingEntry.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -9,11 +10,6 @@
 namespace OpenSHC {
 namespace Audio {
     namespace SFX {
-
-        struct PlayerRankingEntry {
-            int playerID;
-            int points;
-        };
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0044B680
         int __cdecl ComputePlayerRanking(int playerID)
