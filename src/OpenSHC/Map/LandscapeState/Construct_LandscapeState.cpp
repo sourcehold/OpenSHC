@@ -12,7 +12,7 @@ namespace Map {
         this->creationTime = timeGetTime();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::clearRocksAndTrees, this)();
         MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::resetWind, this)();
-        this->field1_0x4 = 1;
+        this->field_0x4 = 1;
         return this;
     }
 

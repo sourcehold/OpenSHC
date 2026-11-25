@@ -1,0 +1,100 @@
+
+name: Declaration/type change validation
+
+on:
+  pull_request_target:
+    branches: [main]
+    types: [opened, reopened, synchronize, ready_for_review]
+  merge_group:
+    types: [checks_requested]
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  check-declaration-changes:
+    name: Declaration/type change validation
+    runs-on: ubuntu-latest
+
+    steps:
+      # Only needed for merge_group validation.
+      - name: Checkout merge group
+        if: github.event_name == 'merge_group'
+        uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      # PR validation and label management.
+      - name: Check PR and update label
+        if: github.event_name == 'pull_request_target'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const label = 'declaration/type change';
+            const { owner, repo } = context.repo;
+            const pull_number = context.issue.number;
+
+            const files = await github.paginate(
+              github.rest.pulls.listFiles,
+              {
+                owner,
+                repo,
+                pull_number,
+                per_page: 100
+              }
+            );
+
+            const declarationFiles = files.filter(file =>
+              /^src\/OpenSHC\/.*\.(h|hpp)$/i.test(file.filename)
+            );
+
+            const hasChanges = declarationFiles.length > 0;
+
+            if (hasChanges) {
+              await github.rest.issues.addLabels({
+                owner,
+                repo,
+                issue_number: pull_number,
+                labels: [label]
+              });
+
+              console.log('Declaration/type changes found:');
+              declarationFiles.forEach(file =>
+                console.log(file.filename)
+              );
+
+              core.setFailed(
+                'Changes to .h/.hpp files in src/OpenSHC are not allowed.'
+              );
+            } else {
+              try {
+                await github.rest.issues.removeLabel({
+                  owner,
+                  repo,
+                  issue_number: pull_number,
+                  name: label
+                });
+              } catch (error) {
+                if (error.status !== 404) throw error;
+              }
+
+              console.log('No declaration/type changes found.');
+            }
+
+      # Validate the combined changes in the merge queue.
+      - name: Check merge group
+        if: github.event_name == 'merge_group'
+        env:
+          BASE_SHA: ${{ github.event.merge_group.base_sha }}
+          HEAD_SHA: ${{ github.event.merge_group.head_sha }}
+        run: |
+          files=$(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+
+          if echo "$files" | grep -Eiq '^src/OpenSHC/.*\.(h|hpp)$'; then
+            echo "::error::Declaration/type changes need to be performed via main push."
+            echo "$files" | grep -Ei '^src/OpenSHC/.*\.(h|hpp)$'
+            exit 1
+          fi
+
+          echo "No declaration/type changes found."

@@ -32,7 +32,7 @@ namespace Map {
             }
             if (_unitType == OpenSHC::Map::Units::UT_TANNER || _unitType == OpenSHC::Map::Units::UT_LADY
                 || _unitType == OpenSHC::Map::Units::UT_MOTHER || _unitType == OpenSHC::Map::Units::UT_BREWER
-                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
+                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 129)) {
                 /* women */
                 this->units[unitID].firstNameIndex = (SEC_RNG::instance.currentNumber2 % 20) + 52;
             } else {

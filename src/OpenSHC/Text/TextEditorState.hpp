@@ -77,11 +77,11 @@ namespace Text {
         int imageHotspotCount; // 0x0002377C length: 4
         ImageHotspot imageHotspotTable[50]; // 0x00023780 length: 400
         wchar_t* intArray1[20]; // 0x00023910 length: 80
-        int field48_0x23960; // 0x00023960 length: 4
-        int field49_0x23964; // 0x00023964 length: 4
+        int field_0x23960; // 0x00023960 length: 4
+        int field_0x23964; // 0x00023964 length: 4
         int currentLinkId; // 0x00023968 length: 4
-        int field51_0x2396c; // 0x0002396C length: 4
-        int field52_0x23970; // 0x00023970 length: 4
+        int field_0x2396c; // 0x0002396C length: 4
+        int field_0x23970; // 0x00023970 length: 4
 
     private:
         TextEditorState(TextEditorState const&);

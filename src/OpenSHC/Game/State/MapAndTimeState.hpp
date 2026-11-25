@@ -34,12 +34,12 @@ namespace Game {
         // SIZE: 0x000401D0
         typedef struct MapAndTimeState {
 
-            int field0_0x0; // 0x00000000 length: 4
+            int field_0x0; // 0x00000000 length: 4
             BOOLEnum singlePlayerHasKeepAndGranary; // 0x00000004 length: 4
-            int field2_0x8[10]; // 0x00000008 length: 40
-            int field3_0x30[10]; // 0x00000030 length: 40
+            int field_0x8[10]; // 0x00000008 length: 40
+            int field_0x30[10]; // 0x00000030 length: 40
             int playerKeepTile[10]; // 0x00000058 length: 40
-            int field5_0x80[10]; // 0x00000080 length: 40
+            int field_0x80[10]; // 0x00000080 length: 40
             int hitsDealtToPlayerArray[9]; // 0x000000A8 length: 36
             int emenyHitArray[9]; // 0x000000CC length: 36
             int field43_0xf0; // 0x000000F0 length: 4
@@ -154,8 +154,7 @@ namespace Game {
             int skirmishNoRushTicksLeft; // 0x000027F4 length: 4
             int rawDeerCount; // 0x000027F8 length: 4
             undefined1 padding_0x27fc[252]; // 0x000027FC length: 252
-            int mercRecruitable[7]; // 0x000028F8 length: 28
-            undefined1 padding_0x2914[4]; // 0x00002914 length: 4
+            int mercRecruitable[8]; // 0x000028F8 length: 32
             int signpostIDs[16]; // 0x00002918 length: 64
             SignpostLocation signpostEntryData[16]; // 0x00002958 length: 256
             XYTileObject signpostsMapEdge[8][50]; // 0x00002A58 length: 6400

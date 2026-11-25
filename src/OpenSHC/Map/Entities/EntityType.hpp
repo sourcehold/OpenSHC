@@ -31,6 +31,7 @@ namespace Map {
             ET_COW_POISON_CLOUD = 22, // 0x00000016
             ET_COW_FLYING = 23, // 0x00000017
             ET_SEAGULLUnk = 29, // 0x0000001D
+            ET_UNKNOWN_30 = 30, // 0x0000001E
             ET_SLINGER = 33, // 0x00000021
             ET_FIRETHROWER = 34, // 0x00000022
             ET_FIRETHROWER_UNTARGETED = 36, // 0x00000024

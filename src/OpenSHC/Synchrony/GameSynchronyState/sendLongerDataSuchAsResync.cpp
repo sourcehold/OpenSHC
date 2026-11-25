@@ -29,8 +29,8 @@ namespace Synchrony {
         this->DAT_CommandActionPlan = Commands::GCS_SCHEDULE_AND_SEND;
         this->DAT_PlayerIDReceiver = 0;
         this->DAT_CommandParameterOffset = 0;
-        (&DAT_ProtocolDefinedData::instance
-                .commandFunctions)[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
+        DAT_ProtocolDefinedData::instance
+                .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
         this->DAT_CommandParameterOffset = 0;
         int _size = this->DAT_CommandSize;
         if (200 < this->DAT_CommandSize && (undefined1)commandCategory != Commands::GCT_SEND_RESYNC_LOGICALTILEMAP) {
