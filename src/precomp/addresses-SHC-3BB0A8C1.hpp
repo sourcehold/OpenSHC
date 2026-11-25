@@ -43811,7 +43811,7 @@ enum {
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2CC0 = 0x004F2CC0,
-    // label: killEveryFifthTree
+    // label: ageFourFifthsOfGrowingTrees
     // location: OpenSHC/Map/LandscapeState
     // type: function
     SHC_3BB0A8C1_0x004F2DA0 = 0x004F2DA0,
@@ -55487,11 +55487,11 @@ enum {
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D620 = 0x0052D620,
-    // label: isSuitableWildlifeSpawnCell
+    // label: isAttackStagingCandidateCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D690 = 0x0052D690,
-    // label: floodFillUnknownNonZero01FromCell
+    // label: floodFillZoneProximityFromCell
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052D720 = 0x0052D720,
@@ -55505,7 +55505,7 @@ enum {
     SHC_3BB0A8C1_0x0052DA40 = 0x0052DA40,
     // type: function
     SHC_3BB0A8C1_0x0052DAA0 = 0x0052DAA0,
-    // label: getDistanceToNearestUnknownNonZero01FromSignpost
+    // label: getDistanceFromAttackSignpostToZoneProximity
     // location: OpenSHC/Map/WildlifeState
     // type: function
     SHC_3BB0A8C1_0x0052DD20 = 0x0052DD20,

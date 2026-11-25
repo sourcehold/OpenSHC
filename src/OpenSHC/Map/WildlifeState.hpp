@@ -57,13 +57,13 @@ namespace Map {
 
         undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
 
-        BOOLEnum isSuitableWildlifeSpawnCell(int param_1, int param_2);
+        BOOLEnum isAttackStagingCandidateCell(int cellX, int cellY);
 
-        void floodFillUnknownNonZero01FromCell(int param_1, int param_2, int param_3);
+        void floodFillZoneProximityFromCell(int cellX, int cellY, int strength);
 
         void floodFillCasDisFromSignpost();
 
-        int getDistanceToNearestUnknownNonZero01FromSignpost();
+        int getDistanceFromAttackSignpostToZoneProximity();
 
         void updateWildlife();
 
