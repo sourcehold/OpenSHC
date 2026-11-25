@@ -7,10 +7,6 @@
 namespace OpenSHC {
 namespace UI {
 
-    using OpenSHC::UI::ScrollDirection;
-    using OpenSHC::UI::ScrollSpeed;
-    using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
     // FUNCTION: STRONGHOLDCRUSADER 0x00468A90
     ScrollingHandler* ScrollingHandler::Constructor_ScrollingHandler()
     {
