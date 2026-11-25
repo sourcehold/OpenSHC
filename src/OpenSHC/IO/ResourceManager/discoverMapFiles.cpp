@@ -1,9 +1,9 @@
 #include "../ResourceManager.func.hpp"
 
 #include "OpenSHC/Global.func.hpp"
-#include "OpenSHC/IO/Helpers/ScanState.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/OS.func.hpp"
+#include "OpenSHC/IO/Helpers/ScanState.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -83,7 +83,8 @@ namespace IO {
             // "magic numbers" here consider the length of "mission" and in relation to that
 
             if (scan.missionMaps
-                && !MACRO_CALL(OS_Func::__strnicmp)(manager->loadedMapNames[manager->mapFileCounter], s_mission_005a6494, 7)
+                && !MACRO_CALL(OS_Func::__strnicmp)(
+                    manager->loadedMapNames[manager->mapFileCounter], s_mission_005a6494, 7)
                 && manager->loadedMapNames[manager->mapFileCounter][7] >= '0'
                 && manager->loadedMapNames[manager->mapFileCounter][7] <= '9') {
 
