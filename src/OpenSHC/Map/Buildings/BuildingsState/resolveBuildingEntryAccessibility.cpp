@@ -13,12 +13,13 @@ namespace Map {
     namespace Buildings {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00421BE0
-        int BuildingsState::resolveBuildingEntryAccessibility(int buildingID, int workerIndexPlus1, int x, int y)
+        BuildingEntranceSearchResult BuildingsState::resolveBuildingEntryAccessibility(
+            int buildingID, int workerIndexPlus1, int x, int y)
         {
-            // Returns 2 if a gate is locked, 1 if accessible from (x, y) and 0 otherwise.
+            // BESR_FOUND if the building is accessible from (x, y), BESR_UNREACHABLE if a gate is locked.
             // workerIndexPlus1 - 1 matching entrance tiles are skipped when a new entrance is searched.
             if (buildingID <= 0) {
-                return 0;
+                return OpenSHC::Map::Buildings::Enums::BESR_NOT_FOUND;
             }
             Building& b = this->buildings[buildingID];
             int const playerID = b.owner;
@@ -65,21 +66,21 @@ namespace Map {
 
             this->buildings[buildingID].hasAccessToKeep = 1;
             if (!blocked) {
-                return 1;
+                return OpenSHC::Map::Buildings::Enums::BESR_FOUND;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setBuildingInitialEntryTileTry, this)(
                 buildingID, 0);
-            int const found = MACRO_CALL_MEMBER(
+            BuildingEntranceSearchResult const found = MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::determineBuildingEntranceFromCustomArea, this)(
                 buildingID, workerIndexPlus1, 0, x, y);
-            if (found == 0) {
+            if (found == OpenSHC::Map::Buildings::Enums::BESR_NOT_FOUND) {
                 this->buildings[buildingID].hasAccessToKeep = 0;
-                return 0;
+                return OpenSHC::Map::Buildings::Enums::BESR_NOT_FOUND;
             }
-            if (found == 2) {
-                return 2;
+            if (found == OpenSHC::Map::Buildings::Enums::BESR_UNREACHABLE) {
+                return OpenSHC::Map::Buildings::Enums::BESR_UNREACHABLE;
             }
-            return 1;
+            return OpenSHC::Map::Buildings::Enums::BESR_FOUND;
         }
 
     }

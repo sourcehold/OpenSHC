@@ -539,11 +539,11 @@ namespace Map {
                 &BuildingsState::swapOwnersOfCastle)
             swapOwnersOfCastle;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, BOOLEnum), false,
+            MACRO_FUNCTION_RESOLVER(BuildingEntranceSearchResult (BuildingsState::*)(int, int, BOOLEnum), false,
                 Address::SHC_3BB0A8C1_0x0041ADE0, &BuildingsState::determineBuildingEntranceFromKeepArea)
             determineBuildingEntranceFromKeepArea;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int, int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BuildingEntranceSearchResult (BuildingsState::*)(int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x0041B2B0, &BuildingsState::determineBuildingEntranceFromCustomArea)
             determineBuildingEntranceFromCustomArea;
 
@@ -635,7 +635,7 @@ namespace Map {
                 &BuildingsState::buildingIsAccessible)
             buildingIsAccessible;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(BuildingEntranceSearchResult (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00421BE0, &BuildingsState::resolveBuildingEntryAccessibility)
             resolveBuildingEntryAccessibility;
 

@@ -11,8 +11,8 @@ namespace Synchrony {
     void Actions::GateOpenOrClose(undefined4 playerID, int buildingID, int newGateState, int buildingUID)
     {
         if (DAT_BuildingsState::instance.buildings[buildingID].uid == buildingUID) {
-            DAT_BuildingsState::instance.buildings[buildingID].gateState = (byte)newGateState;
-            DAT_BuildingsState::instance.buildings[buildingID].gateState2 = 0;
+            DAT_BuildingsState::instance.buildings[buildingID].gateCommand = (byte)newGateState;
+            DAT_BuildingsState::instance.buildings[buildingID].gateKeepClosedTimer = 0;
             if (newGateState == 10) {
                 DAT_BuildingsState::instance.buildings[buildingID].gateCloseOpenTimer = -1;
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange,

@@ -28,21 +28,25 @@ namespace Map {
                     }
                 }
                 if (open) {
-                    if (DAT_BuildingsState::instance.buildings[gateID].pathLinkageRelated2 != 2) {
+                    if (DAT_BuildingsState::instance.buildings[gateID].gatePhase
+                        != OpenSHC::Map::Buildings::Enums::GP_CLOSED) {
                         return;
                     }
                     if (setTimer) {
                         DAT_BuildingsState::instance.buildings[gateID].gateCloseOpenTimer = 600;
                     }
-                    DAT_BuildingsState::instance.buildings[gateID].gateState = 11;
+                    DAT_BuildingsState::instance.buildings[gateID].gateCommand
+                        = OpenSHC::Map::Buildings::Enums::GC_OPEN;
                 } else {
-                    if (DAT_BuildingsState::instance.buildings[gateID].pathLinkageRelated2 != 0) {
+                    if (DAT_BuildingsState::instance.buildings[gateID].gatePhase
+                        != OpenSHC::Map::Buildings::Enums::GP_OPEN) {
                         return;
                     }
                     if (setTimer) {
                         DAT_BuildingsState::instance.buildings[gateID].gateCloseOpenTimer = -1;
                     }
-                    DAT_BuildingsState::instance.buildings[gateID].gateState = 10;
+                    DAT_BuildingsState::instance.buildings[gateID].gateCommand
+                        = OpenSHC::Map::Buildings::Enums::GC_CLOSE;
                 }
                 return;
             }

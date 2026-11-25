@@ -21,13 +21,12 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041ADE0
-        undefined4 BuildingsState::determineBuildingEntranceFromKeepArea(
+        BuildingEntranceSearchResult BuildingsState::determineBuildingEntranceFromKeepArea(
             int buildingID, int workerIndexPlus1, BOOLEnum flag)
         {
             // Finds an entrance tile of the building that can be reached from the campground of the owner.
             // flag enlarges the area around the building by one tile, workerIndexPlus1 - 1 matching tiles are skipped.
-            // Returns 1 if an entrance was found, 2 if only an unreachable one (e.g. behind a locked gate) and 0
-            // otherwise.
+            // BESR_UNREACHABLE is an entrance that cannot be reached from the campground (e.g. behind a locked gate).
 
             // Tiles that cannot hold an entrance
             enum {
@@ -50,7 +49,7 @@ namespace Map {
             int tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             int index;
             if (tileCount > 0) {
-                index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
+                index = this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
             } else {
                 index = 0;
@@ -89,7 +88,7 @@ namespace Map {
                         = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
                     this->buildings[buildingID].buildingEntryY
                         = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-                    return 1;
+                    return OpenSHC::Map::Buildings::Enums::BESR_FOUND;
                 }
                 ++index;
                 if (index >= tileCount) {
@@ -128,7 +127,7 @@ namespace Map {
                         = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
                     this->buildings[buildingID].buildingEntryY
                         = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-                    return 1;
+                    return OpenSHC::Map::Buildings::Enums::BESR_FOUND;
                 }
                 ++index;
                 if (index >= tileCount) {
@@ -139,7 +138,7 @@ namespace Map {
             // Accept any walkable tile next to the building
             tileCount = DAT_BuildingDefinedData::instance.BuildingAccessibleTilesCount[size];
             if (tileCount > 0) {
-                index = (short)this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
+                index = this->buildings[buildingID].entranceAttemptTileIndex % tileCount;
                 this->buildings[buildingID].entranceAttemptTileIndex = index;
             } else {
                 index = 0;
@@ -164,14 +163,14 @@ namespace Map {
                         = this->buildings[buildingID].x - flag + this->DAT_TempXOffset;
                     this->buildings[buildingID].buildingEntryY
                         = this->buildings[buildingID].y - flag + this->DAT_TempYOffset;
-                    return 2;
+                    return OpenSHC::Map::Buildings::Enums::BESR_UNREACHABLE;
                 }
                 ++index;
                 if (index >= tileCount) {
                     index = 0;
                 }
             }
-            return 0;
+            return OpenSHC::Map::Buildings::Enums::BESR_NOT_FOUND;
         }
 
     }

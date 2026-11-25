@@ -186,8 +186,8 @@ namespace Map {
                             SFX_WeLostControlOfAGatehouse);
                     }
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2c6 = newController;
-                    // gateState 11 requests opening, 10 closing
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 11;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                        = OpenSHC::Map::Buildings::Enums::GC_OPEN;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange, this)(
                         DAT_CurrentBuildingID::instance, TRUE, FALSE);
@@ -203,10 +203,10 @@ namespace Map {
                 return;
             }
 
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2 > 0) {
-                --DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2;
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateKeepClosedTimer > 0) {
+                --DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateKeepClosedTimer;
                 if (DAT_GameState::instance.playerDataArray[gateOwner].enemies == 0) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2 = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateKeepClosedTimer = 0;
                 }
             }
             // Gatehouses of players without human or AI control are not operated
@@ -232,8 +232,7 @@ namespace Map {
                 return;
             }
 
-            // Close the gate when enemies come near, open it again when they are gone. pathLinkageRelated2 is 0 for an
-            // open gate and 2 for a closed one.
+            // Close the gate when enemies come near, open it again when they have been gone for a while.
             bool enemyNear = false;
             for (int i = 0; i < DAT_GameState::instance.playerDataArray[gateOwner].enemies; ++i) {
                 int const enemyID = DAT_GameState::instance.playerDataArray[gateOwner].enemyIDArray[i];
@@ -267,26 +266,32 @@ namespace Map {
                 }
             }
             if (enemyNear) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2 = 1200;
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 0) {
-                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 10;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateKeepClosedTimer = 1200;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    == OpenSHC::Map::Buildings::Enums::GP_OPEN) {
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                        = OpenSHC::Map::Buildings::Enums::GC_CLOSE;
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2b6 = 10;
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange, this)(
                         DAT_CurrentBuildingID::instance, FALSE, FALSE);
                 }
-            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState2 == 0
-                && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 2) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 11;
+            } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateKeepClosedTimer == 0
+                && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    == OpenSHC::Map::Buildings::Enums::GP_CLOSED) {
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                    = OpenSHC::Map::Buildings::Enums::GC_OPEN;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange,
                     this)(DAT_CurrentBuildingID::instance, TRUE, FALSE);
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                == OpenSHC::Map::Buildings::Enums::GP_OPEN) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange,
                     this)(DAT_CurrentBuildingID::instance, TRUE, FALSE);
                 return;
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 2) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                == OpenSHC::Map::Buildings::Enums::GP_CLOSED) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::applyGateOrDrawbridgeOpenCloseChange,
                     this)(DAT_CurrentBuildingID::instance, FALSE, FALSE);
             }
