@@ -93,10 +93,10 @@ namespace AI {
                     int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                     // tree types 1 to 4 give wood
                     if (treeID != 0
-                        && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_1
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_2
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_3
-                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_4)
+                        && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_OLIVE
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_DATE
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_COCONUT
+                            || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_CHERRY)
                         && DAT_LandscapeState::instance.trees[treeID].stage < 4
                         && DAT_LandscapeState::instance.trees[treeID].state == 2
                         && MACRO_CALL_MEMBER(Map::LandscapeState_Func::isTreeAdult, DAT_LandscapeState::ptr)(
@@ -156,10 +156,10 @@ namespace AI {
                 int const treeID = DAT_TileMapState::instance.OrganismLayer[tile];
                 // tree types 1 to 4 give wood
                 if (treeID != 0
-                    && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_1
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_2
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_3
-                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_UNKNOWN_4)
+                    && (DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_OLIVE
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_DATE
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_COCONUT
+                        || DAT_LandscapeState::instance.trees[treeID].treeType == Map::Trees::TT_TREE_CHERRY)
                     && DAT_LandscapeState::instance.trees[treeID].stage < 4
                     && DAT_LandscapeState::instance.trees[treeID].state == 2
                     && MACRO_CALL_MEMBER(Map::LandscapeState_Func::isTreeAdult, DAT_LandscapeState::ptr)(

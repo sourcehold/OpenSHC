@@ -14,10 +14,10 @@ namespace Map {
     void Version::UpdateFixTrees2()
     {
         for (int treeID = 1; treeID < 2000; ++treeID) {
-            if (DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_1
-                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_2
-                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_3
-                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_UNKNOWN_4) {
+            if (DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_TREE_OLIVE
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_TREE_DATE
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_TREE_COCONUT
+                || DAT_LandscapeState::instance.trees[treeID].treeType == Trees::TT_TREE_CHERRY) {
                 DAT_LandscapeState::instance.trees[treeID].gmOriginX
                     = DAT_TextureRenderCoreObject::instance
                           .gmFileHeaderColorpaletteArray[DAT_LandscapeState::instance.trees[treeID].treeTypeBasedValue1]
