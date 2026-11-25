@@ -26,11 +26,11 @@ namespace Map {
             int _buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             if (this->units[unitID].unknownCountdown_0x402 == 0) {
-                if (_buildingID == 0 && (_logicFlags & 0x10000500) == 0) {
-                    if ((this->units[unitID].field_0x440 + unitID & 7) != 0) {
+                if (_buildingID != 0 || (_logicFlags & 0x10000500) != 0) {
+                    if ((this->units[unitID].field_0x440 + unitID & 3) != 0) {
                         return;
                     }
-                } else if ((this->units[unitID].field_0x440 + unitID & 3) != 0) {
+                } else if ((this->units[unitID].field_0x440 + unitID & 7) != 0) {
                     return;
                 }
             }

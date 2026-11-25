@@ -105,7 +105,8 @@ def orig(va):
 
 
 def ours(f, cls, name):
-    cmd = base['command']
+    # /GL emits IL with no machine code into the /FA listing
+    cmd = re.sub(r'\s/GL\b', '', base['command'])
     cmd = re.sub(r'/Fo\S+', lambda m: '/Fo' + out + '/x.obj /FA /Fa' + out + '/x.asm', cmd)
     cmd = re.sub(r'-c \S+$', lambda m: '-c ' + f, cmd)
     r = subprocess.run(cmd, cwd=base['directory'], env=ENV, capture_output=True, text=True)

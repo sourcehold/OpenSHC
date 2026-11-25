@@ -66,8 +66,8 @@ namespace Map {
                     }
                     if (_distanceX < _minDistance) {
                         this->climbX2 = DAT_PathFindingState::instance.climbX;
-                        _bestEnemyUnitID = _enemyUnitID;
                         _minDistance = _distanceX;
+                        _bestEnemyUnitID = _enemyUnitID;
                         this->climbY2 = DAT_PathFindingState::instance.climbY;
                     }
                 }

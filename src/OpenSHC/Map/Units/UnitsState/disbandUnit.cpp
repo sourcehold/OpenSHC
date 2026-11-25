@@ -24,7 +24,7 @@ namespace Map {
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052EDC0
-        int UnitsState::disbandUnit(int unitID)
+        void UnitsState::disbandUnit(int unitID)
         {
             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_E_KNIGHT
                 && this->units[unitID].horseOriginStablesBuildingIndexUnk != 0) {
@@ -44,26 +44,23 @@ namespace Map {
                     DAT_BuildingsState::ptr)((UnitType)(short)_unitType, &refund);
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     .startResources[15] += refund;
-                return (
-                    int)&DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .startResources[15];
+                return;
             }
-            BOOLEnum _hasCampground = MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playerHasACampground,
-                DAT_GameState::ptr)(this->units[unitID].owner);
             this->units[unitID].disappearFadeAlphaCountdown = 0;
-            if (_hasCampground != FALSE) {
+            if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playerHasACampground, DAT_GameState::ptr)(
+                    this->units[unitID].owner)
+                != FALSE) {
                 this->units[unitID].state_2 = 0;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_PEASANT;
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
                 this->units[unitID].engineerManningSiegeStateRef_checkType = 1;
                 this->units[unitID].isDisappearingUnk = 1;
-                return 1;
+                return;
             }
             this->units[unitID].updateTickTracker = 0;
             this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             this->units[unitID].killedFlagUnk = 1;
-            return 0;
         }
 
     }
