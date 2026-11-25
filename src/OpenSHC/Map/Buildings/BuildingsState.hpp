@@ -205,7 +205,7 @@ namespace Map {
 
             void subtractPitchAndMoatFromStartingGoldInSiegeThatMode();
 
-            uint hasEnoughGoldForMoat();
+            BOOLEnum hasEnoughGoldForMoat();
 
             int getFarmThatHasTile(int tile);
 
