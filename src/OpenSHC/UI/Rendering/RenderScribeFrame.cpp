@@ -5,6 +5,7 @@
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
 #include "OpenSHC/DE/SHCDE/eGM.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Rendering/Colors/ColorsEnum.hpp"
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
@@ -34,11 +35,10 @@ namespace UI {
     // FUNCTION: STRONGHOLDCRUSADER 0x00433260
     void Rendering::RenderScribeFrame()
     {
-        BOOLEnum _placementInfoShown;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
         if (DAT_GameCore::instance.scribeAnimationFrame <= 0) {
             DAT_GameCore::instance.scribeAnimationFrame = 1;
-        } else if (44 < DAT_GameCore::instance.scribeAnimationFrame) {
+        } else if (DAT_GameCore::instance.scribeAnimationFrame > 44) {
             DAT_GameCore::instance.scribeAnimationFrame = 44;
         }
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
@@ -48,14 +48,14 @@ namespace UI {
         if (DAT_GameCore::instance.currentMenuViewType == OpenSHC::UI::Enums::MVT_BUILD_MENU
             && DAT_GameCore::instance.activeMenuTab.tabType != OpenSHC::UI::Enums::BASMTT_SIEGETENT_BATTERINGRAM
             && DAT_GameCore::instance.isTimeHalted == FALSE
-            && (_placementInfoShown = MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
-                    OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO),
-                _placementInfoShown == FALSE)) {
+            && MACRO_CALL(OpenSHC::UI::DisplayElements_Func::GetIfDisplayElementStateNotZero)(
+                   OpenSHC::UI::Enums::DEID_KEEP_AND_GRANERY_PLACEMENT_INFO)
+                == FALSE) {
             int const blendStrength = 0;
             BOOLEnum const withShadow = FALSE;
             int const fontSize = 18;
             uint const backgroundColor = 0;
-            uint const foregroundColor = 0xb8eefb;
+            uint const foregroundColor = OpenSHC::Rendering::Colors::COL_B8EEFB;
             TextAlignment const alignment = OpenSHC::Text::TTA_LEFT;
             int const yParam = DAT_WindowAndDirectDraw::instance.resolutionY - 20;
             int const xParam = DAT_MenuHandlerState::instance.x + 292;
@@ -66,7 +66,8 @@ namespace UI {
                 xParam, yParam, alignment, foregroundColor, backgroundColor, fontSize, withShadow, blendStrength);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.mapAndTime.year, DAT_MenuHandlerState::instance.x + 296,
-                DAT_WindowAndDirectDraw::instance.resolutionY - 20, OpenSHC::Text::TTA_LEFT, 0xb8eefb, 0, 18, TRUE, 0);
+                DAT_WindowAndDirectDraw::instance.resolutionY - 20, OpenSHC::Text::TTA_LEFT,
+                OpenSHC::Rendering::Colors::COL_B8EEFB, 0, 18, TRUE, 0);
         }
     }
 

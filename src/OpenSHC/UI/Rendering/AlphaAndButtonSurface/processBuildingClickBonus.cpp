@@ -18,21 +18,19 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00463270
         void AlphaAndButtonSurface::processBuildingClickBonus(int buildingIndex)
         {
-            if (0 < buildingIndex) {
-                int _playerIndex = (int)DAT_BuildingsState::instance.buildings[buildingIndex].owner;
+            if (buildingIndex > 0) {
+                int const _playerIndex = DAT_BuildingsState::instance.buildings[buildingIndex].owner;
                 if (DAT_GameState::instance.mapAndTime.playerTeams[_playerIndex]
                         == DAT_GameState::instance.mapAndTime
                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     || (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_playerIndex] == -1
-                        && (DAT_GameSynchronyState::instance.currentAIArray[_playerIndex] != 0))) {
+                        && DAT_GameSynchronyState::instance.currentAIArray[_playerIndex] != 0)) {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Buildings::BuildingsState_Func::extendResourceCountdownForPlayerBuildingsOfType,
                         DAT_BuildingsState::ptr)(
-                        (OpenSHC::Map::Buildings::BuildingType)(int)(short)DAT_BuildingsState::instance
-                            .buildings[buildingIndex]
-                            .buildingType,
-                        1, _playerIndex);
-                    BuildingTypeShort _buildingType
+                        (BuildingType)DAT_BuildingsState::instance.buildings[buildingIndex].buildingType, 1,
+                        _playerIndex);
+                    BuildingTypeShort const _buildingType
                         = DAT_BuildingsState::instance.buildings[buildingIndex].buildingType;
                     if (_buildingType == OpenSHC::Map::Buildings::BT_MANORHOUSE
                         || _buildingType == OpenSHC::Map::Buildings::BT_STONEKEEP

@@ -11,25 +11,27 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x00467EC0
         BOOLEnum WindowAndDirectDraw::restoreDXSurfaces()
         {
-            HRESULT _restoreResult;
             if (this->NOTSelfBufferOrWindowMode_0xf8 == TRUE) {
                 if (this->directDrawPrimarySurfacePointer == NULL) {
                     return FALSE;
                 }
-                _restoreResult = this->directDrawPrimarySurfacePointer->Restore();
-                if (_restoreResult != 0) {
+                if (this->directDrawPrimarySurfacePointer->Restore() != DD_OK) {
                     return FALSE;
                 }
             }
-            if (this->directDrawBackbufferSurfacePointer != NULL
-                && (_restoreResult = this->directDrawBackbufferSurfacePointer->Restore(), _restoreResult == 0)
-                && this->directDrawOffscreenSurfacePointer_screenMenu != NULL
-                && (_restoreResult = this->directDrawOffscreenSurfacePointer_screenMenu->Restore(),
-                    _restoreResult == 0 && (this->directDrawOffscreenSurfacePointer_mapGame != NULL))
-                && (_restoreResult = this->directDrawOffscreenSurfacePointer_mapGame->Restore(), _restoreResult == 0)) {
-                return TRUE;
+            if (this->directDrawBackbufferSurfacePointer == NULL
+                || this->directDrawBackbufferSurfacePointer->Restore() != DD_OK) {
+                return FALSE;
             }
-            return FALSE;
+            if (this->directDrawOffscreenSurfacePointer_screenMenu == NULL
+                || this->directDrawOffscreenSurfacePointer_screenMenu->Restore() != DD_OK) {
+                return FALSE;
+            }
+            if (this->directDrawOffscreenSurfacePointer_mapGame == NULL
+                || this->directDrawOffscreenSurfacePointer_mapGame->Restore() != DD_OK) {
+                return FALSE;
+            }
+            return TRUE;
         }
 
     }

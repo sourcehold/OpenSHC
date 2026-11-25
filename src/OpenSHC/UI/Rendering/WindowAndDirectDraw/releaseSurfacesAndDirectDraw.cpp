@@ -13,7 +13,7 @@ namespace UI {
         {
             this->drawingReady_0x0 = FALSE;
             if (alsoReleaseDDInterfaceUnk && this->pointerToIDirectDrawInterface != NULL) {
-                this->pointerToIDirectDrawInterface->SetCooperativeLevel(this->windowHandle, 8);
+                this->pointerToIDirectDrawInterface->SetCooperativeLevel(this->windowHandle, DDSCL_NORMAL);
             }
             if (this->directDrawOffscreenSurfacePointer_screenMenu != NULL) {
                 this->directDrawOffscreenSurfacePointer_screenMenu->Release();

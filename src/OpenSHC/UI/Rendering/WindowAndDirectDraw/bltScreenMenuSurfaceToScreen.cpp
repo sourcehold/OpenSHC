@@ -1,6 +1,5 @@
 #include "../WindowAndDirectDraw.func.hpp"
 
-#include "OpenSHC/UI/Rendering/WindowAndDirectDraw.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 namespace OpenSHC {
@@ -16,17 +15,17 @@ namespace UI {
             HWND__* _windowHandle;
             tagRECT _sourceRect;
             tagRECT _destinationRect;
-            if (this->drawingReady_0x0 != FALSE) {
+            if (this->drawingReady_0x0) {
                 _windowHandle = GetForegroundWindow();
                 if (_windowHandle == this->windowHandle) {
-                    if (this->NOTSelfBufferOrWindowMode_0xf8 == FALSE) {
-                        _sourceRect.left = windowedX + -0x20;
-                        _sourceRect.top = windowedY + -8;
-                        _sourceRect.right = windowedWidth + 0x20;
+                    if (!this->NOTSelfBufferOrWindowMode_0xf8) {
+                        _sourceRect.left = windowedX - 32;
+                        _sourceRect.top = windowedY - 8;
+                        _sourceRect.right = windowedWidth + 32;
                         _sourceRect.bottom = windowedHeigth + 8;
-                        _destinationRect.left = this->clientOnScreenCoords.left + -0x20 + windowedX;
-                        _destinationRect.top = this->clientOnScreenCoords.top + -8 + windowedY;
-                        _destinationRect.right = this->clientOnScreenCoords.left + 0x20 + windowedWidth;
+                        _destinationRect.left = this->clientOnScreenCoords.left - 32 + windowedX;
+                        _destinationRect.top = this->clientOnScreenCoords.top - 8 + windowedY;
+                        _destinationRect.right = this->clientOnScreenCoords.left + 32 + windowedWidth;
                         _destinationRect.bottom = this->clientOnScreenCoords.top + 8 + windowedHeigth;
                     } else {
                         _sourceRect.left = 0;
@@ -45,9 +44,9 @@ namespace UI {
                       Normal waiting blt. --TheRedDaemon
                      */
                     this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
-                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, 0x1000000, (LPDDBLTFX)0x0);
+                        this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, DDBLT_WAIT, NULL);
                     if (this->NOTSelfBufferOrWindowMode_0xf8 == TRUE) {
-                        this->directDrawPrimarySurfacePointer->Flip((IDirectDrawSurface*)0x0, 1);
+                        this->directDrawPrimarySurfacePointer->Flip(NULL, DDFLIP_WAIT);
                     }
                 }
             }

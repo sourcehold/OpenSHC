@@ -5,10 +5,10 @@
 #include "OpenSHC/Audio/MSS/enums/SHC_SoundStream.hpp"
 
 #include "OpenSHC/Globals/DAT_BinkControlState.hpp"
-#include "OpenSHC/Globals/INT_00ed27a4.hpp"
+#include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkCount.hpp"
 #include "OpenSHC/Globals/DAT_UnknownBinkIndex.hpp"
-#include "OpenSHC/Globals/DAT_SoundSystemState.hpp"
+#include "OpenSHC/Globals/INT_00ed27a4.hpp"
 
 namespace OpenSHC {
 namespace UI {

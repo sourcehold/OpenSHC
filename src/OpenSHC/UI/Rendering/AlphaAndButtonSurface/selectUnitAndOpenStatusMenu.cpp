@@ -18,15 +18,12 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Game::GameMode2;
-        using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00463A00
         BOOLEnum AlphaAndButtonSurface::selectUnitAndOpenStatusMenu(int unitIndex)
         {
-            if (0 < unitIndex
+            if (unitIndex > 0
                 && DAT_UnitsState::instance.units[unitIndex].owner
                     == DAT_GameSynchronyState::instance.currentPlayerSlotID
                 && DAT_UnitsState::instance.units[unitIndex].isSelectable_OR_matchTime == 0

@@ -20,8 +20,8 @@ namespace UI {
                 OpenSHC::UI::Rendering::PencilRenderCore_Func::setupPencil, this)(left, top, right, bottom, 0);
             if (_drawReady) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderBlendedBlackBox,
-                    DAT_TextureRenderCoreObject::ptr)(this->drawStartX, (int)(this->drawStartY), (int)(this->drawEndX),
-                    (int)(this->drawEndY), blendStrengh);
+                    DAT_TextureRenderCoreObject::ptr)(
+                    this->drawStartX, this->drawStartY, this->drawEndX, this->drawEndY, blendStrengh);
             }
         }
 

@@ -7,9 +7,6 @@ namespace OpenSHC {
 namespace UI {
     namespace Rendering {
 
-        using OpenSHC::Rendering::ScreenResolutionEnum;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x004679F0
         WindowAndDirectDraw* WindowAndDirectDraw::Constructor_WindowAndDirectDraw()
         {
@@ -23,7 +20,7 @@ namespace UI {
             this->mbr_0xcc = 0;
             this->not_DDCAPS2_CANBOBHARDWARE_0xe0 = FALSE;
             this->screenWidthOnInit_0x10 = GetSystemMetrics(SM_CXSCREEN);
-            int _screenHeight = GetSystemMetrics(SM_CYSCREEN);
+            int const _screenHeight = GetSystemMetrics(SM_CYSCREEN);
             this->postWindowCloseMessage = 0;
             this->pointerToIDirectDrawInterface = NULL;
             this->directDrawBackbufferSurfacePointer = NULL;
