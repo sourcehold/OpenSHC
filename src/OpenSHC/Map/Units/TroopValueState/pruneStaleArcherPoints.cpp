@@ -34,10 +34,10 @@ namespace Map {
                         }
                     }
                     if (0 < point->claimCooldown) {
-                        point->claimCooldown = point->claimCooldown + -1;
+                        point->claimCooldown--;
                     }
                 }
-                point = point + 1;
+                point++;
             } while ((int)point < (int)&DAT_TroopValueState::instance.attackInfo.archerPointArray[200]);
         }
 

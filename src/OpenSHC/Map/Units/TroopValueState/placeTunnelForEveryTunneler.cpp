@@ -46,16 +46,16 @@ namespace Map {
                 do {
                     if (_pUnit->logicalState == Map::Units::ULS_NORMAL && _pUnit->owner == _playerID && !_pUnit->dying
                         && _pUnit->unitType == Map::Units::UT_TUNNELER) {
-                        _nTunnelers = _nTunnelers + 1;
+                        _nTunnelers++;
                     }
-                    _pUnit = _pUnit + 1;
-                    _remainingUnits = _remainingUnits + -1;
+                    _pUnit++;
+                    _remainingUnits--;
                 } while (_remainingUnits);
                 _nTunnels = _nTunnelers;
             }
             int _tribeArraySize = 0;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
-            for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (_tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
                     && DAT_TribesState::instance.tribes[_tribeID].owner == _playerID
                     && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackWave
@@ -76,7 +76,7 @@ namespace Map {
                                 _tribeID);
                             _tribeSize = DAT_TribesState::instance.tribes[_tribeID].size;
                         }
-                        _index = _index + 1;
+                        _index++;
                         _tribeArraySize = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     } while (_index < _tribeArraySize);
                 }
@@ -100,20 +100,20 @@ namespace Map {
                         while (_pCandidateUnit->logicalState != Map::Units::ULS_NORMAL
                             || _pCandidateUnit->owner != _playerID || _pCandidateUnit->dying
                             || _pCandidateUnit->unitType != Map::Units::UT_TUNNELER || _pCandidateUnit->tribeID) {
-                            unitID = unitID + 1;
-                            _pCandidateUnit = _pCandidateUnit + 1;
+                            unitID++;
+                            _pCandidateUnit++;
                             if ((int)unitID >= (int)_maxUnitCount) {
                                 return;
                             }
                         }
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                             unitID, _tribe);
-                        unitID = unitID + 1;
+                        unitID++;
                         if ((int)unitID >= DAT_UnitsState::instance.maxUnitCount) {
                             return;
                         }
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::placeTunnelEntrances, this)(_tribe);
-                        attackWave = attackWave + 1;
+                        attackWave++;
                     } while (attackWave < _nTunnels);
                 }
             }

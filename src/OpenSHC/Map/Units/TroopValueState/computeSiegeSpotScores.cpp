@@ -1,8 +1,8 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -28,7 +28,10 @@ namespace Map {
             int _attackedPlayerID;
             uint _tile2;
             uint _tile;
-            if (DAT_GameState::instance.playerDataArray[attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].id != 0) {
+            if (DAT_GameState::instance.playerDataArray[attackedPlayerID]
+                    .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                    .id
+                != 0) {
                 int _offset = attackingPlayerID * 96188;
                 int _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
                 int _counterTillHack2 = 0;
@@ -45,8 +48,8 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                 .someMinimumDistance = _pathFindingCost;
                         }
-                        _counterTillHack2 = _counterTillHack2 + 1;
-                        _pTileArray = _pTileArray + 4;
+                        _counterTillHack2++;
+                        _pTileArray += 4;
                     } while (_counterTillHack2 < _hack2);
                 }
                 DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack3 = 0;
@@ -81,8 +84,8 @@ namespace Map {
                                 *_pScore = _pathFindingCost;
                             }
                         }
-                        _counter2 = _counter2 + 1;
-                        _pScore = _pScore + 4;
+                        _counter2++;
+                        _pScore += 4;
                     } while (
                         _counter2 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2);
                 }
@@ -98,8 +101,8 @@ namespace Map {
                                                    .currentPlayerID_OR_attackedPlayerID_OR_one][_pScore[-2]])
                             ? 9999
                             : 0;
-                        _entryCountOrBias = _entryCountOrBias + 1;
-                        _pScore = _pScore + 4;
+                        _entryCountOrBias++;
+                        _pScore += 4;
                     } while (_entryCountOrBias
                         < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].scale2);
                 }
@@ -118,8 +121,8 @@ namespace Map {
                         } else {
                             *_pScore = _pathFindingCost;
                         }
-                        _entryCountOrBias = _entryCountOrBias + 1;
-                        _pScore = _pScore + 4;
+                        _entryCountOrBias++;
+                        _pScore += 4;
                     } while (_entryCountOrBias
                         < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].town2);
                 }
@@ -141,8 +144,8 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].field22_0x3ea4
                                 = _pathFindingCost;
                         }
-                        _index = _index + 1;
-                        _pGateTile = _pGateTile + 4;
+                        _index++;
+                        _pGateTile += 4;
                     } while (_index < _entryCountOrBias);
                 }
                 _index = 0;
@@ -165,12 +168,12 @@ namespace Map {
                             _entryCountOrBias = -0x14;
                             isAtThreshold = _pathFindingCost == 0x14;
                         }
-                        _index = _index + 1;
+                        _index++;
                         *_pScore
                             = (isAtThreshold || isBelowThreshold != (int)(_pathFindingCost + _entryCountOrBias) < 0)
                             ? 0
                             : 9999;
-                        _pScore = _pScore + 4;
+                        _pScore += 4;
                     } while (_index < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
                                  .some1000ArrayIndex_2);
                 }
@@ -188,7 +191,7 @@ namespace Map {
                                                                      [((int*)_pWideEntry->hackValuesArray)[0]])
                             ? 9999
                             : 0;
-                        _counter = _counter + 1;
+                        _counter++;
                         _pWideEntry = (AttackInfoSubElement*)(((int*)_pWideEntry->hackValuesArray) + 6);
                     } while (
                         _counter < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2);
@@ -220,8 +223,8 @@ namespace Map {
                         } else {
                             *_pScore = 9999;
                         }
-                        _entryCountOrBias = _entryCountOrBias + 1;
-                        _pScore = _pScore + 4;
+                        _entryCountOrBias++;
+                        _pScore += 4;
                     } while (_entryCountOrBias
                         < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].moat2);
                 }

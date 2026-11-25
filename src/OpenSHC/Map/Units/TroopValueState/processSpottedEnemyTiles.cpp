@@ -14,7 +14,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F950
         void TroopValueState::processSpottedEnemyTiles()
         {
-            for (int i = 0; i < 100; i = i + 1) {
+            for (int i = 0; i < 100; ++i) {
                 int tileOrCountdown = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile;
                 if (0 < tileOrCountdown) {
                     if (80400 <= tileOrCountdown) {
@@ -32,7 +32,7 @@ namespace Map {
                         }
                         DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = 99;
                     } else {
-                        tileOrCountdown = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value + -1;
+                        tileOrCountdown = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value - 1;
                         DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value = tileOrCountdown;
                         if (tileOrCountdown <= 0) {
                             DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;

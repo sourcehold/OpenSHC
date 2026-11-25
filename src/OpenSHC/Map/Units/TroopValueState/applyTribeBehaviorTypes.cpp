@@ -33,14 +33,14 @@ namespace Map {
                             = ((short)_index + 1) * (short)off2 + (short)off1;
                         short const _someCounter1 = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
                         DAT_TribesState::instance.tribes[_tribeID].someCounter1 = (short)_assignedCount;
-                        _assignedCount = _assignedCount + 1;
+                        _assignedCount++;
                         DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType
                             = (SomeTribeBehaviorTypeShort)tribeBehaviorType;
                         DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1 = _someCounter1;
                         DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = _assignedCount;
                     }
                     _size = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
-                    _index = _index + 1;
+                    _index++;
                     DAT_TribesState::instance.tribes[_tribeID].unknownAttackRelatedUpdateCounter = 0;
                 } while (_index < _size);
             }

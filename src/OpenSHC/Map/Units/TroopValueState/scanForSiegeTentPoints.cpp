@@ -20,7 +20,7 @@ namespace Map {
         {
             int _flatTileCount;
             DAT_TroopValueState::instance.attackInfo.tentPoints = 0;
-            for (int _candidateTile = 0; _candidateTile < 80400; _candidateTile = _candidateTile + 1) {
+            for (int _candidateTile = 0; _candidateTile < 80400; ++_candidateTile) {
                 if ((DAT_TileMapState::instance.AIInfoLayer[_candidateTile] == '\b')
                     && (_flatTileCount = 0, DAT_TileMapState::instance.UnitLayer[_candidateTile] == 0)) {
                     uint _y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_candidateTile];
@@ -73,7 +73,7 @@ namespace Map {
                                 || (_neighbourValue = DAT_TileMapState::instance.LogicLayer[_innerNeighbourTile],
                                     (_neighbourValue & 0x2000) != 0 || ((_neighbourValue & 0x20000000)))
                                 || (int)_neighbourValue < 0 || (_neighbourValue & 0x400)) {
-                                _flatTileCount = _flatTileCount + 1;
+                                _flatTileCount++;
                                 break;
                             }
                             _neighbourValue = (uint)DAT_TileMapState::instance
@@ -92,7 +92,7 @@ namespace Map {
                                     (_neighbourValue & 0x2000) != 0)
                                 || (_neighbourValue & 0x20000000) || (int)_neighbourValue < 0
                                 || (_neighbourValue & 0x400)) {
-                                _flatTileCount = _flatTileCount + 2;
+                                _flatTileCount += 2;
                                 break;
                             }
                             _neighbourValue = (uint)DAT_TileMapState::instance
@@ -111,11 +111,11 @@ namespace Map {
                                     (_neighbourValue & 0x2000) != 0)
                                 || (_neighbourValue & 0x20000000) || (int)_neighbourValue < 0
                                 || (_neighbourValue & 0x400)) {
-                                _flatTileCount = _flatTileCount + 3;
+                                _flatTileCount += 3;
                                 break;
                             }
-                            _innerDirection = _innerDirection + 4;
-                            _flatTileCount = _flatTileCount + 4;
+                            _innerDirection += 4;
+                            _flatTileCount += 4;
                         } while (_innerDirection < 8);
                     }
                     if (63 < _flatTileCount) {

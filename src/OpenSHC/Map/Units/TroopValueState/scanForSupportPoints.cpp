@@ -19,10 +19,10 @@ namespace Map {
         void TroopValueState::scanForSupportPoints()
         {
             DAT_TroopValueState::instance.attackInfo.supportPoints = 0;
-            for (int tile = 0; tile < 80400; tile = tile + 1) {
+            for (int tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '') {
                     uint y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                    for (int _direction = 0; _direction < 4; _direction = _direction + 1) {
+                    for (int _direction = 0; _direction < 4; ++_direction) {
                         if ((DAT_TileMapState::instance.AIInfoLayer
                                     [DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + tile]
                                 & 0xf)

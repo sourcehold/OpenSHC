@@ -1,8 +1,8 @@
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -23,7 +23,9 @@ namespace Map {
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                 return;
             }
-            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id
+            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                    .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                    .id
                 <= 0) {
                 MACRO_CALL_MEMBER(TroopValueState_Func::updateAttackInfoTick, this)();
                 return;
@@ -33,8 +35,9 @@ namespace Map {
             if (DAT_TroopValueState::instance.attackInfo.aiTroops == 0) {
                 DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
             }
-            int const status = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                                   .aiControlStatusRelated;
+            int const status
+                = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                      .aiControlStatusRelated;
             if (status != -1000) {
                 if (status == 0) {
                     BOOLEnum waveComplete = TRUE;
@@ -46,15 +49,19 @@ namespace Map {
                         }
                     }
                     if (waveComplete != FALSE) {
-                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].aiControlStatusRelated = 600;
+                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .aiControlStatusRelated = 600;
                     }
                 } else if (status > 0) {
-                    DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].aiControlStatusRelated = status - 1;
+                    DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .aiControlStatusRelated = status - 1;
                     if (status - 1 == 0) {
-                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].aiControlStatusRelated = -1000;
+                        DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                            .aiControlStatusRelated = -1000;
                     }
                 } else if (status < 0) {
-                    DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].aiControlStatusRelated = status + 1;
+                    DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .aiControlStatusRelated = status + 1;
                 }
             }
             DAT_TroopValueState::instance.attackInfo.value3Array01[0] = 0;
@@ -69,8 +76,8 @@ namespace Map {
                     && MACRO_CALL_MEMBER(TroopValueState_Func::searchTribeWithProperties, this)(wave) == FALSE) {
                     continue;
                 }
-                DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker].attackedPlayerID
-                    = 1;
+                DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]
+                    .attackedPlayerID = 1;
                 if (DAT_TroopValueState::instance.attackInfo.nof_tribes[wave] != 0) {
                     DAT_TroopValueState::instance.attackInfo.index = wave;
                     int const waveAge = ++DAT_TroopValueState::instance.attackInfo.someIntArray2[wave - 1];
@@ -78,8 +85,8 @@ namespace Map {
                         && DAT_TroopValueState::instance.attackInfo.value3Array01[wave] != 6) {
                         DAT_TroopValueState::instance.attackInfo.attackWaveTicker[wave] = 0;
                         DAT_TroopValueState::instance.attackInfo.value3Array01[wave] = 6;
-                        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition,
-                            DAT_SoundSystemState::ptr)();
+                        MACRO_CALL_MEMBER(
+                            Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     }
                     int const waveState = DAT_TroopValueState::instance.attackInfo.value3Array01[wave];
                     if (waveState == 0) {

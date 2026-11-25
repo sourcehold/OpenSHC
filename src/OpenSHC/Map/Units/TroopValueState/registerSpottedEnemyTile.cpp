@@ -1,8 +1,8 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -25,7 +25,9 @@ namespace Map {
             int _freeSlot;
             int _entityID;
             if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
-                && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id
+                && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+                        .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                        .id
                     <= 0
                 && (_freeSlot = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < _freeSlot)
                 && DAT_GameSynchronyState::instance
@@ -36,7 +38,7 @@ namespace Map {
                     !_entityID
                         || (DAT_EntityState::instance.entityArray[_entityID].entityType != Map::Entities::ET_FIRE))) {
                 _freeSlot = -1;
-                for (int _slot = 0; _slot < 100; _slot = _slot + 1) {
+                for (int _slot = 0; _slot < 100; ++_slot) {
                     int const _tile = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[_slot].tile;
                     if (_tile == param_1) {
                         return;

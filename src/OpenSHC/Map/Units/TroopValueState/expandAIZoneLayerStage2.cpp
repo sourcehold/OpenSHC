@@ -15,7 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AE00
         void TroopValueState::expandAIZoneLayerStage2()
         {
-            for (int tile = 0; tile < 80400; tile = tile + 1) {
+            for (int tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x02') {
                     int const y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                     int direction = 0;
@@ -37,7 +37,7 @@ namespace Map {
                                 4);
                             break;
                         }
-                        direction = direction + 1;
+                        direction++;
                     } while (direction < 4);
                 }
             }

@@ -37,8 +37,8 @@ namespace Map {
                             (int)(_pUnit->y), (int)(_pUnit->buildingHeight + _pUnit->terrainOrClimbHeight));
                         _pUnit->field_0x40d = _isBrazierNearby != 0;
                     }
-                    _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 1;
+                    _unitID++;
+                    _pUnit++;
                 } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
         }

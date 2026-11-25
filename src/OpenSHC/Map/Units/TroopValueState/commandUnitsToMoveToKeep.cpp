@@ -1,10 +1,10 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
@@ -40,7 +40,9 @@ namespace Map {
             uint y1;
             uint x1;
             int _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            uint _keep = DAT_GameState::instance.playerDataArray[_playerID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id;
+            uint _keep = DAT_GameState::instance.playerDataArray[_playerID]
+                             .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                             .id;
             if (0 < (int)_keep) {
                 BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
                 if (_buildingType == Map::Buildings::BT_MANORHOUSE) {
@@ -97,8 +99,8 @@ namespace Map {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                                 _unitID, _theTribe);
                         }
-                        _unitID = _unitID + 1;
-                        _pUnit = _pUnit + 1;
+                        _unitID++;
+                        _pUnit++;
                     } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
                 }
                 if (DAT_TribesState::instance.tribes[_swordsTribe].size <= 0) {

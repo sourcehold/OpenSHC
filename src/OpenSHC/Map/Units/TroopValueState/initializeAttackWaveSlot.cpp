@@ -17,7 +17,7 @@ namespace Map {
         {
             DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
-            DAT_TroopValueState::instance.attackInfo.someIntArray2[param_1 + -1] = 0;
+            DAT_TroopValueState::instance.attackInfo.someIntArray2[param_1 - 1] = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1]), '\0',
                 (void*)((int)(DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore + param_1)));
@@ -36,8 +36,8 @@ namespace Map {
             int _activeSignposts
                 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
             if ((param_2 <= _activeSignposts) && (param_2)) {
-                DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = param_2 + -1;
-                DAT_TroopValueState::instance.attackInfo.field_0x469d4 = param_2 + -1;
+                DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = param_2 - 1;
+                DAT_TroopValueState::instance.attackInfo.field_0x469d4 = param_2 - 1;
                 return;
             }
             DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = _randomSignpost;

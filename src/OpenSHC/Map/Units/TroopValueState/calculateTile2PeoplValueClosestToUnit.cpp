@@ -36,7 +36,7 @@ namespace Map {
                             _bestIndex = i;
                         }
                     }
-                    i = i + 1;
+                    i++;
                 } while (i < DAT_TroopValueState::instance.attackInfo.people2);
                 if (-1 < _bestIndex) {
                     DAT_TroopValueState::instance.attackInfo.peopleValuesArray[_bestIndex].unitID = unitID;

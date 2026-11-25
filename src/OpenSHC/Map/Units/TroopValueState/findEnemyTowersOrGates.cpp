@@ -47,7 +47,7 @@ namespace Map {
                             _bestIndex = i;
                         }
                     }
-                    i = i + 1;
+                    i++;
                 } while (i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].some1000ArrayIndex_2);
                 if (-1 < _bestIndex) {
                     undefined4 _bestTile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
@@ -62,7 +62,7 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].some1000ArrayIndex_2) {
                 do {
                     DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].gateValuesArray[i].unitID = 0;
-                    i = i + 1;
+                    i++;
                 } while (i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].some1000ArrayIndex_2);
             }
             _minDistance = 1000;

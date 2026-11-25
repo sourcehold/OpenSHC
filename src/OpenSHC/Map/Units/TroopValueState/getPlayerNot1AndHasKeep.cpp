@@ -1,8 +1,8 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -26,7 +26,10 @@ namespace Map {
                 if (playerID == 1) {
                     return TRUE;
                 }
-            } else if (playerID != 1 && 0 < DAT_GameState::instance.playerDataArray[playerID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id) {
+            } else if (playerID != 1
+                && 0 < DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                        .id) {
                 return TRUE;
             }
             return FALSE;

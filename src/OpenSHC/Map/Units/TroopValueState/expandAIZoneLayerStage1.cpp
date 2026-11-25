@@ -18,7 +18,7 @@ namespace Map {
             int direction;
             int y;
             int tile;
-            for (tile = 0; tile < 80400; tile = tile + 1) {
+            for (tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x01') {
                     y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                     direction = 0;
@@ -40,16 +40,16 @@ namespace Map {
                                 2);
                             break;
                         }
-                        direction = direction + 1;
+                        direction++;
                     } while (direction < 4);
                 }
             }
-            for (tile = 0; tile < 80400; tile = tile + 1) {
+            for (tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x02') {
                     DAT_TileMapState::instance.AIInfoLayer[tile] = '\x01';
                 }
             }
-            for (tile = 0; tile < 80400; tile = tile + 1) {
+            for (tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x01') {
                     direction = 0;
                     y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
@@ -71,7 +71,7 @@ namespace Map {
                                 2);
                             break;
                         }
-                        direction = direction + 1;
+                        direction++;
                     } while (direction < 4);
                 }
             }

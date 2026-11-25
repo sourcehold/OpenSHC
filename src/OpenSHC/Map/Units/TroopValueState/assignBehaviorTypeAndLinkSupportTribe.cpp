@@ -19,12 +19,12 @@ namespace Map {
             if (param_2 <= 0) {
                 param_2 = 2;
             }
-            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].owner == param_2) {
                     DAT_TribesState::instance.tribes[_tribeID].tribeID = 0;
                 }
             }
-            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize; i = i + 1) {
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize; ++i) {
                 int _tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[i];
                 if (11 <= DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i]) {
                     continue;
@@ -42,7 +42,7 @@ namespace Map {
                     = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
                 DAT_TribesState::instance.tribes[_tribeID].unknownAttackRelatedUpdateCounter = 0;
                 _supportTribeID = 0;
-                for (int _candidate = 1; _candidate < 1250; _candidate = _candidate + 1) {
+                for (int _candidate = 1; _candidate < 1250; ++_candidate) {
                     if (DAT_TribesState::instance.tribes[_candidate].tribeState != 0
                         && DAT_TribesState::instance.tribes[_candidate].tribeState != 3
                         && DAT_TribesState::instance.tribes[_candidate].owner
@@ -55,7 +55,7 @@ namespace Map {
                     }
                 }
                 if (!_supportTribeID) {
-                    for (int _candidate = 1; _candidate < 1250; _candidate = _candidate + 1) {
+                    for (int _candidate = 1; _candidate < 1250; ++_candidate) {
                         if (DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] == 4) {
                             break;
                         }

@@ -23,7 +23,7 @@ namespace Map {
         {
             int _unitID;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
-            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
                     BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
                         DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);

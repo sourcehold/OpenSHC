@@ -41,7 +41,7 @@ namespace Map {
                     param_1, Map::Units::STBT_3);
             }
             if ((int)(char)DAT_TroopValueState::instance.attackInfo.unknownByteArray02[param_1]
-                >= (char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] + -5) {
+                >= (char)DAT_TroopValueState::instance.attackInfo.nof_tribes[param_1] - 5) {
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]
                     = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] + 1;
                 if (DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1]

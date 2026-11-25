@@ -15,7 +15,7 @@ namespace Map {
         {
             int _dying = 0;
             int _living = 0;
-            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
                     && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
                     && DAT_GameSynchronyState::instance
@@ -25,9 +25,9 @@ namespace Map {
                     int _status = MACRO_CALL_MEMBER(
                         Map::Units::TribesState_Func::getTribeAliveStatus, DAT_TribesState::ptr)(_tribeID);
                     if (_status < 50) {
-                        _living = _living + 1;
+                        _living++;
                     } else {
-                        _dying = _dying + 1;
+                        _dying++;
                     }
                 }
             }

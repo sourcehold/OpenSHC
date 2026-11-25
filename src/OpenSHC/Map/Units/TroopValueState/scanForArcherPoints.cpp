@@ -32,10 +32,10 @@ namespace Map {
                 _searchRadius
                     = (uint)(0x14 <= (int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev) * 2 + 8;
             }
-            for (int tile = 0; tile < 80400; tile = tile + 1) {
+            for (int tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '') {
                     uint const y = (uint)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                    for (int _direction = 0; _direction < 4; _direction = _direction + 1) {
+                    for (int _direction = 0; _direction < 4; ++_direction) {
                         if ((DAT_TileMapState::instance.AIInfoLayer
                                     [DAT_TileMapState::instance.directionTranslationMatrix[y][_direction * 2] + tile]
                                 & 0xf)

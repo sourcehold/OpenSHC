@@ -1,10 +1,10 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
@@ -117,8 +117,8 @@ namespace Map {
                                 DAT_GameState::instance.mapAndTime.attackVectors[_playerID_7][_index].tribeID = tribeID;
                                 break;
                             }
-                            _index = _index + 1;
-                            _pAttackVectorTribeID = _pAttackVectorTribeID + 4;
+                            _index++;
+                            _pAttackVectorTribeID += 4;
                         } while (_index < 49);
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
                             tribeID, (uint)(DAT_GameState::instance.mapAndTime.attackVectors[_playerID_7][_index].x),
@@ -268,7 +268,9 @@ namespace Map {
                         && (_index = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::stopTribeMovementAndCheckIdle,
                                 DAT_TribesState::ptr)(tribeID),
                             _index != 0)) {
-                        _index = DAT_GameState::instance.playerDataArray[_playerID_7].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id;
+                        _index = DAT_GameState::instance.playerDataArray[_playerID_7]
+                                     .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                                     .id;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
                         if (0 < _index) {

@@ -97,13 +97,13 @@ namespace Map {
             } else {
                 _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x17c;
             }
-            for (int i = 0; i < 50; i = i + 1) {
+            for (int i = 0; i < 50; ++i) {
                 DAT_TroopValueState::instance.attackInfo.tribeIDArray[i] = 0;
                 DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i] = 0xc;
             }
             _index = 0;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
-            for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (_tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
                     && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
                     && DAT_GameSynchronyState::instance
@@ -126,7 +126,7 @@ namespace Map {
                      */
                     _index2 = 0;
                     _swapped = 0;
-                    if (_index + -1 <= 0) {
+                    if (_index - 1 <= 0) {
                         break;
                     }
                     do {
@@ -141,27 +141,27 @@ namespace Map {
                                 break;
                             }
                             if (_pPriority[-1] == _currentTribeType) {
-                                _currentValue = _currentValue + 1;
+                                _currentValue++;
                                 break;
                             }
                             if (*_pPriority == _currentTribeType) {
-                                _currentValue = _currentValue + 2;
+                                _currentValue += 2;
                                 break;
                             }
                             if (_pPriority[1] == _currentTribeType) {
-                                _currentValue = _currentValue + 3;
+                                _currentValue += 3;
                                 break;
                             }
                             if (_pPriority[2] == _currentTribeType) {
-                                _currentValue = _currentValue + 4;
+                                _currentValue += 4;
                                 break;
                             }
                             if (_pPriority[3] == _currentTribeType) {
-                                _currentValue = _currentValue + 5;
+                                _currentValue += 5;
                                 break;
                             }
-                            _currentValue = _currentValue + 6;
-                            _pPriority = _pPriority + 6;
+                            _currentValue += 6;
+                            _pPriority += 6;
                         } while (_currentValue < 12);
                         _nextValue = 0;
                         _pPriority = (int*)(_tribeTypePriority + 2);
@@ -170,35 +170,35 @@ namespace Map {
                                 break;
                             }
                             if (_pPriority[-1] == _nextTribeType) {
-                                _nextValue = _nextValue + 1;
+                                _nextValue++;
                                 break;
                             }
                             if (*_pPriority == _nextTribeType) {
-                                _nextValue = _nextValue + 2;
+                                _nextValue += 2;
                                 break;
                             }
                             if (_pPriority[1] == _nextTribeType) {
-                                _nextValue = _nextValue + 3;
+                                _nextValue += 3;
                                 break;
                             }
                             if (_pPriority[2] == _nextTribeType) {
-                                _nextValue = _nextValue + 4;
+                                _nextValue += 4;
                                 break;
                             }
                             if (_pPriority[3] == _nextTribeType) {
-                                _nextValue = _nextValue + 5;
+                                _nextValue += 5;
                                 break;
                             }
-                            _nextValue = _nextValue + 6;
-                            _pPriority = _pPriority + 6;
+                            _nextValue += 6;
+                            _pPriority += 6;
                         } while (_nextValue < 0xc);
                         if (_nextValue < _currentValue) {
                             _swapped = 1;
                             DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2] = _next;
                             DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2 + 1] = _current;
                         }
-                        _index2 = _index2 + 1;
-                    } while (_index2 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + -1);
+                        _index2++;
+                    } while (_index2 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize - 1);
                     _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                 } while (_swapped);
                 _counter2 = 0;
@@ -214,31 +214,31 @@ namespace Map {
                                 break;
                             }
                             if (_pPriority[-1] == _tribeType) {
-                                _lookupValue3 = _lookupValue3 + 1;
+                                _lookupValue3++;
                                 break;
                             }
                             if (*_pPriority == _tribeType) {
-                                _lookupValue3 = _lookupValue3 + 2;
+                                _lookupValue3 += 2;
                                 break;
                             }
                             if (_pPriority[1] == _tribeType) {
-                                _lookupValue3 = _lookupValue3 + 3;
+                                _lookupValue3 += 3;
                                 break;
                             }
                             if (_pPriority[2] == _tribeType) {
-                                _lookupValue3 = _lookupValue3 + 4;
+                                _lookupValue3 += 4;
                                 break;
                             }
                             if (_pPriority[3] == _tribeType) {
-                                _lookupValue3 = _lookupValue3 + 5;
+                                _lookupValue3 += 5;
                                 break;
                             }
-                            _lookupValue3 = _lookupValue3 + 6;
-                            _pPriority = _pPriority + 6;
+                            _lookupValue3 += 6;
+                            _pPriority += 6;
                         } while (_lookupValue3 < 0xc);
                         DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_counter2]
                             = _lookupValue3;
-                        _counter2 = _counter2 + 1;
+                        _counter2++;
                         _index = _index;
                     } while (_counter2 < _index);
                 }
@@ -251,8 +251,8 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_sumIndex] = 0xc;
                             _index = _index;
                         }
-                        _sumIndex = _sumIndex + 1;
-                        _tribeSizeSum = _tribeSizeSum + DAT_TribesState::instance.tribes[_sumTribeID].size;
+                        _sumIndex++;
+                        _tribeSizeSum += DAT_TribesState::instance.tribes[_sumTribeID].size;
                     } while (_sumIndex < _index);
                 }
                 if (shrinkSize < _index) {

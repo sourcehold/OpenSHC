@@ -33,7 +33,7 @@ namespace Map {
                 && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
                 BOOLEnum const isNotCampaignMission = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount
-                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount + -1;
+                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount - 1;
                 int _macemen = DAT_TroopValueState::instance.attackInfo
                                    .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
                 DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;

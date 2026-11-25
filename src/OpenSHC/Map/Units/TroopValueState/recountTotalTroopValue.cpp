@@ -37,8 +37,8 @@ namespace Map {
                             = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
                             + _troopTypeValue;
                     }
-                    _pUnit = _pUnit + 1;
-                    remainingUnits = remainingUnits + -1;
+                    _pUnit++;
+                    remainingUnits--;
                 } while (remainingUnits);
             }
         }

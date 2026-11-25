@@ -82,8 +82,8 @@ namespace Map {
                             }
                         }
                     }
-                    _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 1;
+                    _unitID++;
+                    _pUnit++;
                 } while ((int)_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
         }

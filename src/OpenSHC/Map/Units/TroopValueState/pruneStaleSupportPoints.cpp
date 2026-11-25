@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -20,16 +20,16 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                         sizeof(DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]), 0,
                         &DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]);
-                }
-                else {
+                } else {
                     if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].tribeID != 0
                         && MACRO_CALL_MEMBER(TribesState_Func::tribeCorrespondsWithUID, DAT_TribesState::ptr)(
                                DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].tribeID,
                                DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].tribeUID)
                             == FALSE) {
-                        MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue,
-                            DAT_LowLevelMemory::ptr)(sizeof(DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]),
-                            0, &DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                            sizeof(DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]), 0,
+                            &DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot]);
                     }
                     if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].three > 0) {
                         DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].three--;

@@ -53,8 +53,8 @@ namespace Map {
                             _pUnit->animationFrame = 4;
                         }
                     }
-                    _unitID = _unitID + 1;
-                    _pUnit = _pUnit + 1;
+                    _unitID++;
+                    _pUnit++;
                 } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
             }
         }

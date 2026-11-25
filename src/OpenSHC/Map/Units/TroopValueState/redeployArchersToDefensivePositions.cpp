@@ -32,7 +32,7 @@ namespace Map {
                             (DAT_TileMapState::instance.LogicLayer[_tile] & 0x10000100U) != 0)) {
                         int const _y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
                         DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c
-                            = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c + -1;
+                            = DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c - 1;
                         int _unitID2
                             = DAT_TroopValueState::instance.attackInfo
                                   .unitIDArray_0x2b57c[DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2bd4c];
@@ -45,7 +45,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setDestinationForUnit, DAT_UnitsState::ptr)(
                             _unitID2, (uint)(_tile - _xOff), (uint)(_y), 0);
                     }
-                    _index = _index + 1;
+                    _index++;
                 } while (_index < DAT_TroopValueState::instance.attackInfo.unitIDIndex_0x2c520);
             }
         }

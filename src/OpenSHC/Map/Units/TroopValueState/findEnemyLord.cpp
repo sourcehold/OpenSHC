@@ -25,7 +25,7 @@ namespace Map {
                         DAT_TroopValueState::instance.attackInfo.lordValuesArray[i].unitID = param_1;
                         return DAT_TroopValueState::instance.attackInfo.lordValuesArray[i].tile2;
                     }
-                    i = i + 1;
+                    i++;
                 } while (i < _lordCount);
                 this->y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
                               [DAT_TroopValueState::instance.attackInfo.lordValuesArray[0].tile2];

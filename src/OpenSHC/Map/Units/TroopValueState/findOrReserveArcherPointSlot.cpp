@@ -12,7 +12,7 @@ namespace Map {
         int TroopValueState::findOrReserveArcherPointSlot(int param_1)
         {
             DAT_TroopValueState::instance.attackInfo.archerPointsNext = 0;
-            for (int i = 1; i < 200; i = i + 1) {
+            for (int i = 1; i < 200; ++i) {
                 if (DAT_TroopValueState::instance.attackInfo.archerPointArray[i].tile == param_1) {
                     return i;
                 }

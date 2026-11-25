@@ -46,7 +46,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.catapults = 0;
                 DAT_TroopValueState::instance.attackInfo.knights = 0;
                 DAT_TroopValueState::instance.attackInfo.ranged = 0;
-                for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+                for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
                     if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
                         BOOLEnum fullIDIsMinus1
                             = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,

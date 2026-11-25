@@ -60,16 +60,16 @@ namespace Map {
                             .engineerBuildQueue[DAT_TroopValueState::instance.attackInfo.createTribeAmount]
                             .engineerCount = _engineerCount;
                         _queueSize = DAT_TroopValueState::instance.attackInfo.createTribeAmount + 1;
-                        _totalEngineers = _totalEngineers + _engineerCount;
+                        _totalEngineers += _engineerCount;
                         DAT_TroopValueState::instance.attackInfo.createTribeAmount = _queueSize;
                         if (0xfa <= _queueSize) {
                             break;
                         }
-                        _subCount = _subCount + 1;
+                        _subCount++;
                     } while (_subCount < _count);
                 }
                 _pScoreRow = (byte(*)[10])(*_pScoreRow + 1);
-                _index = _index + 4;
+                _index += 4;
             } while (_index <= 16);
             _subCount = DAT_AttackInfoDefinedData::instance.field_0xa0c;
             _engineerCount = DAT_AttackInfoDefinedData::instance.field_0xe8;
@@ -86,14 +86,14 @@ namespace Map {
                         .engineerBuildQueue[DAT_TroopValueState::instance.attackInfo.createTribeAmount]
                         .engineerCount = _subCount;
                     _queueSize = DAT_TroopValueState::instance.attackInfo.createTribeAmount + 1;
-                    _index = _index + 1;
-                    _totalEngineers = _totalEngineers + _subCount;
+                    _index++;
+                    _totalEngineers += _subCount;
                     DAT_TroopValueState::instance.attackInfo.createTribeAmount = _queueSize;
                 } while (_index < _extraCount);
             }
             _queueSize = 0;
             DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
-            for (_tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (_tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
                     && DAT_TribesState::instance.tribes[_tribeID].owner == _playerID
                     && DAT_TribesState::instance.tribes[_tribeID].attackWave == param_1
@@ -110,7 +110,7 @@ namespace Map {
                     for (; (_tribeSize
                              && (_queueSize = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize,
                                 0 < _totalEngineers));
-                        _totalEngineers = _totalEngineers + -1) {
+                        _totalEngineers = _totalEngineers - 1) {
                         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(
                             _tribeID);
                         _tribeSize = DAT_TribesState::instance.tribes[_tribeID].size;
@@ -139,18 +139,18 @@ namespace Map {
                             && !_ptrPlayerID->tribeID) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
                                 _unitID, _tribeID2);
-                            _unitCount = _unitCount + -1;
+                            _unitCount--;
                             if (_unitCount < 1) {
                                 break;
                             }
                         }
-                        _unitID = _unitID + 1;
-                        _ptrPlayerID = _ptrPlayerID + 1;
+                        _unitID++;
+                        _ptrPlayerID++;
                         if (DAT_UnitsState::instance.maxUnitCount <= _unitID) {
                             return;
                         }
                     } while (true);
-                    _unitID = _unitID + 1;
+                    _unitID++;
                     if (DAT_UnitsState::instance.maxUnitCount <= _unitID) {
                         return;
                     }
@@ -165,7 +165,7 @@ namespace Map {
                             _tribeID2,
                             DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerBuildingType);
                     }
-                    param_1 = param_1 + 1;
+                    param_1++;
                 }
             }
         }

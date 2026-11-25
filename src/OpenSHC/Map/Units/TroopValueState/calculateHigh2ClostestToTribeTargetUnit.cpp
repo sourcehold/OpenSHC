@@ -22,7 +22,7 @@ namespace Map {
             int _bestIndex = -1;
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.high2) {
-                for (; i < DAT_TroopValueState::instance.attackInfo.high2; i = i + 1) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.high2; ++i) {
                     if (DAT_BuildingsState::instance
                                 .buildings[DAT_TroopValueState::instance.attackInfo.high2ValuesArray[i].buildingID]
                                 .unknownCounterTo10000_0x2b4

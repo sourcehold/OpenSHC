@@ -47,7 +47,7 @@ namespace Map {
                         }
                     }
                     _size = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
-                    _index = _index + 1;
+                    _index++;
                     DAT_TribesState::instance.tribes[_tribeID].unknownAttackRelatedUpdateCounter = 0;
                 } while (_index < _size);
             }

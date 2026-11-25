@@ -14,7 +14,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3 = 0;
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2) {
-                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2; i = i + 1) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town2; ++i) {
                     if (DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].townValuesArray[i].unitID == 0
                         || param_1) {
                         DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town3

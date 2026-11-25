@@ -31,7 +31,7 @@ namespace Map {
                 int const _siegeWeaponsCount
                     = DAT_GameState::instance.playerDataArray[_unitID].previousSiegeWeaponsCount;
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount
-                    = DAT_TroopValueState::instance.attackInfo.knightTribeCount + -1;
+                    = DAT_TroopValueState::instance.attackInfo.knightTribeCount - 1;
                 int tribeID = DAT_TroopValueState::instance.attackInfo
                                   .knightTribeArray[DAT_TroopValueState::instance.attackInfo.knightTribeCount];
                 DAT_TribesState::instance.tribes[tribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;

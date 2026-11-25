@@ -43,7 +43,7 @@ namespace Map {
                 _tribeUID = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_tentPointIndex].x;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)_tentPointIndex;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
-                    playerID, _tribeUID + -1, _tentPointY + -1, (MappersEnum)((int)(66)), 3, 0xf);
+                    playerID, _tribeUID - 1, _tentPointY - 1, (MappersEnum)((int)(66)), 3, 0xf);
                 _tribeUID = DAT_TileMapState::instance.placedBuildingID;
                 if (0 < _tribeUID) {
                     DAT_BuildingsState::instance.buildings[_tribeUID].attackWave

@@ -42,8 +42,8 @@ namespace Map {
                         return;
                     }
                 }
-                _pTribe = _pTribe + 1;
-                _tribeID = _tribeID + 1;
+                _pTribe++;
+                _tribeID++;
             } while (_pTribe < &DAT_TribesState::instance.tribes[1250]);
         }
 

@@ -1,8 +1,8 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -22,13 +22,15 @@ namespace Map {
             int _bestIndex = -1;
             int _attackedPlayerID = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                         .currentPlayerID_OR_attackedPlayerID_OR_one;
-            int const destinationXPosition
-                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].xEntry;
-            int const destinationYPosition
-                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].yEntry;
+            int const destinationXPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID]
+                                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                                 .xEntry;
+            int const destinationYPosition = DAT_GameState::instance.playerDataArray[_attackedPlayerID]
+                                                 .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
+                                                 .yEntry;
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2) {
-                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2; i = i + 1) {
+                for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2; ++i) {
                     if (DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].buildingID
                             < 5999
                         && !DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wideValuesArray[i].unitID) {
@@ -48,7 +50,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(
                             destinationXPosition, destinationYPosition, fromXPosition, fromYPosition);
-                        distance = distance + DAT_DirectionAlgorithmState::instance.distanceHigh;
+                        distance += DAT_DirectionAlgorithmState::instance.distanceHigh;
                         if (distance < _minDistance) {
                             this->y = fromYPosition;
                             this->x = fromXPosition;

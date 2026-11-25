@@ -1,5 +1,5 @@
-#include "../TroopValueState.func.hpp"
 #include "../TroopValueState.asm.hpp"
+#include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -213,7 +213,7 @@ namespace Map {
                                                 = DAT_TroopValueState::instance.attackInfo.people2 + 1;
                                         }
                                     }
-                                    _directionStep = _directionStep + 2;
+                                    _directionStep += 2;
                                 } while (_directionStep < 8);
                             }
                             if (DAT_UnitsState::instance.units[(short)_unitID].unitType == Map::Units::UT_LORD) {
@@ -244,7 +244,7 @@ namespace Map {
                                             _directionStep = DAT_TroopValueState::instance.attackInfo.lord3 + 1;
                                             DAT_TroopValueState::instance.attackInfo.lord3 = _directionStep;
                                         }
-                                        _candidateTile = _candidateTile + 1;
+                                        _candidateTile++;
                                         _pDirectionRow = (int (*)[8])(*_pDirectionRow + 1);
                                     } while (_candidateTile < 8);
                                 }
@@ -260,6 +260,7 @@ namespace Map {
                                 && DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile]
                                     != '\0') {
                                 _tileDefaultHeight = DAT_TileMapState::instance.DefaultHeightLayer[_tile];
+                                // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
                                 _pValueCount = (int*)((
                                     undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray
                                     + _offset + -0xc)));
@@ -332,7 +333,7 @@ namespace Map {
                                             break;
                                         }
                                     }
-                                    _directionStep = _directionStep + 2;
+                                    _directionStep += 2;
                                 } while (_directionStep < 8);
                             }
                         } else if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile]
@@ -353,7 +354,7 @@ namespace Map {
                                     (dword)((int)(DAT_TroopValueState::instance.attackInfo.startCon)),
                                     (dword)((int)(DAT_TileMapState::instance.specialAreasArray[_direction])), 0);
                                 if (_toArea) {
-                                    _directionMin1 = _direction + -1;
+                                    _directionMin1 = _direction - 1;
                                     if (_directionMin1 < 0) {
                                         _directionMin1 = 7;
                                     }
@@ -495,7 +496,7 @@ namespace Map {
                                         break;
                                     }
                                 }
-                                _directionStep = _directionStep + 2;
+                                _directionStep += 2;
                             } while (_directionStep < 8);
                             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1
                                 = DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1 + 1;
@@ -571,7 +572,7 @@ namespace Map {
                                             break;
                                         }
                                     }
-                                    _directionStep = _directionStep + 2;
+                                    _directionStep += 2;
                                 } while (_directionStep < 8);
                             }
                         }
@@ -582,6 +583,7 @@ namespace Map {
                         if (DAT_BuildingDefinedData::instance.IsGateOrTowerArray[_buildingTypeInt]) {
                             if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile]
                                 != '\0') {
+                                // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
                                 _pValueCount = (int*)((
                                     undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray
                                     + _offset + -0xc)));
@@ -599,7 +601,7 @@ namespace Map {
                                 _directionStep = 0;
                                 // The decompiler encoded this scan as a label plus a fragment after the tile
                                 // loop: its "break" was the back edge and falling off the end left the scan.
-                                for (_directionStep = 0; _directionStep < 8; _directionStep = _directionStep + 2) {
+                                for (_directionStep = 0; _directionStep < 8; _directionStep += 2) {
                                     if (DAT_TileMapState::instance.specialAreasArray[_directionStep]
                                         != DAT_TroopValueState::instance.attackInfo.startCon) {
                                         continue;
@@ -664,6 +666,7 @@ namespace Map {
                                     DAT_TileMapState::instance.DAT_SomeY
                                         = (int)
                                               DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
+                                    // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
                                     _pValueCount = (int*)((
                                         undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
                                         + _offset + -0xc)));
@@ -716,7 +719,7 @@ namespace Map {
                                                 break;
                                             }
                                         }
-                                        _directionStep = _directionStep + 2;
+                                        _directionStep += 2;
                                     } while (_directionStep < 8);
                                 }
                             } else {
@@ -746,7 +749,7 @@ namespace Map {
                                                 + DAT_TileMapState::instance.DAT_SomeY * 0x10);
                                             _pathConnectionValue
                                                 = *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_AIZoneLayer)
-                                                    + _tile + -1);
+                                                    + _tile - 1);
                                             DAT_TileMapState::instance.DAT_SomeTile = _tile;
                                             *(undefined2*)(((char*)DAT_TileMapState::instance.ptr_SpecialAreasArray)
                                                 + 2)
@@ -764,7 +767,7 @@ namespace Map {
                                                 if (*_pSpecialArea != 0) {
                                                     _specialArea = (int)*_pSpecialArea;
                                                 }
-                                                _pSpecialArea = _pSpecialArea + 2;
+                                                _pSpecialArea += 2;
                                             } while ((int)_pSpecialArea
                                                 < (int)&DAT_TileMapState::instance.specialAreasArray[8]);
                                             if (0 < _specialArea) {
@@ -836,7 +839,7 @@ namespace Map {
                         }
                     }
                 }
-                _tile = _tile + 1;
+                _tile++;
                 if (0x13a0f < _tile) {
                     return;
                 }

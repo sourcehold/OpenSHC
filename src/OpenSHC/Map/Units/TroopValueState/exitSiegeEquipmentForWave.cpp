@@ -24,7 +24,7 @@ namespace Map {
         {
             AITribeTypeShort tribeType;
             int _tribeUnitIndex;
-            for (int _tribeID = 1; _tribeID < 1250; _tribeID = _tribeID + 1) {
+            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
                 if (DAT_TribesState::instance.tribes[_tribeID].tribeState
                     && DAT_TribesState::instance.tribes[_tribeID].attackWave == wave
                     && (tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType,
@@ -36,7 +36,7 @@ namespace Map {
                     do {
                         int _unitID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::getUnitIDForIndexInTribe,
                             DAT_TribesState::ptr)(_tribeID, _tribeUnitIndex);
-                        _tribeUnitIndex = _tribeUnitIndex + 1;
+                        _tribeUnitIndex++;
                         if ((DAT_UnitsState::instance.units[_unitID].logicalState == Map::Units::ULS_NORMAL)
                             && (DAT_UnitsState::instance.units[_unitID].dying == 0)) {
                             MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction,

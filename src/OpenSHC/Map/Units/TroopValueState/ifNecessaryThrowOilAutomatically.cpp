@@ -113,20 +113,20 @@ namespace Map {
                                                 DAT_TroopValueState::ptr)(
                                                 (Map::Units::UnitType)DAT_UnitsState::instance.units[_playerIDOrUnitID]
                                                     .unitType);
-                                            _friendlyTroopValue = _friendlyTroopValue + _tileOrTroopValue;
+                                            _friendlyTroopValue += _tileOrTroopValue;
                                         } else {
                                             _tileOrTroopValue = MACRO_CALL_MEMBER(
                                                 Map::Units::TroopValueState_Func::getValueOfTroopType,
                                                 DAT_TroopValueState::ptr)(
                                                 (Map::Units::UnitType)DAT_UnitsState::instance.units[_playerIDOrUnitID]
                                                     .unitType);
-                                            _enemyTroopValue = _enemyTroopValue + _tileOrTroopValue;
+                                            _enemyTroopValue += _tileOrTroopValue;
                                         }
                                     }
                                     _tileUnitID
                                         = DAT_UnitsState::instance.units[_playerIDOrUnitID].nextUnitOnTheSameTile;
                                 }
-                                _tribeIDOrTileIndex = _tribeIDOrTileIndex + 1;
+                                _tribeIDOrTileIndex++;
                             } while (_tribeIDOrTileIndex < DAT_TileMapState::instance.constructionTileCount);
                             if (_enemyTroopValue < _friendlyTroopValue) {
                                 return 0;

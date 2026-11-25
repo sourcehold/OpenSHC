@@ -20,8 +20,8 @@ namespace Map {
                         DAT_TroopValueState::instance.attackInfo.people3
                             = DAT_TroopValueState::instance.attackInfo.people3 + 1;
                     }
-                    _pUnitID = _pUnitID + 4;
-                    _remaining = _remaining + -1;
+                    _pUnitID += 4;
+                    _remaining--;
                 } while (_remaining);
             }
         }
