@@ -99,8 +99,8 @@ namespace Map {
                         this->units[unitID].movementCooldown = 0;
                         this->units[unitID].tunnelerFinishedDigging = 0;
                         this->units[unitID].movementRelated = 8;
-                        this->units[unitID].destinationY_2Unk = this->units[unitID].y;
                         this->units[unitID].destinationX_2Unk = this->units[unitID].x;
+                        this->units[unitID].destinationY_2Unk = this->units[unitID].y;
                         return FALSE;
                     }
                     this->units[unitID].movementRelated = 0;
@@ -140,34 +140,47 @@ namespace Map {
                             this->unknownInitially0_01 = this->unknownInitially0_01 + 1;
                             int _destinationY = this->units[unitID].destinationYPosition;
                             int _destinationX = this->units[unitID].destinationXPosition;
-                            bool _destinationReachable = false;
+                            /* an invalid destination keeps area 0 and is handled as an unreachable one */
+                            int _currentArea = 0;
+                            int _destinationArea = 0;
                             if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                                     DAT_ViewportRenderState::ptr)(_destinationX, _destinationY)
                                 == FALSE) {
                                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
                                                       makeUnitStopWalkingByClearingPathProgressState,
                                     this)(unitID);
-                            } else if ((short)DAT_TileMapState::instance
-                                           .PathConnectionLayer[DAT_ViewportRenderState::instance
-                                                                    .translationMatrix[_destinationY]
-                                                                    .addXgetTile
-                                               + _destinationX]
-                                != 0) {
-                                if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                          calculateCanPlayerUnitsNavigateToAreaFromArea,
-                                        DAT_PathFindingState::ptr)(this->units[unitID].owner,
-                                        DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile],
-                                        (short)DAT_TileMapState::instance
-                                            .PathConnectionLayer[DAT_ViewportRenderState::instance
-                                                                     .translationMatrix[_destinationY]
-                                                                     .addXgetTile
-                                                + _destinationX],
-                                        0)
-                                    != 0) {
-                                    _destinationReachable = true;
-                                }
+                            } else {
+                                _currentArea
+                                    = (short)DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile];
+                                _destinationArea = (short)DAT_TileMapState::instance
+                                                       .PathConnectionLayer[DAT_ViewportRenderState::instance
+                                                                                .translationMatrix[_destinationY]
+                                                                                .addXgetTile
+                                                           + _destinationX];
                             }
-                            if (!_destinationReachable) {
+                            if (_destinationArea == 0) {
+                                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
+                                    return FALSE;
+                                }
+                                if (this->units[unitID].isSelectable_OR_matchTime != 0) {
+                                    return FALSE;
+                                }
+                                if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
+                                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::
+                                                          makeUnitStopWalkingByClearingPathProgressState,
+                                        this)(unitID);
+                                    return FALSE;
+                                }
+                                if (this->units[unitID].state.generic != OpenSHC::Map::Units::States::US_DISAPPEAR) {
+                                    this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
+                                    this->units[unitID].updateTickTracker = 0;
+                                    return FALSE;
+                                }
+                            } else if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                             calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                           DAT_PathFindingState::ptr)(
+                                           this->units[unitID].owner, _currentArea, _destinationArea, 0)
+                                == 0) {
                                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_LORD) {
                                     return FALSE;
                                 }
@@ -249,19 +262,14 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageFromKillingPit,
                         DAT_BuildingsState::ptr)(unitID);
-                    if (DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile] != 0) {
-                        int _buildingType
-                            = DAT_BuildingsState::instance
-                                  .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                                  .buildingType;
+                    int const _buildingID
+                        = DAT_TileMapState::instance.BuildingLayer[DAT_UnitsState::instance.units[unitID].tile];
+                    if (_buildingID != 0) {
+                        int const _buildingType = DAT_BuildingsState::instance.buildings[_buildingID].buildingType;
                         if (_buildingType == OpenSHC::Map::Buildings::BT_TOWER1
                             || _buildingType == OpenSHC::Map::Buildings::BT_TOWER4) {
-                            DAT_BuildingsState::instance
-                                .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                                .hasUnitsOntop = 1;
-                            DAT_BuildingsState::instance
-                                .buildings[DAT_TileMapState::instance.BuildingLayer[this->units[unitID].tile]]
-                                .tileScanCountdown = 100;
+                            DAT_BuildingsState::instance.buildings[_buildingID].hasUnitsOntop = 1;
+                            DAT_BuildingsState::instance.buildings[_buildingID].tileScanCountdown = 100;
                         }
                     }
                 } else {
