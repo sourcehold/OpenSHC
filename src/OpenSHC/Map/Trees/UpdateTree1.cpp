@@ -146,7 +146,7 @@ namespace Map {
             break;
         }
         }
-        if (DAT_LandscapeState::instance.field0_0x0 != 0) {
+        if (DAT_LandscapeState::instance.field_0x0 != 0) {
             DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 148;
         }
     }

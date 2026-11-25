@@ -15,7 +15,7 @@ namespace Map {
             uint const y
                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.yOffset + cellY;
             if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0
-                && (this->grid[x][y].field24_0x60 != 0 || this->grid[x][y].field25_0x64 != 0)) {
+                && (this->grid[x][y].field_0x60 != 0 || this->grid[x][y].field_0x64 != 0)) {
                 return 1;
             }
         }

@@ -15,11 +15,11 @@ namespace Map {
     int WildlifeState::getDistanceFromAttackSignpostToZoneProximity()
     {
         int cellX = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field121388_0x469d4]
+                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                         .x
             / 10;
         int cellY = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field121388_0x469d4]
+                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                         .y
             / 10;
         this->casDisRelated = 1;

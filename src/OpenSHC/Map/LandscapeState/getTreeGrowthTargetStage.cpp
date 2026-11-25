@@ -7,7 +7,7 @@ namespace Map {
     undefined4 LandscapeState::getTreeGrowthTargetStage(int treeID)
     {
         switch (this->trees[treeID].treeType) {
-        case OpenSHC::Map::Trees::TT_CHESTNUT:
+        case OpenSHC::Map::Trees::TT_TREE_OLIVE:
             switch (this->trees[treeID].stage) {
             case 0:
                 return 1;
@@ -17,9 +17,9 @@ namespace Map {
                 return 3;
             }
             return 4;
-        case OpenSHC::Map::Trees::TT_OAK:
-        case OpenSHC::Map::Trees::TT_PINE:
-        case OpenSHC::Map::Trees::TT_BIRCH:
+        case OpenSHC::Map::Trees::TT_TREE_DATE:
+        case OpenSHC::Map::Trees::TT_TREE_COCONUT:
+        case OpenSHC::Map::Trees::TT_TREE_CHERRY:
             switch (this->trees[treeID].stage) {
             case 0:
                 return 1;
@@ -29,20 +29,20 @@ namespace Map {
                 return 2;
             }
             return 3;
-        case OpenSHC::Map::Trees::TT_SHRUB1A:
-        case OpenSHC::Map::Trees::TT_SHRUB1B:
-        case OpenSHC::Map::Trees::TT_SHRUB1C:
-        case OpenSHC::Map::Trees::TT_SHRUB1D:
-        case OpenSHC::Map::Trees::TT_SHRUB1E:
-        case OpenSHC::Map::Trees::TT_SHRUB2A:
-        case OpenSHC::Map::Trees::TT_SHRUB2B:
-        case OpenSHC::Map::Trees::TT_SHRUB2C:
-        case OpenSHC::Map::Trees::TT_SHRUB2D:
-        case OpenSHC::Map::Trees::TT_SHRUB2E:
-        case OpenSHC::Map::Trees::TT_SHRUB3A:
-        case OpenSHC::Map::Trees::TT_SHRUB3B:
-        case OpenSHC::Map::Trees::TT_SHRUB3C:
-        case OpenSHC::Map::Trees::TT_SHRUB3D:
+        case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_A:
+        case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_B:
+        case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_C:
+        case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_D:
+        case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_E:
+        case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_A:
+        case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_B:
+        case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_C:
+        case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_D:
+        case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_E:
+        case OpenSHC::Map::Trees::TT_SHRUB_PIPE_CACTUS:
+        case OpenSHC::Map::Trees::TT_SHRUB_SUCCULENT:
+        case OpenSHC::Map::Trees::TT_SHRUB_CYCAD:
+        case OpenSHC::Map::Trees::TT_SHRUB_PRICKLYPEAR:
             return 1;
         }
         return 0;

@@ -15,7 +15,7 @@ namespace Map {
                 continue;
             }
             int const treeType = this->trees[treeID].treeType;
-            if (treeType >= OpenSHC::Map::Trees::TT_CHESTNUT && treeType <= OpenSHC::Map::Trees::TT_BIRCH
+            if (treeType >= OpenSHC::Map::Trees::TT_TREE_OLIVE && treeType <= OpenSHC::Map::Trees::TT_TREE_CHERRY
                 && this->trees[treeID].stage >= 2 && this->trees[treeID].stage <= 4
                 && (SEC_RNG::instance.currentNumber2 ^ this->trees[treeID].rng1) % 5 != 0) {
                 this->trees[treeID].stage = 5;

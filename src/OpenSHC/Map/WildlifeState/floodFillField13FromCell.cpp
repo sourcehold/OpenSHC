@@ -17,11 +17,11 @@ namespace Map {
         this->DAT_X10_Array_Section1034[0] = (short)seedX;
         this->DAT_Y10_Array_Section1034[0] = (short)seedY;
         this->candidateIndex = 0;
-        this->grid[seedX][seedY].field13_0x34 = seedValue;
+        this->grid[seedX][seedY].field_0x34 = seedValue;
         while (this->candidateIndex != this->candidateIndex2) {
             seedX = this->DAT_X10_Array_Section1034[this->candidateIndex];
             seedY = this->DAT_Y10_Array_Section1034[this->candidateIndex];
-            this->casDisRelated = this->grid[seedX][seedY].field13_0x34;
+            this->casDisRelated = this->grid[seedX][seedY].field_0x34;
             if ((int)this->casDisRelated <= 1) {
                 return;
             }
@@ -31,9 +31,8 @@ namespace Map {
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.xOffset + seedX;
                 unsigned int const y
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + seedY;
-                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0
-                    && this->grid[x][y].field13_0x34 < nextValue) {
-                    this->grid[x][y].field13_0x34 = nextValue;
+                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && this->grid[x][y].field_0x34 < nextValue) {
+                    this->grid[x][y].field_0x34 = nextValue;
                     this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)x;
                     this->DAT_Y10_Array_Section1034[this->candidateIndex2] = (short)y;
                     this->candidateIndex2++;

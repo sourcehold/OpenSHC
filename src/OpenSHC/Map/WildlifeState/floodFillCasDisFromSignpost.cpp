@@ -16,11 +16,11 @@ namespace Map {
     void WildlifeState::floodFillCasDisFromSignpost()
     {
         int cellX = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field121388_0x469d4]
+                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                         .x
             / 10;
         int cellY = DAT_GameState::instance.mapAndTime
-                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field121388_0x469d4]
+                        .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                         .y
             / 10;
         this->casDisRelated = 1;
@@ -29,7 +29,7 @@ namespace Map {
         for (int y = 0; y < 40; y++) {
             for (int x = 0; x < 40; x++) {
                 this->grid[x][y].casDisRelated2 = 0;
-                this->grid[x][y].field29_0x74 = 0;
+                this->grid[x][y].field_0x74 = 0;
             }
         }
         this->DAT_Y10_Array_Section1034[0] = (short)cellY;
@@ -52,7 +52,7 @@ namespace Map {
                 if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && areaID == this->grid[x][y].separateAreaID
                     && this->grid[x][y].unknownNonZero01 == 0 && this->grid[x][y].casDisRelated2 == 0) {
                     this->grid[x][y].casDisRelated2 = nextValue;
-                    this->grid[x][y].field29_0x74++;
+                    this->grid[x][y].field_0x74++;
                     this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)x;
                     this->DAT_Y10_Array_Section1034[this->candidateIndex2] = (short)y;
                     this->candidateIndex2++;
