@@ -11,7 +11,7 @@ namespace Map {
         {
             for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState == 2 && this->entityArray[entityID].unitID > 0) {
-                    DAT_UnitsState::instance.units[this->entityArray[entityID].unitID].field233_0x39a = 1;
+                    DAT_UnitsState::instance.units[this->entityArray[entityID].unitID].field_0x39a = 1;
                 }
             }
         }

@@ -4,7 +4,7 @@
 #include "OpenSHC/Globals/DAT_EntityDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
 #include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
-#include "OpenSHC/Globals/PTR_ARRAY_GmRunCopyJumpTable.hpp"
+#include "OpenSHC/Globals/PTR_ARRAY_Unknown_UnitGMHeights.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -22,26 +22,26 @@ namespace Map {
                 = (short)DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] - 1;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 1;
         }
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field82_0xbe = 46;
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field86_0xc8 = 22;
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xbe = 46;
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc8 = 22;
         short tick = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (tick > 16) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field86_0xc8 = 38 - tick;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc8 = 38 - tick;
         }
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field87_0xca = 45
-            - *(short*)((int)PTR_ARRAY_GmRunCopyJumpTable::instance
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xca = 45
+            - *(short*)((int)PTR_ARRAY_Unknown_UnitGMHeights::instance
                   + (GMFirstPictureIndex::instance[DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance]
-                             .field82_0xbe]
-                        + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field83_0xc0)
+                             .field_0xbe]
+                        + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xc0)
                       * 0x10
                   + 114)
                 / 2;
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field88_0xcc = 50;
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xcc = 50;
         tick = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated;
         if (tick > 16) {
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field88_0xcc = tick + 34;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xcc = tick + 34;
         }
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field89_0xce = 39;
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xce = 39;
     }
 
 }

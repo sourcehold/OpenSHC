@@ -27,7 +27,7 @@ namespace Map {
             this->everyTenTicks = entityID;
             this->entityArray[entityID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
             DAT_GameCore::instance.uniqueGameObjectTracker++;
-            this->entityArray[entityID].field21_0x34 = DAT_GameCore::instance.mapTimeInTicks;
+            this->entityArray[entityID].field_0x34 = DAT_GameCore::instance.mapTimeInTicks;
             this->entityArray[entityID].microX = x;
             this->entityArray[entityID].microY = y;
             this->entityArray[entityID].height = (short)height;
@@ -35,7 +35,7 @@ namespace Map {
             this->entityArray[entityID].colorUnk = 0;
             MACRO_CALL_MEMBER(EntityState_Func::drawEntityEffect, this)(
                 entityID, entityType, graphicType1, graphicType2);
-            this->entityArray[entityID].field7_0x12 = 0;
+            this->entityArray[entityID].field_0x12 = 0;
             this->entityArray[entityID].unknownAnimationFrameRelated = 0;
             this->entityArray[entityID].unkMinusOne = 0;
             MACRO_CALL_MEMBER(EntityState_Func::processEntityHitBuildingOrUnit, this)(entityID);
