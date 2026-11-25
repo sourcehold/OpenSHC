@@ -18,7 +18,7 @@ namespace Map {
         {
             // the first selected unit of the current player per unit type
             uint selectedUnitsMap[80];
-            for (int i = 0; i < 80; ++i) {
+            for (int i = 0; i < countof(selectedUnitsMap); ++i) {
                 selectedUnitsMap[i] = 0;
             }
             BOOLEnum hasMatch = FALSE;
@@ -26,9 +26,9 @@ namespace Map {
             for (DAT_CurrentUnitSlotID::instance = unitID; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == ULS_NORMAL
-                    && this->units[DAT_CurrentUnitSlotID::instance].dying == 0
+                    && !this->units[DAT_CurrentUnitSlotID::instance].dying
                     && this->units[DAT_CurrentUnitSlotID::instance].owner == currentPlayerSlotID
-                    && this->units[DAT_CurrentUnitSlotID::instance].isSelected != 0
+                    && this->units[DAT_CurrentUnitSlotID::instance].isSelected
                     && selectedUnitsMap[this->units[DAT_CurrentUnitSlotID::instance].unitType] == 0) {
                     selectedUnitsMap[this->units[DAT_CurrentUnitSlotID::instance].unitType]
                         = DAT_CurrentUnitSlotID::instance;

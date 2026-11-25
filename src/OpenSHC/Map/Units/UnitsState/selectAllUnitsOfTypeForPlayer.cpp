@@ -17,7 +17,7 @@ namespace Map {
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_NORMAL
                     && !this->units[DAT_CurrentUnitSlotID::instance].dying
-                    && this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2 == 0
+                    && !this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2
                     && this->units[DAT_CurrentUnitSlotID::instance].state.generic
                         != OpenSHC::Map::Units::States::US_JESTER_ROAM_TO
                     && this->units[DAT_CurrentUnitSlotID::instance].unitType == unitType

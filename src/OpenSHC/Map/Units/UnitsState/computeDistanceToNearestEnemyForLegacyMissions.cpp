@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Game::GameMode;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00532F80
         int UnitsState::computeDistanceToNearestEnemyForLegacyMissions(int unitID)
         {

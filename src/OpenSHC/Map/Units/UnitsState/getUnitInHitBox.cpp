@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/UnitHitBoxFilter.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -15,16 +16,12 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0053D9C0
-        uint UnitsState::getUnitInHitBox(undefined4 filterMode)
+        uint UnitsState::getUnitInHitBox(UnitHitBoxFilter filterMode)
         {
             int _hitboxXStart;
             int _hitboxXEnd;
-            if ((int)DAT_MouseState::instance.hitboxXStart > (int)DAT_MouseState::instance.hitboxXEnd) {
+            if (DAT_MouseState::instance.hitboxXStart > DAT_MouseState::instance.hitboxXEnd) {
                 _hitboxXStart = DAT_MouseState::instance.hitboxXEnd;
                 _hitboxXEnd = DAT_MouseState::instance.hitboxXStart;
             } else {
@@ -33,7 +30,7 @@ namespace Map {
             }
             int _hitboxYStart;
             int _hitboxYEnd;
-            if ((int)DAT_MouseState::instance.hitboxYStart > (int)DAT_MouseState::instance.hitboxYEnd) {
+            if (DAT_MouseState::instance.hitboxYStart > DAT_MouseState::instance.hitboxYEnd) {
                 _hitboxYStart = DAT_MouseState::instance.hitboxYEnd;
                 _hitboxYEnd = DAT_MouseState::instance.hitboxYStart;
             } else {
@@ -45,10 +42,10 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2 != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
@@ -115,7 +112,7 @@ namespace Map {
                     continue;
                 }
                 switch (filterMode) {
-                case 1:
+                case OpenSHC::Map::Units::UHBF_ENEMY_TEAM:
                     if (DAT_GameState::instance.mapAndTime
                             .playerTeams[this->units[DAT_CurrentUnitSlotID::instance].owner]
                         != DAT_GameState::instance.mapAndTime
@@ -123,28 +120,28 @@ namespace Map {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case 0:
+                case OpenSHC::Map::Units::UHBF_ANY:
                     return DAT_CurrentUnitSlotID::instance;
-                case 3:
+                case OpenSHC::Map::Units::UHBF_OWN:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case 4:
+                case OpenSHC::Map::Units::UHBF_ANY_PLAYER_SELECTABLE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner != 0
                         && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case 5:
+                case OpenSHC::Map::Units::UHBF_OWN_SELECTABLE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime != 0) {
                         return DAT_CurrentUnitSlotID::instance;
                     }
                     break;
-                case 2:
+                case OpenSHC::Map::Units::UHBF_OWN_SIEGE_ENGINE:
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_S_CATAPULT
@@ -165,7 +162,7 @@ namespace Map {
                         }
                     }
                     break;
-                case 6:
+                case OpenSHC::Map::Units::UHBF_OWN_LADDERMAN:
                     if (this->units[DAT_CurrentUnitSlotID::instance].unitType == OpenSHC::Map::Units::UT_E_LADDER
                         && this->units[DAT_CurrentUnitSlotID::instance].owner
                             == DAT_GameSynchronyState::instance.currentPlayerSlotID) {

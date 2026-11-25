@@ -10,7 +10,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536970
@@ -22,10 +21,10 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
+                if (!this->units[DAT_CurrentUnitSlotID::instance].isSelected) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {

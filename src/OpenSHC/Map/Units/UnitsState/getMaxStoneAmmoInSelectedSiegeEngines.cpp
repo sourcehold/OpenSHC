@@ -10,9 +10,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00536370
         int UnitsState::getMaxStoneAmmoInSelectedSiegeEngines()
         {
@@ -23,10 +20,10 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
+                if (!this->units[DAT_CurrentUnitSlotID::instance].isSelected) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayer) {

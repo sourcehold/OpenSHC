@@ -14,9 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Buildings::BuildingType;
-        using OpenSHC::Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F0D0
         void UnitsState::recomputeUnitStandingHeight(int unitID)
         {

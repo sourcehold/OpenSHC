@@ -44,7 +44,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2 != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].state.generic

@@ -20,12 +20,12 @@ namespace Map {
             this->units[unitID].gmIDUnk = DAT_UnitPropertiesDefinedData::instance.SPRITE_ID[unitType];
             this->units[unitID].spriteID = this->units[unitID].gmIDUnk;
             this->units[unitID].gfxNumber = 1;
-            this->units[unitID].field_0x2a = DAT_TextureRenderCoreObject::instance
-                                                 .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
-                                                 .originX;
-            this->units[unitID].unknownV = DAT_TextureRenderCoreObject::instance
-                                               .gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
-                                               .originY;
+            this->units[unitID].field_0x2a
+                = DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
+                      .originX;
+            this->units[unitID].unknownV
+                = DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[this->units[unitID].spriteID]
+                      .originY;
             this->units[unitID].spriteWidthUnk
                 = DAT_UnitPropertiesDefinedData::instance.UNIT_SPRITE_DIMENSIONS[unitType][0];
             this->units[unitID].spriteHeightUnk

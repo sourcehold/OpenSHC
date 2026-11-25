@@ -12,9 +12,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
-        using OpenSHC::UI::Enums::MenuViewType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005360A0
@@ -27,11 +24,12 @@ namespace Map {
                     if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
                     }
-                    if (this->units[unitID].dying != 0) {
+                    if (this->units[unitID].dying) {
                         continue;
                     }
-                    if (this->units[unitID].isSelected == 0) {
-                        for (int i = 0; i < 2500; ++i) {
+                    if (!this->units[unitID].isSelected) {
+                        for (int i = 0; i < countof(DAT_GameState::instance.hotkeyTribes[unitHotKeyNumber].units);
+                            ++i) {
                             /* unitID is listed in this hotkey unit list and not selected */
                             if (DAT_GameState::instance.hotkeyTribes[unitHotKeyNumber].units[i].id == unitID) {
                                 return FALSE;
@@ -40,7 +38,7 @@ namespace Map {
                         continue;
                     }
                     BOOLEnum _isListed = FALSE;
-                    for (int i = 0; i < 2500; ++i) {
+                    for (int i = 0; i < countof(DAT_GameState::instance.hotkeyTribes[unitHotKeyNumber].units); ++i) {
                         if (DAT_GameState::instance.hotkeyTribes[unitHotKeyNumber].units[i].id == unitID) {
                             _isListed = TRUE;
                         }

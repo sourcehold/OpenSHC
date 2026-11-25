@@ -16,30 +16,26 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::Game::GameMode;
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00535A30
         int UnitsState::createUnitSelection()
         {
             /* clear selected units */
             int _selectedCount = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                400, '\0', this->selectedUnitsBitFlags);
+                sizeof(this->selectedUnitsBitFlags), 0, this->selectedUnitsBitFlags);
             for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].dying != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner
                     != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
+                if (!this->units[DAT_CurrentUnitSlotID::instance].isSelected) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].ifSelectedThenPlayerID

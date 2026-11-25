@@ -19,7 +19,7 @@ namespace Map {
             if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                 return TRUE;
             }
-            if (this->units[unitID].unknownTestAgainst0_2 != 0) {
+            if (this->units[unitID].unknownTestAgainst0_2) {
                 return TRUE;
             }
             if (_tile == 0) {

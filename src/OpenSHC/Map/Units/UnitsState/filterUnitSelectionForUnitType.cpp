@@ -8,7 +8,7 @@ namespace Map {
         void UnitsState::filterUnitSelectionForUnitType(int unitType)
         {
             for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
-                if (this->units[unitID].isSelected != 0 && this->units[unitID].unitType != unitType) {
+                if (this->units[unitID].isSelected && this->units[unitID].unitType != unitType) {
                     this->units[unitID].isSelected = 0;
                     this->totalUnitsInSelection -= 1;
                 }

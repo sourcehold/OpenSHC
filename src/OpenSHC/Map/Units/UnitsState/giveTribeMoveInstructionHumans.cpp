@@ -13,8 +13,9 @@ namespace Map {
             int tribeID, uint x, uint y, int rallyBool, MatchSpeedInstructionEnum speedMatching)
         {
             DAT_TribesState::instance.tribes[tribeID].freeUnitSpeeds = 0;
-            if ((speedMatching & 128) != 0) {
-                speedMatching = (Instructions::MatchSpeedInstructionEnum)(speedMatching & ~128);
+            if ((speedMatching & Instructions::MSIE_FREE_SPEEDS_FLAG) != 0) {
+                speedMatching
+                    = (Instructions::MatchSpeedInstructionEnum)(speedMatching & ~Instructions::MSIE_FREE_SPEEDS_FLAG);
                 DAT_TribesState::instance.tribes[tribeID].freeUnitSpeeds = 1;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(

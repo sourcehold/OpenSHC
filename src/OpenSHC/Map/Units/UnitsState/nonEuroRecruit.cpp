@@ -18,7 +18,7 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052EC10
         int UnitsState::nonEuroRecruit(
-            UnitType unitType, undefined4 recruitmentBuilding, int playerID, int onlyCheckAvailability)
+            UnitType unitType, int recruitmentBuildingID, int playerID, int onlyCheckAvailability)
         {
             this->euroUnitAcquisitionFailReason = 0;
             int _unitCost;
@@ -88,9 +88,10 @@ namespace Map {
                 this->units[unitID].engineerManningSiegeStateRef_checkType = 1;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 this->units[unitID].isDisappearingUnk = 1;
-                this->units[unitID].workplaceBuildingID_1 = recruitmentBuilding;
+                this->units[unitID].workplaceBuildingID_1 = recruitmentBuildingID;
                 this->units[unitID].resourceToDeposit = 0;
-                DAT_GameState::instance.playerDataArray[playerID].currentResources[15] -= _unitCost;
+                DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD]
+                    -= _unitCost;
                 DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[playerID] += 1;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::aiAssignNewUnitToTribe, DAT_TribesState::ptr)(
                     playerID, unitType, unitID);

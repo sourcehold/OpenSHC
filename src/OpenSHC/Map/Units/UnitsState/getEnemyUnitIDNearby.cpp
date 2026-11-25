@@ -9,8 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0053CAE0
         int UnitsState::getEnemyUnitIDNearby(int unitID, int tileUnk, int unitHeight)
         {
@@ -20,7 +18,7 @@ namespace Map {
                 return 0;
             }
             for (int _visited = 0; _visited < 2000; ++_visited) {
-                if (this->units[_otherUnitID].dying == 0 && this->units[_otherUnitID].unknownTestAgainst0_2 == 0
+                if (!this->units[_otherUnitID].dying && !this->units[_otherUnitID].unknownTestAgainst0_2
                     && this->units[_otherUnitID].moveRelatedFlag != 1) {
                     if (this->units[_otherUnitID].buildingHeight + this->units[_otherUnitID].terrainOrClimbHeight
                             <= unitHeight + 32

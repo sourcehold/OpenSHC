@@ -24,7 +24,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
+                if (!this->units[DAT_CurrentUnitSlotID::instance].isSelected) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {

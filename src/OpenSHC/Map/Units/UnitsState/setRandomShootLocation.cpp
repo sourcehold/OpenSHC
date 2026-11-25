@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Random/RNG.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -9,9 +10,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using OpenSHC::Map::Units::UnitInstructionType;
-        using OpenSHC::Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005330A0
         void UnitsState::setRandomShootLocation(int unitID, int microX, int microY, int z)
@@ -86,35 +84,35 @@ namespace Map {
                 _spreadAlong = -_spreadAlong;
             }
             switch (this->units[unitID].facingDirection) {
-            case 0:
+            case OpenSHC::Map::Enums::CD_NORTH:
                 microY = microY + _spreadAlong;
                 microX = microX + _spreadAcross;
                 break;
-            case 4:
+            case OpenSHC::Map::Enums::CD_SOUTH:
                 microY = microY - _spreadAlong;
                 microX = microX + _spreadAcross;
                 break;
-            case 2:
+            case OpenSHC::Map::Enums::CD_EAST:
                 microX = microX - _spreadAlong;
                 microY = microY + _spreadAcross;
                 break;
-            case 6:
+            case OpenSHC::Map::Enums::CD_WEST:
                 microX = microX + _spreadAlong;
                 microY = microY + _spreadAcross;
                 break;
-            case 1:
+            case OpenSHC::Map::Enums::CD_NORTHEAST:
                 microX = microX + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
                 microY = microY + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
                 break;
-            case 7:
+            case OpenSHC::Map::Enums::CD_NORTHWEST:
                 microX = microX + (_spreadAlong * 3) / 4 + (_spreadAcross * 3) / 4;
                 microY = microY + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
                 break;
-            case 3:
+            case OpenSHC::Map::Enums::CD_SOUTHEAST:
                 microX = microX + (-((_spreadAlong * 3) / 4) - (_spreadAcross * 3) / 4);
                 microY = microY + ((_spreadAcross * 3) / 4 - (_spreadAlong * 3) / 4);
                 break;
-            case 5:
+            case OpenSHC::Map::Enums::CD_SOUTHWEST:
                 microX = microX + ((_spreadAlong * 3) / 4 - (_spreadAcross * 3) / 4);
                 microY = microY + (-((_spreadAcross * 3) / 4) - (_spreadAlong * 3) / 4);
                 break;

@@ -10,9 +10,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00533810
         int UnitsState::findAndDestroyAdjacentEnemyLadder(int unitID, int checkOnly)
         {

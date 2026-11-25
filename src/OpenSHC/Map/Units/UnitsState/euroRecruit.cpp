@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Map/Units/EuroUnitResourceCostSlot.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -20,11 +21,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Game::GameMode;
         using OpenSHC::Game::Resources::ResourceType;
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0052E960
         int UnitsState::euroRecruit(int unitType, undefined4 playersBarracksID, int playerID, int onlyCheckAvailability)
@@ -33,16 +30,20 @@ namespace Map {
             int const troopIndex = unitType - UT_E_ARCHER;
             int _unitCost = DAT_TroopDefinedData::instance.BarracksUnitCost[troopIndex];
             /* bug: a unitType below UT_E_ARCHER reads in front of the table, unitType 0 requires wood */
-            int _weaponResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][0];
-            int _armourResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][1];
+            int _weaponResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][EURCS_WEAPON];
+            int _armourResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][EURCS_ARMOUR];
             /* fixme: always 0 strange */
-            int _unknownResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][2];
-            int _horseResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][3];
+            int _unknownResource
+                = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][EURCS_UNKNOWN];
+            int _horseResource = DAT_UnitPropertiesDefinedData::instance.EuroUnitResourceCosts[troopIndex][EURCS_HORSE];
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                 && DAT_GameSynchronyState::instance.skirmishTroopsCostGold == 0) {
                 _unitCost = 0;
             }
-            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[15] < _unitCost) {
+            if (DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD]
+                < _unitCost) {
                 this->euroUnitAcquisitionFailReason = 1;
                 /* if we do not have the gold resources */
                 return 0;
@@ -82,7 +83,7 @@ namespace Map {
                 if (this->units[unitID].owner != playerID) {
                     continue;
                 }
-                if (this->units[unitID].dying != 0) {
+                if (this->units[unitID].dying) {
                     continue;
                 }
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
@@ -114,7 +115,8 @@ namespace Map {
                 this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_JESTER_ROAM_TO;
                 this->units[unitID].disappearFadeAlphaCountdown = 0;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
-                DAT_GameState::instance.playerDataArray[playerID].currentResources[15] -= _unitCost;
+                DAT_GameState::instance.playerDataArray[playerID].currentResources[OpenSHC::Game::Resources::RT_GOLD]
+                    -= _unitCost;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,
                     DAT_BuildingsState::ptr)(playerID, (ResourceType)_weaponResource, 1, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss,

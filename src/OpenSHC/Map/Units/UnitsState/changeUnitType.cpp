@@ -9,9 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Game::GameMode;
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0053E6C0
         int UnitsState::changeUnitType(int unitID)
         {

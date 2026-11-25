@@ -10,9 +10,9 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00536CF0
-        void UnitsState::clearOrDeselectUnitFromSelection(int playerID, uint unitID, int unitType)
+        void UnitsState::clearOrDeselectUnitFromSelection(int playerID, int unitID, int unitType)
         {
-            if (unitID == 4294967295) {
+            if (unitID == -1) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::clearTribesOfUnitType, DAT_TribesState::ptr)(
                     playerID, unitType);
                 return;

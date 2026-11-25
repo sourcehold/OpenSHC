@@ -11,9 +11,9 @@ namespace Map {
         void UnitsState::setMoveDelayForUnitsOnSameTiles(int unitID, int unitIDCurrentTilePosition)
         {
             short _unitIDArray[2010];
-            int _lowestMovementSpeed = 0x14;
+            int _lowestMovementSpeed = 20;
             this->units[unitID].unitOrderWhenOnSameTile = 0;
-            if (this->units[unitID].unknownTestAgainst0_2 != 0) {
+            if (this->units[unitID].unknownTestAgainst0_2) {
                 return;
             }
             this->units[unitID].field_0x5a = 0;
