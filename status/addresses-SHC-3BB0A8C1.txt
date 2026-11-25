@@ -49311,7 +49311,7 @@ SHC_3BB0A8C1_0x0052E960 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052EC10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052EDC0 | 97.7% | Asm differs
+SHC_3BB0A8C1_0x0052EDC0 | 98.4% | LTCG sinks a store past a call
 
 SHC_3BB0A8C1_0x0052EED0 | 100.0% | Reimplemented
 
@@ -49343,7 +49343,7 @@ SHC_3BB0A8C1_0x0052F6C0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052F730 | 83.7% | bound >= 2500 as orig, range
 
-SHC_3BB0A8C1_0x0052F7E0 | 96.0% | Asm differs
+SHC_3BB0A8C1_0x0052F7E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0052FBB0 | 100.0% | Reimplemented
 
@@ -50673,7 +50673,7 @@ SHC_3BB0A8C1_0x005334A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00533580 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00533630 | 99.1% | Asm differs
+SHC_3BB0A8C1_0x00533630 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00533810 | 100.0% | Reimplemented
 
