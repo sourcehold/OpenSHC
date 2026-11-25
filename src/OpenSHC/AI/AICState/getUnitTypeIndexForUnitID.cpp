@@ -13,7 +13,6 @@
 namespace OpenSHC {
 namespace AI {
 
-    using OpenSHC::AI::AITypeA;
     using OpenSHC::AI::AIVUnitType;
     using OpenSHC::Map::Units::UnitTypeInt;
     using OpenSHC::Map::Units::UnitTypeShort;
@@ -33,7 +32,8 @@ namespace AI {
         // The Caliph fields slaves rather than the ranged units listed below
         if (DAT_GameState::instance.playerDataArray[owner].aiType - 1 != OpenSHC::AI::AITA_CALIPH
             && allowSlaveSlotForRanged != 0
-            && DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[0xd] > 0) {
+            && DAT_GameState::instance.playerDataArray[owner].aivUnitLocationSlotLocationCount[OpenSHC::AI::AIVUT_SLAVE]
+                > 0) {
             if (effectiveUnitType == OpenSHC::Map::Units::UT_E_ARCHER) {
                 return OpenSHC::AI::AIVUT_SLAVE;
             }
@@ -51,7 +51,8 @@ namespace AI {
             }
         }
 
-        for (int someUnitTypeIndex = 0; someUnitTypeIndex < 20; someUnitTypeIndex++) {
+        for (int someUnitTypeIndex = 0;
+            someUnitTypeIndex < countof(DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray); someUnitTypeIndex++) {
             if (DAT_SkirmishDefinedData::instance.SomeAIUnitTypeArray[someUnitTypeIndex] == effectiveUnitType) {
                 return (AIVUnitType)someUnitTypeIndex;
             }

@@ -9,7 +9,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00521210
         void TribesState::reassignOwnerForTribesOfBehaviorType2(int fromPlayerID, int toPlayerID)
         {
-            // the original reads DAT_TribesState::instance instead of this
             for (int i = 1; i < 1250; ++i) {
                 if (DAT_TribesState::instance.tribes[i].tribeState == 2
                     && DAT_TribesState::instance.tribes[i].owner == fromPlayerID) {

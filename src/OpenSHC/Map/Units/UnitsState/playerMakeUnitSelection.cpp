@@ -18,10 +18,7 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Audio::SFX::SpeechEffectID;
-        using OpenSHC::Map::Units::UnitLogicState;
         using OpenSHC::Map::Units::UnitType;
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00535BC0
         void UnitsState::playerMakeUnitSelection(int playerID, int tribeID)
@@ -30,7 +27,7 @@ namespace Map {
             for (DAT_CurrentUnitSlotID::instance = 1; DAT_CurrentUnitSlotID::instance < this->maxUnitCount;
                 DAT_CurrentUnitSlotID::instance = DAT_CurrentUnitSlotID::instance + 1) {
                 if (this->units[DAT_CurrentUnitSlotID::instance].logicalState == OpenSHC::Map::Units::ULS_NORMAL
-                    && this->units[DAT_CurrentUnitSlotID::instance].dying == 0
+                    && !this->units[DAT_CurrentUnitSlotID::instance].dying
                     && this->units[DAT_CurrentUnitSlotID::instance].owner == playerID
                     && MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::unitIsSelectedByPlayer,
                            DAT_TribesState::ptr)(DAT_CurrentUnitSlotID::instance)
@@ -56,7 +53,7 @@ namespace Map {
                 return;
             }
             UnitType _unitType = MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::getMajoritySelectedUnitType,
-                DAT_TribesState::ptr)(_newTribeID, (int*)0);
+                DAT_TribesState::ptr)(_newTribeID, NULL);
             if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                 || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM || _unitType == OpenSHC::Map::Units::UT_S_SHIELD
                 || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA || _unitType == OpenSHC::Map::Units::UT_S_FBALLISTA

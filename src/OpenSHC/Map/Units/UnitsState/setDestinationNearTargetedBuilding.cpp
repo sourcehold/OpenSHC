@@ -14,21 +14,19 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitInstructionType;
-        using OpenSHC::Map::Units::States::UnitState;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0053DCC0
         BOOLEnum UnitsState::setDestinationNearTargetedBuilding(int unitID, int shortenedDistance)
         {
-            dword _areaAtUnitTile
+            int _areaAtUnitTile
                 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].targetedBuildingTile]
                 = _areaAtUnitTile;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                   findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance,
                 DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].targetedBuildingTile, 1,
-                (int*)_areaAtUnitTile, DAT_UnitsState::instance.units[unitID].owner, shortenedDistance,
+                _areaAtUnitTile, DAT_UnitsState::instance.units[unitID].owner, shortenedDistance,
                 DAT_UnitsState::instance.units[unitID].facingDirection);
             if (DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1 == 0) {
                 return FALSE;
@@ -41,7 +39,7 @@ namespace Map {
             int _destinationX = DAT_PathFindingState::instance.searchQueue.destinationsArray[0].tile1
                 - DAT_ViewportRenderState::instance.translationMatrix[_destinationY].addXgetTile;
             DAT_UnitsState::instance.units[unitID].plannedDestinationX = _destinationX;
-            DAT_UnitsState::instance.units[unitID].targetingType = (UnitInstructionType)0;
+            DAT_UnitsState::instance.units[unitID].targetingType = OpenSHC::Map::Units::UIT_NONE;
             DAT_PathFindingState::instance.notAllAssassinsUnk = 1;
             DAT_UnitsState::instance.units[unitID].plannedDestinationY = _destinationY;
             DAT_UnitsState::instance.units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;

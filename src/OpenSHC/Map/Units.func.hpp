@@ -63,7 +63,7 @@ namespace Map {
         WarnIfPlayersGranaryIsFull;
 
         MACRO_FUNCTION_RESOLVER(
-            uint(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
         PlayStockpileIsFullWarning;
 
         MACRO_FUNCTION_RESOLVER(

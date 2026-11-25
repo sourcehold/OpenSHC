@@ -31,7 +31,7 @@ namespace Map {
                 DAT_TribesState::ptr)(playerID, unitID, tribeID);
             if (DAT_TribesState::instance.tribes[tribeID].owner
                 == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
-                UnitType _unitType = (UnitType)(short)this->units[unitID].unitType;
+                UnitType _unitType = (UnitType)this->units[unitID].unitType;
                 if (_unitType == OpenSHC::Map::Units::UT_S_CATAPULT || _unitType == OpenSHC::Map::Units::UT_S_TOWER
                     || _unitType == OpenSHC::Map::Units::UT_S_BATTERINGRAM
                     || _unitType == OpenSHC::Map::Units::UT_S_SHIELD || _unitType == OpenSHC::Map::Units::UT_S_BALLISTA

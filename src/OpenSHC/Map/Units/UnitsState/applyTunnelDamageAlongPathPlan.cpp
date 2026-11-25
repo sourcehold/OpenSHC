@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -13,8 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00534130
         void UnitsState::applyTunnelDamageAlongPathPlan(uint unitID)
         {
@@ -22,7 +21,9 @@ namespace Map {
             uint _yPosition = this->units[unitID].ladderExitYPosition;
             int _tile = this->units[unitID].previousTilePosition;
             for (int _stepIndex = 0; _stepIndex < this->units[unitID].totalSizeOfPathPlan; ++_stepIndex) {
-                if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x20000081U) == 0) {
+                if ((DAT_TileMapState::instance.LogicLayer[_tile]
+                        & (LogicHelpers::L_SEA | LogicHelpers::L_ROCKY | LogicHelpers::L_MARSH))
+                    == 0) {
                     if (DAT_TileMapState::instance.BuildingLayer[_tile] == 0
                         && (DAT_TileMapState::instance.HeightLayer[_tile] < 16
                             || DAT_TileMapState::instance.DefaultHeightLayer[_tile] < 16)) {
@@ -37,12 +38,12 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
                         DAT_PathFindingState::ptr)(1, _xPosition, _yPosition);
                 }
-                uint _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
-                uint _direction;
+                int const _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
+                int _direction;
                 if ((_stepIndex & 1) != 0) {
-                    _direction = (int)_packedDirections >> 4;
+                    _direction = _packedDirections >> 4;
                 } else {
-                    _direction = _packedDirections & 0xf;
+                    _direction = _packedDirections & 15;
                 }
                 _xPosition = _xPosition
                     + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;

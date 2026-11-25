@@ -9,9 +9,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Game::GameMode;
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0053E6C0
         int UnitsState::changeUnitType(int unitID)
         {
@@ -39,7 +36,7 @@ namespace Map {
                 this->units[unitID].calculatedOwnerPlayerIndex = this->units[unitID].owner;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setUnitValues, this)(
-                unitID, (UnitType)(short)this->units[unitID].unitTypeToChangeInto);
+                unitID, (UnitType)this->units[unitID].unitTypeToChangeInto);
             return unitID;
         }
 

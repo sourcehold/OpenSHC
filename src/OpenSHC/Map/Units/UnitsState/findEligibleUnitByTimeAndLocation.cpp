@@ -11,8 +11,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005345A0
         int UnitsState::findEligibleUnitByTimeAndLocation(
             int unitID, int playerID, int unitXPosition, int unitYPosition, int zero1, int zero2)
@@ -23,7 +21,7 @@ namespace Map {
                 if (this->units[_candidateUnitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[_candidateUnitID].dying != 0) {
+                if (this->units[_candidateUnitID].dying) {
                     continue;
                 }
                 if (this->units[_candidateUnitID].owner != playerID) {

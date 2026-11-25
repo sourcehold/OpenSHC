@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -13,13 +14,14 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0054C610
         BOOLEnum UnitsState::moveToFreeTileNearby(int unitID)
         {
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x30U) != 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile]
+                    & (LogicHelpers::L_BORDER | LogicHelpers::L_BORDER_EDGE))
+                != 0) {
                 if (MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findDirectNeighbourWalkableTile,
                         DAT_PathFindingState::ptr)(this->units[unitID].x, this->units[unitID].y)
                     != FALSE) {
@@ -32,7 +34,8 @@ namespace Map {
             if (DAT_TileMapState::instance.UnitLayer[this->units[unitID].tile] == unitID) {
                 return FALSE;
             }
-            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & 0x100U) != 0) {
+            if ((DAT_TileMapState::instance.LogicLayer[this->units[unitID].tile] & LogicHelpers::L_WALL_OR_GATEHOUSE)
+                != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::findFreeTileOnDefensiveStructure,
                     DAT_PathFindingState::ptr)(-1, this->units[unitID].x, this->units[unitID].y);
             } else {

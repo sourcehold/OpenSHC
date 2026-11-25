@@ -1,5 +1,6 @@
 #include "../UnitsState.func.hpp"
 
+#include "OpenSHC/Map/Enums/ClimbDataType.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -10,8 +11,6 @@
 namespace OpenSHC {
 namespace Map {
     namespace Units {
-
-        using OpenSHC::Map::Units::States::UnitState;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0054C1C0
         void UnitsState::unitClimbing(int unitID)
@@ -26,7 +25,7 @@ namespace Map {
             if (DAT_PathFindingState::instance.climbData[_climbDataID].canBeUsed != 0
                 && DAT_PathFindingState::instance.climbData[_climbDataID].climbDataRelated
                     == this->units[unitID].climbDataRelated) {
-                if (DAT_PathFindingState::instance.climbData[_climbDataID].type == 1) {
+                if (DAT_PathFindingState::instance.climbData[_climbDataID].type == OpenSHC::Map::Enums::CDT_LADDER) {
                     this->units[unitID].field_0x35c = this->units[unitID].field_0x35c + 1;
                     if (this->units[unitID].field_0x35c >= 96) {
                         this->units[unitID].climbingState += 1;
@@ -38,7 +37,7 @@ namespace Map {
                             /* Climbing down */
                             this->units[unitID].terrainOrClimbHeight = this->units[unitID].terrainOrClimbHeight + 15;
                         }
-                        if (this->units[unitID].terrainOrClimbHeight > (short)(ushort)DAT_TileMapState::instance
+                        if (this->units[unitID].terrainOrClimbHeight > DAT_TileMapState::instance
                                 .HeightLayer[DAT_ViewportRenderState::instance
                                                  .translationMatrix[this->units[unitID].mimicCurrentYPosition]
                                                  .addXgetTile
@@ -72,12 +71,12 @@ namespace Map {
                     if (this->units[unitID].climbingDirection == 1) {
                         /* Climbing up */
                         this->units[unitID].animationFrame
-                            = (char)DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
+                            = DAT_UnitPropertiesDefinedData::instance.Frames_Shared_UnitClimbingUp
                                   .ANIM_Frames_Shared_UnitClimbingUp[this->units[unitID].field_0x35c / 8];
                     } else {
                         /* Climbing down */
                         this->units[unitID].animationFrame
-                            = (char)DAT_UnitPropertiesDefinedData::instance
+                            = DAT_UnitPropertiesDefinedData::instance
                                   .Frames_Shared_UnitClimbingDown[this->units[unitID].field_0x35c / 8];
                     }
                     this->units[unitID].gfxNumber = this->units[unitID].animationSheetFrameOffset
@@ -101,14 +100,18 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::changeDestinationByLeftover, this)(unitID);
                     return;
                 }
-                if (DAT_PathFindingState::instance.climbData[_climbDataID].type != 6
-                    && DAT_PathFindingState::instance.climbData[_climbDataID].type != 5
-                    && DAT_PathFindingState::instance.climbData[_climbDataID].type != 4
-                    && DAT_PathFindingState::instance.climbData[_climbDataID].type != 3
-                    && DAT_PathFindingState::instance.climbData[_climbDataID].type != 7) {
+                if (DAT_PathFindingState::instance.climbData[_climbDataID].type != OpenSHC::Map::Enums::CDT_6Unk
+                    && DAT_PathFindingState::instance.climbData[_climbDataID].type
+                        != OpenSHC::Map::Enums::CDT_BUILDING_5Unk
+                    && DAT_PathFindingState::instance.climbData[_climbDataID].type
+                        != OpenSHC::Map::Enums::CDT_BUILDING_4Unk
+                    && DAT_PathFindingState::instance.climbData[_climbDataID].type
+                        != OpenSHC::Map::Enums::CDT_BUILDING_3Unk
+                    && DAT_PathFindingState::instance.climbData[_climbDataID].type
+                        != OpenSHC::Map::Enums::CDT_BUILDING_7Unk) {
                     return;
                 }
-                if (this->units[unitID].state.generic == (UnitState)108) {
+                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_UNKNOWN_108) {
                     this->units[unitID].dying = 1;
                     this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_STONE_DEATH_01;
                     this->units[unitID].animationCycleNumber = 0;

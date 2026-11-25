@@ -24,9 +24,10 @@ namespace Map {
             DAT_PathFindingState::instance.allAssassinsUnk = 0;
             this->units[unitID].field_0x3f4 = 0;
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::copyData, DAT_LowLevelMemory::ptr)(
-                1168, &this->units[unitID], this->units);
+                sizeof(this->units[unitID]), &this->units[unitID], this->units);
             MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                400, '\0', DAT_UnitsState::instance.units[unitID].pathPlanStart);
+                sizeof(DAT_UnitsState::instance.units[unitID].pathPlanStart), 0,
+                DAT_UnitsState::instance.units[unitID].pathPlanStart);
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::bindPathPlanToAlgorithmStateAndReset,
                 DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].pathPlanStart);
             DAT_PathFindingState::instance.unitX = this->units[unitID].x;

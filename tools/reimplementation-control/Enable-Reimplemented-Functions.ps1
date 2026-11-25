@@ -32,7 +32,7 @@ function Enable-Reimplemented-Functions {
             Where-Object { $null -ne (Select-String -Path $_ -Pattern "$address") } |
             ForEach-Object {
                 (Get-Content -Path $_ -Raw) -replace
-                    "(?s)(MACRO_FUNCTION_RESOLVER\b(?:(?!MACRO_FUNCTION_RESOLVER).)*?),\s*$target(\s*, Address::SHC_3BB0A8C1_$address)", "`$1, $replacement`$2" |
+                    "(?s)(MACRO_FUNCTION_RESOLVER\b(?:(?!MACRO_FUNCTION_RESOLVER).)*?),\s*$target(\s*,\s*Address::SHC_3BB0A8C1_$address)", "`$1, $replacement`$2" |
                     Set-Content -Path $_ -NoNewLine
             }
     }

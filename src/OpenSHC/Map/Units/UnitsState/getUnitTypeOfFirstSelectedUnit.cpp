@@ -24,13 +24,13 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].dying) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].isSelected == 0) {
+                if (!this->units[DAT_CurrentUnitSlotID::instance].isSelected) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].owner != _currentPlayerSlotID) {
                     return OpenSHC::Map::Units::UT_INVALID;
                 }
-                return (UnitType)(short)this->units[DAT_CurrentUnitSlotID::instance].unitType;
+                return (UnitType)this->units[DAT_CurrentUnitSlotID::instance].unitType;
             }
             return OpenSHC::Map::Units::UT_NONE;
         }

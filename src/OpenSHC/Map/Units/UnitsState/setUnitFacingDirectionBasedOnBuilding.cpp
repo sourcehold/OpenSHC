@@ -1,6 +1,8 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -10,23 +12,25 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
+        using OpenSHC::WindowsHelper::Enums::BOOLEnum;
+
         // FUNCTION: STRONGHOLDCRUSADER 0x0052FF80
-        uint UnitsState::setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID)
+        BOOLEnum UnitsState::setUnitFacingDirectionBasedOnBuilding(int unitID, int buildingID)
         {
             int previousFacingDirection = this->units[unitID].facingDirection;
             if (buildingID == 0) {
-                return 0;
+                return FALSE;
             }
             MACRO_CALL_MEMBER(
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(this->units[unitID].x, this->units[unitID].y,
                 DAT_BuildingsState::instance.buildings[buildingID].x,
                 DAT_BuildingsState::instance.buildings[buildingID].y);
-            if (DAT_DirectionAlgorithmState::instance.orientation == 15) {
-                return 0;
+            if (DAT_DirectionAlgorithmState::instance.orientation == OpenSHC::Map::Enums::CD_UNSPECIFIED) {
+                return FALSE;
             }
             if (this->units[unitID].facingDirection == DAT_DirectionAlgorithmState::instance.orientation) {
-                return 0;
+                return FALSE;
             }
             int clockwiseSteps
                 = DAT_DirectionAlgorithmState::instance.orientation - this->units[unitID].facingDirection;
@@ -52,7 +56,7 @@ namespace Map {
             this->units[unitID].facingDirectionMapOrientationCorrected = this->units[unitID].facingDirection;
             this->units[unitID].facingDirectionMapOrientationCorrected
                 = this->units[unitID].facingDirectionMapOrientationCorrected
-                - (short)DAT_TileMapState::instance.mapOrientation;
+                - DAT_TileMapState::instance.mapOrientation;
             if (this->units[unitID].facingDirectionMapOrientationCorrected < 0) {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;

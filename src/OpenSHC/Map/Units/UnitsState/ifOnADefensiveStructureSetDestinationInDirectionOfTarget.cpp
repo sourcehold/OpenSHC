@@ -14,8 +14,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitInstructionType;
-        using OpenSHC::Map::Units::States::UnitState;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00540040
@@ -56,10 +54,10 @@ namespace Map {
                                .y;
             } else if (DAT_UnitsState::instance.units[unitID].targetingType
                 == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
-                _targetX = (short)DAT_BuildingsState::instance
+                _targetX = DAT_BuildingsState::instance
                                .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
                                .x;
-                _targetY = (short)DAT_BuildingsState::instance
+                _targetY = DAT_BuildingsState::instance
                                .buildings[DAT_UnitsState::instance.units[unitID].targetID_OR_targetBuildingID]
                                .y;
             } else if (DAT_UnitsState::instance.units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_LAND

@@ -15,7 +15,8 @@ namespace Map {
             typedef enum MatchSpeedInstructionEnum {
 
                 MSIE_FREE_SPEEDS = -127, // 0x-000007F
-                MSIE_MATCH_SPEEDS = 1 // 0x00000001
+                MSIE_MATCH_SPEEDS = 1, // 0x00000001
+                MSIE_FREE_SPEEDS_FLAG = 128 // 0x00000080
 
             } MatchSpeedInstructionEnum;
 

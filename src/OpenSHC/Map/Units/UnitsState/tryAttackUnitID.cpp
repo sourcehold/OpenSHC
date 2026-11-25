@@ -10,8 +10,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00537D60
         BOOLEnum UnitsState::tryAttackUnitID(int unitID_1, int unitID_2)
         {
@@ -30,7 +28,7 @@ namespace Map {
             if (DAT_UnitsState::instance.units[unitID_2].dying) {
                 return FALSE;
             }
-            if (DAT_UnitsState::instance.units[unitID_1].state.generic == (UnitState)207) {
+            if (DAT_UnitsState::instance.units[unitID_1].state.generic == OpenSHC::Map::Units::States::US_UNKNOWN_207) {
                 return FALSE;
             }
             if (DAT_UnitsState::instance.units[unitID_1].state.generic
@@ -43,7 +41,7 @@ namespace Map {
                 .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                 = DAT_UnitsState::instance.units[unitID_2].uid;
             DAT_UnitsState::instance.units[unitID_2].huntedBy = DAT_UnitsState::instance.units[unitID_2].huntedBy + 1;
-            DAT_UnitsState::instance.units[unitID_1].state.generic = (UnitState)207;
+            DAT_UnitsState::instance.units[unitID_1].state.generic = OpenSHC::Map::Units::States::US_UNKNOWN_207;
             DAT_UnitsState::instance.units[unitID_1].destinationNeeded
                 = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
             return TRUE;

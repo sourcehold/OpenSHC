@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
+#include "OpenSHC/Map/Enums/CardinalDirection.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_DirectionAlgorithmState.hpp"
@@ -22,7 +23,7 @@ namespace Map {
                 OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::calculatePreferredRelativeOrientation,
                 DAT_DirectionAlgorithmState::ptr)(
                 this->units[unitID].x, this->units[unitID].y, this->units[targetUnitID].x, this->units[targetUnitID].y);
-            if (DAT_DirectionAlgorithmState::instance.orientation == 15) {
+            if (DAT_DirectionAlgorithmState::instance.orientation == OpenSHC::Map::Enums::CD_UNSPECIFIED) {
                 return FALSE;
             }
             if (this->units[unitID].facingDirection == DAT_DirectionAlgorithmState::instance.orientation) {
@@ -52,7 +53,7 @@ namespace Map {
             this->units[unitID].facingDirectionMapOrientationCorrected = this->units[unitID].facingDirection;
             this->units[unitID].facingDirectionMapOrientationCorrected
                 = this->units[unitID].facingDirectionMapOrientationCorrected
-                - (short)DAT_TileMapState::instance.mapOrientation;
+                - DAT_TileMapState::instance.mapOrientation;
             if (this->units[unitID].facingDirectionMapOrientationCorrected < 0) {
                 this->units[unitID].facingDirectionMapOrientationCorrected
                     = this->units[unitID].facingDirectionMapOrientationCorrected + 8;

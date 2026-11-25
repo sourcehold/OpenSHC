@@ -13,9 +13,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-        using OpenSHC::Map::Units::States::UnitState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00530650
         void UnitsState::makeUnitsDisappearThatCannotReachTheKeep(int playerID)
         {
@@ -33,7 +30,7 @@ namespace Map {
                 if (this->units[unitID].isSelectable_OR_matchTime != 0) {
                     continue;
                 }
-                if (this->units[unitID].dying != 0) {
+                if (this->units[unitID].dying) {
                     continue;
                 }
                 if (this->units[unitID].isStalked != 0) {

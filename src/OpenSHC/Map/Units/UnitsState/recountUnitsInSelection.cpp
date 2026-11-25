@@ -9,25 +9,23 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Map::Units::UnitLogicState;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x00535240
         void UnitsState::recountUnitsInSelection()
         {
-            for (int i = 0; i <= 26; ++i) {
+            for (int i = 0; i < countof(this->selectionUnitType); ++i) {
                 this->selectionUnitType[i] = 0;
             }
             for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
                 if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                     continue;
                 }
-                if (this->units[unitID].dying != 0) {
+                if (this->units[unitID].dying) {
                     continue;
                 }
                 if (this->units[unitID].owner != DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                     continue;
                 }
-                if (this->units[unitID].isSelected == 0) {
+                if (!this->units[unitID].isSelected) {
                     continue;
                 }
                 switch (this->units[unitID].unitType) {
@@ -166,14 +164,14 @@ namespace Map {
                 }
             }
             int _slot = 0;
-            for (int k = 0; k < 8; ++k) {
+            for (int k = 0; k < countof(this->selectionSlots); ++k) {
                 this->selectionSlots[k] = -1;
             }
-            for (int i = 0; i <= 26; ++i) {
+            for (int i = 0; i <= countof(this->selectionUnitType) - 1; ++i) {
                 if (this->selectionUnitType[i] != 0) {
                     this->selectionSlots[_slot] = i;
                     _slot = _slot + 1;
-                    if (_slot >= 8) {
+                    if (_slot >= countof(this->selectionSlots)) {
                         break;
                     }
                 }

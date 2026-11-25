@@ -12,9 +12,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using OpenSHC::Commands::GameCommandType;
-        using OpenSHC::Game::GameMode;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F680
         void UnitsState::triggerDesyncIfTileUnitLinkageInvalid(int tile)
         {
@@ -27,13 +24,14 @@ namespace Map {
                 return;
             }
             int unitID = DAT_TileMapState::instance.UnitLayer[tile];
-            if ((uint)unitID <= 2499) {
+            if (unitID >= 0 && unitID < countof(this->units)) {
                 for (; unitID != 0; unitID = this->units[unitID].nextUnitOnTheSameTile) {
                     if (this->units[unitID].tile != tile && this->units[unitID].usingTeleport == 0
                         && this->units[unitID].field_0x413 == 0) {
                         DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
-                        MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
-                            DAT_GameSynchronyState::ptr)((GameCommandType)79);
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
+                            OpenSHC::Commands::GCT_TRIGGER_UNIT_SAME_TILE_LINKAGE_RECALCULATION);
                         return;
                     }
                 }
@@ -41,7 +39,7 @@ namespace Map {
             }
             DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 1;
             MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
-                (GameCommandType)79);
+                OpenSHC::Commands::GCT_TRIGGER_UNIT_SAME_TILE_LINKAGE_RECALCULATION);
         }
 
     }

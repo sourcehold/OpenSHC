@@ -11,24 +11,23 @@ namespace Map {
         void UnitsState::setMoveDelayForUnitsOnSameTiles(int unitID, int unitIDCurrentTilePosition)
         {
             short _unitIDArray[2010];
-            int _lowestMovementSpeed = 0x14;
+            int _lowestMovementSpeed = 20;
             this->units[unitID].unitOrderWhenOnSameTile = 0;
-            if (this->units[unitID].unknownTestAgainst0_2 != 0) {
+            if (this->units[unitID].unknownTestAgainst0_2) {
                 return;
             }
             this->units[unitID].field_0x5a = 0;
             /* if current tile position is not occupied */
             if (DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] == 0) {
-                DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)unitID;
+                DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = unitID;
                 this->units[unitID].nextUnitOnTheSameTile = 0;
                 return;
             }
             /* if current tile position is occupied */
             int _isInserted = 0;
             int _unitIDOfAUnitOnSameTile = DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition];
-            int _index = 0;
-            /* do-while loops: as for loops MSVC unrolls them and the match drops from 100% to 31% */
-            do {
+            int _index;
+            for (_index = 0; _index < 2000; _index++) {
                 if (unitID < _unitIDOfAUnitOnSameTile && _isInserted == 0) {
                     _unitIDArray[_index] = unitID;
                     _index++;
@@ -39,8 +38,7 @@ namespace Map {
                 if (_unitIDOfAUnitOnSameTile <= 0) {
                     break;
                 }
-                _index++;
-            } while (_index < 2000);
+            }
             _index++;
             if (_isInserted == 0) {
                 _unitIDArray[_index] = unitID;
@@ -48,7 +46,7 @@ namespace Map {
             }
             _unitIDArray[_index] = 0;
             int _previousUnitID = _unitIDArray[0];
-            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = (ushort)_previousUnitID;
+            DAT_TileMapState::instance.UnitLayer[unitIDCurrentTilePosition] = _previousUnitID;
             this->units[_previousUnitID].unitOrderWhenOnSameTile = 0;
             for (int _order = 1; _order < 2001; ++_order) {
                 int _nextUnitID = _unitIDArray[_order];
