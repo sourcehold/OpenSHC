@@ -423,10 +423,6 @@ namespace Map {
 
         int getTotalHeightAtTile(int tile);
 
-        // a second function with getTotalHeightAtTile's body, which the original's linker folded into the same
-        // address; it has no game address of its own and therefore no resolver
-        uint getTotalHeightAtTile2(int tile);
-
         int getTotalHeightAt(int tile, int playerID);
 
         uint getHeightAtTileIncludingOwnersBuildings(int tile, int playerID);

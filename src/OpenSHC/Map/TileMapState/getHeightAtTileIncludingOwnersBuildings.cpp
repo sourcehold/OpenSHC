@@ -12,6 +12,18 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
     using OpenSHC::Map::LogicHelpers::MD_DECORATION_ENTITY;
 
+    namespace {
+        // The original's gatehouse arm calls a second function with getTotalHeightAtTile's body, which its linker
+        // folded into the same address. Calling one function from both arms lets MSVC merge the gatehouse arm into the
+        // keep/tower arm, so the gatehouse arm goes through this forwarder instead.
+        struct GatehouseTotalHeight : TileMapState {
+            __declspec(noinline) int getTotalHeightAtTile(int tile)
+            {
+                return MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getTotalHeightAtTile, this)(tile);
+            }
+        };
+    }
+
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFF10
     uint TileMapState::getHeightAtTileIncludingOwnersBuildings(int tile, int playerID)
     {
@@ -80,7 +92,7 @@ namespace Map {
                 != building) {
                 return 0;
             }
-            return this->getTotalHeightAtTile2(tile);
+            return static_cast<GatehouseTotalHeight*>(this)->getTotalHeightAtTile(tile);
         }
         default:
             return 0;
