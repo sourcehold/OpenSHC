@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../EntityState.func.hpp"
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
@@ -13,13 +12,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004015D0
         void EntityState::processFireDamageToUnitsAtTile(int tile, int playerID, int fireLowIntensity)
         {
-            ushort _unitID;
-            int _unitID2;
-            _unitID = DAT_TileMapState::instance.UnitLayer[tile];
-            while (_unitID2 = (int)(short)_unitID, _unitID2) {
+            for (int unitID = DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
+                unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
                 MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::processFireDamageToUnit, DAT_UnitsState::ptr)(
-                    _unitID2, playerID, fireLowIntensity);
-                _unitID = DAT_UnitsState::instance.units[_unitID2].nextUnitOnTheSameTile;
+                    unitID, playerID, fireLowIntensity);
             }
         }
 

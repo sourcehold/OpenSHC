@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../EntityState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -12,28 +11,17 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004010E0
         void EntityState::clearEntityArrayAndSeagullArray()
         {
-            Entity* destination;
-            ExtraEntityInfo* destination_00;
-            int iVar1;
             this->totalEntityCount = 0;
-            destination = this->entityArray;
-            iVar1 = 3000;
-            do {
+            for (int entityID = 0; entityID < countof(this->entityArray); ++entityID) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    232, '\0', (void*)((int)(destination)));
-                destination = destination + 1;
-                iVar1 = iVar1 + -1;
-            } while (iVar1);
-            destination_00 = this->seagullArray;
-            iVar1 = 100;
-            do {
+                    sizeof(this->entityArray[entityID]), 0, &this->entityArray[entityID]);
+            }
+            for (int seagullID = 0; seagullID < countof(this->seagullArray); ++seagullID) {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                    100, '\0', (void*)((int)(destination_00)));
-                destination_00 = destination_00 + 1;
-                iVar1 = iVar1 + -1;
-            } while (iVar1);
+                    sizeof(this->seagullArray[seagullID]), 0, &this->seagullArray[seagullID]);
+            }
             this->maxEntityCount = 3000;
-            this->everyTenTicks = 0x19;
+            this->everyTenTicks = 25;
         }
 
     }

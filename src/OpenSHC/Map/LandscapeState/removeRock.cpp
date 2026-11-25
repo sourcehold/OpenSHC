@@ -1,4 +1,3 @@
-#include "../../Map.func.hpp"
 #include "../LandscapeState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -13,14 +12,14 @@ namespace OpenSHC {
 namespace Map {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2220
-    void LandscapeState::removeRock(int param_1)
+    void LandscapeState::removeRock(int rockID)
     {
-        MACRO_CALL_MEMBER(Map::TileMapState_Func::clearRockFootprintFlags, DAT_TileMapState::ptr)(param_1);
-        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
-            DAT_PathFindingState::ptr)((int)(short)this->rocks[param_1].y, (int)((int)(this->rocks[param_1].tile)));
+        MACRO_CALL_MEMBER(TileMapState_Func::clearRockFootprintFlags, DAT_TileMapState::ptr)(rockID);
+        MACRO_CALL_MEMBER(Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
+            DAT_PathFindingState::ptr)(this->rocks[rockID].y, this->rocks[rockID].tile);
         DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
         MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-            0x20, '\0', (void*)((int)(this->rocks + param_1)));
+            sizeof(this->rocks[rockID]), 0, &this->rocks[rockID]);
     }
 
 }

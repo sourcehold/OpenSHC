@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -9,23 +8,15 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AB10
-        void TroopValueState::countAvailableArcherValueSlots(int param_1)
+        void TroopValueState::countAvailableArcherValueSlots(int includeOccupied)
         {
-            int* piVar1;
-            int iVar2;
             DAT_TroopValueState::instance.attackInfo.arch3 = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.arch2) {
-                piVar1 = &DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[0].unitID;
-                iVar2 = DAT_TroopValueState::instance.attackInfo.arch2;
-                do {
-                    if ((DAT_BuildingsState::instance.buildings[piVar1[-1]].unknownCounterTo10000_0x2b4 < 9999)
-                        && ((*piVar1 == 0 || (param_1)))) {
-                        DAT_TroopValueState::instance.attackInfo.arch3
-                            = DAT_TroopValueState::instance.attackInfo.arch3 + 1;
-                    }
-                    piVar1 = piVar1 + 4;
-                    iVar2 = iVar2 + -1;
-                } while (iVar2);
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.arch2; ++i) {
+                int const buildingID = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].buildingID;
+                if (DAT_BuildingsState::instance.buildings[buildingID].unknownCounterTo10000_0x2b4 < 9999
+                    && (DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[i].unitID == 0 || includeOccupied)) {
+                    DAT_TroopValueState::instance.attackInfo.arch3++;
+                }
             }
         }
 

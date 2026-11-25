@@ -1,4 +1,3 @@
-#include "../../../Map.func.hpp"
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
@@ -14,7 +13,7 @@ namespace Map {
         void TroopValueState::clearAttackInfo()
         {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_IntegerValue, DAT_LowLevelMemory::ptr)(
-                1062748, 0, (void*)((int)(&DAT_TroopValueState::instance.attackInfo)));
+                sizeof(DAT_TroopValueState::instance.attackInfo), 0, &DAT_TroopValueState::instance.attackInfo);
             DAT_TroopValueState::instance.attackInfo.nof_fpoints = 0;
             DAT_TroopValueState::instance.attackInfo.aiTickPhase = 0;
             DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount = 0;

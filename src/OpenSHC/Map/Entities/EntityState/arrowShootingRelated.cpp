@@ -1,6 +1,4 @@
-#include "../../../Map.func.hpp"
-
-#include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "../EntityState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -10,14 +8,13 @@ namespace Map {
         int EntityState::arrowShootingRelated(
             int microX, int microY, int height, int destMicroX, int destMicroY, int destHeight)
         {
-            uint uVar1;
-            uVar1 = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::computeLineOfSightDistance, this)(
+            uint distance = MACRO_CALL_MEMBER(EntityState_Func::computeLineOfSightDistance, this)(
                 microX, microY, height, destMicroX, destMicroY, destHeight, 0);
-            if (!uVar1) {
-                uVar1 = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::computeLineOfSightDistance, this)(
+            if (distance == 0) {
+                distance = MACRO_CALL_MEMBER(EntityState_Func::computeLineOfSightDistance, this)(
                     destMicroX, destMicroY, destHeight, microX, microY, height, 0);
             }
-            return (int)(uVar1);
+            return distance;
         }
 
     }
