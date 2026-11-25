@@ -1,0 +1,69 @@
+#include "../SFX.func.hpp"
+
+#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Audio/SFX/PlayerRankingEntry.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Audio {
+    namespace SFX {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x0044B680
+        int __cdecl ComputePlayerRanking(int playerID)
+        {
+            PlayerRankingEntry entries[10];
+            WindowsHelper::Enums::BOOLEnum deadPlayersUnk[10];
+
+            for (int i = 0; i < countof(entries); ++i) {
+                entries[i].playerID = 0;
+            }
+
+            int count = 0;
+            for (int i = 1; i < 9; ++i) {
+                if (DAT_GameSynchronyState::instance.finalResults.active[i] == 0) {
+                    continue;
+                }
+                entries[count].playerID = i;
+                if (MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(i)
+                    == 0) {
+                    if (i == playerID) {
+                        return 0;
+                    }
+                    deadPlayersUnk[i] = TRUE;
+                    entries[count].points = 0;
+                } else {
+                    entries[count].points = MACRO_CALL(SFX_Func::ComputePlayerPoints1)(i);
+                }
+                ++count;
+            }
+
+            // Must stay uninitialized for 100% match; initializing shrinks the frame and swaps edx/esi.
+            int bestPoints;
+            for (int rank = 0; rank < count; ++rank) {
+                int bestIndex = -1;
+                for (int i = 0; i < count; ++i) {
+                    if (entries[i].playerID != 0 && (bestIndex == -1 || entries[i].points > bestPoints)) {
+                        bestPoints = entries[i].points;
+                        bestIndex = i;
+                    }
+                }
+                if (bestIndex < 0) {
+                    return 0;
+                }
+                int const selectedPlayer = entries[bestIndex].playerID;
+                if (selectedPlayer == playerID) {
+                    // This local store is elided by VC8 but keeps the original register allocation.
+                    deadPlayersUnk[selectedPlayer] = FALSE;
+                    return rank + 1;
+                }
+                entries[bestIndex].playerID = 0;
+            }
+            return 0;
+        }
+
+    } // namespace SFX
+} // namespace Audio
+} // namespace OpenSHC

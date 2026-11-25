@@ -34,13 +34,13 @@ namespace Audio {
             if (FLOAT_00b98708::instance == FLOAT_00b98704::instance) {
                 FLOAT_00b98704::instance = FLOAT_00b98708::instance - 1.0f;
             }
-            float _fadeDelta = (FLOAT_00b98708::instance - FLOAT_00b98704::instance) * 0.0625f;
-            if (_fadeDelta > 20.0) {
-                _fadeDelta = 20.0;
+            float fadeDelta = (FLOAT_00b98708::instance - FLOAT_00b98704::instance) * 0.0625f;
+            if (fadeDelta > 20.0) {
+                fadeDelta = 20.0;
             }
             FLOAT_00b98704::instance = FLOAT_00b98708::instance;
             if (DAT_SpeechDefinedData::instance.currentStreamID == -1) {
-                DAT_SFXFadeDeltaAccumulator::instance += _fadeDelta;
+                DAT_SFXFadeDeltaAccumulator::instance += fadeDelta;
             } else {
                 DAT_SFXFadeDeltaAccumulator::instance = 0.0;
             }
@@ -55,27 +55,31 @@ namespace Audio {
                 DAT_SpeechDefinedData::instance.currentStreamID = -1;
             } else {
                 for (int i = 0; i < 10; ++i) {
-                    int _datum = this->ambientEventCounters[i][0];
+                    int datum = this->ambientEventCounters[i][0];
                     /* These 10 slots appear to be per-frame sound event accumulators (e.g. how many
                        sword clashes, arrows, fire crackles happened this frame), written by other
                        systems and consumed here. */
-                    DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum;
+                    DAT_SFXAmbientEventCountersRescaled::instance[i] = datum;
                     if (i == 4) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum >> 2;
+                        DAT_SFXAmbientEventCountersRescaled::instance[i] = datum >> 2;
                     }
                     if (i == 8) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum >> 1;
+                        DAT_SFXAmbientEventCountersRescaled::instance[i] = datum >> 1;
                     }
                     if (i == 2) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum >> 5;
+                        DAT_SFXAmbientEventCountersRescaled::instance[i] = datum >> 5;
                     }
                     if (i == 7) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = _datum >> 4;
+                        DAT_SFXAmbientEventCountersRescaled::instance[i] = datum >> 4;
                     }
                     if (i == 6) {
-                        DAT_SFXAmbientEventCountersRescaled::instance[i] = (_datum > 1) ? 100 : 0;
+                        if (datum > 1) {
+                            DAT_SFXAmbientEventCountersRescaled::instance[i] = 100;
+                        } else {
+                            DAT_SFXAmbientEventCountersRescaled::instance[i] = 0;
+                        }
                     }
-                    if (99 < DAT_SFXAmbientEventCountersRescaled::instance[i]) {
+                    if (DAT_SFXAmbientEventCountersRescaled::instance[i] > 99) {
                         DAT_SFXAmbientEventCountersRescaled::instance[i] = 99;
                         if (i == 6) {
                             DAT_SFXAmbientEventCountersRescaled::instance[i] = 100;
@@ -91,25 +95,25 @@ namespace Audio {
                 || (DAT_SpeechDefinedData::instance.currentStreamID == 6
                     && DAT_SFXFadeState::instance != SFXFS_FADE_OUT)
                 || DAT_SFXAmbientEventCountersRescaled::instance[6] == 100) {
-                if (10 < DAT_SFXAmbientEventCountersRescaled::instance[8]) {
+                if (DAT_SFXAmbientEventCountersRescaled::instance[8] > 10) {
                     MACRO_CALL_MEMBER(SFX::SFXState_Func::tweakVolume, this)(
-                        8, _fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
+                        8, fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
                 } else {
                     MACRO_CALL_MEMBER(SFX::SFXState_Func::tweakVolume, this)(
-                        0, _fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
+                        0, fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
                 }
             } else if (DAT_SFXAmbientEventCountersRescaled::instance[7] > 28) {
                 MACRO_CALL_MEMBER(SFX::SFXState_Func::tweakVolume, this)(
-                    7, _fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
+                    7, fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
             } else {
                 MACRO_CALL_MEMBER(SFX::SFXState_Func::tweakVolume, this)(
-                    8, _fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
+                    8, fadeDelta, DAT_SpeechDefinedData::instance.currentStreamID);
             }
 
             if (DAT_SFXFadeState::instance == SFXFS_IDLE || DAT_SpeechDefinedData::instance.currentStreamID != -1) {
                 if (DAT_SFXFadeState::instance == SFXFS_FADE_IN) {
-                    FLOAT_00b986f8::instance += _fadeDelta + _fadeDelta;
-                    if (100.0 < FLOAT_00b986f8::instance) {
+                    FLOAT_00b986f8::instance += fadeDelta + fadeDelta;
+                    if (FLOAT_00b986f8::instance > 100.0) {
                         DAT_SFXFadeState::instance = 100;
                     }
                     if (DAT_SpeechDefinedData::instance.currentStreamID == 6) {
@@ -135,7 +139,7 @@ namespace Audio {
                     return;
                 }
                 if (DAT_SFXFadeState::instance == SFXFS_FADE_OUT) {
-                    FLOAT_00b986f8::instance -= 2 * _fadeDelta;
+                    FLOAT_00b986f8::instance -= 2 * fadeDelta;
                     if (FLOAT_00b986f8::instance < 1.0) {
                         FLOAT_00b986f8::instance = 1.0;
                     }
@@ -177,59 +181,46 @@ namespace Audio {
                 DAT_SFXFadeState::instance = SFXFS_IDLE;
             }
 
-            PriorityListEntry _prioritySortedList[10];
+            PriorityListEntry prioritySortedList[10];
             for (int ambientEventIndex = 0; ambientEventIndex < 7; ++ambientEventIndex) {
                 if (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex] == 0) {
                     continue;
                 }
                 if (sortedCount == 0) {
-                    _prioritySortedList[sortedCount].index = ambientEventIndex;
-                    _prioritySortedList[sortedCount].ambientEventCounterRescaled
+                    prioritySortedList[sortedCount].index = ambientEventIndex;
+                    prioritySortedList[sortedCount].ambientEventCounterRescaled
                         = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
                     ++sortedCount;
                     continue;
                 }
 
-                // This structure may have been one loop. I was unable to create it.
-                // The closets I managed to do was running the loop as long as insertIndex < sortedCount and having the
-                // condition after be insertIndex >= sortedCount. This created almost the required structure, but the
-                // condition was wrong, since it would require and equals. So the most likely thing is that the original
-                // was able to proof that insertIndex could never be bigger then sortedCount. I have no idea how they
-                // managed to do that.
-                int insertIndex = 0;
-                if (sortedCount > 0) {
-                    while (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex]
-                        <= _prioritySortedList[insertIndex].ambientEventCounterRescaled) {
-                        ++insertIndex;
-                        if (insertIndex < sortedCount) {
-                            continue;
-                        }
-                        _prioritySortedList[sortedCount].index = ambientEventIndex;
-                        _prioritySortedList[sortedCount].ambientEventCounterRescaled
-                            = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
-                        ++sortedCount;
-                        goto outerLoopEnd; // found no solution so far for this
+                // Reusing i across both loops and duplicating ++sortedCount in the append branch keeps
+                // sortedCount in ebp and insertIndex in ecx (matching the original register allocation)
+                int insertIndex = sortedCount;
+                int i;
+                for (i = 0; i < sortedCount; ++i) {
+                    if (DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex]
+                        > prioritySortedList[i].ambientEventCounterRescaled) {
+                        insertIndex = i;
+                        break;
                     }
                 }
-
                 if (insertIndex == sortedCount) {
-                    _prioritySortedList[sortedCount].index = ambientEventIndex;
-                    _prioritySortedList[sortedCount].ambientEventCounterRescaled
+                    prioritySortedList[sortedCount].index = ambientEventIndex;
+                    prioritySortedList[sortedCount].ambientEventCounterRescaled
                         = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
                     ++sortedCount;
                     continue;
                 }
-
-                for (int shiftIndex = sortedCount - 1; shiftIndex >= insertIndex; --shiftIndex) {
-                    _prioritySortedList[shiftIndex + 1].index = _prioritySortedList[shiftIndex].index;
-                    _prioritySortedList[shiftIndex + 1].ambientEventCounterRescaled
-                        = _prioritySortedList[shiftIndex].ambientEventCounterRescaled;
+                for (i = sortedCount - 1; i >= insertIndex; --i) {
+                    prioritySortedList[i + 1].index = prioritySortedList[i].index;
+                    prioritySortedList[i + 1].ambientEventCounterRescaled
+                        = prioritySortedList[i].ambientEventCounterRescaled;
                 }
-                _prioritySortedList[insertIndex].index = ambientEventIndex;
-                _prioritySortedList[insertIndex].ambientEventCounterRescaled
+                prioritySortedList[insertIndex].index = ambientEventIndex;
+                prioritySortedList[insertIndex].ambientEventCounterRescaled
                     = DAT_SFXAmbientEventCountersRescaled::instance[ambientEventIndex];
                 ++sortedCount;
-            outerLoopEnd:;
             }
 
             if ((DAT_SpeechDefinedData::instance.currentStreamID == 6
@@ -241,7 +232,7 @@ namespace Audio {
                 }
                 FLOAT_00b986f8::instance = 100.0;
                 DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
-                DAT_SpeechDefinedData::instance.field_0x49d4b8 = 0xffffffff;
+                DAT_SpeechDefinedData::instance.field_0x49d4b8 = -1;
                 return;
             }
             if (sortedCount == 0) {
@@ -251,39 +242,37 @@ namespace Audio {
                 && DAT_SFXAmbientEventCountersRescaled::instance[5] > 8) {
                 return;
             }
-            int _pick = _prioritySortedList[0].index;
-            if (_pick != 6) {
+            int pick = prioritySortedList[0].index;
+            if (pick != 6) {
                 if (forcedAmbientEventUnk > -1) {
-                    if (0 < DAT_SFXAmbientEventCountersRescaled::instance[forcedAmbientEventUnk]
-                        && (_prioritySortedList[0].ambientEventCounterRescaled
+                    if (DAT_SFXAmbientEventCountersRescaled::instance[forcedAmbientEventUnk] > 0
+                        && (prioritySortedList[0].ambientEventCounterRescaled
                                - DAT_SFXAmbientEventCountersRescaled::instance[forcedAmbientEventUnk])
                             < 40) {
-                        _pick = forcedAmbientEventUnk;
+                        pick = forcedAmbientEventUnk;
                     }
                 } else {
                     for (int i = 1; i < sortedCount; ++i) {
-                        if (_prioritySortedList[0].ambientEventCounterRescaled
-                                - _prioritySortedList[i].ambientEventCounterRescaled
-                            >= 20) {
-                            continue;
+                        if (prioritySortedList[0].ambientEventCounterRescaled
+                                - prioritySortedList[i].ambientEventCounterRescaled
+                            < 20) {
+                            MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
+                            if (SEC_RNG::instance.currentNumber1 & 1) {
+                                pick = prioritySortedList[i].index;
+                            }
                         }
-                        MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                        if (!(SEC_RNG::instance.currentNumber1 & 1)) {
-                            continue;
-                        }
-                        _pick = _prioritySortedList[i].index;
                     }
                 }
             }
-            if (_pick == DAT_SpeechDefinedData::instance.currentStreamID) {
+            if (pick == DAT_SpeechDefinedData::instance.currentStreamID) {
                 return;
             }
-            if (_pick == 4 && DAT_LandscapeState::instance.wind.valueIs2 == 0
+            if (pick == 4 && DAT_LandscapeState::instance.wind.valueIs2 == 0
                 && DAT_LandscapeState::instance.wind.valueIs1 == 0) {
                 return;
             }
-            if (DAT_SFXFadeDeltaAccumulator::instance < 300.0 && _pick != 6 && _pick != 5) {
-                if (_pick != 4) {
+            if (DAT_SFXFadeDeltaAccumulator::instance < 300.0 && pick != 6 && pick != 5) {
+                if (pick != 4) {
                     return;
                 }
                 if (DAT_SFXFadeDeltaAccumulator::instance < 150.0) {
@@ -292,7 +281,7 @@ namespace Audio {
             }
             if (DAT_SpeechDefinedData::instance.currentStreamID != 6
                 && DAT_SpeechDefinedData::instance.currentStreamID != 5) {
-                switch (_pick) {
+                switch (pick) {
                 case 4:
                     if (DAT_LandscapeState::instance.wind.valueIs2 != 0) {
                         MACRO_CALL_MEMBER(SFX::SFXState_Func::playAmbientSoundStreamUnk, this)(ASFXT_WIND_1);
@@ -327,7 +316,7 @@ namespace Audio {
                 return;
             }
             FLOAT_00b986f8::instance = 100.0;
-            DAT_SpeechDefinedData::instance.field_0x49d4b8 = _pick;
+            DAT_SpeechDefinedData::instance.field_0x49d4b8 = pick;
             DAT_SFXFadeState::instance = SFXFS_FADE_OUT;
         }
 
