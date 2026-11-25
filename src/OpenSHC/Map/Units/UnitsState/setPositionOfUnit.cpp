@@ -1,7 +1,8 @@
 #include "../UnitsState.func.hpp"
 
-#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 #include "OpenSHC/Map/MapConstants.hpp"
+
+#include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
 
 namespace OpenSHC {
 namespace Map {
