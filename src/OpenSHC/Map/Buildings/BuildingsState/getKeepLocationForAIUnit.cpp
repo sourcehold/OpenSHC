@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/AI/AIUnitBehaviourType.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -30,7 +31,7 @@ namespace Map {
             if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                 && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] == -1
                 && DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0
-                && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != 2) {
+                && DAT_UnitsState::instance.units[unitID].aiUnitBehaviourType != OpenSHC::AI::AIUBT_DEFENSE) {
                 int const keepID = DAT_GameState::instance.playerDataArray[playerID]
                                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
                                        .id;

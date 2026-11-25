@@ -137,8 +137,7 @@ namespace Map {
                             this->buildings[DAT_CurrentBuildingID::instance].currentTilePositionAdjusted,
                             this->buildings[DAT_CurrentBuildingID::instance].x,
                             this->buildings[DAT_CurrentBuildingID::instance].y, damage, 0,
-                            (short)this->buildings[DAT_CurrentBuildingID::instance].ifFireThenResponsiblePlayer, FALSE,
-                            0);
+                            this->buildings[DAT_CurrentBuildingID::instance].ifFireThenResponsiblePlayer, FALSE, 0);
                         int const buildingType = this->buildings[DAT_CurrentBuildingID::instance].buildingType;
                         if (buildingType == BT_PARADEGROUND
                             || (buildingType >= BT_CAMPGROUND && buildingType <= BT_PARADEGROUND5)) {
@@ -154,7 +153,7 @@ namespace Map {
                     ++this->buildings[DAT_CurrentBuildingID::instance].fireDuration;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::spawnRandomFireEffectOnBuilding,
                         this)(DAT_CurrentBuildingID::instance,
-                        (short)this->buildings[DAT_CurrentBuildingID::instance].ifFireThenResponsiblePlayer);
+                        this->buildings[DAT_CurrentBuildingID::instance].ifFireThenResponsiblePlayer);
                 }
 
                 // Siege engines of the AI are removed after a while
@@ -178,7 +177,7 @@ namespace Map {
             this->field_0x18e024 = 0;
             this->field_0x18e074 = 0;
             this->unknownCountdown01 = countof(this->buildings) - this->structCount;
-            if ((int)this->field_0x10 > 0) {
+            if (this->field_0x10 > 0) {
                 --this->field_0x10;
             }
         }

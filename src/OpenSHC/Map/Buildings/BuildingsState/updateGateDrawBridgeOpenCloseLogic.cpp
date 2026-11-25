@@ -45,11 +45,11 @@ namespace Map {
             if (DAT_GameState::instance.gameTicksLoadBalancer % 10
                 == (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].fireRelatedRNG1 + 5) % 10) {
                 // Count the troops of every player on the gatehouse and look for its flag.
-                int strength[9];
-                for (int p = 0; p < 9; ++p) {
+                int strength[countof(DAT_GameState::instance.playerDataArray)];
+                for (int p = 0; p < countof(strength); ++p) {
                     strength[p] = 0;
                 }
-                while (true) {
+                do {
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                         t, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].widthOrHeight);
@@ -93,10 +93,7 @@ namespace Map {
                         entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                     }
                     ++t;
-                    if (t >= DAT_TileMapState::instance.constructionTileCount) {
-                        break;
-                    }
-                }
+                } while (t < DAT_TileMapState::instance.constructionTileCount);
 
                 int flagColor = 0;
                 int newController = 0;
@@ -131,7 +128,7 @@ namespace Map {
                     }
                     int strongest = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].owner;
                     int strongestStrength = 0;
-                    for (int p = 1; p < 9; ++p) {
+                    for (int p = 1; p < countof(strength); ++p) {
                         if (strength[p] > strongestStrength) {
                             strongestStrength = strength[p];
                             strongest = p;
@@ -144,7 +141,7 @@ namespace Map {
                 if (flagColor != 0 && flagEntityID != 0) {
                     // Color all flags on the gatehouse.
                     int t2 = 0;
-                    while (true) {
+                    do {
                         MACRO_CALL_MEMBER(
                             OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, DAT_TileMapState::ptr)(
                             t2, DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].widthOrHeight);
@@ -172,10 +169,7 @@ namespace Map {
                             entityID = DAT_EntityState::instance.entityArray[entityID].nextEntityOnThisTileByID;
                         }
                         ++t2;
-                        if (t2 >= DAT_TileMapState::instance.constructionTileCount) {
-                            break;
-                        }
-                    }
+                    } while (t2 < DAT_TileMapState::instance.constructionTileCount);
                 }
                 if (newController != 0) {
                     if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x2c6

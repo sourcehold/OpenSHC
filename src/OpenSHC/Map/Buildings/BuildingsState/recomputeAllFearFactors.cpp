@@ -19,7 +19,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0040B260
         void BuildingsState::recomputeAllFearFactors()
         {
-            for (int p = 1; p < 9; ++p) {
+            for (int p = 1; p < countof(DAT_GameState::instance.playerDataArray); ++p) {
                 DAT_GameState::instance.playerDataArray[p].badStuffCount = 0;
                 DAT_GameState::instance.playerDataArray[p].goodStuffCount = 0;
                 DAT_GameState::instance.playerDataArray[p].fearFactorLevel = 0;
@@ -70,7 +70,7 @@ namespace Map {
             }
 
             // Every 16 peasants need one more good or bad thing for the next fear factor level
-            for (int p = 1; p < 9; ++p) {
+            for (int p = 1; p < countof(DAT_GameState::instance.playerDataArray); ++p) {
                 int const thingsPerLevel = DAT_GameState::instance.playerDataArray[p].currentPopulation / 16 + 1;
                 int balance = DAT_GameState::instance.playerDataArray[p].goodStuffCount
                     - DAT_GameState::instance.playerDataArray[p].badStuffCount;

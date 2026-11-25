@@ -23,7 +23,7 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0041BFD0
         void BuildingsState::processPlacementResourceLossForBuildingType(
-            int playerID, BuildingType buildingType, int param_3)
+            int playerID, BuildingType buildingType, BOOLEnum dryRun)
         {
             if (DAT_GameCore::instance.solitaryAllBuildingsAreFree
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR) {
@@ -50,14 +50,14 @@ namespace Map {
                 // Only every fourth pitch ditch tile costs pitch
                 if (DAT_GameState::instance.playerDataArray[playerID].pitchDitchCounterTo4 == 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                        playerID, OpenSHC::Game::Resources::RT_PITCH, 1, param_3);
-                    if (param_3 != 0) {
+                        playerID, OpenSHC::Game::Resources::RT_PITCH, 1, dryRun);
+                    if (dryRun != 0) {
                         return;
                     }
                     DAT_GameState::instance.playerDataArray[playerID].pitchDitchCounterTo4 = 1;
                     return;
                 }
-                if (param_3 != 0) {
+                if (dryRun != 0) {
                     return;
                 }
                 ++DAT_GameState::instance.playerDataArray[playerID].pitchDitchCounterTo4;
@@ -79,23 +79,23 @@ namespace Map {
                     this)(buildingType, &stone, &gold);
             } else if (wood != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                    playerID, OpenSHC::Game::Resources::RT_WOOD, wood, param_3);
+                    playerID, OpenSHC::Game::Resources::RT_WOOD, wood, dryRun);
             }
             if (stone != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                    playerID, OpenSHC::Game::Resources::RT_STONE, stone, param_3);
+                    playerID, OpenSHC::Game::Resources::RT_STONE, stone, dryRun);
             }
             if (iron != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                    playerID, OpenSHC::Game::Resources::RT_IRON, iron, param_3);
+                    playerID, OpenSHC::Game::Resources::RT_IRON, iron, dryRun);
             }
             if (pitch != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                    playerID, OpenSHC::Game::Resources::RT_PITCH, pitch, param_3);
+                    playerID, OpenSHC::Game::Resources::RT_PITCH, pitch, dryRun);
             }
             if (gold != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processResourceLoss, this)(
-                    playerID, OpenSHC::Game::Resources::RT_GOLD, gold, param_3);
+                    playerID, OpenSHC::Game::Resources::RT_GOLD, gold, dryRun);
             }
         }
 

@@ -40,7 +40,7 @@ namespace Map {
                 break;
             default: {
                 // One crow in the middle of the building and some more on random tiles of it
-                int const halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
+                int const halfSize = this->buildings[buildingID].widthOrHeight / 2;
                 int const microX = (this->buildings[buildingID].x + halfSize) * 8;
                 int const microY = (this->buildings[buildingID].y + halfSize) * 8;
                 MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::spawnProjectileEntity,
@@ -50,10 +50,10 @@ namespace Map {
                     microX + 1, microY + 1,
                     DAT_TileMapState::instance
                         .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                    (EntityType)30, 0);
+                    OpenSHC::Map::Entities::ET_UNKNOWN_30, 0);
 
                 int t = 0;
-                while (true) {
+                do {
                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData,
                         DAT_TileMapState::ptr)(t, this->buildings[buildingID].widthOrHeight);
                     int const tile
@@ -72,13 +72,11 @@ namespace Map {
                             (this->buildings[buildingID].y + DAT_TileMapState::instance.buildingY) * 8 + 1,
                             DAT_TileMapState::instance
                                 .DefaultHeightLayer[this->buildings[buildingID].currentTilePositionAdjusted],
-                            (EntityType)30, -((DAT_TileMapState::instance.RandomLayer[tile] >> 4) % 20));
+                            OpenSHC::Map::Entities::ET_UNKNOWN_30,
+                            -((DAT_TileMapState::instance.RandomLayer[tile] >> 4) % 20));
                     }
                     ++t;
-                    if (t >= DAT_TileMapState::instance.constructionTileCount) {
-                        break;
-                    }
-                }
+                } while (t < DAT_TileMapState::instance.constructionTileCount);
                 break;
             }
             }

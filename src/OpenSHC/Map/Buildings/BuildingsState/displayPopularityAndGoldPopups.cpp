@@ -19,9 +19,10 @@ namespace Map {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0040A060
         void BuildingsState::displayPopularityAndGoldPopups(
-            int buildingID, int param_2, int param_3, undefined4 param_4)
+            int buildingID, BOOLEnum isSale, int amount, undefined4 resourceType)
         {
-            // Shows the gold, popularity or trade popup above keeps, campgrounds and marketplaces of other players
+            // Shows the gold, popularity or trade popup above keeps, campgrounds and marketplaces of other players.
+            // For a trade, amount is the traded amount and resourceType selects the icon.
             short const& owner = this->buildings[buildingID].owner;
             int const playerID = this->buildings[buildingID].owner;
             if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
@@ -35,21 +36,21 @@ namespace Map {
             case BT_STONEKEEP:
             case BT_STRONGHOLD:
                 // Gold popup
-                entityType = (EntityType)40;
+                entityType = OpenSHC::Map::Entities::ET_GOLD_POPUP;
                 heightOffset = 120;
                 break;
             case BT_CAMPGROUND:
                 // Popularity popup
-                entityType = (EntityType)41;
+                entityType = OpenSHC::Map::Entities::ET_POPULARITY_POPUP;
                 heightOffset = 40;
                 break;
             case BT_MARKETPLACE:
                 heightOffset = 80;
                 // Trade popups
-                if (param_2 != 0) {
-                    entityType = (EntityType)43;
+                if (isSale) {
+                    entityType = OpenSHC::Map::Entities::ET_TRADE_SELL_POPUP;
                 } else {
-                    entityType = (EntityType)42;
+                    entityType = OpenSHC::Map::Entities::ET_TRADE_BUY_POPUP;
                 }
                 break;
             default:
@@ -60,7 +61,7 @@ namespace Map {
                     DAT_EntityState::ptr)(owner, entityType)) {
                 return;
             }
-            int const halfSize = (int)this->buildings[buildingID].widthOrHeight / 2;
+            int const halfSize = this->buildings[buildingID].widthOrHeight / 2;
             int const tile
                 = DAT_ViewportRenderState::instance.translationMatrix[this->buildings[buildingID].y + halfSize]
                       .addXgetTile
@@ -73,22 +74,22 @@ namespace Map {
                 return;
             }
 
-            if (entityType == (EntityType)40) {
+            if (entityType == OpenSHC::Map::Entities::ET_GOLD_POPUP) {
                 int const gold = DAT_GameState::instance.playerDataArray[playerID]
                                      .currentResources[OpenSHC::Game::Resources::RT_GOLD];
                 DAT_EntityState::instance.entityArray[entityID].displayValue = gold;
                 if (gold < 0) {
                     DAT_EntityState::instance.entityArray[entityID].displayValue = 0;
                 }
-            } else if (entityType == (EntityType)41) {
+            } else if (entityType == OpenSHC::Map::Entities::ET_POPULARITY_POPUP) {
                 DAT_EntityState::instance.entityArray[entityID].displayValue
                     = DAT_GameState::instance.playerDataArray[playerID].popularity / 100;
-            } else if (entityType == (EntityType)42) {
-                DAT_EntityState::instance.entityArray[entityID].displayValue = param_3;
-                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)param_4 * 2 + 141;
-            } else if (entityType == (EntityType)43) {
-                DAT_EntityState::instance.entityArray[entityID].displayValue = param_3;
-                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)param_4 * 2 + 141;
+            } else if (entityType == OpenSHC::Map::Entities::ET_TRADE_BUY_POPUP) {
+                DAT_EntityState::instance.entityArray[entityID].displayValue = amount;
+                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)resourceType * 2 + 141;
+            } else if (entityType == OpenSHC::Map::Entities::ET_TRADE_SELL_POPUP) {
+                DAT_EntityState::instance.entityArray[entityID].displayValue = amount;
+                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)resourceType * 2 + 141;
             }
         }
 

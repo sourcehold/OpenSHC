@@ -22,10 +22,11 @@ namespace Map {
             if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
                 start = DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow;
             }
-            for (int i = 0; i < 36; ++i) {
-                int const tile
-                    = this->buildings[buildingID]
-                          .tileRefs[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start) % 36] - 1];
+            for (int i = 0; i < countof(DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown); ++i) {
+                int const tile = this->buildings[buildingID]
+                                     .tileRefs[DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown[(i + start)
+                                                   % countof(DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown)]
+                                         - 1];
                 char const stage = DAT_TileMapState::instance.DamageLayer[tile];
                 // Stages above 121 keep the frame of the previous tile
                 if (stage == 0) {
@@ -63,13 +64,15 @@ namespace Map {
                 }
                 if (gfx == DAT_TileMapState::instance.GfxLayer[tile]) {
                     if (--unchangedLeft != 0 && DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow = (i + 1 + start) % 36;
+                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow
+                            = (i + 1 + start) % countof(DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown);
                         return;
                     }
                 } else {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                     if (DAT_BuildingsState::instance.field_0x18e024 == 0) {
-                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow = (i + 1 + start) % 36;
+                        DAT_BuildingsState::instance.buildings[buildingID].wheatFieldIndexToGrow
+                            = (i + 1 + start) % countof(DAT_BuildingDefinedData::instance.WheatFieldTile_Unknown);
                         return;
                     }
                 }
