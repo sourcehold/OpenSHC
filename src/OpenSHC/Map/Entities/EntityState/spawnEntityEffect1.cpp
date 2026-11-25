@@ -12,8 +12,8 @@ namespace Map {
         uint EntityState::spawnEntityEffect1(
             short x, short y, undefined4 height, undefined4 entityType, int graphicType1, int graphicType2)
         {
-            int entityID;
-            for (entityID = this->everyTenTicks; entityID < countof(this->entityArray); entityID++) {
+            int entityID = this->everyTenTicks;
+            for (; entityID < countof(this->entityArray); entityID++) {
                 if (this->entityArray[entityID].logicalState == 0) {
                     break;
                 }
