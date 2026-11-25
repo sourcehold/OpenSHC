@@ -145,7 +145,7 @@ namespace UI {
                 // the type goes as a word (movzx)
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setConstructionGFXLayerBasedOnPlacementChecks,
                     DAT_TileMapState::ptr)(this->elements[i].x, this->elements[i].y,
-                    (Commands::MappersEnum)(ushort)this->elements[i].type, this->elements[i].size);
+                    (Commands::MappersEnum)this->elements[i].type, this->elements[i].size);
                 break;
             }
         }

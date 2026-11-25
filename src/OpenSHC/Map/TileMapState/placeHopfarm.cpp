@@ -37,22 +37,19 @@ namespace Map {
                 + DAT_TerrainDefinedData::instance.HopFarmProperty1[layout][i].x + x;
         }
         DAT_BuildingsState::instance.buildings[buildingID].someFarmRelatedState = layout != 0 ? 7 : 81;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 3);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= OpenSHC::Map::LogicHelpers::L_BUILDING;
-            this->BuildingLayer[tile] = (short)buildingID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingLayer[tile] = buildingID;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(playerID, tile, this->buildingY + y, 2,
                 OpenSHC::Map::LogicHelpers::L_NONE, OpenSHC::Map::LogicHelpers::L2_THICK_SCRUB);
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         for (int i = 0; i < 24; i++) {
             int const tile
                 = DAT_ViewportRenderState::instance
@@ -68,7 +65,7 @@ namespace Map {
                 + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
             this->LogicLayer[tile] |= OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->BuildingLayer[tile] = buildingID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
                 DAT_PathFindingState::ptr)(
                 DAT_TerrainDefinedData::instance
@@ -76,7 +73,7 @@ namespace Map {
                         .y
                     + y,
                 tile);
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);

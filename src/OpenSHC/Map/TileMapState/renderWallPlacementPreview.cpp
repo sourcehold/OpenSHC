@@ -102,17 +102,14 @@ namespace Map {
         } while (index < this->constructionTileCount);
 
         index = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y]
                                            .addXgetTile
                 + this->buildingX + x]
                 = this->buildingOrientedPartIndex + GMFirstPictureIndex::instance[56] + variationStep + base - 1;
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
     }
 
 }

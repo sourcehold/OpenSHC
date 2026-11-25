@@ -94,7 +94,7 @@ namespace Map {
                             }
                             // the original tests each layer separately and skips the tile only when neither matches
                             if ((this->LogicLayer[this->DAT_SomeTile] & logic1) != 0) {
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & logic2) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & logic2) != 0) {
                             } else {
                                 continue;
                             }
@@ -131,7 +131,7 @@ namespace Map {
                             }
                             if (this->bitFlag != 0xff) {
                                 this->MacroLayer[this->DAT_SomeTile] = 1;
-                            } else if (((short)this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
+                            } else if ((this->RandomLayer[this->DAT_SomeTile] & 0xf) == 0) {
                                 this->MacroLayer[this->DAT_SomeTile] = 2;
                             } else {
                                 this->MacroLayer[this->DAT_SomeTile] = 2048;
@@ -169,7 +169,7 @@ namespace Map {
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                 &DAT_ViewportRenderState::instance)(this->DAT_SomeTile, this->DAT_SomeY);
-                            randomVal = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                            randomVal = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                             for (scanIndex = 0;
                                 scanIndex < countof(DAT_TerrainDefinedData::instance.MacroLayerScanOffsets);
                                 scanIndex++) {
@@ -225,7 +225,7 @@ namespace Map {
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                 &DAT_ViewportRenderState::instance)(this->DAT_SomeTile, this->DAT_SomeY);
-                            randomVal = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                            randomVal = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                             for (scanIndex = 0; scanIndex < countof(DAT_TerrainDefinedData::instance.field_0x198c);
                                 scanIndex++) {
                                 offsetX = DAT_TerrainDefinedData::instance.field_0x198c[scanIndex].x;
@@ -279,7 +279,7 @@ namespace Map {
                             }
                             tileX = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::computeTileXOffset,
                                 &DAT_ViewportRenderState::instance)(this->DAT_SomeTile, this->DAT_SomeY);
-                            randomVal = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                            randomVal = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                             for (scanIndex = 0; scanIndex < countof(DAT_TerrainDefinedData::instance.field_0x196c);
                                 scanIndex++) {
                                 offsetX = DAT_TerrainDefinedData::instance.field_0x196c[scanIndex].x;

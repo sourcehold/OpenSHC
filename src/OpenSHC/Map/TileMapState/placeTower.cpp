@@ -24,14 +24,14 @@ namespace Map {
             playerID, x, y, averageHeight, (BuildingType)(short)buildingType, size, playerID, variation);
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             if (index < countof(DAT_BuildingsState::instance.buildings[buildingID].tileRefs)) {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             }
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][0] == index) {
                 this->LogicLayer[tile] |= L_BUILDING;
             } else if (DAT_TerrainDefinedData::instance.TowerTileOffsetsBySize[size][1] == index) {
@@ -43,14 +43,11 @@ namespace Map {
             } else {
                 this->LogicLayer[tile] |= L_KEEP_NON_MANOR_HOUSE;
             }
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->BuildingLayer[tile] = buildingID;
             index++;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }

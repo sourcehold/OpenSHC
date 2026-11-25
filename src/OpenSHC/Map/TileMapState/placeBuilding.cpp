@@ -13,6 +13,7 @@
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -44,6 +45,7 @@ namespace Map {
 
     using OpenSHC::Game::GameMode;
     using OpenSHC::Game::GameMode2;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_EDGES;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x005162D0
     void TileMapState::placeBuilding(
@@ -68,14 +70,13 @@ namespace Map {
         BuildingType buildingType = (BuildingType)(ushort)MACRO_CALL_MEMBER(
             OpenSHC::Map::Buildings::BuildingsState_Func::convertCommandBuildingTypeToBuildingType,
             DAT_BuildingsState::ptr)(command);
-        short shortType = (short)buildingType;
+        short shortType = buildingType;
         if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_CRUSADER_TUTORIAL) {
-            if (MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(2, (short)shortType) == FALSE) {
+            if (MACRO_CALL(OpenSHC::Game_Func::Tutorial_IsActionAllowed)(2, shortType) == FALSE) {
                 MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialHintActiveWithTimestamp)();
                 return;
             }
-            MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialBuildingActionState)(
-                7, (BuildingType)(int)(short)shortType);
+            MACRO_CALL(OpenSHC::UI::Helpers_Func::SetTutorialBuildingActionState)(7, (BuildingType)shortType);
         }
 
         // clear whatever the footprint was before the building goes down
@@ -171,7 +172,7 @@ namespace Map {
                     this->buildingX + x, this->buildingY + y);
                 this->LogicLayer[tile] &= ~(L_MOAT | L_MOAT_DUG_OR_PLANNED);
             }
-            this->MiscDisplayLayer[tile] &= 0xfc3f;
+            this->MiscDisplayLayer[tile] &= ~MD_SEA_EDGES;
             index++;
             DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
             DAT_TileMapState::instance.field_0x554a30 = 1;
@@ -202,7 +203,7 @@ namespace Map {
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::TribesState_Func::playTunnelerCommandSpeech, DAT_TribesState::ptr)();
         }
 
-        switch ((int)shortType) {
+        switch (shortType) {
         case OpenSHC::Map::Buildings::BT_UNKNOWN1:
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::stampBuildingOntoTileMap, this)(playerID, x, y,
                 buildingType, command + ~OpenSHC::Commands::M_MAPPER_MP_KEEP8, buildingSize, buildingOrientation,
@@ -340,10 +341,10 @@ namespace Map {
             }
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processPlacementResourceLossForBuildingType,
-            DAT_BuildingsState::ptr)(playerID, (BuildingType)(int)(short)shortType, 0);
+            DAT_BuildingsState::ptr)(playerID, (BuildingType)shortType, 0);
         if (MACRO_CALL_MEMBER(
                 OpenSHC::Map::Buildings::BuildingsState_Func::hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters,
-                DAT_BuildingsState::ptr)(playerID, (int)(short)shortType)
+                DAT_BuildingsState::ptr)(playerID, shortType)
             != 0) {
             DAT_BuildingsState::instance.buildings[this->placedBuildingID].suppressDestroyRefund = 1;
         }

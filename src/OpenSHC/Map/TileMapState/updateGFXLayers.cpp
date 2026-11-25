@@ -135,7 +135,7 @@ namespace Map {
                                 macroBase = 37;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_EARTH_AND_STONES) != 0) {
                                 elevation = this->HeightLayer[this->DAT_SomeTile];
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(2, NEIGHBOUR_FLAGS_MASK_L2_EARTH_AND_STONES)
                                 edgeBase = 153;
@@ -145,7 +145,7 @@ namespace Map {
                                 macroBase = 189;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_OASIS_GRASS) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(3, NEIGHBOUR_FLAGS_MASK_L2_OASIS_GRASS)
                                 edgeBase = 457;
                                 cornerFrame = 459;
@@ -154,8 +154,7 @@ namespace Map {
                                 macroBase = 493;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk)
-                                != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_STONES_OR_DRIVEN_SANDUnk) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(4, NEIGHBOUR_FLAGS_MASK_L2_STONES)
                                 edgeBase = 609;
                                 cornerFrame = 611;
@@ -164,7 +163,7 @@ namespace Map {
                                 macroBase = 645;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_SCRUB) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(5, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                 edgeBase = 761;
                                 cornerFrame = 763;
@@ -173,7 +172,7 @@ namespace Map {
                                 macroBase = 797;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_THICK_SCRUB) != 0) {
                                 // the original gathers L2_SCRUB here, not L2_THICK_SCRUB; kept as-is
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(6, NEIGHBOUR_FLAGS_MASK_L2_SCRUB)
                                 edgeBase = 1193;
@@ -183,7 +182,7 @@ namespace Map {
                                 macroBase = 1229;
                                 perLevel = 4;
                                 drawMode = 0;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_MEDIUM) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(7, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_MEDIUM)
                                 edgeBase = 305;
                                 cornerFrame = 307;
@@ -192,7 +191,7 @@ namespace Map {
                                 macroBase = 341;
                                 perLevel = 4;
                                 drawMode = 2;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_PLATEAU_HIGH) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(8, NEIGHBOUR_FLAGS_MASK_L2_PLATEAU_HIGH)
                                 edgeBase = 305;
                                 cornerFrame = 307;
@@ -201,11 +200,11 @@ namespace Map {
                                 macroBase = 341;
                                 perLevel = 4;
                                 drawMode = 2;
-                            } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                            } else if ((this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_4(9, NEIGHBOUR_FLAGS_MASK_L2_BEACH)
                                 priorBitFlag = this->bitFlag;
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(10, NEIGHBOUR_FLAGS_MASK_SEA)
-                                this->bitFlag = this->bitFlag | priorBitFlag;
+                                this->bitFlag |= priorBitFlag;
                                 edgeBase = 913;
                                 cornerFrame = 915;
                                 flatFrame = 933;
@@ -252,7 +251,7 @@ namespace Map {
                                             == this->bitFlag) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
                                                 + edgeBase + ((luminescence - 2) * perLevel - 1)
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 1)
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 1)
                                                 + DAT_TerrainDefinedData::instance.field_0x1d54[partIndex][1];
                                         }
                                     }
@@ -267,50 +266,50 @@ namespace Map {
                                     if (this->GfxLayer[this->DAT_SomeTile] == 0) {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
                                             + flatFrame + ((luminescence - 2) * perLevel - 1)
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                     }
                                 } else if (luminescence == 2) {
                                     if (this->bitFlag != 0) {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55]
-                                            + flatFrame + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                            + flatFrame + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                     }
                                 } else if (drawMode == 2) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
                                         + ((luminescence - 3) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                 } else if (this->bitFlag != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
                                         + ((luminescence - 3) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 1);
                                 } else {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + cornerFrame
                                         + ((luminescence - 3) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 1);
                                 }
                             } else if (luminescence > 2) {
                                 if (drawMode == 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + cornerFrame
                                         + ((luminescence - 3) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 1);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 1);
                                 } else if (drawMode == 2) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + edgeBase
                                         + ((luminescence - 3) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                 } else {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
                                         + ((luminescence - 2) * perLevel - 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                 }
                             } else if (macroSizeType == 2) {
                                 if (drawMode == 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                 } else {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + lowGfx
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3) - 1;
                                 }
                             } else if (macroSizeType == 4) {
                                 macroMid = MACRO_TILE_OFFSETS[0][this->mapOrientation / 2][macroMid];

@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Rendering/ViewportRenderState.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -47,6 +48,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_SEA;
     using OpenSHC::Map::LogicHelpers::L_UNNAMED_0x40;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_GATEHOUSE_RAISED;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00512940
     void TileMapState::setTerrain(int playerID, int tile, uint yParam, uint brushType, Logic1 flags1, Logic2 flags2)
@@ -465,7 +467,7 @@ namespace Map {
                     }
                 }
 
-                this->MiscDisplayLayer[tile] = (short)this->MiscDisplayLayer[tile] & ~0x20;
+                this->MiscDisplayLayer[tile] &= ~MD_GATEHOUSE_RAISED;
                 // the original tests each kept terrain on its own and leaves the height alone for it
                 if (flags2 == L2_STONES_OR_DRIVEN_SANDUnk) {
                 } else if (flags2 == L2_SCRUB) {
@@ -492,7 +494,7 @@ namespace Map {
                 if (flags2 != L2_EARTH_AND_STONES) {
                     this->LogicLayer[tile] &= ~L_PLAIN2_AND_PITCH;
                 }
-                this->Logic2Layer[tile] = (byte)flags2;
+                this->Logic2Layer[tile] = flags2;
             } else if (flags1 == L_BOULDERS) {
                 if ((this->LogicLayer[tile] & (L_BUILDING | L_KEEP_NON_MANOR_HOUSE)) != 0) {
                     continue;

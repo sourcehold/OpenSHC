@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -8,6 +10,7 @@ namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_DECORATION_ENTITY;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FFF10
     uint TileMapState::getHeightAtTileIncludingOwnersBuildings(int tile, int playerID)
@@ -17,7 +20,7 @@ namespace Map {
         if (DAT_TileMapState::instance.PathConnectionLayer[tile] == 0) {
             return 0;
         }
-        if ((DAT_TileMapState::instance.MiscDisplayLayer[tile] & 0x1000) != 0) {
+        if ((DAT_TileMapState::instance.MiscDisplayLayer[tile] & MD_DECORATION_ENTITY) != 0) {
             return 0;
         }
 

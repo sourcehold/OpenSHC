@@ -1,11 +1,14 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F9000
     void TileMapState::reassignWallOwnershipForPlayer(int playerID, int newOwner)
@@ -22,7 +25,7 @@ namespace Map {
             } else if ((this->WallOwnerLayer[tile] & 7) + 1 != playerID) {
                 continue;
             }
-            this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & 0xf8) | (newOwner - 1);
+            this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~WO_OWNER_MASK) | (newOwner - 1);
         }
     }
 

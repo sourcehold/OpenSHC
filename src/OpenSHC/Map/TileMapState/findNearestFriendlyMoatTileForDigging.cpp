@@ -24,8 +24,7 @@ namespace Map {
         int const unitX = DAT_UnitsState::instance.units[unitID].x;
         int const unitY = DAT_UnitsState::instance.units[unitID].y;
         int const area
-            = (short)this
-                  ->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[unitY].addXgetTile + unitX];
+            = this->PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[unitY].addXgetTile + unitX];
         for (int moatID = 0; moatID < this->currentMoatCount; moatID++) {
             // digging works on own moat, filling in works on anyone else's
             if (number == 1) {

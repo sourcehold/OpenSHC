@@ -385,7 +385,7 @@ namespace Map {
             }
             tileIndex++;
         } while (tileIndex < this->constructionTileCount);
-        short const commandShort = (short)commandBuildingType;
+        short const commandShort = commandBuildingType;
         if (commandShort == OpenSHC::Commands::M_MAPPER_CATTLEFARM
             || commandShort == OpenSHC::Commands::M_MAPPER_WHEATFARM
             || commandShort == OpenSHC::Commands::M_MAPPER_HOPSFARM

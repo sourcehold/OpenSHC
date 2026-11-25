@@ -29,9 +29,8 @@ namespace Map {
         undefined4 buildingSize, int variation, int averageHeight)
     {
         int index = 0;
-        int buildingID = MACRO_CALL_MEMBER(
-            OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
-            playerID, x, y, averageHeight, (BuildingType)(short)buildingType, 3, playerID, variation);
+        int buildingID = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData,
+            DAT_BuildingsState::ptr)(playerID, x, y, averageHeight, (BuildingType)buildingType, 3, playerID, variation);
         this->placedBuildingID = buildingID;
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::markBuildingFootprintFlag, this)(x, y, 10);
 
@@ -45,22 +44,19 @@ namespace Map {
         }
 
         // the farm house
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 3);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->BuildingLayer[tile] = buildingID;
             this->BuildingWasLayer[tile] = (uchar)buildingType;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(
                 playerID, tile, this->buildingY + y, 2, L_NONE, L2_THICK_SCRUB);
             index++;
             this->ChangedLayer[tile] = 2;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
 
         for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.AppleFarmOffsets); i++) {
             int tile = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];

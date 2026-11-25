@@ -20,7 +20,7 @@ namespace Map {
         int index = 0;
         int const keepX = x;
         int const keepY = y;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, sizeIndex);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
@@ -30,10 +30,7 @@ namespace Map {
                     DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
 
         // the keep drags three towers and two outbuildings with it, laid out per keep variant
         buildingType = (short)buildingType - OpenSHC::Map::Buildings::BT_MANORHOUSE;
@@ -76,7 +73,7 @@ namespace Map {
         x += DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[buildingType][0].xOffset;
         y += DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x384[buildingType][0].yOffset;
         index = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 7);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
@@ -86,15 +83,12 @@ namespace Map {
                     DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
 
         x = keepX + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[buildingType][0].xOffset;
         y = keepY + DAT_TerrainDefinedData::instance.keepOutbuildingOffsets_0x3e4[buildingType][0].yOffset;
         index = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 5);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
@@ -104,10 +98,7 @@ namespace Map {
                     DAT_BuildingsState::ptr)(this->BuildingLayer[tile]);
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
 
         for (int buildingID = 1; buildingID < 2000; buildingID++) {
             if (DAT_BuildingsState::instance.buildings[buildingID].logicalState

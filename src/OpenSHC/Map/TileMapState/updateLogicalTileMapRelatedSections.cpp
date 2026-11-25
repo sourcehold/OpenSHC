@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -34,6 +35,8 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_TREE_VARIATION;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_BATCHED_SPRITES;
+    using OpenSHC::Map::LogicHelpers::MD_PILLAR_SIDESUnk;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F70F0
     void TileMapState::updateLogicalTileMapRelatedSections()
@@ -56,7 +59,7 @@ namespace Map {
                 int const height = this->HeightLayer[tile];
                 int const screenY = this->heightBasedScreenYOffset[height];
                 this->ShowHiLayer[tile] = 0;
-                this->MiscDisplayLayer[tile] &= 0xffef;
+                this->MiscDisplayLayer[tile] &= ~MD_BATCHED_SPRITES;
                 // whether the tile draws its own texture or the default earth
                 if (height == 0
                     && ((this->LogicLayer[tile] & L_RIVER) != 0 || (this->Logic2Layer[tile] & L2_BEACH) == 0)
@@ -93,11 +96,11 @@ namespace Map {
                         break;
                     }
                 }
-                int const building = (short)this->BuildingLayer[tile];
+                int const building = this->BuildingLayer[tile];
                 if (building != 0
                     && DAT_BuildingsState::instance.buildings[building].buildingType
                         == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
-                    this->MiscDisplayLayer[tile] |= 0x10;
+                    this->MiscDisplayLayer[tile] |= MD_BATCHED_SPRITES;
                 }
 
                 if (this->disableElevationRendering == 0) {
@@ -138,14 +141,14 @@ namespace Map {
                 } else if ((this->LogicLayer[tile] & L_STAIRS) != 0) {
                     occluded = TRUE;
                 } else {
-                    this->MiscDisplayLayer[tile] |= 0x10;
+                    this->MiscDisplayLayer[tile] |= MD_BATCHED_SPRITES;
                     occluded = FALSE;
                 }
                 for (int i = 0; i < 8; i++) {
                     int const neighbour = this->directionTranslationMatrix[row][i] + tile;
                     if ((height > 8 && height != this->HeightLayer[neighbour])
                         || (this->LogicLayer[neighbour] & L_TREE_VARIATION) != 0) {
-                        this->MiscDisplayLayer[tile] &= 0xffef;
+                        this->MiscDisplayLayer[tile] &= ~MD_BATCHED_SPRITES;
                         break;
                     }
                     if ((this->LogicLayer[neighbour] & L_FARM_FIELD_WHEAT) != 0) {
@@ -155,7 +158,7 @@ namespace Map {
                         occluded = TRUE;
                     }
                 }
-                this->MiscDisplayLayer[tile] &= 0xfffc;
+                this->MiscDisplayLayer[tile] &= ~MD_PILLAR_SIDESUnk;
 
                 BOOLEnum stepRight = FALSE;
                 BOOLEnum stepLeft = FALSE;
@@ -324,14 +327,14 @@ namespace Map {
                     occluded = TRUE;
                 }
                 if (!occluded) {
-                    this->MiscDisplayLayer[tile] |= 0x10;
+                    this->MiscDisplayLayer[tile] |= MD_BATCHED_SPRITES;
                 } else {
-                    this->MiscDisplayLayer[tile] &= 0xffef;
+                    this->MiscDisplayLayer[tile] &= ~MD_BATCHED_SPRITES;
                 }
 
                 if (screenY > lowest) {
                     if (this->disableElevationRendering == 0) {
-                        this->ShowHiLayer[tile] = (char)screenY - (char)lowest;
+                        this->ShowHiLayer[tile] = screenY - lowest;
                     }
                     if ((this->LogicLayer[tile] & L_SEA) == 0) {
                         if (stepLeft) {

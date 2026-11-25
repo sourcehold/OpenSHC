@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -30,6 +31,9 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_TREE;
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_DESTROY_PENDING;
+    using OpenSHC::Map::LogicHelpers::MD_GATEHOUSE_RAISED;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_EDGES;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00502390
     void TileMapState::setLand(int tile, uint y, uint brushType)
@@ -60,7 +64,7 @@ namespace Map {
                 this->DefaultHeightLayer[brushTile] = 8;
             }
             this->HeightLayer[brushTile] = this->DefaultHeightLayer[brushTile];
-            this->MiscDisplayLayer[brushTile] &= 0xffdf;
+            this->MiscDisplayLayer[brushTile] &= ~MD_GATEHOUSE_RAISED;
             if ((this->LogicLayer[brushTile] & (L_MOAT | L_MOAT_DUG_OR_PLANNED)) != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::clearMoatDataAtTile, this)(brushTile
                         - DAT_ViewportRenderState::instance
@@ -74,7 +78,7 @@ namespace Map {
                 &= (L_STOCKPILEUnk | L_PLAIN1_AND_FARM | L_BORDER | L_BORDER_EDGE | L_BUILDING | L_MOAT_DUG_OR_PLANNED
                     | L_DEFAULT_EARTH_OR_TEXTURE | L_UNKNOWN_WALL_RELATED | L_CLIMBABLE | L_FARM_FIELD_WHEAT
                     | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY | L_KEEP_NON_MANOR_HOUSE | L_MOAT);
-            this->MiscDisplayLayer[brushTile] &= 0xf83f;
+            this->MiscDisplayLayer[brushTile] &= ~(MD_SEA_EDGES | MD_DESTROY_PENDING);
             this->Logic2Layer[brushTile] = 0;
             if (DAT_TileMapState::instance.HeightLayer[brushTile] == 80) {
                 this->Logic2Layer[brushTile] = L2_PLATEAU_MEDIUM;

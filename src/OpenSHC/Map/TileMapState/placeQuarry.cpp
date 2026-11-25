@@ -33,21 +33,18 @@ namespace Map {
         this->placedBuildingID = quarryID;
         DAT_BuildingsState::instance.buildings[quarryID].uidWhenPlaced = uid;
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, buildingSize);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             index++;
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
-            this->BuildingLayer[tile] = (short)quarryID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingLayer[tile] = quarryID;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(quarryID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(quarryID);
 
@@ -65,12 +62,12 @@ namespace Map {
         }
 
         // x/y now name the pile corner
-        x = x + DAT_BuildingsState::instance.DAT_TempXOffset;
+        x += DAT_BuildingsState::instance.DAT_TempXOffset;
         y += DAT_BuildingsState::instance.DAT_TempYOffset;
         int tileIndex = 0;
         int lowest = 1000;
         int highest = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 2);
             int tileHeight
                 = this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -82,10 +79,7 @@ namespace Map {
                 lowest = tileHeight;
             }
             tileIndex++;
-            if (tileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (tileIndex < this->constructionTileCount);
         averageHeight = (highest - lowest) / 2 + lowest;
 
         tileIndex = 0;
@@ -94,22 +88,19 @@ namespace Map {
             averageHeight, OpenSHC::Map::Buildings::BT_QUARRYSTOCKPILE, 2, playerID, buildingOrientation);
         MACRO_CALL_MEMBER(OpenSHC::AI::AIVState_Func::incrementStructureHeatMapTile, DAT_AIVState::ptr)(x, y);
         DAT_BuildingsState::instance.buildings[pileID].uidWhenPlaced = uid;
-        DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID = (short)pileID;
-        while (true) {
+        DAT_BuildingsState::instance.buildings[quarryID].quarryStockpileID = pileID;
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(tileIndex, 2);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
-            this->BuildingLayer[tile] = (short)pileID;
+            this->BuildingLayer[tile] = pileID;
             tileIndex++;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
-            if (tileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (tileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(pileID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(pileID);
 

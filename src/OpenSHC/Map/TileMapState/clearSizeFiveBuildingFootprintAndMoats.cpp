@@ -15,7 +15,7 @@ namespace Map {
     void TileMapState::clearSizeFiveBuildingFootprintAndMoats(int x, int y)
     {
         int buildingSizeTileIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -46,10 +46,7 @@ namespace Map {
             this->BuildingLayer[tile] = 0;
             buildingSizeTileIndex++;
             this->ChangedLayer[tile] = 2;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
     }
 
 }

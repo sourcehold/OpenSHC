@@ -17,7 +17,7 @@ namespace Map {
         int const variation = DAT_BuildingsState::instance.buildings[buildingID].buildingVariation / 2;
         int buildingSizeTileIndex = 0;
         int const* mapping = DAT_TerrainDefinedData::instance.field_0x21ec[variation];
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
             if (*mapping == 0
@@ -29,10 +29,7 @@ namespace Map {
             }
             buildingSizeTileIndex++;
             mapping++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
         return FALSE;
     }
 

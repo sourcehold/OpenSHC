@@ -5,6 +5,7 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingFailReasonEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -25,6 +26,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     using OpenSHC::Map::Buildings::BuildingFailReasonEnum;
+    using OpenSHC::Map::LogicHelpers::MD_DESTROY_PENDING;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00504A30
     void TileMapState::evaluateBuildingPlacementAtCursor(int playerID, uint x, uint y)
@@ -138,7 +140,7 @@ namespace Map {
                 }
                 this->buildingPlacementFail = FALSE;
                 this->placementOnWall = 1;
-                if ((this->MiscDisplayLayer[wallTile] & 0x400) != 0) {
+                if ((this->MiscDisplayLayer[wallTile] & MD_DESTROY_PENDING) != 0) {
                     this->buildingPlacementFail = TRUE;
                 }
                 checkMoat = false;
@@ -160,7 +162,7 @@ namespace Map {
                     }
                     this->buildingPlacementFail = FALSE;
                     this->placementOnMoat = 1;
-                    if ((this->MiscDisplayLayer[moatTile] & 0x400) != 0) {
+                    if ((this->MiscDisplayLayer[moatTile] & MD_DESTROY_PENDING) != 0) {
                         this->buildingPlacementFail = TRUE;
                     }
                     wallTile = moatTile;

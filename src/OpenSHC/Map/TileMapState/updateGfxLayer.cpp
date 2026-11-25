@@ -6,6 +6,8 @@
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Enums/MapOrientation.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -171,6 +173,13 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
     using OpenSHC::Game::GameMode2;
+    using OpenSHC::Map::LogicHelpers::MD_BATCHED_SPRITES;
+    using OpenSHC::Map::LogicHelpers::MD_RUBBLE_EDGEUnk;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_CLIFF;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_EDGES;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_SHORE;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_SHORE_EDGE;
+    using OpenSHC::Map::LogicHelpers::MD_SEA_UNNAMED_0x80;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00509180
     void TileMapState::updateGfxLayer()
@@ -259,8 +268,8 @@ namespace Map {
                             if ((char)this->ChangedLayer[this->DAT_SomeTile] == 0) {
                                 continue;
                             }
-                            if ((short)this->BuildingLayer[this->DAT_SomeTile] != 0) {
-                                buildingIDTmp = (short)this->BuildingLayer[this->DAT_SomeTile];
+                            if (this->BuildingLayer[this->DAT_SomeTile] != 0) {
+                                buildingIDTmp = this->BuildingLayer[this->DAT_SomeTile];
                                 if (DAT_BuildingsState::instance.buildings[buildingIDTmp].buildingType
                                     == OpenSHC::Map::Buildings::BT_DRAWBRIDGE) {
                                     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::computeTileLuminescence, this)(
@@ -273,15 +282,15 @@ namespace Map {
                             tileXTmp = this->DAT_SomeX;
                             this->FloatingLayer[this->DAT_SomeTile] = 0;
                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x3c0;
+                                = this->MiscDisplayLayer[this->DAT_SomeTile] & ~MD_SEA_EDGES;
                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x800;
+                                = this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x800;
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_RIVER) != 0) {
                                 if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isTileSuitableForBrushPlacement,
                                         this)(this->DAT_SomeTile, tileXTmp, this->DAT_SomeY)
                                     != FALSE) {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
-                                        = ((short)this->RandomLayer[this->DAT_SomeTile] & 0xf) + 35;
+                                        = (this->RandomLayer[this->DAT_SomeTile] & 0xf) + 35;
                                 } else {
                                     this->PillarGFXLayer[this->DAT_SomeTile] = 32;
                                 }
@@ -293,7 +302,7 @@ namespace Map {
                                         this)(this->DAT_SomeTile, tileXTmp, this->DAT_SomeY)
                                     != FALSE) {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
-                                        = ((short)this->RandomLayer[this->DAT_SomeTile] & 0xf) + 35;
+                                        = (this->RandomLayer[this->DAT_SomeTile] & 0xf) + 35;
                                 } else {
                                     this->PillarGFXLayer[this->DAT_SomeTile] = 32;
                                 }
@@ -307,9 +316,9 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
-                                this->GfxLayer[this->DAT_SomeTile] = ((short)this->RandomLayer[this->DAT_SomeTile] & 3)
-                                    + GMFirstPictureIndex::instance[14];
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                this->GfxLayer[this->DAT_SomeTile]
+                                    = (this->RandomLayer[this->DAT_SomeTile] & 3) + GMFirstPictureIndex::instance[14];
                                 DAT_BuildingsState::instance.field_0x18e024 = 1;
                                 continue;
                             }
@@ -320,9 +329,9 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[14] + 37
-                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 1) * 9;
+                                    + (this->RandomLayer[this->DAT_SomeTile] & 1) * 9;
                                 DAT_BuildingsState::instance.field_0x18e024 = 1;
                                 continue;
                             }
@@ -334,7 +343,7 @@ namespace Map {
                                     & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE))
                                     == 0
                                 && this->BuildingWasLayer[this->DAT_SomeTile] != 0
-                                && ((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x10) != 0) {
+                                && (this->MiscDisplayLayer[this->DAT_SomeTile] & MD_BATCHED_SPRITES) != 0) {
                                 buildingWasOffsetOld = 0;
                                 switch (this->BuildingWasLayer[this->DAT_SomeTile]) {
                                 case OpenSHC::Map::Buildings::BT_BARRACKS:
@@ -363,23 +372,21 @@ namespace Map {
                                 case OpenSHC::Map::Buildings::BT_OUTPOST_EUROPEAN:
                                     buildingWasOffsetOld = 12;
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x2000) != 0) {
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_RUBBLE_EDGEUnk) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[149]
-                                        + (buildingWasOffsetOld + 1)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                        + (buildingWasOffsetOld + 1) + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                 } else {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[149]
-                                        + (buildingWasOffsetOld + 5)
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
+                                        + (buildingWasOffsetOld + 5) + (this->RandomLayer[this->DAT_SomeTile] & 7) - 1;
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_WALL_OR_GATEHOUSE) != 0) {
                                 this->wallCornerRotation = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::TileMapState_Func::computeWallCornerRenderRotation, this)(tileXTmp);
                                 this->WallGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[10] + this->wallCornerRotation - 1;
-                                if ((char)this->DamageLayer[this->DAT_SomeTile] != 0) {
+                                if (this->DamageLayer[this->DAT_SomeTile] != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 138
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                 } else if ((this->LogicLayer[this->DAT_SomeTile] & L_CRENEL) != 0) {
                                     if (MACRO_CALL_MEMBER(
                                             OpenSHC::Map::TileMapState_Func::isWallCornerForCardinalDirection, this)(
@@ -389,18 +396,18 @@ namespace Map {
                                             || this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                                             if ((this->LogicLayer[this->DAT_SomeTile] & L_CRENEL_VARIATIONUnk) != 0) {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12]
-                                                    + 124 + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + 124 + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12]
-                                                    + 116 + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + 116 + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             }
                                         } else if ((this->LogicLayer[this->DAT_SomeTile] & L_CRENEL_VARIATIONUnk)
                                             != 0) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 120
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 112
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         }
                                     } else if (MACRO_CALL_MEMBER(
                                                    OpenSHC::Map::TileMapState_Func::isWallCornerForCardinalDirection,
@@ -410,18 +417,18 @@ namespace Map {
                                             || this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                                             if ((this->LogicLayer[this->DAT_SomeTile] & L_CRENEL_VARIATIONUnk) != 0) {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12]
-                                                    + 120 + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + 120 + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12]
-                                                    + 112 + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + 112 + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             }
                                         } else if ((this->LogicLayer[this->DAT_SomeTile] & L_CRENEL_VARIATIONUnk)
                                             != 0) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 124
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 116
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         }
                                     } else if (MACRO_CALL_MEMBER(
                                                    OpenSHC::Map::TileMapState_Func::isWallCornerForDiagonalDirection,
@@ -544,10 +551,10 @@ namespace Map {
                                     }
                                 } else if (this->LuminesenceLayer[this->DAT_SomeTile] >= 4) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 104
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                 } else {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 96
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                 }
                                 continue;
                             } else if ((this->LogicLayer[this->DAT_SomeTile]
@@ -649,22 +656,22 @@ namespace Map {
                                         switch (cornerMain) {
                                         case 1:
                                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x40;
+                                                = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_CLIFF;
                                             this->AlphaGFXLayer[this->DAT_SomeTile] = 47;
                                             break;
                                         case 2:
                                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x200;
+                                                = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_SHORE_EDGE;
                                             this->AlphaGFXLayer[this->DAT_SomeTile] = 46;
                                             break;
                                         case 3:
                                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x80;
+                                                = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_UNNAMED_0x80;
                                             this->AlphaGFXLayer[this->DAT_SomeTile] = 49;
                                             break;
                                         case 4:
                                             this->MiscDisplayLayer[this->DAT_SomeTile]
-                                                = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x100;
+                                                = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_SHORE;
                                             this->AlphaGFXLayer[this->DAT_SomeTile] = 48;
                                         }
                                     }
@@ -697,7 +704,7 @@ namespace Map {
                             if ((char)this->ChangedLayer[this->DAT_SomeTile] == 0) {
                                 continue;
                             }
-                            if ((short)this->BuildingLayer[this->DAT_SomeTile] != 0) {
+                            if (this->BuildingLayer[this->DAT_SomeTile] != 0) {
                                 continue;
                             }
                             if ((this->LogicLayer[this->DAT_SomeTile]
@@ -708,7 +715,7 @@ namespace Map {
                             tileXTmp = this->DAT_SomeX;
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0xfffc;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] & 0xfffc;
                                 facingTile
                                     = this->DAT_SomeTile + DIRECTION_OFFSET(this->DAT_SomeY, this->mapOrientation);
                                 this->gfxTileHeight = this->HeightLayer[facingTile];
@@ -728,7 +735,7 @@ namespace Map {
                                     }
                                     this->PillarGFXLayer[this->DAT_SomeTile] = GM_FIRST_PICTURE_INDEX(9);
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x40;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_CLIFF;
                                 }
                                 shallowMaskMain = 0;
                                 this->bitFlag = 0;
@@ -742,14 +749,14 @@ namespace Map {
                                             this->bitFlag |= 0x80 >> directionTmp;
                                         }
                                         if ((this->LogicLayer[neighbourTilePos] & (L_SEA | L_RIVER)) == 0
-                                            && ((char)this->Logic2Layer[neighbourTilePos] & 0x20) != 0) {
+                                            && (this->Logic2Layer[neighbourTilePos] & L2_BEACH) != 0) {
                                             shallowMaskMain = 0x80 >> directionTmp | shallowMaskMain;
                                         }
                                     }
                                 }
                                 if (this->bitFlag != 0) {
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x100;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_SHORE;
                                     this->CertainPathLayer[this->DAT_SomeTile] = this->bitFlag | shallowMaskMain << 8;
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_RIVER) != 0) {
@@ -762,14 +769,14 @@ namespace Map {
                                 rightTileCalc = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 1) % 8);
                                 if (((this->LogicLayer[leftTile8] | this->LogicLayer[rightTileCalc]) & L_SEA) == 0
-                                    && ((short)this->MiscDisplayLayer[leftTile8] & 0x3c0) != 0
-                                    && ((short)this->MiscDisplayLayer[rightTileCalc] & 0x3c0) != 0) {
+                                    && (this->MiscDisplayLayer[leftTile8] & MD_SEA_EDGES) != 0
+                                    && (this->MiscDisplayLayer[rightTileCalc] & MD_SEA_EDGES) != 0) {
                                     if (this->LuminesenceLayer[this->DAT_SomeTile] >= 4) {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 104
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 96
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                     }
                                 }
                                 leftTile8 = this->DAT_SomeTile
@@ -777,42 +784,42 @@ namespace Map {
                                 rightTileCalc = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 3) % 8);
                                 if (((this->LogicLayer[leftTile8] | this->LogicLayer[rightTileCalc]) & L_SEA) == 0
-                                    && ((short)this->MiscDisplayLayer[leftTile8] & 0x3c0) != 0
-                                    && ((short)this->MiscDisplayLayer[rightTileCalc] & 0x3c0) != 0) {
+                                    && (this->MiscDisplayLayer[leftTile8] & MD_SEA_EDGES) != 0
+                                    && (this->MiscDisplayLayer[rightTileCalc] & MD_SEA_EDGES) != 0) {
                                     if ((this->DAT_SomeY & 1) != 0) {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 311;
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 312;
                                     }
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x3c0;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_EDGES;
                                 }
                                 leftTile8 = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 5) % 8);
                                 rightTileCalc = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 7) % 8);
                                 if (((this->LogicLayer[leftTile8] | this->LogicLayer[rightTileCalc]) & L_SEA) == 0
-                                    && ((short)this->MiscDisplayLayer[leftTile8] & 0x3c0) != 0
-                                    && ((short)this->MiscDisplayLayer[rightTileCalc] & 0x3c0) != 0) {
+                                    && (this->MiscDisplayLayer[leftTile8] & MD_SEA_EDGES) != 0
+                                    && (this->MiscDisplayLayer[rightTileCalc] & MD_SEA_EDGES) != 0) {
                                     if ((this->DAT_SomeY & 1) != 0) {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 313;
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[12] + 314;
                                     }
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x3c0;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_EDGES;
                                 }
                                 leftTile8 = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 3) % 8);
                                 rightTileCalc = this->DAT_SomeTile
                                     + DIRECTION_OFFSET(this->DAT_SomeY, (this->screenSouthEastDirection + 5) % 8);
                                 if (((this->LogicLayer[leftTile8] | this->LogicLayer[rightTileCalc]) & L_SEA) == 0
-                                    && ((short)this->MiscDisplayLayer[leftTile8] & 0x3c0) != 0
-                                    && ((short)this->MiscDisplayLayer[rightTileCalc] & 0x3c0) != 0) {
+                                    && (this->MiscDisplayLayer[leftTile8] & MD_SEA_EDGES) != 0
+                                    && (this->MiscDisplayLayer[rightTileCalc] & MD_SEA_EDGES) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[12] + 303 + this->DAT_SomeY % 8;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x3c0;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_EDGES;
                                 }
                             }
                         }
@@ -847,10 +854,10 @@ namespace Map {
                                 != 0) {
                                 continue;
                             }
-                            if ((short)this->BuildingLayer[this->DAT_SomeTile] != 0) {
+                            if (this->BuildingLayer[this->DAT_SomeTile] != 0) {
                                 continue;
                             }
-                            if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x40) != 0) {
+                            if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_CLIFF) != 0) {
                             } else {
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(m2, 0x80)
                                 wallMaskId = this->bitFlag;
@@ -861,7 +868,7 @@ namespace Map {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[166] + 1488;
                                     this->PillarGFXLayer[this->DAT_SomeTile] = GM_FIRST_PICTURE_INDEX(9);
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x80;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_UNNAMED_0x80;
                                 }
                             }
                         }
@@ -894,16 +901,15 @@ namespace Map {
                             this->ChangedLayer[this->DAT_SomeTile] = (char)this->ChangedLayer[this->DAT_SomeTile] - 1;
                             tileXTmp = this->DAT_SomeX;
                             if ((this->LogicLayer[this->DAT_SomeTile] & L_SEA) != 0) {
-                                this->Logic2Layer[this->DAT_SomeTile]
-                                    = (char)this->Logic2Layer[this->DAT_SomeTile] & ~8;
+                                this->Logic2Layer[this->DAT_SomeTile] &= ~L2_PLATEAU_HIGH;
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(sea1, NEIGHBOUR_FLAGS_MASK_RIVER)
                                 if (this->bitFlag != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 764;
-                                    this->Logic2Layer[this->DAT_SomeTile]
-                                        = (char)this->Logic2Layer[this->DAT_SomeTile] | 8;
+                                    this->Logic2Layer[this->DAT_SomeTile] |= L2_PLATEAU_HIGH;
                                     continue;
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) != 0) {
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & (MD_SEA_CLIFF | MD_SEA_UNNAMED_0x80))
+                                    != 0) {
                                 } else {
                                     MACRO_NEIGHBOUR_FLAGS_GLOBAL_MISC_8(sea2, 0x40)
                                     seaMask_ = this->bitFlag;
@@ -914,21 +920,23 @@ namespace Map {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[166] + 1476;
                                         this->PillarGFXLayer[this->DAT_SomeTile] = GM_FIRST_PICTURE_INDEX(9);
                                         this->MiscDisplayLayer[this->DAT_SomeTile]
-                                            = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0xc0;
+                                            = this->MiscDisplayLayer[this->DAT_SomeTile]
+                                            | (MD_SEA_CLIFF | MD_SEA_UNNAMED_0x80);
                                     }
                                 }
                                 if (this->LuminesenceLayer[this->DAT_SomeTile] > 2) {
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x40;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] & ~MD_SEA_CLIFF;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x80;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] & ~MD_SEA_UNNAMED_0x80;
                                 }
                                 shadeLevelRef = this->LuminesenceLayer[this->DAT_SomeTile] - 2;
                                 if (shadeLevelRef < 0) {
                                     shadeLevelRef = 0;
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0xc0) != 0) {
-                                } else if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x100) != 0) {
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & (MD_SEA_CLIFF | MD_SEA_UNNAMED_0x80))
+                                    != 0) {
+                                } else if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_SHORE) != 0) {
                                     pathModulusWork = 2;
                                     pathLowPos = this->CertainPathLayer[this->DAT_SomeTile] & 0xff;
                                     pathHighMaskCur = this->CertainPathLayer[this->DAT_SomeTile] >> 8 & 0xff;
@@ -961,28 +969,25 @@ namespace Map {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[166]
                                             + (edgeOffsetId + 9) + shadeLevelRef * 246 - 1;
                                         this->MiscDisplayLayer[this->DAT_SomeTile]
-                                            = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x200;
+                                            = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_SEA_SHORE_EDGE;
                                     }
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x3c0) == 0) {
-                                    this->GfxLayer[this->DAT_SomeTile]
-                                        = ((short)this->RandomLayer[this->DAT_SomeTile] & 7)
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_EDGES) == 0) {
+                                    this->GfxLayer[this->DAT_SomeTile] = (this->RandomLayer[this->DAT_SomeTile] & 7)
                                         + GMFirstPictureIndex::instance[166] + shadeLevelRef * 246;
                                     this->PillarGFXLayer[this->DAT_SomeTile] = GM_FIRST_PICTURE_INDEX(9);
                                 }
                                 continue;
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_RIVER) != 0) {
-                                this->Logic2Layer[this->DAT_SomeTile]
-                                    = (char)this->Logic2Layer[this->DAT_SomeTile] & ~8;
+                                this->Logic2Layer[this->DAT_SomeTile] &= ~L2_PLATEAU_HIGH;
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(riv1, 1)
                                 if (this->bitFlag != 0) {
-                                    this->Logic2Layer[this->DAT_SomeTile]
-                                        = (char)this->Logic2Layer[this->DAT_SomeTile] | 8;
-                                    if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                                    this->Logic2Layer[this->DAT_SomeTile] |= L2_PLATEAU_HIGH;
+                                    if ((this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
                                         this->Logic2Layer[this->DAT_SomeTile]
-                                            = (char)this->Logic2Layer[this->DAT_SomeTile] & ~L2_BEACH;
+                                            = this->Logic2Layer[this->DAT_SomeTile] & ~L2_BEACH;
                                         this->WallGFXLayer[this->DAT_SomeTile]
-                                            = (short)this->RandomLayer[this->DAT_SomeTile] & 7;
+                                            = this->RandomLayer[this->DAT_SomeTile] & 7;
                                     }
                                 }
                                 MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_4(riv2, 0x100031)
@@ -996,10 +1001,10 @@ namespace Map {
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::propagateCliffEdgeFlagFromNeighbor,
                                     this)(this->DAT_SomeTile, tileXTmp, this->DAT_SomeY);
-                                if ((char)this->Logic2Layer[this->DAT_SomeTile] == 0) {
+                                if (this->Logic2Layer[this->DAT_SomeTile] == 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 532
                                         + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                     for (local_14_f = 0; local_14_f < 7; local_14_f++) {
                                         if (DAT_TerrainDefinedData::instance.TerrainFlagGraphicLookup[local_14_f].unk1
                                             == this->bitFlag) {
@@ -1024,11 +1029,11 @@ namespace Map {
                                             } else if (local_14_f == 4) {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5]
                                                     + 596 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else if (local_14_f == 5) {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5]
                                                     + 628 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             } else if (local_14_f == 6) {
                                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5]
                                                     + 660 + this->LuminesenceLayer[this->DAT_SomeTile];
@@ -1037,7 +1042,7 @@ namespace Map {
                                         }
                                     }
                                 }
-                                if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                                if ((this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
                                     bankBase_ = (this->WallGFXLayer[this->DAT_SomeTile] & 8) * 8 + 909;
                                     switch (this->mapOrientation) {
                                     case OpenSHC::Map::Enums::MO_NORTH:
@@ -1061,17 +1066,16 @@ namespace Map {
                                             + (((this->WallGFXLayer[this->DAT_SomeTile] & 0x3e0) >> 5) - 6 & 7) * 8 - 1;
                                     }
                                 }
-                                if (((char)this->Logic2Layer[this->DAT_SomeTile]
+                                if ((this->Logic2Layer[this->DAT_SomeTile]
                                         & (L2_OASIS_GRASS | L2_STONES_OR_DRIVEN_SANDUnk))
                                     != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 764;
-                                } else if (((char)this->Logic2Layer[this->DAT_SomeTile]
-                                               & (L2_PLATEAU_HIGH | L2_THICK_SCRUB))
+                                } else if ((this->Logic2Layer[this->DAT_SomeTile] & (L2_PLATEAU_HIGH | L2_THICK_SCRUB))
                                     != 0) {
                                     MACRO_NEIGHBOUR_FLAGS_GLOBAL_LOGIC_8(riv5, 1)
                                     riverMaskA = this->bitFlag;
                                     MACRO_NEIGHBOUR_FLAGS_GLOBAL_TERRAIN_8(riv6, 0x50)
-                                    this->bitFlag = this->bitFlag | riverMaskA;
+                                    this->bitFlag |= riverMaskA;
                                     bankDirection = -1;
                                     if (this->bitFlag != 0) {
                                         if ((this->bitFlag & 0x80) != 0) {
@@ -1134,9 +1138,9 @@ namespace Map {
                                         if (bankDirection == -1) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 532
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             this->Logic2Layer[this->DAT_SomeTile]
-                                                = (char)this->Logic2Layer[this->DAT_SomeTile] & ~L2_THICK_SCRUB;
+                                                = this->Logic2Layer[this->DAT_SomeTile] & ~L2_THICK_SCRUB;
                                         } else {
                                             bankDirection = (bankDirection - this->mapOrientation + 8) % 8;
                                             this->GfxLayer[this->DAT_SomeTile]
@@ -1222,16 +1226,16 @@ namespace Map {
                                         if (bankDirection == -1) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 532
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                             this->Logic2Layer[this->DAT_SomeTile]
-                                                = (char)this->Logic2Layer[this->DAT_SomeTile] & ~L2_THICK_SCRUB;
+                                                = this->Logic2Layer[this->DAT_SomeTile] & ~L2_THICK_SCRUB;
                                         }
                                     }
-                                } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & 1) != 0) {
+                                } else if ((this->Logic2Layer[this->DAT_SomeTile] & 1) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 1036;
-                                } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
+                                } else if ((this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 1044;
-                                } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & 4) != 0) {
+                                } else if ((this->Logic2Layer[this->DAT_SomeTile] & 4) != 0) {
                                     this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 1052;
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_FORD) != 0) {
@@ -1246,7 +1250,7 @@ namespace Map {
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 668
                                     + this->LuminesenceLayer[this->DAT_SomeTile] * 8
-                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                    + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                 for (local_14_f = 0; local_14_f < 7; local_14_f++) {
                                     if (DAT_TerrainDefinedData::instance.TerrainFlagGraphicLookup[local_14_f].unk1
                                         == this->bitFlag) {
@@ -1258,11 +1262,11 @@ namespace Map {
                                         } else if (local_14_f == 4) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 596
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else if (local_14_f == 5) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 628
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else if (local_14_f == 6) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 660
                                                 + this->LuminesenceLayer[this->DAT_SomeTile];
@@ -1272,7 +1276,7 @@ namespace Map {
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_PLAIN2_AND_PITCH) != 0) {
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] & ~0x2000;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] & ~MD_RUBBLE_EDGEUnk;
                                 ditchIDCur = MACRO_CALL_MEMBER(
                                     OpenSHC::Map::TileMapState_Func::getPitchDitchIDForTile, this)(this->DAT_SomeTile);
                                 if (ditchIDCur != 0) {
@@ -1295,19 +1299,19 @@ namespace Map {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                     this->GfxLayer[this->DAT_SomeTile]
                                         = (this->pitchDitches[ditchIDCur].rng & 7) + GMFirstPictureIndex::instance[140];
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x2000;
-                                    if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x80) != 0) {
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | MD_RUBBLE_EDGEUnk;
+                                    if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_UNNAMED_0x80) != 0) {
                                         __asm jmp wallAlpha __asm jmp wallAlpha
                                     }
                                     continue;
                                 }
                                 goto plainTerrain;
-                            } else if ((short)this->BuildingLayer[this->DAT_SomeTile] != 0) {
-                                buildingIDTmp = (short)this->BuildingLayer[this->DAT_SomeTile];
+                            } else if (this->BuildingLayer[this->DAT_SomeTile] != 0) {
+                                buildingIDTmp = this->BuildingLayer[this->DAT_SomeTile];
                                 if (DAT_BuildingsState::instance.buildings[buildingIDTmp].buildingType
                                     == OpenSHC::Map::Buildings::BT_STOCKPILE) {
                                     this->wallCornerRotation = MACRO_CALL_MEMBER(
@@ -1331,14 +1335,14 @@ namespace Map {
                                         this->PillarGFXLayer[this->DAT_SomeTile] = (heightPicture_ - 1) / 2
                                             + GMFirstPictureIndex::instance[3]
                                             + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         break;
                                     }
                                 default:
                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 }
                                 if (DAT_BuildingsState::instance.buildings[buildingIDTmp].buildingType
                                         == OpenSHC::Map::Buildings::BT_KILLINGPIT
@@ -1366,7 +1370,7 @@ namespace Map {
                                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, this)(
                                     buildingIDTmp);
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_KEEP_NON_MANOR_HOUSE) != 0) {
-                                buildingIDTmp = (short)this->BuildingLayer[this->DAT_SomeTile];
+                                buildingIDTmp = this->BuildingLayer[this->DAT_SomeTile];
                                 if (DAT_BuildingsState::instance.buildings[buildingIDTmp].currentTilePositionAdjusted
                                     != this->DAT_SomeTile) {
                                     continue;
@@ -1381,7 +1385,7 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 rockIndexId = this->OrganismLayer[this->DAT_SomeTile];
                                 if (rockIndexId >= 2000) {
                                     rockIndexId -= 2000;
@@ -1392,7 +1396,7 @@ namespace Map {
                                         this)(rockIndexId);
                                     continue;
                                 }
-                                this->wallCornerRotation = (short)this->RandomLayer[this->DAT_SomeTile] & 7;
+                                this->wallCornerRotation = this->RandomLayer[this->DAT_SomeTile] & 7;
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[56]
                                     + this->LuminesenceLayer[this->DAT_SomeTile] * 8 + this->wallCornerRotation;
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_BOULDERS) != 0) {
@@ -1402,8 +1406,8 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
-                                this->wallCornerRotation = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                this->wallCornerRotation = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                 if (this->LuminesenceLayer[this->DAT_SomeTile] >= 6) {
                                     this->GfxLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[12] + 80 + this->wallCornerRotation;
@@ -1418,8 +1422,8 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
-                                this->wallCornerRotation = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                this->wallCornerRotation = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                 if (this->LuminesenceLayer[this->DAT_SomeTile] >= 6) {
                                     this->GfxLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[12] + 48 + this->wallCornerRotation;
@@ -1434,13 +1438,13 @@ namespace Map {
                                 this->PillarGFXLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                 this->MiscDisplayLayer[this->DAT_SomeTile]
-                                    = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
-                                this->wallCornerRotation = (short)this->RandomLayer[this->DAT_SomeTile] & 0xf;
+                                    = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                this->wallCornerRotation = this->RandomLayer[this->DAT_SomeTile] & 0xf;
                                 this->GfxLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[12] + 238 + this->wallCornerRotation;
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_OIL) != 0) {
                                 this->PillarGFXLayer[this->DAT_SomeTile] = GM_FIRST_PICTURE_INDEX(9);
-                                this->wallCornerRotation = (short)this->RandomLayer[this->DAT_SomeTile] & 7;
+                                this->wallCornerRotation = this->RandomLayer[this->DAT_SomeTile] & 7;
                                 this->GfxLayer[this->DAT_SomeTile]
                                     = GMFirstPictureIndex::instance[55] + 1064 + this->wallCornerRotation * 16;
                                 if (this->wallCornerRotation == 0) {
@@ -1478,14 +1482,13 @@ namespace Map {
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile] & L_MOAT) != 0) {
                                 this->bitFlag = 0;
-                                for (moatDirectionValue = 0; moatDirectionValue < 8;
-                                    moatDirectionValue = moatDirectionValue + 2) {
+                                for (moatDirectionValue = 0; moatDirectionValue < 8; moatDirectionValue += 2) {
                                     moatTile6
                                         = this->DAT_SomeTile + DIRECTION_OFFSET(this->DAT_SomeY, moatDirectionValue);
                                     if ((this->LogicLayer[moatTile6] & L_MOAT) != 0) {
                                         this->bitFlag |= 0x80 >> moatDirectionValue;
-                                    } else if ((short)this->BuildingLayer[moatTile6] != 0) {
-                                        buildingIDTmp = (short)this->BuildingLayer[moatTile6];
+                                    } else if (this->BuildingLayer[moatTile6] != 0) {
+                                        buildingIDTmp = this->BuildingLayer[moatTile6];
                                         if (DAT_BuildingsState::instance.buildings[buildingIDTmp].buildingType
                                                 == OpenSHC::Map::Buildings::BT_DRAWBRIDGE
                                             && MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::returnOwnedMoatAtTile,
@@ -1499,14 +1502,13 @@ namespace Map {
                                 this->bitFlag &= 0xaa;
                                 if (this->bitFlag == 0) {
                                     this->bitFlag = 0;
-                                    for (moatDirectionValue = 1; moatDirectionValue < 8;
-                                        moatDirectionValue = moatDirectionValue + 2) {
+                                    for (moatDirectionValue = 1; moatDirectionValue < 8; moatDirectionValue += 2) {
                                         moatTile6 = this->DAT_SomeTile
                                             + DIRECTION_OFFSET(this->DAT_SomeY, moatDirectionValue);
                                         if ((this->LogicLayer[moatTile6] & L_MOAT) != 0) {
                                             this->bitFlag |= 0x80 >> moatDirectionValue;
-                                        } else if ((short)this->BuildingLayer[moatTile6] != 0) {
-                                            buildingIDTmp = (short)this->BuildingLayer[moatTile6];
+                                        } else if (this->BuildingLayer[moatTile6] != 0) {
+                                            buildingIDTmp = this->BuildingLayer[moatTile6];
                                             if (DAT_BuildingsState::instance.buildings[buildingIDTmp].buildingType
                                                     == OpenSHC::Map::Buildings::BT_DRAWBRIDGE
                                                 && MACRO_CALL_MEMBER(
@@ -1523,7 +1525,7 @@ namespace Map {
                                 ROTATE_BITFLAG_BY_ORIENTATION()
                                 this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 204
                                     + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                    + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                    + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                 for (local_14_f = 0; local_14_f < 7; local_14_f++) {
                                     if (DAT_TerrainDefinedData::instance.TerrainFlagGraphicLookup[local_14_f].unk1
                                         == this->bitFlag) {
@@ -1535,11 +1537,11 @@ namespace Map {
                                         } else if (local_14_f == 4) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 268
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else if (local_14_f == 5) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 300
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         } else if (local_14_f == 6) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[5] + 332
                                                 + this->LuminesenceLayer[this->DAT_SomeTile];
@@ -1547,7 +1549,7 @@ namespace Map {
                                         break;
                                     }
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x80) != 0) {
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_UNNAMED_0x80) != 0) {
                                     goto wallAlpha;
                                 }
                             } else if ((this->LogicLayer[this->DAT_SomeTile]
@@ -1559,7 +1561,7 @@ namespace Map {
                                 if ((this->WallOwnerLayer[this->DAT_SomeTile] & 8) != 0) {
                                     alphaBaseCur = 45;
                                 }
-                                if (((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x80) != 0) {
+                                if ((this->MiscDisplayLayer[this->DAT_SomeTile] & MD_SEA_UNNAMED_0x80) != 0) {
                                 // the original jumps here from the pitch-ditch and moat arms: its gotos show as a
                                 // doubled jmp
                                 wallAlpha:
@@ -1567,8 +1569,8 @@ namespace Map {
                                         + DIRECTION_OFFSET(this->DAT_SomeY, (13 - this->mapOrientation) % 8);
                                     rightAlphaTile = this->DAT_SomeTile
                                         + DIRECTION_OFFSET(this->DAT_SomeY, (9 - this->mapOrientation) % 8);
-                                    if (((short)this->MiscDisplayLayer[leftAlphaTileRef] & 0x80) != 0) {
-                                        if (((short)this->MiscDisplayLayer[rightAlphaTile] & 0x80) != 0) {
+                                    if ((this->MiscDisplayLayer[leftAlphaTileRef] & MD_SEA_UNNAMED_0x80) != 0) {
+                                        if ((this->MiscDisplayLayer[rightAlphaTile] & MD_SEA_UNNAMED_0x80) != 0) {
                                             if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH
                                                 || this->mapOrientation == OpenSHC::Map::Enums::MO_WEST) {
                                                 this->AlphaGFXLayer[this->DAT_SomeTile]
@@ -1585,7 +1587,7 @@ namespace Map {
                                             this->AlphaGFXLayer[this->DAT_SomeTile]
                                                 = ((tileXTmp ^ this->DAT_SomeY) & 1) + alphaBaseCur + 51;
                                         }
-                                    } else if (((short)this->MiscDisplayLayer[rightAlphaTile] & 0x80) != 0) {
+                                    } else if ((this->MiscDisplayLayer[rightAlphaTile] & MD_SEA_UNNAMED_0x80) != 0) {
                                         if (this->mapOrientation == OpenSHC::Map::Enums::MO_NORTH
                                             || this->mapOrientation == OpenSHC::Map::Enums::MO_SOUTH) {
                                             this->AlphaGFXLayer[this->DAT_SomeTile]
@@ -1628,7 +1630,7 @@ namespace Map {
                                                & (L_WALL_OR_GATEHOUSE | L_BUILDING | L_KEEP_NON_MANOR_HOUSE))
                                         == 0
                                     && this->BuildingWasLayer[this->DAT_SomeTile] != 0
-                                    && ((short)this->MiscDisplayLayer[this->DAT_SomeTile] & 0x10) != 0) {
+                                    && (this->MiscDisplayLayer[this->DAT_SomeTile] & MD_BATCHED_SPRITES) != 0) {
                                 } else {
                                 // the plain terrain graphic; the original jumps here with goto from several arms above
                                 plainTerrain:
@@ -1641,7 +1643,7 @@ namespace Map {
                                         this->PillarGFXLayer[this->DAT_SomeTile]
                                             = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                         this->MiscDisplayLayer[this->DAT_SomeTile]
-                                            = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                            = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                         cliffDropValue = 1;
                                     } else {
                                         if (heightPicture_ <= 0) {
@@ -1650,7 +1652,7 @@ namespace Map {
                                         this->PillarGFXLayer[this->DAT_SomeTile] = (heightPicture_ - 1) / 2
                                             + GMFirstPictureIndex::instance[3]
                                             + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         if (MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::isCliffDropInDirection,
                                                 this)(this->DAT_SomeTile, tileXTmp, this->DAT_SomeY)
                                             != 0) {
@@ -1660,16 +1662,16 @@ namespace Map {
                                         }
                                     }
                                     heightPicture_ = (this->HeightLayer[this->DAT_SomeTile] / 8 - 1) * 32 + 1;
-                                    if (((char)this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
+                                    if ((this->Logic2Layer[this->DAT_SomeTile] & L2_BEACH) != 0) {
                                         this->GfxLayer[this->DAT_SomeTile] = 0;
                                     } else if (this->HeightLayer[this->DAT_SomeTile] < 8) {
-                                        if (((char)this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
+                                        if ((this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[55] + 180
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                         } else {
                                             this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[2]
                                                 + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                                + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                                + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                         }
                                     } else if ((this->LogicLayer[this->DAT_SomeTile] & L_DEFAULT_EARTH_OR_TEXTURE)
                                         != 0) {
@@ -1679,11 +1681,11 @@ namespace Map {
                                         this->LogicLayer[this->DAT_SomeTile] |= L_ROCKY;
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[56]
                                             + this->LuminesenceLayer[this->DAT_SomeTile] * 8
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 7);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 7);
                                     } else {
                                         this->GfxLayer[this->DAT_SomeTile] = GMFirstPictureIndex::instance[2]
                                             + heightPicture_ + (this->LuminesenceLayer[this->DAT_SomeTile] * 4 - 1)
-                                            + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                            + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                     }
                                 }
                             }
@@ -1697,22 +1699,22 @@ namespace Map {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 } else if (rampRotation != 0) {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
-                                } else if (((char)this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                } else if ((this->Logic2Layer[this->DAT_SomeTile] & 2) != 0) {
                                     this->PillarGFXLayer[this->DAT_SomeTile]
                                         = GMFirstPictureIndex::instance[9] + this->wallCornerRotation - 1;
                                     this->MiscDisplayLayer[this->DAT_SomeTile]
-                                        = (short)this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
+                                        = this->MiscDisplayLayer[this->DAT_SomeTile] | 0x800;
                                 } else {
                                     this->PillarGFXLayer[this->DAT_SomeTile] = (heightPicture_ - 1) / 2
                                         + GMFirstPictureIndex::instance[3]
                                         + this->LuminesenceLayer[this->DAT_SomeTile] * 4
-                                        + ((short)this->RandomLayer[this->DAT_SomeTile] & 3);
+                                        + (this->RandomLayer[this->DAT_SomeTile] & 3);
                                 }
                             }
                         }

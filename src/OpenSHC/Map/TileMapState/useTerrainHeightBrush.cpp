@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/LandscapeState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic2.hpp"
 #include "OpenSHC/Map/TileMapState/NeighbourFlagsGlobalAsm.hpp"
 
 #include "OpenSHC/Globals/DAT_LandscapeState.hpp"
@@ -12,9 +13,12 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Map::LogicHelpers::L2_PLATEAU_HIGH;
+    using OpenSHC::Map::LogicHelpers::L2_PLATEAU_MEDIUM;
     using OpenSHC::Map::LogicHelpers::L_BORDER;
     using OpenSHC::Map::LogicHelpers::L_BORDER_EDGE;
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
+    using OpenSHC::Map::LogicHelpers::L_DEFAULT_EARTH_OR_TEXTURE;
     using OpenSHC::Map::LogicHelpers::L_KEEP_NON_MANOR_HOUSE;
     using OpenSHC::Map::LogicHelpers::L_MARSH;
     using OpenSHC::Map::LogicHelpers::L_MOAT;
@@ -70,11 +74,11 @@ namespace Map {
             if (mapper == 0) {
                 // mapper min
                 height = 8;
-                this->Logic2Layer[brushTile] &= 0xf3;
+                this->Logic2Layer[brushTile] &= ~(L2_PLATEAU_MEDIUM | L2_PLATEAU_HIGH);
             } else if (mapper == 1) {
                 // mapper max, bug:fixme: is 156 really the maximum height?
                 height = 156;
-                this->LogicLayer[brushTile] |= 0x8000;
+                this->LogicLayer[brushTile] |= L_DEFAULT_EARTH_OR_TEXTURE;
             } else if (mapper == 5) {
                 height = 100;
             } else if (mapper == 2) {
@@ -87,7 +91,7 @@ namespace Map {
                 if (ratio > 156) {
                     ratio = 156;
                 }
-                height = (byte)ratio;
+                height = ratio;
             }
 
             if ((this->LogicLayer[brushTile] & L_ROCKY) != 0) {

@@ -147,8 +147,7 @@ namespace Map {
                 return;
             }
             if (this->UnitLayer[tile] != 0 && (logic & L_WALL_OR_GATEHOUSE) == 0
-                && DAT_UnitsState::instance.units[(short)this->UnitLayer[tile]].unitType
-                    != OpenSHC::Map::Units::UT_CHICKEN) {
+                && DAT_UnitsState::instance.units[this->UnitLayer[tile]].unitType != OpenSHC::Map::Units::UT_CHICKEN) {
                 return;
             }
             if (DAT_GameCore::instance.gameMode_2 != OpenSHC::Game::GM_EDITOR

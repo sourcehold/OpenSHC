@@ -22,7 +22,7 @@ namespace Map {
         uint const widthOrHeight = building.widthOrHeight;
         int buildingSizeTileIndex = 0;
         int const* drawbridgeMapping = DAT_TerrainDefinedData::instance.DrawbridgeOrientationMapping[variation];
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, 5);
             int const tile
@@ -38,10 +38,7 @@ namespace Map {
             }
             buildingSizeTileIndex++;
             drawbridgeMapping++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,

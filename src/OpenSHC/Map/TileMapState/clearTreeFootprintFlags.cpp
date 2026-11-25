@@ -17,17 +17,14 @@ namespace Map {
         this->OrganismLayer[DAT_LandscapeState::instance.trees[treeID].tile] = 0;
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] &= ~L_TREE;
         int index = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, DAT_LandscapeState::instance.trees[treeID].size);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + treeY].addXgetTile
                 + treeX + this->buildingX;
             index++;
             this->LogicLayer[tile] &= ~L_TREE_VARIATION;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
     }
 
 }

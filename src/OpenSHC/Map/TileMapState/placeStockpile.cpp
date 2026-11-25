@@ -3,6 +3,7 @@
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/UI/BottomLeftTextDisplayState.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
 
 #include "OpenSHC/Globals/DAT_BottomLeftTextDisplayState.hpp"
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -18,6 +19,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_BUILDING;
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00508540
     void TileMapState::placeStockpile(int playerID, int x, int y, undefined4 buildingType,
@@ -35,7 +37,7 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uid;
             DAT_BuildingsState::instance.buildings[buildingID].field_0x190 = part + 1;
             int index = 0;
-            while (true) {
+            do {
                 MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 2);
                 int const tile
                     = DAT_ViewportRenderState::instance
@@ -43,18 +45,15 @@ namespace Map {
                               + this->buildingY + y]
                           .addXgetTile
                     + DAT_TerrainDefinedData::instance.Stockpile_BuildingPartsOffsets[part].x + x + this->buildingX;
-                this->HeightLayer[tile] = (byte)(averageHeight + 10);
+                this->HeightLayer[tile] = averageHeight + 10;
                 // the stockpile body itself cannot be walked over
                 this->LogicLayer[tile] |= L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE | L_BUILDING;
-                this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & 0xf8 | (byte)(playerID - 1);
-                this->BuildingLayer[tile] = (ushort)buildingID;
-                this->BuildingWasLayer[tile] = (uchar)buildingType;
+                this->WallOwnerLayer[tile] = this->WallOwnerLayer[tile] & ~WO_OWNER_MASK | (playerID - 1);
+                this->BuildingLayer[tile] = buildingID;
+                this->BuildingWasLayer[tile] = buildingType;
                 this->ChangedLayer[tile] = 2;
                 index++;
-                if (index >= this->constructionTileCount) {
-                    break;
-                }
-            }
+            } while (index < this->constructionTileCount);
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         }
 
@@ -66,11 +65,11 @@ namespace Map {
             int const tile
                 = DAT_ViewportRenderState::instance.translationMatrix[offset.y + y].addXgetTile + offset.x + x;
             this->LogicLayer[tile] |= L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE;
-            this->HeightLayer[tile] = (byte)(averageHeight + 10);
-            this->AlphaGFXLayer[tile] = (ushort)buildingID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
-            this->WallOwnerLayer[tile] &= 0xf8;
-            this->WallOwnerLayer[tile] |= (byte)(playerID - 1);
+            this->HeightLayer[tile] = averageHeight + 10;
+            this->AlphaGFXLayer[tile] = buildingID;
+            this->BuildingWasLayer[tile] = buildingType;
+            this->WallOwnerLayer[tile] &= ~WO_OWNER_MASK;
+            this->WallOwnerLayer[tile] |= playerID - 1;
             this->ChangedLayer[tile] = 2;
         }
 

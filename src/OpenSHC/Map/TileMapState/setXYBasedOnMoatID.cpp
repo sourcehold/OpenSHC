@@ -16,7 +16,7 @@ namespace Map {
         }
 
         int const tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
-        int const tilePathConnection = (short)this->PathConnectionLayer[tile];
+        int const tilePathConnection = this->PathConnectionLayer[tile];
         int const tileHeight = this->HeightLayer[tile];
         if (mode == 1) {
             this->ALG_MoatXResult = this->moats[moatID].x;
@@ -34,7 +34,7 @@ namespace Map {
             if (this->HeightLayer[neighbour] > tileHeight + 16) {
                 continue;
             }
-            if ((short)this->PathConnectionLayer[neighbour] != tilePathConnection) {
+            if (this->PathConnectionLayer[neighbour] != tilePathConnection) {
                 continue;
             }
 

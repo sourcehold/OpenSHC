@@ -58,7 +58,7 @@ namespace Map {
 
         // the original walks the footprint again through the command parameter
         commandBuildingType = OpenSHC::Commands::M_MAPPER_NULL;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 commandBuildingType, buildingWidthOrHeight);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
@@ -113,10 +113,7 @@ namespace Map {
                 }
             }
             commandBuildingType = (MappersEnum)(commandBuildingType + 1);
-            if ((int)commandBuildingType >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (commandBuildingType < this->constructionTileCount);
         return result;
     }
 

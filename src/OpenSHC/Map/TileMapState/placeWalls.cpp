@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
 #include "OpenSHC/Map/WallAndPitchState.func.hpp"
 #include "OpenSHC/UI/MinimapViewState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/WallOwner.hpp"
 #include "OpenSHC/Map/Units/States/UnitState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -34,6 +35,7 @@ namespace Map {
     using OpenSHC::Map::LogicHelpers::L_UNKNOWN_WALL_RELATED;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
 
+    using OpenSHC::Map::LogicHelpers::WO_OWNER_MASK;
     using OpenSHC::Map::Units::UnitType;
     using OpenSHC::Map::Units::States::UnitState;
 
@@ -68,11 +70,11 @@ namespace Map {
         uint x = x1;
         uint y = y1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        while (true) {
+        do {
             if ((short)wallType == OpenSHC::Commands::M_MAPPER_STAIR && budget < 24) {
                 break;
             }
-            if (placed >= tileCountUnk || wallCount > (int)this->constructionTileCount) {
+            if (placed >= tileCountUnk || wallCount > this->constructionTileCount) {
                 break;
             }
             placed++;
@@ -128,7 +130,7 @@ namespace Map {
                     int const steps = budget - this->HeightLayer[tile] - 16;
                     if (steps > 0) {
                         this->LogicLayer[tile] |= L_STAIRS;
-                        this->HeightLayer[tile] += (char)steps;
+                        this->HeightLayer[tile] += steps;
                     } else {
                         applyWall = FALSE;
                     }
@@ -179,7 +181,7 @@ namespace Map {
                         if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL || towerNeighbours) {
                             this->LogicLayer[tile] |= L_UNKNOWN_WALL_RELATED;
                         }
-                        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & 0xf8) | (playerID - 1);
+                        this->WallOwnerLayer[tile] = (this->WallOwnerLayer[tile] & ~WO_OWNER_MASK) | (playerID - 1);
                     }
                     MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkagesInAllEightDirections,
@@ -250,10 +252,7 @@ namespace Map {
             if (budget >= 16) {
                 budget -= 16;
             }
-            if (x == x2 && y == y2 && overshoot == 0) {
-                break;
-            }
-        }
+        } while (x != x2 || y != y2 || overshoot != 0);
 
         // a stair aborts with wallType still M_MAPPER_STAIR, so it always charges stone
         if ((short)wallType == OpenSHC::Commands::M_MAPPER_WOODWALL) {

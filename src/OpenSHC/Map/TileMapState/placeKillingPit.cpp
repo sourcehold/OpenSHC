@@ -34,7 +34,7 @@ namespace Map {
             }
         }
 
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, buildingSize);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -42,8 +42,8 @@ namespace Map {
             if (index < countof(DAT_BuildingsState::instance.buildings[buildingID].tileRefs)) {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             }
-            this->HeightLayer[tile] = (byte)averageHeight;
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->HeightLayer[tile] = averageHeight;
+            this->BuildingLayer[tile] = buildingID;
             this->BuildingWasLayer[tile] = (uchar)buildingType;
             if (buildingType != OpenSHC::Map::Buildings::BT_KILLINGPIT) {
                 /* bug:fixme: a pit dug in grass comes back as thick scrub, not as the terrain it replaced */
@@ -59,10 +59,7 @@ namespace Map {
             }
             index++;
             this->ChangedLayer[tile] = 2;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 

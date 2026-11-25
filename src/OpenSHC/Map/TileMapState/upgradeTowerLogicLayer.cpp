@@ -14,7 +14,7 @@ namespace Map {
     void TileMapState::upgradeTowerLogicLayer(int buildingID)
     {
         int buildingSizeTileIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 buildingSizeTileIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int tile = DAT_ViewportRenderState::instance
@@ -42,10 +42,7 @@ namespace Map {
                 this->LogicLayer[tile] |= L_KEEP_NON_MANOR_HOUSE;
             }
             buildingSizeTileIndex++;
-            if (buildingSizeTileIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (buildingSizeTileIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }
 

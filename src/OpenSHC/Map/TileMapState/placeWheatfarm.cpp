@@ -54,29 +54,26 @@ namespace Map {
         }
 
         // the farm house
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, 3);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
-            this->BuildingLayer[tile] = (short)buildingID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingLayer[tile] = buildingID;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setTerrain, this)(
                 playerID, tile, this->buildingY + y, 2, L_NONE, L2_THICK_SCRUB);
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
 
         for (int i = 0; i < 36; i++) {
             int tile = DAT_BuildingsState::instance.buildings[buildingID].tileRefs[i];
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
             this->LogicLayer[tile] |= L_FARM_FIELD_WHEAT;
-            this->BuildingLayer[tile] = (short)buildingID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingLayer[tile] = buildingID;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
         }
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);

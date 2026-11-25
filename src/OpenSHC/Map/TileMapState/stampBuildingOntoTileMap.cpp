@@ -19,7 +19,7 @@ namespace Map {
             OpenSHC::Map::Buildings::BuildingsState_Func::setupBuildingData, DAT_BuildingsState::ptr)(
             playerID, x, y, averageHeight, (BuildingType)(short)buildingType, buildingSize, playerID, (short)variation);
         this->placedBuildingID = buildingID;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, buildingSize);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
@@ -27,15 +27,12 @@ namespace Map {
             if (index < countof(DAT_BuildingsState::instance.buildings[buildingID].tileRefs)) {
                 DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
             }
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
-            this->BuildingLayer[tile] = (short)buildingID;
+            this->BuildingLayer[tile] = buildingID;
             index++;
             this->ChangedLayer[tile] = 2;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }

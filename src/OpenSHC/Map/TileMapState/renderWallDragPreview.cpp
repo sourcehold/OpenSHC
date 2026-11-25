@@ -30,7 +30,7 @@ namespace Map {
             budget = this->maxWallHeightInPath;
             if (this->field_0x554920 == 0) {
                 this->ConstructionGFXLayer[DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile + x1]
-                    = (short)GMFirstPictureIndex::instance[6] + 19;
+                    = GMFirstPictureIndex::instance[6] + 19;
                 return;
             }
         }
@@ -43,7 +43,7 @@ namespace Map {
         int downY = y2 - y1;
         int rightX = x2 - x1;
         int* translation = &DAT_ViewportRenderState::instance.translationMatrix[y1].addXgetTile;
-        while (true) {
+        do {
             if (command == OpenSHC::Commands::M_MAPPER_STAIR && budget < 24) {
                 break;
             }
@@ -69,20 +69,20 @@ namespace Map {
                 }
                 if (this->illegalBuild != FALSE) {
                     if (command == OpenSHC::Commands::M_MAPPER_WALL) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
+                        this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 19;
                     } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
+                        this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 19;
                     } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 20;
+                        this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 20;
                     } else if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
-                        this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 19;
+                        this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 19;
                     }
                 } else if (command == OpenSHC::Commands::M_MAPPER_WALL) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6];
+                    this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6];
                 } else if (command == OpenSHC::Commands::M_MAPPER_WOODWALL) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 1;
+                    this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 1;
                 } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
-                    this->ConstructionGFXLayer[tile] = (ushort)GMFirstPictureIndex::instance[6] + 4;
+                    this->ConstructionGFXLayer[tile] = GMFirstPictureIndex::instance[6] + 4;
                 } else if (command == OpenSHC::Commands::M_MAPPER_STAIR) {
                     // a stair climbs one graphic per eight units of height below the wall top
                     int steps = (budget - this->HeightLayer[tile]) / 8 - 1;
@@ -157,10 +157,7 @@ namespace Map {
             if (budget > 16 && overshoot == 2) {
                 budget -= 16;
             }
-            if (x == x2 && y == y2 && overshoot == 0) {
-                break;
-            }
-        }
+        } while (x != x2 || y != y2 || overshoot != 0);
 
         if (this->illegalBuild != FALSE) {
             this->DAT_WallTileCountCurrentDrag = 0;

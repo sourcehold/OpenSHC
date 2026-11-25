@@ -69,7 +69,7 @@ namespace Map {
                 this->HeightLayer[brushTile] -= 8;
             }
             uint const brushY = *(uint volatile*)&y;
-            this->Logic2Layer[brushTile] = (byte)plateauHeightSetting;
+            this->Logic2Layer[brushTile] = plateauHeightSetting;
             this->DAT_SomeTile = brushTile;
             this->DAT_SomeY = brushY;
 

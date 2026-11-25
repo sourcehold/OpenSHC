@@ -40,22 +40,19 @@ namespace Map {
         int buildingID = (short)placedID;
         this->placedBuildingID = buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 index, buildingSize);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             this->LogicLayer[tile] |= L_BUILDING;
             this->BuildingLayer[tile] = placedID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
 
@@ -66,26 +63,23 @@ namespace Map {
             playerID, x, y, averageHeight, OpenSHC::Map::Buildings::BT_PARADEGROUND3, 5, playerID, 15);
         buildingID = (short)placedID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = (short)this->placedBuildingID;
+        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = this->placedBuildingID;
         int campIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 campIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             if (this->buildingX == 2 && this->buildingY == 2) {
                 this->LogicLayer[tile] |= L_BUILDING;
             }
             this->BuildingLayer[tile] = placedID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             campIndex++;
-            if (campIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (campIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
@@ -98,26 +92,23 @@ namespace Map {
             playerID, x, y, averageHeight, OpenSHC::Map::Buildings::BT_PARADEGROUND4, 5, playerID, 15);
         buildingID = (short)placedID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = (short)this->placedBuildingID;
+        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = this->placedBuildingID;
         campIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 campIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             if (this->buildingX == 2 && this->buildingY == 2) {
                 this->LogicLayer[tile] |= L_BUILDING;
             }
             this->BuildingLayer[tile] = placedID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             campIndex++;
-            if (campIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (campIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
@@ -130,26 +121,23 @@ namespace Map {
             playerID, x, y, averageHeight, OpenSHC::Map::Buildings::BT_PARADEGROUND2, 5, playerID, 15);
         buildingID = (short)placedID;
         DAT_BuildingsState::instance.buildings[buildingID].uidWhenPlaced = uniqueID;
-        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = (short)this->placedBuildingID;
+        DAT_BuildingsState::instance.buildings[buildingID].quarryStockpileID = this->placedBuildingID;
         campIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(
                 campIndex, DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetTileAndClearMoat, this)(tile);
-            this->HeightLayer[tile] = (byte)averageHeight;
+            this->HeightLayer[tile] = averageHeight;
             if (this->buildingX == 2 && this->buildingY == 2) {
                 this->LogicLayer[tile] |= L_BUILDING;
             }
             this->BuildingLayer[tile] = placedID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             campIndex++;
-            if (campIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (campIndex < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,

@@ -24,13 +24,13 @@ namespace Map {
             playerID, x, y, averageHeight, (BuildingType)(short)buildingType, width, playerID, orientation);
         int rot = orientation / 2;
         this->placedBuildingID = buildingID;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, width);
             int tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile
                 + this->buildingX + x;
             DAT_BuildingsState::instance.buildings[buildingID].tileRefs[index] = tile;
-            this->BuildingLayer[tile] = (short)buildingID;
-            this->BuildingWasLayer[tile] = (uchar)buildingType;
+            this->BuildingLayer[tile] = buildingID;
+            this->BuildingWasLayer[tile] = buildingType;
             this->ChangedLayer[tile] = 2;
             if (DAT_TerrainDefinedData::instance.DrawbridgeTileMoatProperty[index] != 0) {
                 this->LogicLayer[tile] |= L_BUILDING;
@@ -45,10 +45,7 @@ namespace Map {
                 this->LogicLayer[tile] &= ~L_MOAT;
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setMiscDisplayLayer, this)(buildingID);
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updatePathLinkagesForBuilding, this)(buildingID);
     }

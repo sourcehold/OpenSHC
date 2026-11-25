@@ -80,10 +80,10 @@ namespace Map {
             bool levelChanged = true;
             if (this->HeightLayer[brushTile] < average) {
                 byte const height = *(byte volatile*)&this->HeightLayer[brushTile];
-                levelled = (char)((average - height) / 10) + height + 1;
+                levelled = ((average - height) / 10) + height + 1;
             } else if (this->HeightLayer[brushTile] > average) {
                 byte const height = *(byte volatile*)&this->HeightLayer[brushTile];
-                levelled = height - (char)((height - average) / 10) - 1;
+                levelled = height - ((height - average) / 10) - 1;
             } else {
                 levelChanged = false;
             }

@@ -16,15 +16,14 @@ namespace Map {
         uint neighbourY = y - 1;
         if (x <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + x] != 0
-            && (int)(height
-                   - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x])
+            && (height - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x])
                 > 0) {
             return TRUE;
         }
         uint neighbourX = x + 1;
         if (neighbourX <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] != 0
-            && (int)(height
+            && (height
                    - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x + 1])
                 > 0) {
             return TRUE;
@@ -32,30 +31,28 @@ namespace Map {
         neighbourX = x + 1;
         if (neighbourX <= 399 && y <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + neighbourX] != 0
-            && (int)(height
-                   - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x + 1])
+            && (height - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x + 1])
                 > 0) {
             return TRUE;
         }
         neighbourY = y + 1;
         if (neighbourX <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] != 0
-            && (int)(height
+            && (height
                    - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y + 1].addXgetTile + x + 1])
                 > 0) {
             return TRUE;
         }
         if (x <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + x] != 0
-            && (int)(height
-                   - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y + 1].addXgetTile + x])
+            && (height - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y + 1].addXgetTile + x])
                 > 0) {
             return TRUE;
         }
         neighbourX = x - 1;
         if (neighbourX <= 399 && neighbourY <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[neighbourY * 400 + neighbourX] != 0
-            && (int)(height
+            && (height
                    - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y + 1].addXgetTile + x - 1])
                 > 0) {
             return TRUE;
@@ -63,8 +60,7 @@ namespace Map {
         neighbourX = x - 1;
         if (neighbourX <= 399 && y <= 399
             && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + neighbourX] != 0
-            && (int)(height
-                   - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x - 1])
+            && (height - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x - 1])
                 > 0) {
             return TRUE;
         }
@@ -72,7 +68,7 @@ namespace Map {
         if (MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid, DAT_ViewportRenderState::ptr)(
                 neighbourX, y - 1)
                 != FALSE
-            && (int)(height
+            && (height
                    - this->HeightLayer[DAT_ViewportRenderState::instance.translationMatrix[y - 1].addXgetTile + x - 1])
                 > 0) {
             return TRUE;

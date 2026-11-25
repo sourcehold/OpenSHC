@@ -1,5 +1,7 @@
 #include "../TileMapState.func.hpp"
 
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
+
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
@@ -9,6 +11,7 @@ namespace Map {
 
     using OpenSHC::Map::LogicHelpers::L_STOCKPILEUnk;
     using OpenSHC::Map::LogicHelpers::L_WALL_OR_GATEHOUSE;
+    using OpenSHC::Map::LogicHelpers::MD_RUBBLE_INNERUnk;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FAF70
     void TileMapState::clearStockpileFootprintTiles(int x, int y)
@@ -23,7 +26,7 @@ namespace Map {
             if (DAT_BuildingsState::instance.buildings[this->AlphaGFXLayer[tile]].noRubble == 0) {
                 this->BuildingWasLayer[tile] = 0;
             } else {
-                this->MiscDisplayLayer[tile] |= 0x4000;
+                this->MiscDisplayLayer[tile] |= MD_RUBBLE_INNERUnk;
             }
             this->AlphaGFXLayer[tile] = 0;
         }

@@ -1,6 +1,7 @@
 #include "../TileMapState.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
@@ -8,6 +9,8 @@
 
 namespace OpenSHC {
 namespace Map {
+
+    using OpenSHC::Map::LogicHelpers::MD_BUILDING_TILES;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004FB0C0
     void TileMapState::setMiscDisplayLayer(int buildingID)
@@ -82,19 +85,16 @@ namespace Map {
         }
 
         int clearIndex = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(clearIndex, size);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
-            this->MiscDisplayLayer[tile] &= ~0xc;
+            this->MiscDisplayLayer[tile] &= ~MD_BUILDING_TILES;
             clearIndex++;
-            if (clearIndex >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (clearIndex < this->constructionTileCount);
 
         int index = 0;
-        while (true) {
+        do {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getBuildingSizeIndexMappingData, this)(index, size);
             int const tile = DAT_ViewportRenderState::instance.translationMatrix[this->buildingY + y].addXgetTile + x
                 + this->buildingX;
@@ -112,14 +112,11 @@ namespace Map {
                 DAT_BuildingsState::instance.buildings[buildingID].miscDisplayLayerTile = tile;
             }
             if (index == extraTile) {
-                this->MiscDisplayLayer[tile] |= 0xc;
+                this->MiscDisplayLayer[tile] |= MD_BUILDING_TILES;
                 DAT_BuildingsState::instance.buildings[buildingID].miscDisplayLayerTile = tile;
             }
             index++;
-            if (index >= this->constructionTileCount) {
-                break;
-            }
-        }
+        } while (index < this->constructionTileCount);
     }
 
 }

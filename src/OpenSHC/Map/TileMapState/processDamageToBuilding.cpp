@@ -50,6 +50,10 @@ namespace Map {
     using OpenSHC::Game::GameMode;
     using OpenSHC::Map::Buildings::BuildingLogicalState;
     using OpenSHC::Map::Entities::EntityType;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_APPLE;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_DAIRY;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_HOP;
+    using OpenSHC::Map::LogicHelpers::L_FARM_FIELD_WHEAT;
     using OpenSHC::Map::Units::States::UnitState;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00516B80
@@ -82,11 +86,13 @@ namespace Map {
             }
             DAT_GameCore::instance.cowPoisonTrackerUnk += damageUnk * 10;
             if (DAT_BuildingDefinedData::instance
-                    .BuildingTypeHasHealth[(short)DAT_BuildingsState::instance.buildings[buildingID].buildingType]
+                    .BuildingTypeHasHealth[DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                 == 0) {
                 return TRUE;
             }
-            if ((this->LogicLayer[tile] & 0xf000000) != 0) {
+            if ((this->LogicLayer[tile]
+                    & (L_FARM_FIELD_WHEAT | L_FARM_FIELD_HOP | L_FARM_FIELD_APPLE | L_FARM_FIELD_DAIRY))
+                != 0) {
                 return TRUE;
             }
             if (spareOwnTeam != FALSE
@@ -95,7 +101,7 @@ namespace Map {
                         .playerTeams[DAT_BuildingsState::instance.buildings[buildingID].owner]) {
                 return FALSE;
             }
-            DAT_BuildingsState::instance.buildings[buildingID].currentHealth -= (short)damageUnk;
+            DAT_BuildingsState::instance.buildings[buildingID].currentHealth -= damageUnk;
 
             if (aiBuildDelayRelated == TRUE
                 && (DAT_BuildingsState::instance.buildings[buildingID].buildingType
@@ -105,13 +111,13 @@ namespace Map {
                 // a damaged gatehouse loses its drawbridges straight away
                 int bridge = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
                     DAT_BuildingsState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].owner,
-                    (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                    (short)DAT_BuildingsState::instance.buildings[buildingID].y,
+                    DAT_BuildingsState::instance.buildings[buildingID].x,
+                    DAT_BuildingsState::instance.buildings[buildingID].y,
                     DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight,
                     OpenSHC::Map::Buildings::BT_DRAWBRIDGE, 0);
                 if (bridge != 0) {
                     if (DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                            [(short)DAT_BuildingsState::instance.buildings[bridge].buildingType]
+                            [DAT_BuildingsState::instance.buildings[bridge].buildingType]
                         != 0) {
                         this->showNoRubbleWhenDestroyingBuilding = FALSE;
                     } else {
@@ -121,14 +127,14 @@ namespace Map {
                         OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(bridge);
                     int second = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
                         DAT_BuildingsState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].owner,
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].y,
+                        DAT_BuildingsState::instance.buildings[buildingID].x,
+                        DAT_BuildingsState::instance.buildings[buildingID].y,
                         DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight,
                         OpenSHC::Map::Buildings::BT_DRAWBRIDGE, bridge);
                     if (second != 0) {
                         this->showNoRubbleWhenDestroyingBuilding
                             = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                                  [(short)DAT_BuildingsState::instance.buildings[second].buildingType]
+                                  [DAT_BuildingsState::instance.buildings[second].buildingType]
                             == 0;
                         MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
                             DAT_BuildingsState::ptr)(second);
@@ -145,7 +151,7 @@ namespace Map {
             case OpenSHC::Map::Buildings::BT_TOWER4:
             case OpenSHC::Map::Buildings::BT_TOWER5:
                 DAT_GameState::instance.playerDataArray[DAT_BuildingsState::instance.buildings[buildingID].owner]
-                    .defensesDamagedByPlayer = (short)playerID;
+                    .defensesDamagedByPlayer = playerID;
                 break;
             default:
                 break;
@@ -174,7 +180,7 @@ namespace Map {
                         .resourceRebuildDelay = 1;
                 }
                 int owner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                int destroyedType = (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+                int destroyedType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
                 if (destroyedType != OpenSHC::Map::Buildings::BT_UNKNOWN3
                     && (destroyedType <= 85 || destroyedType > 89)) {
                     DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[playerID] += 1;
@@ -230,9 +236,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 25);
                     int towerOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                    int towerX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int towerX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int towerY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int towerY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     // a destroyed tower leaves its ruin behind
@@ -247,9 +253,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     int towerOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                    int towerX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int towerX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int towerY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int towerY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     // a destroyed tower leaves its ruin behind
@@ -264,9 +270,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     int towerOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                    int towerX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int towerX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int towerY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int towerY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     // a destroyed tower leaves its ruin behind
@@ -281,9 +287,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     int towerOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                    int towerX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int towerX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int towerY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int towerY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     // a destroyed tower leaves its ruin behind
@@ -298,9 +304,9 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     int towerOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
-                    int towerX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int towerX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int towerY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int towerY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     // a destroyed tower leaves its ruin behind
@@ -318,11 +324,11 @@ namespace Map {
                         goto destroyNormally;
                     }
                     // a smelter with oil in it goes up, and a full one throws burning oil about
-                    int smelterX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int smelterX = DAT_BuildingsState::instance.buildings[buildingID].x;
                     int smelterOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                     uint smelterTile = DAT_BuildingsState::instance.buildings[buildingID].currentTilePositionAdjusted;
                     DAT_BuildingsState::instance.buildings[buildingID].noRubble = 0;
-                    int smelterY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int smelterY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::deleteBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     if (oilAmount <= 4) {
@@ -344,13 +350,13 @@ namespace Map {
                 case OpenSHC::Map::Buildings::BT_GATEHOUSESMALL: {
                     int bridge = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
                         DAT_BuildingsState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].owner,
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].y,
+                        DAT_BuildingsState::instance.buildings[buildingID].x,
+                        DAT_BuildingsState::instance.buildings[buildingID].y,
                         DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight,
                         OpenSHC::Map::Buildings::BT_DRAWBRIDGE, 0);
                     if (bridge != 0) {
                         if (DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                                [(short)DAT_BuildingsState::instance.buildings[bridge].buildingType]
+                                [DAT_BuildingsState::instance.buildings[bridge].buildingType]
                             != 0) {
                             this->showNoRubbleWhenDestroyingBuilding = FALSE;
                         } else {
@@ -361,26 +367,26 @@ namespace Map {
                         int second
                             = MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::findParticularBuilding,
                                 DAT_BuildingsState::ptr)(DAT_BuildingsState::instance.buildings[buildingID].owner,
-                                (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                                (short)DAT_BuildingsState::instance.buildings[buildingID].y,
+                                DAT_BuildingsState::instance.buildings[buildingID].x,
+                                DAT_BuildingsState::instance.buildings[buildingID].y,
                                 DAT_BuildingsState::instance.buildings[buildingID].widthOrHeight,
                                 OpenSHC::Map::Buildings::BT_DRAWBRIDGE, bridge);
                         if (second != 0) {
                             this->showNoRubbleWhenDestroyingBuilding
                                 = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                                      [(short)DAT_BuildingsState::instance.buildings[second].buildingType]
+                                      [DAT_BuildingsState::instance.buildings[second].buildingType]
                                 == 0;
                             MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
                                 DAT_BuildingsState::ptr)(second);
                         }
                     }
-                    int gateX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-                    int gateY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                    int gateX = DAT_BuildingsState::instance.buildings[buildingID].x;
+                    int gateY = DAT_BuildingsState::instance.buildings[buildingID].y;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::processDamageToUnitsOnBuilding,
                         DAT_BuildingsState::ptr)(buildingID, 50);
                     this->showNoRubbleWhenDestroyingBuilding
                         = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed
-                              [(short)DAT_BuildingsState::instance.buildings[buildingID].buildingType]
+                              [DAT_BuildingsState::instance.buildings[buildingID].buildingType]
                         == 0;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
@@ -404,16 +410,15 @@ namespace Map {
                 }
                 default:
                 destroyNormally: {
-                    int rubbleType = (short)DAT_BuildingsState::instance.buildings[buildingID].buildingType;
+                    int rubbleType = DAT_BuildingsState::instance.buildings[buildingID].buildingType;
                     int rubbleOwner = DAT_BuildingsState::instance.buildings[buildingID].owner;
                     this->showNoRubbleWhenDestroyingBuilding
                         = DAT_BuildingDefinedData::instance.BuildingShowRubbleWhenDestroyed[rubbleType] == 0;
                     MACRO_CALL_MEMBER(OpenSHC::Map::Buildings::BuildingsState_Func::destroyBuilding,
                         DAT_BuildingsState::ptr)(buildingID);
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].x,
-                        (short)DAT_BuildingsState::instance.buildings[buildingID].y,
-                        OpenSHC::DE::SHCDE::FX_BUILDING_SMASH);
+                        DAT_BuildingsState::instance.buildings[buildingID].x,
+                        DAT_BuildingsState::instance.buildings[buildingID].y, OpenSHC::DE::SHCDE::FX_BUILDING_SMASH);
                     if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
                         && playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && DAT_GameState::instance.mapAndTime.playerTeams[rubbleOwner]
@@ -460,8 +465,8 @@ namespace Map {
                         == DAT_UnitsState::instance.units[rider].uid
                     && DAT_BuildingsState::instance.buildings[buildingID].maxHealth != 0) {
                     DAT_UnitsState::instance.units[rider].health
-                        = ((int)remaining * DAT_UnitsState::instance.units[rider].maxHealth)
-                        / (int)DAT_BuildingsState::instance.buildings[buildingID].maxHealth;
+                        = (remaining * DAT_UnitsState::instance.units[rider].maxHealth)
+                        / DAT_BuildingsState::instance.buildings[buildingID].maxHealth;
                 }
             }
         } else {
@@ -477,7 +482,7 @@ namespace Map {
                         == DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]) {
                     return FALSE;
                 }
-                DAT_GameState::instance.playerDataArray[wallOwner].defensesDamagedByPlayer = (short)playerID;
+                DAT_GameState::instance.playerDataArray[wallOwner].defensesDamagedByPlayer = playerID;
                 if (unitID != 0) {
                     if (DAT_GameState::instance.mapAndTime.playerTeams[wallOwner]
                         == DAT_GameState::instance.mapAndTime.playerTeams[playerID]) {
@@ -517,7 +522,7 @@ namespace Map {
                         break;
                     }
                     this->HeightLayer[tile] -= 1;
-                    if ((char)this->DamageLayer[tile] < 200) {
+                    if (this->DamageLayer[tile] < 200) {
                         this->DamageLayer[tile] += 1;
                     }
                 }
