@@ -1,3 +1,4 @@
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
@@ -22,7 +23,7 @@ namespace Map {
                 || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
                 return;
             }
-            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].keep.id
+            if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id
                 <= 0) {
                 MACRO_CALL_MEMBER(TroopValueState_Func::updateAttackInfoTick, this)();
                 return;

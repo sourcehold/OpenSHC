@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -31,7 +32,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.keepCon
                 = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance
                         .playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                        .campground.tileEntry];
+                        .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].tileEntry];
         }
 
     }

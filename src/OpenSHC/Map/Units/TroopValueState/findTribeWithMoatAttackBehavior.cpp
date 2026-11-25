@@ -17,7 +17,7 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A920
-        undefined4 TroopValueState::findTribeWithMoatAttackBehavior()
+        BOOLEnum TroopValueState::findTribeWithMoatAttackBehavior()
         {
             for (int tribeID = 1; tribeID < 1250; tribeID = tribeID + 1) {
                 if (DAT_TribesState::instance.tribes[tribeID].tribeState != 0) {

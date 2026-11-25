@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/Units/Instructions/UnitMatchSpeedEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_PathFindingState.hpp"
@@ -17,9 +18,10 @@ namespace Map {
 
         using Map::Units::UnitInstructionType;
         using Map::Units::Instructions::UnitMatchSpeedEnum;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D450
-        undefined4 TroopValueState::moveTribeToNearbyGatehouse(int param_1)
+        BOOLEnum TroopValueState::moveTribeToNearbyGatehouse(int param_1)
         {
             int const _unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
             int _gatehouseID = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::getGatehouseNearSomethingUnk,

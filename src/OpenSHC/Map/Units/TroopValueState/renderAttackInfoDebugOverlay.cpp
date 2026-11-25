@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Text/TextManager.func.hpp"
@@ -44,7 +45,7 @@ namespace Map {
                 "keep POS: ", xParam2, yParam, Text::TTA_LEFT, 0xffffff, 0x12, TRUE, 0);
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
-                    .keep.yEntry,
+                    .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].yEntry,
                 xParam2, yParam, Text::TTA_LEFT, 0x80ff, 0x12, TRUE, 0);
             yParam = y + 0x20;
             MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(

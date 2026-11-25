@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 #include "OpenSHC/Map/Units/Behavior/UnitStanceEnum.hpp"
 #include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -22,9 +23,10 @@ namespace Map {
 
         using Map::Units::UnitInstructionType;
         using Map::Units::Behavior::UnitStanceEnum;
+        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051C570
-        undefined4 TroopValueState::ifNecessaryThrowOilAutomatically(int param_1)
+        BOOLEnum TroopValueState::ifNecessaryThrowOilAutomatically(int param_1)
         {
             int _playerIDOrUnitID;
             int _tribeIDOrTileIndex = (int)DAT_UnitsState::instance.units[param_1].tribeID;
@@ -50,7 +52,7 @@ namespace Map {
                 DAT_UnitsState::instance.units[param_1].updateTickTracker = 0;
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeTotalUnitsWithinDistance,
                     DAT_PathFindingState::ptr)(_playerIDOrUnitID, 0, 0, _tileOrTroopValue, _searchRadiusOrTargetUnitID);
-                _searchRadiusOrTargetUnitID = DAT_PathFindingState::instance.field34_0x64;
+                _searchRadiusOrTargetUnitID = DAT_PathFindingState::instance.field_0x64;
                 if (DAT_TribesState::instance.tribes[_tribeIDOrTileIndex].unitStance
                     == Map::Units::Behavior::USE_AGGRESSIVE) {
                     if (DAT_PathFindingState::instance.ALGO_TotalTroopCount < 1) {
@@ -60,10 +62,10 @@ namespace Map {
                     && (DAT_PathFindingState::instance.ALGO_TotalTroopValue < 0x14)) {
                     return 0;
                 }
-                if (DAT_PathFindingState::instance.field34_0x64) {
+                if (DAT_PathFindingState::instance.field_0x64) {
                     short _buildingID
                         = DAT_TileMapState::instance.BuildingLayer
-                              [DAT_UnitsState::instance.units[DAT_PathFindingState::instance.field34_0x64].tile];
+                              [DAT_UnitsState::instance.units[DAT_PathFindingState::instance.field_0x64].tile];
                     if (_buildingID) {
                         int _buildingSize = 0;
                         switch (DAT_BuildingsState::instance.buildings[_buildingID].buildingType) {

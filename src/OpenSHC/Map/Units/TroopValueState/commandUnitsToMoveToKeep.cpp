@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
@@ -39,7 +40,7 @@ namespace Map {
             uint y1;
             uint x1;
             int _playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            uint _keep = DAT_GameState::instance.playerDataArray[_playerID].keep.id;
+            uint _keep = DAT_GameState::instance.playerDataArray[_playerID].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id;
             if (0 < (int)_keep) {
                 BuildingTypeShort _buildingType = DAT_BuildingsState::instance.buildings[_keep].buildingType;
                 if (_buildingType == Map::Buildings::BT_MANORHOUSE) {

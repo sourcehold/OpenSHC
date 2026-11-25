@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 
@@ -22,9 +23,9 @@ namespace Map {
             int _attackedPlayerID = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
                                         .currentPlayerID_OR_attackedPlayerID_OR_one;
             int const destinationXPosition
-                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.xEntry;
+                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].xEntry;
             int const destinationYPosition
-                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].campground.yEntry;
+                = DAT_GameState::instance.playerDataArray[_attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].yEntry;
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].wide2; i = i + 1) {

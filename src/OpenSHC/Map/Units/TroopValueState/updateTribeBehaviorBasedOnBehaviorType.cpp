@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
@@ -67,7 +68,7 @@ namespace Map {
             DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter
                 = DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter + 1;
             _updateCounter = DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter;
-            DAT_TribesState::instance.tribes[tribeID].field159_0x2ae = 0;
+            DAT_TribesState::instance.tribes[tribeID].field_0x2ae = 0;
             _playerID_7 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             _retargetCount = DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount;
             if (_tribeBehaviorType < 1010) {
@@ -267,7 +268,7 @@ namespace Map {
                         && (_index = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::stopTribeMovementAndCheckIdle,
                                 DAT_TribesState::ptr)(tribeID),
                             _index != 0)) {
-                        _index = DAT_GameState::instance.playerDataArray[_playerID_7].keep.id;
+                        _index = DAT_GameState::instance.playerDataArray[_playerID_7].buildingEntryInfos[Game::Player::Enums::BEIE_KEEP].id;
                         DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter = 0;
                         DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = 0;
                         if (0 < _index) {

@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -27,7 +28,7 @@ namespace Map {
             int _attackedPlayerID;
             uint _tile2;
             uint _tile;
-            if (DAT_GameState::instance.playerDataArray[attackedPlayerID].campground.id != 0) {
+            if (DAT_GameState::instance.playerDataArray[attackedPlayerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].id != 0) {
                 int _offset = attackingPlayerID * 96188;
                 int _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
                 int _counterTillHack2 = 0;

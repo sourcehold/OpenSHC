@@ -35,7 +35,7 @@ namespace Map {
                         int _isBrazierNearby = MACRO_CALL_MEMBER(
                             Map::Entities::EntityState_Func::isBrazierNearby, DAT_EntityState::ptr)((int)_pUnit->x,
                             (int)(_pUnit->y), (int)(_pUnit->buildingHeight + _pUnit->terrainOrClimbHeight));
-                        _pUnit->field297_0x40d = _isBrazierNearby != 0;
+                        _pUnit->field_0x40d = _isBrazierNearby != 0;
                     }
                     _unitID = _unitID + 1;
                     _pUnit = _pUnit + 1;

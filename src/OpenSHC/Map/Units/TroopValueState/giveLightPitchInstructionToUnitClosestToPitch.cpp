@@ -25,7 +25,7 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BF70
-        undefined4 TroopValueState::giveLightPitchInstructionToUnitClosestToPitch(int tile)
+        BOOLEnum TroopValueState::giveLightPitchInstructionToUnitClosestToPitch(int tile)
         {
             BOOLEnum isAIPlayerWithKeep;
             int _shot;
@@ -43,7 +43,7 @@ namespace Map {
                             isAIPlayerWithKeep)
                         && (_pUnit->unitType == Map::Units::UT_E_ARCHER
                             || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
-                        && !_pUnit->dying && _pUnit->field297_0x40d != false
+                        && !_pUnit->dying && _pUnit->field_0x40d != false
                         && _pUnit->targetingType != Map::Units::UIT_LIGHT_PITCH) {
                         int const _ditchY = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].y;
                         int const _ditchX = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].x;
@@ -82,13 +82,13 @@ namespace Map {
             DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
             DAT_UnitsState::instance.units[_minUnitID]
                 .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID = _ditchUID;
-            DAT_UnitsState::instance.units[_minUnitID].field253_0x3c5 = 0x22;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x3c5 = 0x22;
             DAT_UnitsState::instance.units[_minUnitID].targetingType = Map::Units::UIT_LIGHT_PITCH;
-            DAT_UnitsState::instance.units[_minUnitID].field283_0x3f8 = 0;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x3f8 = 0;
             MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
                 DAT_UnitsState::ptr)(_minUnitID);
             DAT_UnitsState::instance.units[_minUnitID].state.generic = Map::Units::States::US_FIRE_WEAPONUnk;
-            DAT_UnitsState::instance.units[_minUnitID].field298_0x40e = true;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x40e = true;
             return 1;
         }
 

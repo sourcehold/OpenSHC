@@ -37,11 +37,11 @@ namespace Map {
                 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::countActiveSignposts, DAT_GameState::ptr)();
             if ((param_2 <= _activeSignposts) && (param_2)) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = param_2 + -1;
-                DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = param_2 + -1;
+                DAT_TroopValueState::instance.attackInfo.field_0x469d4 = param_2 + -1;
                 return;
             }
             DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_1] = _randomSignpost;
-            DAT_TroopValueState::instance.attackInfo.field121388_0x469d4 = _randomSignpost;
+            DAT_TroopValueState::instance.attackInfo.field_0x469d4 = _randomSignpost;
         }
 
     }

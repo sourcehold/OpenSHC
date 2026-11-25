@@ -49,8 +49,8 @@ namespace Map {
             do {
                 int const _count = (int)(char)(*_pScoreRow)[0];
                 MappersEnum _buildingType
-                    = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field5_0xc8 + _index);
-                _engineerCount = *(int*)((int)DAT_AttackInfoDefinedData::instance.field39_0x9ec + _index);
+                    = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field_0xc8 + _index);
+                _engineerCount = *(int*)((int)DAT_AttackInfoDefinedData::instance.field_0x9ec + _index);
                 _subCount = 0;
                 if (0 < _count) {
                     do {
@@ -71,8 +71,8 @@ namespace Map {
                 _pScoreRow = (byte(*)[10])(*_pScoreRow + 1);
                 _index = _index + 4;
             } while (_index <= 16);
-            _subCount = DAT_AttackInfoDefinedData::instance.field52_0xa0c;
-            _engineerCount = DAT_AttackInfoDefinedData::instance.field9_0xe8;
+            _subCount = DAT_AttackInfoDefinedData::instance.field_0xa0c;
+            _engineerCount = DAT_AttackInfoDefinedData::instance.field_0xe8;
             int _extraCount = (int)(char)DAT_TroopValueState::instance.attackInfo.someSinglePlayerScore[param_1][8];
             _index = 0;
             if (0 < _extraCount) {

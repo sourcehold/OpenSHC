@@ -1,5 +1,6 @@
 #include "../TroopValueState.func.hpp"
 
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Navigation/DirectionAlgorithmState.func.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
@@ -36,8 +37,8 @@ namespace Map {
                         int _playerID = ptrUnit->owner;
                         MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                             DAT_DirectionAlgorithmState::ptr)(
-                            DAT_GameState::instance.playerDataArray[_playerID].campground.xEntry,
-                            DAT_GameState::instance.playerDataArray[_playerID].campground.yEntry, (int)(ptrUnit->x),
+                            DAT_GameState::instance.playerDataArray[_playerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].xEntry,
+                            DAT_GameState::instance.playerDataArray[_playerID].buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND].yEntry, (int)(ptrUnit->x),
                             (int)(ptrUnit->y));
                         if (DAT_DirectionAlgorithmState::instance.distanceHigh <= 40) {
                             int _troopValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,

@@ -45,8 +45,8 @@ namespace Map {
                             0, _pUnit->tile, _radiusOrTargetUnitID);
                         if (10 <= DAT_PathFindingState::instance.ALGO_TotalTroopValue
                             && 2 <= DAT_PathFindingState::instance.ALGO_TotalTroopCount
-                            && DAT_PathFindingState::instance.field34_0x64) {
-                            _radiusOrTargetUnitID = DAT_PathFindingState::instance.field34_0x64;
+                            && DAT_PathFindingState::instance.field_0x64) {
+                            _radiusOrTargetUnitID = DAT_PathFindingState::instance.field_0x64;
                             _pUnit->targetingType = Map::Units::UIT_THROW_OIL;
                             _pUnit->attackAtTileX = DAT_UnitsState::instance.units[_radiusOrTargetUnitID].x;
                             _pUnit->attackAtTileY = DAT_UnitsState::instance.units[_radiusOrTargetUnitID].y;
