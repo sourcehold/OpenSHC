@@ -76,6 +76,8 @@ namespace UI {
             return;
         }
         // the fear factor's combat bonus, green when positive and red when negative
+        // the bonus line's y in a value of its own (`top + 25` at each use loses the match)
+        int const textY = top + 25;
         int const fearFactor
             = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                   .fearFactorLevel;
@@ -89,12 +91,12 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 31),
-                x + 156, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
+                x + 156, textY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 162, top + 25, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_00FF00, 0, 18, TRUE, 0);
+                x + 162, textY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_00FF00, 0, 18, TRUE, 0);
             color = OpenSHC::Rendering::Colors::COL_00FF00;
             percentX = x + 164;
         } else if (fearFactor < 0) {
@@ -105,12 +107,12 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 31),
-                x + 146, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
+                x + 146, textY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumber2, DAT_TextManagerObject::ptr)(
                 DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .fearFactorLevel
                     * 5,
-                x + 152, top + 25, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0000FF, 0, 18, TRUE, 0);
+                x + 152, textY, OpenSHC::Text::TTA_LEFT, OpenSHC::Rendering::Colors::COL_0000FF, 0, 18, TRUE, 0);
             color = OpenSHC::Rendering::Colors::COL_0000FF;
             percentX = x + 154;
         } else {
@@ -118,12 +120,13 @@ namespace UI {
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                     DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_REPORT_BUTTONS, 30),
-                x + 116, top + 25, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
+                x + 116, textY, OpenSHC::Text::TTA_LEFT, 0, 18, FALSE, 0);
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             return;
         }
+        // "%"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderInGameTextWithShadow, DAT_TextManagerObject::ptr)(
-            s_percentage_005a2770, percentX, top + 25, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
+            s_percentage_005a2770, percentX, textY, OpenSHC::Text::TTA_LEFT, color, 0, 18, TRUE, 0);
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         DAT_TextManagerObject::instance.field_0x20 = 0;
     }
