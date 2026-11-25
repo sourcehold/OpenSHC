@@ -50,7 +50,7 @@ namespace Map {
             nonEuroRecruit;
 
             MACRO_FUNCTION_RESOLVER(
-                int (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052EDC0, &UnitsState::disbandUnit)
+                void (UnitsState::*)(int), false, Address::SHC_3BB0A8C1_0x0052EDC0, &UnitsState::disbandUnit)
             disbandUnit;
 
             MACRO_FUNCTION_RESOLVER(

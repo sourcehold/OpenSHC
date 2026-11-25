@@ -91,7 +91,7 @@ namespace Map {
 
             int nonEuroRecruit(UnitType unitType, int recruitmentBuildingID, int playerID, int param_4);
 
-            int disbandUnit(int unitID);
+            void disbandUnit(int unitID);
 
             void assignNameToUnit(int unitID);
 
