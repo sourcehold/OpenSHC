@@ -39,7 +39,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00409930, &BuildingsState::convertBuildingTypeToCommandBuildingType)
             convertBuildingTypeToCommandBuildingType;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int), false, Address::SHC_3BB0A8C1_0x00409DB0,
                 &BuildingsState::getBuildingHeightForBuildingID)
             getBuildingHeightForBuildingID;
 
@@ -87,12 +87,12 @@ namespace Map {
                 &BuildingsState::getEmptyBuildingCount)
             getEmptyBuildingCount;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType, BOOLEnum), false,
                 Address::SHC_3BB0A8C1_0x0040A9B0, &BuildingsState::countBuildingsForPlayer)
             countBuildingsForPlayer;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (BuildingsState::*)(int, int), false, Address::SHC_3BB0A8C1_0x0040AA10, &BuildingsState::countFarms)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BOOLEnum), false, Address::SHC_3BB0A8C1_0x0040AA10,
+                &BuildingsState::countFarms)
             countFarms;
 
             MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, BuildingType), false, Address::SHC_3BB0A8C1_0x0040AA80,
@@ -255,7 +255,7 @@ namespace Map {
                 &BuildingsState::subtractPitchAndMoatFromStartingGoldInSiegeThatMode)
             subtractPitchAndMoatFromStartingGoldInSiegeThatMode;
 
-            MACRO_FUNCTION_RESOLVER(uint (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040CAC0,
+            MACRO_FUNCTION_RESOLVER(BOOLEnum (BuildingsState::*)(), false, Address::SHC_3BB0A8C1_0x0040CAC0,
                 &BuildingsState::hasEnoughGoldForMoat)
             hasEnoughGoldForMoat;
 
@@ -619,8 +619,8 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x00420BF0, &BuildingsState::upgradeBuildingsForMapVersion)
             upgradeBuildingsForMapVersion;
 
-            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, uint, uint, undefined4, BuildingType, uint, int, int),
-                false, Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, uint, uint, int, BuildingType, uint, int, int), false,
+                Address::SHC_3BB0A8C1_0x00420D20, &BuildingsState::setupBuildingData)
             setupBuildingData;
 
             MACRO_FUNCTION_RESOLVER(void (BuildingsState::*)(uint), false, Address::SHC_3BB0A8C1_0x00421890,
@@ -635,7 +635,7 @@ namespace Map {
                 &BuildingsState::buildingIsAccessible)
             buildingIsAccessible;
 
-            MACRO_FUNCTION_RESOLVER(char (BuildingsState::*)(int, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(int (BuildingsState::*)(int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x00421BE0, &BuildingsState::resolveBuildingEntryAccessibility)
             resolveBuildingEntryAccessibility;
 

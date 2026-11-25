@@ -8,7 +8,7 @@ namespace Map {
         void PathFindingState::clearAllClimbData()
         {
             this->numberOfClimbTeleports = 0;
-            for (int climbID = 0; climbID < 200; ++climbID) {
+            for (int climbID = 0; climbID < countof(this->climbData); ++climbID) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::clearClimbData, this)(climbID);
             }
         }

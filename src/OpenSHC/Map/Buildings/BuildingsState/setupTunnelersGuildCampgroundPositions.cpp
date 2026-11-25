@@ -1,6 +1,7 @@
 #include "../BuildingsState.func.hpp"
 
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingLogicalState.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 
@@ -20,7 +21,10 @@ namespace Map {
                 sizeof(DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations), 0,
                 DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocations);
             DAT_GameState::instance.playerDataArray[playerID].tunnelersGuildParadegroundLocationsTotal = 0;
-            if (DAT_GameState::instance.playerDataArray[playerID].tunnelersGuild.id <= 0) {
+            if (DAT_GameState::instance.playerDataArray[playerID]
+                    .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_TUNNELERSGUILD]
+                    .id
+                <= 0) {
                 return;
             }
             for (int buildingID = 1; buildingID < this->maxBuildingsCount; ++buildingID) {

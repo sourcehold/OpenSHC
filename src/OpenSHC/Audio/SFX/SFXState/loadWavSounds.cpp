@@ -21,7 +21,7 @@ namespace Audio {
             int soundStructure2Index = 0;
             while (soundStructure2Index < 270) {
                 this->DAT_SoundStructures2[soundStructure2Index].soundID = 0;
-                this->DAT_SoundStructures2[soundStructure2Index].field1_0x4 = 0;
+                this->DAT_SoundStructures2[soundStructure2Index].field_0x4 = 0;
                 this->DAT_SoundStructures2[soundStructure2Index].variationCount = 0;
                 this->DAT_SoundStructures2[soundStructure2Index].variationCounter = 0;
 
@@ -30,7 +30,7 @@ namespace Audio {
                     if (!strcmp(variation, s_Null_wav_005a4cf8))
                         break;
 
-                    ++this->DAT_SoundStructures2[soundStructure2Index].field1_0x4;
+                    ++this->DAT_SoundStructures2[soundStructure2Index].field_0x4;
                     variation += sizeof(char[1000]);
                 }
 

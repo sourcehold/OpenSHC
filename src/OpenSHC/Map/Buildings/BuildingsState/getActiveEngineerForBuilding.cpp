@@ -30,7 +30,7 @@ namespace Map {
             if (DAT_UnitsState::instance.units[unitID].workplaceBuildingID_1 != buildingID) {
                 return 0;
             }
-            return DAT_UnitsState::instance.units[unitID].field252_0x3c4 != 0 ? unitID : 0;
+            return DAT_UnitsState::instance.units[unitID].field_0x3c4 != 0 ? unitID : 0;
         }
 
     }

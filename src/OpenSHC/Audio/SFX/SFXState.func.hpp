@@ -73,8 +73,8 @@ namespace Audio {
                 void (SFXState::*)(int), false, Address::SHC_3BB0A8C1_0x0044A1B0, &SFXState::playAmbientSoundStream2Unk)
             playAmbientSoundStream2Unk;
 
-            MACRO_FUNCTION_RESOLVER(
-                int (SFXState::*)(char*), false, Address::SHC_3BB0A8C1_0x0044A240, &SFXState::getSoundVolumeForFilename)
+            MACRO_FUNCTION_RESOLVER(int (SFXState::*)(char const*), false, Address::SHC_3BB0A8C1_0x0044A240,
+                &SFXState::getSoundVolumeForFilename)
             getSoundVolumeForFilename;
 
             MACRO_FUNCTION_RESOLVER(

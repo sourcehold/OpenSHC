@@ -159,11 +159,11 @@ namespace Synchrony {
             &GameSynchronyState::sendLongerDataSuchAsResync)
         sendLongerDataSuchAsResync;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(GameCommandType, DWORD, dword, void*), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(char, DWORD, dword, void*), false,
             Address::SHC_3BB0A8C1_0x00480210, &GameSynchronyState::scheduleReceivedCommand)
         scheduleReceivedCommand;
 
-        MACRO_FUNCTION_RESOLVER(int (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480440,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (GameSynchronyState::*)(), false, Address::SHC_3BB0A8C1_0x00480440,
             &GameSynchronyState::getCommandIDFromCommandSelectionStuff)
         getCommandIDFromCommandSelectionStuff;
 
@@ -212,7 +212,7 @@ namespace Synchrony {
             &GameSynchronyState::determineGameTicksToPerform)
         determineGameTicksToPerform;
 
-        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, size_t, undefined4), false,
+        MACRO_FUNCTION_RESOLVER(void (GameSynchronyState::*)(byte, undefined4, char*, int, undefined4), false,
             Address::SHC_3BB0A8C1_0x00487C50, &GameSynchronyState::transmitCommand)
         transmitCommand;
 

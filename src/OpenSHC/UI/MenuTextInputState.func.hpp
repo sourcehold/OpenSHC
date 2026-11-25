@@ -36,7 +36,7 @@ namespace UI {
             &MenuTextInputState::popModalDialog)
         popModalDialog;
 
-        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(int), false, Address::SHC_3BB0A8C1_0x00493980,
+        MACRO_FUNCTION_RESOLVER(void (MenuTextInputState::*)(MenuModalType), false, Address::SHC_3BB0A8C1_0x00493980,
             &MenuTextInputState::activateLoadOrSaveMapUI)
         activateLoadOrSaveMapUI;
 

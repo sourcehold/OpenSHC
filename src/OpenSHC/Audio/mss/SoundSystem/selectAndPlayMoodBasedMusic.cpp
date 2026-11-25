@@ -41,7 +41,7 @@ namespace Audio {
                             + DE::SHCDE::MUSIC_OUD1));
                 } else {
                     MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                    DAT_SoundEffectsHelperData1::instance.field13_0x50 = SEC_RNG::instance.currentNumber1 % 4;
+                    DAT_SoundEffectsHelperData1::instance.field_0x50 = SEC_RNG::instance.currentNumber1 % 4;
                     MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                     DAT_SoundEffectsHelperData1::instance.DAT_RandomVariationCurrentPlayingMusic_02
                         = SEC_RNG::instance.currentNumber1 % 19;
@@ -62,7 +62,7 @@ namespace Audio {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_MAIN);
                     break;
                 case 1:
-                    if (DAT_SoundEffectsHelperData1::instance.field8_0x3c != 0) {
+                    if (DAT_SoundEffectsHelperData1::instance.field_0x3c != 0) {
                         MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_AVG2);
                         break;
                     }
@@ -77,23 +77,23 @@ namespace Audio {
                     break;
                 }
             } else {
-                if (DAT_SoundEffectsHelperData1::instance.field18_0x64 == 0) {
+                if (DAT_SoundEffectsHelperData1::instance.field_0x64 == 0) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_HAPPY);
                 }
-                if (DAT_SoundEffectsHelperData1::instance.field18_0x64 == 1) {
+                if (DAT_SoundEffectsHelperData1::instance.field_0x64 == 1) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_HAPPY2);
                 }
-                if (DAT_SoundEffectsHelperData1::instance.field18_0x64 == 2) {
+                if (DAT_SoundEffectsHelperData1::instance.field_0x64 == 2) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_HAPPY3);
                 }
-                DAT_SoundEffectsHelperData1::instance.field18_0x64
-                    = DAT_SoundEffectsHelperData1::instance.field18_0x64 + 1;
-                if (2 < DAT_SoundEffectsHelperData1::instance.field18_0x64) {
-                    DAT_SoundEffectsHelperData1::instance.field18_0x64 = 0;
+                DAT_SoundEffectsHelperData1::instance.field_0x64
+                    = DAT_SoundEffectsHelperData1::instance.field_0x64 + 1;
+                if (2 < DAT_SoundEffectsHelperData1::instance.field_0x64) {
+                    DAT_SoundEffectsHelperData1::instance.field_0x64 = 0;
                 }
             }
             this->lastMusicChangeTime = 0;
-            ++DAT_SoundEffectsHelperData1::instance.field8_0x3c;
+            ++DAT_SoundEffectsHelperData1::instance.field_0x3c;
             this->lastMusicChangeTime = 0;
         }
 

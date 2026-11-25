@@ -56,12 +56,12 @@ namespace AI {
                 == 0) {
                 continue;
             }
-            if (DAT_GameState::instance.playerDataArray[i].requestedGoodsArray1Unk[playerID] != 0) {
+            if (DAT_GameState::instance.playerDataArray[i].goodsRequestTypeByPlayer[playerID] != 0) {
                 continue;
             }
 
-            DAT_GameState::instance.playerDataArray[i].requestedGoodsArray1Unk[playerID] = resourceType;
-            DAT_GameState::instance.playerDataArray[i].requestedGoodsArray2Unk[playerID] = amount;
+            DAT_GameState::instance.playerDataArray[i].goodsRequestTypeByPlayer[playerID] = resourceType;
+            DAT_GameState::instance.playerDataArray[i].goodsRequestAmountByPlayer[playerID] = amount;
             MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::playGoodsRequestBikFromPlayerToPlayer, this)(playerID, i);
         }
     }

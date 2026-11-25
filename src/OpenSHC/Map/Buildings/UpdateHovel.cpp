@@ -19,7 +19,7 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].spriteID
             = DAT_BuildingDefinedData::instance.SomeSpriteArray1
-                  [(short)DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].hovelVisualStyle];
+                  [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].hovelVisualStyle];
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].oldVisualActiveState == -1) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::updateBuildingGraphicsLayer, DAT_TileMapState::ptr)(
                 DAT_CurrentBuildingID::instance);

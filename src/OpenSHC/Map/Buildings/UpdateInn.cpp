@@ -35,7 +35,7 @@ namespace Map {
         } else if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                        .flagonsOfAleOrCheeseOrReleaseDogs
                 != 0
-            || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field164_0x28a != 0) {
+            || DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 1;
         } else {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingIsVisuallyActive = 0;
@@ -64,7 +64,7 @@ namespace Map {
             }
             // The original clears the sprite it just animated
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite1 = 0;
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field164_0x28a != 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite2
                     = (char)DAT_BuildingDefinedData::instance
                           .InnAnimationFrames3[DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
@@ -98,9 +98,9 @@ namespace Map {
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationFrame2 += 1;
                 }
             }
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field164_0x28a != 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field164_0x28a -= 1;
-                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field164_0x28a == 0) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a != 0) {
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a -= 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].field_0x28a == 0) {
                     MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::spawnDrunkard, DAT_GameState::ptr)(
                         DAT_CurrentBuildingID::instance);
                 }
@@ -131,14 +131,14 @@ namespace Map {
             DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].extraAnimationSprite4 = 0;
         }
 
-        // padding_0x2b2 holds the short tick counter towards the next flagon drunk
+        // aleTracker counts the ticks towards the next flagon drunk
         if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].flagonsOfAleOrCheeseOrReleaseDogs
             > 0) {
             if (workerID != 0) {
-                *(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2 += 1;
-                if (*(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker += 1;
+                if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker
                     >= DAT_GameState::instance.playerDataArray[owner].aleRate) {
-                    *(short*)&DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].padding_0x2b2 = 0;
+                    DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].aleTracker = 0;
                     DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance]
                         .flagonsOfAleOrCheeseOrReleaseDogs -= 1;
                 }

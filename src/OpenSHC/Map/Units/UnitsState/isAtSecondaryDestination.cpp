@@ -14,7 +14,7 @@ namespace Map {
             if (this->units[unitID].destinationX_2Unk != this->units[unitID].x) {
                 return FALSE;
             }
-            return (BOOLEnum)(this->units[unitID].destinationY_2Unk == this->units[unitID].y);
+            return this->units[unitID].destinationY_2Unk == this->units[unitID].y;
         }
 
     }

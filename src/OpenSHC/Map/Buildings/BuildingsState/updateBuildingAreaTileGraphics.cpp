@@ -2,7 +2,7 @@
 #include "OpenSHC/Map/TileMapState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
-#include "OpenSHC/Globals/GMTotalPicturesProcessed.hpp"
+#include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -17,7 +17,7 @@ namespace Map {
                 int const stage
                     = MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::getRubbleGraphicStageForDamageLevel,
                         DAT_TileMapState::ptr)(damage);
-                int gfx = GMTotalPicturesProcessed::instance[14] + 55 + stage;
+                int gfx = GMFirstPictureIndex::instance[14] + 55 + stage;
                 if (gfx != DAT_TileMapState::instance.GfxLayer[tile]) {
                     DAT_TileMapState::instance.GfxLayer[tile] = gfx;
                     DAT_TileMapState::instance.MiscDisplayLayer[tile] &= 0xfff3;

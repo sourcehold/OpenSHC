@@ -12,7 +12,7 @@ namespace Rendering {
     BOOLEnum ViewportRenderState::xyAreValid(uint x, uint y)
     {
         return x <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1 && y <= OpenSHC::Map::MC_MAP_XY_LIMIT_MIN_1
-            && this->DAT_BinaryTileMap400x400[y * OpenSHC::Map::MC_MAP_XY_LIMIT + x] != 0;
+            && this->DAT_BinaryTileMap400x400[y * OpenSHC::Map::MC_MAP_XY_LIMIT + x];
     }
 
 }

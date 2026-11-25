@@ -30,7 +30,7 @@ namespace Rendering {
                 &BinkControlClass::stopAllBinkPlayback)
             stopAllBinkPlayback;
 
-            MACRO_FUNCTION_RESOLVER(void (BinkControlClass::*)(int, char*, DWORD, DWORD, int, int, DWORD), false,
+            MACRO_FUNCTION_RESOLVER(void (BinkControlClass::*)(int, char const*, DWORD, DWORD, int, int, DWORD), false,
                 Address::SHC_3BB0A8C1_0x00408ED0, &BinkControlClass::playBINK)
             playBINK;
 

@@ -28,7 +28,7 @@ namespace Game {
                 UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
         } else {
             DAT_GameSynchronyState::instance.currentPlayerSlotID = 1;
-            if (this->missionNumber1to20 != 33 && !DAT_GameCore::instance.field26_0x74) {
+            if (this->missionNumber1to20 != 33 && !DAT_GameCore::instance.field_0x74) {
                 MACRO_CALL_MEMBER(GameCore_Func::switchToMenuView, DAT_GameCore::ptr)(
                     UI::Enums::MVT_MISSION_FINISHED_TRANSITION, 0);
             } else {
@@ -37,7 +37,7 @@ namespace Game {
                     UI::Enums::MVT_SCENARIO_DESCRIPTION, 0);
             }
         }
-        DAT_GameCore::instance.field26_0x74 = 0;
+        DAT_GameCore::instance.field_0x74 = 0;
         DAT_GameCore::instance.unknownAlwaysZero = 0;
     }
 

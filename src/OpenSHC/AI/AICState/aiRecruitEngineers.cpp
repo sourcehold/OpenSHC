@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/AI/AITypeA.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 
@@ -18,15 +19,17 @@ namespace AI {
         int const aiType = DAT_GameState::instance.playerDataArray[playerID].aiType;
         if (aiType == AITA_NULL)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired == FALSE)
+        if (!DAT_GameState::instance.playerDataArray[playerID].isEngineerRequired)
             return;
-        if (DAT_GameState::instance.playerDataArray[playerID].canStartSpending == 0)
+        if (!DAT_GameState::instance.playerDataArray[playerID].canStartSpending)
             return;
         if (this->aics[aiType - 1].defSiegeEngineGoldThreshold
                 + DAT_GameState::instance.playerDataArray[playerID].currentResources[Game::Resources::RT_GOLD]
             < 30)
             return;
-        int const guildID = DAT_GameState::instance.playerDataArray[playerID].engineersGuild.id;
+        int const guildID = DAT_GameState::instance.playerDataArray[playerID]
+                                .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_ENGINEERSGUILD]
+                                .id;
         if (guildID <= 0)
             return;
         if (DAT_BuildingsState::instance.buildings[guildID].buildingType != Map::Buildings::BT_ENGINEERSGUILD)

@@ -25,7 +25,7 @@ namespace OS {
     using OpenSHC::OS::_atexit_t;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
-    int* __stdcall basic_ofstream_write(void* param_1, uint param_2);
+    int* __cdecl basic_ofstream_write(void* param_1, uint param_2);
 
     BOOLEnum __cdecl isEqualGUID(GUID* param_1, GUID* param_2);
 
@@ -81,7 +81,7 @@ namespace OS {
 
     int __cdecl _ucrt_read(int fileDescriptor, void* destination, size_t size);
 
-    int __cdecl _ucrt_open(char* _Filename, int _OpenFlag, int _PMode);
+    int __cdecl _ucrt_open(char const* _Filename, int _OpenFlag, int _PMode);
 
     void __cdecl _srand(ulong param_1);
 

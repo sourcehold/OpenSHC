@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "../TileMapState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -6,10 +6,10 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00512920
     void TileMapState::processMapOrientationChange()
     {
-        if ((int)this->DAT_FutureMapOrientation < 8) {
+        if ((int)this->DAT_FutureMapOrientation < OpenSHC::Map::Enums::MO_UPPER_LIMIT) {
             MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::changeMapOrientation, this)(
-                this->DAT_FutureMapOrientation);
-            this->DAT_FutureMapOrientation = 8;
+                (MapOrientation)this->DAT_FutureMapOrientation);
+            this->DAT_FutureMapOrientation = OpenSHC::Map::Enums::MO_UPPER_LIMIT;
         }
     }
 
