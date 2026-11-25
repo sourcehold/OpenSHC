@@ -25,7 +25,9 @@ namespace Map {
             DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow = 0;
             for (int tile = 0; tile < 0x13a10; ++tile) {
                 int unitID = DAT_TileMapState::instance.UnitLayer[tile];
-                if (unitID < 0 || unitID >= 2500) {
+                /* the window was reset to 0 above; comparing against it keeps the signed jl/jge pair */
+                if (unitID < DAT_GameState::instance.mapAndTime.multiplayerUnitSameTileLinkageTimeWindow
+                    || unitID >= 2500) {
                     DAT_TileMapState::instance.UnitLayer[tile] = 0;
                     continue;
                 }
