@@ -46,7 +46,7 @@ namespace Map {
                 if (this->units[DAT_CurrentUnitSlotID::instance].isSelectable_OR_matchTime == 0) {
                     continue;
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2 != 0) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].unknownTestAgainst0_2) {
                     continue;
                 }
                 if (this->units[DAT_CurrentUnitSlotID::instance].state.generic
@@ -99,7 +99,7 @@ namespace Map {
                         == DAT_GameSynchronyState::instance.currentPlayerSlotID
                     && this->units[DAT_CurrentUnitSlotID::instance].unitType != OpenSHC::Map::Units::UT_LORD) {
                     this->units[DAT_CurrentUnitSlotID::instance].isSelected = 1;
-                    this->totalUnitsInSelection = this->totalUnitsInSelection + 1;
+                    this->totalUnitsInSelection += 1;
                 }
             }
         }

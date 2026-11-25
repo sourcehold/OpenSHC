@@ -13,7 +13,7 @@ namespace Audio {
     namespace MSS {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047AB10
-        void SoundSystem::playRandomMusic02(int param_1)
+        void SoundSystem::playRandomMusic02(int troopValueLevel)
         {
             if (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState == 5) {
                 return;
@@ -22,10 +22,10 @@ namespace Audio {
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicTracker = 0;
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.musicState = 5;
             DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.battleEndHandled = 0;
-            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = param_1;
+            DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = troopValueLevel;
             DAT_SoundEffectsHelperData1::ptr->DAT_SomeSoundTime2 = timeGetTime();
 
-            if (param_1 != 2) {
+            if (troopValueLevel != 2) {
                 if (DAT_TroopValueState::ptr->attackInfo.pendingAttackWaveCount == 0) {
                     MACRO_CALL_MEMBER(
                         Map::Units::TroopValueState_Func::recountTotalTroopValue, DAT_TroopValueState::ptr)();
@@ -49,40 +49,40 @@ namespace Audio {
                     = DAT_SoundEffectsHelperData1::ptr->DAT_Music_TotalTroopValue;
                 DAT_SoundEffectsHelperData1::ptr->battleMoodState = 0;
                 if (DAT_SoundEffectsHelperData1::ptr->DAT_Music_TotalTroopValue < 100) {
-                    param_1 = 0;
+                    troopValueLevel = 0;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 0;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel
                         = DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.incrementorUpTo4;
                 } else if (DAT_SoundEffectsHelperData1::ptr->DAT_Music_TotalTroopValue < 250) {
                     if ((DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.incrementorUpTo4 == 1)
                         || (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.incrementorUpTo4 == 3)) {
-                        param_1 = 0;
+                        troopValueLevel = 0;
                         DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 0;
                         DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 5;
                     } else {
-                        param_1 = 1;
+                        troopValueLevel = 1;
                         DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 1;
                         DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 1;
                     }
                 } else {
-                    param_1 = 1;
+                    troopValueLevel = 1;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 1;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 2;
                 }
             } else {
-                int iVar1 = 3;
+                int musicVariantUnk = 3;
                 if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
-                    iVar1 = SEC_RNG::ptr->currentNumber1 % 5;
+                    musicVariantUnk = SEC_RNG::ptr->currentNumber1 % 5;
                 }
-                if ((iVar1 == 0) || (iVar1 == 1)) {
-                    param_1 = 0;
+                if ((musicVariantUnk == 0) || (musicVariantUnk == 1)) {
+                    troopValueLevel = 0;
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.troopValueLevel = 0;
-                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = (iVar1 + 1);
+                    DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = (musicVariantUnk + 1);
                 }
-                if (iVar1 == 2) {
+                if (musicVariantUnk == 2) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_BATTLE_L1A);
                     DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel = 1;
-                } else if (iVar1 >= 3) {
+                } else if (musicVariantUnk >= 3) {
                     MACRO_CALL_MEMBER(
                         Map::Units::TroopValueState_Func::recountTotalTroopValue, DAT_TroopValueState::ptr)();
                     int const currentPlayerTotalTroopValue
@@ -116,7 +116,7 @@ namespace Audio {
                 MACRO_CALL_MEMBER(SoundSystem_Func::setSomeSoundTime, this)();
             }
 
-            if (param_1 == 0) {
+            if (troopValueLevel == 0) {
                 switch (DAT_SoundEffectsHelperData1::ptr->SEC_Section1079.volumeLevel) {
                 case 1:
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_BATTLE1A);
@@ -142,7 +142,7 @@ namespace Audio {
                     MACRO_CALL_MEMBER(SoundSystem_Func::setupVolumeAndSoundID, this)(DE::SHCDE::MUSIC_TUNE_BATTLE2A);
                     return;
                 }
-            } else if (param_1 == 2) {
+            } else if (troopValueLevel == 2) {
                 MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                 if (DAT_GameSynchronyState::ptr->currentGameMode != Game::GM_SOLITARY) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::endSoundStream, this)(enums::SND_STR_MUSIC);

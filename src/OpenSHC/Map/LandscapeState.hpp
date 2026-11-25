@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/Rocks/Rock.hpp"
 #include "OpenSHC/Map/Trees/Tree.hpp"
@@ -20,6 +21,7 @@
 namespace OpenSHC {
 namespace Map {
 
+    using OpenSHC::Commands::MappersEnum;
     using OpenSHC::IO::PackagedFileMagicNum;
     using OpenSHC::Map::WindState;
     using OpenSHC::Map::Rocks::Rock;
@@ -32,10 +34,10 @@ namespace Map {
     // SIZE: 0x0006B700
     class LandscapeState {
     public:
-        undefined4 field0_0x0; // 0x00000000 length: 4
-        undefined4 field1_0x4; // 0x00000004 length: 4
+        undefined4 field_0x0; // 0x00000000 length: 4
+        undefined4 field_0x4; // 0x00000004 length: 4
         undefined4 DAT_TotalOrganisms; // 0x00000008 length: 4
-        int field3_0xc; // 0x0000000C length: 4
+        int field_0xc; // 0x0000000C length: 4
         int maxTreeCount; // 0x00000010 length: 4
         undefined4 x; // 0x00000014 length: 4
         undefined4 y; // 0x00000018 length: 4
@@ -56,7 +58,7 @@ namespace Map {
         // Constructor
         LandscapeState* Construct_LandscapeState();
 
-        undefined4 mapUITreeTypeToLogicalTreeType(undefined4 param_1);
+        TreeType mapUITreeTypeToLogicalTreeType(MappersEnum mapperType);
 
         undefined4 getValueFrom0UpTo3ForTreeTypeAndTreeStage(undefined4 treeType, int treeStage);
 
@@ -73,7 +75,7 @@ namespace Map {
 
         int createRock(undefined4 x, undefined4 y, int rockType, undefined4 size, undefined4 orientation);
 
-        void removeRock(int param_1);
+        void removeRock(int rockID);
 
         BOOLEnum lightUpTree(int tile, int playerID);
 

@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/WildlifeState.func.hpp"
+#include "../WildlifeState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

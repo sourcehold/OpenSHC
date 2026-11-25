@@ -1,7 +1,7 @@
 #include "../SoundSystem.func.hpp"
 
-#include "OpenSHC/Globals/DAT_00b95954.hpp"
 #include "OpenSHC/Globals/DAT_SFXDefinedData.hpp"
+#include "OpenSHC/Globals/INT_00b95954.hpp"
 
 namespace OpenSHC {
 namespace Audio {
@@ -10,7 +10,7 @@ namespace Audio {
         // FUNCTION: STRONGHOLDCRUSADER 0x0047A5E0
         void SoundSystem::playDarMehqOrGlory()
         {
-            if (*DAT_00b95954::ptr == 1) {
+            if (*INT_00b95954::ptr == 1) {
                 MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(DAT_SFXDefinedData::ptr->Pointers[0x26].musicFile);
                 return;
             }

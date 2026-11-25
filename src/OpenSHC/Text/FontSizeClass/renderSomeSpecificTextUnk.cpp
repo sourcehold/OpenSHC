@@ -62,14 +62,14 @@ namespace Text {
                     continue;
                 }
 
-                if (0 < lengthUnk + -1) {
+                if (0 < lengthUnk - 1) {
                     MACRO_CALL(OpenSHC::OS_Func::_memcpy)(
                         strBuffer, DAT_TextManagerObject::instance.stringArray1[_index], lengthStr);
-                    strBuffer[lengthUnk + -1] = '\0';
+                    strBuffer[lengthUnk - 1] = '\0';
                     MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::renderText, this)(
-                        strBuffer, lengthUnk + -1, xPos, _runYPos, color, 0);
+                        strBuffer, lengthUnk - 1, xPos, _runYPos, color, 0);
                     _runXPos = MACRO_CALL_MEMBER(OpenSHC::Text::FontSizeClass_Func::getWidthOfText, this)(
-                        strBuffer, lengthUnk + -1);
+                        strBuffer, lengthUnk - 1);
                     _runXPos += xPos;
                 }
                 strBuffer[0] = DAT_TextManagerObject::instance.stringArray1[_index][lengthUnk - 1];

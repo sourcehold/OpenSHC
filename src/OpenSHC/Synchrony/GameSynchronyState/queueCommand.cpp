@@ -26,7 +26,8 @@ namespace Synchrony {
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].stateUnk = Commands::GCS_UNPROCESSED;
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].playerUnk = this->DPLAYX_PlayerHandle;
         this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType = commandType;
-        if (DAT_GameCore::instance.mapTimeInTicks > this->mapTimeInTicksSinglePlayer) {
+        // a signed compare, though mapTimeInTicks is a uint
+        if ((int)DAT_GameCore::instance.mapTimeInTicks > this->mapTimeInTicksSinglePlayer) {
             this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time
                 = this->commandDelay + DAT_GameCore::instance.mapTimeInTicks;
         } else {
@@ -38,8 +39,8 @@ namespace Synchrony {
         this->DAT_CommandParameterOffset = 0;
         // Calls the callback function for a specific command. See "GameCommandType" for possible
         // commands: placing buildings, walls, moving units, ...
-        (&DAT_ProtocolDefinedData::instance
-                .commandFunctions)[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
+        DAT_ProtocolDefinedData::instance
+            .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
         this->DAT_CommandParameterOffset = 0;
         dword _time = this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].time;
         if (0 < (int)_time) {
@@ -64,8 +65,8 @@ namespace Synchrony {
                 this->DAT_GameCommandParam0 = 0;
                 this->DPLAYX_ReceivedPlayerID = this->DPLAYX_PlayerHandle;
                 this->protocolInvokerPlayerID = this->currentPlayerSlotID;
-                (&DAT_ProtocolDefinedData::instance
-                        .commandFunctions)[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
+                DAT_ProtocolDefinedData::instance
+                    .commandFunctions[this->DAT_GameCommandArray[this->DAT_CurrentGameCommandID].commandType]();
             }
             MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::clearGameCommandEntry, this)(
                 this->DAT_CurrentGameCommandID);

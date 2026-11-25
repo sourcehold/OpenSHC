@@ -7,8 +7,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x004A9760
         PathFindingState* PathFindingState::Constructor_PathFindingState()
         {
-            this->field40_0x70 = 0;
-            this->field41_0x74 = 0;
+            this->field_0x70 = 0;
+            this->field_0x74 = 0;
             this->DAT_lWys = 0;
             this->notAllAssassinsUnk = 0;
             this->DAT_Easy = 0;

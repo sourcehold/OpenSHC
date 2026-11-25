@@ -33,8 +33,8 @@ namespace Audio {
             SpeechEffectPath SpeechEffectPathArray[40]; // 0x0042061C length: 640
             char SpeechEffectFileArray[65][1000]; // 0x0042089C length: 65000
             NameSpeechPair LordNameToCall[223]; // 0x00430684 length: 446000
-            int field10_0x49d4b4; // 0x0049D4B4 length: 4
-            undefined4 field11_0x49d4b8; // 0x0049D4B8 length: 4
+            int field_0x49d4b4; // 0x0049D4B4 length: 4
+            undefined4 field_0x49d4b8; // 0x0049D4B8 length: 4
             int currentStreamID; // 0x0049D4BC length: 4
             undefined1 padding_0x49d4c0[4]; // 0x0049D4C0 length: 4
 

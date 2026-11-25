@@ -1,0 +1,29 @@
+#include "../General.func.hpp"
+
+#include "OpenSHC/UI/Rendering/PencilRenderCore.func.hpp"
+#include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
+
+#include "OpenSHC/Globals/DAT_ButtonH.hpp"
+#include "OpenSHC/Globals/DAT_ButtonX.hpp"
+#include "OpenSHC/Globals/DAT_ButtonY.hpp"
+#include "OpenSHC/Globals/DAT_PencilRenderCore.hpp"
+#include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
+
+namespace OpenSHC {
+namespace UI {
+    namespace MenuItems {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x004BAE30
+        void General::MenuItemRenderFunction_General_Scrollbar(
+            int unused, int thumbYPos, int sliderValue, int thumbHeight, BOOLEnum isDragged)
+        {
+            DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_SCREEN_MENU;
+            MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
+                DAT_ButtonX::instance, DAT_ButtonY::instance, DAT_ButtonH::instance, thumbYPos, isDragged, thumbHeight,
+                0);
+            DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
+        }
+
+    }
+}
+}

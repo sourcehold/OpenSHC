@@ -9,15 +9,15 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053D900
         void UnitsState::exitLadder(int unitID)
         {
-            int _previousTile = this->units[unitID].field42_0x60;
+            int _previousTile = this->units[unitID].field_0x60;
             this->units[unitID].vanish = 0;
             this->units[unitID].usingTeleport = 0;
-            this->units[unitID].field203_0x35c = 0;
-            this->units[unitID].field43_0x64 = 0;
+            this->units[unitID].field_0x35c = 0;
+            this->units[unitID].field_0x64 = 0;
             this->units[unitID].movementRelated = 8;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingTileIDs, this)(
                 unitID, _previousTile);
-            this->units[unitID].field42_0x60 = 0;
+            this->units[unitID].field_0x60 = 0;
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setupUnitSharingCurrentTilePosition, this)(unitID);
             this->units[unitID].x = this->units[unitID].mimicCurrentXPosition;
             this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;

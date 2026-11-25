@@ -77,7 +77,7 @@ namespace Map {
 
             void flagUnitsWithActiveEntity();
 
-            int somethingWithSeparateAreas1(int unitID);
+            int findNearestDiseaseCloudForHealer(int unitID);
 
             void refreshPoisonCloudNearUnit(int param_1);
 
@@ -110,7 +110,7 @@ namespace Map {
 
             void removeEntityFromTileLinkedList(int param_1);
 
-            void activateProjectileEntity(int entityID);
+            int activateProjectileEntity(int entityID);
 
             void deleteEntity(uint entityID);
 

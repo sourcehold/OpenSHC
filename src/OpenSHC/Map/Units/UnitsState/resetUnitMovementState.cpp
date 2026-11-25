@@ -12,7 +12,7 @@ namespace Map {
             this->units[unitID].tunnelerFinishedDigging = 0;
             this->units[unitID].movementRelated = 8;
             this->units[unitID].unknownTestAgainst0_2 = 0;
-            this->units[unitID].field105_0xe8 = FALSE;
+            this->units[unitID].field_0xe8 = FALSE;
             this->units[unitID].movementCooldown = 0;
             if (_wasPositionPending != 0) {
                 MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);

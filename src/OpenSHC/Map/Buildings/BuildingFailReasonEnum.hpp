@@ -25,7 +25,15 @@ namespace Map {
             BFRE_NOT_IRON_ORE = 5, // 0x00000005
             BFRE_NOT_OIL_MARSH = 6, // 0x00000006
             BFRE_NOT_ADJ_GRANARY = 7, // 0x00000007
-            BFRE_TOO_FAR = 15 // 0x0000000F
+            BFRE_TOO_FAR = 15, // 0x0000000F
+            BRE_UNKNOWN_17 = 17, // 0x00000011
+            BRE_UNKNOWN_18 = 18, // 0x00000012
+            BRE_UNKNOWN_19 = 19, // 0x00000013
+            BRE_UNKNOWN_20 = 20, // 0x00000014
+            BRE_UNKNOWN_21 = 21, // 0x00000015
+            BRE_UNKNOWN_22 = 22, // 0x00000016
+            BRE_UNKNOWN_23 = 23, // 0x00000017
+            BRE_UNKNOWN_1000 = 1000 // 0x000003E8
 
         } BuildingFailReasonEnum;
 
