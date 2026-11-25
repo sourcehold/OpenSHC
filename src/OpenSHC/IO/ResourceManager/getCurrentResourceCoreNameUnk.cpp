@@ -16,19 +16,14 @@ namespace IO {
             if (_resourceName[basenameStart] == '.') {
                 basenameEnd = basenameStart;
             }
-            if (_resourceName[basenameStart] != '\\') {
-                continue;
-            }
-            ++basenameStart;
-            int basenameLength = 0;
-            if (basenameStart < basenameEnd) {
-                basenameLength = basenameEnd - basenameStart;
-                for (int i = basenameStart; i < basenameEnd; ++i) {
-                    DAT_CurrentResourceCoreName::instance[i - basenameStart] = _resourceName[i];
+            if (_resourceName[basenameStart] == '\\') {
+                int basenameLength = 0;
+                for (int i = basenameStart + 1; i < basenameEnd; ++i) {
+                    DAT_CurrentResourceCoreName::instance[basenameLength++] = _resourceName[i];
                 }
+                DAT_CurrentResourceCoreName::instance[basenameLength] = '\0';
+                break;
             }
-            DAT_CurrentResourceCoreName::instance[basenameLength] = '\0';
-            break;
         }
         return DAT_CurrentResourceCoreName::instance;
     }
