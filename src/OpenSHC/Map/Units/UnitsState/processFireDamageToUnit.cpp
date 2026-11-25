@@ -79,6 +79,12 @@ namespace Map {
                     this->units[unitID].state_2 = 1;
                     break;
                 }
+                /* a large deer burns like the large animals below */
+            case OpenSHC::Map::Units::UT_QUARRYOX:
+            case OpenSHC::Map::Units::UT_LIONSHWOLF:
+            case OpenSHC::Map::Units::UT_CAMELSHBEAR:
+            case OpenSHC::Map::Units::UT_COW:
+            case OpenSHC::Map::Units::UT_CAGEDOG:
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
                 this->units[unitID].state_2 = 1;
                 break;
@@ -86,14 +92,6 @@ namespace Map {
             case OpenSHC::Map::Units::UT_HUNTERDOG:
             case OpenSHC::Map::Units::UT_CHICKEN:
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_SMALL;
-                this->units[unitID].state_2 = 1;
-                break;
-            case OpenSHC::Map::Units::UT_QUARRYOX:
-            case OpenSHC::Map::Units::UT_LIONSHWOLF:
-            case OpenSHC::Map::Units::UT_CAMELSHBEAR:
-            case OpenSHC::Map::Units::UT_COW:
-            case OpenSHC::Map::Units::UT_CAGEDOG:
-                this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_BURNING_ANIMAL_BIG;
                 this->units[unitID].state_2 = 1;
                 break;
             default:
