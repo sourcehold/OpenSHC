@@ -35577,7 +35577,7 @@ SHC_3BB0A8C1_0x004D55D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D5780 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D5810 | 58.8% | Frame 8 bytes larger, reg alloc
+SHC_3BB0A8C1_0x004D5810 | 59.8% | frame 4 bytes larger, 0 kept in esi across the kill loop, the icons' y and x swap ebx and memory
 
 SHC_3BB0A8C1_0x004D5990 | 0.0% | Pending
 

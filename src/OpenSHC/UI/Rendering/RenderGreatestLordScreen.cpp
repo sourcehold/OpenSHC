@@ -12,7 +12,6 @@
 #include "OpenSHC/Rendering/Enums/RenderTarget.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/Text/TextAlignment.hpp"
-#include "OpenSHC/UI/Rendering/GreatestLordTablesUnk.hpp"
 #include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/CHAR_00eb0e44.hpp"
@@ -44,7 +43,16 @@ namespace UI {
         int columnOffset;
         int index;
         int x;
-        GreatestLordTablesUnk tables;
+        // the tables, one entry per player slot (index 0 unused), as separate arrays: as one struct, the date written
+        // into the statistic orders takes the address of all of them (the star loop then reads its count each pass)
+        int points[9];
+        int stars[9];
+        int overallOrder[9];
+        int kills[9];
+        int losses[9];
+        // player order per statistic, best first: 0 kills, 1 burned, 2 food, 3 gold, 4 population, 5 wood, 6 stone,
+        // 7 iron, 8 pitch, 9 unused, 10 losses, 11 weapons, 12 buildings lost, 13 troops, 14 received, 15 sent
+        int statOrder[16][9];
         char saveText[100];
         char scoreText[100];
         if (DAT_WindowAndDirectDraw::instance.currentGameResolution == OpenSHC::Rendering::SRE_800x600) {
@@ -57,43 +65,43 @@ namespace UI {
         int y = DAT_MenuHandlerState::instance.y;
 
         for (int player = 1; player < 9; ++player) {
-            tables.points[player] = 0;
+            points[player] = 0;
         }
         for (int player = 1; player < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix);
             ++player) {
-            int kills = 0;
+            int killCount = 0;
             for (int victim = 1; victim < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[0]);
                 ++victim) {
                 if (victim != player) {
-                    kills += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[player][victim];
+                    killCount += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[player][victim];
                 }
             }
-            tables.kills[player] = kills;
-            int losses = 0;
+            kills[player] = killCount;
+            int lossCount = 0;
             for (int killer = 0; killer < countof(DAT_GameSynchronyState::instance.finalResults.finalKillMatrix);
                 ++killer) {
                 if (killer != player) {
-                    losses += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[killer][player];
+                    lossCount += DAT_GameSynchronyState::instance.finalResults.finalKillMatrix[killer][player];
                 }
             }
-            tables.losses[player] = losses;
+            losses[player] = lossCount;
         }
         for (int player = 1; player < 9; ++player) {
-            tables.stars[player] = 0;
+            stars[player] = 0;
         }
         for (int player = 1; player < 9; ++player) {
-            tables.overallOrder[player] = player;
+            overallOrder[player] = player;
             for (int stat = 0; stat < 16; ++stat) {
-                tables.statOrder[stat][player] = player;
+                statOrder[stat][player] = player;
             }
         }
 
         // bubble sort every order at once; index is the pass here and the rank further down
         for (index = 8; index > 0; --index) {
             for (int i = 1; i < index; ++i) {
-                int const first = tables.overallOrder[i];
+                int const first = overallOrder[i];
                 int const firstScore = MACRO_CALL(OpenSHC::UI::GreatestLord_Func::ComputeSkMasterScore)(first);
-                int const second = tables.overallOrder[i + 1];
+                int const second = overallOrder[i + 1];
                 int const secondScore = MACRO_CALL(OpenSHC::UI::GreatestLord_Func::ComputeSkMasterScore)(second);
                 if (firstScore < secondScore
                     || firstScore == secondScore
@@ -103,155 +111,150 @@ namespace UI {
                                     == DAT_GameSynchronyState::instance.finalResults.finalTimeAlive[second]
                                 && DAT_GameState::instance.mapAndTime.playerIsAlive[first]
                                     < DAT_GameState::instance.mapAndTime.playerIsAlive[second])) {
-                    tables.overallOrder[i] = second;
-                    tables.overallOrder[i + 1] = first;
+                    overallOrder[i] = second;
+                    overallOrder[i + 1] = first;
                 }
 
-                int current = tables.statOrder[0][i];
-                if (tables.kills[current] < tables.kills[tables.statOrder[0][i + 1]]) {
-                    tables.statOrder[0][i] = tables.statOrder[0][i + 1];
-                    tables.statOrder[0][i + 1] = current;
+                int current = statOrder[0][i];
+                if (kills[current] < kills[statOrder[0][i + 1]]) {
+                    statOrder[0][i] = statOrder[0][i + 1];
+                    statOrder[0][i + 1] = current;
                 }
-                current = tables.statOrder[10][i];
-                if (tables.losses[tables.statOrder[10][i + 1]] < tables.losses[current]) {
-                    tables.statOrder[10][i] = tables.statOrder[10][i + 1];
-                    tables.statOrder[10][i + 1] = current;
+                current = statOrder[10][i];
+                if (losses[current] > losses[statOrder[10][i + 1]]) {
+                    statOrder[10][i] = statOrder[10][i + 1];
+                    statOrder[10][i + 1] = current;
                 }
-                current = tables.statOrder[1][i];
+                current = statOrder[1][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[tables.statOrder[1][i + 1]]) {
-                    tables.statOrder[1][i] = tables.statOrder[1][i + 1];
-                    tables.statOrder[1][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[statOrder[1][i + 1]]) {
+                    statOrder[1][i] = statOrder[1][i + 1];
+                    statOrder[1][i + 1] = current;
                 }
-                current = tables.statOrder[2][i];
+                current = statOrder[2][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[tables.statOrder[2][i + 1]]) {
-                    tables.statOrder[2][i] = tables.statOrder[2][i + 1];
-                    tables.statOrder[2][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[statOrder[2][i + 1]]) {
+                    statOrder[2][i] = statOrder[2][i + 1];
+                    statOrder[2][i + 1] = current;
                 }
-                current = tables.statOrder[3][i];
+                current = statOrder[3][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalGold[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalGold[tables.statOrder[3][i + 1]]) {
-                    tables.statOrder[3][i] = tables.statOrder[3][i + 1];
-                    tables.statOrder[3][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalGold[statOrder[3][i + 1]]) {
+                    statOrder[3][i] = statOrder[3][i + 1];
+                    statOrder[3][i + 1] = current;
                 }
-                current = tables.statOrder[4][i];
+                current = statOrder[4][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[tables.statOrder[4][i + 1]]) {
-                    tables.statOrder[4][i] = tables.statOrder[4][i + 1];
-                    tables.statOrder[4][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[statOrder[4][i + 1]]) {
+                    statOrder[4][i] = statOrder[4][i + 1];
+                    statOrder[4][i + 1] = current;
                 }
-                current = tables.statOrder[5][i];
+                current = statOrder[5][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[tables.statOrder[5][i + 1]]) {
-                    tables.statOrder[5][i] = tables.statOrder[5][i + 1];
-                    tables.statOrder[5][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[statOrder[5][i + 1]]) {
+                    statOrder[5][i] = statOrder[5][i + 1];
+                    statOrder[5][i + 1] = current;
                 }
-                current = tables.statOrder[6][i];
+                current = statOrder[6][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[tables.statOrder[6][i + 1]]) {
-                    tables.statOrder[6][i] = tables.statOrder[6][i + 1];
-                    tables.statOrder[6][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[statOrder[6][i + 1]]) {
+                    statOrder[6][i] = statOrder[6][i + 1];
+                    statOrder[6][i + 1] = current;
                 }
-                current = tables.statOrder[7][i];
+                current = statOrder[7][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalIronProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalIronProduced[tables.statOrder[7][i + 1]]) {
-                    tables.statOrder[7][i] = tables.statOrder[7][i + 1];
-                    tables.statOrder[7][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalIronProduced[statOrder[7][i + 1]]) {
+                    statOrder[7][i] = statOrder[7][i + 1];
+                    statOrder[7][i + 1] = current;
                 }
-                current = tables.statOrder[8][i];
+                current = statOrder[8][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[tables.statOrder[8][i + 1]]) {
-                    tables.statOrder[8][i] = tables.statOrder[8][i + 1];
-                    tables.statOrder[8][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[statOrder[8][i + 1]]) {
+                    statOrder[8][i] = statOrder[8][i + 1];
+                    statOrder[8][i + 1] = current;
                 }
-                current = tables.statOrder[11][i];
+                current = statOrder[11][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[tables.statOrder[11][i + 1]]) {
-                    tables.statOrder[11][i] = tables.statOrder[11][i + 1];
-                    tables.statOrder[11][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[statOrder[11][i + 1]]) {
+                    statOrder[11][i] = statOrder[11][i + 1];
+                    statOrder[11][i + 1] = current;
                 }
-                current = tables.statOrder[12][i];
-                if (DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[tables.statOrder[12][i + 1]]
-                    < DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[current]) {
-                    tables.statOrder[12][i] = tables.statOrder[12][i + 1];
-                    tables.statOrder[12][i + 1] = current;
+                current = statOrder[12][i];
+                if (DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[current]
+                    > DAT_GameSynchronyState::instance.finalResults.finalBuidingsDestroyed[statOrder[12][i + 1]]) {
+                    statOrder[12][i] = statOrder[12][i + 1];
+                    statOrder[12][i + 1] = current;
                 }
-                current = tables.statOrder[13][i];
+                current = statOrder[13][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[tables.statOrder[13][i + 1]]) {
-                    tables.statOrder[13][i] = tables.statOrder[13][i + 1];
-                    tables.statOrder[13][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalTroopsProduced[statOrder[13][i + 1]]) {
+                    statOrder[13][i] = statOrder[13][i + 1];
+                    statOrder[13][i + 1] = current;
                 }
-                current = tables.statOrder[14][i];
+                current = statOrder[14][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[tables.statOrder[14][i + 1]]) {
-                    tables.statOrder[14][i] = tables.statOrder[14][i + 1];
-                    tables.statOrder[14][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalGoodsRecieved[statOrder[14][i + 1]]) {
+                    statOrder[14][i] = statOrder[14][i + 1];
+                    statOrder[14][i + 1] = current;
                 }
-                current = tables.statOrder[15][i];
+                current = statOrder[15][i];
                 if (DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[current]
-                    < DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[tables.statOrder[15][i + 1]]) {
-                    tables.statOrder[15][i] = tables.statOrder[15][i + 1];
-                    tables.statOrder[15][i + 1] = current;
+                    < DAT_GameSynchronyState::instance.finalResults.finalGoodsSent[statOrder[15][i + 1]]) {
+                    statOrder[15][i] = statOrder[15][i + 1];
+                    statOrder[15][i + 1] = current;
                 }
             }
         }
 
         // bonus points for the winner and for a clear lead in a statistic
-        tables.points[tables.overallOrder[1]] += 3;
-        if (tables.kills[tables.statOrder[0][1]] > 10
-            && tables.kills[tables.statOrder[0][1]] > tables.kills[tables.statOrder[0][2]] * 2) {
-            tables.points[tables.statOrder[0][1]] += 3;
+        points[overallOrder[1]] += 3;
+        if (kills[statOrder[0][1]] > 10 && kills[statOrder[0][1]] > kills[statOrder[0][2]] * 2) {
+            points[statOrder[0][1]] += 3;
         }
-        int value = DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[tables.statOrder[1][1]];
+        int value = DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[statOrder[1][1]];
         if (value > 2
-            && value > DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[tables.statOrder[1][2]] * 2) {
-            tables.points[tables.statOrder[1][1]] += 2;
+            && value > DAT_GameSynchronyState::instance.finalResults.finalBuildingsBurned[statOrder[1][2]] * 2) {
+            points[statOrder[1][1]] += 2;
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[tables.statOrder[2][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[statOrder[2][1]];
         if (value > 50
-            && value > DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[tables.statOrder[2][2]] * 2) {
-            tables.points[tables.statOrder[2][1]] += 2;
+            && value > DAT_GameSynchronyState::instance.finalResults.finalFoodProduced[statOrder[2][2]] * 2) {
+            points[statOrder[2][1]] += 2;
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalGold[tables.statOrder[3][1]];
-        if (value > 100
-            && value > DAT_GameSynchronyState::instance.finalResults.finalGold[tables.statOrder[3][2]] * 2) {
-            tables.points[tables.statOrder[3][1]] += 3;
+        value = DAT_GameSynchronyState::instance.finalResults.finalGold[statOrder[3][1]];
+        if (value > 100 && value > DAT_GameSynchronyState::instance.finalResults.finalGold[statOrder[3][2]] * 2) {
+            points[statOrder[3][1]] += 3;
         }
-        short const maxPopulation
-            = DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[tables.statOrder[4][1]];
+        short const maxPopulation = DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[statOrder[4][1]];
         if (maxPopulation > 24
-            && maxPopulation
-                > DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[tables.statOrder[4][2]] * 2) {
+            && maxPopulation > DAT_GameSynchronyState::instance.finalResults.finalMaxPopulation[statOrder[4][2]] * 2) {
             // fixme: the original gives the population point to the player with the most kills
-            ++tables.points[tables.statOrder[0][1]];
+            ++points[statOrder[0][1]];
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[tables.statOrder[5][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[statOrder[5][1]];
         if (value > 100
-            && value > DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[tables.statOrder[5][2]] * 2) {
-            ++tables.points[tables.statOrder[5][1]];
+            && value > DAT_GameSynchronyState::instance.finalResults.finalWoodProduced[statOrder[5][2]] * 2) {
+            ++points[statOrder[5][1]];
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[tables.statOrder[6][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[statOrder[6][1]];
         if (value > 50
-            && value > DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[tables.statOrder[6][2]] * 2) {
-            ++tables.points[tables.statOrder[6][1]];
+            && value > DAT_GameSynchronyState::instance.finalResults.finalStoneProduced[statOrder[6][2]] * 2) {
+            ++points[statOrder[6][1]];
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalIronProduced[tables.statOrder[7][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalIronProduced[statOrder[7][1]];
         if (value > 10
-            && value > DAT_GameSynchronyState::instance.finalResults.finalIronProduced[tables.statOrder[7][2]] * 2) {
-            ++tables.points[tables.statOrder[7][1]];
+            && value > DAT_GameSynchronyState::instance.finalResults.finalIronProduced[statOrder[7][2]] * 2) {
+            ++points[statOrder[7][1]];
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[tables.statOrder[8][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[statOrder[8][1]];
         if (value > 20
-            && value > DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[tables.statOrder[8][2]] * 2) {
-            ++tables.points[tables.statOrder[8][1]];
+            && value > DAT_GameSynchronyState::instance.finalResults.finalPitchProduced[statOrder[8][2]] * 2) {
+            ++points[statOrder[8][1]];
         }
-        value = DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[tables.statOrder[11][1]];
+        value = DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[statOrder[11][1]];
         if (value > 20
-            && value
-                > DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[tables.statOrder[11][2]] * 2) {
-            ++tables.points[tables.statOrder[11][1]];
+            && value > DAT_GameSynchronyState::instance.finalResults.finalWeaponsProduced[statOrder[11][2]] * 2) {
+            ++points[statOrder[11][1]];
         }
 
         // three points per star, at most five, and at most four unless player slot 1 took part
@@ -260,12 +263,12 @@ namespace UI {
             starLimitUnk = 8;
         }
         for (int player = 1; player < 9; ++player) {
-            tables.stars[player] = tables.points[player] / 3;
-            if (tables.points[player] / 3 > 5) {
-                tables.stars[player] = 5;
+            stars[player] = points[player] / 3;
+            if (points[player] / 3 > 5) {
+                stars[player] = 5;
             }
-            if (starLimitUnk < 4 && tables.stars[player] == 5) {
-                tables.stars[player] = 4;
+            if (starLimitUnk < 4 && stars[player] == 5) {
+                stars[player] = 4;
             }
         }
 
@@ -290,63 +293,64 @@ namespace UI {
             y += 20;
         }
         y += 190;
-        int iconY = y - 18;
         DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
         int player;
         for (index = 0; index < 8; ++index) {
             switch (DAT_FinalResultsOrderByColumn::instance) {
             case 0:
-                player = tables.overallOrder[index + 1];
+                player = overallOrder[index + 1];
                 break;
             case 1:
-                player = tables.statOrder[0][index + 1];
+                player = statOrder[0][index + 1];
                 break;
             case 2:
-                player = tables.statOrder[1][index + 1];
+                player = statOrder[1][index + 1];
                 break;
             case 3:
-                player = tables.statOrder[10][index + 1];
+                player = statOrder[10][index + 1];
                 break;
             case 4:
-                player = tables.statOrder[3][index + 1];
+                player = statOrder[3][index + 1];
                 break;
             case 5:
-                player = tables.statOrder[2][index + 1];
+                player = statOrder[2][index + 1];
                 break;
             case 6:
-                player = tables.statOrder[5][index + 1];
+                player = statOrder[5][index + 1];
                 break;
             case 7:
-                player = tables.statOrder[6][index + 1];
+                player = statOrder[6][index + 1];
                 break;
             case 8:
-                player = tables.statOrder[7][index + 1];
+                player = statOrder[7][index + 1];
                 break;
             case 9:
-                player = tables.statOrder[8][index + 1];
+                player = statOrder[8][index + 1];
                 break;
             case 10:
-                player = tables.statOrder[4][index + 1];
+                player = statOrder[4][index + 1];
                 break;
             case 11:
-                player = tables.statOrder[11][index + 1];
+                player = statOrder[11][index + 1];
                 break;
             case 12:
-                player = tables.statOrder[12][index + 1];
+                player = statOrder[12][index + 1];
                 break;
             case 13:
-                player = tables.statOrder[13][index + 1];
+                player = statOrder[13][index + 1];
                 break;
             case 14:
-                player = tables.statOrder[14][index + 1];
+                player = statOrder[14][index + 1];
                 break;
             case 15:
-                player = tables.statOrder[15][index + 1];
+                player = statOrder[15][index + 1];
                 break;
             }
             if (!DAT_GameSynchronyState::instance.finalResults.active[player]) {
                 continue;
             }
+            // the icons' y, from the row's y (an icon y of its own, stepped by 45, loses the match)
+            int const iconY = y - 18;
             char* const name = DAT_GameSynchronyState::instance.finalResults.names[player];
             DAT_TextManagerObject::instance.field_0x30 = 1;
             MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderMultilineText6Unk, DAT_TextManagerObject::ptr)(
@@ -362,7 +366,7 @@ namespace UI {
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 139, x, iconY - 2);
                 iconX = x + 22;
             }
-            for (int star = 0; star < tables.stars[player]; ++star) {
+            for (int star = 0; star < stars[player]; ++star) {
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::renderGM,
                     DAT_TextureRenderCoreObject::ptr)(OpenSHC::DE::SHCDE::GM_INTERFACE_ICONS3, 139, iconX, iconY - 2);
                 iconX += 22;
@@ -397,11 +401,11 @@ namespace UI {
             DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue = OpenSHC::Rendering::Enums::RT_MAP_GAME;
             if (INT_00ec082c::instance == 0 || INT_00ec082c::instance == 2) {
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    tables.kills[player], x + 279, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB,
-                    18, FALSE, 0);
+                    kills[player], x + 279, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
+                    FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-                    tables.losses[player], x + 337, y, OpenSHC::Text::TTA_CENTER,
-                    OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
+                    losses[player], x + 337, y, OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18,
+                    FALSE, 0);
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     DAT_GameSynchronyState::instance.finalResults.finalGold[player], x + 395, y,
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
@@ -471,14 +475,13 @@ namespace UI {
                     OpenSHC::Text::TTA_CENTER, OpenSHC::Rendering::Colors::COL_C2F0EB, 18, FALSE, 0);
             }
             y += 45;
-            iconY += 45;
         }
 
         if (CHAR_00eb0e44::instance == '\0') {
             if (DAT_00eb9af8::instance == 0
                 && DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart != 0) {
                 // fixme: the original writes the date into the (no longer needed) statistic orders
-                char* const dateText = (char*)tables.statOrder[0];
+                char* const dateText = (char*)statOrder[0];
                 MACRO_CALL(OpenSHC::OS_Func::_sprintf)(dateText, s__s__d____s__d_005aaf3c,
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::getTextStringInGroupAtOffset,
                         DAT_TextManagerObject::ptr)(OpenSHC::DE::SHCDE::TEXT_MONTHS,
