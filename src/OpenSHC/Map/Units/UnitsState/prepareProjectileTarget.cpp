@@ -122,7 +122,8 @@ namespace Map {
                     _scatter = _scatter + 70;
                     break;
                 case OpenSHC::Map::Units::UT_S_FBALLISTA:
-                    return this->units[shooterID].unitType - 22;
+                    _scatter = 0;
+                    break;
                 case OpenSHC::Map::Units::UT_E_ARCHER:
                 case OpenSHC::Map::Units::UT_E_ARCHER_DEBUG:
                     _archerScatter = FALSE;
@@ -161,12 +162,13 @@ namespace Map {
                 }
                 int _heightRng = abs(this->units[shooterID].fixedRng + _rng);
                 int _heightOffset = _heightRng % _scatter + 20;
-                if (this->units[shooterID].shootTargetZ < _heightOffset + 8) {
-                    _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ + _heightOffset;
+                int const _z = (ushort)this->units[shooterID].shootTargetZ;
+                if ((short)_z < _heightOffset + 8) {
+                    _unhandledTypeResult = _z + _heightOffset;
                     this->units[shooterID].shootTargetZ = _unhandledTypeResult;
                     return _unhandledTypeResult;
                 }
-                _unhandledTypeResult = (ushort)this->units[shooterID].shootTargetZ - _heightOffset;
+                _unhandledTypeResult = _z - _heightOffset;
                 this->units[shooterID].shootTargetZ = _unhandledTypeResult;
                 return _unhandledTypeResult;
             }
