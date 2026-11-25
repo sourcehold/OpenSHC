@@ -1,0 +1,38 @@
+#include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
+#include "OpenSHC/Map/MapType2.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_GameCore.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+#include "OpenSHC/Globals/DAT_MapPropertiesState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using WindowsHelper::Enums::BOOLEnum;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x0051BDE0
+        BOOLEnum TroopValueState::getPlayerNot1AndHasKeep(int playerID)
+        {
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+                && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
+                if (playerID == 1) {
+                    return TRUE;
+                }
+            } else if (playerID != 1
+                && 0 < DAT_GameState::instance.playerDataArray[playerID]
+                        .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
+                        .id) {
+                return TRUE;
+            }
+            return FALSE;
+        }
+
+    }
+}
+}
