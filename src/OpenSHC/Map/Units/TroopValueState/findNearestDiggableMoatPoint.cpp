@@ -13,7 +13,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A8A0
         int TroopValueState::findNearestDiggableMoatPoint(int param_1)
         {
-            // the generated header declares a BOOLEnum return, but the value is a moat tile or -1
+            // findNearestFriendlyMoatTileForDigging is declared BOOLEnum, but it returns a moat tile or -1
             int const moatTile = MACRO_CALL_MEMBER(Map::TileMapState_Func::findNearestFriendlyMoatTileForDigging,
                 DAT_TileMapState::ptr)(DAT_UnitsState::instance.units[param_1].owner, param_1, 2);
             if (moatTile <= -1) {

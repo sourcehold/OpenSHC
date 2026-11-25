@@ -22,7 +22,7 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005200A0
-        void TroopValueState::aiRecomputeAttacks2(int param_1, int param_2)
+        void TroopValueState::aiRecomputeAttacks2(BOOLEnum param_1, int param_2)
         {
             int const playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             BOOLEnum canKeepReachSignpost = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
@@ -36,7 +36,7 @@ namespace Map {
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                 sizeof(DAT_TileMapState::instance.AIInfoLayer), '\0',
                 (void*)((int)(DAT_TileMapState::instance.AIInfoLayer)));
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(TRUE);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             int const _defaultSignpostTile = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
             DAT_TroopValueState::instance.attackInfo.field127625_0x42744 = 0;
@@ -69,15 +69,15 @@ namespace Map {
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID,
                 DAT_TroopValueState::instance.attackInfo.attacker);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setScale3, this)(1, playerID);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setTown2, this)(1, playerID);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailablePeopleValueSlots, this)(1);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableLordValueSlots, this)(1);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setGate2, this)(1, playerID);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setWide3, this)(1, playerID);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setMoat3, this)(1, playerID);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableHighValueSlots, this)(1);
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableArcherValueSlots, this)(1);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setScale3, this)(TRUE, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setTown2, this)(TRUE, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailablePeopleValueSlots, this)(TRUE);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableLordValueSlots, this)(TRUE);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setGate2, this)(TRUE, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setWide3, this)(TRUE, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::setMoat3, this)(TRUE, playerID);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableHighValueSlots, this)(TRUE);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::countAvailableArcherValueSlots, this)(TRUE);
             if (DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle <= 0) {
                 MACRO_CALL_MEMBER(Game::GameStateStructures_Func::calculateAttackVectorsToCampFireOfPlayer,
                     DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);

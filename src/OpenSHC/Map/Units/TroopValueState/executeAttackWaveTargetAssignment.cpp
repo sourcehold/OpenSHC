@@ -57,7 +57,7 @@ namespace Map {
             }
             DAT_TroopValueState::instance.attackInfo.someCounter1
                 = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
-            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(0, param_1);
+            MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks2, this)(FALSE, param_1);
             int _playerInfoOffset = _playerID * 0x177bc;
             if (*(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset - 0x18)
                 < *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerInfoOffset - 0x1c)) {

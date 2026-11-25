@@ -15,7 +15,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D690
         void TroopValueState::advanceAttackWaveStaging(int param_1)
         {
-            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 0;
+            DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = FALSE;
             DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 2;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             MACRO_CALL_MEMBER(Game::GameStateStructures_Func::nof_fpoints_locationFinder, DAT_GameState::ptr)();

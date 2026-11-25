@@ -22,7 +22,7 @@ namespace Map {
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FB90
-        void TroopValueState::recountAttackTroopValue(int param_1)
+        void TroopValueState::recountAttackTroopValue(BOOLEnum param_1)
         {
             int counter = 0x10;
             if (!param_1) {
@@ -34,7 +34,7 @@ namespace Map {
                 MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
                     sizeof(DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType), '\0',
                     (void*)((int)(&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)));
-                DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 0;
+                DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = FALSE;
                 DAT_TroopValueState::instance.attackInfo.size = 0;
                 DAT_TroopValueState::instance.attackInfo.aiTroops = 0;
                 DAT_TroopValueState::instance.attackInfo.attackTribeCount = 0;
@@ -148,7 +148,7 @@ namespace Map {
                 }
                 if ((DAT_TroopValueState::instance.attackInfo.aiTroops <= 0)
                     || (DAT_TroopValueState::instance.attackInfo.attackTribeCount <= 0)) {
-                    DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 1;
+                    DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = TRUE;
                 }
                 if ((DAT_TroopValueState::instance.attackInfo.size
                         > DAT_TroopValueState::instance.attackInfo.aiTroops * 3)
@@ -159,7 +159,7 @@ namespace Map {
                             + DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[3]
                             + DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[2]
                         < 30) {
-                        DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = 1;
+                        DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated = TRUE;
                     }
                 }
             }

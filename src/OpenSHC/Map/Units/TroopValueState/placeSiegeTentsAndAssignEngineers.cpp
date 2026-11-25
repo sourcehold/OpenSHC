@@ -28,7 +28,7 @@ namespace Map {
         using Map::Units::UnitType;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B710
-        void TroopValueState::placeSiegeTentsAndAssignEngineers(int param_1, int param_2)
+        void TroopValueState::placeSiegeTentsAndAssignEngineers(int param_1, BOOLEnum param_2)
         {
             int _engineerCount;
             int _subCount;

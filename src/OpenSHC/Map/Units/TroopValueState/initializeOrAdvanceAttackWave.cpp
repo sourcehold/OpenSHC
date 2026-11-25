@@ -24,9 +24,9 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount
                     = DAT_TroopValueState::instance.attackInfo.pendingAttackWaveCount + 1;
                 DAT_TroopValueState::instance.attackInfo.someCounter1 = 1;
-                DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = 0;
+                DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = FALSE;
                 DAT_TroopValueState::instance.attackInfo.attackWaveRetargetCount = 0;
-                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
+                MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(TRUE);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountTotalTroopValue, this)();

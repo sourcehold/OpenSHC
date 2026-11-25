@@ -31,8 +31,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.playerID_0x2c850 = 1;
             }
             if (!DAT_TroopValueState::instance.attackInfo.aiTickPhase) {
-                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag
-                    = DAT_TroopValueState::instance.attackInfo.aiTickPhase;
+                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = FALSE;
                 DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
                     = DAT_TroopValueState::instance.attackInfo.aiTickPhase;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::collectArcherUnitsByLocation, this)();
@@ -62,7 +61,7 @@ namespace Map {
             BOOLEnum const canMoveFromKeep = MACRO_CALL_MEMBER(
                 Game::GameStateStructures_Func::unitsCanMoveFromKeepOfPlayerToAnotherArea, DAT_GameState::ptr)(1);
             if (canMoveFromKeep && !DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag) {
-                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = 1;
+                DAT_TroopValueState::instance.attackInfo.unitsSentToKeepFlag = TRUE;
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::commandUnitsToMoveToKeep, this)();
             }
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::processSpottedEnemyTiles, this)();
