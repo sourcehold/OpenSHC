@@ -15,64 +15,57 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051ACE0
         void TroopValueState::expandAIZoneLayerStage1()
         {
-            int direction;
-            int y;
-            int tile;
-            for (tile = 0; tile < 80400; ++tile) {
-                if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x01') {
-                    y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                    direction = 0;
-                    int _x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                    do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[tile
-                                  + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
-                                & 0xf)) {
-                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
-                                DAT_PathFindingState::ptr)(6,
-                                (uint)(DAT_TerrainDefinedData::instance
-                                           .clockwiseCardinalTranslationMatrix[direction * 2]
-                                           .int_.xOffset
-                                    + _x),
-                                (uint)(DAT_TerrainDefinedData::instance
-                                           .clockwiseCardinalTranslationMatrix[direction * 2]
-                                           .int_.yOffset
-                                    + y),
-                                2);
-                            break;
-                        }
-                        direction++;
-                    } while (direction < 4);
+            for (int tile = 0; tile < countof(DAT_TileMapState::instance.AIInfoLayer); ++tile) {
+                if (DAT_TileMapState::instance.AIInfoLayer[tile] != 1) {
+                    continue;
+                }
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int direction = 0;
+                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                for (; direction < 4; ++direction) {
+                    if (!(DAT_TileMapState::instance.AIInfoLayer[tile
+                              + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
+                            & 0xf)) {
+                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
+                            DAT_PathFindingState::ptr)(6,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.xOffset
+                                + x,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.yOffset
+                                + y,
+                            2);
+                        break;
+                    }
                 }
             }
-            for (tile = 0; tile < 80400; ++tile) {
-                if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x02') {
-                    DAT_TileMapState::instance.AIInfoLayer[tile] = '\x01';
+            for (int tile = 0; tile < countof(DAT_TileMapState::instance.AIInfoLayer); ++tile) {
+                if (DAT_TileMapState::instance.AIInfoLayer[tile] == 2) {
+                    DAT_TileMapState::instance.AIInfoLayer[tile] = 1;
                 }
             }
-            for (tile = 0; tile < 80400; ++tile) {
-                if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x01') {
-                    direction = 0;
-                    y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                    int _x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                    do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[tile
-                                  + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
-                                & 0xf)) {
-                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
-                                DAT_PathFindingState::ptr)(10,
-                                (uint)(DAT_TerrainDefinedData::instance
-                                           .clockwiseCardinalTranslationMatrix[direction * 2]
-                                           .int_.xOffset
-                                    + _x),
-                                (uint)(DAT_TerrainDefinedData::instance
-                                           .clockwiseCardinalTranslationMatrix[direction * 2]
-                                           .int_.yOffset
-                                    + y),
-                                2);
-                            break;
-                        }
-                        direction++;
-                    } while (direction < 4);
+            for (int tile = 0; tile < countof(DAT_TileMapState::instance.AIInfoLayer); ++tile) {
+                if (DAT_TileMapState::instance.AIInfoLayer[tile] != 1) {
+                    continue;
+                }
+                int direction = 0;
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                for (; direction < 4; ++direction) {
+                    if (!(DAT_TileMapState::instance.AIInfoLayer[tile
+                              + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
+                            & 0xf)) {
+                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
+                            DAT_PathFindingState::ptr)(10,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.xOffset
+                                + x,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.yOffset
+                                + y,
+                            2);
+                        break;
+                    }
                 }
             }
         }

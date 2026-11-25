@@ -21,31 +21,36 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519690
         void TroopValueState::buildRallyPointsFromSiegeUnits(int tribeID)
         {
-            int _unitID;
             DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
-            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
-                if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
-                    BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
-                        DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
-                    if (fullIDIsMinus1) {
-                        if (((DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x16))
-                                || (DAT_TribesState::instance.tribes[_tribeID].tribeType == ((AITribeType)0x17)))
-                            && (_unitID = (int)DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID,
-                                0 < DAT_UnitsState::instance.units[_unitID].stoneAmmunition)) {
-                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
-                                DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[_unitID].x),
-                                (int)(DAT_UnitsState::instance.units[_unitID].y));
-                            DAT_TribesState::instance.tribes[tribeID]
-                                .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][0]
-                                = (short)DAT_PathFindingState::instance.ALG_ResultX;
-                            DAT_TribesState::instance.tribes[tribeID]
-                                .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][1]
-                                = (short)DAT_PathFindingState::instance.ALG_ResultY;
-                            DAT_TribesState::instance.tribes[tribeID].rallyPointCount
-                                = DAT_TribesState::instance.tribes[tribeID].rallyPointCount + 1;
-                        }
-                    }
+            for (int siegeTribeID = 1; siegeTribeID < countof(DAT_TribesState::instance.tribes); ++siegeTribeID) {
+                if (!DAT_TribesState::instance.tribes[siegeTribeID].tribeState) {
+                    continue;
                 }
+                BOOLEnum const fullIDIsMinus1
+                    = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(
+                        DAT_TribesState::instance.tribes[siegeTribeID].owner);
+                if (!fullIDIsMinus1) {
+                    continue;
+                }
+                // 22 and 23 have no AITribeType constant yet; they are the stone-throwing siege tribes
+                if (DAT_TribesState::instance.tribes[siegeTribeID].tribeType != (AITribeType)22
+                    && DAT_TribesState::instance.tribes[siegeTribeID].tribeType != (AITribeType)23) {
+                    continue;
+                }
+                int const unitID = DAT_TribesState::instance.tribes[siegeTribeID].selectionTargetUnitID;
+                if (DAT_UnitsState::instance.units[unitID].stoneAmmunition <= 0) {
+                    continue;
+                }
+                MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
+                    DAT_PathFindingState::ptr)(
+                    -1, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y);
+                DAT_TribesState::instance.tribes[tribeID]
+                    .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][0]
+                    = DAT_PathFindingState::instance.ALG_ResultX;
+                DAT_TribesState::instance.tribes[tribeID]
+                    .rallyPointArray[DAT_TribesState::instance.tribes[tribeID].rallyPointCount][1]
+                    = DAT_PathFindingState::instance.ALG_ResultY;
+                ++DAT_TribesState::instance.tribes[tribeID].rallyPointCount;
             }
             if (DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex < 0) {
                 DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;

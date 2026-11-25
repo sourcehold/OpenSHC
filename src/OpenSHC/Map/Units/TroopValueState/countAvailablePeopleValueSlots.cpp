@@ -12,17 +12,10 @@ namespace Map {
         void TroopValueState::countAvailablePeopleValueSlots(int param_1)
         {
             DAT_TroopValueState::instance.attackInfo.people3 = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.people2) {
-                int* _pUnitID = &DAT_TroopValueState::instance.attackInfo.peopleValuesArray[0].unitID;
-                int _remaining = DAT_TroopValueState::instance.attackInfo.people2;
-                do {
-                    if ((*_pUnitID == 0) || (param_1)) {
-                        DAT_TroopValueState::instance.attackInfo.people3
-                            = DAT_TroopValueState::instance.attackInfo.people3 + 1;
-                    }
-                    _pUnitID += 4;
-                    _remaining--;
-                } while (_remaining);
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.people2; ++i) {
+                if (DAT_TroopValueState::instance.attackInfo.peopleValuesArray[i].unitID == 0 || param_1) {
+                    ++DAT_TroopValueState::instance.attackInfo.people3;
+                }
             }
         }
 

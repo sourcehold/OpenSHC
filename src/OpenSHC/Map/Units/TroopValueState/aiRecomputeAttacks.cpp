@@ -21,30 +21,28 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005202B0
         void TroopValueState::aiRecomputeAttacks(undefined4 param_1, int param_2)
         {
-            int const playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
+            int const playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
                 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TileMapState::instance.AIZoneLayer), '\0',
-                (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
+                sizeof(DAT_TileMapState::instance.AIZoneLayer), 0, DAT_TileMapState::instance.AIZoneLayer);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TileMapState::instance.AIInfoLayer), '\0',
-                (void*)((int)(DAT_TileMapState::instance.AIInfoLayer)));
+                sizeof(DAT_TileMapState::instance.AIInfoLayer), 0, DAT_TileMapState::instance.AIInfoLayer);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(1);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
-            int const _defaultSignpostTile = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
-            int _signpostTile
+            int const defaultSignpostTile = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
+            int signpostTile
                 = DAT_GameState::instance.mapAndTime
                       .signpostEntryData[DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2]]
                       .tile;
-            if (_signpostTile <= 0) {
+            if (signpostTile <= 0) {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
-                _signpostTile = _defaultSignpostTile;
+                signpostTile = defaultSignpostTile;
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer, DAT_PathFindingState::ptr)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID, 1,
-                (int)((short)DAT_TileMapState::instance.PathConnectionLayer[_signpostTile]));
+                DAT_TileMapState::instance.PathConnectionLayer[signpostTile]);
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(60, 0, 0, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackZoneSearch, this)(param_2);
@@ -52,8 +50,8 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.attacker);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recomputeAttackInfo, this)(
                 DAT_TroopValueState::instance.attackInfo.attacker,
-                (int)(DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1]
-                        .currentPlayerID_OR_attackedPlayerID_OR_one));
+                DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1]
+                    .currentPlayerID_OR_attackedPlayerID_OR_one);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeSiegeSpotScores, this)(
                 DAT_GameSynchronyState::instance.currentPlayerSlotID,
                 DAT_TroopValueState::instance.attackInfo.attacker);
@@ -71,8 +69,7 @@ namespace Map {
                     DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID);
                 DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 1;
             }
-            DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle
-                = DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle + 1;
+            ++DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle;
             if (1 < DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle) {
                 DAT_TroopValueState::instance.attackInfo.attackVectorRecomputeThrottle = 0;
             }

@@ -18,9 +18,9 @@ namespace Map {
         void TroopValueState::aiControlNonSkirmishUnitMovement()
         {
             MACRO_CALL_MEMBER(TroopValueState_Func::decrementTileMap1104, this)();
-            if (DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_EDITOR
-                || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SKIRMISH_AND_MULTIPLAYER
-                || DAT_GameCore::instance.gameMode_2 == OpenSHC::Game::GM_SIEGE_THAT) {
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_EDITOR
+                || DAT_GameCore::instance.gameMode_2 == Game::GM_SKIRMISH_AND_MULTIPLAYER
+                || DAT_GameCore::instance.gameMode_2 == Game::GM_SIEGE_THAT) {
                 return;
             }
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -41,14 +41,14 @@ namespace Map {
             if (status != -1000) {
                 if (status == 0) {
                     BOOLEnum waveComplete = TRUE;
-                    for (int wave = 0; wave < 50; ++wave) {
+                    for (int wave = 0; wave < countof(DAT_TroopValueState::instance.attackInfo.nof_tribes); ++wave) {
                         if (DAT_TroopValueState::instance.attackInfo.nof_tribes[wave] != 0
                             && DAT_TroopValueState::instance.attackInfo.value3Array01[wave] != 6) {
                             waveComplete = FALSE;
                             break;
                         }
                     }
-                    if (waveComplete != FALSE) {
+                    if (waveComplete) {
                         DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .aiControlStatusRelated = 600;
                     }
@@ -66,14 +66,14 @@ namespace Map {
             }
             DAT_TroopValueState::instance.attackInfo.value3Array01[0] = 0;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[0] = 0;
-            for (int wave = 1; wave < 50; ++wave) {
+            for (int wave = 1; wave < countof(DAT_TroopValueState::instance.attackInfo.nof_tribes); ++wave) {
                 DAT_TroopValueState::instance.attackInfo.attacker
                     = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[wave];
                 if (DAT_TroopValueState::instance.attackInfo.attacker == 1) {
                     continue;
                 }
                 if (DAT_TroopValueState::instance.attackInfo.attacker <= 0
-                    && MACRO_CALL_MEMBER(TroopValueState_Func::searchTribeWithProperties, this)(wave) == FALSE) {
+                    && !MACRO_CALL_MEMBER(TroopValueState_Func::searchTribeWithProperties, this)(wave)) {
                     continue;
                 }
                 DAT_GameState::instance.playerDataArray[DAT_TroopValueState::instance.attackInfo.attacker]

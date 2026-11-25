@@ -17,36 +17,31 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Game::GameMode;
-        using Game::GameMode2;
-        using Map::MapType2;
-        using Map::Units::SomeTribeBehaviorType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BC70
         void TroopValueState::addUnitToNewTribe(
             undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID)
         {
-            int _tribe;
+            int tribeID;
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {
-                _tribe = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
+                tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
                     playerID);
             } else {
-                int _playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
-                if (!_playerID) {
-                    _playerID = 2;
+                int wavePlayerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
+                if (!wavePlayerID) {
+                    wavePlayerID = 2;
                 }
-                if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
-                    && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
-                    _playerID = 2;
+                if (DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+                    && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
+                    wavePlayerID = 2;
                 }
-                _tribe
-                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(_playerID, 0);
-                DAT_TribesState::instance.tribes[_tribe].tribeBehaviorType = Map::Units::STBT_6;
+                tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                    wavePlayerID, 0);
+                DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = Map::Units::STBT_6;
             }
-            DAT_TribesState::instance.tribes[_tribe].tribeType = (undefined2)tribeType;
-            DAT_TribesState::instance.tribes[_tribe].attackWave = (short)attackWave;
-            DAT_TribesState::instance.tribes[_tribe].attackInfo_someCounter1 = 0;
-            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, _tribe);
+            DAT_TribesState::instance.tribes[tribeID].tribeType = tribeType;
+            DAT_TribesState::instance.tribes[tribeID].attackWave = attackWave;
+            DAT_TribesState::instance.tribes[tribeID].attackInfo_someCounter1 = 0;
+            MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(unitID, tribeID);
         }
 
     }

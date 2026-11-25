@@ -13,33 +13,27 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::UnitType;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051C2D0
         void TroopValueState::updateArcherBrazierProximityFlags()
         {
-            BOOLEnum isAIPlayerWithKeep;
-            int _unitID = 1;
-            if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
-                do {
-                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
-                        && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
-                                Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)((int)_pUnit->owner),
-                            isAIPlayerWithKeep)
-                        && (_pUnit->unitType == Map::Units::UT_E_ARCHER
-                            || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
-                        && !_pUnit->dying) {
-                        int _isBrazierNearby = MACRO_CALL_MEMBER(
-                            Map::Entities::EntityState_Func::isBrazierNearby, DAT_EntityState::ptr)((int)_pUnit->x,
-                            (int)(_pUnit->y), (int)(_pUnit->buildingHeight + _pUnit->terrainOrClimbHeight));
-                        _pUnit->field_0x40d = _isBrazierNearby != 0;
-                    }
-                    _unitID++;
-                    _pUnit++;
-                } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
+            for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; ++unitID) {
+                Unit* const unit = &DAT_UnitsState::instance.units[unitID];
+                if (unit->logicalState == Map::Units::ULS_INVISIBLE) {
+                    continue;
+                }
+                BOOLEnum const isAIPlayerWithKeep
+                    = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(unit->owner);
+                if (!isAIPlayerWithKeep) {
+                    continue;
+                }
+                if ((unit->unitType == Map::Units::UT_E_ARCHER || unit->unitType == Map::Units::UT_A_ARCHER)
+                    && !unit->dying) {
+                    BOOLEnum const isBrazierNearby = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::isBrazierNearby,
+                        DAT_EntityState::ptr)(unit->x, unit->y, unit->buildingHeight + unit->terrainOrClimbHeight);
+                    unit->field_0x40d = isBrazierNearby != 0;
+                }
             }
         }
 

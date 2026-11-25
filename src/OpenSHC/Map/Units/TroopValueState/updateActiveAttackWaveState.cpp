@@ -17,40 +17,35 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Game::GameMode2;
-        using Map::MapType2;
-        using Map::Units::SomeTribeBehaviorType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D730
         void TroopValueState::updateActiveAttackWaveState(int attackWave)
         {
-            int playerID = (int)(char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
-            if ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk)
-                && (DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE)) {
+            int playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
+            if (DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
+                && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
                 playerID = 2;
             }
-            int const _ticker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
-            int const _nextTicker = _ticker + 1;
-            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = _nextTicker;
-            if (0 < _ticker) {
-                if (100 < _nextTicker) {
+            int const ticker = DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave];
+            int const nextTicker = ticker + 1;
+            DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = nextTicker;
+            if (0 < ticker) {
+                if (100 < nextTicker) {
                     MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
-                        attackWave, (SomeTribeBehaviorType)((int)(1024)));
+                        attackWave, Map::Units::STBT_0x400);
                 }
                 if (1000 < DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave]) {
                     DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackWave] = 0;
                 }
                 return;
             }
-            DAT_TroopValueState::instance.attackInfo.someCounter1
-                = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
+            ++DAT_TroopValueState::instance.attackInfo.someCounter1;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::removeSiegeBuildings, DAT_BuildingsState::ptr)(
                 attackWave, playerID);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::exitSiegeEquipmentForWave, this)(attackWave);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
-                attackWave, 1000, 10000, (SomeTribeBehaviorType)((int)(1023)));
+                attackWave, 1000, 10000, Map::Units::STBT_0x3ff);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
-                (Map::Units::SomeTribeBehaviorType)1023, Map::Units::STBT_1, 0, 10);
+                Map::Units::STBT_0x3ff, Map::Units::STBT_1, 0, 10);
         }
 
     }

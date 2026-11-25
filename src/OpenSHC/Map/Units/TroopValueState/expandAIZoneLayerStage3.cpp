@@ -15,30 +15,29 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AE90
         void TroopValueState::expandAIZoneLayerStage3()
         {
-            for (int tile = 0; tile < 80400; ++tile) {
-                if (DAT_TileMapState::instance.AIInfoLayer[tile] == '\x04') {
-                    int const y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                    int direction = 0;
-                    int const _x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                    do {
-                        if (!(DAT_TileMapState::instance.AIInfoLayer[tile
-                                  + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
-                                & 0xf)) {
-                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
-                                DAT_PathFindingState::ptr)(0xf,
-                                (uint)((int)(DAT_TerrainDefinedData::instance
-                                                 .clockwiseCardinalTranslationMatrix[direction * 2]
-                                                 .int_.xOffset
-                                    + _x)),
-                                (uint)(DAT_TerrainDefinedData::instance
-                                           .clockwiseCardinalTranslationMatrix[direction * 2]
-                                           .int_.yOffset
-                                    + y),
-                                8);
-                            break;
-                        }
-                        direction++;
-                    } while (direction < 4);
+            for (int tile = 0; tile < countof(DAT_TileMapState::instance.AIInfoLayer); ++tile) {
+                if (DAT_TileMapState::instance.AIInfoLayer[tile] != 4) {
+                    continue;
+                }
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                // direction is declared before x on purpose: declaring it in the for changes the register allocation
+                int direction = 0;
+                int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                for (; direction < 4; ++direction) {
+                    if (!(DAT_TileMapState::instance.AIInfoLayer[tile
+                              + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]
+                            & 15)) {
+                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::recomputeALGPathFindingTileMapUnk,
+                            DAT_PathFindingState::ptr)(15,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.xOffset
+                                + x,
+                            DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction * 2]
+                                    .int_.yOffset
+                                + y,
+                            8);
+                        break;
+                    }
                 }
             }
         }

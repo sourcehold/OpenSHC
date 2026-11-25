@@ -16,40 +16,39 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::Instructions::UnitMatchSpeedEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D0D0
         void TroopValueState::sendAttackingPatrolTribeToComputedDestination(int tribeID)
         {
-            int const _unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int const targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
-            dword _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                (uint)(DAT_UnitsState::instance.units[_unitID].y), (int)(DAT_UnitsState::instance.units[_unitID].owner),
-                (uint)(12), 1);
-            if ((int)_tile <= 0) {
-                _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                    DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                    (uint)(DAT_UnitsState::instance.units[_unitID].y),
-                    (int)(DAT_UnitsState::instance.units[_unitID].owner), (uint)(30), 1);
-                if ((int)_tile <= 0) {
-                    _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                        DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                        (uint)(DAT_UnitsState::instance.units[_unitID].y),
-                        (int)(DAT_UnitsState::instance.units[_unitID].owner), (uint)(50), 1);
+            // widen the search until a reachable tile is found
+            dword destinationTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+                DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
+                DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner, 12,
+                1);
+            if ((int)destinationTile <= 0) {
+                destinationTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
+                    DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner,
+                    30, 1);
+                if ((int)destinationTile <= 0) {
+                    destinationTile = MACRO_CALL_MEMBER(
+                        Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20, DAT_PathFindingState::ptr)(
+                        DAT_UnitsState::instance.units[targetUnitID].x, DAT_UnitsState::instance.units[targetUnitID].y,
+                        DAT_UnitsState::instance.units[targetUnitID].owner, 50, 1);
                 }
             }
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 0);
-            if (0 < (int)_tile) {
+            if (0 < (int)destinationTile) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
-                    (uint)(_tile
+                    destinationTile
                         - DAT_ViewportRenderState::instance
                             .translationMatrix[DAT_ViewportRenderState::instance
-                                    .tileTranslationMatrix_YComponent[_tile]]
-                            .addXgetTile),
-                    (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile]), 0, 0,
+                                    .tileTranslationMatrix_YComponent[destinationTile]]
+                            .addXgetTile,
+                    DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[destinationTile], 0, 0,
                     Map::Units::Instructions::UMSE_0);
             }
         }

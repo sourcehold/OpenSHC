@@ -14,40 +14,36 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::Instructions::UnitMatchSpeedEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AFF0
         int TroopValueState::claimArcherAttackPoint(int param_1)
         {
-            int const _unitID = (int)DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
-            int _pointIndex = MACRO_CALL_MEMBER(
+            int const unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            int pointIndex = MACRO_CALL_MEMBER(
                 Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(param_1);
-            if (!_pointIndex) {
-                _pointIndex
-                    = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
-                        DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
-                        (uint)(DAT_UnitsState::instance.units[_unitID].y), param_1);
-                if (_pointIndex) {
-                    short const _archerRelated = DAT_TribesState::instance.tribes[param_1].archerRelated;
-                    int const _tribeUID = DAT_TribesState::instance.tribes[param_1].uid;
-                    DAT_TribesState::instance.tribes[param_1].archerRelated2 = _archerRelated;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_archerRelated * 2 + 0x3ea].buildingID
-                        = 0;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_archerRelated * 2 + 0x3ea].unitID = 0;
-                    uint const y1
-                        = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3e9].unitID;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3ea].unitID
-                        = _tribeUID;
-                    uint x1
-                        = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3e9].buildingID;
-                    DAT_TribesState::instance.tribes[param_1].archerRelated = (short)_pointIndex;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3ea].buildingID
-                        = param_1;
-                    DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[_pointIndex * 2 + 0x3eb].tile = 3;
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                        param_1, x1, y1, 0, 0, Map::Units::Instructions::UMSE_0);
-                    return _pointIndex;
+            // Nested on purpose: an early return here moves the shared return-0 block ahead of the body.
+            if (!pointIndex) {
+                pointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
+                    DAT_PathFindingState::ptr)(
+                    200, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y, param_1);
+                if (!pointIndex) {
+                    return 0;
                 }
+                short const oldPointIndex = DAT_TribesState::instance.tribes[param_1].archerRelated;
+                int const tribeUID = DAT_TribesState::instance.tribes[param_1].uid;
+                DAT_TribesState::instance.tribes[param_1].archerRelated2 = oldPointIndex;
+                DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[oldPointIndex * 2 + 1002].buildingID = 0;
+                DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[oldPointIndex * 2 + 1002].unitID = 0;
+                uint const pointY
+                    = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1001].unitID;
+                DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1002].unitID = tribeUID;
+                uint const pointX
+                    = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1001].buildingID;
+                DAT_TribesState::instance.tribes[param_1].archerRelated = (short)pointIndex;
+                DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1002].buildingID = param_1;
+                DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1003].tile = 3;
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                    param_1, pointX, pointY, 0, 0, Map::Units::Instructions::UMSE_0);
+                return pointIndex;
             }
             return 0;
         }

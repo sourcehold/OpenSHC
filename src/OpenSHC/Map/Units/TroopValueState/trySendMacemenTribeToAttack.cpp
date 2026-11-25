@@ -20,30 +20,27 @@ namespace Map {
 
         using WindowsHelper::Enums::BOOLEnum;
 
-        using Game::GameMode2;
-        using Map::Units::Behavior::UnitStanceEnum;
-        using Map::Units::Instructions::UnitMatchSpeedEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051CF90
         void TroopValueState::trySendMacemenTribeToAttack()
         {
-            int const _playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
-            if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount
-                && 4 <= (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount
-                && !((byte)SEC_RNG::instance.currentNumber2 & 7)) {
-                BOOLEnum const isNotCampaignMission = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
-                DAT_TroopValueState::instance.attackInfo.macemenTribeCount
-                    = DAT_TroopValueState::instance.attackInfo.macemenTribeCount - 1;
-                int _macemen = DAT_TroopValueState::instance.attackInfo
-                                   .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
-                DAT_TribesState::instance.tribes[_macemen].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
-                if ((isNotCampaignMission) || (0xf <= DAT_GameCore::instance.missionNumber1to20)) {
-                    int _unitID = MACRO_CALL_MEMBER(
-                        Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(_playerID);
-                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
-                        _macemen, (uint)(DAT_UnitsState::instance.units[_unitID].x),
-                        (uint)(DAT_UnitsState::instance.units[_unitID].y), 0, 0, Map::Units::Instructions::UMSE_0);
-                }
+            int const playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
+            if (DAT_TroopValueState::instance.attackInfo.macemenTribeCount <= 0
+                || (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 4
+                || ((byte)SEC_RNG::instance.currentNumber2 & 7)) {
+                return;
+            }
+            BOOLEnum const isNotCampaignMission = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;
+            --DAT_TroopValueState::instance.attackInfo.macemenTribeCount;
+            int const macemenTribeID
+                = DAT_TroopValueState::instance.attackInfo
+                      .macemenTribeArray[DAT_TroopValueState::instance.attackInfo.macemenTribeCount];
+            DAT_TribesState::instance.tribes[macemenTribeID].unitStance = Map::Units::Behavior::USE_AGGRESSIVE;
+            if (isNotCampaignMission || 15 <= DAT_GameCore::instance.missionNumber1to20) {
+                int const unitID = MACRO_CALL_MEMBER(
+                    Map::Units::UnitsState_Func::getLivingSelectableUnit, DAT_UnitsState::ptr)(playerID);
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(
+                    macemenTribeID, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y,
+                    0, 0, Map::Units::Instructions::UMSE_0);
             }
         }
 

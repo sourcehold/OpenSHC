@@ -16,40 +16,34 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::Instructions::UnitMatchSpeedEnum;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D1C0
         void TroopValueState::moveTribeToReachableNearbyTile(int param_1)
         {
-            int const _unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
+            int const unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
-            dword _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                (uint)(DAT_UnitsState::instance.units[_unitID].y), (int)(DAT_UnitsState::instance.units[_unitID].owner),
-                0xc, 0);
-            if ((int)_tile <= 0) {
-                _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                    DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                    (uint)(DAT_UnitsState::instance.units[_unitID].y),
-                    (int)(DAT_UnitsState::instance.units[_unitID].owner), 0x1e, 0);
-                if ((int)_tile <= 0) {
-                    _tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
-                        DAT_PathFindingState::ptr)((int)DAT_UnitsState::instance.units[_unitID].x,
-                        (uint)(DAT_UnitsState::instance.units[_unitID].y),
-                        (int)(DAT_UnitsState::instance.units[_unitID].owner), 0x32, 0);
+            dword tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+                DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                DAT_UnitsState::instance.units[unitID].y, DAT_UnitsState::instance.units[unitID].owner, 12, 0);
+            if ((int)tile <= 0) {
+                tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                    DAT_UnitsState::instance.units[unitID].y, DAT_UnitsState::instance.units[unitID].owner, 30, 0);
+                if ((int)tile <= 0) {
+                    tile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+                        DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                        DAT_UnitsState::instance.units[unitID].y, DAT_UnitsState::instance.units[unitID].owner, 50, 0);
                 }
             }
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 0);
-            if (0 < (int)_tile) {
+            if (0 < (int)tile) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(param_1,
-                    (uint)(_tile
+                    tile
                         - DAT_ViewportRenderState::instance
-                            .translationMatrix[DAT_ViewportRenderState::instance
-                                    .tileTranslationMatrix_YComponent[_tile]]
-                            .addXgetTile),
-                    (uint)(DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile]), 0, 0,
+                            .translationMatrix[DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile]]
+                            .addXgetTile,
+                    DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile], 0, 0,
                     Map::Units::Instructions::UMSE_0);
             }
         }

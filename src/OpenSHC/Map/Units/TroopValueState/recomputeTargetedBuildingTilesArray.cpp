@@ -13,39 +13,34 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitLogicState;
-        using Map::Units::UnitType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x005198C0
         void TroopValueState::recomputeTargetedBuildingTilesArray(int playerID)
         {
             DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray), '\0',
-                (void*)((int)(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray)));
-            uint const _maxUnitCount = DAT_UnitsState::instance.maxUnitCount;
-            int _unitID = 1;
+                sizeof(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray), 0,
+                DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray);
+            uint const maxUnitCount = DAT_UnitsState::instance.maxUnitCount;
+            int unitID = 1;
+            // the guard compares unsigned, the loop condition signed
             if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
-                int _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
+                int arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize;
                 do {
-                    if (_pUnit->logicalState == Map::Units::ULS_NORMAL && _pUnit->isSelectable_OR_matchTime
-                        && _pUnit->owner == playerID && _pUnit->targetedBuildingTile
-                        && _pUnit->unitType != Map::Units::UT_A_SLAVE) {
-                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[_arraySize]
-                            = _pUnit->targetedBuildingTile;
-                        /*
-                          Units.targetBuildingTile
-                         */
-                        _arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
-                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = _arraySize;
-                        if (4000 <= _arraySize) {
+                    if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_NORMAL
+                        && DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime
+                        && DAT_UnitsState::instance.units[unitID].owner == playerID
+                        && DAT_UnitsState::instance.units[unitID].targetedBuildingTile
+                        && DAT_UnitsState::instance.units[unitID].unitType != Map::Units::UT_A_SLAVE) {
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray[arraySize]
+                            = DAT_UnitsState::instance.units[unitID].targetedBuildingTile;
+                        arraySize = DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize + 1;
+                        DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArraySize = arraySize;
+                        if (countof(DAT_TroopValueState::instance.attackInfo.targetedBuildingTilesArray) <= arraySize) {
                             break;
                         }
                     }
-                    _unitID++;
-                    _pUnit++;
-                } while (_unitID < (int)_maxUnitCount);
+                    ++unitID;
+                } while (unitID < (int)maxUnitCount);
             }
         }
 

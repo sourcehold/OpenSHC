@@ -17,40 +17,40 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Map::Units::UnitInstructionType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B310
         int TroopValueState::placeSiegeTentAtAttackAngle(int tribeID, MappersEnum commandBuildingType)
         {
-            int const _unitID = (int)DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            int _attackLocationIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
-                DAT_PathFindingState::ptr)(200, (uint)(DAT_UnitsState::instance.units[_unitID].x),
-                (uint)(DAT_UnitsState::instance.units[_unitID].y), tribeID);
-            if (_attackLocationIndex) {
-                short const _siegeIndex = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
-                int const _tribeUID = DAT_TribesState::instance.tribes[tribeID].uid;
-                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = _siegeIndex;
+            int const targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+            int const attackLocationIndex
+                = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
+                    DAT_PathFindingState::ptr)(200, DAT_UnitsState::instance.units[targetUnitID].x,
+                    DAT_UnitsState::instance.units[targetUnitID].y, tribeID);
+            // the early-return form moves the cold return block and changes the asm
+            if (attackLocationIndex) {
+                short const previousSiegeIndex = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
+                int const tribeUID = DAT_TribesState::instance.tribes[tribeID].uid;
+                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = previousSiegeIndex;
                 /*
                   fixme
                  */
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_siegeIndex].tribeID = 0;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_siegeIndex].tribeUID = 0;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].tribeUID = _tribeUID;
-                int const _y = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].y;
-                int const _x = DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].x;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].tribeID = tribeID;
-                DAT_TroopValueState::instance.attackInfo.tentPointsValues[_attackLocationIndex].three = 3;
-                int const _playerID = DAT_TribesState::instance.tribes[tribeID].owner;
-                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)_attackLocationIndex;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[previousSiegeIndex].tribeID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[previousSiegeIndex].tribeUID = 0;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].tribeUID = tribeUID;
+                int const y = DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].y;
+                int const x = DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].x;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].tribeID = tribeID;
+                DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].three = 3;
+                int const playerID = DAT_TribesState::instance.tribes[tribeID].owner;
+                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = attackLocationIndex;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
-                    _playerID, _x - 1, _y - 1, commandBuildingType, 3, 0xf);
-                int const _buildingID = DAT_TileMapState::instance.placedBuildingID;
+                    playerID, x - 1, y - 1, commandBuildingType, 3, 15);
+                int const buildingID = DAT_TileMapState::instance.placedBuildingID;
                 DAT_BuildingsState::instance.buildings[DAT_TileMapState::instance.placedBuildingID].attackWave
-                    = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
+                    = DAT_TribesState::instance.tribes[tribeID].attackWave;
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
-                    Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, _buildingID,
-                    DAT_BuildingsState::instance.buildings[_buildingID].uid, 0);
-                return _attackLocationIndex;
+                    Map::Units::UIT_CONSTRUCT_SIEGE_EQUIPMENTOIL_DUTYENGINEERRELATED, buildingID,
+                    DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
+                return attackLocationIndex;
             }
             return 0;
         }

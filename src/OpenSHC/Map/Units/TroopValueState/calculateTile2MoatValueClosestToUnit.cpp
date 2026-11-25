@@ -15,53 +15,38 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A780
         undefined4 TroopValueState::calculateTile2MoatValueClosestToUnit(int unitID)
         {
-            int const _owner = DAT_UnitsState::instance.units[unitID].owner;
-            int _minDistance = 100000;
-            int _bestIndex = -1;
-            int i = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moat2) {
-                do {
-                    if (DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[i].buildingID
-                            < 5999
-                        && DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[i].unitID
-                            == 0) {
-                        int fromYPosition
-                            = (int)DAT_ViewportRenderState::instance
-                                  .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
-                                          .playerInfo[_owner - 1]
-                                          .moatValuesArray[i]
-                                          .tile2];
-                        int fromXPosition
-                            = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[i].tile2
-                            - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
-                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                            DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
-                        int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
-                            + DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                                    .moatValuesArray[i]
-                                    .buildingID
-                                * 8;
-                        DAT_DirectionAlgorithmState::instance.distanceHigh = _distance;
-                        if (_distance < _minDistance) {
-                            _minDistance = _distance;
-                            this->y = fromYPosition;
-                            this->x = fromXPosition;
-                            this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                                             .moatValuesArray[i]
-                                             .tile;
-                            _bestIndex = i;
-                        }
-                    }
-                    i++;
-                } while (i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moat2);
-                if (-1 < _bestIndex) {
-                    DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].moatValuesArray[_bestIndex].unitID
-                        = unitID;
-                    return DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                        .moatValuesArray[_bestIndex]
-                        .tile2;
+            int const owner = DAT_UnitsState::instance.units[unitID].owner;
+            int minDistance = 100000;
+            int bestIndex = -1;
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moat2; ++i) {
+                if (DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].buildingID >= 5999
+                    || DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].unitID != 0) {
+                    continue;
                 }
+                int const fromYPosition
+                    = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                          [DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].tile2];
+                int const fromXPosition
+                    = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].tile2
+                    - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
+                MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                    DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                    DAT_UnitsState::instance.units[unitID].y, fromXPosition, fromYPosition);
+                int const distance = DAT_DirectionAlgorithmState::instance.distanceHigh
+                    + DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].buildingID * 8;
+                DAT_DirectionAlgorithmState::instance.distanceHigh = distance;
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    this->y = fromYPosition;
+                    this->x = fromXPosition;
+                    this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[i].tile;
+                    bestIndex = i;
+                }
+            }
+            if (-1 < bestIndex) {
+                DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[bestIndex].unitID
+                    = unitID;
+                return DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].moatValuesArray[bestIndex].tile2;
             }
             return 0;
         }

@@ -15,51 +15,40 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519FB0
         undefined4 TroopValueState::findEnemyBuildingsClosestToUnit(int unitID)
         {
-            int const _owner = (int)DAT_UnitsState::instance.units[unitID].owner;
-            int _minDistance = 1000;
-            int _bestIndex = -1;
-            int i = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].town2) {
-                do {
-                    if (!DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].unitID) {
-                        int fromYPosition
-                            = (int)DAT_ViewportRenderState::instance
-                                  .tileTranslationMatrix_YComponent[DAT_TroopValueState::instance.attackInfo
-                                          .playerInfo[_owner - 1]
-                                          .townValuesArray[i]
-                                          .tile2];
-                        int fromXPosition
-                            = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[i].tile2
-                            - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
-                        MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                            DAT_DirectionAlgorithmState::ptr)((int)DAT_UnitsState::instance.units[unitID].x,
-                            (int)(DAT_UnitsState::instance.units[unitID].y), fromXPosition, fromYPosition);
-                        int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh
-                            + (100
-                                  - DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                                      .townValuesArray[i]
-                                      .size)
-                                * 2;
-                        DAT_DirectionAlgorithmState::instance.distanceHigh = _distance;
-                        if (_distance < _minDistance) {
-                            _minDistance = _distance;
-                            this->y = fromYPosition;
-                            this->x = fromXPosition;
-                            this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                                             .townValuesArray[i]
-                                             .tile;
-                            _bestIndex = i;
-                        }
-                    }
-                    i++;
-                } while (i < DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].town2);
-                if (-1 < _bestIndex) {
-                    DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1].townValuesArray[_bestIndex].unitID
-                        = unitID;
-                    return DAT_TroopValueState::instance.attackInfo.playerInfo[_owner - 1]
-                        .townValuesArray[_bestIndex]
-                        .tile2;
+            int const owner = DAT_UnitsState::instance.units[unitID].owner;
+            int minDistance = 1000;
+            int bestIndex = -1;
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].town2; ++i) {
+                if (DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].unitID) {
+                    continue;
                 }
+                int const fromYPosition
+                    = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
+                          [DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].tile2];
+                int const fromXPosition
+                    = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].tile2
+                    - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
+                MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                    DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                    DAT_UnitsState::instance.units[unitID].y, fromXPosition, fromYPosition);
+                // smaller buildings count as further away
+                int const distance = DAT_DirectionAlgorithmState::instance.distanceHigh
+                    + (100 - DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].size)
+                        * 2;
+                DAT_DirectionAlgorithmState::instance.distanceHigh = distance;
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    this->y = fromYPosition;
+                    this->x = fromXPosition;
+                    this->tile = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].tile;
+                    bestIndex = i;
+                }
+            }
+            // "if (bestIndex <= -1) return 0;" moves the cold return block and changes the asm
+            if (-1 < bestIndex) {
+                DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[bestIndex].unitID
+                    = unitID;
+                return DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[bestIndex].tile2;
             }
             return 0;
         }

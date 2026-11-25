@@ -11,7 +11,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B240
         int TroopValueState::getSiegeIndexForTile(int tile)
         {
-            int _firstFree = 0;
             DAT_TroopValueState::instance.attackInfo.tentPointsNext = 0;
             for (int i = 1; i < 2000; ++i) {
                 if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[i].tile == tile) {

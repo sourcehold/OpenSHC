@@ -13,31 +13,32 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518BB0
         BOOLEnum TroopValueState::isLessThanPercentageOfTribesInAttackDying(int attackID, int leDyingPerc)
         {
-            int _dying = 0;
-            int _living = 0;
-            for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
-                if (DAT_TribesState::instance.tribes[_tribeID].tribeState
-                    && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
-                    && DAT_GameSynchronyState::instance
-                            .currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner]
-                        == -1
-                    && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackID) {
-                    int _status = MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::getTribeAliveStatus, DAT_TribesState::ptr)(_tribeID);
-                    if (_status < 50) {
-                        _living++;
-                    } else {
-                        _dying++;
-                    }
+            int dying = 0;
+            int living = 0;
+            for (int tribeID = 1; tribeID < countof(DAT_TribesState::instance.tribes); ++tribeID) {
+                if (!DAT_TribesState::instance.tribes[tribeID].tribeState
+                    || DAT_TribesState::instance.tribes[tribeID].tribeState == 3
+                    || DAT_GameSynchronyState::instance
+                            .currentPlayerFullIDArray[DAT_TribesState::instance.tribes[tribeID].owner]
+                        != -1
+                    || DAT_TribesState::instance.tribes[tribeID].attackWave != attackID) {
+                    continue;
+                }
+                int const aliveStatus = MACRO_CALL_MEMBER(
+                    Map::Units::TribesState_Func::getTribeAliveStatus, DAT_TribesState::ptr)(tribeID);
+                if (aliveStatus < 50) {
+                    ++living;
+                } else {
+                    ++dying;
                 }
             }
-            int _dyingPercentage;
-            if (_dying + _living == 0) {
-                _dyingPercentage = 100;
+            int dyingPercentage;
+            if (dying + living == 0) {
+                dyingPercentage = 100;
             } else {
-                _dyingPercentage = (_dying * 100) / (_dying + _living);
+                dyingPercentage = (dying * 100) / (dying + living);
             }
-            return _dyingPercentage >= leDyingPerc;
+            return dyingPercentage >= leDyingPerc;
         }
 
     }

@@ -16,41 +16,40 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using Game::GameMode;
-        using Map::Entities::EntityType;
-
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BE60
         void TroopValueState::registerSpottedEnemyTile(int param_1)
         {
-            int _freeSlot;
-            int _entityID;
-            if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY
-                && DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
+            if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+                || 0 < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .buildingEntryInfos[Game::Player::Enums::BEIE_KEEP]
-                        .id
-                    <= 0
-                && (_freeSlot = (int)(short)DAT_TileMapState::instance.UnitLayer[param_1], 0 < _freeSlot)
-                && DAT_GameSynchronyState::instance
-                        .currentPlayerFullIDArray[DAT_UnitsState::instance.units[_freeSlot].owner]
-                    != -1
-                && DAT_UnitsState::instance.units[_freeSlot].isSelectable_OR_matchTime != 0
-                && (_entityID = (int)(short)DAT_TileMapState::instance.EntityLayer[param_1],
-                    !_entityID
-                        || (DAT_EntityState::instance.entityArray[_entityID].entityType != Map::Entities::ET_FIRE))) {
-                _freeSlot = -1;
-                for (int _slot = 0; _slot < 100; ++_slot) {
-                    int const _tile = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[_slot].tile;
-                    if (_tile == param_1) {
-                        return;
-                    }
-                    if ((!_tile) && (_freeSlot == -1)) {
-                        _freeSlot = _slot;
-                    }
+                        .id) {
+                return;
+            }
+            int const unitID = DAT_TileMapState::instance.UnitLayer[param_1];
+            if (unitID <= 0
+                || DAT_GameSynchronyState::instance
+                        .currentPlayerFullIDArray[DAT_UnitsState::instance.units[unitID].owner]
+                    == -1
+                || DAT_UnitsState::instance.units[unitID].isSelectable_OR_matchTime == 0) {
+                return;
+            }
+            int const entityID = DAT_TileMapState::instance.EntityLayer[param_1];
+            if (entityID && DAT_EntityState::instance.entityArray[entityID].entityType == Map::Entities::ET_FIRE) {
+                return;
+            }
+            int freeSlot = -1;
+            for (int slot = 0; slot < countof(DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles); ++slot) {
+                int const tile = DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[slot].tile;
+                if (tile == param_1) {
+                    return;
                 }
-                if (-1 < _freeSlot) {
-                    DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[_freeSlot].tile = param_1;
-                    DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[_freeSlot].value = 100;
+                if (!tile && freeSlot == -1) {
+                    freeSlot = slot;
                 }
+            }
+            if (-1 < freeSlot) {
+                DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[freeSlot].tile = param_1;
+                DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[freeSlot].value = 100;
             }
         }
 
