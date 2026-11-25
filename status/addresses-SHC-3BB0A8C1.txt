@@ -7467,7 +7467,7 @@ SHC_3BB0A8C1_0x0042C450 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0042C540 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0042C620 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0042C620 | 99.4% | Reimplemented, 100% until main's header sync 48f7e946c; since then the map index sum takes the other two registers, a tie that moves with the declaration count (source unchanged)
 
 SHC_3BB0A8C1_0x0042C9B0 | 0.0% | Pending
 
@@ -11113,7 +11113,7 @@ SHC_3BB0A8C1_0x00433C20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00433D00 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00433DA0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00433DA0 | 100.0% | Reimplemented, identical code; the picture table's folded address is another global's on each side
 
 SHC_3BB0A8C1_0x00434120 | 100.0% | Reimplemented
 
@@ -13617,13 +13617,13 @@ SHC_3BB0A8C1_0x0043FCA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0043FCB0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0043FD30 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0043FD30 | 100.0% | Reimplemented, identical code; only names differ: the loop's end address resolves to the next symbol, and one global is named with another type
 
 SHC_3BB0A8C1_0x0043FD90 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0043FE10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004401A0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004401A0 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 
 SHC_3BB0A8C1_0x00440200 | 0.0% | Pending
 
@@ -14135,7 +14135,7 @@ SHC_3BB0A8C1_0x00442C2C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00442C2D | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00442C30 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00442C30 | 100.0% | Reimplemented, only the two loops' end addresses resolve to the next symbol
 
 SHC_3BB0A8C1_0x00442E90 | 0.0% | Pending
 
@@ -16871,7 +16871,7 @@ SHC_3BB0A8C1_0x0044B7D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0044B800 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044B840 | 100.0% | Reimplemented, identical code; the loop-end compare (past the per-enemy history) is the next global's symbol in the original, unnamed or another global in ours
+SHC_3BB0A8C1_0x0044B840 | 95.6% | Reimplemented, identical code on its PR until main's header sync 603369286 (the loop-end compare is the next global's symbol in the original); since then the enemies' second counter sum is built in edx where the original has ecx, a tie that moves with the declaration count (source unchanged)
 
 SHC_3BB0A8C1_0x0044B890 | 0.0% | Pending
 
@@ -16949,7 +16949,7 @@ SHC_3BB0A8C1_0x0044D340 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044D3D0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0044E510 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0044E510 | 100.0% | Reimplemented, only the two loops' end addresses resolve to the next symbol
 
 SHC_3BB0A8C1_0x0044E630 | 100.0% | Reimplemented
 
@@ -19995,7 +19995,7 @@ SHC_3BB0A8C1_0x00466E20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00466F60 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00467040 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00467040 | 93.9% | Reimplemented, register choice only: the two player-index imuls swap ecx and edx and one load and one store take edx where the original has eax, which also moves two jne displacements by a byte (#414)
 
 SHC_3BB0A8C1_0x004672F0 | 100.0% | Reimplemented
 
@@ -20973,7 +20973,7 @@ SHC_3BB0A8C1_0x0046CED0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0046CEF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0046CF10 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x0046CF10 | 100.0% | Reimplemented, identical code; only the LARGE_INTEGER global's type differs in its name (ntddk_32::_LARGE_INTEGER against _LARGE_INTEGER)
 
 SHC_3BB0A8C1_0x0046CF90 | 100.0% | Reimplemented, only the float constants' addresses differ (same values)
 
@@ -22437,7 +22437,7 @@ SHC_3BB0A8C1_0x00480680 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00480710 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00480980 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00480980 | 95.9% | Reimplemented, 100% on its PR until main's header sync 603369286; since then the map index sum's two loads take the other order, a tie that moves with the declaration count (source unchanged)
 
 SHC_3BB0A8C1_0x00480B10 | 0.0% | Pending
 
@@ -23057,7 +23057,7 @@ SHC_3BB0A8C1_0x004870B0 | 100.0% | Reimplemented, requires SHC_3BB0A8C1_0x004870
 
 SHC_3BB0A8C1_0x00487200 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00487250 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00487250 | 100.0% | Reimplemented, only the pushed callback address is unnamed in the original
 
 SHC_3BB0A8C1_0x00487390 | 100.0% | Reimplemented
 
@@ -23109,7 +23109,7 @@ SHC_3BB0A8C1_0x00489AC0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00489C80 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00489E30 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00489E30 | 100.0% | Reimplemented, only the _chkstk call target differs
 
 SHC_3BB0A8C1_0x0048A050 | 0.0% | Pending
 
@@ -27577,7 +27577,7 @@ SHC_3BB0A8C1_0x004B92BC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004B92C0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004B92D0 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004B92D0 | 100.0% | Reimplemented, identical code; the picture table's folded address is another global's on each side
 
 SHC_3BB0A8C1_0x004B9440 | 0.0% | Pending
 
@@ -29831,7 +29831,7 @@ SHC_3BB0A8C1_0x004BBF30 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BBF34 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BBF40 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x004BBF40 | 100.0% | Reimplemented, identical code; the picture table's folded address is another global's on each side
 
 SHC_3BB0A8C1_0x004BC0A8 | 0.0% | Pending
 
@@ -62529,7 +62529,7 @@ SHC_3BB0A8C1_0x00551980 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x005521D0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00552F80 | 100.0% | Reimplemented
+SHC_3BB0A8C1_0x00552F80 | 99.7% | Reimplemented, register choice only: the owner pushed for getBuildingThatCanStoreThisResource is loaded into eax, ecx in the original (#414)
 
 SHC_3BB0A8C1_0x00553AE0 | 0.0% | Pending
 
