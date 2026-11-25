@@ -1,6 +1,7 @@
 #include "../UnitsState.func.hpp"
 
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -9,10 +10,10 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053E900
         void UnitsState::setPositionOfUnit(int unitID, int x, int y, undefined4 height)
         {
-            if (x < 0 || x > 399 || y < 0 || y > 399) {
+            if (x < 0 || x > MC_MAP_XY_LIMIT_INCLUSIVE || y < 0 || y > MC_MAP_XY_LIMIT_INCLUSIVE) {
                 return;
             }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * MC_MAP_XY_LIMIT + x] == 0) {
                 return;
             }
             this->units[unitID].currentIndexInPathPlan = 0;
