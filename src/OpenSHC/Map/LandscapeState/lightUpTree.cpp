@@ -38,7 +38,7 @@ namespace Map {
             this->trees[treeID].stage = 6;
             this->trees[treeID].stageTracker = DAT_OrganismDefinedData::instance.TreeStageLevels[0][treeType * 8];
             this->trees[treeID].field_0x98 = 20;
-            this->trees[treeID].igniterPlayer = (short)playerID;
+            this->trees[treeID].igniterPlayer = playerID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::igniteFireAtTilesDistanceAway,
                 DAT_PathFindingState::ptr)(tileUnk, 2, playerID);
             return TRUE;
@@ -62,7 +62,7 @@ namespace Map {
             this->trees[treeID].stageTracker = 0;
             this->trees[treeID].stage = 6;
             this->trees[treeID].field_0x98 = 20;
-            this->trees[treeID].igniterPlayer = (short)playerID;
+            this->trees[treeID].igniterPlayer = playerID;
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::igniteFireAtTilesDistanceAway,
                 DAT_PathFindingState::ptr)(tileUnk, 1, playerID);
             return TRUE;

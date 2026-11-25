@@ -11,7 +11,7 @@ namespace Map {
     BOOLEnum LandscapeState::damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 healthDelta, int treeUID)
     {
         if (this->trees[treeID].uid == treeUID && this->trees[treeID].zeroUpTo2 == 0) {
-            this->trees[treeID].stageRelated1 += (short)healthDelta;
+            this->trees[treeID].stageRelated1 += healthDelta;
             if ((short)this->trees[treeID].stageRelated1 <= 0) {
                 this->trees[treeID].stageRelated1 = 0;
                 this->trees[treeID].zeroUpTo2 = 1;

@@ -22,8 +22,7 @@ namespace Map {
                 continue;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                DAT_DirectionAlgorithmState::ptr)(
-                x, y, (short)this->trees[treeID].xPosition, (short)this->trees[treeID].yPosition);
+                DAT_DirectionAlgorithmState::ptr)(x, y, this->trees[treeID].xPosition, this->trees[treeID].yPosition);
             if (DAT_DirectionAlgorithmState::instance.distanceHigh < 4) {
                 this->trees[treeID].unknownDistanceRelatedToCrow = 1;
             }

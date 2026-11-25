@@ -14,8 +14,8 @@ namespace Map {
     {
         this->candidateIndex2 = 1;
         this->casDisRelated = 1;
-        this->DAT_X10_Array_Section1034[0] = (short)seedX;
-        this->DAT_Y10_Array_Section1034[0] = (short)seedY;
+        this->DAT_X10_Array_Section1034[0] = seedX;
+        this->DAT_Y10_Array_Section1034[0] = seedY;
         this->candidateIndex = 0;
         this->grid[seedX][seedY].field_0x50 = seedValue;
         while (this->candidateIndex != this->candidateIndex2) {
@@ -33,8 +33,8 @@ namespace Map {
                     = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + seedY;
                 if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && this->grid[x][y].field_0x50 < nextValue) {
                     this->grid[x][y].field_0x50 = nextValue;
-                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)x;
-                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = (short)y;
+                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = x;
+                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = y;
                     this->candidateIndex2++;
                     if ((int)this->candidateIndex2 >= 1600) {
                         this->candidateIndex2 = 0;

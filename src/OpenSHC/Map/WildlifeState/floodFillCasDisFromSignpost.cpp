@@ -32,8 +32,8 @@ namespace Map {
                 this->grid[x][y].field_0x74 = 0;
             }
         }
-        this->DAT_Y10_Array_Section1034[0] = (short)cellY;
-        this->DAT_X10_Array_Section1034[0] = (short)cellX;
+        this->DAT_Y10_Array_Section1034[0] = cellY;
+        this->DAT_X10_Array_Section1034[0] = cellX;
         int const areaID = this->grid[cellX][cellY].separateAreaID;
         this->grid[cellX][cellY].casDisRelated2 = 1;
         while (this->candidateIndex != this->candidateIndex2) {
@@ -53,8 +53,8 @@ namespace Map {
                     && this->grid[x][y].unknownNonZero01 == 0 && this->grid[x][y].casDisRelated2 == 0) {
                     this->grid[x][y].casDisRelated2 = nextValue;
                     this->grid[x][y].field_0x74++;
-                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)x;
-                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = (short)y;
+                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = x;
+                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = y;
                     this->candidateIndex2++;
                     if ((int)this->candidateIndex2 >= 1600) {
                         this->candidateIndex2 = 0;
