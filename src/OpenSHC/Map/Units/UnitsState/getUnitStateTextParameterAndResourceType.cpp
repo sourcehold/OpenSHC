@@ -22,8 +22,8 @@ namespace Map {
         int UnitsState::getUnitStateTextParameterAndResourceType(int unitIndex, ResourceType* pResourceType)
 
         {
-            *pResourceType = (ResourceType)0;
             int _state = this->units[unitIndex].state.generic;
+            *pResourceType = (ResourceType)0;
             if (this->units[unitIndex].dying != 0) {
                 /*
                   "Dying"
@@ -267,7 +267,8 @@ namespace Map {
                         ? 112
                         : 115;
                 case 10:
-                    return (this->units[this->units[unitIndex].shootTargetedUnit].isStalked == 0) * 2 + 113;
+                    return (this->units[DAT_UnitsState::instance.units[unitIndex].shootTargetedUnit].isStalked == 0) * 2
+                        + 113;
                 case 1:
                 case 11:
                     return 113;
@@ -296,17 +297,18 @@ namespace Map {
                     return 8;
                 case 0:
                     return 1;
-                default:
+                case 1:
                     return 7;
                 case 2:
                     return 5;
                 }
+                return 7;
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
                 case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
-                default:
+                case 0:
                     return 7;
                 case 1:
                 case 6:
@@ -320,6 +322,7 @@ namespace Map {
                 case 5:
                     return 4;
                 }
+                return 7;
             case OpenSHC::Map::Units::UT_QUARRYOX:
                 *pResourceType = OpenSHC::Game::Resources::RT_STONE;
                 switch (_state) {
@@ -469,6 +472,9 @@ namespace Map {
                     return 1;
                 case 2:
                     return 5;
+                case 3:
+                case 4:
+                    return 7;
                 default:
                     return 7;
                 case 5:
@@ -497,6 +503,9 @@ namespace Map {
                     return 6;
                 case 4:
                     return 5;
+                case 5:
+                case 6:
+                    return 7;
                 default:
                     return 7;
                 case 7:
@@ -615,6 +624,10 @@ namespace Map {
                     return 105;
                 case 4:
                     return 5;
+                case 5:
+                case 6:
+                case 9:
+                    return 7;
                 default:
                     return 7;
                 case 7:
@@ -676,6 +689,8 @@ namespace Map {
                     return 1;
                 case 1:
                     return 5;
+                case 2:
+                    return 7;
                 default:
                     return 7;
                 case 3:
@@ -775,6 +790,8 @@ namespace Map {
                 case 1:
                 case 9:
                     return 18;
+                case 2:
+                    return 4;
                 case 3:
                     return 19;
                 case 4:
@@ -815,19 +832,18 @@ namespace Map {
                 switch (_state) {
                 case OpenSHC::Map::Units::States::US_MELEE_ATTACK:
                     return 8;
-                case 101:
-                    if (DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
-                                .buildingType
+                case 101: {
+                    int const _buildingID = this->units[unitIndex].targetID_OR_targetBuildingID;
+                    if (DAT_BuildingsState::instance.buildings[_buildingID].buildingType
                             != OpenSHC::Map::Buildings::BT_CHAPEL
-                        && DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
-                                .buildingType
+                        && DAT_BuildingsState::instance.buildings[_buildingID].buildingType
                             != OpenSHC::Map::Buildings::BT_CHURCH
-                        && DAT_BuildingsState::instance.buildings[this->units[unitIndex].targetID_OR_targetBuildingID]
-                                .buildingType
+                        && DAT_BuildingsState::instance.buildings[_buildingID].buildingType
                             != OpenSHC::Map::Buildings::BT_CATHEDRAL) {
                         return 79;
                     }
                     return 78;
+                }
                 case 3:
                 case 5:
                 case 6:
@@ -845,8 +861,6 @@ namespace Map {
                 case 0:
                 case 1:
                     return 1;
-                default:
-                    return 87;
                 case 3:
                     return 83;
                 case 4:
@@ -860,6 +874,16 @@ namespace Map {
                 case 12:
                 case 13:
                     return 86;
+                case 7:
+                case 8:
+                case 14:
+                case 15:
+                case 16:
+                case 17:
+                case 18:
+                    return 87;
+                default:
+                    return 87;
                 }
             case OpenSHC::Map::Units::UT_JUGGLER:
                 switch (_state) {
