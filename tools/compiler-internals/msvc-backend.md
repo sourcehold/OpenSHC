@@ -3080,3 +3080,141 @@ Two more `quick_diff.py` artefacts came out of this batch and are fixed: a `swit
 (`$LN38@f[edi]`, `jmp dword ptr [ecx*4 + 0x41c9d0]`) were not collapsed to `G` on either side, which alone
 held `lightUpBuilding` at 0.8988 where it is 0.9312; and the original's indirect jumps were skipping
 normalisation entirely.
+
+## Decoded on the TileMapState last mile (2026-11-15)
+
+Eight more c2 decisions, traced with Ghidra on `c2.dll` and the cdb probes while finishing
+`Map::TileMapState`. Each entry says what decides, what feeds it from the source, and whether a lever was found.
+Addresses are for the unrebased load at `0x10b00000`.
+
+### Inlining is gated on `_Globopt_flag`: only `__forceinline` callees inline in an `/Od` function
+
+`InlCallTupleIsCandidate` (`0x10b69bd0`) ends at `0x10b69d48` with
+
+```
+test edi, edi            ; edi = _Globopt_flag (0x10d0d708)
+jnz  accept
+test ecx, 0x2080         ; ecx = callee function record flags (+0x50)
+jz   reject
+```
+
+so with global optimisation off a callee is an inline candidate only with bit `0x2000` (`__forceinline`, which
+also skips the `_MaxInlineeSize` test at `0x10b69d26`) or `0x80` (not decoded). Plain `inline` is bit `0x40` and
+is not enough. The module gate in `Inline` (`0x10b69110`) is the `/Ob` level (`DAT_10d127d0`, written by
+`MscProcessSwitches`), nonzero under `/O2`, so passing `/Ob` changes nothing. `#pragma inline_depth`,
+`inline_recursion` and `auto_inline` are not honoured either.
+
+`_Globopt_flag` is cleared two ways: the `g` letter of `#pragma optimize` (`MscProcessPragstat`), and
+`dop2_GetInitialTuples` (`0x10c06670`, at `0x10c06834`-`0x10c06879`), which calls `MscCheckAsm` (`0x10b9d6a0`)
+on any function with inline asm (func `+0xac` bit `0x10`) and, if control flows into or out of an `__asm` block,
+raises C4740 and clears `_Globopt_flag` and `0x10d0d714` for that function. That is the whole of the `/Od` look:
+`optimize("g", off)` alone gives byte-identical code to `optimize("", off)`; `y` does nothing once `g` is off;
+`t` off switches to favour-size and is much worse.
+
+Consequence for this project: every `MACRO_CALL` in an `/Od` function (pragma or C4740) compiled to
+`call Resolver::get` + `call eax` where the original has one direct `call`, two bytes longer per call, so every
+jump displacement after the first call shifted too. PR #396 makes `get()` in
+`src/precomp/FunctionResolver.h` `__forceinline` (all five definitions - the implemented, the game-function and the wrapper unifiers, `GameFunction`
+and the member `GameFunction` macro; one alone leaves calls to disabled callees indirect). Optimised functions are
+unaffected because they inlined `get()` already. Measured with reccmp: `setBitFlagBasedOnWallTowerGatehouseOrKeep`,
+`setTerrain`, `updateGFXLayers`, `updateMacroLayerRelated` and `updateGfxLayer` (C4740) went from 92.8-98.1% to
+100%, and nothing else in the TileMapState build list moved. A build of all 2515 sources under `src/OpenSHC`
+with each header (2533 functions) agreed: those five better, and the only two "worse" functions
+(`UI::Menu::Constructor_Menu`, `handleMenuItems`) differ solely in a `cmp .., 0x11000000` immediate that reccmp
+now prints as a symbol name, because the layout shift put a compiler-generated destructor of our DLL at that VA.
+The bytes are unchanged.
+
+### Loop unrolling: `!=` is not a counted loop, and loads == stores vetoes the unroll
+
+`LurClassifyNests` -> `LurClassifyLoop` (`0x10b90650`) -> `LurClassifyDo` (`0x10b8f4f0`) ->
+`LurDetermineDoUnrollAmount` (`0x10b91160`, body counted by `LurCountTuples` `0x10b8e090`). A `!=` bound is
+classified 5 (not counted) and never reaches the unroller - that is why `!=` suppresses unrolling. A `<` bound is
+classified 1, and the amount is 0 (no unroll, `jl` back-edge) when
+
+- the body has more than 128 tuples, or
+- it stores to memory but never loads, or
+- **it has no calls and its memory loads equal its memory stores**, or
+- it has more than 15 blocks, unless call-free with more than 50 tuples.
+
+Otherwise the factor is the largest of 6..2 (5..2 above 50 tuples) dividing the trip count. The counts are taken
+before CSE and store-to-load forwarding, but after dead loads are removed, so a duplicated read before any store
+counts and a dead read does not. `placeStockpile` keeps `!=` (one store more than loads; a `<` gives x3 unroll).
+
+### Post-allocation scheduler: address-taken locals add store -> load edges
+
+`SchSelectInstrs` (`0x10c722c0`) with `SchComputeStaticPriority` (`0x10c71f00`): priority =
+branch/compare flag << 23 + memory-source flag << 15 + (height + field `+0x26`) << 10, ties by IL order, one
+instruction per cycle on these functions. A store to an address-taken local (`(int*)&y` passed to
+`getTileForBrush`), or through a `T&` that may alias one, orders every later load after it, so the IL position of
+such a store relative to a test decides the issue order (`placeTree`, `processEntityDamageToBuildingCollateral`).
+Conversely a store through a `byte&` keeps it ahead of a following read-modify-write on another layer
+(`useTerrainHeightBrush`).
+
+### Copy preferences go only to partners that are not coloured yet
+
+`InsertSplitPoints` (`0x10b13460`) fills `_UpdatePrefsBv` (`0x10d15088`) at `0x10b139b3` (candidate defined by a
+copy from an uncoloured globreg) and `0x10b14047` (candidate's first use in a block is the source of a copy into a
+globreg). At the end of `ChoosePhysReg` (`0x10b14b70`) each uncoloured member gets +1 for the chosen register in
+its `+0x38` list. So of two copy partners the one coloured first takes a register without preference and the copy
+survives. Lever: when copy propagation rewrote a call argument to the source variable (a separate, higher-keyed
+candidate that then wins), `T const v = *(T volatile*)&src;` stops the propagation (`useEraserBrush` -> 1.0).
+
+### Spill reload on a new edge block: the latch's first predecessor decides
+
+`RewriteSplitGlobregs` (`0x10b12d20`, from `ColProcessSplitGlobregs` `0x10b11b20`) picks the piece of a split
+counter at the loop latch from the latch's **first** predecessor. If that predecessor holds it in memory,
+`GrgAirlockEnterloads` (`0x10b59320`) must reload on the latch -> head edge and, the edge source having several
+successors, `FgInsertAirlockBlock` adds a block: a stray `jmp` + reload and every later displacement 4 bytes off.
+`do { ... } while (++i < N);` instead of `i++; if (i >= N) break;` changes the first predecessor
+(`updateBuildingGraphicsLayer`).
+
+### Branch-free `?:` is refused for a volatile arm
+
+`BuildQuestion` (`0x10b9e5c0`, via `MscBuildQuestion` `0x10b9dfe0` from `dop2_PreLowerGlobalOpts`) ->
+`MscIsQuestionable` (`0x10b9e0e0`) -> `QuesNoJumpsNeeded` (`0x10c5dc60`, `FindSbbPattern` / `FindSetccPattern`
+against `DAT_10cdf0a0[_Speed == 0]`). An arm is refused when `MscUnsafeQuestionArmLeaf` (`0x10b9e970`) is set -
+bit 6 of the leaf's byte `+0x14`, which a volatile symbol has - or when the else label has a second reference.
+If the original has `neg/sbb/and` or `setcc` on a value we made volatile, copy it into a plain local just before
+the `?:` (`processDamageToBuilding`). The converse also holds: explicit branches in the original where we get
+`setcc`/`lea` mean the original's arm failed one of these checks.
+
+### Code motion past a `ret` needs a non-falling-through predecessor
+
+`FgCodeMotion` (`0x10b312c0`, called only from `dop2_FinalFlowOpts` after `FgDoLateFlowOpts(2)`) replaces a
+`goto L` (or a `jcc A; goto L` pair, trying A after `FgInvertAndSwapBranches`) with the code range at L.
+`FgCanMoveCode` (`0x10b319b0`) allows it only if L is forward, the tuple after the jump is another label, the range
+ends at the first non-falling-through instruction without reaching `OPSEGMENT`, and **the last real instruction
+before L does not fall through** (`FgSafeLocation` `0x10b31aa0`; exit gotos count as not falling through). An
+original with arms placed after the `ret` that jump back therefore had a goto target preceded by a jump - usually
+a cross-jump that retargeted a then-arm into the else chain's last block. The input order comes from
+`FgDFOReorderLoopRecog`: `GrInitDFOWalk` (`0x10b5cd30`) follows successor lists that `FgAddAllArcs`
+(`0x10b28910`) builds by pushing each arc to the front, so the physically later successor is explored first and
+`FgChangeNextToDFOEx` (`0x10b281e0`) keeps source order in reverse post-order. Any if/else-if chain thus puts its
+last arm right before the join; `useTerrainHeightBrush` is still open on this.
+
+### Stack slots: weights are counted before cross-jumping, and small frames are not sorted
+
+`ColorStackElements` (`0x10beaef0`, with `colorElemental` `0x10beb760`): parameter homes become colours first, in
+element-list order; every other element takes the first parameter colour it does not interfere with, else an
+existing local colour from the newest backwards, else a new colour (first created = lowest address). The list is
+size ascending then weight descending (`AddStackElement` `0x10be9190`), and for a frame of 0x80 bytes or less
+without a /GS buffer `QSortColors` never runs, so first reference in `CollectStackElements`' block walk
+(`0x10be8f10`, via `EnumerateStackElements` `0x10be92d0`) decides ties. The weight counts references **before**
+tail merging: two identical stores that later fold into one still count twice. That explains an original calling
+`isAIPlayer` and discarding the result - both arms assigned the same `distance`/`range` - and is a lever: writing
+the duplicated stores back raises a local's weight without changing the code (`checkBuildingCanBePlacedHere`).
+Reusing a parameter for a later coordinate moves that value's spills into the parameter's home.
+
+### Smaller notes
+
+- c2 packs locals into dead parameter home slots, including a 4-byte local into a 2-byte parameter's slot, so a
+  dword store to a parameter's slot does not prove the parameter is a dword (`placeRock`).
+- A trailing `+ret N` on our side of a reccmp diff, when ours is shorter in bytes, is reccmp clipping the
+  original's stream at our length, not a tail difference.
+- `quick_diff.py` mishandles `/Od` and asm-heavy listings (`_x$[ebp]` slots, `DB`-encoded jcc, `global+offset`),
+  and cannot measure a header change while the PCH is used - the header is baked in. Compile such variants
+  without the PCH.
+- `QD_OUT` is a folder name under `build-RelWithDebInfo/batch/`, not a path.
+- Editing a header under `src/precomp/` does **not** rebuild the PCH: `cmake_pch.cxx.obj.d` is empty, so the
+  build reports `BUILD_OK`, recompiles nothing that matters and reccmp shows the old code. Delete
+  `build-RelWithDebInfo/CMakeFiles/OpenSHC.dll.dir/cmake_pch.cxx.obj` and `cmake_pch.cxx.pch` first.
