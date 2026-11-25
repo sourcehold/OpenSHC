@@ -28,7 +28,9 @@ namespace UI {
             divisor = 1;
         }
         int const viewportHeight = DAT_ViewportRenderState::instance.viewportState.viewportHeight;
-        int rowParity = viewportHeight + 1;
+        // the other row parity read on its own (as viewportHeight + 1, the compiler recomputes it and loses the match)
+        int const otherParity = DAT_ViewportRenderState::instance.viewportState.viewportHeight + 1;
+        int rowParity = otherParity;
         if (DAT_TileMapState::instance.mapOrientation != 0) {
             if (DAT_TileMapState::instance.mapOrientation == 6) {
                 orientationOffset = 80408;
@@ -44,12 +46,12 @@ namespace UI {
             // the screen tile rows are staggered: every other row is half a tile in and one tile longer
             int rowX;
             int rowLength;
-            if (rowParity == viewportHeight + 1) {
+            if (rowParity == otherParity) {
                 rowParity = viewportHeight;
                 rowX = widthFactor / 2;
                 rowLength = 200;
             } else {
-                rowParity = viewportHeight + 1;
+                rowParity = otherParity;
                 rowX = 0;
                 rowLength = 201;
             }
