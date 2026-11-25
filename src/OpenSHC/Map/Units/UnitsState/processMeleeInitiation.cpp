@@ -54,11 +54,11 @@ namespace Map {
                                 == 0))))) {
                     int _totalHeight = this->units[unitID].buildingHeight + this->units[unitID].terrainOrClimbHeight;
                     int _playerID = this->units[unitID].owner;
+                    BOOLEnum _hasEnemyOnOwnTile = FALSE;
                     DAT_TileMapState::instance.DAT_SomeTile = this->units[unitID].tile;
                     DAT_TileMapState::instance.DAT_SomeY
                         = (int)DAT_ViewportRenderState::instance
                               .tileTranslationMatrix_YComponent[DAT_TileMapState::instance.DAT_SomeTile];
-                    BOOLEnum _hasEnemyOnOwnTile = FALSE;
                     uint _teamBitFlags = MACRO_CALL_MEMBER(
                         OpenSHC::Game::GameStateStructures_Func::teamToBitFlagsUnk, DAT_GameState::ptr)(unitID);
                     /* Handwritten assembly in the original: gathers a 24-bit mask of the surrounding tiles
@@ -275,7 +275,7 @@ namespace Map {
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][1]
                                 + this->units[unitID].tile;
                         }
-                        if ((char)DAT_TileMapState::instance.field_0x554a48 < 0) {
+                        if ((DAT_TileMapState::instance.field_0x554a48 & 0x80) != 0) {
                             _adjacentTiles[7] = DAT_TileMapState::instance
                                                     .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                                 + this->units[unitID].tile;
@@ -493,7 +493,6 @@ namespace Map {
                                 this->units[unitID].field_0x3d2 = 0;
                             }
                         }
-                        int _engage = _keepsTarget;
                         if (_keepsTarget) {
                             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
                                 DAT_UnitsState::ptr)(unitID, _otherUnitID);
@@ -560,38 +559,38 @@ namespace Map {
                                     DAT_UnitsState::ptr)(unitID, _otherUnitID);
                                 break;
                             }
-                            if (this->units[unitID].attackedUnitID != 0) {
-                                if (this->units[_otherUnitID].someUnitStat2_meleeDamageUnk != 0
-                                    && this->units[_otherUnitID].attackedUnitID == 0
-                                    && this->units[_otherUnitID].movementCooldown == 0) {
-                                    this->units[_otherUnitID].attackedUnitID = unitID;
-                                    this->units[_otherUnitID].field_0x340 = this->units[unitID].uid;
-                                    MACRO_CALL_MEMBER(
-                                        OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
-                                        DAT_UnitsState::ptr)(_otherUnitID, unitID);
-                                }
-                                _engage = 1;
+                            if (this->units[unitID].attackedUnitID == 0) {
+                                this->units[unitID].field_0x3d2 = 0;
+                                this->units[unitID].attackedUnitID = 0;
+                                this->units[unitID].field_0x340 = 0;
+                                return;
+                            }
+                            if (this->units[_otherUnitID].someUnitStat2_meleeDamageUnk != 0
+                                && this->units[_otherUnitID].attackedUnitID == 0
+                                && this->units[_otherUnitID].movementCooldown == 0) {
+                                this->units[_otherUnitID].attackedUnitID = unitID;
+                                this->units[_otherUnitID].field_0x340 = this->units[unitID].uid;
+                                MACRO_CALL_MEMBER(
+                                    OpenSHC::Map::Units::UnitsState_Func::setFacingDirectionTowardUnitMicro,
+                                    DAT_UnitsState::ptr)(_otherUnitID, unitID);
                             }
                         }
-                        if (_engage) {
-                            if (this->units[unitID].state.generic != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                                if (this->units[unitID].movementRelated == 8) {
-                                    MACRO_CALL_MEMBER(
-                                        OpenSHC::Map::Units::UnitsState_Func::saveUnitStateBeforeInterruption, this)(
-                                        unitID);
-                                    this->units[unitID].movementRelated = 8;
-                                    this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MELEE_ATTACK;
-                                    this->units[unitID].SA = 0;
-                                    this->units[unitID].animationCycleNumber = 0;
-                                    DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0;
-                                } else {
-                                    this->units[unitID].field_0x3d2 = 1;
-                                }
+                        if (this->units[unitID].state.generic != OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
+                            if (this->units[unitID].movementRelated == 8) {
+                                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::saveUnitStateBeforeInterruption,
+                                    this)(unitID);
+                                this->units[unitID].movementRelated = 8;
+                                this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MELEE_ATTACK;
+                                this->units[unitID].SA = 0;
+                                this->units[unitID].animationCycleNumber = 0;
+                                DAT_UnitsState::instance.units[DAT_CurrentUnitSlotID::instance].substate = 0;
+                            } else {
+                                this->units[unitID].field_0x3d2 = 1;
                             }
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitAttackOtherUnit, this)(
-                                DAT_CurrentUnitSlotID::instance, this->units[unitID].attackedUnitID);
-                            return;
                         }
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processUnitAttackOtherUnit, this)(
+                            DAT_CurrentUnitSlotID::instance, this->units[unitID].attackedUnitID);
+                        return;
                     }
                     this->units[unitID].field_0x3d2 = 0;
                     this->units[unitID].attackedUnitID = 0;
