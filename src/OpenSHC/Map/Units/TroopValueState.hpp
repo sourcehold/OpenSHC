@@ -99,7 +99,7 @@ namespace Map {
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
-            void countAvailablePeopleValueSlots(BOOLEnum param_1);
+            void countAvailablePeopleValueSlots(BOOLEnum includeOccupied);
 
             void countAvailableLordValueSlots(BOOLEnum includeOccupied);
 
