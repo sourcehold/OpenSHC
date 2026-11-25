@@ -9,8 +9,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0052F0A0
         int UnitsState::checkUnitHasPropertyBasedOnUnitType(int unitID, int property)
         {
-            return DAT_UnitPropertiesDefinedData::instance
-                .UnitClimbStateFlags[property][(short)this->units[unitID].unitType];
+            return DAT_UnitPropertiesDefinedData::instance.UnitClimbStateFlags[property][this->units[unitID].unitType];
         }
 
     }

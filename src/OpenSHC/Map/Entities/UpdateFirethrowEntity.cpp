@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Entities.func.hpp"
+#include "../Entities.func.hpp"
 
 #include "OpenSHC/Globals/DAT_CurrentEntityID.hpp"
 #include "OpenSHC/Globals/DAT_EntityState.hpp"
@@ -13,7 +13,7 @@ namespace Map {
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset;
         if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someCounter_OR_hitGround != 0) {
-            MACRO_CALL(OpenSHC::Map::Entities_Func::AFireSpreadFunction)(
+            MACRO_CALL(Entities_Func::AFireSpreadFunction)(
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner,
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].microX,
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].microY,

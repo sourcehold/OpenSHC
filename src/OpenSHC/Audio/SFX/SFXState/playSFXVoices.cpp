@@ -127,7 +127,7 @@ namespace Audio {
                 }
                 DAT_CurrentPlayerRanking::instance = _ranking;
 
-                int iVar2 = 1;
+                int nextTeamStatusStateUnk = 1;
 
                 int currentPlayer;
                 int playerAtRankOne;
@@ -152,7 +152,7 @@ namespace Audio {
                                 MACRO_CALL_MEMBER(AI::AICState_Func::playTeamWinningBikFromPlayer, DAT_AICState::ptr)(
                                     _teamMate);
                             }
-                            iVar2 = 0;
+                            nextTeamStatusStateUnk = 0;
                         }
                     }
                 }
@@ -172,7 +172,7 @@ namespace Audio {
                         if (_teamMate
                             && MACRO_CALL_MEMBER(
                                 Map::Units::UnitsState_Func::getAliveLordForPlayer, DAT_UnitsState::ptr)(_teamMate)) {
-                            iVar2 = 2;
+                            nextTeamStatusStateUnk = 2;
                             if (INT_00b98664::instance != 2) {
                                 MACRO_CALL_MEMBER(AI::AICState_Func::playNoHelpBikFromPlayer, DAT_AICState::ptr)(
                                     _teamMate);
@@ -181,7 +181,7 @@ namespace Audio {
                     }
                 }
 
-                INT_00b98664::instance = iVar2;
+                INT_00b98664::instance = nextTeamStatusStateUnk;
             }
             DWORD_LatestPLayerStatusMessageTime::instance = _currentTime;
         }

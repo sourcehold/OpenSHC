@@ -39,7 +39,7 @@ namespace Map {
 
         void __cdecl WarnIfPlayersGranaryIsFull();
 
-        uint __cdecl PlayStockpileIsFullWarning();
+        void __cdecl PlayStockpileIsFullWarning();
 
         void __cdecl PlayArmoryIsFullWarning();
 

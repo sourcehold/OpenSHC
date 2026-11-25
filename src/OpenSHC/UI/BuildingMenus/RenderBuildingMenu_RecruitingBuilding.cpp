@@ -1,5 +1,6 @@
+#include "../BuildingMenus.func.hpp"
+
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
-#include "OpenSHC/UI/BuildingMenus.func.hpp"
 #include "OpenSHC/UI/Rendering.func.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"

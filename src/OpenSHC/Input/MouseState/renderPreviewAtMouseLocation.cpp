@@ -15,70 +15,70 @@ namespace Input {
     // FUNCTION: STRONGHOLDCRUSADER 0x004685C0
     void MouseState::renderPreviewAtMouseLocation()
     {
-        int iVar1 = 0;
+        int orientationVariant = 0;
         if (!this->previewEnabled || !this->rightClickState
-            || !DAT_ViewportRenderState::instance.viewportState.field0_0x0
+            || !DAT_ViewportRenderState::instance.viewportState.field_0x0
             || (DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_BUILD_MENU
                 && DAT_GameCore::instance.currentMenuViewType != UI::Enums::MVT_MAP_EDITOR_LANDSCAPING)) {
             return;
         }
 
         if (DAT_TileMapState::instance.mapOrientation == 0) {
-            iVar1 = 0;
+            orientationVariant = 0;
         } else if (DAT_TileMapState::instance.mapOrientation == 2) {
-            iVar1 = 3;
+            orientationVariant = 3;
         } else if (DAT_TileMapState::instance.mapOrientation == 4) {
-            iVar1 = 2;
+            orientationVariant = 2;
         } else if (DAT_TileMapState::instance.mapOrientation == 6) {
-            iVar1 = 1;
+            orientationVariant = 1;
         }
 
-        if (!this->field57_0x1bc) {
-            int imageIndex = GMFirstPictureIndex::instance[16] + 37 + iVar1;
+        if (!this->field_0x1bc) {
+            int imageIndex = GMFirstPictureIndex::instance[16] + 37 + orientationVariant;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                DE::SHCDE::GM_FLOATS, 38 + iVar1,
+                DE::SHCDE::GM_FLOATS, 38 + orientationVariant,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX,
                 (this->storedScreenSpaceY - DAT_GMImageHeaders::instance.imh[imageIndex].height / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY - 50);
         }
 
-        if (!this->field58_0x1c0) {
-            int uVar2 = this->mouseBasedEvent == 1;
+        if (!this->field_0x1c0) {
+            int iconVariant = this->mouseBasedEvent == 1;
 
-            int imageIndex = GMFirstPictureIndex::instance[16] + 35 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 35 + iconVariant;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                DE::SHCDE::GM_FLOATS, 36 + uVar2,
+                DE::SHCDE::GM_FLOATS, 36 + iconVariant,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX,
                 (this->storedScreenSpaceY - DAT_GMImageHeaders::instance.imh[imageIndex].height / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY + 50);
         }
 
-        if (!this->field60_0x1c8) {
-            int uVar2 = !DAT_ViewportRenderState::instance.viewportState.isZoomedOutUnk;
-            if (this->field56_0x1b8 == 3) {
-                uVar2 += 2;
+        if (!this->field_0x1c8) {
+            int iconVariant = !DAT_ViewportRenderState::instance.viewportState.isZoomedOutUnk;
+            if (this->field_0x1b8 == 3) {
+                iconVariant += 2;
             }
 
-            int imageIndex = GMFirstPictureIndex::instance[16] + 45 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 45 + iconVariant;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                DE::SHCDE::GM_FLOATS, 46 + uVar2,
+                DE::SHCDE::GM_FLOATS, 46 + iconVariant,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX + 80,
                 (this->storedScreenSpaceY - DAT_GMImageHeaders::instance.imh[imageIndex].height / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetY);
         }
 
-        if (!this->field59_0x1c4) {
-            int uVar2 = !!DAT_TileMapState::instance.flatViewToggleValue1;
-            if (this->field56_0x1b8 == 4) {
-                uVar2 += 2;
+        if (!this->field_0x1c4) {
+            int iconVariant = !!DAT_TileMapState::instance.flatViewToggleValue1;
+            if (this->field_0x1b8 == 4) {
+                iconVariant += 2;
             }
 
-            int imageIndex = GMFirstPictureIndex::instance[16] + 124 + uVar2;
+            int imageIndex = GMFirstPictureIndex::instance[16] + 124 + iconVariant;
             MACRO_CALL_MEMBER(UI::Rendering::TextureRenderCore_Func::renderGM, DAT_TextureRenderCoreObject::ptr)(
-                DE::SHCDE::GM_FLOATS, 125 + uVar2,
+                DE::SHCDE::GM_FLOATS, 125 + iconVariant,
                 (this->storedScreenSpaceX - DAT_GMImageHeaders::instance.imh[imageIndex].width / 2)
                     + DAT_ViewportRenderState::instance.viewportState.currentCameraOffsetX - 80,
                 (this->storedScreenSpaceY - DAT_GMImageHeaders::instance.imh[imageIndex].height / 2)

@@ -53,7 +53,7 @@ namespace Audio {
 
                 if (this->sec_Section1055_0x3274 >= 73) {
                     if (this->sec_Section1055_0x3274 >= 97) {
-                        if (0 < DAT_SoundEffectsHelperData1::ptr->field13_0x50) {
+                        if (0 < DAT_SoundEffectsHelperData1::ptr->field_0x50) {
                             int _selection;
                             for (int i = 0; i < 16; ++i) {
                                 /* this call is in a different thread! */
@@ -66,9 +66,9 @@ namespace Audio {
                             DAT_SoundEffectsHelperData1::ptr->DAT_RandomVariationCurrentPlayingMusic_02 = _selection;
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                                 DAT_SFXDefinedData::ptr->Pointers[_selection + 97].musicFile);
-                            --DAT_SoundEffectsHelperData1::ptr->field13_0x50;
-                            if (DAT_SoundEffectsHelperData1::ptr->field13_0x50 > 3) {
-                                DAT_SoundEffectsHelperData1::ptr->field13_0x50 = 0;
+                            --DAT_SoundEffectsHelperData1::ptr->field_0x50;
+                            if (DAT_SoundEffectsHelperData1::ptr->field_0x50 > 3) {
+                                DAT_SoundEffectsHelperData1::ptr->field_0x50 = 0;
                             }
                         }
                     } else {

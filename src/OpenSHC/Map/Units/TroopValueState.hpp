@@ -91,31 +91,31 @@ namespace Map {
 
             undefined4 findEnemyWalls(int unitID);
 
-            void setScale3(int one, int playerID);
+            void setScale3(BOOLEnum includeAll, int playerID);
 
             undefined4 findNearestAvailableScalePoint(int unitID);
 
-            void setTown2(int param_1, int playerID);
+            void setTown2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
             void countAvailablePeopleValueSlots(int param_1);
 
-            void countAvailableLordValueSlots(int param_1);
+            void countAvailableLordValueSlots(int includeOccupied);
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
             int findEnemyLord(int unitID);
 
-            void setGate2(int param_1, int param_2);
+            void setGate2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyTowersOrGates(int unitID);
 
-            void setWide3(int param_1, int param_2);
+            void setWide3(BOOLEnum includeAll, int playerID);
 
             undefined4 getClosestWideValueBasedOnPlayer(int playerID);
 
-            void setMoat3(int checkAgainstNonZero, int playerID);
+            void setMoat3(BOOLEnum includeAll, int playerID);
 
             undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
 
@@ -123,11 +123,11 @@ namespace Map {
 
             BOOLEnum findTribeWithMoatAttackBehavior();
 
-            void countAvailableHighValueSlots(int param_1);
+            void countAvailableHighValueSlots(int includeOccupied);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int param_1);
+            void countAvailableArcherValueSlots(int includeOccupied);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 

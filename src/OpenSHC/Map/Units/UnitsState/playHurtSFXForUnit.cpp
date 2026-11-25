@@ -16,7 +16,7 @@ namespace Map {
             if (unitID == 0) {
                 return;
             }
-            if (this->units[unitID].healthPercentage <= 0xa) {
+            if (this->units[unitID].healthPercentage <= 10) {
                 return;
             }
             if (this->units[unitID].isStalked != 0) {
@@ -40,7 +40,7 @@ namespace Map {
                 }
             } else if (_unitType == OpenSHC::Map::Units::UT_BREWER || _unitType == OpenSHC::Map::Units::UT_TANNER
                 || _unitType == OpenSHC::Map::Units::UT_LADY || _unitType == OpenSHC::Map::Units::UT_MOTHER
-                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 0x81)) {
+                || (_unitType == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 129)) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_GIRL_GRUNT);
                 return;

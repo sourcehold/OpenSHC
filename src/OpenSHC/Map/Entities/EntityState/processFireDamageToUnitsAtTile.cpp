@@ -10,11 +10,11 @@ namespace Map {
     namespace Entities {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x004015D0
-        void EntityState::processFireDamageToUnitsAtTile(int tileUnk, int playerID, int fireLowIntensity)
+        void EntityState::processFireDamageToUnitsAtTile(int tile, int playerID, int fireLowIntensity)
         {
-            for (int unitID = (short)DAT_TileMapState::instance.UnitLayer[tileUnk]; unitID != 0;
-                unitID = (short)DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::processFireDamageToUnit, DAT_UnitsState::ptr)(
+            for (int unitID = DAT_TileMapState::instance.UnitLayer[tile]; unitID != 0;
+                unitID = DAT_UnitsState::instance.units[unitID].nextUnitOnTheSameTile) {
+                MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::processFireDamageToUnit, DAT_UnitsState::ptr)(
                     unitID, playerID, fireLowIntensity);
             }
         }

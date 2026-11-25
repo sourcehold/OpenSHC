@@ -76,7 +76,7 @@ namespace IO {
         strcat(configPath, s_crusader_cfg_005a75bc);
         FILE* _File = MACRO_CALL(OS_Func::_fopen)(configPath, s_rb_005a4e18);
 
-        unsigned int local_9cc = 0xffffffff;
+        unsigned int configVersionUnk = 0xffffffff;
 
         // NOTE: Weird stack sizes. No idea if this were truly the sizes or if something is missing here, but the
         // function fits.
@@ -155,7 +155,7 @@ namespace IO {
 
             MACRO_CALL(OS_Func::_fread)(
                 &DAT_GameCore::instance.settingBubbleHelp, sizeof(DAT_GameCore::instance.settingBubbleHelp), 1, _File);
-            MACRO_CALL(OS_Func::_fread)(&local_9cc, sizeof(local_9cc), 1, _File);
+            MACRO_CALL(OS_Func::_fread)(&configVersionUnk, sizeof(configVersionUnk), 1, _File);
             MACRO_CALL(OS_Func::_fread)(&DAT_ViewportRenderState::instance.viewportState.isZoomedOutUnk,
                 sizeof(DAT_ViewportRenderState::instance.viewportState.isZoomedOutUnk), 1, _File);
             MACRO_CALL(OS_Func::_fread)(&DAT_ScrollingHandler::instance.scrollSpeedSetting_0x38,

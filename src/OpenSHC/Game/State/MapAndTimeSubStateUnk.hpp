@@ -17,7 +17,7 @@ namespace Game {
         typedef struct MapAndTimeSubStateUnk {
 
             undefined1 padding_0x0[4]; // 0x00000000 length: 4
-            int field4_0x4; // 0x00000004 length: 4
+            int field_0x4; // 0x00000004 length: 4
             undefined1 padding_0x8[380]; // 0x00000008 length: 380
             int cathedralRelated1; // 0x00000184 length: 4
             undefined1 padding_0x188[14174]; // 0x00000188 length: 14174

@@ -1,6 +1,7 @@
 #include "../AICState.func.hpp"
 
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -12,14 +13,16 @@ namespace AI {
     // FUNCTION: STRONGHOLDCRUSADER 0x004CD0C0
     void AICState::sendUnitsToKeep(int tribeID, int playerID)
     {
-        int const keepID = DAT_GameState::instance.playerDataArray[playerID].keep.id;
+        int const keepID = DAT_GameState::instance.playerDataArray[playerID]
+                               .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]
+                               .id;
         if (keepID <= 0) {
             return;
         }
 
         MACRO_CALL_MEMBER(Map::Units::TribesState_Func::commandUnitsToLocation, DAT_TribesState::ptr)(tribeID,
-            (short)DAT_BuildingsState::instance.buildings[keepID].x + 3,
-            (short)DAT_BuildingsState::instance.buildings[keepID].y + 4, 0);
+            DAT_BuildingsState::instance.buildings[keepID].x + 3, DAT_BuildingsState::instance.buildings[keepID].y + 4,
+            0);
     }
 }
 }

@@ -56,12 +56,12 @@ namespace Audio {
                 Dat_UnitValueLossesHistoryPerEnemyPlayer::instance[i][0]
                     = DAT_UnitValueLossesPerEnemyPlayer::instance[i];
             }
-            int iVar1
+            int currentRoundLossesSum
                 = DAT_CurrentPlayerUnitLossesHistory::instance[0] + DAT_TotalUnitValueLossesEnemyHistory::instance[0];
-            int iVar2 = DAT_CurrentPlayerUnitLossesHistory::instance[1]
+            int previousRoundsLossesSum = DAT_CurrentPlayerUnitLossesHistory::instance[1]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2]
                 + DAT_TotalUnitValueLossesEnemyHistory::instance[2];
-            if (DAT_GL_Counter::instance >= 2 && 50 > iVar1 && iVar2 > 150) {
+            if (DAT_GL_Counter::instance >= 2 && 50 > currentRoundLossesSum && previousRoundsLossesSum > 150) {
 
                 int smallPlayerUnitLossesSum
                     = DAT_CurrentPlayerUnitLossesHistory::instance[1] + DAT_CurrentPlayerUnitLossesHistory::instance[2];
@@ -71,17 +71,26 @@ namespace Audio {
                     smallPlayerUnitLossesSum, smallTotalEnemyUnitLossesSum);
 
                 int playerUnitLossesSum = 0;
-                int totalEnemyUnitLossesSum = 0;
                 for (int i = 1; i < 10; ++i) {
                     playerUnitLossesSum += DAT_CurrentPlayerUnitLossesHistory::instance[i];
-                    totalEnemyUnitLossesSum += DAT_TotalUnitValueLossesEnemyHistory::instance[i];
                 }
+                // grouped so the additions run in the original's order, [4] + [5], [6] .. [9], [3], [2], [1];
+                // as a loop like the player's sum above, they start with [3] + [4]
+                int totalEnemyUnitLossesSum = (DAT_TotalUnitValueLossesEnemyHistory::instance[1]
+                                                  + DAT_TotalUnitValueLossesEnemyHistory::instance[2]
+                                                  + DAT_TotalUnitValueLossesEnemyHistory::instance[3])
+                    + (DAT_TotalUnitValueLossesEnemyHistory::instance[9]
+                        + DAT_TotalUnitValueLossesEnemyHistory::instance[8])
+                    + (DAT_TotalUnitValueLossesEnemyHistory::instance[7]
+                        + DAT_TotalUnitValueLossesEnemyHistory::instance[6])
+                    + (DAT_TotalUnitValueLossesEnemyHistory::instance[4]
+                        + DAT_TotalUnitValueLossesEnemyHistory::instance[5]);
                 int _relative2 = MACRO_CALL(SFX_Func::UpdateUnitLossSpeechFeedback_RelativeValueForGenie)(
                     playerUnitLossesSum, totalEnemyUnitLossesSum);
 
                 if (_relative1 == 0 && _relative2 == 0) {
                     if (DAT_GameCore::instance.genieVoiceActive) {
-                        /* "A Valliant Effort" */
+                        // "A Valliant Effort"
                         MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_29_wav_005a4ecc);
                     }
                     DAT_GL_Counter::instance = 0;
@@ -90,44 +99,44 @@ namespace Audio {
                     _relative1 = (_relative2 + _relative1) / 2;
                     if (DAT_GameCore::instance.genieVoiceActive) {
                         if (_relative1 == 1) {
-                            /* "Majestic" */
+                            // "Majestic"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_30_wav_005a4ebc);
                         } else if (_relative1 == 2) {
-                            /* "Excellent" */
+                            // "Excellent"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_31_wav_005a4eac);
                         } else if (_relative1 == 3) {
-                            /* "Impressive" */
+                            // "Impressive"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_32_wav_005a4e9c);
                         } else if (_relative1 == 4) {
-                            /* "Glorious" */
+                            // "Glorious"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_34_wav_005a4e8c);
                         } else if (_relative1 == 5) {
-                            /* "For the crown" */
+                            // "For the crown"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_37_wav_005a4e7c);
                         } else if (_relative1 == 6) {
-                            /* "Heroic" */
+                            // "Heroic"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_38_wav_005a4e6c);
                         } else if (_relative1 >= 7) {
-                            /* "It's a Rout" */
+                            // "It's a Rout"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_39_wav_005a4e5c);
                         }
                     }
                     DAT_GL_Counter::instance = 0;
                 }
                 if (_relative1 < 0 && _relative2 < 0) {
-                    int iVar3 = (_relative2 + _relative1) / 2;
+                    int averageRelativeValue = (_relative2 + _relative1) / 2;
                     if (DAT_GameCore::instance.genieVoiceActive) {
-                        if (iVar3 == -1) {
-                            /* "Vanquished" */
+                        if (averageRelativeValue == -1) {
+                            // "Vanquished"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_42_wav_005a4e4c);
-                        } else if (iVar3 == -2) {
-                            /* "Crest falling" */
+                        } else if (averageRelativeValue == -2) {
+                            // "Crest falling"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_43_wav_005a4e3c);
                         }
                     }
-                    if (iVar3 <= -3) {
+                    if (averageRelativeValue <= -3) {
                         if (DAT_GameCore::instance.genieVoiceActive) {
-                            /* "Humiliated" */
+                            // "Humiliated"
                             MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_44_wav_005a4e2c);
                         }
                         int playerId = -1;
@@ -157,25 +166,26 @@ namespace Audio {
             for (int i = 0; i < 9; ++i) {
                 DAT_UnitValueLossesPerEnemyPlayer::instance[i] = 0;
             }
-            if (DAT_DestroyedBuildingsCountHistory::instance[0] > 1
-                && DAT_DestroyedBuildingsCountHistory::instance[4] + DAT_DestroyedBuildingsCountHistory::instance[3]
-                        + DAT_DestroyedBuildingsCountHistory::instance[2]
-                        + DAT_DestroyedBuildingsCountHistory::instance[1]
-                        + DAT_DestroyedBuildingsCountHistory::instance[0]
-                    > 5) {
-                if (DAT_GameCore::instance.genieVoiceActive) {
-                    /* "Where is your Castle" */
-                    MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_41_wav_005a4e1c);
+            // the sum, the reset and the shift as loops: written out, the compiler gives them other registers
+            if (DAT_DestroyedBuildingsCountHistory::instance[0] > 1) {
+                int destroyedSum = 0;
+                for (int i = 0; i < countof(DAT_DestroyedBuildingsCountHistory::instance); ++i) {
+                    destroyedSum += DAT_DestroyedBuildingsCountHistory::instance[i];
                 }
-                DAT_DestroyedBuildingsCountHistory::instance[0] = 0;
-                DAT_DestroyedBuildingsCountHistory::instance[1] = 0;
-                DAT_DestroyedBuildingsCountHistory::instance[2] = 0;
-                DAT_DestroyedBuildingsCountHistory::instance[3] = 0;
+                if (destroyedSum > 5) {
+                    if (DAT_GameCore::instance.genieVoiceActive) {
+                        // "Where is your Castle"
+                        MACRO_CALL_MEMBER(SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(s_Genie_41_wav_005a4e1c);
+                    }
+                    // all but the last entry: the shift below gives [4] the zero from [3]
+                    for (int i = 0; i < 4; ++i) {
+                        DAT_DestroyedBuildingsCountHistory::instance[i] = 0;
+                    }
+                }
             }
-            DAT_DestroyedBuildingsCountHistory::instance[4] = DAT_DestroyedBuildingsCountHistory::instance[3];
-            DAT_DestroyedBuildingsCountHistory::instance[3] = DAT_DestroyedBuildingsCountHistory::instance[2];
-            DAT_DestroyedBuildingsCountHistory::instance[2] = DAT_DestroyedBuildingsCountHistory::instance[1];
-            DAT_DestroyedBuildingsCountHistory::instance[1] = DAT_DestroyedBuildingsCountHistory::instance[0];
+            for (int i = 4; i > 0; --i) {
+                DAT_DestroyedBuildingsCountHistory::instance[i] = DAT_DestroyedBuildingsCountHistory::instance[i - 1];
+            }
             DAT_DestroyedBuildingsCountHistory::instance[0] = 0;
         }
 
@@ -189,38 +199,38 @@ namespace Audio {
                 smaller = 1;
             }
             if (larger > smaller) {
-                int iVar1 = (larger * 100) / smaller;
-                if (iVar1 < 150) {
+                int ratioPercent = (larger * 100) / smaller;
+                if (ratioPercent < 150) {
                     return 0;
                 }
-                if (iVar1 < 170) {
+                if (ratioPercent < 170) {
                     return 1;
                 }
-                if (iVar1 < 190) {
+                if (ratioPercent < 190) {
                     return 2;
                 }
-                if (iVar1 < 210) {
+                if (ratioPercent < 210) {
                     return 3;
                 }
-                if (iVar1 < 230) {
+                if (ratioPercent < 230) {
                     return 4;
                 }
-                if (iVar1 < 250) {
+                if (ratioPercent < 250) {
                     return 5;
                 }
-                if (iVar1 < 270) {
+                if (ratioPercent < 270) {
                     return 6;
                 }
                 return 7;
             } else {
-                int iVar1 = (smaller * 100) / larger;
-                if (iVar1 < 150) {
+                int ratioPercent = (smaller * 100) / larger;
+                if (ratioPercent < 150) {
                     return 0;
                 }
-                if (iVar1 < 190) {
+                if (ratioPercent < 190) {
                     return -1;
                 }
-                if (iVar1 < 240) {
+                if (ratioPercent < 240) {
                     return -2;
                 }
                 return -3;

@@ -40,17 +40,17 @@ namespace Text {
     };
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0045FDC0
-    int TextEditorState::processHelpRichTextTokens(int param_1)
+    int TextEditorState::processHelpRichTextTokens(int interactionModeUnk)
     {
         wchar_t wideTextBuffer[100];
 
-        int local_f8;
+        int centeringXOffset;
 
         int currentLinkId = -1;
         int textMemIndex = 0;
         FontSizeClass* currentFontClass = DAT_TextManagerObject::instance.fontSizeClassArray + 17;
         int currentFontLineHeight = currentFontClass->lineHeight_0x14;
-        BOOL local_f0 = FALSE;
+        BOOL lineHasGlyphsUnk = FALSE;
         BGR24 color = 0xccfaff;
         BGR24 linkColor = 0x8bcf84;
         int imageCount = -1;
@@ -58,20 +58,20 @@ namespace Text {
         BOOL centerCurrentLine = FALSE;
         int lineStartY = 0;
         int lineEndY = 0;
-        int local_11c = 0;
-        int local_100 = 0;
-        int local_10c = 0;
-        BOOL local_e4 = FALSE;
-        int local_134 = -10000;
+        int currentHotspotIndex = 0;
+        int previousHotspotIndex = 0;
+        int hotspotIndexOffset = 0;
+        BOOL hotspotHandled = FALSE;
+        int hotspotStepCountUnk = -10000;
         if (this->helpDialogVariant == 2 || this->isCustomTextMode) {
             color = 0xc2f0eb;
         }
         if (!this->isTextHelpDialogMode) {
             return 1;
         }
-        this->field49_0x23964 = -1;
+        this->field_0x23964 = -1;
         this->currentLinkId = -1;
-        if (this->field51_0x2396c) {
+        if (this->field_0x2396c) {
             DAT_00df334c::instance = 1;
         }
         if (this->activeHelpHotspotIndex < 0) {
@@ -91,37 +91,38 @@ namespace Text {
             abortProcessing = false;
 
             TextMemUnion textToRender;
-            int local_114;
+            int tokenStartIndex;
             BGR24 charColor;
             // false if text debug view token handled (this->helpDialogSubMode == 1), maybe related to input?
-            BOOL local_12c;
+            BOOL isPlainTextTokenUnk;
 
             charColor = color;
-            local_12c = TRUE;
+            isPlainTextTokenUnk = TRUE;
             if (0 <= currentLinkId) {
                 charColor = linkColor;
             }
-            local_114 = textMemIndex;
+            tokenStartIndex = textMemIndex;
             textToRender.value
                 = MACRO_CALL_MEMBER(TextEditorState_Func::getWideCharOrWideCharPointer, this)(&textMemIndex);
             if (this->useAlternateHelpTab && textToRender.value < L' '
-                && textToRender.helpToken != Enums::HTT_NEWPARAGRAPH && local_114 == this->activeHelpHotspotIndex) {
+                && textToRender.helpToken != Enums::HTT_NEWPARAGRAPH
+                && tokenStartIndex == this->activeHelpHotspotIndex) {
                 lineStartY = lineY;
                 lineEndY = lineY + currentFontLineHeight;
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     int xModify = 0;
                     if (centerCurrentLine) {
                         xModify = this->lineLayoutTable[lineY].widthForCentering / 2;
                     }
-                    local_10c = local_114 - local_11c;
-                    if (this->field51_0x2396c < 0) {
-                        this->activeHelpHotspotIndex = local_100 + DAT_00df3348::instance;
-                        if (this->activeHelpHotspotIndex >= local_11c) {
-                            this->activeHelpHotspotIndex = local_11c - 1;
+                    hotspotIndexOffset = tokenStartIndex - currentHotspotIndex;
+                    if (this->field_0x2396c < 0) {
+                        this->activeHelpHotspotIndex = previousHotspotIndex + DAT_00df3348::instance;
+                        if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                            this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
-                    local_134 = 0;
+                    hotspotStepCountUnk = 0;
                     int xPos = this->dialogContentX + xModify;
                     int yPos = this->dialogContentY - this->helpContentScrollOffsetY;
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
@@ -132,7 +133,7 @@ namespace Text {
                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                         xPos + leftPosition, yPos + lineY - 1, xPos + leftPosition, yPos + lineEndY + 1,
                         COL_DARK_LIME::instance.shortValue);
-                    local_e4 = TRUE;
+                    hotspotHandled = TRUE;
                 }
             }
 
@@ -140,7 +141,7 @@ namespace Text {
             case Enums::HTT_PIC: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__PIC__d__S__005a583c,
                         this->DAT_PointerToTemporaryTextMemory[textMemIndex],
                         this->graphicFileNames[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
@@ -179,10 +180,11 @@ namespace Text {
 
                 bool validImageIndex = false;
                 int imageIndex;
-                if (param_1 == 1 && this->DAT_PointerToTemporaryTextMemory[textMemIndex + 1] == Enums::HTPPT_HERE) {
+                if (interactionModeUnk == 1
+                    && this->DAT_PointerToTemporaryTextMemory[textMemIndex + 1] == Enums::HTPPT_HERE) {
                     imageIndex = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
                     validImageIndex = true;
-                } else if (!param_1
+                } else if (!interactionModeUnk
                     && (imageCount == this->imageHotspotCount
                         || this->DAT_PointerToTemporaryTextMemory[textMemIndex + 1] == Enums::HTPPT_HERE)) {
                     imageIndex = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
@@ -227,7 +229,7 @@ namespace Text {
                     case Enums::HTPPT_HERE: {
                         int const hereWidth = imageWidth + 3;
                         if (hereWidth + leftPosition > this->lineLayoutTable[lineY].rightBorder) {
-                            local_f0 = FALSE;
+                            lineHasGlyphsUnk = FALSE;
                             if (centerCurrentLine) {
                                 this->lineLayoutTable[lineY].widthForCentering
                                     = this->lineLayoutTable[lineY].rightBorder - leftPosition;
@@ -239,17 +241,17 @@ namespace Text {
                                     leftPosition = this->lineLayoutTable[++lineY].leftBorder;
                                 } while (leftPosition == -1);
                             } while (leftPosition + hereWidth > this->lineLayoutTable[lineY].rightBorder);
-                            if (this->useAlternateHelpTab && param_1 == 1) {
-                                local_100 = local_11c;
-                                local_11c = local_114;
-                                ++local_134;
-                                if (0 < this->field51_0x2396c && 2 <= local_134) {
-                                    local_134 = -10000;
-                                    this->activeHelpHotspotIndex = local_100 + local_10c;
-                                    if (this->activeHelpHotspotIndex >= local_11c) {
-                                        this->activeHelpHotspotIndex = local_11c - 1;
+                            if (this->useAlternateHelpTab && interactionModeUnk == 1) {
+                                previousHotspotIndex = currentHotspotIndex;
+                                currentHotspotIndex = tokenStartIndex;
+                                ++hotspotStepCountUnk;
+                                if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
+                                    hotspotStepCountUnk = -10000;
+                                    this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
+                                    if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                        this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                     }
-                                    this->field51_0x2396c = 0;
+                                    this->field_0x2396c = 0;
                                 }
                             }
                             currentFontLineHeight = currentFontClass->lineHeight_0x14;
@@ -258,7 +260,7 @@ namespace Text {
                             currentFontLineHeight = imageHeight;
                         }
                         leftPosition += hereWidth;
-                        if (param_1 != 1 && imageCount == this->imageHotspotCount) {
+                        if (interactionModeUnk != 1 && imageCount == this->imageHotspotCount) {
                             this->imageHotspotTable[this->imageHotspotCount].xPos = leftPosition - hereWidth;
                             this->imageHotspotTable[this->imageHotspotCount].yPos = lineY;
                             ++this->imageHotspotCount;
@@ -267,7 +269,7 @@ namespace Text {
                     }
                     }
                     textMemIndex += 2;
-                    if (positionToken != Enums::HTPPT_HERE && !param_1) {
+                    if (positionToken != Enums::HTPPT_HERE && !interactionModeUnk) {
                         ++this->imageHotspotCount;
                         DAT_TextManagerObject::instance.helpTextLinkActive = FALSE;
                         abortProcessing = true;
@@ -281,7 +283,7 @@ namespace Text {
             case Enums::HTT_FONT: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(
                         wideTextBuffer, u__FONT__d__005a5454, this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
                     textMemIndex += 2;
@@ -294,7 +296,7 @@ namespace Text {
                 }
                 textMemIndex += 2;
                 currentFontClass = &DAT_TextManagerObject::instance.fontSizeClassArray[fontSize];
-                if (currentFontClass->lineHeight_0x14 > currentFontLineHeight || !local_f0) {
+                if (currentFontClass->lineHeight_0x14 > currentFontLineHeight || !lineHasGlyphsUnk) {
                     currentFontLineHeight = currentFontClass->lineHeight_0x14;
                 }
                 break;
@@ -302,16 +304,16 @@ namespace Text {
             case Enums::HTT_COLOUR: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__COLOUR__S__005a5824,
                         DAT_UserHelpDefinedData::instance
-                            .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
+                            .field_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
                     textMemIndex += 2;
                     textToRender.text = wideTextBuffer;
                     break;
                 }
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     int const colorIndex = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
 
                     uint colorRed;
@@ -322,9 +324,9 @@ namespace Text {
                         colorGreen = 0xd2;
                         colorBlue = 0xa4;
                     } else {
-                        colorRed = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].r_0x4;
-                        colorGreen = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].g_0x8;
-                        colorBlue = DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].b_0xc;
+                        colorRed = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].r_0x4;
+                        colorGreen = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].g_0x8;
+                        colorBlue = DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].b_0xc;
                     }
                     textMemIndex += 2;
                     color = RGB(colorRed, colorGreen, colorBlue);
@@ -336,21 +338,21 @@ namespace Text {
             case Enums::HTT_LINKCOLOUR: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__LINKCOLOUR__S__005a5804,
                         DAT_UserHelpDefinedData::instance
-                            .field6_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
+                            .field_0x7a16c[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]
                             .name_0x0);
                     textMemIndex += 2;
                     textToRender.text = wideTextBuffer;
                     break;
                 }
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     int const colorIndex = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
                     textMemIndex += 2;
-                    linkColor = RGB(DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].r_0x4,
-                        DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].g_0x8,
-                        DAT_UserHelpDefinedData::instance.field6_0x7a16c[colorIndex].b_0xc);
+                    linkColor = RGB(DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].r_0x4,
+                        DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].g_0x8,
+                        DAT_UserHelpDefinedData::instance.field_0x7a16c[colorIndex].b_0xc);
                 } else {
                     textMemIndex += 2;
                 }
@@ -359,7 +361,7 @@ namespace Text {
             case Enums::HTT_LINK: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__LINK_S__005a57ec,
                         DAT_UserHelpDefinedData::instance
                             .HelpSections[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
@@ -368,7 +370,7 @@ namespace Text {
                     break;
                 }
                 currentLinkId = this->DAT_PointerToTemporaryTextMemory[textMemIndex];
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     DAT_TextManagerObject::instance.helpTextLinkActive = TRUE;
                 }
                 textMemIndex += 2;
@@ -377,7 +379,7 @@ namespace Text {
             case Enums::HTT_INCLUDE: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__INCLUDE_S__005a57cc,
                         DAT_UserHelpDefinedData::instance
                             .HelpSections[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
@@ -391,14 +393,14 @@ namespace Text {
             case Enums::HTT_SOUND: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(wideTextBuffer, u__SOUND_S__005a57b0,
                         this->soundFileNames[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]);
                     textMemIndex += 2;
                     textToRender.text = wideTextBuffer;
                     break;
                 }
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     int const visibleY = lineY - this->helpContentScrollOffsetY;
                     if (0 <= visibleY && visibleY < this->dialogContentHeight
                         && !this->soundFilePlayedFlags[this->DAT_PointerToTemporaryTextMemory[textMemIndex]]) {
@@ -411,13 +413,13 @@ namespace Text {
             case Enums::HTT_ENDLINK: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     wcscpy(wideTextBuffer, u__LINK__005a53d4);
                     textToRender.text = wideTextBuffer;
                     break;
                 }
                 currentLinkId = -1;
-                if (param_1 == 1) {
+                if (interactionModeUnk == 1) {
                     DAT_TextManagerObject::instance.helpTextLinkActive = FALSE;
                 }
                 break;
@@ -425,7 +427,7 @@ namespace Text {
             case Enums::HTT_STRING: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     MACRO_CALL(Global_Func::PrintToDestination)(
                         wideTextBuffer, u__STRING__d__005a5358, this->DAT_PointerToTemporaryTextMemory[textMemIndex]);
                     textMemIndex += 2;
@@ -438,7 +440,7 @@ namespace Text {
             case Enums::HTT_CENTRE: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     wcscpy(wideTextBuffer, u__CENTRE__005a539c);
                     textToRender.text = wideTextBuffer;
                     break;
@@ -450,7 +452,7 @@ namespace Text {
             case Enums::HTT_ENDCENTRE: {
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     wcscpy(wideTextBuffer, u__CENTRE__005a5388);
                     textToRender.text = wideTextBuffer;
                     break;
@@ -464,10 +466,10 @@ namespace Text {
                         = this->lineLayoutTable[lineY].rightBorder - leftPosition;
                     centerCurrentLine = centreActive;
                 }
-                if (this->useAlternateHelpTab && local_114 == this->activeHelpHotspotIndex) {
+                if (this->useAlternateHelpTab && tokenStartIndex == this->activeHelpHotspotIndex) {
                     lineStartY = lineY;
                     lineEndY = currentFontLineHeight + lineY;
-                    if (param_1 == 1) {
+                    if (interactionModeUnk == 1) {
                         int xModify = 0;
                         if (centerCurrentLine) {
                             xModify = this->lineLayoutTable[lineY].widthForCentering / 2;
@@ -482,10 +484,10 @@ namespace Text {
                         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                             xPos + leftPosition, yPos - 1 + lineStartY, xPos + leftPosition, yPos + 1 + lineEndY,
                             COL_DARK_LIME::instance.shortValue);
-                        local_e4 = TRUE;
+                        hotspotHandled = TRUE;
                     }
                 }
-                local_f0 = FALSE;
+                lineHasGlyphsUnk = FALSE;
                 lineY += 3 + currentFontLineHeight;
                 do {
                     leftPosition = this->lineLayoutTable[++lineY].leftBorder;
@@ -493,34 +495,34 @@ namespace Text {
                 currentFontLineHeight = currentFontClass->lineHeight_0x14;
 
                 if (this->useAlternateHelpTab) {
-                    local_100 = local_11c;
-                    local_11c = local_114;
-                    if (param_1 == 1) {
-                        ++local_134;
-                        if (0 < this->field51_0x2396c && 2 <= local_134) {
-                            local_134 = -10000;
-                            this->activeHelpHotspotIndex = local_10c + local_100;
-                            if (this->activeHelpHotspotIndex >= local_11c) {
-                                this->activeHelpHotspotIndex = local_11c - 1;
+                    previousHotspotIndex = currentHotspotIndex;
+                    currentHotspotIndex = tokenStartIndex;
+                    if (interactionModeUnk == 1) {
+                        ++hotspotStepCountUnk;
+                        if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
+                            hotspotStepCountUnk = -10000;
+                            this->activeHelpHotspotIndex = hotspotIndexOffset + previousHotspotIndex;
+                            if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
-                    if (local_11c == this->activeHelpHotspotIndex && param_1 == 1) {
-                        local_10c = 0;
-                        if (this->field51_0x2396c < 0) {
-                            this->activeHelpHotspotIndex = DAT_00df3348::instance + local_100;
-                            if (this->activeHelpHotspotIndex >= local_11c) {
-                                this->activeHelpHotspotIndex = local_11c - 1;
+                    if (currentHotspotIndex == this->activeHelpHotspotIndex && interactionModeUnk == 1) {
+                        hotspotIndexOffset = 0;
+                        if (this->field_0x2396c < 0) {
+                            this->activeHelpHotspotIndex = DAT_00df3348::instance + previousHotspotIndex;
+                            if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
-                        local_134 = 0;
+                        hotspotStepCountUnk = 0;
                     }
                 }
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     wcscpy(wideTextBuffer, u__NEWPARAGRAPH__005a5790);
                     textToRender.text = wideTextBuffer;
                     break;
@@ -530,13 +532,13 @@ namespace Text {
             case Enums::HTT_TAB: { // TODO?: unknown token
                 if (this->helpDialogSubMode == 1) {
                     charColor = 0xff;
-                    local_12c = FALSE;
+                    isPlainTextTokenUnk = FALSE;
                     wcscpy(wideTextBuffer, u__tab__005a5784);
                     textToRender.text = wideTextBuffer;
                     break;
                 }
                 if (leftPosition + 30 > this->lineLayoutTable[lineY].rightBorder) {
-                    local_f0 = FALSE;
+                    lineHasGlyphsUnk = FALSE;
                     if (centerCurrentLine) {
                         this->lineLayoutTable[lineY].widthForCentering
                             = this->lineLayoutTable[lineY].rightBorder - leftPosition;
@@ -549,17 +551,17 @@ namespace Text {
                         } while (leftPosition == -1);
                     } while (leftPosition + 30 > this->lineLayoutTable[lineY].rightBorder);
 
-                    if (this->useAlternateHelpTab && param_1 == 1) {
-                        local_100 = local_11c;
-                        local_11c = local_114;
-                        ++local_134;
-                        if (0 < this->field51_0x2396c && 2 <= local_134) {
-                            local_134 = -10000;
-                            this->activeHelpHotspotIndex = local_100 + local_10c;
-                            if (this->activeHelpHotspotIndex >= local_11c) {
-                                this->activeHelpHotspotIndex = local_11c - 1;
+                    if (this->useAlternateHelpTab && interactionModeUnk == 1) {
+                        previousHotspotIndex = currentHotspotIndex;
+                        currentHotspotIndex = tokenStartIndex;
+                        ++hotspotStepCountUnk;
+                        if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
+                            hotspotStepCountUnk = -10000;
+                            this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
+                            if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
                     currentFontLineHeight = currentFontClass->lineHeight_0x14;
@@ -568,7 +570,7 @@ namespace Text {
                 break;
             }
             case (wchar_t*)0: { // TODO?: unknown token, or just NULL, meaning end?
-                if (param_1 == 0) {
+                if (interactionModeUnk == 0) {
                     this->topVisibleLineIndex = lineY + currentFontLineHeight - 1;
                     do {
                         ++this->topVisibleLineIndex;
@@ -590,17 +592,17 @@ namespace Text {
                         }
                     }
                 } else if (this->useAlternateHelpTab) {
-                    DAT_00df3348::instance = local_10c;
-                    if (0 < this->field51_0x2396c && local_134 == 1) {
-                        this->activeHelpHotspotIndex = local_10c + local_11c;
+                    DAT_00df3348::instance = hotspotIndexOffset;
+                    if (0 < this->field_0x2396c && hotspotStepCountUnk == 1) {
+                        this->activeHelpHotspotIndex = hotspotIndexOffset + currentHotspotIndex;
                         if (this->activeHelpHotspotIndex > this->customHelpTextLength) {
                             this->activeHelpHotspotIndex = this->customHelpTextLength;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
-                    if (!local_e4 && this->activeHelpHotspotIndex && DAT_00df334c::instance) {
+                    if (!hotspotHandled && this->activeHelpHotspotIndex && DAT_00df334c::instance) {
                         --this->activeHelpHotspotIndex;
-                        this->field52_0x23970 = 0;
+                        this->field_0x23970 = 0;
                         DAT_TextManagerObject::instance.helpTextLinkActive = FALSE;
                         return TRUE;
                     }
@@ -617,7 +619,7 @@ namespace Text {
             int textWidth = MACRO_CALL_MEMBER(FontSizeClass_Func::getWidthOfWideText, currentFontClass)(
                 textToRender.text, wcslen(textToRender.text));
             if (leftPosition + textWidth > this->lineLayoutTable[lineY].rightBorder) {
-                local_f0 = FALSE;
+                lineHasGlyphsUnk = FALSE;
                 if (centerCurrentLine) {
                     this->lineLayoutTable[lineY].widthForCentering
                         = this->lineLayoutTable[lineY].rightBorder - leftPosition;
@@ -629,22 +631,22 @@ namespace Text {
                 } while (leftPosition == -1);
                 currentFontLineHeight = currentFontClass->lineHeight_0x14;
                 if (this->useAlternateHelpTab) {
-                    ++local_134;
-                    local_100 = local_11c;
-                    local_11c = local_114;
-                    if (0 < this->field51_0x2396c && 2 <= local_134) {
-                        local_134 = -10000;
-                        this->activeHelpHotspotIndex = local_100 + local_10c;
-                        if (this->activeHelpHotspotIndex >= local_11c) {
-                            this->activeHelpHotspotIndex = local_11c - 1;
+                    ++hotspotStepCountUnk;
+                    previousHotspotIndex = currentHotspotIndex;
+                    currentHotspotIndex = tokenStartIndex;
+                    if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
+                        hotspotStepCountUnk = -10000;
+                        this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
+                        if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                            this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                         }
-                        this->field51_0x2396c = 0;
+                        this->field_0x2396c = 0;
                     }
                 }
                 if (leftPosition + textWidth > this->lineLayoutTable[lineY].rightBorder) {
-                    local_f8 = 0;
+                    centeringXOffset = 0;
                     if (centerCurrentLine) {
-                        local_f8 = this->lineLayoutTable[lineY].widthForCentering / 2;
+                        centeringXOffset = this->lineLayoutTable[lineY].widthForCentering / 2;
                     }
                     int wordLength = wcslen(textToRender.text);
                     for (int i = 0; i < wordLength; ++i) {
@@ -658,71 +660,71 @@ namespace Text {
                                 centerCurrentLine = centreActive;
                             }
                             lineY += currentFontLineHeight + 1;
-                            if (this->useAlternateHelpTab && param_1 == 1) {
-                                local_100 = local_11c;
-                                local_11c = local_114 + i;
-                                ++local_134;
-                                if (0 < this->field51_0x2396c && 2 <= local_134) {
-                                    local_134 = -10000;
-                                    this->activeHelpHotspotIndex = local_100 + local_10c;
-                                    if (this->activeHelpHotspotIndex >= local_11c) {
-                                        this->activeHelpHotspotIndex = local_11c - 1;
+                            if (this->useAlternateHelpTab && interactionModeUnk == 1) {
+                                previousHotspotIndex = currentHotspotIndex;
+                                currentHotspotIndex = tokenStartIndex + i;
+                                ++hotspotStepCountUnk;
+                                if (0 < this->field_0x2396c && 2 <= hotspotStepCountUnk) {
+                                    hotspotStepCountUnk = -10000;
+                                    this->activeHelpHotspotIndex = previousHotspotIndex + hotspotIndexOffset;
+                                    if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                        this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                     }
-                                    this->field51_0x2396c = 0;
+                                    this->field_0x2396c = 0;
                                 }
                             }
                             do {
                                 leftPosition = this->lineLayoutTable[++lineY].leftBorder;
                             } while (leftPosition == -1);
                             if (centerCurrentLine) {
-                                local_f8 = this->lineLayoutTable[lineY].widthForCentering / 2;
+                                centeringXOffset = this->lineLayoutTable[lineY].widthForCentering / 2;
                             }
                         }
-                        if (this->useAlternateHelpTab && local_114 + i == this->activeHelpHotspotIndex) {
+                        if (this->useAlternateHelpTab && tokenStartIndex + i == this->activeHelpHotspotIndex) {
                             lineStartY = lineY;
                             lineEndY = lineY + currentFontLineHeight;
-                            if (param_1 == 1) {
-                                if (local_12c) {
-                                    local_10c = (i - local_11c) + local_114;
-                                    if (this->field51_0x2396c < 0) {
-                                        this->activeHelpHotspotIndex = DAT_00df3348::instance + local_100;
-                                        if (this->activeHelpHotspotIndex >= local_11c) {
-                                            this->activeHelpHotspotIndex = local_11c - 1;
+                            if (interactionModeUnk == 1) {
+                                if (isPlainTextTokenUnk) {
+                                    hotspotIndexOffset = (i - currentHotspotIndex) + tokenStartIndex;
+                                    if (this->field_0x2396c < 0) {
+                                        this->activeHelpHotspotIndex = DAT_00df3348::instance + previousHotspotIndex;
+                                        if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                            this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                                         }
-                                        this->field51_0x2396c = 0;
+                                        this->field_0x2396c = 0;
                                     }
-                                    local_134 = 0;
-                                    int xPos = this->dialogContentX + local_f8;
+                                    hotspotStepCountUnk = 0;
+                                    int xPos = this->dialogContentX + centeringXOffset;
                                     int yPos = this->dialogContentY - this->helpContentScrollOffsetY;
                                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine,
                                         DAT_PencilRenderCore::ptr)(xPos - 1 + leftPosition, yPos - 1 + lineY,
                                         xPos - 1 + leftPosition, yPos + 1 + lineEndY,
                                         COL_DARK_LIME::instance.shortValue);
-                                    xPos = this->dialogContentX + local_f8;
+                                    xPos = this->dialogContentX + centeringXOffset;
                                     yPos = this->dialogContentY - this->helpContentScrollOffsetY;
                                     MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine,
                                         DAT_PencilRenderCore::ptr)(xPos + leftPosition, yPos - 1 + lineY,
                                         xPos + leftPosition, yPos + 1 + lineEndY, COL_DARK_LIME::instance.shortValue);
-                                    local_e4 = TRUE;
+                                    hotspotHandled = TRUE;
                                 }
                             }
                         }
-                        if (param_1 == 1) {
-                            int charXPos = this->dialogContentX + local_f8 + leftPosition;
+                        if (interactionModeUnk == 1) {
+                            int charXPos = this->dialogContentX + centeringXOffset + leftPosition;
                             int charYPos = this->dialogContentY - this->helpContentScrollOffsetY + lineY;
 
                             wchar_t currentChar = textToRender.text[i];
                             int const newCharXPos = MACRO_CALL_MEMBER(FontSizeClass_Func::renderWideChar,
                                 currentFontClass)(currentChar, charXPos, charYPos, charColor, 0);
-                            local_f0 = TRUE;
+                            lineHasGlyphsUnk = TRUE;
                             if (MACRO_CALL_MEMBER(Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
                                     charXPos - this->helpContentScrollX, charYPos - this->helpContentScrollY,
                                     newCharXPos - charXPos, currentFontLineHeight + 2)) {
-                                if (local_12c) {
-                                    this->field49_0x23964 = local_114 + i;
+                                if (isPlainTextTokenUnk) {
+                                    this->field_0x23964 = tokenStartIndex + i;
                                     this->currentLinkId = currentLinkId;
                                 } else {
-                                    this->field49_0x23964 = local_114;
+                                    this->field_0x23964 = tokenStartIndex;
                                 }
                             }
                         }
@@ -739,33 +741,33 @@ namespace Text {
             }
             int wordLength = wcslen(textToRender.text);
             for (int i = 0; i < wordLength; ++i) {
-                if (this->useAlternateHelpTab && i + local_114 == this->activeHelpHotspotIndex) {
-                    if (param_1 == 1 && local_12c) {
+                if (this->useAlternateHelpTab && i + tokenStartIndex == this->activeHelpHotspotIndex) {
+                    if (interactionModeUnk == 1 && isPlainTextTokenUnk) {
                         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                             charXPos - 1, charYPos - 1, charXPos - 1, charYPos + 1 + currentFontLineHeight,
                             COL_DARK_LIME::instance.shortValue);
                         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
                             charXPos, charYPos - 1, charXPos, charYPos + 1 + currentFontLineHeight,
                             COL_DARK_LIME::instance.shortValue);
-                        local_e4 = TRUE;
+                        hotspotHandled = TRUE;
                     }
                     lineStartY = lineY;
                     lineEndY = lineY + currentFontLineHeight;
-                    if (param_1 == 1) {
-                        local_134 = 0;
-                        local_10c = local_114 - local_11c + i;
-                        if (this->field51_0x2396c < 0 && local_12c) {
-                            this->activeHelpHotspotIndex = local_100 + DAT_00df3348::instance;
-                            if (this->activeHelpHotspotIndex >= local_11c) {
-                                this->activeHelpHotspotIndex = local_11c - 1;
+                    if (interactionModeUnk == 1) {
+                        hotspotStepCountUnk = 0;
+                        hotspotIndexOffset = tokenStartIndex - currentHotspotIndex + i;
+                        if (this->field_0x2396c < 0 && isPlainTextTokenUnk) {
+                            this->activeHelpHotspotIndex = previousHotspotIndex + DAT_00df3348::instance;
+                            if (this->activeHelpHotspotIndex >= currentHotspotIndex) {
+                                this->activeHelpHotspotIndex = currentHotspotIndex - 1;
                             }
-                            this->field51_0x2396c = 0;
+                            this->field_0x2396c = 0;
                         }
                     }
                 }
 
-                if (param_1 == 1) {
-                    local_f0 = TRUE;
+                if (interactionModeUnk == 1) {
+                    lineHasGlyphsUnk = TRUE;
                     int oldCharPos = charXPos;
                     wchar_t const currentChar = textToRender.text[i];
                     charXPos = MACRO_CALL_MEMBER(FontSizeClass_Func::renderWideChar, currentFontClass)(
@@ -773,11 +775,11 @@ namespace Text {
                     if (MACRO_CALL_MEMBER(Input::MouseState_Func::isMouseInsideBox, DAT_MouseState::ptr)(
                             oldCharPos - this->helpContentScrollX, charYPos - this->helpContentScrollY,
                             charXPos - oldCharPos, currentFontLineHeight + 2)) {
-                        if (local_12c) {
-                            this->field49_0x23964 = i + local_114;
+                        if (isPlainTextTokenUnk) {
+                            this->field_0x23964 = i + tokenStartIndex;
                             this->currentLinkId = currentLinkId;
                         } else {
-                            this->field49_0x23964 = local_114;
+                            this->field_0x23964 = tokenStartIndex;
                         }
                     }
                 } else {

@@ -9,12 +9,14 @@
 #pragma once
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
+#include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
 #include "OpenSHC/Synchrony/Actions.hpp"
 namespace OpenSHC {
 namespace Synchrony {
     namespace Actions_Func {
 
         using OpenSHC::Game::Resources::ResourceType;
+        using OpenSHC::Game::Resources::ResourceTypeMin1;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x004285C0,
             &OpenSHC::Synchrony::Actions::RemovePositionOfPlayer)
@@ -25,7 +27,7 @@ namespace Synchrony {
         ProcessRecruitUnit;
 
         MACRO_FUNCTION_RESOLVER(
-            void(__cdecl*)(undefined4 playerID, int buildingID, ushort producedItemType, int buildingUID), false,
+            void(__cdecl*)(undefined4 playerID, int buildingID, int producedItemType, int buildingUID), false,
             Address::SHC_3BB0A8C1_0x004652A0, &OpenSHC::Synchrony::Actions::SetBuildingProductionType)
         SetBuildingProductionType;
 
@@ -66,7 +68,7 @@ namespace Synchrony {
             Address::SHC_3BB0A8C1_0x00466260, &OpenSHC::Synchrony::Actions::ProcessTowerRepair)
         ProcessTowerRepair;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, int buildingID, int buildingUID), false,
+        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int displayColor, int buildingID, int buildingUID), false,
             Address::SHC_3BB0A8C1_0x00466430, &OpenSHC::Synchrony::Actions::ProcessReleaseDogs)
         ProcessReleaseDogs;
 
@@ -82,11 +84,13 @@ namespace Synchrony {
             false, Address::SHC_3BB0A8C1_0x004AD2F0, &OpenSHC::Synchrony::Actions::ProcessAllyRequestAttackDefense)
         ProcessAllyRequestAttackDefense;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int askedPlayerID, int param_2, int amount, int askee), false,
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(int askedPlayerID, ResourceTypeMin1 requestedResource, int amount, int askee), false,
             Address::SHC_3BB0A8C1_0x004AD7C0, &OpenSHC::Synchrony::Actions::ProcessAllyRequestingGoods)
         ProcessAllyRequestingGoods;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ResourceType param_2, int param_3, int param_4), false,
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(int receiverPlayerID, ResourceType requestedResource, int amount, int senderPlayerID), false,
             Address::SHC_3BB0A8C1_0x004ADDD0, &OpenSHC::Synchrony::Actions::ProcessAllyGoodsRequest)
         ProcessAllyGoodsRequest;
 

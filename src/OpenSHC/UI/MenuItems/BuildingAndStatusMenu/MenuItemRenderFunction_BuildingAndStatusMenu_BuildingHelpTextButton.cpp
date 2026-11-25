@@ -22,7 +22,7 @@ namespace UI {
                     DAT_ButtonUnknownZero::instance = 1;
                     return;
                 }
-                if (DAT_BuildingsState::instance.field24_0x18e04c != 0) {
+                if (DAT_BuildingsState::instance.field_0x18e04c != 0) {
                     MACRO_CALL(OpenSHC::UI::MenuItems::General_Func::
                             MenuItemRenderFunction_General_RenderCurrentButtonWithPossibleAlphaTexOnScreenMenuSurface)();
                 }
