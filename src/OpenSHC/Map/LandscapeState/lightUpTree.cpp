@@ -17,7 +17,7 @@ namespace Map {
     BOOLEnum LandscapeState::lightUpTree(int tileUnk, int playerID)
     {
         int const treeID = DAT_TileMapState::instance.OrganismLayer[tileUnk];
-        if (treeID >= 2000) {
+        if (treeID >= countof(this->trees)) {
             return FALSE;
         }
         if (this->trees[treeID].field_0x98 != 0) {

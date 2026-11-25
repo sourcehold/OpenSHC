@@ -8,7 +8,7 @@ namespace Map {
     // BFS over the 40x40 grid writing unknownNonZero01 (+0x68). A dequeued value <= 1 ends the fill (signed jle
     // 0x52D7B4); neighbours need unsigned bounds (ja 0x27), firstMember > 0, unclaimedArea <= 10 (signed jg
     // 0x52D7F2) and a lower current value (signed jge 0x52D7F7). The queue indices are undefined4, so they are cast to
-    // int for the signed wrap compares (jl 0x640).
+    // int for the signed wrap compares (jl 1600).
     // FUNCTION: STRONGHOLDCRUSADER 0x0052D720
     void WildlifeState::floodFillZoneProximityFromCell(int cellX, int cellY, int strength)
     {

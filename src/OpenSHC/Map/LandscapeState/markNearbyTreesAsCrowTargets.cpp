@@ -17,8 +17,8 @@ namespace Map {
             if (this->trees[treeID].stage >= 4) {
                 continue;
             }
-            if (MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::isTreeAdult, this)(treeID, this->trees[treeID].uid)
-                == FALSE) {
+            if (!MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::isTreeAdult, this)(
+                    treeID, this->trees[treeID].uid)) {
                 continue;
             }
             MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,

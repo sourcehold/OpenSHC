@@ -25,8 +25,8 @@ namespace Map {
         this->casDisRelated = 1;
         this->candidateIndex = 0;
         this->candidateIndex2 = 1;
-        for (int y = 0; y < 40; y++) {
-            for (int x = 0; x < 40; x++) {
+        for (int y = 0; y < countof(this->grid[0]); y++) {
+            for (int x = 0; x < countof(this->grid); x++) {
                 this->grid[x][y].casDisRelated2 = 0;
             }
         }

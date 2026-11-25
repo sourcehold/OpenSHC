@@ -9,8 +9,8 @@ namespace Map {
 
     // Felled (zeroUpTo2 != 0): when the Tree_2 entry (A for stage 0) is <= 0 (signed jg 0x4F23C0) the index steps
     // back one. Standing: when the signed Tree_1 sway byte is <= 0 (jg 0x4F23EE) the index wraps to 0 and the
-    // table is re-picked (B if one == 2). Frame per stage (jump table 0x4F2620, stages 0..4, rest 0x92);
-    // 0x94 while field0_0x0.
+    // table is re-picked (B if one == 2). Frame per stage (jump table 0x4F2620, stages 0..4, rest 146);
+    // 148 while field_0x0.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2380
     void Trees::UpdateTree1()
     {

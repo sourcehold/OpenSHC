@@ -11,7 +11,7 @@ namespace Map {
     void Trees::UpdateTree19()
     {
         int const treeID = DAT_CurrentTreeID::instance;
-        int const frame = (DAT_LandscapeState::instance.trees[treeID].rng1 & 3U) + 7;
+        int const frame = (DAT_LandscapeState::instance.trees[treeID].rng1 & 3) + 7;
         DAT_LandscapeState::instance.trees[treeID].animationFrameUnk = frame;
         if (frame == 10) {
             DAT_LandscapeState::instance.trees[treeID].animationFrameUnk = 9;

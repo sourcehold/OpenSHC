@@ -5,7 +5,7 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Signed compares (jg) of DAT_TotalOrganisms; the last step is treeSpreadInterval = (count <= 1800) (setle).
+    // Signed compares (jg) of DAT_TotalOrganisms; the last step compiles to a setle.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2CC0
     void LandscapeState::setTreeSpreadInterval()
     {
@@ -54,7 +54,11 @@ namespace Map {
             DAT_GameState::instance.mapAndTime.treeSpreadInterval = 2;
             return;
         }
-        DAT_GameState::instance.mapAndTime.treeSpreadInterval = count <= 1800;
+        if (count <= 1800) {
+            DAT_GameState::instance.mapAndTime.treeSpreadInterval = 1;
+            return;
+        }
+        DAT_GameState::instance.mapAndTime.treeSpreadInterval = 0;
     }
 
 }
