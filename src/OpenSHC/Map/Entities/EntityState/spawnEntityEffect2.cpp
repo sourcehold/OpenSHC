@@ -28,9 +28,9 @@ namespace Map {
             this->entityArray[entityID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
             DAT_GameCore::instance.uniqueGameObjectTracker++;
             this->entityArray[entityID].field_0x34 = DAT_GameCore::instance.mapTimeInTicks;
-            this->entityArray[entityID].microX = (short)microX;
-            this->entityArray[entityID].microY = (short)microY;
-            this->entityArray[entityID].height = (short)height;
+            this->entityArray[entityID].microX = microX;
+            this->entityArray[entityID].microY = microY;
+            this->entityArray[entityID].height = height;
             this->entityArray[entityID].logicalState = 5;
             this->entityArray[entityID].colorUnk = 0;
             MACRO_CALL_MEMBER(EntityState_Func::setEntityParameters, this)(entityID, entityType, gmLookupValue);

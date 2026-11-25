@@ -16,8 +16,8 @@ namespace Map {
             for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState != 0 && this->entityArray[entityID].logicalState == 2
                     && this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FIRE) {
-                    DAT_TileMapState::instance.OccupancyLayer[this->entityArray[entityID].tile]
-                        |= (uchar)(1 << (this->entityArray[entityID].owner - 1));
+                    DAT_TileMapState::instance.OccupancyLayer[this->entityArray[entityID].tile] |= 1
+                        << (this->entityArray[entityID].owner - 1);
                     DAT_EntityState::instance.fireCount++;
                 }
             }

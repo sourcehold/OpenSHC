@@ -13,10 +13,10 @@ namespace Map {
     {
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset;
-        if ((int)((byte)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition & 0x1f)
+        if ((DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].yPosition & 0x1f)
             >= DAT_LandscapeState::instance.wind.countdown) {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2
-                = (short)DAT_LandscapeState::instance.wind.value;
+                = DAT_LandscapeState::instance.wind.value;
         }
         switch (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker) {
         case 0: {

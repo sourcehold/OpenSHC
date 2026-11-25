@@ -23,7 +23,7 @@ namespace Map {
             int nearestCloudID = 0;
             int nearestDistance = 10000;
             int const unitArea
-                = (short)DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+                = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
             for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState != 2
                     || this->entityArray[entityID].entityType != OpenSHC::Map::Entities::ET_COW_POISON_CLOUD
@@ -42,8 +42,7 @@ namespace Map {
                     }
                     this->entityArray[entityID].unitID_healer = 0;
                 }
-                int const cloudArea
-                    = (short)DAT_TileMapState::instance.PathConnectionLayer[this->entityArray[entityID].tile];
+                int const cloudArea = DAT_TileMapState::instance.PathConnectionLayer[this->entityArray[entityID].tile];
                 if (cloudArea != unitArea
                     && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
                                              calculateCanPlayerUnitsNavigateToAreaFromArea,

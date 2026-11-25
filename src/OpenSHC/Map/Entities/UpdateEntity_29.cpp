@@ -39,7 +39,7 @@ namespace Map {
         uint result = (ushort)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2;
         if ((short)result < 0) {
             result++;
-            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = (short)result;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = result;
             if ((short)result == 0) {
                 result = randomValue / 200;
                 DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = randomValue % 200 + 170;

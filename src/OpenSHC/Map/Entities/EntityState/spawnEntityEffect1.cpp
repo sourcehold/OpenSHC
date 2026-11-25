@@ -30,7 +30,7 @@ namespace Map {
             this->entityArray[entityID].field_0x34 = DAT_GameCore::instance.mapTimeInTicks;
             this->entityArray[entityID].microX = x;
             this->entityArray[entityID].microY = y;
-            this->entityArray[entityID].height = (short)height;
+            this->entityArray[entityID].height = height;
             this->entityArray[entityID].logicalState = 5;
             this->entityArray[entityID].colorUnk = 0;
             MACRO_CALL_MEMBER(EntityState_Func::drawEntityEffect, this)(

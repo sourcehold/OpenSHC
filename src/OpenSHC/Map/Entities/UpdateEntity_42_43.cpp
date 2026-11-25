@@ -19,7 +19,7 @@ namespace Map {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].logicalState = 3;
         } else {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne
-                = (short)DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] - 1;
+                = DAT_EntityDefinedData::instance.SharedEntityAnimationFrames[animTick] - 1;
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = 1;
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].field_0xbe = 46;

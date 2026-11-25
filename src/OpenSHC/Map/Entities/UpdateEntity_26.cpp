@@ -34,7 +34,7 @@ namespace Map {
             DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = nextFrame;
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
-            = (short)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 80;
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 80;
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne
             = -1 - DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unkMinusOne;
     }
