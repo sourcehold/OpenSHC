@@ -3081,6 +3081,139 @@ Two more `quick_diff.py` artefacts came out of this batch and are fixed: a `swit
 held `lightUpBuilding` at 0.8988 where it is 0.9312; and the original's indirect jumps were skipping
 normalisation entirely.
 
+## The TU symbol count decides some register choices (`shift_sweep.py`, `color_probe.py`)
+
+`placeDefensiveStructureTile` (TileMapState, PR #366) was 100% before a merge of `main` and 96.3% after it, with
+the `.cpp` byte-identical and the IL identical up to `regalloc`. The merge had only added three enums to headers
+the file includes. None of them is used by the function; what they changed is **how many symbols the front end
+had numbered before the function**, and that number reaches the register allocator through a hash.
+
+### The chain, in c2.dll
+
+1. **`GrgImmedTupleHash`** (0x10b5c050) files every constant operand into the 64-bucket `_ImmedHashTable`
+   (0x10d12170). An address constant (tuple kind 3, the `&Instance<...>::instance` of a resolver global) hashes
+   by `[[[tuple+0x18]+8]]+0x28 & 0x3f` - a symbol number counted over the whole translation unit. Measured: an
+   `enum` with one enumerator adds 2 to it, a `typedef` 1, a `#define` 0, and only declarations *before* the
+   function count (four dummy enums after the last `#include` moved the result; the same four after the body
+   did not).
+2. **`CreateGlobregs`** (0x10b5abe0) walks that table bucket by bucket and frees every immediate candidate that
+   turned out worthless (`ColRemoveGlobregFromHashTable`, 0x10b18790, called from 0x10b5ac39). The bucket
+   decides where each one lands in the free order.
+3. **`GrgNewGlobreg`** (0x10b5b7b0) reuses `_FreeGlobs` last-in-first-out and **keeps the freed record's number**
+   (`+0x1c`). The same `CreateGlobregs` call then creates the candidates for the real symbols (`this`, `tile`,
+   `x`, temporaries), so they receive a permutation of the freed numbers.
+4. What the number does **not** change: the colouring key `+0x0c`, the benefit `+0x40`, the symbol id `+0x44`,
+   and therefore `InsertInList`'s serve order, whose tie-break is the id. `color_probe.py --compare` on a bad
+   and a good shift shows all of them equal right up to the pass that diverges.
+5. What it does change: any **greedy** pass that visits candidates in number order - walking `_GlobregHash`
+   (0x10d15090, bucket `number & 0x3ff`, chained through `+0x30`) or `bsf` over a bitset of numbers - where
+   acting on one candidate changes what the pass can do with a later one. Two were caught doing it.
+
+### Pass 1: `FoldTooCheapDefs` (0x10b0da80) - `placeDefensiveStructureTile`
+
+Phase 2 of `FoldTooCheapDefs` walks `_GlobregHash` and folds each cheap single-definition candidate back into its
+uses (`ComponentKilled` 0x10b19fe0 as the veto, then `DoFoldDef` 0x10b195e0 -> `CmdDoFoldDef`). This function
+has two such candidates, one built on the other (`tuple_dump.py` at `FoldTooCheapDefs` entry; the `t` numbers
+are the candidate numbers):
+
+```
+shift 0 (bad)                              shift 46 (good)
+lea  t8,  dword ptr [this + tile]          lea  t11, dword ptr [this + tile]
+mov  byte ptr [t8 + 3313824], t1           mov  byte ptr [t11 + 3313824], t1
+lea  t21, dword ptr [t8 + 2751024]         lea  t8,  dword ptr [t11 + 2751024]     ; &HeightLayer[tile]
+mov  t3,  byte ptr [t8 + 2831424]          mov  t21, byte ptr [t11 + 2831424]
+mov  byte ptr [t21], t3                    mov  byte ptr [t8], t21                 ; ... and ~16 more uses
+```
+
+With the inner `lea` (A) numbered lower, it is folded first: every `[A + d]` becomes `[this + tile + d]`, which
+turns the outer `lea` (B) from a based address (`0x27c`) into an indexed one (`0x27d`). `CmdDoFoldDef`'s end
+block notices and sets B's never-fold bit (byte `+5 |= 4`, the write at 0x10c248f5, caught with `--watch 0x1b`),
+so B is skipped when the walk reaches it. With B numbered lower, B folds first (into `[A + 2751024]`) and A
+after it, and both disappear:
+
+```
+color_probe.py ... --compare                       (A = shift 0, B = shift 46)
+FOLD    A: 46#2 34#6 1d#8 5c#f 62#17 75#1a 68#1e 6d#25 56#26
+        B: 56#2 34#3 46#6 1b#8 1d#b 5c#f 62#17 6d#1a 68#1e 75#23
+CK 4.0  id=1e tile   A [key 385, refs 0x26, benefit 76]    B [key 451, refs 0x38, benefit 112]
+        id=e  this   A [key 311, refs 0x25, benefit 74]    B [key 383, refs 0x37, benefit 110]
+```
+
+The surviving B is gone again before colouring proper, but it is still there when `Spillcosts` counts
+references, so 18 uses each of `tile` and `this` are booked against B instead. The lower keys reorder the tail
+of the serve list, the `x & 1` temporaries tie with `x` and take `eax` instead of `ecx` (`CPRDONE` in the same
+comparison), a `mov eax, ecx` copy survives, and `FgDoCommonTailMerge` can no longer merge the two crenel arms'
+identical tails - seven instructions more:
+
+```
+shift 0 (ours, 96.3%)                      shift 46 (= original)
+add  byte ptr [esi+edi+2751024], 98        add  byte ptr [esi+edi+2751024], 98
+mov  eax, ecx                            $LN54:
+and  eax, 1                                and  ecx, 1
+je   $LN18                                 je   $LN18
+test bl, 1                                 test bl, 1
+jne  $LN18                                 jne  $LN18
+or   dword ptr [edi+esi*4+1462624], 0x400000   or   dword ptr [edi+esi*4+1462624], 0x400000
+jmp  $LN52                                 jmp  $LN52
+...                                        ...
+add  byte ptr [esi+edi+2751024], 68        add  byte ptr [esi+edi+2751024], 68
+mov  eax, ecx                              jmp  $LN54          ; the second arm reuses the first's tail
+and  eax, 1
+... (the whole tail again)
+```
+
+### Pass 2: `SpillObvious` (0x10b11560) - the sliders and `DisplayMapDescriptionAndAllocatePlayersToSlots`
+
+`SpillObvious` spills every candidate with fewer than two references (`+0x24 < 2`) in `bsf` order (the `Spill`
+call at 0x10b115d6, `CmdSubstDef` at 0x10b11630; `eax` is the candidate at both). Each spill inserts its reload
+right before the use, so the spill order is the order of the loads. In
+`MenuItemRenderFunction_GameplayOptions_SpeedSlider`, `thumbX = thumbXPos + DAT_ButtonX::instance`:
+
+```
+SPILL   A: 7(thumbXPos)#3 29(thumbWidth)#6 8(DAT_ButtonX)#7 ...          shift 0  (= original)
+        B: 29(thumbWidth)#6 8(DAT_ButtonX)#7 7(thumbXPos)#8 ...          shift 30
+
+shift 0                                    shift 30
+mov  ecx, dword ptr [DAT_ButtonX]          mov  ecx, dword ptr [thumbXPos]
+mov  eax, dword ptr [thumbXPos]            mov  eax, dword ptr [DAT_ButtonX]
+add  eax, ecx                              add  eax, ecx
+```
+
+Serve order, `ChoosePhysReg` costs and chosen registers are identical in both runs; only the load order flips,
+so the two operands trade registers.
+
+### Periodic in 64, and how many functions it reaches
+
+Because the only path is `number & 0x3f`, the outcome repeats every 64 symbols - predicted and confirmed for
+nine combinations of dummy enums and typedefs on `placeDefensiveStructureTile`, including 32 enums = 64
+typedefs = 128 typedefs = no change. `shift_sweep.py --all` screened all 2469 marked functions at shifts
+0/17/34/51 (no compile errors), then swept the six that varied over the full period:
+
+| function | shift 0 | best | shifts at best (of 64) |
+|---|---|---|---|
+| `placeDefensiveStructureTile` | 0.9630 | **1.0000** | 39: 13-23, 25-52 |
+| `MenuItemRenderFunction_GameplayOptions_SpeedSlider` | 1.0000 | 1.0000 | 21: 0-14, 16-19, 62-63 |
+| `MenuItemRenderFunction_SoundOptions_VolumeSlider` | 1.0000 | 1.0000 | 21: 0-10, 12-15, 58-63 |
+| `MenuItemActionHandler_UnusedChooseAvailableKeeps_Main` | 1.0000 | 1.0000 | 50: 0-48, 63 |
+| `DisplayMapDescriptionAndAllocatePlayersToSlots` | 0.9507 | 0.9686 | 45 |
+| `UpdateFireBallistaBuilding` | 0.9936 | 0.9936 | 55 |
+
+About 0.25% of functions, and only one is held below a reachable 100% today; three sit at 100% by luck and an
+unrelated header edit can knock them down (the two sliders hardest). A function whose sensitive window is
+narrower than 17 shifts can slip between the screen's four points, so six is a lower bound.
+
+### What to do with it
+
+- A header-only change that moves one function's match is a candidate for this. Check with
+  `shift_sweep.py OUT.jsonl FILE.cpp --name FUNC` (0-63 by default, about 30 s at `-j 12`).
+- If any shift reaches 1.0, the source is right: record the function as "matches modulo TU symbol count" in the
+  commit remark, like "only call targets differ". Do **not** pad the translation unit with dummy declarations
+  or steer the enum/typedef count by hand - the next header edit anywhere above the function moves it again.
+  Converting enums to `#define`s does not fix it either; it only removes symbols, which helps or hurts by luck.
+- To see which pass decides it for a new case: `color_probe.py FILE.cpp --name FUNC` and again with
+  `--shift N` for a good N, then `color_probe.py --compare A.txt B.txt`. The first checkpoint where a
+  candidate differs by more than its number, and the first event list that differs, name the pass. `--watch ID`
+  puts a hardware breakpoint on that candidate's flag byte and prints the stack of every write.
 ## Decoded on the TileMapState last mile (2026-11-15)
 
 Eight more c2 decisions, traced with Ghidra on `c2.dll` and the cdb probes while finishing
