@@ -87,7 +87,7 @@ namespace Map {
         uchar OccupancyLayer[80400]; // 0x0039ED00 length: 80400
         short CertainPathLayer[80400]; // 0x003B2710 length: 160800
         short WalkLayer[80400]; // 0x003D9B30 length: 160800
-        byte AIZoneLayer[80400]; // 0x00400F50 length: 80400
+        char AIZoneLayer[80400]; // 0x00400F50 length: 80400
         uchar AIInfoLayer[80400]; // 0x00414960 length: 80400
         uchar unitDeathHeatMap[80400]; // 0x00428370 length: 80400
         uchar SEC_TileMap1104[80400]; // 0x0043BD80 length: 80400
@@ -592,7 +592,7 @@ namespace Map {
 
         int createMoatData(undefined4 playerID, uint x, uint y, BOOLEnum filled);
 
-        BOOLEnum findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
+        int findNearestFriendlyMoatTileForDigging(int playerID, int unitID, int number);
 
         BOOLEnum removeMoat(uint moatID, int param_2);
 
