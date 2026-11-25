@@ -101,7 +101,7 @@ namespace Map {
 
             void countAvailablePeopleValueSlots(int param_1);
 
-            void countAvailableLordValueSlots(int param_1);
+            void countAvailableLordValueSlots(int includeOccupied);
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
@@ -123,11 +123,11 @@ namespace Map {
 
             BOOLEnum findTribeWithMoatAttackBehavior();
 
-            void countAvailableHighValueSlots(int param_1);
+            void countAvailableHighValueSlots(int includeOccupied);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int param_1);
+            void countAvailableArcherValueSlots(int includeOccupied);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 

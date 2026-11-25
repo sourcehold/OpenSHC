@@ -42,7 +42,7 @@ namespace Map {
         int const stage = MACRO_CALL_MEMBER(
             OpenSHC::Map::LandscapeState_Func::getValueFrom0UpTo3ForTreeTypeAndTreeStage, DAT_LandscapeState::ptr)(
             MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
-                DAT_LandscapeState::ptr)((short)treeType),
+                DAT_LandscapeState::ptr)((OpenSHC::Commands::MappersEnum)(short)treeType),
             3);
         int const baseTile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
         int tile = DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x;
@@ -74,7 +74,7 @@ namespace Map {
         }
 
         ushort logicalType = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::mapUITreeTypeToLogicalTreeType,
-            DAT_LandscapeState::ptr)((short)treeType);
+            DAT_LandscapeState::ptr)((OpenSHC::Commands::MappersEnum)(short)treeType);
         int const treeID = MACRO_CALL_MEMBER(OpenSHC::Map::LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
             x, y, (TreeType)(short)logicalType, stage, 0, 0, 3);
         this->LogicLayer[DAT_LandscapeState::instance.trees[treeID].tile] &= ~L_ROCKY;

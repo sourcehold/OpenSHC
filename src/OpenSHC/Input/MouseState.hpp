@@ -54,10 +54,10 @@ namespace Input {
         int lastSetCursorType; // 0x0000005C length: 4
         RECT selectionBox; // 0x00000060 length: 16
         RECT previousSelectionBox; // 0x00000070 length: 16
-        undefined4 hitboxXStart; // 0x00000080 length: 4
-        undefined4 hitboxYStart; // 0x00000084 length: 4
-        undefined4 hitboxXEnd; // 0x00000088 length: 4
-        undefined4 hitboxYEnd; // 0x0000008C length: 4
+        int hitboxXStart; // 0x00000080 length: 4
+        int hitboxYStart; // 0x00000084 length: 4
+        int hitboxXEnd; // 0x00000088 length: 4
+        int hitboxYEnd; // 0x0000008C length: 4
         int selectionBoxMode; // 0x00000090 length: 4
         undefined4 selectionBoxState; // 0x00000094 length: 4
         int savedSelectionBoxState; // 0x00000098 length: 4

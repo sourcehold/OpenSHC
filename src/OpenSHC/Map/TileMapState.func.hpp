@@ -650,7 +650,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00508A00, &TileMapState::renderPreviewMapperWithBrush)
         renderPreviewMapperWithBrush;
 
-        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, int), false, Address::SHC_3BB0A8C1_0x00508DD0,
+        MACRO_FUNCTION_RESOLVER(void (TileMapState::*)(int, BOOLEnum), false, Address::SHC_3BB0A8C1_0x00508DD0,
             &TileMapState::applyTreeBrushToLogicalLayer)
         applyTreeBrushToLogicalLayer;
 

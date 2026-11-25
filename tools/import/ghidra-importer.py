@@ -353,7 +353,14 @@ def write_patches(output_dir: pathlib.Path):
   (output_dir / "OpenSHC/UI/Rendering/TextureRenderCore/" / "RGB555To565Asm.hpp").write_bytes(
     (pathlib.Path(__file__).parent / "injected-headers" / "RGB555To565Asm.hpp").read_bytes()
   )
-  pass # Overwrite hpp files in this function
+
+  (output_dir / "OpenSHC/Map/TileMapState/" / "NeighbourFlagsAsm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "NeighbourFlagsAsm.hpp").read_bytes()
+  )
+
+  (output_dir / "OpenSHC/Map/TileMapState/" / "NeighbourFlagsGlobalAsm.hpp").write_bytes(
+    (pathlib.Path(__file__).parent / "injected-headers" / "NeighbourFlagsGlobalAsm.hpp").read_bytes()
+  )
 
 if not args.dry_run:
   # TODO: 

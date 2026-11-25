@@ -14,25 +14,25 @@ namespace Map {
         typedef enum TreeType {
 
             TT_DEFAULT = 0, // 0x00000000
-            TT_UNKNOWN_1 = 1, // 0x00000001
-            TT_UNKNOWN_2 = 2, // 0x00000002
-            TT_UNKNOWN_3 = 3, // 0x00000003
-            TT_UNKNOWN_4 = 4, // 0x00000004
-            TT_UNKNOWN_5 = 5, // 0x00000005
-            TT_UNKNOWN_6 = 6, // 0x00000006
-            TT_UNKNOWN_7 = 7, // 0x00000007
-            TT_UNKNOWN_8 = 8, // 0x00000008
-            TT_UNKNOWN_9 = 9, // 0x00000009
-            TT_UNKNOWN_10 = 10, // 0x0000000A
-            TT_UNKNOWN_11 = 11, // 0x0000000B
-            TT_UNKNOWN_12 = 12, // 0x0000000C
-            TT_UNKNOWN_13 = 13, // 0x0000000D
-            TT_UNKNOWN_14 = 14, // 0x0000000E
-            TT_APPLEUnk = 15, // 0x0000000F
-            TT_UNKNOWN_16 = 16, // 0x00000010
-            TT_UNKNOWN_17 = 17, // 0x00000011
-            TT_UNKNOWN_18 = 18, // 0x00000012
-            TT_UNKNOWN_19 = 19 // 0x00000013
+            TT_TREE_OLIVE = 1, // 0x00000001
+            TT_TREE_DATE = 2, // 0x00000002
+            TT_TREE_COCONUT = 3, // 0x00000003
+            TT_TREE_CHERRY = 4, // 0x00000004
+            TT_SHRUB_NEEDLE_PALM_A = 5, // 0x00000005
+            TT_SHRUB_NEEDLE_PALM_B = 6, // 0x00000006
+            TT_SHRUB_NEEDLE_PALM_C = 7, // 0x00000007
+            TT_SHRUB_NEEDLE_PALM_D = 8, // 0x00000008
+            TT_SHRUB_NEEDLE_PALM_E = 9, // 0x00000009
+            TT_SHRUB_PYGMY_A = 10, // 0x0000000A
+            TT_SHRUB_PYGMY_B = 11, // 0x0000000B
+            TT_SHRUB_PYGMY_C = 12, // 0x0000000C
+            TT_SHRUB_PYGMY_D = 13, // 0x0000000D
+            TT_SHRUB_PYGMY_E = 14, // 0x0000000E
+            TT_TREE_APPLE = 15, // 0x0000000F
+            TT_SHRUB_PIPE_CACTUS = 16, // 0x00000010
+            TT_SHRUB_SUCCULENT = 17, // 0x00000011
+            TT_SHRUB_CYCAD = 18, // 0x00000012
+            TT_SHRUB_PRICKLYPEAR = 19 // 0x00000013
 
         } TreeType;
 

@@ -160,20 +160,20 @@ namespace Map {
                             if (organism < 2000) {
                                 // scrub is flattened by the wall, a real tree is left standing
                                 switch (DAT_LandscapeState::instance.trees[organism].treeType) {
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_5:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_6:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_7:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_8:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_9:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_10:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_11:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_12:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_13:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_14:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_16:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_17:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_18:
-                                case OpenSHC::Map::Trees::TT_UNKNOWN_19:
+                                case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_A:
+                                case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_B:
+                                case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_C:
+                                case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_D:
+                                case OpenSHC::Map::Trees::TT_SHRUB_NEEDLE_PALM_E:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_A:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_B:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_C:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_D:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PYGMY_E:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PIPE_CACTUS:
+                                case OpenSHC::Map::Trees::TT_SHRUB_SUCCULENT:
+                                case OpenSHC::Map::Trees::TT_SHRUB_CYCAD:
+                                case OpenSHC::Map::Trees::TT_SHRUB_PRICKLYPEAR:
                                     DAT_LandscapeState::instance.trees[organism].state = 3;
                                 }
                             }

@@ -90,7 +90,7 @@ namespace Map {
                 }
                 DAT_OrganismDefinedData::instance.UpdateTree[this->trees[DAT_CurrentTreeID::instance].treeType]();
                 if (this->trees[DAT_CurrentTreeID::instance].field_0x98 != 0) {
-                    if (this->trees[DAT_CurrentTreeID::instance].treeType != Trees::TT_APPLEUnk) {
+                    if (this->trees[DAT_CurrentTreeID::instance].treeType != Trees::TT_TREE_APPLE) {
                         DAT_GameState::instance.mapAndTime.burningTreeCount += 1;
                     }
                     if (this->trees[DAT_CurrentTreeID::instance].field_0x98 > 1) {

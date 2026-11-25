@@ -68,24 +68,24 @@ namespace Map {
         case OpenSHC::Commands::M_MAPPER_OIL:
             gfx = 61;
             break;
-        case OpenSHC::Commands::M_MAPPER_CHESTNUT:
-        case OpenSHC::Commands::M_MAPPER_OAK:
-        case OpenSHC::Commands::M_MAPPER_PINE:
-        case OpenSHC::Commands::M_MAPPER_BIRCH:
-        case OpenSHC::Commands::M_MAPPER_SHRUB1A:
-        case OpenSHC::Commands::M_MAPPER_SHRUB1B:
-        case OpenSHC::Commands::M_MAPPER_SHRUB1C:
-        case OpenSHC::Commands::M_MAPPER_SHRUB1D:
-        case OpenSHC::Commands::M_MAPPER_SHRUB1E:
-        case OpenSHC::Commands::M_MAPPER_SHRUB2A:
-        case OpenSHC::Commands::M_MAPPER_SHRUB2B:
-        case OpenSHC::Commands::M_MAPPER_SHRUB2C:
-        case OpenSHC::Commands::M_MAPPER_SHRUB2D:
-        case OpenSHC::Commands::M_MAPPER_SHRUB2E:
-        case OpenSHC::Commands::M_MAPPER_SHRUB3A:
-        case OpenSHC::Commands::M_MAPPER_SHRUB3B:
-        case OpenSHC::Commands::M_MAPPER_SHRUB3C:
-        case OpenSHC::Commands::M_MAPPER_SHRUB3D:
+        case OpenSHC::Commands::M_MAPPER_TREE_OLIVE:
+        case OpenSHC::Commands::M_MAPPER_TREE_DATE:
+        case OpenSHC::Commands::M_MAPPER_TREE_COCONUT:
+        case OpenSHC::Commands::M_MAPPER_TREE_CHERRY:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_NEEDLE_PALM_A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_NEEDLE_PALM_B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_NEEDLE_PALM_C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_NEEDLE_PALM_D:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_NEEDLE_PALM_E:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PYGMY_A:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PYGMY_B:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PYGMY_C:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PYGMY_D:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PYGMY_E:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PIPE_CACTUS:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_SUCCULENT:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_CYCAD:
+        case OpenSHC::Commands::M_MAPPER_SHRUB_PRICKLYPEAR:
         case OpenSHC::Commands::M_MAPPER_DEER:
         case OpenSHC::Commands::M_MAPPER_LION:
         case OpenSHC::Commands::M_MAPPER_RABBIT:
