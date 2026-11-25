@@ -36,16 +36,33 @@ namespace Map {
             int _siegeKind = 0;
             int _searchRange = 200;
             BOOLEnum _isFireBallista = FALSE;
-            BOOLEnum _needsStoneAmmunition = FALSE;
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_S_CATAPULT:
                 _siegeKind = 2;
                 _searchRange = 80;
-                _needsStoneAmmunition = TRUE;
+                if (this->units[unitID].stoneAmmunition <= 0) {
+                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                        && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                               DAT_GameSynchronyState::ptr)(_playerID)
+                            != FALSE) {
+                        MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
+                            _playerID, unitID);
+                    }
+                    return FALSE;
+                }
                 break;
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
                 _siegeKind = 3;
-                _needsStoneAmmunition = TRUE;
+                if (this->units[unitID].stoneAmmunition <= 0) {
+                    if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
+                        && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
+                               DAT_GameSynchronyState::ptr)(_playerID)
+                            != FALSE) {
+                        MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
+                            _playerID, unitID);
+                    }
+                    return FALSE;
+                }
                 break;
             case OpenSHC::Map::Units::UT_S_MANGONEL:
             case OpenSHC::Map::Units::UT_S_BALLISTA:
@@ -54,16 +71,6 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                 _siegeKind = 37;
                 _isFireBallista = TRUE;
-            }
-            if (_needsStoneAmmunition && this->units[unitID].stoneAmmunition <= 0) {
-                if (DAT_GameSynchronyState::instance.currentGameMode != OpenSHC::Game::GM_SOLITARY
-                    && MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::isAIPlayer,
-                           DAT_GameSynchronyState::ptr)(_playerID)
-                        != FALSE) {
-                    MACRO_CALL(OpenSHC::Synchrony::Actions_Func::TryAcquireAmmunitionOrPlanToBuyStone)(
-                        _playerID, unitID);
-                }
-                return FALSE;
             }
             uint _defaultHeightAtTarget = 0;
             uint _heightAtTarget = 0;
@@ -79,8 +86,8 @@ namespace Map {
                     == this->units[unitID]
                         .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID) {
                     int _halfBuildingSize
-                        = (DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
-                                  .widthOrHeight
+                        = (int)(DAT_BuildingsState::instance.buildings[this->units[unitID].targetID_OR_targetBuildingID]
+                                    .widthOrHeight
                               * 8)
                         / 2;
                     _shootAtMicroX = _halfBuildingSize
@@ -118,10 +125,12 @@ namespace Map {
                     * 8;
             } else {
                 DAT_PathFindingState::instance.ALG_TargetTile = 0;
-                int _maxTargetDistance = 200;
+                int _maxTargetDistance;
                 if (this->units[unitID].aiUnitBehaviourType == 21
                     || this->units[unitID].unknownSiegeTentRelated02 == 3) {
                     _maxTargetDistance = 20;
+                } else {
+                    _maxTargetDistance = 200;
                 }
                 int _searchFlags;
                 if (_siegeKind == 37) {
