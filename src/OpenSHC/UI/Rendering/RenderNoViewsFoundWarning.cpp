@@ -25,11 +25,11 @@ namespace UI {
         int const top = (DAT_WindowAndDirectDraw::instance.resolutionY - 40) / 2;
         int const left = (DAT_WindowAndDirectDraw::instance.resolutionX - 400) / 2;
         MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawColorBox, DAT_PencilRenderCore::ptr)(
-            left, top, left + 400, top + 40, (ushort)(COL_WHITE::instance.shortValue));
+            left, top, left + 400, top + 40, COL_WHITE::instance.shortValue);
         // "No views have been found"
         MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_No_views_have_been_found__005ab8c8, (DAT_WindowAndDirectDraw::instance.resolutionX - 400) / 2,
-            (int)((DAT_WindowAndDirectDraw::instance.resolutionY - 40) / 2 + 8), ((TextAlignment)400), 0, 17, FALSE, 0);
+            (DAT_WindowAndDirectDraw::instance.resolutionY - 40) / 2 + 8, (TextAlignment)400, 0, 17, FALSE, 0);
     }
 
 }
