@@ -79,6 +79,12 @@ Implementation code belongs in `.cpp` files:
 The [Implementation Cheat Sheet](IMPLEMENTATION_CHEAT_SHEET.md) is a reference for patterns and oddities of the compiler that are found during the reimplementation process.
 Scan this document if you are instructed to reimplement a function.
 
+### Reimplementation Style Guide
+
+The [Reimplementation Style Guide](REIMPLEMENTATION_STYLE_GUIDE.md) covers how a reimplemented `.cpp` should read
+once it matches: which decompiler artefacts to remove, which ones are load-bearing, and what each rule measured.
+Read it before a readability pass, and before removing a cast, a pointer or a hand-unrolled loop.
+
 ### MCP Server (`tools/mcp`)
 
 Provides project-specific utilities including:
@@ -91,6 +97,12 @@ Provides project-specific utilities including:
 ### Ghidra Import (`tools/import`)
 
 Imports and synchronizes Ghidra-exported data.
+
+### Compiler Internals (`tools/compiler-internals`)
+
+Notes on the bundled MSVC backend itself - what `c2.dll` does, how its symbols and source layout were recovered,
+the decoded stack-slot rule, and a `cdb` recipe for observing one function's allocation from inside the compiler.
+Read it when a diff is down to register or stack-slot allocation and no source-level hypothesis is paying.
 
 ### Reimplementation Control (`tools/reimplementation-control`)
 
@@ -151,12 +163,17 @@ restyling anything large:
   `__asm` block rather than C++. Functions are never `__declspec(naked)`: write a normal function, keep the
   compiler-generated statements as C++, and refer to parameters, locals and `this` by name. Prettify offsets with
   MSVC's struct-member asm syntax (`mov esi, dword ptr [eax]TileMapState.ptr_LogicLayer`) - `::` is not parseable in an
-  asm operand, so a resolver global cannot be named there.
-- a frame pointer plus a `this` spill - the original was built without optimisation. Add `#pragma optimize(, off)`
-  around the function; inline asm alone does not disable optimisation. Then match the reported **frame size** exactly,
-  which is usually the single biggest win, because every local displacement shifts otherwise. Merge locals that share a
-  slot and reproduce dead stores. At `/Od` prefer a nested `if` over an early `continue` (the original inverts the test
-  and jumps to the loop's continue trampoline), and declare locals together at the top of the function.
+  asm operand, so a resolver global cannot be named there. Where the handwritten block reaches a *global* layer rather
+  than a `this` field, give it a C++ pointer local and name that local in the asm; the original caches the same bases in
+  stack slots anyway, so the inner loop still matches. `mov eax, 0` followed by `mov ax, word ptr [..]` is the giveaway
+  in its own right - that is a hand-rolled `movzx`, which the compiler always emits as one instruction.
+  Such a block is usually a **macro**: the same instruction stream appears verbatim in several functions and never as a
+  call, so it belongs in a hand-written `*Asm.hpp` beside them (`NeighbourFlagsAsm.hpp`, `LinkageNeighbourAsm.hpp`).
+  This has been worth ~45 points per function, three times over.
+- a frame pointer plus a `this` spill - the original was built without optimisation, **unless the same function also
+  reports `mov reg, 0`**. MSVC keeps `ebp` in any function containing an `__asm` block, so for a function with
+  handwritten assembly the frame pointer says nothing about the optimisation level: reimplement the handwritten part as
+  inline asm.
 - a jump table - Ghidra usually renders the dispatch as a call through an unnamed pointer array and drops the arms, so
   rebuild the `switch` from the byte and jump tables instead of restyling the decompiler output.
 
@@ -164,7 +181,10 @@ restyling anything large:
 flags a `sub esp` frame-size mismatch (`FRAME`), byte-sized stack slots we have and the original does not (`BYTE`), a
 cold return block we inline where the original outlines it (`RET`), and the case where only register and stack-slot
 *naming* is left (`alloc-only`). Chase a `FRAME` flag with `diff_slots.py NAME`, which lists every `[esp + N]` slot per
-side: one extra slot is one local the original does not have, and removing it has been worth 10-30 points.
+side: one extra slot is often one local the original does not have, and removing it has been worth 10-30 points -
+but locals with disjoint live ranges share a slot, so a slot count is not a local count. `slot_weight.py NAME.cpp`
+reads MSVC's own `_name$ = N` table out of a `/FA` listing and says which local actually got which slot, instead
+of inferring it from the diff.
 `diff_jcc.py` finds comparisons whose operator is one strictness step off the original (`jl`/`jle`, `jg`/`jge`) - these
 are real off-by-one bugs where Ghidra decompiled the condition wrongly, so confirm a fix by re-running that tool rather
 than by the percentage. `diff_types.py` is its counterpart away from comparisons: `movsx` against `movzx` for one field
@@ -174,7 +194,11 @@ sign. It carries only those two rules on purpose: a third, "same instruction wit
 dropped because every hit it produced was a loop-induction stride rather than a constant the source chose.
 `reorder_search.py FILE NAME` hill-climbs the match % by reordering independent statements,
 which is the only lever left once a function is `alloc-only`; it pays about one move in ten, and mostly where the
-statements sit between two calls or on a loop back-edge.
+statements sit between two calls or on a loop back-edge. `alloc-only` is worth reading literally: a register
+mismatch is most likely an interference difference - a different set of values was live at that point - rather
+than a preference the source could state. That is a hypothesis, not a decoded rule;
+`tools/compiler-internals/msvc-backend.md` has what is actually established about the compiler's allocator and
+the debugger recipe that can settle it per function.
 
 ### Binary Comparison (`reccmp`)
 
@@ -190,12 +214,29 @@ of namespace average this way, and a snapshot taken on one side of that change c
 with anything measured on the other. `tools/reimplementation-control/enable_reimplemented_data.py`
 turns them back on; `git checkout -- src/OpenSHC/Globals/` turns them off again.
 
+**The function resolvers are a second, separate switch, and they matter just as much.** Every
+`MACRO_FUNCTION_RESOLVER(..., false, Address::...)` in a `*.func.hpp` routes `MACRO_CALL`/`MACRO_CALL_MEMBER` to the
+*original binary*, so with it off the compiler never sees our callee. It cannot then know the callee leaves `ecx`
+alone, and the caller spills `this` into a callee-saved register, which renames every register downstream of the
+call. `processSyncPacket` read 26.2% for that reason alone; enabling its (already 100%) callee took it to 79.2%,
+and enabling all 23 finished functions of `GameSynchronyState` moved the namespace average 84.6% -> 85.7% with
+nothing getting worse. It is also the missing precondition for `cmake/compiler-flags-gl.txt`: `/GL` on both sides
+does nothing while the callee is still proxied. `tools/reimplementation-control/Enable-Reimplemented-Functions.ps1`
+flips them; like the struct resolvers they are never committed. Only enable a callee that is itself finished.
+
+`structural_diff.py --all` splits the build list by *what kind* of difference is left - wrong instruction mix
+(`mix`), right mix in the wrong order (`order`), or register naming only (`allocation`). Check it before picking
+a target: the reccmp percentage is dominated by allocation, so it will rank a structurally wrong function above a
+structurally perfect one. On `AI::AICState` it puts `aiGiveRaidInstructions` (delta 21) at the top while marking
+`sellExcessGoods` - a 62.4% function - as having nothing structural left to fix.
+
 ## Working on Many Functions
 
 When restyling or improving a large set of functions, work in batches (e.g. per folder) and verify each batch:
 
-0. Switch the global data reimplementations on (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`)
-   before measuring anything, and never commit those files. With the resolvers inactive, reccmp collapses every
+0. Switch **both** sets of reimplementations on before measuring anything, and never commit those files: the
+   global data (the `MACRO_STRUCT_RESOLVER` flag in `src/OpenSHC/Globals/*.hpp`) and the finished functions
+   (the `MACRO_FUNCTION_RESOLVER` flag in the `*.func.hpp` files). With the resolvers inactive, reccmp collapses every
    absolute address to one token, so a `this->` that should be the global instance, and a wrong field offset, both
    look like a match.
 1. Save a baseline: `reccmp_report.py --run save base.json`.
@@ -223,6 +264,14 @@ Style expected of reimplemented code:
   no pointer variables walking over arrays or structs, named fields and enum constants instead of offsets and magic numbers.
   The early-return preference has one known exception, still tentative - see the note on arms sharing a tail among the
   diff patterns below.
+- Prefer `const` on a local that is assigned once, spelled with `const` *after* the type (`int const tribeID = ...`).
+  This is not free: a `const` local whose initialiser is a **compile-time literal** lets MSVC fold the value into its
+  use sites and drop instructions the original still has, so leave those non-const. A `const` local initialised from a
+  memory read or a call is code-generation neutral. Over `AI::AICState` 165 of 172 candidates were neutral and 7 were
+  not - every one of them an `int tribeIndex = <literal>` feeding an array index, each costing 4 instructions and
+  0.18-0.50 of match (`setTribe0x11ToAggressiveAndAttackIfConditionMet` went 1.0000 -> 0.5000). Isolate before
+  blaming the qualifier: in `aiCommandTribe13DefensiveWave`, keeping `int const tribeID = <array read>` while
+  reverting `int tribeIndex = 13` alone restored 1.0000.
 - Never change the `// FUNCTION:` address line; keep generated headers untouched unless asked.
 - Write sources as UTF-8 with LF line endings.
 
@@ -234,6 +283,13 @@ of the switch leaving the value it should have set uninitialised. Fixing them wa
 suspicious dead store is worth decompiling for rather than deleting. Note this is the opposite of the duplicate-tail
 pattern below, where our shared block should have been two separate branches - check the predecessor count either way.
 
+Duplicating a `LAB_*` is correct C++ but not automatically a better match, so **measure every `goto` removal**. A
+`goto` in the decompiler output usually marks a block the original compiler emitted once and jumped to, and writing
+the block out twice makes MSVC emit it twice: duplicating the single shared tail in
+`setClimbBasedOnClosestClimbData` - two `if` arms that set a coordinate pair and then share the distance test - was
+semantically identical and cost **35 points**. Keep the `goto` where the measurement says the original shared the
+block, and record that in the commit remark rather than trading match for style.
+
 Diff patterns that were reliable (more in the cheat sheet):
 
 - Absolute `DAT_*` addresses in the original asm where the source uses `this->` mean the original accessed the global instance.
@@ -243,7 +299,8 @@ Diff patterns that were reliable (more in the cheat sheet):
 - A tail call to the same callee from our code but a jump back to a shared block in the original means separate
   `if` branches with identical bodies, not a combined condition.
 - Callee-saved registers reused after a call without reload (`ecx`/`edx`) indicate LTCG (`cmake/compiler-flags-gl.txt`),
-  not a source difference.
+  not a source difference. Investigate by adding the caller and callee to the txt and enabling their reimplementation in the .func.hpp files.
+  Only makes sense if the callee is 100% matching (e.g. ECX not touched).
 - A mismatching argument count or `ret N` usually means the generated header is wrong; report it instead of working around it.
 - Instruction order is not statement order: the compiler schedules freely inside a boundary, so a long run of
   independent stores into one object says nothing about the order the fields were assigned in the original source
@@ -340,7 +397,10 @@ Diff patterns that were reliable (more in the cheat sheet):
 - `diff_triage.py`'s `FRAME` column is worth checking but, unlike `BYTE`, is not mechanically actionable. Every
   cheap hypothesis for the frame mismatches in `Map::Units::UnitsState` came back an exact tie or worse: local
   declaration order, array element type, widening unsigned locals, and splitting a local the decompiler had reused
-  for two values. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
+  for two values. Declaration order was never going to work: the stack colorer sorts its elements by **reference
+  weight per byte**, not by declaration order, and leaves only the ties to the order the symbols happen to arrive
+  in - see `tools/compiler-internals/msvc-backend.md` for the comparator and the evidence. The lever on a slot layout is
+  how often, and at what loop depth, each local is read. `diff_slots.py` says the lowest-access extra slot is usually the culprit, so a function whose
   extra slots are all heavily used has genuine live values rather than a stray local, and needs structural
   understanding rather than a rule.
 - `jmp dword ptr [reg*4 + table]` on one side only is a dispatch-form mismatch: a `switch` over contiguous values
@@ -358,7 +418,25 @@ Diff patterns that were reliable (more in the cheat sheet):
 - MSVC1400 at `/O2` does unroll small constant-trip loops (`applyAIV`'s 10-iteration unit loop comes out five copies
   wide from a plain `for`), and `!=` as the bound suppresses it - see the cheat sheet. A body repeated N times in the
   asm is therefore not proof that the source wrote it out N times; compile the plain loop first and compare.
-- A flag stored with `mov dword ptr [..], 0/1` is an `int`, not a `bool`, which stores a byte.
+  What the asm pins down is the unroll *factor*, and the way to hit a factor the compiler will not pick on its own is
+  an outer loop stepping by N with the inner N left to it: that compiles identically to writing the N copies out by
+  hand, down to everything but MSVC's label numbering. Read the factor off how the index is held. Once the whole trip
+  count is visible the compiler constant-folds every index, so each body carries absolute addresses and an immediate;
+  an original that instead keeps the index in a register and computes stored values with `lea` still had an induction
+  variable, so its source had a loop. `someChatMessageSelection` is the worked case: a plain 1..8 loop and 8
+  hand-written copies both give 154 instructions at 0.6745, while outer-step-4 plus an inner 0..3 gives 132 at 0.9198
+  against the original's 119. Do not bother varying the loop variable - a fresh `int i`, the function's already
+  declared `i`, a fresh name and a pre-declared one all produced byte-identical code.
+- A flag stored with `mov dword ptr [..], 0/1` is four bytes wide, so it is not a `bool`, which stores a byte. It
+  does not follow that it is a plain `int`: `BOOLEnum` is a typedef of `BOOL` and so of `int`, which means a dword
+  store is exactly what a `BOOLEnum` field looks like and is no evidence against one. Decide from the writes, not
+  the width - xref the field's address and read every store. `PlayerData::isNotNervousByEnemyTroopValue` is written
+  7 times across the image and every store is 0 or 1 (three through a register: two `xor eax, eax` and an `ebx` the
+  decompiler renders as `= 1`), and its 6 reads are all boolean tests - five `cmp .., 0x0` plus one against a zeroed
+  register that Ghidra prints as `== FALSE` - so the field is a `BOOLEnum`. Grepping our own sources would have
+  missed this, because 3 of its 4 writing functions are not reimplemented yet. Check Ghidra's own type for the
+  field too; it already had this one as `BOOLEnum`. Correcting such a field is free: the underlying type is the
+  same, so the match does not move.
 - Tentative, one clear case so far: where two arms of a condition share a tail, the nested `if/else` shape the
   decompiler emits can beat the early returns the style list above asks for, because it decides *which* arm holds the
   physical copy of the shared block. In `calculateTaxIncomeForPlayer` the original keeps the shared `(tax * 150) / 100`

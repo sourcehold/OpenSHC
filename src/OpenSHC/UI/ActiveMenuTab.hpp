@@ -9,7 +9,7 @@
 #pragma once
 
 #include "OpenSHC/DE/SHCDE/eInBuildingModesInt.hpp"
-#include "OpenSHC/UI/Enums/BuildMenuTabTypeShort.hpp"
+#include "OpenSHC/UI/Enums/BuildMenuTabTypeInt.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabTypeInt.hpp"
 
 namespace OpenSHC {
@@ -17,14 +17,14 @@ namespace UI {
 
     using OpenSHC::DE::SHCDE::eInBuildingModesInt;
     using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabTypeInt;
-    using OpenSHC::UI::Enums::BuildMenuTabTypeShort;
+    using OpenSHC::UI::Enums::BuildMenuTabTypeInt;
 
 #pragma pack(push, 1)
     // SIZE: 0x00000004
     typedef union ActiveMenuTab {
 
         BuildingsAndStatusMenuTabTypeInt tabType; // 0x00000000 length: 4
-        BuildMenuTabTypeShort buildMenuTab; // 0x00000000 length: 4
+        BuildMenuTabTypeInt buildMenuTab; // 0x00000000 length: 4
         eInBuildingModesInt inBuildingTab; // 0x00000000 length: 4
 
     } ActiveMenuTab;

@@ -34,8 +34,8 @@ namespace AI {
             int arabianSwordsmen; // 0x0000003C length: 4
             int fireThrowers; // 0x00000040 length: 4
             int fireBallistas; // 0x00000044 length: 4
-            int field18_0x48; // 0x00000048 length: 4
-            int field19_0x4c; // 0x0000004C length: 4
+            int field_0x48; // 0x00000048 length: 4
+            int field_0x4c; // 0x0000004C length: 4
 
         } SiegeUnitCounts;
 #pragma pack(pop)

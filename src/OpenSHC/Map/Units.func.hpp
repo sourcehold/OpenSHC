@@ -46,7 +46,7 @@ namespace Map {
             Address::SHC_3BB0A8C1_0x00530C40, &OpenSHC::Map::Units::ConsiderHavingABreakNowUnk)
         ConsiderHavingABreakNowUnk;
 
-        MACRO_FUNCTION_RESOLVER(undefined4(__cdecl*)(int unitID, int shouldFindNewGoodThing, int param_3), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum(__cdecl*)(int unitID, int shouldFindNewGoodThing, int param_3), false,
             Address::SHC_3BB0A8C1_0x00530CF0, &OpenSHC::Map::Units::SetStateToFreetimeWalking)
         SetStateToFreetimeWalking;
 
@@ -63,7 +63,7 @@ namespace Map {
         WarnIfPlayersGranaryIsFull;
 
         MACRO_FUNCTION_RESOLVER(
-            uint(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
+            void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00530EB0, &OpenSHC::Map::Units::PlayStockpileIsFullWarning)
         PlayStockpileIsFullWarning;
 
         MACRO_FUNCTION_RESOLVER(

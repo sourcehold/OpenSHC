@@ -49,13 +49,13 @@ namespace Input {
         if (this->cursorPosX <= 0) {
             DAT_ScrollingHandler::instance.scrollLeft = TRUE;
         }
-        if (this->cursorPosX >= DAT_WindowAndDirectDraw::instance.screenHorizontalResolutionInPixels + -1) {
+        if (this->cursorPosX >= DAT_WindowAndDirectDraw::instance.screenHorizontalResolutionInPixels - 1) {
             DAT_ScrollingHandler::instance.scrollRight = TRUE;
         }
         if (this->cursorPosY <= 0) {
             DAT_ScrollingHandler::instance.scrollUp = TRUE;
         }
-        if (this->cursorPosY >= DAT_WindowAndDirectDraw::instance.screenVerticalResolutionInPixels + -1) {
+        if (this->cursorPosY >= DAT_WindowAndDirectDraw::instance.screenVerticalResolutionInPixels - 1) {
             DAT_ScrollingHandler::instance.scrollDown = TRUE;
         }
 

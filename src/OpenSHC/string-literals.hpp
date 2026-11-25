@@ -2276,6 +2276,9 @@ char const* const s_Crusader_005a22b8 = S_CRUSADER_005A22B8;
 // 0x005a22c4
 char const* const s_FireFly_s_005a22c4 = S_FIREFLY_S_005A22C4;
 
+// 0x005a22d0
+char const* const s_Exit_005a22d0 = S_EXIT_005A22D0;
+
 // 0x005a22d8
 char const* const s_Continue_005a22d8 = S_CONTINUE_005A22D8;
 
@@ -4415,6 +4418,9 @@ char const* const s_Stronghold_16_aa_005a5314 = S_STRONGHOLD_16_AA_005A5314;
 // 0x005a5328
 char const* const s_Stronghold_14_aa_005a5328 = S_STRONGHOLD_14_AA_005A5328;
 
+// 0x005a5339
+char const* const s__005a5339 = S__005A5339;
+
 // 0x005a5510
 char const* const s_wb_005a5510 = S_WB_005A5510;
 
@@ -4495,6 +4501,9 @@ char const* const s__Link_005a55d0 = S__LINK_005A55D0;
 
 // 0x005a55d8
 char const* const s_Link_005a55d8 = S_LINK_005A55D8;
+
+// 0x005a55e0
+char const* const s_Pic_005a55e0 = S_PIC_005A55E0;
 
 // 0x005a55e4
 char const* const s_ScrSize_005a55e4 = S_SCRSIZE_005A55E4;
@@ -8221,6 +8230,9 @@ char const* const s_c2pic_tgx_005ab0e0 = S_C2PIC_TGX_005AB0E0;
 
 // 0x005ab0ec
 char const* const s_c1pic_tgx_005ab0ec = S_C1PIC_TGX_005AB0EC;
+
+// 0x005ab0fc
+char const* const s_fx_speech_intro_04_wav_005ab0fc = S_FX_SPEECH_INTRO_04_WAV_005AB0FC;
 
 // 0x005ab114
 char const* const s_fx_speech_intro_03_wav_005ab114 = S_FX_SPEECH_INTRO_03_WAV_005AB114;

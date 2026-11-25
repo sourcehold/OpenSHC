@@ -16,38 +16,38 @@ namespace Map {
     typedef struct HeatMap {
 
         int algorithmIterationNumber; // 0x00000000 length: 4
-        byte tilesNotPartOfLargestAreaCount; // 0x00000004 length: 1
-        byte algorithmVisitCountUnk; // 0x00000005 length: 1
-        byte woodRelatedCountdownTo0; // 0x00000006 length: 1
-        byte treeCount; // 0x00000007 length: 1
-        byte bouldersCount; // 0x00000008 length: 1
-        byte ironCount; // 0x00000009 length: 1
-        byte oilCount; // 0x0000000A length: 1
-        byte marshCount; // 0x0000000B length: 1
+        char tilesNotPartOfLargestAreaCount; // 0x00000004 length: 1
+        char algorithmVisitCountUnk; // 0x00000005 length: 1
+        char woodRelatedCountdownTo0; // 0x00000006 length: 1
+        char treeCount; // 0x00000007 length: 1
+        char bouldersCount; // 0x00000008 length: 1
+        char ironCount; // 0x00000009 length: 1
+        char oilCount; // 0x0000000A length: 1
+        char marshCount; // 0x0000000B length: 1
         byte lowestTerrainHeight; // 0x0000000C length: 1
         byte highestTerrainHeight; // 0x0000000D length: 1
-        byte terrainDiffHigherThan12; // 0x0000000E length: 1
-        byte structureCount; // 0x0000000F length: 1
-        byte isNotNearEdgeUnk; // 0x00000010 length: 1
-        byte oasisScrubCount; // 0x00000011 length: 1
-        byte oasisThickScrubCount; // 0x00000012 length: 1
-        byte destructionBasedPlacementCooldown; // 0x00000013 length: 1
-        byte unused_0x14; // 0x00000014 length: 1
-        byte tileOwnership; // 0x00000015 length: 1
-        byte impassableCount; // 0x00000016 length: 1
-        byte unused_0x17; // 0x00000017 length: 1
-        short field21_0x18; // 0x00000018 length: 2
-        short field22_0x1a; // 0x0000001A length: 2
-        short field23_0x1c; // 0x0000001C length: 2
-        short field24_0x1e; // 0x0000001E length: 2
-        short field25_0x20; // 0x00000020 length: 2
-        short field26_0x22; // 0x00000022 length: 2
-        short field27_0x24; // 0x00000024 length: 2
-        short field28_0x26; // 0x00000026 length: 2
-        short field29_0x28; // 0x00000028 length: 2
-        short field30_0x2a; // 0x0000002A length: 2
-        short field31_0x2c; // 0x0000002C length: 2
-        short field32_0x2e; // 0x0000002E length: 2
+        char terrainDiffHigherThan12; // 0x0000000E length: 1
+        char structureCount; // 0x0000000F length: 1
+        char isNotNearEdgeUnk; // 0x00000010 length: 1
+        char oasisScrubCount; // 0x00000011 length: 1
+        char oasisThickScrubCount; // 0x00000012 length: 1
+        char destructionBasedPlacementCooldown; // 0x00000013 length: 1
+        char unused_0x14; // 0x00000014 length: 1
+        char tileOwnership; // 0x00000015 length: 1
+        char impassableCount; // 0x00000016 length: 1
+        char unused_0x17; // 0x00000017 length: 1
+        short field_0x18; // 0x00000018 length: 2
+        short field_0x1a; // 0x0000001A length: 2
+        short field_0x1c; // 0x0000001C length: 2
+        short field_0x1e; // 0x0000001E length: 2
+        short field_0x20; // 0x00000020 length: 2
+        short field_0x22; // 0x00000022 length: 2
+        short field_0x24; // 0x00000024 length: 2
+        short field_0x26; // 0x00000026 length: 2
+        short field_0x28; // 0x00000028 length: 2
+        short field_0x2a; // 0x0000002A length: 2
+        short field_0x2c; // 0x0000002C length: 2
+        short field_0x2e; // 0x0000002E length: 2
 
     } HeatMap;
 #pragma pack(pop)

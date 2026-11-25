@@ -91,43 +91,43 @@ namespace Map {
 
             undefined4 findEnemyWalls(int unitID);
 
-            void setScale3(int one, int playerID);
+            void setScale3(BOOLEnum includeAll, int playerID);
 
             undefined4 findNearestAvailableScalePoint(int unitID);
 
-            void setTown2(int param_1, int playerID);
+            void setTown2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
             void countAvailablePeopleValueSlots(int param_1);
 
-            void countAvailableLordValueSlots(int param_1);
+            void countAvailableLordValueSlots(int includeOccupied);
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
             int findEnemyLord(int unitID);
 
-            void setGate2(int param_1, int param_2);
+            void setGate2(BOOLEnum includeAll, int playerID);
 
             undefined4 findEnemyTowersOrGates(int unitID);
 
-            void setWide3(int param_1, int param_2);
+            void setWide3(BOOLEnum includeAll, int playerID);
 
             undefined4 getClosestWideValueBasedOnPlayer(int playerID);
 
-            void setMoat3(int checkAgainstNonZero, int playerID);
+            void setMoat3(BOOLEnum includeAll, int playerID);
 
             undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
 
             int findNearestDiggableMoatPoint(int param_1);
 
-            undefined4 findTribeWithMoatAttackBehavior();
+            BOOLEnum findTribeWithMoatAttackBehavior();
 
-            void countAvailableHighValueSlots(int param_1);
+            void countAvailableHighValueSlots(int includeOccupied);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int param_1);
+            void countAvailableArcherValueSlots(int includeOccupied);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 
@@ -182,7 +182,7 @@ namespace Map {
 
             BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID, int param_3);
 
-            undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
+            BOOLEnum giveLightPitchInstructionToUnitClosestToPitch(int tile);
 
             void lightPitchIfNecessary(int unitID, int unitID2);
 
@@ -192,7 +192,7 @@ namespace Map {
 
             void queueOilThrowForIdleArchers();
 
-            undefined4 ifNecessaryThrowOilAutomatically(int param_1);
+            BOOLEnum ifNecessaryThrowOilAutomatically(int param_1);
 
             void commandUnitsToMoveToKeep();
 
@@ -212,7 +212,7 @@ namespace Map {
 
             void decideAndExecuteTribeAttackAction(int tribeID);
 
-            undefined4 moveTribeToNearbyGatehouse(int param_1);
+            BOOLEnum moveTribeToNearbyGatehouse(int param_1);
 
             void moveTowardsParticularUnits(int param_1);
 

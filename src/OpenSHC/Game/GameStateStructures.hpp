@@ -112,7 +112,7 @@ namespace Game {
 
         void destroyPlayerCompletely(int playerID);
 
-        undefined4 checkRequiredResourcesForBuildingOrPlanToBuy(
+        BOOLEnum checkRequiredResourcesForBuildingOrPlanToBuy(
             MappersEnum commandBuildingType, int playerID, BOOLEnum playResourceLackMsgUnk);
 
         int getWallTilesThatCanBeBuilt(int playerID, int wallMaterial);

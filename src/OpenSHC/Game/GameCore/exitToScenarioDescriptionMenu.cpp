@@ -1,12 +1,9 @@
-#include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/UI/Enums/MenuViewType.hpp"
+#include "../GameCore.func.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 
 namespace OpenSHC {
 namespace Game {
-
-    using OpenSHC::UI::Enums::MenuViewType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00471A80
     void GameCore::exitToScenarioDescriptionMenu()

@@ -1,0 +1,29 @@
+#include "OpenSHC/AI/AICState.func.hpp"
+#include "OpenSHC/Game/GameStateStructures.func.hpp"
+#include "OpenSHC/Map/Buildings.func.hpp"
+
+#include "OpenSHC/Globals/DAT_AICState.hpp"
+#include "OpenSHC/Globals/DAT_BuildingsState.hpp"
+#include "OpenSHC/Globals/DAT_CurrentBuildingID.hpp"
+#include "OpenSHC/Globals/DAT_GameState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x00419670
+    void Buildings::UpdateGoodBuildingShrine()
+    {
+        MACRO_CALL_MEMBER(OpenSHC::AI::AICState_Func::addBuildingToTargetableBuildings, DAT_AICState::ptr)(
+            DAT_CurrentBuildingID::instance);
+        MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::addBuildingInRegistry, DAT_GameState::ptr)(
+            DAT_CurrentBuildingID::instance);
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].displayOwnerFlag = 0;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someX
+            = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryX;
+        DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].someY
+            = DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].buildingEntryY;
+    }
+
+}
+}

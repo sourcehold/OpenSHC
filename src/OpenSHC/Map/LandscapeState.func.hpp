@@ -2,6 +2,7 @@
   path: 'OpenSHC/Map/LandscapeState.func.hpp'
 */
 
+#include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/Map/LandscapeState.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
@@ -10,6 +11,7 @@ namespace OpenSHC {
 namespace Map {
     namespace LandscapeState_Func {
 
+        using OpenSHC::Commands::MappersEnum;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::Map::Trees::TreeType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -20,7 +22,7 @@ namespace Map {
             &LandscapeState::Construct_LandscapeState)
         Construct_LandscapeState;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(undefined4), false, Address::SHC_3BB0A8C1_0x004F1A60,
+        MACRO_FUNCTION_RESOLVER(TreeType (LandscapeState::*)(MappersEnum), false, Address::SHC_3BB0A8C1_0x004F1A60,
             &LandscapeState::mapUITreeTypeToLogicalTreeType)
         mapUITreeTypeToLogicalTreeType;
 
@@ -77,7 +79,7 @@ namespace Map {
             void (LandscapeState::*)(), false, Address::SHC_3BB0A8C1_0x004F2DA0, &LandscapeState::killEveryFifthTree)
         killEveryFifthTree;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(uint, int, uint, uint), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(uint, int, uint, uint), false,
             Address::SHC_3BB0A8C1_0x004F2E00, &LandscapeState::setupBabyTreeLocation)
         setupBabyTreeLocation;
 
@@ -89,7 +91,7 @@ namespace Map {
             &LandscapeState::isTreeAdult)
         isTreeAdult;
 
-        MACRO_FUNCTION_RESOLVER(undefined4 (LandscapeState::*)(int, undefined4, int), false,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (LandscapeState::*)(int, undefined4, int), false,
             Address::SHC_3BB0A8C1_0x004F3010, &LandscapeState::damageTreeAndTriggerDeathIfDepleted)
         damageTreeAndTriggerDeathIfDepleted;
 

@@ -81,7 +81,7 @@ namespace AI {
             int (AIVState::*)(), false, Address::SHC_3BB0A8C1_0x004EDD00, &AIVState::computeLargestSeparateArea)
         computeLargestSeparateArea;
 
-        MACRO_FUNCTION_RESOLVER(int (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (AIVState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004EDDF0,
             &AIVState::findSuitableFarmLocationAndPlaceFarm)
         findSuitableFarmLocationAndPlaceFarm;
 

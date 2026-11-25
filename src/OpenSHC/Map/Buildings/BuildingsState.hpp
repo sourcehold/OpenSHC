@@ -36,20 +36,20 @@ namespace Map {
         class BuildingsState {
         public:
             int structCount; // 0x00000000 length: 4
-            undefined4 field1_0x4; // 0x00000004 length: 4
+            undefined4 field_0x4; // 0x00000004 length: 4
             int maxBuildingsCount; // 0x00000008 length: 4
             int unknownCountdown01; // 0x0000000C length: 4
-            undefined4 field4_0x10; // 0x00000010 length: 4
+            undefined4 field_0x10; // 0x00000010 length: 4
             Building buildings[2000]; // 0x00000014 length: 1624000
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
-            undefined4 pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
+            int pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
             undefined4 counter; // 0x0018D070 length: 4
-            undefined2 DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
-            undefined4 DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
+            short DAT_BuildingIDsNeedPeasantsQueue[2000]; // 0x0018D074 length: 4000
+            int DAT_CountOfBuildingsNeedPeasants; // 0x0018E014 length: 4
             int campfireSpotX; // 0x0018E018 length: 4
             int campfireSpotY; // 0x0018E01C length: 4
             int campfireSpotOrientation; // 0x0018E020 length: 4
-            undefined4 field14_0x18e024; // 0x0018E024 length: 4
+            undefined4 field_0x18e024; // 0x0018E024 length: 4
             int DAT_TempXOffset; // 0x0018E028 length: 4
             int DAT_TempYOffset; // 0x0018E02C length: 4
             int farmerDestinationTile; // 0x0018E030 length: 4
@@ -59,8 +59,8 @@ namespace Map {
             int newSelectedBuildingID; // 0x0018E040 length: 4
             int menuSelectedUnitID; // 0x0018E044 length: 4
             int newSelectedUnitID; // 0x0018E048 length: 4
-            undefined4 field24_0x18e04c; // 0x0018E04C length: 4
-            undefined4 field25_0x18e050; // 0x0018E050 length: 4
+            undefined4 field_0x18e04c; // 0x0018E04C length: 4
+            undefined4 field_0x18e050; // 0x0018E050 length: 4
             char* DAT_CurrentlyPlayingBuildingBik; // 0x0018E054 length: 4
             BOOLEnum DAT_IsBuildingOrPeasantBinkPlaying; // 0x0018E058 length: 4
             int selectedBuildingID; // 0x0018E05C length: 4
@@ -69,10 +69,10 @@ namespace Map {
             int DAT_DraggedTileCountVerified; // 0x0018E068 length: 4
             int INT_SelectedBuildingStoneWoodCost; // 0x0018E06C length: 4
             int INT_SelectedBuildingStoneRepairCost; // 0x0018E070 length: 4
-            undefined4 field34_0x18e074; // 0x0018E074 length: 4
+            undefined4 field_0x18e074; // 0x0018E074 length: 4
             int siegeEngineCreationRelated01; // 0x0018E078 length: 4
             int unitID; // 0x0018E07C length: 4
-            undefined4 field37_0x18e080; // 0x0018E080 length: 4
+            undefined4 field_0x18e080; // 0x0018E080 length: 4
             int unused01; // 0x0018E084 length: 4
 
         private:
@@ -92,7 +92,7 @@ namespace Map {
 
             MappersEnum convertBuildingTypeToCommandBuildingType(BuildingType buildingType);
 
-            undefined4 getBuildingHeightForBuildingID(int buildingID);
+            int getBuildingHeightForBuildingID(int buildingID);
 
             undefined4 getBuildingHeightForBuildingID2(int buildingID);
 
@@ -104,9 +104,9 @@ namespace Map {
 
             void displayPopularityAndGoldPopups(int buildingID, int param_2, int param_3, undefined4 param_4);
 
-            int spawnCrowForBuilding(int buildingID);
+            void spawnCrowForBuilding(int buildingID);
 
-            uint isFearFactorBuilding(int buildingID);
+            BOOLEnum isFearFactorBuilding(int buildingID);
 
             BOOLEnum isReligiousBuilding(int buildingID);
 
@@ -116,9 +116,9 @@ namespace Map {
 
             int getEmptyBuildingCount(int playerID, BuildingType buildingType);
 
-            int countBuildingsForPlayer(int playerID, BuildingType buildingType, int includeBool);
+            int countBuildingsForPlayer(int playerID, BuildingType buildingType, BOOLEnum excludeAIVPlaced);
 
-            int countFarms(int playerID, int param_2);
+            int countFarms(int playerID, BOOLEnum excludeAIVPlaced);
 
             int findFirstBuildingOfType(int playerID, BuildingType buildingType);
 
@@ -147,19 +147,19 @@ namespace Map {
 
             void recomputeAllFearFactors();
 
-            undefined4 findBuildingOfTypeForPlayer(int playerID, BuildingType buildingType);
+            BOOLEnum findBuildingOfTypeForPlayer(int playerID, BuildingType buildingType);
 
             void removeSiegeBuildings(int attackWave, int playerID);
 
             void setBuildingInitialEntryTileTry(int buildingID, undefined4 param_2);
 
-            undefined4 prepareCampgroundCoords(int playerID);
+            BOOLEnum prepareCampgroundCoords(int playerID);
 
-            undefined4 hasBuildingEntranceFlagForOrientation(int buildingID);
+            BOOLEnum hasBuildingEntranceFlagForOrientation(int buildingID);
 
-            undefined4 hasBuildingExitFlagForOrientation(int buildingID);
+            BOOLEnum hasBuildingExitFlagForOrientation(int buildingID);
 
-            uint isBuildingPathBlockerOrDamageable(uint param_1, int param_2);
+            BOOLEnum isBuildingPathBlockerOrDamageable(uint param_1, int param_2);
 
             BOOLEnum getBuildingHasHealthProperty(uint buildingID, int param_2);
 
@@ -188,9 +188,9 @@ namespace Map {
 
             uint computeResourceSumForBuilding(int buildingID);
 
-            uint hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters(int playerID, int param_2);
+            BOOLEnum hasLessWoodThanTheCostOfAWoodcuttersHutAndNoWoodcutters(int playerID, int param_2);
 
-            int getResourceSpace(int param_1, int* resourceType);
+            int getResourceSpace(int param_1, ResourceType resourceType);
 
             void countPlayerResources(int playerID);
 
@@ -205,11 +205,11 @@ namespace Map {
 
             void subtractPitchAndMoatFromStartingGoldInSiegeThatMode();
 
-            uint hasEnoughGoldForMoat();
+            BOOLEnum hasEnoughGoldForMoat();
 
             int getFarmThatHasTile(int tile);
 
-            undefined4 isFarmTileReadyForWheatStageChange(int param_1);
+            BOOLEnum isFarmTileReadyForWheatStageChange(int param_1);
 
             void growWheat(int buildingID);
 
@@ -221,29 +221,29 @@ namespace Map {
 
             void setupMercenaryPostCampgroundPositions(int playerID);
 
-            undefined4 isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
+            BOOLEnum isSpaceAvailableAtUnitRallyPoint(int playerID, int value0to6, int unitID);
 
-            undefined4 getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
+            BOOLEnum getKeepLocationForAIUnit(int playerID, int param_2, int unitID);
 
             void createEntityForAssemblyPointsForActiveTabType();
 
             void setupEngineersGuildParagroundPositions(int playerID);
 
-            int findFreeEngineerAssemblyTile(int playerIndex, int param_2);
+            BOOLEnum findFreeEngineerAssemblyTile(int playerIndex, int param_2);
 
             void setupTunnelersGuildCampgroundPositions(int param_1);
 
-            undefined4 findFreeTunnelerAssemblyTile(int param_1, int param_2);
+            BOOLEnum findFreeTunnelerAssemblyTile(int param_1, int param_2);
 
-            undefined4 findFreeCathedralAssemblyTile(int param_1, int param_2);
+            BOOLEnum findFreeCathedralAssemblyTile(int param_1, int param_2);
 
             void setTileRefsForOilSmelter(int buildingID);
 
-            undefined4 isEngineerNotAtAssignedWorkTile(int param_1, int param_2, int param_3);
+            BOOLEnum isEngineerNotAtAssignedWorkTile(int param_1, int param_2, int param_3);
 
             uint getActiveEngineerForBuilding(int buildingID);
 
-            undefined4 setNewOnFarmDestination(int buildingID);
+            BOOLEnum setNewOnFarmDestination(int buildingID);
 
             void growHops(int buildingID);
 
@@ -251,7 +251,7 @@ namespace Map {
 
             void harmHopFarmsOfPlayer(int param_1);
 
-            ushort* updateBuildingAreaTileGraphics(int param_1);
+            void updateBuildingAreaTileGraphics(int param_1);
 
             void setDairyFarmCheeseCounter(int param_1);
 
@@ -271,7 +271,7 @@ namespace Map {
 
             int getBuildingFlag1(int param_1);
 
-            undefined4 determinePeasantSitPosition(int campfireID, int availablePeasants);
+            BOOLEnum determinePeasantSitPosition(int campfireID, int availablePeasants);
 
             void refreshAllBuildingTileDisplays();
 
@@ -297,9 +297,9 @@ namespace Map {
 
             BOOLEnum updateRepairCostAndReturnIfDamaged(int buildingIndex);
 
-            undefined4 canUnitReachBuildingPerimeter(int param_1, int param_2);
+            BOOLEnum canUnitReachBuildingPerimeter(int param_1, int param_2);
 
-            undefined4 canUnitReachAdjacentTile(int param_1, int param_2);
+            BOOLEnum canUnitReachAdjacentTile(int param_1, int param_2);
 
             void processDamageToUnitsOnBuilding(int buildingID, int damageBonus);
 
@@ -311,7 +311,7 @@ namespace Map {
 
             int findClosestReachableAlliedBuilding(int param_1);
 
-            undefined4 playerHasBurningBuilding(int playerID);
+            BOOLEnum playerHasBurningBuilding(int playerID);
 
             void validateBuildingTetheredUnits(int buildingID);
 
@@ -363,7 +363,7 @@ namespace Map {
 
             int findAccessibleAreaNearBuildingLocation(int x, int y, int buildingSize);
 
-            undefined4 addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType, int amount,
+            BOOLEnum addResourceToStockpile(int buildingID, int buildingUID, ResourceType resourceType, int amount,
                 int maxCapacity, int recomputeResources);
 
             void addResourceToGranary(ResourceType resourceType, int playerID, int amount);
@@ -386,12 +386,11 @@ namespace Map {
 
             void sortBuildingIDsNeedPeasantsQueue(int playerID);
 
-            undefined4 lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds);
+            BOOLEnum lightUpBuilding(int buildingID, int burnerPlayerID, int spareGrounds);
 
-            void upgradeBuildingsForMapVersion(
-                PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
+            void upgradeBuildingsForMapVersion(int receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            int setupBuildingData(int playerID, uint x, uint y, undefined4 averageHeight, BuildingType buildingType,
+            int setupBuildingData(int playerID, uint x, uint y, int averageHeight, BuildingType buildingType,
                 uint width, int playerID_dup, int variationIndex);
 
             void deleteBuilding(uint buildingID);
@@ -400,7 +399,7 @@ namespace Map {
 
             int buildingIsAccessible(int buildingID, int amountUnk);
 
-            char resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
+            int resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
             void giveBackResourceForDestroyedBuilding(int buildingIDORIfNegResourceType, int playerID, int param_3);
 

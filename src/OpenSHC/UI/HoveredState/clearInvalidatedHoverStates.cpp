@@ -1,4 +1,5 @@
-#include "OpenSHC/UI/HoveredState.func.hpp"
+#include "../HoveredState.func.hpp"
+
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/UI/HoveredStateElement.hpp"
@@ -20,6 +21,7 @@ namespace UI {
             return;
         }
         for (int i = 0; i < 20; ++i) {
+            // a signed compare, though mapTimeInTicks is a uint
             if (this->elements[i].type != OpenSHC::Commands::M_MAPPER_NULL
                 && (int)DAT_GameCore::instance.mapTimeInTicks >= this->elements[i].time) {
                 this->elements[i].type = OpenSHC::Commands::M_MAPPER_NULL;

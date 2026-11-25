@@ -1,5 +1,4 @@
-#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "../PathFindingState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

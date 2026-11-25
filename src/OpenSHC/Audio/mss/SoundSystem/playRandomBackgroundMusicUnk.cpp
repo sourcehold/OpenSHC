@@ -4,7 +4,6 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/Audio/mss/SoundFlagsAndLoopCountBitwiseFlagEnum.hpp"
-#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -15,8 +14,6 @@
 namespace OpenSHC {
 namespace Audio {
     namespace MSS {
-
-        using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0047BF20
         void SoundSystem::playRandomBackgroundMusicUnk()
@@ -39,7 +36,7 @@ namespace Audio {
                 return;
             }
 
-            BOOLEnum shouldClearLoopFlag = TRUE;
+            BOOLEnum shouldStartNewTrackUnk = TRUE;
             if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.troopValueLevel == 0) {
                 switch (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.volumeLevel) {
                 case 1:
@@ -121,7 +118,7 @@ namespace Audio {
                     return;
                 }
                 DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
-                shouldClearLoopFlag = FALSE;
+                shouldStartNewTrackUnk = FALSE;
             } else {
                 if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.battleEndHandled == 0) {
                     if (DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicTracker == 0) {
@@ -140,55 +137,54 @@ namespace Audio {
                                 MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                                     DAT_SFXDefinedData::instance.Pointers[34].musicFile);
                             }
-                            DAT_SoundEffectsHelperData1::instance.field21_0x70 = 34;
+                            DAT_SoundEffectsHelperData1::instance.field_0x70 = 34;
                         } else {
-                            int currentTrackIndex = DAT_SoundEffectsHelperData1::instance.field21_0x70 + -34;
+                            int musicSetIndex = DAT_SoundEffectsHelperData1::instance.field_0x70 - 34;
                             int candidateCount = 0;
-                            if (currentTrackIndex < 0 || 7 < currentTrackIndex) {
-                                currentTrackIndex = 0;
+                            if (musicSetIndex < 0 || 7 < musicSetIndex) {
+                                musicSetIndex = 0;
                             }
 
-                            int candidateTracks[20];
+                            int candidateTrackIndices[20];
                             for (int i = 0; i < 8; ++i) {
-                                if (currentTrackIndex == i
-                                    || DAT_SFXDefinedData::instance.field2_0x3a4[currentTrackIndex][i] == 0) {
+                                if (musicSetIndex == i
+                                    || DAT_SFXDefinedData::instance.field_0x3a4[musicSetIndex][i] == 0) {
                                     continue;
                                 }
                                 if (i == 4) {
-                                    // Track 4 is weighted six times. A loop over the six stores took the match
-                                    // from 97.5% to 50%, so the original really is straight-line code here.
-                                    candidateTracks[candidateCount++] = i;
-                                    candidateTracks[candidateCount++] = i;
-                                    candidateTracks[candidateCount++] = i;
-                                    candidateTracks[candidateCount++] = i;
-                                    candidateTracks[candidateCount++] = i;
-                                    candidateTracks[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
+                                    candidateTrackIndices[candidateCount++] = i;
                                     continue;
                                 }
-                                int trackMoodState = DAT_SFXDefinedData::instance.field3_0x4a4[i];
-                                int const battleMoodState = DAT_SoundEffectsHelperData1::instance.battleMoodState;
-                                if ((trackMoodState == 1 && trackMoodState == battleMoodState)
-                                    || (trackMoodState == 2 && trackMoodState == battleMoodState)) {
+                                int trackMoodUnk = DAT_SFXDefinedData::instance.field_0x4a4[i];
+                                int battleMoodState = DAT_SoundEffectsHelperData1::instance.battleMoodState;
+                                if ((trackMoodUnk == 1 && trackMoodUnk == battleMoodState)
+                                    || (trackMoodUnk == 2 && trackMoodUnk == battleMoodState)) {
                                     continue;
                                 }
-                                candidateTracks[candidateCount++] = i;
-                                if (battleMoodState == 1 && trackMoodState == 2) {
-                                    candidateTracks[candidateCount++] = i;
-                                } else if (battleMoodState == 2 && trackMoodState == 1) {
-                                    candidateTracks[candidateCount++] = i;
+                                candidateTrackIndices[candidateCount++] = i;
+                                if (battleMoodState == 1 && trackMoodUnk == 2) {
+                                    candidateTrackIndices[candidateCount++] = i;
+                                } else if (battleMoodState == 2 && trackMoodUnk == 1) {
+                                    candidateTrackIndices[candidateCount++] = i;
                                 }
                             }
 
                             int sfxIndex;
                             if (candidateCount == 0) {
-                                sfxIndex = currentTrackIndex + 34;
+                                sfxIndex = musicSetIndex + 34;
                             } else {
                                 MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
-                                sfxIndex = candidateTracks[SEC_RNG::instance.currentNumber1 % candidateCount] + 34;
+                                sfxIndex
+                                    = candidateTrackIndices[SEC_RNG::instance.currentNumber1 % candidateCount] + 34;
                             }
                             MACRO_CALL_MEMBER(SoundSystem_Func::openSound, this)(
                                 DAT_SFXDefinedData::instance.Pointers[sfxIndex].musicFile);
-                            DAT_SoundEffectsHelperData1::instance.field21_0x70 = sfxIndex;
+                            DAT_SoundEffectsHelperData1::instance.field_0x70 = sfxIndex;
                         }
                         if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 0) {
                             ++this->streamFlagsUnkAndLoopCount_0x34[0];
@@ -197,16 +193,16 @@ namespace Audio {
                     }
                 } else {
                     DAT_SoundEffectsHelperData1::instance.SEC_Section1079.musicState = 1;
-                    shouldClearLoopFlag = FALSE;
+                    shouldStartNewTrackUnk = FALSE;
                 }
             }
             if (this->musicFileHandle_0x178 != -1) {
-                DAT_SoundEffectsHelperData1::instance.field14_0x54 = TRUE;
+                DAT_SoundEffectsHelperData1::instance.field_0x54 = TRUE;
                 MACRO_CALL(OS_Func::_ucrt_close)(this->musicFileHandle_0x178);
                 this->musicFileHandle_0x178 = -1;
-                DAT_SoundEffectsHelperData1::instance.field14_0x54 = FALSE;
+                DAT_SoundEffectsHelperData1::instance.field_0x54 = FALSE;
             }
-            if (shouldClearLoopFlag) {
+            if (shouldStartNewTrackUnk) {
                 if ((this->streamFlagsUnkAndLoopCount_0x34[0] & FLAG_SOUND_LOOP_COUNT_FIELD) == 1) {
                     this->streamFlagsUnkAndLoopCount_0x34[0] &= ~FLAG_SOUND_LOOP_COUNT_FIELD;
                 }

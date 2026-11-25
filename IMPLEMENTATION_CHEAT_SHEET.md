@@ -4,6 +4,13 @@ This file is meant to contain general behaviors, patterns and oddities of the co
 It should be used as a reference for the reimplementation process by providing possible options on how the code can be changed to produce different assembly while keeping the logic flow.  
 Update whenever new information is discovered!
 
+reccmp renders the same bytes differently on the two sides, so a diff line is not automatically a mismatch. The
+original's side resolves addresses through the `StructResolver`/`trampoline` symbols and prints `__security_cookie`
+as `StructResolver::Instance<unsigned int,12141088>::instance`, and it will print a plain immediate such as
+`0xffffff` as whatever global happens to live at that address. Eleven functions in `GameSynchronyState` score
+between 84% and 98% while being byte-identical for this reason alone. Before working on a function, canonicalise
+the `-`/`+` lines (symbols to one token, call/jump targets to one token) and check they are not already equal.
+
 Note, that Ghidra and reccmp use slightly different disassembly styles, so there might be different opcodes generated. Example: JZ (Jump if Zero) and JE (Jump if Equal) mean the same and are the same instruction. So do not get confused.
 
 ## Boundaries
@@ -98,6 +105,33 @@ This also applies when putting instructions inside the condition branches.
 
 Naturally, the logic flow needs to be kept, so the update of a variable can not move before or after another usage of the same variable.
 
+The order in which **initialised** declarations appear decides which register each one gets. `countPlayersInSameTeam`
+matched instruction for instruction except that the parameter was loaded into `eax` instead of `edx`; moving
+`int iVar2 = 0;` in front of `int iVar1 = DAT_GameState::instance.mapAndTime.playerTeams[playerID];` freed `edx`
+for the parameter load. Uninitialised declarations do not have this effect.
+
+Stack *slot* assignment for spilled locals is a different matter: it follows the **reference weight** of each
+local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
+slot. Examples are `setupSkirmishLobby`, `initMultiplayerLobbyState`,
+`initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and some reverse engineering work on the
+compiler says why: its stack "colorer" sorts the elements by weight per byte and hands out offsets in that order. The
+mechanism, the evidence and the debugger recipe are in
+[tools/compiler-internals/msvc-backend.md](tools/compiler-internals/msvc-backend.md); what matters here is how to
+read a diff:
+
+* A slot-order mismatch means the reimplemented locals carry **different reference counts** from the original's, so look for a
+  read the original might have had and we do not. It is not a declaration-order problem.
+* Weight **ties** are left to the order the symbols arrive in. Permuting declarations can only decide ties.
+* Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
+  is already dead (e.g., `writeMapOrSaveFile` puts eight locals on the first parameter's slot).
+* Renaming locals doesn't affect anything; the comparator never looks at a name.
+
+`slot_weight.py` prints the slot table for one function with each local's weight beside it (read out of MSVC's own
+intermediate assembly symbol table rather than inferred from the diff for sake of speed).
+
+For **registers** there is no decoded rule yet. Treat a register-only mismatch as an interference difference - a
+different set of values was live at that point - which is a working hypothesis, not an established mechanism.
+
 ### Statement Order
 
 The order of instructions in the assembly is not the order of the statements in the original source.
@@ -167,6 +201,11 @@ SEC_RNG::ptr->currentNumber1 % 4
 ```
 
 ### Variables
+
+A 16-bit field saved into a `short` temp and written straight back is loaded with `movzx`; the same field saved into
+an `int` temp is loaded with `movsx`. When the original sign-extends a `short` field it only reads and restores,
+widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, six entity fields, +0.6%).
+
 
 - Ghidra declares all variables at the start of a function. Please try to declare them when needed. Helps the readability.
 - Always prefer direct usage of parameters and member variables over the creation of a local temporary on first attempts. Real local variables are rare.
@@ -242,9 +281,15 @@ SEC_RNG::ptr->currentNumber1 % 4
   `mov [field], ebx`) is a **result variable** initialised at the top and stored once at the end, not two literal
   stores: `int isNotNervous = 1; ... if (cond) isNotNervous = 0; else {...} field = isNotNervous;`
   (`computeNervousness` 77% -> 100%).
-- `add reg, -N` where we emit `sub reg, N` or `cmp reg, N` means two constants were merged: the source compared a
-  derived value, `aicIndex == 7` with `aicIndex = aiType - 1`, not `aiType == 8`
-  (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- The original's `add reg, -N` against our `sub reg, N` or `cmp reg, N` has two causes, told apart by whether a
+  second constant is in sight. **With one**, they were merged: the source compared a derived value, `aicIndex == 7`
+  with `aicIndex = aiType - 1`, not `aiType == 8` (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- **With none**, the value is a separate derived local rather than a self-decrement: the typical case leads to the reimplementation
+  writing `sub` whereas the original had `add` (e.g. `int value -= N`). A solution is to write `int y = x - N;`
+  with `x` becoming a dead local right after. However, this creates another local variable which can cause register and stack
+  allocation changes elsewhere. The solution is to drop a local variable: the one to delete is
+  usually a global that is cached instead of re-read, so reading the global again instead of using the cached value in
+  a local drops the local's importance to allocation and causes a match.
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
@@ -393,11 +438,34 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   function needed `int i = 0;` declared *first*, before the other zero-initialised locals, to get the original's
   `xor` order - declaration order did not matter anywhere else it was tried.
 
+- When a loop walks a pointer **and** counts an index, the two initialisers are not interchangeable. The original
+  of `broadcastDesyncResyncCommands` sets the index first (`xor edi, edi`) and the row pointer second, where our
+  source had the pointer first; swapping the two statements was worth 0.3%. In the same function the original
+  starts the walker one element in and advances it at the **tail**, next to the index increment, where the source
+  had `do { p = p + 1; ... }` - moving the `+ 1` into the initialiser and the advance to the loop tail took it from
+  96.1% to 97.4%.
+- A Ghidra temp reused as the index of several unrelated loops costs a spill. `recomputeHashesAndSendResync` shared
+  `iVar39` between its hash accumulator and the climb-data loop; giving that loop its own `int _climbIndex` kept the
+  index in a register as the original does (58.4% -> 58.8%). Splitting the *other* loops that share the same temp
+  changed nothing, so split the loop that the diff points at rather than all of them.
+- An early `return <constant>;` is sometimes a fall-through in the original. `addPlayerToCurrentPlayerArray` ends its
+  last search loop with `return 0;`, but the original zeroes the slot index and falls into the shared store, writing
+  the id into slot 0 before returning it. The tell is a store between the `pop`s of the epilogue
+  (`xor eax, eax; pop esi; pop edi; mov [ecx + eax*4 + ...], ebx; pop ebx; ret`) - one epilogue where the
+  reimplementation has two.
+
 - `mov edx, esi; add esi, 1` at the **top** of a loop body, with the body then indexing by the copy, is a `while`
   loop that takes the index and advances the counter first: `while (i < count) { int index = i; i++; if (...[index]...)
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
+- When a loop reads two **parallel arrays** at the same index, MSVC strength-reduces the index into one pointer and
+  anchors it on whichever of the arrays is compared **last**, reaching the other one off that pointer. If the
+  original anchors on the other array, try swapping the comparisons; where the comparison order is itself fixed by
+  the original's asm, the second array has to be reached as an offset from the first
+  (`createStatsPopUpEntities`, `showPopAndGoldPopup`: 0.9211 -> 1.0000). Derive that offset from the two array
+  names so no literal index past an array's end is needed.
 
 ### GOTO
 
@@ -439,6 +507,27 @@ A function declared `void` whose assembly still leaves a value in EAX at the ret
 case is a function that returns the ID it was passed: changing `void EntityState::activateProjectileEntity(int entityID)`
 to `int` with a trailing `return entityID;` took SHC_3BB0A8C1_0x004039B0 from 36.4% to 100%. Fix the signature in the
 generated header rather than working around the difference.
+
+### Per-file optimization pragmas
+
+`/O2` is a bundle (`/Og /Oi /Ot /Oy /Ob2 /GF /Gy`), and a few translation units in the original were plainly not
+built with all of it. Two of its parts are worth testing per file when a function is stuck and the diff shows
+structural noise rather than a source bug:
+
+- `#pragma inline_depth(1)` - `/Ob2` inlines things the original did not. `disconnectDPlay` 66.0% -> 87.4% and
+  `createCompoundAddressBasedOnSelectedProvider` 54.1% -> 61.2%, `checkMultiplayerLaggingPlayers` 90.6% -> 91.0%.
+  Depth 1 beat depth 0 by about a point on both of the first two; depths 2 and 3 are the same as the default.
+- `#pragma optimize("y", off)` - with `/Oy` the optimizer may use `ebp` as a general register and cross-jump
+  identical epilogues into one. `waitForMultiplayerHost` has two `DAT_HostAnnounced = 1` returns that the original
+  keeps separate: 87.0% -> 98.9%. Note that putting `/Oy-` on the command line through
+  `set_source_files_properties` does **not** reproduce this; only the pragma does.
+
+Sweep them rather than guess: patch one file at a time, rebuild, and keep the ones that win. Over the 25
+non-matching functions of `GameSynchronyState` only four files wanted either pragma, and
+`optimize("s", on)`, `optimize("g", off)`, `optimize("t", off)` and `auto_inline(off)` never won anywhere.
+Toggling a file in or out of `cmake/compiler-flags-gl.txt` is worth the same sweep - it found one win
+(`receiveAllTransmittedCommands`, +1.3) and showed that the `/GL` entries for `determineGameTicksToPerform` and
+`computeLatencyAdjustmentFromMatchTimes` currently measure as no-ops.
 
 ### Link-Time Code Generation
 
@@ -527,6 +616,12 @@ do {
 
 #### Known special cases
 
+- `memset` emits its stores from the **lowest** address upwards. When the original clears two adjacent fields from a
+  zero register in the other order, the `memset` is wrong even though the effect is identical: in
+  `recomputeHashesAndSendResync` the original clears `field309_0x420` before `field308_0x41c`, and replacing
+  `memset(&unit.field308_0x41c, 0, 8)` with those two stores in that order was worth 4 points (54.4% -> 58.4%).
+  Check the store order in the diff before reaching for `memset`, and keep it where the order does match - the two
+  other `memset`s in the same function both lose 3-9 points when expanded.
 - `memset` so far was seen optimizing a "set all bytes to zero" case, if it was smaller then a unknown amount. In all known cases it used `EAX` for this. Would still recommend to try `memset` for cases with a register filling multiple **byte-sized** memory locations.
 
 ### CRT Functions

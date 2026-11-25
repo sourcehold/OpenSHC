@@ -1,7 +1,5 @@
 #include "../TroopValueState.func.hpp"
 
-#include "OpenSHC/Map.func.hpp"
-
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 
 namespace OpenSHC {
@@ -9,20 +7,13 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A100
-        void TroopValueState::countAvailableLordValueSlots(int param_1)
+        void TroopValueState::countAvailableLordValueSlots(int includeOccupied)
         {
             DAT_TroopValueState::instance.attackInfo.lord2 = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.lord3) {
-                int* _pUnitID = &DAT_TroopValueState::instance.attackInfo.lordValuesArray[0].unitID;
-                int _remaining = DAT_TroopValueState::instance.attackInfo.lord3;
-                do {
-                    if ((*_pUnitID == 0) || (param_1)) {
-                        DAT_TroopValueState::instance.attackInfo.lord2
-                            = DAT_TroopValueState::instance.attackInfo.lord2 + 1;
-                    }
-                    _pUnitID = _pUnitID + 4;
-                    _remaining = _remaining + -1;
-                } while (_remaining);
+            for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.lord3; ++i) {
+                if (DAT_TroopValueState::instance.attackInfo.lordValuesArray[i].unitID == 0 || includeOccupied) {
+                    DAT_TroopValueState::instance.attackInfo.lord2++;
+                }
             }
         }
 

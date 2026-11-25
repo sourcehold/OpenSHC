@@ -1,6 +1,7 @@
 #include "OpenSHC/Map/MapPropertiesState.func.hpp"
 #include "OpenSHC/UI/MenuViews/EditScenario.func.hpp"
 #include "OpenSHC/UI/Rendering/TextureRenderCore.func.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_CopyOfScenarioGold.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -16,8 +17,9 @@ namespace UI {
             void MenuView_EditScenario_Prepare()
             {
                 DAT_TextureRenderCoreObject::instance.totalLoadedGfx = 0;
+                // "frontend_builder2.tgx"
                 MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::TextureRenderCore_Func::loadGfxFile,
-                    DAT_TextureRenderCoreObject::ptr)("frontend_builder2.tgx");
+                    DAT_TextureRenderCoreObject::ptr)(s_frontend_builder2_tgx_005a206c);
                 MACRO_CALL_MEMBER(OpenSHC::Map::MapPropertiesState_Func::updateEventYearsAndCommitBuildingAvailability,
                     DAT_MapPropertiesState::ptr)();
                 DAT_CopyOfScenarioGold::instance = DAT_GameState::instance.mapAndTime.scenarioGold;

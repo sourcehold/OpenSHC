@@ -1,10 +1,7 @@
-#include "OpenSHC/Game/GameCore.func.hpp"
-#include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
+#include "../GameCore.func.hpp"
 
 namespace OpenSHC {
 namespace Game {
-
-    using OpenSHC::UI::Enums::BuildingsAndStatusMenuTabType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x0046B320
     void GameCore::swapBuildMenuTab()

@@ -38,7 +38,7 @@ namespace Rendering {
             &ViewportRenderState::tweakValidTilesToExcludeMapBorders)
         tweakValidTilesToExcludeMapBorders;
 
-        MACRO_FUNCTION_RESOLVER(int (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E2600,
+        MACRO_FUNCTION_RESOLVER(BOOLEnum (ViewportRenderState::*)(), false, Address::SHC_3BB0A8C1_0x004E2600,
             &ViewportRenderState::resetBatchedRender)
         resetBatchedRender;
 
@@ -46,16 +46,15 @@ namespace Rendering {
             &ViewportRenderState::renderAssassinClimbingOverlay)
         renderAssassinClimbingOverlay;
 
-        MACRO_FUNCTION_RESOLVER(
-            void (ViewportRenderState::*)(undefined4, undefined4, undefined4, undefined4, undefined4, undefined4, int),
-            false, Address::SHC_3BB0A8C1_0x004E26D0, &ViewportRenderState::scheduleUnitForBatchedRendering)
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int, int, int, int), false,
+            Address::SHC_3BB0A8C1_0x004E26D0, &ViewportRenderState::scheduleUnitForBatchedRendering)
         scheduleUnitForBatchedRendering;
 
         MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int), false,
             Address::SHC_3BB0A8C1_0x004E2AD0, &ViewportRenderState::renderGmOverlayBuilding2)
         renderGmOverlayBuilding2;
 
-        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, undefined4, int), false,
+        MACRO_FUNCTION_RESOLVER(void (ViewportRenderState::*)(int, int, int, int, BOOLEnum), false,
             Address::SHC_3BB0A8C1_0x004E3870, &ViewportRenderState::renderBuildingAnimation)
         renderBuildingAnimation;
 

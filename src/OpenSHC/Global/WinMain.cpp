@@ -35,6 +35,7 @@
 #include "OpenSHC/DE/SHCDE/eMusicIDs.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/Rendering/ScreenResolutionEnum.hpp"
 #include "OpenSHC/UI/Enums/BuildingsAndStatusMenuTabType.hpp"
 #include "OpenSHC/UI/Enums/MenuItemHandleState.hpp"
@@ -209,7 +210,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
     if (!DAT_GameSynchronyState::instance.useTCPIP) {
         MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::setupAllMapSections, DAT_TileMapState::ptr)();
     }
-    DAT_TileMapState::instance.mapSize = 400;
+    DAT_TileMapState::instance.mapSize = OpenSHC::Map::MC_MAP_XY_LIMIT;
     MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::resetHeightAndMapBorders, DAT_TileMapState::ptr)(400);
     DAT_PathFindingState::instance.toggleUpdateSeparateAreaTileMap = 1;
     MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageLayerForEachBuildingAtEachTile,
