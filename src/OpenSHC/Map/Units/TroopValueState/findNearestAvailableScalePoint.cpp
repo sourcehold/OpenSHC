@@ -13,7 +13,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00519E40
-        undefined4 TroopValueState::findNearestAvailableScalePoint(int unitID)
+        int TroopValueState::findNearestAvailableScalePoint(int unitID)
         {
             int const playerID = DAT_UnitsState::instance.units[unitID].owner;
             int minDistance = 1000;

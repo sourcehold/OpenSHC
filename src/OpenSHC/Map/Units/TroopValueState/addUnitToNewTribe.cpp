@@ -18,8 +18,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051BC70
-        void TroopValueState::addUnitToNewTribe(
-            undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID)
+        void TroopValueState::addUnitToNewTribe(int unitID, int attackWave, AITribeType tribeType, int playerID)
         {
             int tribeID;
             if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY) {

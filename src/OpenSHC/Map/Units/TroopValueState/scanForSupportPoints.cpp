@@ -23,7 +23,7 @@ namespace Map {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] != 1) {
                     continue;
                 }
-                uint const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
+                int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 for (int direction = 0; direction < 4; ++direction) {
                     if ((DAT_TileMapState::instance
                                 .AIInfoLayer[DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]
@@ -36,7 +36,7 @@ namespace Map {
                             & 3)) {
                         continue;
                     }
-                    uint const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
+                    int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                     BOOLEnum const hasSupportZoneFlag
                         = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findAIZoneWithFlags,
                             DAT_PathFindingState::ptr)(8, x, y, 0x40);

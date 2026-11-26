@@ -13,7 +13,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00519FB0
-        undefined4 TroopValueState::findEnemyBuildingsClosestToUnit(int unitID)
+        int TroopValueState::findEnemyBuildingsClosestToUnit(int unitID)
         {
             int const owner = DAT_UnitsState::instance.units[unitID].owner;
             int minDistance = 1000;

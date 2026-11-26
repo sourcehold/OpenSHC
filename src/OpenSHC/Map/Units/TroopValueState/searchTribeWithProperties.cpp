@@ -1,6 +1,7 @@
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
@@ -38,7 +39,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.attacker
                 = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_1];
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
-            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
+            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = Map::Enums::AWS_ASSIGNING_TARGETS;
             DAT_TroopValueState::instance.attackInfo.value10 = 10;
             return TRUE;
         }

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
 #include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
@@ -16,7 +17,7 @@ namespace Map {
         void TroopValueState::advanceAttackWaveStaging(int param_1)
         {
             DAT_TroopValueState::instance.attackInfo.attackAlarmPlayed = FALSE;
-            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 2;
+            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = Map::Enums::AWS_PREPARING_SIEGE;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             MACRO_CALL_MEMBER(Game::GameStateStructures_Func::nof_fpoints_locationFinder, DAT_GameState::ptr)();
             ++DAT_TroopValueState::instance.attackInfo.someCounter1;
