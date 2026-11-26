@@ -12,7 +12,7 @@ namespace Map {
         int TroopValueState::getSupportPointIndex(int tile)
         {
             DAT_TroopValueState::instance.attackInfo.supportPointsNext = 0;
-            for (int i = 1; i < 200; ++i) {
+            for (int i = 1; i < countof(DAT_TroopValueState::instance.attackInfo.supportPointsArray) - 1; ++i) {
                 if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[i].tile == tile) {
                     return i;
                 }
