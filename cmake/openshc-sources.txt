@@ -1,0 +1,4 @@
+src/OpenSHC/Map/Version/DeleteSeagull.cpp
+src/OpenSHC/Map/Version/UpgradeSetCurrentEntityID3000.cpp
+src/OpenSHC/Map/Version/SetFlagEntityColor.cpp
+src/OpenSHC/Map/Version/UpgradeFirst25Entities.cpp
