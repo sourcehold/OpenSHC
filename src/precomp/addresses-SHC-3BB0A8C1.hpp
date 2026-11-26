@@ -97604,11 +97604,11 @@ enum {
     SHC_3BB0A8C1_0x00ED3180 = 0x00ED3180,
     // label: DAT_CurrentRockID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED3198 = 0x00ED3198,
     // label: DAT_CurrentTreeID
     // location:
-    // type: /undefined4
+    // type: /int
     SHC_3BB0A8C1_0x00ED319C = 0x00ED319C,
     // type: /undefined4
     SHC_3BB0A8C1_0x00ED31A0 = 0x00ED31A0,
