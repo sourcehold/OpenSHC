@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/AI/Tribes/AITribeType.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
@@ -56,7 +57,8 @@ namespace Map {
                 }
                 if (!_supportTribeID) {
                     for (int _candidate = 1; _candidate < 1250; ++_candidate) {
-                        if (DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] == 4) {
+                        if (DAT_TroopValueState::instance.attackInfo.value3Array01[param_1]
+                            == Map::Enums::AWS_DELAYED_TARGET_ASSIGNMENT) {
                             break;
                         }
                         if (DAT_TribesState::instance.tribes[_candidate].tribeState != 0

@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Audio/SFX/SFXState.func.hpp"
 #include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -64,7 +65,7 @@ namespace Map {
                 <= DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID]) {
                 BOOLEnum isMission39 = DAT_GameCore::instance.missionNumber1to20 == 39;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[attackID] = 10000;
-                DAT_TroopValueState::instance.attackInfo.value3Array01[attackID] = 3;
+                DAT_TroopValueState::instance.attackInfo.value3Array01[attackID] = Map::Enums::AWS_ASSIGNING_TARGETS;
                 DAT_TroopValueState::instance.attackInfo.value10 = 0;
                 if ((isMission39) && (DAT_TroopValueState::instance.attackInfo.attacker == 4)) {
                     /*

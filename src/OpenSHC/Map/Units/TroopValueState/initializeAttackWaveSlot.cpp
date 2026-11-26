@@ -3,6 +3,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/IO/LowLevelMemory.func.hpp"
 #include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_LowLevelMemory.hpp"
@@ -15,7 +16,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00518180
         void TroopValueState::initializeAttackWaveSlot(int param_1, int param_2)
         {
-            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 0;
+            DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = Map::Enums::AWS_GATHERING;
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
             DAT_TroopValueState::instance.attackInfo.someIntArray2[param_1 - 1] = 0;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(

@@ -59,9 +59,8 @@ namespace Map {
                                 } else {
                                     DAT_TroopValueState::instance.attackInfo
                                         .archerPointArray[DAT_TroopValueState::instance.attackInfo.archerPointsNext]
-                                        .field0_0x0 = x;
-                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[_nextPointIndex]
-                                        .field1_0x4 = y;
+                                        .x = x;
+                                    DAT_TroopValueState::instance.attackInfo.archerPointArray[_nextPointIndex].y = y;
                                     DAT_TroopValueState::instance.attackInfo.archerPointArray[_nextPointIndex].tile
                                         = tile;
                                     DAT_TroopValueState::instance.attackInfo.archerPointArray[_nextPointIndex]

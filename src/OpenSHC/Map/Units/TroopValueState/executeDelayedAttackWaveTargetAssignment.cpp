@@ -3,6 +3,7 @@
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -35,7 +36,7 @@ namespace Map {
             BOOLEnum _canReachSignpostZone = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::canKeepReachSignpostZone,
                 DAT_GameState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, _playerID, param_1);
             if (!_canReachSignpostZone) {
-                DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
+                DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = Map::Enums::AWS_ASSIGNING_TARGETS;
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                 return;
             }

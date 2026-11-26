@@ -3,6 +3,7 @@
 #include "OpenSHC/Map.func.hpp"
 #include "OpenSHC/Map/Units/TribesState.func.hpp"
 #include "OpenSHC/Map/WildlifeState.func.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
 #include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
 
 #include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
@@ -34,9 +35,8 @@ namespace Map {
                     param_1, 2, 100000, Map::Units::STBT_0x3fb);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3fe, Map::Units::STBT_1, 0, 0x32);
-                DAT_TroopValueState::instance.attackInfo.casDis
-                    = MACRO_CALL_MEMBER(Map::WildlifeState_Func::getDistanceToNearestUnknownNonZero01FromSignpost,
-                        DAT_WildlifeState::ptr)();
+                DAT_TroopValueState::instance.attackInfo.casDis = MACRO_CALL_MEMBER(
+                    Map::WildlifeState_Func::getDistanceFromAttackSignpostToZoneProximity, DAT_WildlifeState::ptr)();
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::applyTribeBehaviorType, DAT_TribesState::ptr)(
                     param_1, Map::Units::STBT_3);
             }
@@ -50,10 +50,11 @@ namespace Map {
                     if (DAT_TroopValueState::instance.attackInfo.attacker == 8) {
                         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::playAttackAlarmSound, this)();
                         DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 10000;
-                        DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 3;
+                        DAT_TroopValueState::instance.attackInfo.value3Array01[param_1]
+                            = Map::Enums::AWS_ASSIGNING_TARGETS;
                         DAT_TroopValueState::instance.attackInfo.value10 = 0;
                     }
-                    DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = 1;
+                    DAT_TroopValueState::instance.attackInfo.value3Array01[param_1] = Map::Enums::AWS_ADVANCING;
                     DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                 }
             }

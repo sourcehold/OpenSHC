@@ -46,7 +46,6 @@ namespace Map {
             int _candidateTile;
             uint _totalHeight;
             int _tile;
-            int _offset;
             int _directionStep;
             int* _pValueCount;
             int _direction;
@@ -62,7 +61,6 @@ namespace Map {
             int _someLimit;
             ushort _area;
             int _startCon;
-            _offset = playerID * 96188;
             _isSolitary = DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY;
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].hack1 = 0;
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scale1 = 0;
@@ -260,10 +258,7 @@ namespace Map {
                                 && DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile]
                                     != '\0') {
                                 _tileDefaultHeight = DAT_TileMapState::instance.DefaultHeightLayer[_tile];
-                                // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
-                                _pValueCount = (int*)((
-                                    undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.moatValuesArray
-                                    + _offset + -0xc)));
+                                _pValueCount = &DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].moat1;
                                 *_pValueCount = (int)((undefined*)(*_pValueCount + 1));
                                 _pPathConnectionBase = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
                                 _pSpecialAreasBase = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
@@ -583,10 +578,7 @@ namespace Map {
                         if (DAT_BuildingDefinedData::instance.IsGateOrTowerArray[_buildingTypeInt]) {
                             if (DAT_TileMapState::instance.SEC_PathfindingCostTileMap1105[attackedPlayerID][_tile]
                                 != '\0') {
-                                // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
-                                _pValueCount = (int*)((
-                                    undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.gateValuesArray
-                                    + _offset + -0xc)));
+                                _pValueCount = &DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].gate1;
                                 *_pValueCount = (int)((undefined*)(*_pValueCount + 1));
                                 _pPathConnectionBase = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
                                 _pSpecialAreasBase = (undefined*)(DAT_TileMapState::instance.ptr_PathConnectionLayer);
@@ -666,10 +658,8 @@ namespace Map {
                                     DAT_TileMapState::instance.DAT_SomeY
                                         = (int)
                                               DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_tile];
-                                    // `+ -0xc` on purpose: `- 0xc` changes the instruction schedule
-                                    _pValueCount = (int*)((
-                                        undefined*)((int*)((int)DAT_TroopValueState::instance.attackInfo.townValuesArray
-                                        + _offset + -0xc)));
+                                    _pValueCount
+                                        = &DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].town1;
                                     *_pValueCount = (int)((undefined*)(*_pValueCount + 1));
                                     _pPathConnectionBase
                                         = (undefined*)(DAT_TileMapState::instance.ptr_SpecialAreasArray);
