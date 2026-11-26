@@ -89,35 +89,35 @@ namespace Map {
 
             void computeSiegeSpotScores(int attackedPlayerID, int attackingPlayerID);
 
-            undefined4 findEnemyWalls(int unitID);
+            int findEnemyWalls(int unitID);
 
             void setScale3(BOOLEnum includeAll, int playerID);
 
-            undefined4 findNearestAvailableScalePoint(int unitID);
+            int findNearestAvailableScalePoint(int unitID);
 
             void setTown2(BOOLEnum includeAll, int playerID);
 
-            undefined4 findEnemyBuildingsClosestToUnit(int unitID);
+            int findEnemyBuildingsClosestToUnit(int unitID);
 
             void countAvailablePeopleValueSlots(BOOLEnum includeOccupied);
 
             void countAvailableLordValueSlots(BOOLEnum includeOccupied);
 
-            undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
+            int calculateTile2PeoplValueClosestToUnit(int unitID);
 
             int findEnemyLord(int unitID);
 
             void setGate2(BOOLEnum includeAll, int playerID);
 
-            undefined4 findEnemyTowersOrGates(int unitID);
+            int findEnemyTowersOrGates(int unitID);
 
             void setWide3(BOOLEnum includeAll, int playerID);
 
-            undefined4 getClosestWideValueBasedOnPlayer(int playerID);
+            int getClosestWideValueBasedOnPlayer(int unitID);
 
             void setMoat3(BOOLEnum includeAll, int playerID);
 
-            undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
+            int calculateTile2MoatValueClosestToUnit(int unitID);
 
             int findNearestDiggableMoatPoint(int param_1);
 
@@ -151,7 +151,7 @@ namespace Map {
 
             void pruneStaleSupportPoints();
 
-            int assignTribeToSupportPoint(uint x, uint y, int tribeID);
+            int assignTribeToSupportPoint(int x, int y, int tribeID);
 
             int getSiegeIndexForTile(int tile);
 
@@ -172,7 +172,7 @@ namespace Map {
 
             void placeTunnelForEveryTunneler(int attackWave);
 
-            void addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
+            void addUnitToNewTribe(int unitID, int attackWave, AITribeType tribeType, int playerID);
 
             void exitSiegeEquipmentForWave(int wave);
 
@@ -248,7 +248,7 @@ namespace Map {
 
             void aiRecomputeAttacks2(BOOLEnum param_1, int param_2);
 
-            void aiRecomputeAttacks(undefined4 param_1, int param_2);
+            void aiRecomputeAttacks(int param_1, int param_2);
 
             void updateInProgressAttackWave(int attackID);
 

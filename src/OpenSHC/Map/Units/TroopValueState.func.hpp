@@ -97,7 +97,7 @@ namespace Map {
                 &TroopValueState::computeSiegeSpotScores)
             computeSiegeSpotScores;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519CC0,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519CC0,
                 &TroopValueState::findEnemyWalls)
             findEnemyWalls;
 
@@ -105,7 +105,7 @@ namespace Map {
                 &TroopValueState::setScale3)
             setScale3;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519E40,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519E40,
                 &TroopValueState::findNearestAvailableScalePoint)
             findNearestAvailableScalePoint;
 
@@ -113,7 +113,7 @@ namespace Map {
                 &TroopValueState::setTown2)
             setTown2;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519FB0,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x00519FB0,
                 &TroopValueState::findEnemyBuildingsClosestToUnit)
             findEnemyBuildingsClosestToUnit;
 
@@ -125,7 +125,7 @@ namespace Map {
                 &TroopValueState::countAvailableLordValueSlots)
             countAvailableLordValueSlots;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A140,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A140,
                 &TroopValueState::calculateTile2PeoplValueClosestToUnit)
             calculateTile2PeoplValueClosestToUnit;
 
@@ -137,7 +137,7 @@ namespace Map {
                 &TroopValueState::setGate2)
             setGate2;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A330,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A330,
                 &TroopValueState::findEnemyTowersOrGates)
             findEnemyTowersOrGates;
 
@@ -145,7 +145,7 @@ namespace Map {
                 &TroopValueState::setWide3)
             setWide3;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A5B0,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A5B0,
                 &TroopValueState::getClosestWideValueBasedOnPlayer)
             getClosestWideValueBasedOnPlayer;
 
@@ -153,7 +153,7 @@ namespace Map {
                 &TroopValueState::setMoat3)
             setMoat3;
 
-            MACRO_FUNCTION_RESOLVER(undefined4 (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A780,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int), false, Address::SHC_3BB0A8C1_0x0051A780,
                 &TroopValueState::calculateTile2MoatValueClosestToUnit)
             calculateTile2MoatValueClosestToUnit;
 
@@ -221,7 +221,7 @@ namespace Map {
                 &TroopValueState::pruneStaleSupportPoints)
             pruneStaleSupportPoints;
 
-            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(uint, uint, int), false, Address::SHC_3BB0A8C1_0x0051B190,
+            MACRO_FUNCTION_RESOLVER(int (TroopValueState::*)(int, int, int), false, Address::SHC_3BB0A8C1_0x0051B190,
                 &TroopValueState::assignTribeToSupportPoint)
             assignTribeToSupportPoint;
 
@@ -262,7 +262,7 @@ namespace Map {
                 &TroopValueState::placeTunnelForEveryTunneler)
             placeTunnelForEveryTunneler;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(undefined4, int, AITribeType, undefined4), false,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int, AITribeType, int), false,
                 Address::SHC_3BB0A8C1_0x0051BC70, &TroopValueState::addUnitToNewTribe)
             addUnitToNewTribe;
 
@@ -414,7 +414,7 @@ namespace Map {
                 &TroopValueState::aiRecomputeAttacks2)
             aiRecomputeAttacks2;
 
-            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(undefined4, int), false, Address::SHC_3BB0A8C1_0x005202B0,
+            MACRO_FUNCTION_RESOLVER(void (TroopValueState::*)(int, int), false, Address::SHC_3BB0A8C1_0x005202B0,
                 &TroopValueState::aiRecomputeAttacks)
             aiRecomputeAttacks;
 
