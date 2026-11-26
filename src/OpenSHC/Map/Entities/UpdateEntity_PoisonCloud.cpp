@@ -53,7 +53,7 @@ namespace Map {
             }
         }
         DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
-            = (short)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 16;
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 + 16;
         short const linkedID
             = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownDistanceRelatedValue;
         if (linkedID != 0) {
