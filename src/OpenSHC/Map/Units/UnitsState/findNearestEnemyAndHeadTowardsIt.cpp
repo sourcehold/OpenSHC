@@ -41,17 +41,19 @@ namespace Map {
             BOOLEnum _skipStanceSearch = FALSE;
             int _stanceBasedRange = 0;
             int _isRallying = 0;
-            if ((this->units[unitID].SA != 0
-                    || (this->units[unitID].movementType_OR_targetUnitID != 0
-                        && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION))
-                && this->units[unitID].tribeID != 0) {
-                _isRallying = DAT_TribesState::instance.tribes[this->units[unitID].tribeID].isRallyingUnk;
-                if (DAT_TribesState::instance.tribes[this->units[unitID].tribeID].unitStance
-                    == OpenSHC::Map::Units::Behavior::USE_DEFENSIVE) {
-                    _stanceBasedRange = 40;
-                } else if (DAT_TribesState::instance.tribes[this->units[unitID].tribeID].unitStance
-                    == OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE) {
-                    _stanceBasedRange = 200;
+            if (this->units[unitID].SA != 0
+                || (this->units[unitID].movementType_OR_targetUnitID != 0
+                    && this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION)) {
+                int const _tribeID = this->units[unitID].tribeID;
+                if (_tribeID != 0) {
+                    _isRallying = DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk;
+                    if (DAT_TribesState::instance.tribes[_tribeID].unitStance
+                        == OpenSHC::Map::Units::Behavior::USE_DEFENSIVE) {
+                        _stanceBasedRange = 40;
+                    } else if (DAT_TribesState::instance.tribes[_tribeID].unitStance
+                        == OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE) {
+                        _stanceBasedRange = 200;
+                    }
                 }
             }
             if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_UNIT_ATTACK_UNIT) {
@@ -69,11 +71,12 @@ namespace Map {
                 case OpenSHC::Map::Units::UT_A_ASSASSIN:
                 case OpenSHC::Map::Units::UT_A_SWORDSMAN:
                     _skipStanceSearch = FALSE;
-                    if (this->units[unitID].tribeID != 0) {
-                        int _tribeUnitID = DAT_TribesState::instance.tribes[this->units[unitID].tribeID].someUnitID;
+                    int const _unitTribeID = this->units[unitID].tribeID;
+                    if (_unitTribeID != 0) {
+                        int _tribeUnitID = DAT_TribesState::instance.tribes[_unitTribeID].someUnitID;
                         if (_tribeUnitID != 0
                             && this->units[_tribeUnitID].uid
-                                == DAT_TribesState::instance.tribes[this->units[unitID].tribeID].someUnitUID) {
+                                == DAT_TribesState::instance.tribes[_unitTribeID].someUnitUID) {
                             _skipStanceSearch = TRUE;
                             break;
                         }
