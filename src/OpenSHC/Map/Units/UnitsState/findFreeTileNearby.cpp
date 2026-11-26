@@ -97,7 +97,7 @@ namespace Map {
                 for (int i = 0; i < 9; ++i) {
                     uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].x + _originX;
                     uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].y + _originY;
-                    if (_checkX >= 400 || _checkY >= 400) {
+                    if (_checkX > 399 || _checkY > 399) {
                         continue;
                     }
                     if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
@@ -121,7 +121,7 @@ namespace Map {
                 for (int i = 0; i < 9; ++i) {
                     uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].x + _originX;
                     uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].y + _originY;
-                    if (_checkX >= 400 || _checkY >= 400) {
+                    if (_checkX > 399 || _checkY > 399) {
                         continue;
                     }
                     if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
@@ -145,7 +145,7 @@ namespace Map {
                 for (int i = 0; i < 9; ++i) {
                     uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].x + _originX;
                     uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].y + _originY;
-                    if (_checkX >= 400 || _checkY >= 400) {
+                    if (_checkX > 399 || _checkY > 399) {
                         continue;
                     }
                     if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
@@ -169,7 +169,7 @@ namespace Map {
                 for (int i = 0; i < 9; ++i) {
                     uint _checkX = DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].x + _originX;
                     uint _checkY = DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].y + _originY;
-                    if (_checkX >= 400 || _checkY >= 400) {
+                    if (_checkX > 399 || _checkY > 399) {
                         continue;
                     }
                     if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_checkX + _checkY * 400] == 0) {
