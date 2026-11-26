@@ -158,7 +158,7 @@ namespace Map {
                         return TRUE;
                     }
                 }
-                int const _savedDestinationX = this->units[unitID]._someX_2;
+                int const _savedDestinationX = (ushort)this->units[unitID]._someX_2;
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
