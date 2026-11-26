@@ -46,10 +46,10 @@ namespace Map {
                     .startResources[15] += refund;
                 return;
             }
-            this->units[unitID].disappearFadeAlphaCountdown = 0;
             if (MACRO_CALL_MEMBER(OpenSHC::Game::GameStateStructures_Func::playerHasACampground, DAT_GameState::ptr)(
                     this->units[unitID].owner)
                 != FALSE) {
+                this->units[unitID].disappearFadeAlphaCountdown = 0;
                 this->units[unitID].state_2 = 0;
                 this->units[unitID].cachedState = OpenSHC::Map::Units::States::US_DETERMINE_NEXT_STATEUnk;
                 this->units[unitID].unitTypeToChangeInto = OpenSHC::Map::Units::UT_PEASANT;
@@ -58,6 +58,7 @@ namespace Map {
                 this->units[unitID].isDisappearingUnk = 1;
                 return;
             }
+            this->units[unitID].disappearFadeAlphaCountdown = 0;
             this->units[unitID].updateTickTracker = 0;
             this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_DISAPPEAR;
             this->units[unitID].killedFlagUnk = 1;
