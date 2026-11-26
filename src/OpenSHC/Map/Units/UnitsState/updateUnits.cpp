@@ -397,11 +397,10 @@ namespace Map {
                         this->units[_targetID].field_0x39a = 1;
                     }
                 }
-                if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
-                    && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
-                           & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)
-                        == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng
-                            & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)) {
+                int const _noticeMask = this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk;
+                if (_noticeMask != 0
+                    && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk & _noticeMask)
+                        == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng & _noticeMask)) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner == 0) {
                         this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::computeDistanceToNearestEnemyForLegacyMissions, this)(
@@ -824,13 +823,12 @@ namespace Map {
                             _fadeAlpha = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_1_2
                                              [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
                         } else {
-                            byte const _fadeCounter = this->units[DAT_CurrentUnitSlotID::instance].fadeCounter;
                             if (_fadeType == 3) {
-                                _fadeAlpha
-                                    = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_3[(char)_fadeCounter];
+                                _fadeAlpha = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_3
+                                                 [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
                             } else {
-                                _fadeAlpha
-                                    = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_4[(char)_fadeCounter];
+                                _fadeAlpha = DAT_UnitPropertiesDefinedData::instance.FadeAlpha_Values_4
+                                                 [(char)this->units[DAT_CurrentUnitSlotID::instance].fadeCounter];
                             }
                         }
                         this->units[DAT_CurrentUnitSlotID::instance].disappearFadeAlphaCountdown = _fadeAlpha;
