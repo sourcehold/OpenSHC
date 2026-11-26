@@ -67,7 +67,7 @@ namespace Map {
             if (_worstPopularityReason != -1) {
                 if (DAT_UnitPropertiesDefinedData::instance.field_0x1225c == _worstPopularityReason) {
                     DAT_00ee1034::instance = DAT_00ee1034::instance + 1;
-                    if (DAT_00ee1034::instance > 1) {
+                    if ((int)DAT_00ee1034::instance >= 2) {
                         DAT_GameState::instance.mapAndTime.scenarioEventTimers[_worstPopularityReason] = 0;
                     }
                 } else {
@@ -176,9 +176,9 @@ namespace Map {
                 }
                 if (_weight != 0) {
                     _candidateCount = _candidateCount + 1;
-                    if (_bestSpeechID == -1
-                        || _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264 > _bestWeight) {
-                        _bestWeight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
+                    int const _score = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
+                    if (_bestSpeechID == -1 || _score > _bestWeight) {
+                        _bestWeight = _score;
                         _bestSpeechID = _candidateSpeechID;
                     }
                 }
@@ -252,7 +252,7 @@ namespace Map {
                     }
                 }
             }
-            if (_productivity > 100 || _weight != 0) {
+            if (_productivity > 100 || _weight > 0) {
                 if (_bestSpeechID == -1
                     || DAT_UnitPropertiesDefinedData::instance.field_0x12268 + _weight > _bestWeight) {
                     _bestSpeechID = _candidateSpeechID;
