@@ -12,7 +12,7 @@ namespace Map {
     {
         if (this->trees[treeID].uid == treeUID && this->trees[treeID].zeroUpTo2 == 0) {
             this->trees[treeID].stageRelated1 += healthDelta;
-            if ((short)this->trees[treeID].stageRelated1 <= 0) {
+            if (this->trees[treeID].stageRelated1 <= 0) {
                 this->trees[treeID].stageRelated1 = 0;
                 this->trees[treeID].zeroUpTo2 = 1;
                 this->trees[treeID].animationFrameIndex = 0;

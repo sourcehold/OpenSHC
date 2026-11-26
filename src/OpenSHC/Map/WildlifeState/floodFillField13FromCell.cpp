@@ -22,7 +22,7 @@ namespace Map {
             seedX = this->DAT_X10_Array_Section1034[this->candidateIndex];
             seedY = this->DAT_Y10_Array_Section1034[this->candidateIndex];
             this->casDisRelated = this->grid[seedX][seedY].field_0x34;
-            if ((int)this->casDisRelated <= 1) {
+            if (this->casDisRelated <= 1) {
                 return;
             }
             int const nextValue = this->casDisRelated - 1;
@@ -36,13 +36,13 @@ namespace Map {
                     this->DAT_X10_Array_Section1034[this->candidateIndex2] = x;
                     this->DAT_Y10_Array_Section1034[this->candidateIndex2] = y;
                     this->candidateIndex2++;
-                    if ((int)this->candidateIndex2 >= 1600) {
+                    if (this->candidateIndex2 >= 1600) {
                         this->candidateIndex2 = 0;
                     }
                 }
             }
             this->candidateIndex++;
-            if ((int)this->candidateIndex >= 1600) {
+            if (this->candidateIndex >= 1600) {
                 this->candidateIndex = 0;
             }
         }

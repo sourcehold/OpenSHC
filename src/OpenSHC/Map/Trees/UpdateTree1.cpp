@@ -77,8 +77,7 @@ namespace Map {
                     + 129;
             } else if (zeroUpTo2 == 2) {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 140
-                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
-                          .treeAdultHoodStageRelatedVisual3;
+                    - DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
@@ -103,8 +102,7 @@ namespace Map {
                     + 117;
             } else if (zeroUpTo2 == 2) {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 130
-                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
-                          .treeAdultHoodStageRelatedVisual3;
+                    - DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk
@@ -130,8 +128,7 @@ namespace Map {
                     + 100;
             } else if (zeroUpTo2 == 2) {
                 DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 118
-                    - (short)DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance]
-                          .treeAdultHoodStageRelatedVisual3;
+                    - DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].treeAdultHoodStageRelatedVisual3;
             } else {
                 if (DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].flag) {
                     DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk

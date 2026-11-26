@@ -11,7 +11,7 @@ namespace Map {
     void LandscapeState::setCurrentTimeOnSomeTrees()
     {
         DAT_00ed31a0::instance = timeGetTime();
-        for (DAT_CurrentTreeID::instance = 1; (int)DAT_CurrentTreeID::instance < countof(this->trees);
+        for (DAT_CurrentTreeID::instance = 1; DAT_CurrentTreeID::instance < countof(this->trees);
             DAT_CurrentTreeID::instance++) {
             short const state = this->trees[DAT_CurrentTreeID::instance].state;
             if (state != 0 && state != 3) {

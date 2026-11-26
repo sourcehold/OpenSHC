@@ -10,10 +10,10 @@ namespace Map {
         if (this->trees[treeID].uid != treeUID) {
             return;
         }
-        if ((short)this->trees[treeID].treeAdultHoodStageRelatedVisual3 > 0) {
+        if (this->trees[treeID].treeAdultHoodStageRelatedVisual3 > 0) {
             this->trees[treeID].treeAdultHoodStageRelatedVisual3--;
         }
-        if ((short)this->trees[treeID].treeAdultHoodStageRelatedVisual3 <= 0) {
+        if (this->trees[treeID].treeAdultHoodStageRelatedVisual3 <= 0) {
             this->trees[treeID].state = 3;
         }
         this->trees[treeID].zeroUpTo2 = 2;
