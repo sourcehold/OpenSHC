@@ -22,17 +22,16 @@ namespace Map {
             int const targetUnitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
-            // widen the search until a reachable tile is found
-            dword destinationTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
+            int destinationTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                 DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                 DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner, 12,
                 1);
-            if ((int)destinationTile <= 0) {
+            if (destinationTile <= 0) {
                 destinationTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20,
                     DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                     DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner,
                     30, 1);
-                if ((int)destinationTile <= 0) {
+                if (destinationTile <= 0) {
                     destinationTile = MACRO_CALL_MEMBER(
                         Map::Navigation::PathFindingState_Func::pathfindingRelated49ff20, DAT_PathFindingState::ptr)(
                         DAT_UnitsState::instance.units[targetUnitID].x, DAT_UnitsState::instance.units[targetUnitID].y,
@@ -41,7 +40,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 0);
-            if (0 < (int)destinationTile) {
+            if (0 < destinationTile) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
                     destinationTile
                         - DAT_ViewportRenderState::instance

@@ -21,10 +21,10 @@ namespace Map {
         {
             int const playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (DAT_TroopValueState::instance.attackInfo.knightTribeCount <= 0
-                || (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 10
-                || ((int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 100
+                || DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 10
+                || (DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 100
                     && DAT_GameState::instance.playerDataArray[playerID].previousSiegeWeaponsCount <= 0)
-                || ((byte)SEC_RNG::instance.currentNumber2 & 7)) {
+                || (SEC_RNG::instance.currentNumber2 & 7)) {
                 return;
             }
             int const siegeWeaponsCount = DAT_GameState::instance.playerDataArray[playerID].previousSiegeWeaponsCount;

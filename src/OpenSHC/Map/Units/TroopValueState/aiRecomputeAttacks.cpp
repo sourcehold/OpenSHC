@@ -21,7 +21,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005202B0
         void TroopValueState::aiRecomputeAttacks(undefined4 param_1, int param_2)
         {
-            int const playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
+            int const playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
                 = DAT_GameSynchronyState::instance.currentPlayerSlotID;

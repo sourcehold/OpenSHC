@@ -28,7 +28,6 @@ namespace Map {
             int const destinationYPosition = DAT_GameState::instance.playerDataArray[attackedPlayerID]
                                                  .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
                                                  .yEntry;
-            // i is zeroed before the guard in the original; declaring it in the for moves the store past the branch
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].wide2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].wide2; ++i) {

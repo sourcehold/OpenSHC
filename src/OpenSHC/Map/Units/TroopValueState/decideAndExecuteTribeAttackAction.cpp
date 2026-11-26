@@ -30,13 +30,13 @@ namespace Map {
                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findNearestEnemyUnitWithinDistance,
                     DAT_PathFindingState::ptr)(DAT_TribesState::instance.tribes[tribeID].owner,
                     DAT_UnitsState::instance.units[targetUnitID].x, DAT_UnitsState::instance.units[targetUnitID].y, 10);
-            if (enemyBuildingID && ((byte)SEC_RNG::instance.currentNumber2 & 1)) {
+            if (enemyBuildingID && (SEC_RNG::instance.currentNumber2 & 1)) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
                     Map::Units::UIT_ATTACK_BUILDING, enemyBuildingID,
                     DAT_BuildingsState::instance.buildings[enemyBuildingID].uid, 0);
                 return;
             }
-            if (enemyUnitID && ((byte)SEC_RNG::instance.currentNumber2 & 1)) {
+            if (enemyUnitID && (SEC_RNG::instance.currentNumber2 & 1)) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
                     Map::Units::UIT_UNIT_ATTACK_UNIT, enemyUnitID, DAT_UnitsState::instance.units[enemyUnitID].uid, 0);
                 return;
@@ -45,16 +45,15 @@ namespace Map {
                 tribeID, Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk, 0, 0, 0);
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 1);
-            // widen the search until a reachable tile is found
-            dword targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
+            int targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                 DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                 DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner, 6);
-            if ((int)targetTile <= 0) {
+            if (targetTile <= 0) {
                 targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                     DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                     DAT_UnitsState::instance.units[targetUnitID].y, DAT_UnitsState::instance.units[targetUnitID].owner,
                     30);
-                if ((int)targetTile <= 0) {
+                if (targetTile <= 0) {
                     targetTile = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findBestAttackTileByPathCost,
                         DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[targetUnitID].x,
                         DAT_UnitsState::instance.units[targetUnitID].y,
@@ -63,7 +62,7 @@ namespace Map {
             }
             MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::updatePathLinkageTileMap, DAT_BuildingsState::ptr)(
                 0);
-            if (0 < (int)targetTile) {
+            if (0 < targetTile) {
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(tribeID,
                     targetTile
                         - DAT_ViewportRenderState::instance

@@ -17,23 +17,19 @@ namespace Map {
             SomeTribeBehaviorType tribeBehaviorType, SomeTribeBehaviorType tribeBehaviorType2, int off1, int off2)
         {
             int assignedCount = 0;
-            // Stored from the local rather than as a literal: the literal form costs the register allocation.
             DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = assignedCount;
             for (int index = 0; index < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize; ++index) {
                 int const tribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[index];
                 if (11 <= DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[index]) {
-                    if (tribeBehaviorType2 != (SomeTribeBehaviorType)0) {
-                        DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
-                            = (SomeTribeBehaviorTypeShort)tribeBehaviorType2;
+                    if (tribeBehaviorType2 != 0) {
+                        DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = tribeBehaviorType2;
                     }
                 } else {
-                    DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit
-                        = ((short)index + 1) * (short)off2 + (short)off1;
-                    short const someCounter1 = (short)DAT_TroopValueState::instance.attackInfo.someCounter1;
-                    DAT_TribesState::instance.tribes[tribeID].someCounter1 = (short)assignedCount;
+                    DAT_TribesState::instance.tribes[tribeID].someUpdateUpperLimit = (index + 1) * off2 + off1;
+                    short const someCounter1 = DAT_TroopValueState::instance.attackInfo.someCounter1;
+                    DAT_TribesState::instance.tribes[tribeID].someCounter1 = assignedCount;
                     ++assignedCount;
-                    DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType
-                        = (SomeTribeBehaviorTypeShort)tribeBehaviorType;
+                    DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType = tribeBehaviorType;
                     DAT_TribesState::instance.tribes[tribeID].attackInfo_someCounter1 = someCounter1;
                     DAT_TroopValueState::instance.attackInfo.unknownTribeCounterRelated = assignedCount;
                 }

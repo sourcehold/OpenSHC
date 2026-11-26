@@ -18,13 +18,12 @@ namespace Map {
         {
             int const pointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSupportPointIndex,
                 DAT_PathFindingState::ptr)(200, x, y, tribeID);
-            // Nested on purpose: an early return here moves the return-0 block ahead of the body.
             if (pointIndex) {
                 short const oldPointIndex = DAT_TribesState::instance.tribes[tribeID].supportPointIndex;
                 DAT_TribesState::instance.tribes[tribeID].oldSupportPointIndex = oldPointIndex;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[oldPointIndex].tribeID = 0;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[oldPointIndex].tribeUID = 0;
-                DAT_TribesState::instance.tribes[tribeID].supportPointIndex = (short)pointIndex;
+                DAT_TribesState::instance.tribes[tribeID].supportPointIndex = pointIndex;
                 uint const pointY = DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].y;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].tribeUID
                     = DAT_TribesState::instance.tribes[tribeID].uid;

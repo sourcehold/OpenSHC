@@ -25,8 +25,8 @@ namespace Map {
         {
             int const playerID = DAT_TroopValueState::instance.attackInfo.playerID_0x2c850;
             if (DAT_TroopValueState::instance.attackInfo.macemenTribeCount <= 0
-                || (int)DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 4
-                || ((byte)SEC_RNG::instance.currentNumber2 & 7)) {
+                || DAT_TroopValueState::instance.attackInfo.attackInfoTickWrapCount < 4
+                || (SEC_RNG::instance.currentNumber2 & 7)) {
                 return;
             }
             BOOLEnum const isNotCampaignMission = DAT_GameCore::instance.gameMode_2 != Game::GM_CAMPAIGN_MISSION;

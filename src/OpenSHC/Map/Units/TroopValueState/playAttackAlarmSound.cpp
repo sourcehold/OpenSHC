@@ -20,22 +20,18 @@ namespace Map {
                 Audio::MSS::SoundSystem_Func::playBattleGloryMusicIfConditionsMet, DAT_SoundSystemState::ptr)();
             switch (DAT_TroopValueState::instance.attackInfo.attacker) {
             case 5:
-                // "drumhorn.wav"
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
                     S_DRUMHORN_WAV_005ABB58);
                 break;
             case 2:
-                // "battlehorn.wav"
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
                     S_BATTLEHORN_WAV_005A77D8);
                 break;
             case 3:
-                // "battlehorn.wav"
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
                     S_BATTLEHORN_WAV_005A77D8);
                 break;
             case 4:
-                // "battlehorn.wav"
                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playOnSpeechSfxStream, DAT_SFXState::ptr)(
                     S_BATTLEHORN_WAV_005A77D8);
                 break;

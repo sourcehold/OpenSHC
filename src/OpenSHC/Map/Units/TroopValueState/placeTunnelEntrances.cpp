@@ -21,13 +21,9 @@ namespace Map {
         int TroopValueState::placeTunnelEntrances(int tribeID)
         {
             int const unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
-            /*
-              finds a route from target to siege engine location?
-             */
             int const tentPointIndex = MACRO_CALL_MEMBER(
                 Map::Navigation::PathFindingState_Func::algFindAttackAngle, DAT_PathFindingState::ptr)(
                 200, DAT_UnitsState::instance.units[unitID].x, DAT_UnitsState::instance.units[unitID].y, tribeID);
-            // an early return here instead of this nesting moves the shared "return 0" epilogue (measured)
             if (tentPointIndex) {
                 short const previousSiegeIndex = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
                 int const tribeUID = DAT_TribesState::instance.tribes[tribeID].uid;
@@ -40,7 +36,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[tentPointIndex].tribeID = tribeID;
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[tentPointIndex].three = 3;
                 int const tentPointX = DAT_TroopValueState::instance.attackInfo.tentPointsValues[tentPointIndex].x;
-                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = (short)tentPointIndex;
+                DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1 = tentPointIndex;
                 MACRO_CALL_MEMBER(Map::TileMapState_Func::placeBuilding, DAT_TileMapState::ptr)(
                     playerID, tentPointX - 1, tentPointY - 1, Commands::M_MAPPER_TUNNEL_CONSTRUCTION, 3, 15);
                 int const buildingID = DAT_TileMapState::instance.placedBuildingID;
@@ -49,8 +45,8 @@ namespace Map {
                 }
                 DAT_BuildingsState::instance.buildings[buildingID].attackWave
                     = DAT_TribesState::instance.tribes[tribeID].attackWave;
-                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(tribeID,
-                    (UnitInstructionType)21, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeAnInstruction, DAT_TribesState::ptr)(
+                    tribeID, UIT_DIG_TUNNEL, buildingID, DAT_BuildingsState::instance.buildings[buildingID].uid, 0);
                 return tentPointIndex;
             }
             return 0;

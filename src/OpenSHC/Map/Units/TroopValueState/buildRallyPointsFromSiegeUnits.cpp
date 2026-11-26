@@ -15,7 +15,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Units {
 
-        using AI::Tribes::AITribeType;
         using WindowsHelper::Enums::BOOLEnum;
 
         // FUNCTION: STRONGHOLDCRUSADER 0x00519690
@@ -32,9 +31,8 @@ namespace Map {
                 if (!fullIDIsMinus1) {
                     continue;
                 }
-                // 22 and 23 have no AITribeType constant yet; they are the stone-throwing siege tribes
-                if (DAT_TribesState::instance.tribes[siegeTribeID].tribeType != (AITribeType)22
-                    && DAT_TribesState::instance.tribes[siegeTribeID].tribeType != (AITribeType)23) {
+                if (DAT_TribesState::instance.tribes[siegeTribeID].tribeType != AI::Tribes::AITT_CATAPULT
+                    && DAT_TribesState::instance.tribes[siegeTribeID].tribeType != AI::Tribes::AITT_TREBUCHET) {
                     continue;
                 }
                 int const unitID = DAT_TribesState::instance.tribes[siegeTribeID].selectionTargetUnitID;

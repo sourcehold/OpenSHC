@@ -25,14 +25,10 @@ namespace Map {
                 = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::algFindAttackAngle,
                     DAT_PathFindingState::ptr)(200, DAT_UnitsState::instance.units[targetUnitID].x,
                     DAT_UnitsState::instance.units[targetUnitID].y, tribeID);
-            // the early-return form moves the cold return block and changes the asm
             if (attackLocationIndex) {
                 short const previousSiegeIndex = DAT_TribesState::instance.tribes[tribeID].siegeIndexValue1;
                 int const tribeUID = DAT_TribesState::instance.tribes[tribeID].uid;
                 DAT_TribesState::instance.tribes[tribeID].siegeIndexValue2 = previousSiegeIndex;
-                /*
-                  fixme
-                 */
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[previousSiegeIndex].tribeID = 0;
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[previousSiegeIndex].tribeUID = 0;
                 DAT_TroopValueState::instance.attackInfo.tentPointsValues[attackLocationIndex].tribeUID = tribeUID;

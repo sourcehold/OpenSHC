@@ -17,7 +17,6 @@ namespace Map {
         {
             int minDistance = 1000;
             int bestIndex = -1;
-            // i is zeroed before the guard in the original; declaring it in the for moves the store past the branch
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.people2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.people2; ++i) {

@@ -1,6 +1,7 @@
 #include "../TroopValueState.func.hpp"
 
 #include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/MapConstants.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
@@ -19,7 +20,7 @@ namespace Map {
                 if (tile <= 0) {
                     continue;
                 }
-                if (80400 <= tile) {
+                if (MC_MAP_TILES_COUNT <= tile) {
                     DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].tile = 0;
                 }
                 if (DAT_TroopValueState::instance.attackInfo.spottedEnemyTiles[i].value == 100) {

@@ -20,7 +20,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D730
         void TroopValueState::updateActiveAttackWaveState(int attackWave)
         {
-            int playerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
+            int playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
             if (DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
                 && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
                 playerID = 2;

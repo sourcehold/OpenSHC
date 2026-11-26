@@ -31,7 +31,6 @@ namespace Map {
                 MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                     DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
                     DAT_UnitsState::instance.units[unitID].y, fromXPosition, fromYPosition);
-                // smaller buildings count as further away
                 int const distance = DAT_DirectionAlgorithmState::instance.distanceHigh
                     + (100 - DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[i].size)
                         * 2;
@@ -44,7 +43,6 @@ namespace Map {
                     bestIndex = i;
                 }
             }
-            // "if (bestIndex <= -1) return 0;" moves the cold return block and changes the asm
             if (-1 < bestIndex) {
                 DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].townValuesArray[bestIndex].unitID
                     = unitID;
