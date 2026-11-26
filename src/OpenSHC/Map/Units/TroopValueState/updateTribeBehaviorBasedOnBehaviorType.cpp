@@ -36,7 +36,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051D7F0
         void TroopValueState::updateTribeBehaviorBasedOnBehaviorType(int tribeID)
         {
-            byte* _pTribeCounter;
             short _updateCounter;
             short _updateUpperLimit;
             short _rallyPointY;
@@ -58,11 +57,11 @@ namespace Map {
                     = (short)DAT_TroopValueState::instance.attackInfo.index;
             }
             _attackWave_2 = (int)DAT_TribesState::instance.tribes[tribeID].attackWave;
-            _pTribeCounter = DAT_TroopValueState::instance.attackInfo.nof_tribes + _attackWave_2;
-            *_pTribeCounter = *_pTribeCounter + 1;
+            DAT_TroopValueState::instance.attackInfo.nof_tribes[_attackWave_2]
+                = DAT_TroopValueState::instance.attackInfo.nof_tribes[_attackWave_2] + 1;
             if (DAT_TribesState::instance.tribes[tribeID].percentageMovingUnk <= 0) {
-                _pTribeCounter = DAT_TroopValueState::instance.attackInfo.unknownByteArray02 + _attackWave_2;
-                *_pTribeCounter = *_pTribeCounter + 1;
+                DAT_TroopValueState::instance.attackInfo.unknownByteArray02[_attackWave_2]
+                    = DAT_TroopValueState::instance.attackInfo.unknownByteArray02[_attackWave_2] + 1;
             }
             _tribeBehaviorType = (int)(short)DAT_TribesState::instance.tribes[tribeID].tribeBehaviorType;
             DAT_TribesState::instance.tribes[tribeID].unknownAttackRelatedUpdateCounter
