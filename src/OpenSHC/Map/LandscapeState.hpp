@@ -85,7 +85,7 @@ namespace Map {
 
         void setTreeSpreadInterval();
 
-        void killEveryFifthTree();
+        void ageFourFifthsOfGrowingTrees();
 
         BOOLEnum setupBabyTreeLocation(uint treeID, int treeType, uint x, uint y);
 

@@ -31,11 +31,11 @@ namespace Map {
         // SIZE: 0x000AC5E8
         class EntityState {
         public:
-            undefined4 totalEntityCount; // 0x00000000 length: 4
-            undefined4 maxEntityCount; // 0x00000004 length: 4
+            int totalEntityCount; // 0x00000000 length: 4
+            int maxEntityCount; // 0x00000004 length: 4
             int everyTenTicks; // 0x00000008 length: 4
             int lineOfSightClearanceSteps; // 0x0000000C length: 4
-            undefined4 fireCount; // 0x00000010 length: 4
+            int fireCount; // 0x00000010 length: 4
             Entity entityArray[3000]; // 0x00000014 length: 696000
             ExtraEntityInfo seagullArray[100]; // 0x000A9ED4 length: 10000
             DWORD classConstructionTime; // 0x000AC5E4 length: 4
