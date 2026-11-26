@@ -419,7 +419,7 @@ SHC_3BB0A8C1_0x00401400 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401430 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00401460 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401460 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401540 | 100.0% | Reimplemented
 
@@ -429,9 +429,9 @@ SHC_3BB0A8C1_0x004015D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004015F0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00401620 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401620 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00401690 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401690 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004016E0 | 0.0% | Pending
 
@@ -441,13 +441,13 @@ SHC_3BB0A8C1_0x00401880 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401910 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004019D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004019D0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401A50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401AE0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00401B20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00401B20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00401B60 | 100.0% | Reimplemented
 
