@@ -13,7 +13,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A140
-        undefined4 TroopValueState::calculateTile2PeoplValueClosestToUnit(int unitID)
+        int TroopValueState::calculateTile2PeoplValueClosestToUnit(int unitID)
         {
             int minDistance = 1000;
             int bestIndex = -1;

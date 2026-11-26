@@ -13,7 +13,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A330
-        undefined4 TroopValueState::findEnemyTowersOrGates(int unitID)
+        int TroopValueState::findEnemyTowersOrGates(int unitID)
         {
             int const owner = DAT_UnitsState::instance.units[unitID].owner;
             int minDistance = 1000;
@@ -42,7 +42,7 @@ namespace Map {
                 }
             }
             if (-1 < bestIndex) {
-                undefined4 const bestTile
+                int const bestTile
                     = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].gateValuesArray[bestIndex].tile2;
                 DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].gateValuesArray[bestIndex].unitID
                     = unitID;

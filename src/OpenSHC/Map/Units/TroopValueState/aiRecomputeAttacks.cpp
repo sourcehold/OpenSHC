@@ -19,7 +19,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x005202B0
-        void TroopValueState::aiRecomputeAttacks(undefined4 param_1, int param_2)
+        void TroopValueState::aiRecomputeAttacks(int param_1, int param_2)
         {
             int const playerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[param_2];
             MACRO_CALL_MEMBER(Util::Timing::Stopwatch_Func::start, DAT_UnknownStopwatch::ptr)();

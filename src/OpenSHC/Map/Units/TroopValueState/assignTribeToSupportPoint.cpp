@@ -14,7 +14,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B190
-        int TroopValueState::assignTribeToSupportPoint(uint x, uint y, int tribeID)
+        int TroopValueState::assignTribeToSupportPoint(int x, int y, int tribeID)
         {
             int const pointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findSupportPointIndex,
                 DAT_PathFindingState::ptr)(200, x, y, tribeID);
@@ -24,7 +24,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[oldPointIndex].tribeID = 0;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[oldPointIndex].tribeUID = 0;
                 DAT_TribesState::instance.tribes[tribeID].supportPointIndex = pointIndex;
-                uint const pointY = DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].y;
+                int const pointY = DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].y;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].tribeUID
                     = DAT_TribesState::instance.tribes[tribeID].uid;
                 DAT_TroopValueState::instance.attackInfo.supportPointsArray[pointIndex].tribeID = tribeID;

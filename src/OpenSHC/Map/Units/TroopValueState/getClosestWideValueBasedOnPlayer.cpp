@@ -15,9 +15,9 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A5B0
-        undefined4 TroopValueState::getClosestWideValueBasedOnPlayer(int playerID)
+        int TroopValueState::getClosestWideValueBasedOnPlayer(int unitID)
         {
-            int const owner = DAT_UnitsState::instance.units[playerID].owner;
+            int const owner = DAT_UnitsState::instance.units[unitID].owner;
             int minDistance = 1000;
             int bestIndex = -1;
             int const attackedPlayerID = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1]
@@ -43,8 +43,8 @@ namespace Map {
                         = DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].wideValuesArray[i].tile2
                         - DAT_ViewportRenderState::instance.translationMatrix[fromYPosition].addXgetTile;
                     MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                        DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[playerID].x,
-                        DAT_UnitsState::instance.units[playerID].y, fromXPosition, fromYPosition);
+                        DAT_DirectionAlgorithmState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                        DAT_UnitsState::instance.units[unitID].y, fromXPosition, fromYPosition);
                     int distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
                     MACRO_CALL_MEMBER(Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
                         DAT_DirectionAlgorithmState::ptr)(
@@ -63,7 +63,7 @@ namespace Map {
                     return 0;
                 }
                 DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].wideValuesArray[bestIndex].unitID
-                    = playerID;
+                    = unitID;
                 return DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].wideValuesArray[bestIndex].tile2;
             }
             return 0;
