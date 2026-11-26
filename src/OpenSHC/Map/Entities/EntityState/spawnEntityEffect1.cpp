@@ -21,7 +21,7 @@ namespace Map {
                     return 0;
                 }
             }
-            if (entityID >= (int)this->maxEntityCount) {
+            if (entityID >= this->maxEntityCount) {
                 this->maxEntityCount = entityID + 1;
             }
             this->everyTenTicks = entityID;

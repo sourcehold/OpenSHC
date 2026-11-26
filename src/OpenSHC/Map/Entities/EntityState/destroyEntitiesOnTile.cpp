@@ -16,7 +16,7 @@ namespace Map {
                 == 0) {
                 return;
             }
-            for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
+            for (int entityID = 1; entityID < this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState == 2
                     && (this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FLAG_1
                         || this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FLAG_4

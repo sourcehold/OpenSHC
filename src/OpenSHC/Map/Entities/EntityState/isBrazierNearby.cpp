@@ -12,7 +12,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00401A50
         BOOLEnum EntityState::isBrazierNearby(int unitX, int unitY, int unitZ)
         {
-            for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
+            for (int entityID = 1; entityID < this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState == 2
                     && this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_BRAZIER) {
                     MACRO_CALL_MEMBER(

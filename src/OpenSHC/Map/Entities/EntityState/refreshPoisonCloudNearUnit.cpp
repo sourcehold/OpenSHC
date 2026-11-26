@@ -13,7 +13,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00401880
         void EntityState::refreshPoisonCloudNearUnit(int unitID)
         {
-            for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
+            for (int entityID = 1; entityID < this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState == 2
                     && this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_COW_POISON_CLOUD
                     && this->entityArray[entityID].unknownAnimationFrameRelated <= 1000) {

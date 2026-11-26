@@ -13,7 +13,7 @@ namespace Map {
         void EntityState::recountActiveFires()
         {
             DAT_EntityState::instance.fireCount = 0;
-            for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
+            for (int entityID = 1; entityID < this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState != 0 && this->entityArray[entityID].logicalState == 2
                     && this->entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FIRE) {
                     DAT_TileMapState::instance.OccupancyLayer[this->entityArray[entityID].tile] |= 1

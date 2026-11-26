@@ -24,7 +24,7 @@ namespace Map {
             int nearestDistance = 10000;
             int const unitArea
                 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
-            for (int entityID = 1; entityID < (int)this->maxEntityCount; entityID++) {
+            for (int entityID = 1; entityID < this->maxEntityCount; entityID++) {
                 if (this->entityArray[entityID].logicalState != 2
                     || this->entityArray[entityID].entityType != OpenSHC::Map::Entities::ET_COW_POISON_CLOUD
                     || this->entityArray[entityID].unknownAnimationFrameRelated > 1000
