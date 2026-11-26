@@ -24,9 +24,9 @@ namespace Map {
     public:
         WildlifeGridElement grid[40][40]; // 0x00000000 length: 256000
         int DAT_DebugDataMapDataDisplayType; // 0x0003E800 length: 4
-        undefined4 casDisRelated; // 0x0003E804 length: 4
-        undefined4 candidateIndex; // 0x0003E808 length: 4
-        undefined4 candidateIndex2; // 0x0003E80C length: 4
+        int casDisRelated; // 0x0003E804 length: 4
+        int candidateIndex; // 0x0003E808 length: 4
+        int candidateIndex2; // 0x0003E80C length: 4
         short DAT_Y10_Array_Section1034[1600]; // 0x0003E810 length: 3200
         short DAT_X10_Array_Section1034[1600]; // 0x0003F490 length: 3200
 
@@ -57,13 +57,13 @@ namespace Map {
 
         undefined4 hasAdjacentCellWithField24Or25(int param_1, int param_2);
 
-        BOOLEnum isSuitableWildlifeSpawnCell(int param_1, int param_2);
+        BOOLEnum isAttackStagingCandidateCell(int cellX, int cellY);
 
-        void floodFillUnknownNonZero01FromCell(int param_1, int param_2, int param_3);
+        void floodFillZoneProximityFromCell(int cellX, int cellY, int strength);
 
         void floodFillCasDisFromSignpost();
 
-        int getDistanceToNearestUnknownNonZero01FromSignpost();
+        int getDistanceFromAttackSignpostToZoneProximity();
 
         void updateWildlife();
 
