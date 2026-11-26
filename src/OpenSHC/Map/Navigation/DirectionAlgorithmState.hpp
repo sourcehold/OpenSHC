@@ -6,80 +6,59 @@
   path: 'OpenSHC/Map/Navigation/DirectionAlgorithmState.hpp'
 */
 
-
-
 #pragma once
 
-
-
-
-
-
 namespace OpenSHC {
-    namespace Map {
-        namespace Navigation {
-            
+namespace Map {
+    namespace Navigation {
 
+#pragma pack(push, 1)
 
-            #pragma pack(push, 1)
+        // SIZE: 0x00000014
+        class DirectionAlgorithmState {
+        public:
+            int distanceX; // 0x00000000 length: 4
+            int distanceY; // 0x00000004 length: 4
+            int distanceLow; // 0x00000008 length: 4
+            int distanceHigh; // 0x0000000C length: 4
+            int orientation; // 0x00000010 length: 4
 
-            // SIZE: 0x00000014
-            class DirectionAlgorithmState
-            {
-              public:
-                int distanceX; // 0x00000000 length: 4
-                int distanceY; // 0x00000004 length: 4
-                int distanceLow; // 0x00000008 length: 4
-                int distanceHigh; // 0x0000000C length: 4
-                int orientation; // 0x00000010 length: 4
-                  
-              private:
-                DirectionAlgorithmState(DirectionAlgorithmState const&);
-                void operator=(DirectionAlgorithmState const&);
+        private:
+            DirectionAlgorithmState(DirectionAlgorithmState const&);
+            void operator=(DirectionAlgorithmState const&);
 
+        public:
+            DirectionAlgorithmState() {};
+            ~DirectionAlgorithmState() {};
 
+            int computeHealthPercentage(int param_1, int param_2);
 
+            void calculateOrientation(
+                int currentXPosition, int currentYPosition, int destinationXPosition, int destinationYPosition);
 
+            void calculateOrientationFromTiles(int param_1, int param_2);
 
+            void calculatePreferredRelativeOrientation(int param_1, int param_2, int param_3, int param_4);
 
-              public:
-                DirectionAlgorithmState() {};
-                ~DirectionAlgorithmState() {};
-               
+            void somethingWithProjectileDistance(int x, int y, int targetX, int targetY);
 
-                
+            int setAxisBasedDistanceResult(
+                int destinationXPosition, int destinationYPosition, int fromXPosition, int fromYPosition);
 
-                
-                int computeHealthPercentage(int param_1, int param_2);
-                
-                void calculateOrientation(int currentXPosition, int currentYPosition, int destinationXPosition, int destinationYPosition);
-                
-                void calculateOrientationFromTiles(int param_1, int param_2);
-                
-                void calculatePreferredRelativeOrientation(int param_1, int param_2, int param_3, int param_4);
-                
-                void somethingWithProjectileDistance(int x, int y, int targetX, int targetY);
-                
-                int setAxisBasedDistanceResult(int destinationXPosition, int destinationYPosition, int fromXPosition, int fromYPosition);
-                
-                int getMouseVectorLengthBasedOnDirection(int storedScreenSpaceX, int storedScreenSpaceY, int screenSpaceX, int screenSpaceY, int orientation);
-                
-                uint computeHash(int byteCount, int * address);
-                
-                uint computeMaskedBitAccumulator(int param_1, uint * param_2, uint param_3);
-                
-                byte rotateByteLeft(byte value, int bits);
-                
-              
-            };
+            int getMouseVectorLengthBasedOnDirection(
+                int storedScreenSpaceX, int storedScreenSpaceY, int screenSpaceX, int screenSpaceY, int orientation);
 
-            static_assert_cpp98_obj(sizeof(DirectionAlgorithmState) == 20, DirectionAlgorithmState);
+            uint computeHash(int byteCount, int* address);
 
-            #pragma pack(pop)
+            uint computeMaskedBitAccumulator(int param_1, uint* param_2, uint param_3);
 
+            byte rotateByteLeft(byte value, int bits);
+        };
 
+        static_assert_cpp98_obj(sizeof(DirectionAlgorithmState) == 20, DirectionAlgorithmState);
 
+#pragma pack(pop)
 
-        } // namespace Navigation
-    } // namespace Map
+    } // namespace Navigation
+} // namespace Map
 } // namespace OpenSHC
