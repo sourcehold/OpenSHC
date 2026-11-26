@@ -43,10 +43,10 @@ namespace Map {
                disease cloud of a poisoned cow
              */
 
-            int const _tribeID = this->units[unitID].tribeID;
             BOOLEnum _unitIsSiegeEngine = FALSE;
             BOOLEnum _siegeProjectile = FALSE;
             BOOLEnum _usesFemaleDeathScream = FALSE;
+            int const _tribeID = this->units[unitID].tribeID;
             UnitTypeShort const _unitType = this->units[unitID].unitType;
             int const _victimType = _unitType;
             int const _shooterID = DAT_EntityState::instance.entityArray[entityID].unitID_OR_seaGullID;
@@ -170,11 +170,12 @@ namespace Map {
                 }
                 _unitHeight = 42;
             }
-            if (_entityType == OpenSHC::Map::Entities::ET_TREBUCHET
-                || _entityType == OpenSHC::Map::Entities::ET_CATAPULT
-                || _entityType == OpenSHC::Map::Entities::ET_MANGONEL
-                || _entityType == OpenSHC::Map::Entities::ET_BALLISTA
-                || _entityType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
+            if (DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_TREBUCHET
+                || DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_CATAPULT
+                || DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_MANGONEL
+                || DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_BALLISTA
+                || DAT_EntityState::instance.entityArray[entityID].entityType
+                    == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
                 _siegeProjectile = TRUE;
             }
             int const _unitPlayerID = this->units[unitID].owner;
