@@ -26,7 +26,7 @@ namespace Map {
                 tribeID = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribeForPlayer, DAT_TribesState::ptr)(
                     playerID);
             } else {
-                int wavePlayerID = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
+                int wavePlayerID = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[attackWave];
                 if (!wavePlayerID) {
                     wavePlayerID = 2;
                 }

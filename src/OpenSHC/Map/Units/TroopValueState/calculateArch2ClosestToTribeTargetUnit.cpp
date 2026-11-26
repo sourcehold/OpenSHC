@@ -20,8 +20,6 @@ namespace Map {
             int const unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
             int minDistance = 1000;
             int bestIndex = -1;
-            // the guard around the loop stays: a plain for loop with the bestIndex test after it changes the asm
-            // (measured)
             int i = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.arch2) {
                 for (; i < DAT_TroopValueState::instance.attackInfo.arch2; ++i) {

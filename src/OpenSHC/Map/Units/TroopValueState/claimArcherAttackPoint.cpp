@@ -20,7 +20,6 @@ namespace Map {
             int const unitID = DAT_TribesState::instance.tribes[param_1].selectionTargetUnitID;
             int pointIndex = MACRO_CALL_MEMBER(
                 Map::Units::TribesState_Func::tribeHasActiveLaddermanUnit, DAT_TribesState::ptr)(param_1);
-            // Nested on purpose: an early return here moves the shared return-0 block ahead of the body.
             if (!pointIndex) {
                 pointIndex = MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::findArcherRelatedAttackInfoIndex,
                     DAT_PathFindingState::ptr)(
@@ -38,7 +37,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1002].unitID = tribeUID;
                 uint const pointX
                     = DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1001].buildingID;
-                DAT_TribesState::instance.tribes[param_1].archerRelated = (short)pointIndex;
+                DAT_TribesState::instance.tribes[param_1].archerRelated = pointIndex;
                 DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1002].buildingID = param_1;
                 DAT_TroopValueState::instance.attackInfo.arch2ValuesArray[pointIndex * 2 + 1003].tile = 3;
                 MACRO_CALL_MEMBER(Map::Units::TribesState_Func::giveTribeMoveInstruction, DAT_TribesState::ptr)(

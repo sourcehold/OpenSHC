@@ -68,7 +68,7 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.attackWaveTicker[0] = 0;
             for (int wave = 1; wave < countof(DAT_TroopValueState::instance.attackInfo.nof_tribes); ++wave) {
                 DAT_TroopValueState::instance.attackInfo.attacker
-                    = (char)DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[wave];
+                    = DAT_TroopValueState::instance.attackInfo.attackWavePlayerIDArray[wave];
                 if (DAT_TroopValueState::instance.attackInfo.attacker == 1) {
                     continue;
                 }

@@ -22,7 +22,6 @@ namespace Map {
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
                 int direction = 0;
                 int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
-                // the four cardinal neighbours, at every second entry of the clockwise direction tables
                 for (; direction < 4; ++direction) {
                     if (DAT_TileMapState::instance
                             .AIInfoLayer[tile + DAT_TileMapState::instance.directionTranslationMatrix[y][direction * 2]]

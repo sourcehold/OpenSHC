@@ -18,7 +18,6 @@ namespace Map {
             int const owner = DAT_UnitsState::instance.units[unitID].owner;
             int minDistance = 1000;
             int bestIndex = -1;
-            // one counter shared by the three loops: a fresh one per loop changes the stack layout
             int i;
             for (i = 0; i < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].some1000ArrayIndex_2; ++i) {
                 if (5999 <= DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].gateValuesArray[i].buildingID
@@ -49,7 +48,6 @@ namespace Map {
                     = unitID;
                 return bestTile;
             }
-            // no free gate left: release every claim and search again
             for (i = 0; i < DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].some1000ArrayIndex_2; ++i) {
                 DAT_TroopValueState::instance.attackInfo.playerInfo[owner - 1].gateValuesArray[i].unitID = 0;
             }

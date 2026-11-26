@@ -20,7 +20,6 @@ namespace Map {
                     continue;
                 }
                 int const y = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
-                // direction is declared before x on purpose: declaring it in the for changes the register allocation
                 int direction = 0;
                 int const x = tile - DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile;
                 for (; direction < 4; ++direction) {

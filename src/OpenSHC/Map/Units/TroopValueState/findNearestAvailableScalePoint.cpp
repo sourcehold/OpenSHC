@@ -44,7 +44,6 @@ namespace Map {
                     bestIndex = i;
                 }
             }
-            // "if (bestIndex <= -1) return 0;" moves the cold return block and changes the asm
             if (-1 < bestIndex) {
                 DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].scaleValuesArray[bestIndex].unitID
                     = unitID;
