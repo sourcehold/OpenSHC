@@ -12,7 +12,6 @@
 #include "OpenSHC/Map/ArcherAttackPoint.hpp"
 #include "OpenSHC/Map/AttackInfoPitchRelated.hpp"
 #include "OpenSHC/Map/AttackInfoSubArrayElement1.hpp"
-#include "OpenSHC/Map/AttackInfoSubArrayElement2.hpp"
 #include "OpenSHC/Map/AttackInfoSubArrayElement3.hpp"
 #include "OpenSHC/Map/AttackInfoSubElement.hpp"
 #include "OpenSHC/Map/Enums/AttackWaveState.hpp"
@@ -26,7 +25,6 @@ namespace Map {
     using OpenSHC::Map::ArcherAttackPoint;
     using OpenSHC::Map::AttackInfoPitchRelated;
     using OpenSHC::Map::AttackInfoSubArrayElement1;
-    using OpenSHC::Map::AttackInfoSubArrayElement2;
     using OpenSHC::Map::AttackInfoSubArrayElement3;
     using OpenSHC::Map::AttackInfoSubElement;
     using OpenSHC::Map::Enums::AttackWaveState;
@@ -129,14 +127,7 @@ namespace Map {
         int lord1; // 0x0002C860 length: 4
         int lord3; // 0x0002C864 length: 4
         int lord2; // 0x0002C868 length: 4
-        AttackInfoSubArrayElement1 lordValuesArray[917]; // 0x0002C86C length: 14672
-        undefined1 padding_0x301bc[4]; // 0x000301BC length: 4
-        int unknownPlayerID_0x301c0; // 0x000301C0 length: 4
-        int hackValue1; // 0x000301C4 length: 4
-        int hackValue2; // 0x000301C8 length: 4
-        int hackValue3; // 0x000301CC length: 4
-        AttackInfoSubArrayElement2 hackValuesArray[82]; // 0x000301D0 length: 1312
-        undefined1 padding_0x306f0[12]; // 0x000306F0 length: 12
+        AttackInfoSubArrayElement1 lordValuesArray[1001]; // 0x0002C86C length: 16016
         int inv_count; // 0x000306FC length: 4
         AttackWaveState value3Array01[50]; // 0x00030700 length: 200
         int attackWaveTicker[50]; // 0x000307C8 length: 200
@@ -159,13 +150,7 @@ namespace Map {
         int people1; // 0x00042748 length: 4
         int people2; // 0x0004274C length: 4
         int people3; // 0x00042750 length: 4
-        AttackInfoSubArrayElement1 peopleValuesArray[312]; // 0x00042754 length: 4992
-        undefined1 padding_0x43ad4[12]; // 0x00043AD4 length: 12
-        int wide1; // 0x00043AE0 length: 4
-        int wide2; // 0x00043AE4 length: 4
-        int wide3; // 0x00043AE8 length: 4
-        AttackInfoSubArrayElement1 wideValuesArray[687]; // 0x00043AEC length: 10992
-        undefined1 padding_0x465dc[8]; // 0x000465DC length: 8
+        AttackInfoSubArrayElement1 peopleValuesArray[1001]; // 0x00042754 length: 16016
         int tribeIDArraySize; // 0x000465E4 length: 4
         int unknownTribeCounterRelated; // 0x000465E8 length: 4
         int tribeIDArray[50]; // 0x000465EC length: 200
