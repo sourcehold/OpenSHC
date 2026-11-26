@@ -14,7 +14,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051B110
         void TroopValueState::pruneStaleSupportPoints()
         {
-            for (int slot = 1; slot < 200; ++slot) {
+            for (int slot = 1; slot < countof(DAT_TroopValueState::instance.attackInfo.supportPointsArray) - 1;
+                ++slot) {
                 if (DAT_TroopValueState::instance.attackInfo.supportPointsArray[slot].someCounter
                     != DAT_TroopValueState::instance.attackInfo.someCounter1) {
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(

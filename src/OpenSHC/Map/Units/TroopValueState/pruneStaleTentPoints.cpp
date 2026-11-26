@@ -16,7 +16,7 @@ namespace Map {
         {
             // The original walks slots 1..1999 (end 0x17A52B4): the tent point table really has 2000 entries,
             // tentPointsValues is declared with only 216.
-            for (int slot = 1; slot < 2000; ++slot) {
+            for (int slot = 1; slot < countof(DAT_TroopValueState::instance.attackInfo.tentPointsValues) - 1; ++slot) {
                 if (DAT_TroopValueState::instance.attackInfo.tentPointsValues[slot].someCounter
                     != DAT_TroopValueState::instance.attackInfo.someCounter1) {
                     MACRO_CALL_MEMBER(OpenSHC::IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
