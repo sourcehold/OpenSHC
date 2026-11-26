@@ -32,7 +32,6 @@ namespace Map {
                     .buildingEntryInfos[Game::Player::Enums::BEIE_CAMPGROUND]
                     .id
                 != 0) {
-                int _offset = attackingPlayerID * 96188;
                 int _hack2 = DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].hack2;
                 int _counterTillHack2 = 0;
                 DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].someMinimumDistance = 10000;
@@ -179,20 +178,18 @@ namespace Map {
                 }
                 int _counter = 0;
                 if (0 < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2) {
-                    AttackInfoSubElement* _pWideEntry
-                        = (AttackInfoSubElement*)((int)&DAT_TroopValueState::instance.attackInfo.wideValuesArray
-                            + _offset + 8);
+                    _pScore = (uint*)((int)DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1]
+                                          .wideValuesArray
+                        + 8);
                     do {
-                        ((int*)_pWideEntry->hackValuesArray)[2]
-                            = (5 < DAT_TileMapState::instance
-                                      .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
-                                              .playerInfo[attackingPlayerID - 1]
-                                              .currentPlayerID_OR_attackedPlayerID_OR_one]
-                                                                     [((int*)_pWideEntry->hackValuesArray)[0]])
+                        *_pScore = (5 < DAT_TileMapState::instance
+                                           .SEC_PathfindingCostTileMap1105[DAT_TroopValueState::instance.attackInfo
+                                                   .playerInfo[attackingPlayerID - 1]
+                                                   .currentPlayerID_OR_attackedPlayerID_OR_one][_pScore[-2]])
                             ? 9999
                             : 0;
                         _counter++;
-                        _pWideEntry = (AttackInfoSubElement*)(((int*)_pWideEntry->hackValuesArray) + 6);
+                        _pScore += 4;
                     } while (
                         _counter < DAT_TroopValueState::instance.attackInfo.playerInfo[attackingPlayerID - 1].wide2);
                 }
