@@ -99,9 +99,9 @@ namespace Map {
 
             undefined4 findEnemyBuildingsClosestToUnit(int unitID);
 
-            void countAvailablePeopleValueSlots(int param_1);
+            void countAvailablePeopleValueSlots(BOOLEnum includeOccupied);
 
-            void countAvailableLordValueSlots(int includeOccupied);
+            void countAvailableLordValueSlots(BOOLEnum includeOccupied);
 
             undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
 
@@ -123,11 +123,11 @@ namespace Map {
 
             BOOLEnum findTribeWithMoatAttackBehavior();
 
-            void countAvailableHighValueSlots(int includeOccupied);
+            void countAvailableHighValueSlots(BOOLEnum includeOccupied);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int includeOccupied);
+            void countAvailableArcherValueSlots(BOOLEnum includeOccupied);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 
@@ -168,7 +168,7 @@ namespace Map {
 
             void playAttackAlarmSound();
 
-            void placeSiegeTentsAndAssignEngineers(int param_1, int param_2);
+            void placeSiegeTentsAndAssignEngineers(int param_1, BOOLEnum param_2);
 
             void placeTunnelForEveryTunneler(int attackWave);
 
@@ -240,13 +240,13 @@ namespace Map {
 
             void uselessFunction(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            void recountAttackTroopValue(int param_1);
+            void recountAttackTroopValue(BOOLEnum param_1);
 
             void updateAttackInfoTick();
 
             void initializeOrAdvanceAttackWave(int param_1);
 
-            void aiRecomputeAttacks2(int param_1, int param_2);
+            void aiRecomputeAttacks2(BOOLEnum param_1, int param_2);
 
             void aiRecomputeAttacks(undefined4 param_1, int param_2);
 

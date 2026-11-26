@@ -24,9 +24,9 @@ namespace Map {
     public:
         WildlifeGridElement grid[40][40]; // 0x00000000 length: 256000
         int DAT_DebugDataMapDataDisplayType; // 0x0003E800 length: 4
-        undefined4 casDisRelated; // 0x0003E804 length: 4
-        undefined4 candidateIndex; // 0x0003E808 length: 4
-        undefined4 candidateIndex2; // 0x0003E80C length: 4
+        int casDisRelated; // 0x0003E804 length: 4
+        int candidateIndex; // 0x0003E808 length: 4
+        int candidateIndex2; // 0x0003E80C length: 4
         short DAT_Y10_Array_Section1034[1600]; // 0x0003E810 length: 3200
         short DAT_X10_Array_Section1034[1600]; // 0x0003F490 length: 3200
 
@@ -59,17 +59,17 @@ namespace Map {
 
         BOOLEnum isAttackStagingCandidateCell(int cellX, int cellY);
 
+        void floodFillZoneProximityFromCell(int cellX, int cellY, int strength);
 
         void floodFillCasDisFromSignpost();
 
+        int getDistanceFromAttackSignpostToZoneProximity();
 
         void updateWildlife();
 
         void updateSection1034Info();
 
         void updateNofFpoints();
-        int getDistanceFromAttackSignpostToZoneProximity();
-        void floodFillZoneProximityFromCell(int cellX, int cellY, int strength);
     };
 
     static_assert_cpp98_obj(sizeof(WildlifeState) == 262416, WildlifeState);
