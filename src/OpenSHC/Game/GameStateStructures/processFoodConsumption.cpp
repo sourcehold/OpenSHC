@@ -103,7 +103,7 @@ namespace Game {
                                 s_food_warning4_wav_005a509c);
                         }
                         ++DAT_CounterFoodWarningInterval::instance;
-                        if ((int)DAT_CounterFoodWarningInterval::instance > 2) {
+                        if (DAT_CounterFoodWarningInterval::instance > 2) {
                             DAT_CounterFoodWarningInterval::instance = 0;
                         }
                     } else if (leftover < 2 && leftover != PLAYER_FIELD(short, foodStorageLevelLastLastMonth)
