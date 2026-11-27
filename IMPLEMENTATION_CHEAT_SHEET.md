@@ -784,6 +784,15 @@ The two need opposite treatment, so read the asm rather than the decompiler's sh
   tails on its own - so routing the ID through a `SpeechEffectID` local changed nothing (MSVC propagates the
   constant straight back into the push). Count the call sites in a `/FA` compile before restructuring.
 
+A merged tail can still be worth writing once even when our `/FA` already shows one copy, because MSVC
+cross-jumps *after* register allocation: the allocator still counts every source copy as a use. In
+`computeBuildingCategoryEntryPointAndDestroyEarlierBuilding` nine arms each read
+`buildings[buildingID].buildingEntryX/Y` (and five call `destroyBuilding`). Both compiles end with one shared
+block, but with nine source copies `buildingID` scored high enough to take `ebx`, where the original reloads it
+from the stack every time. Writing the read once, behind `goto readEntry` from the arms that share it, took
+the function 33.5% -> 64.0%. A goto-free form (an outer `||` over the nine categories around the inner
+chain) measured worse, 52.1 against 71.8 quick, because the categories are then tested twice.
+
 ### Declaration order decides stack slots, and two swapped locals cost a whole function
 
 MSVC assigns stack slots in declaration order. Two locals declared the wrong way round therefore sit
