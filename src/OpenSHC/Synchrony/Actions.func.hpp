@@ -10,6 +10,7 @@
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
+#include "OpenSHC/Map/Buildings/Enums/GateCommand.hpp"
 #include "OpenSHC/Synchrony/Actions.hpp"
 namespace OpenSHC {
 namespace Synchrony {
@@ -17,6 +18,7 @@ namespace Synchrony {
 
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::Game::Resources::ResourceTypeMin1;
+        using OpenSHC::Map::Buildings::Enums::GateCommand;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID), false, Address::SHC_3BB0A8C1_0x004285C0,
             &OpenSHC::Synchrony::Actions::RemovePositionOfPlayer)
@@ -35,8 +37,9 @@ namespace Synchrony {
             Address::SHC_3BB0A8C1_0x004653B0, &OpenSHC::Synchrony::Actions::OpenOrCloseDrawbridge)
         OpenOrCloseDrawbridge;
 
-        MACRO_FUNCTION_RESOLVER(void(__cdecl*)(undefined4 playerID, int buildingID, int newGateState, int buildingUID),
-            false, Address::SHC_3BB0A8C1_0x004654F0, &OpenSHC::Synchrony::Actions::GateOpenOrClose)
+        MACRO_FUNCTION_RESOLVER(
+            void(__cdecl*)(undefined4 playerID, int buildingID, GateCommand newGateState, int buildingUID), false,
+            Address::SHC_3BB0A8C1_0x004654F0, &OpenSHC::Synchrony::Actions::GateOpenOrClose)
         GateOpenOrClose;
 
         MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int playerID, int taxesSetting), false, Address::SHC_3BB0A8C1_0x00465800,

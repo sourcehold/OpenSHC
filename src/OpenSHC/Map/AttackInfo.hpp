@@ -14,7 +14,7 @@
 #include "OpenSHC/Map/AttackInfoSubArrayElement1.hpp"
 #include "OpenSHC/Map/AttackInfoSubArrayElement3.hpp"
 #include "OpenSHC/Map/AttackInfoSubElement.hpp"
-#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveStateInt.hpp"
 #include "OpenSHC/Map/Units/Attack/TribeSizesPerTribeType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -27,7 +27,7 @@ namespace Map {
     using OpenSHC::Map::AttackInfoSubArrayElement1;
     using OpenSHC::Map::AttackInfoSubArrayElement3;
     using OpenSHC::Map::AttackInfoSubElement;
-    using OpenSHC::Map::Enums::AttackWaveState;
+    using OpenSHC::Map::Enums::AttackWaveStateInt;
     using OpenSHC::Map::Units::Attack::TribeSizesPerTribeType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -129,7 +129,7 @@ namespace Map {
         int lord2; // 0x0002C868 length: 4
         AttackInfoSubArrayElement1 lordValuesArray[1001]; // 0x0002C86C length: 16016
         int inv_count; // 0x000306FC length: 4
-        AttackWaveState value3Array01[50]; // 0x00030700 length: 200
+        AttackWaveStateInt value3Array01[50]; // 0x00030700 length: 200
         int attackWaveTicker[50]; // 0x000307C8 length: 200
         char nof_tribes[50]; // 0x00030890 length: 50
         byte unknownByteArray02[50]; // 0x000308C2 length: 50
