@@ -3,7 +3,7 @@
 #include "OpenSHC/Audio/mss/SoundSystem.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
-#include "OpenSHC/Map/Enums/AttackWaveState.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveStateInt.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -89,7 +89,7 @@ namespace Map {
                         MACRO_CALL_MEMBER(
                             Audio::MSS::SoundSystem_Func::handleBattleEndMusicTransition, DAT_SoundSystemState::ptr)();
                     }
-                    Map::Enums::AttackWaveState const waveState
+                    Map::Enums::AttackWaveStateInt const waveState
                         = DAT_TroopValueState::instance.attackInfo.value3Array01[wave];
                     if (waveState == Map::Enums::AWS_GATHERING) {
                         MACRO_CALL_MEMBER(TroopValueState_Func::initializeOrAdvanceAttackWave, this)(wave);
