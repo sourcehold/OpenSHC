@@ -6,9 +6,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Entities {
 
-        // Types 40/41 (popups, no EntityType name) return TRUE while the player's cooldown is nonzero
-        // (0x401167, 0x401188). The scan covers only entity slots 1..24 (cmp edx,0x19 / jl at 0x4011C3); type and
-        // owner are read with movsx (0x4011AC, 0x4011B3).
         // FUNCTION: STRONGHOLDCRUSADER 0x00401150
         BOOLEnum EntityState::playerHasEntityOfType(int playerID, EntityType entityType)
         {

@@ -10,8 +10,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // The random value is the signed short currentNumber2 (orig movsx 0x405C35); all three remainders are signed
-    // (cdq; idiv at 0x405C45 / 0x405C5C / 0x405C78), the second one of (value >> 8) with an arithmetic shift.
     // FUNCTION: STRONGHOLDCRUSADER 0x00405C00
     void Entities::UpdateHeadsOnSpikesEntity()
     {

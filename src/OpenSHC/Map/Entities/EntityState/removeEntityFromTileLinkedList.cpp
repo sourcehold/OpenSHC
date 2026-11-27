@@ -19,8 +19,6 @@ namespace Map {
             }
             int nextEntityID = prevEntityID;
             if (prevEntityID != 0) {
-                // A for loop with breaks measured 45.8% instead of 100% (several shapes tried), keep the comma
-                // expressions in the condition.
                 int currentEntityID;
                 while (currentEntityID = nextEntityID,
                     ++guardCounter < 100

@@ -48,6 +48,6 @@ namespace Map {
             return entityID;
         }
 
-    } // namespace Entities
-} // namespace Map
-} // namespace OpenSHC
+    }
+}
+}

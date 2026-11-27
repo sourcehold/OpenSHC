@@ -7,7 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // The return value is not meaningful (the callers ignore it); it reproduces what the original leaves in eax.
     // FUNCTION: STRONGHOLDCRUSADER 0x004023F0
     uint Entities::UpdateEntity_29()
     {

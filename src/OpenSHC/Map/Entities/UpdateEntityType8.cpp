@@ -10,7 +10,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // travelledDistance is compared as a signed short (orig `cmp cx, imm; jge` from 0x406FE2).
     // FUNCTION: STRONGHOLDCRUSADER 0x00406FD0
     void Entities::UpdateEntityType8()
     {

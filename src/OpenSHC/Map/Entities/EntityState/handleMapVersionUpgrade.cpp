@@ -29,6 +29,6 @@ namespace Map {
             }
         }
 
-    } // namespace Entities
-} // namespace Map
-} // namespace OpenSHC
+    }
+}
+}
