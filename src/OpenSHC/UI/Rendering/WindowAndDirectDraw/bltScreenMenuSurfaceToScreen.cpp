@@ -40,9 +40,6 @@ namespace UI {
                     MACRO_CALL_MEMBER(
                         OpenSHC::UI::Rendering::WindowAndDirectDraw_Func::adjustForNotExclusiveFullscreenUnk, this)(
                         &_destinationRect, &_sourceRect);
-                    /*
-                      Normal waiting blt. --TheRedDaemon
-                     */
                     this->directDrawBackbufferSurfacePointer->Blt(&_destinationRect,
                         this->directDrawOffscreenSurfacePointer_screenMenu, &_sourceRect, DDBLT_WAIT, NULL);
                     if (this->NOTSelfBufferOrWindowMode_0xf8 == TRUE) {
