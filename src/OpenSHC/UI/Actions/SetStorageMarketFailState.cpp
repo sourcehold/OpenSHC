@@ -22,9 +22,6 @@ namespace UI {
         DWORD const _currentTime = timeGetTime();
         DAT_GameState::instance.playerDataArray[_playerSlot].timeStorageMarketFailState = _currentTime;
         if (state == 3) {
-            /*
-              missing stock building
-             */
             if (_building == OpenSHC::Map::Buildings::BT_STOCKPILE) {
                 DAT_GameState::instance.playerDataArray[_playerSlot].storageMarketFailState = 6;
             }
@@ -35,9 +32,6 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[_playerSlot].storageMarketFailState = 7;
             }
         } else if (state == 4) {
-            /*
-              not enough space
-             */
             if (_building == OpenSHC::Map::Buildings::BT_STOCKPILE) {
                 DAT_GameState::instance.playerDataArray[_playerSlot].storageMarketFailState = 9;
             }
@@ -48,9 +42,6 @@ namespace UI {
                 DAT_GameState::instance.playerDataArray[_playerSlot].storageMarketFailState = 10;
             }
         } else {
-            /*
-              Generally used for "2" meaning not enough goods to sell
-             */
             DAT_GameState::instance.playerDataArray[_playerSlot].storageMarketFailState = state;
         }
     }
