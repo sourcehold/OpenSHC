@@ -8,7 +8,7 @@ namespace OpenSHC {
 namespace Synchrony {
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004654F0
-    void Actions::GateOpenOrClose(undefined4 playerID, int buildingID, int newGateState, int buildingUID)
+    void Actions::GateOpenOrClose(undefined4 playerID, int buildingID, GateCommand newGateState, int buildingUID)
     {
         if (DAT_BuildingsState::instance.buildings[buildingID].uid == buildingUID) {
             DAT_BuildingsState::instance.buildings[buildingID].gateCommand

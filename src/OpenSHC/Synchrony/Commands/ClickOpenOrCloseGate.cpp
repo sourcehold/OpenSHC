@@ -44,7 +44,7 @@ namespace Synchrony {
         MACRO_CALL(OpenSHC::Synchrony::Actions_Func::GateOpenOrClose)(
             DAT_GameSynchronyState::instance.protocolInvokerPlayerID,
             DAT_GameSynchronyState::instance.DAT_GameCommandParam0,
-            DAT_GameSynchronyState::instance.DAT_GameCommandParam1,
+            (OpenSHC::Map::Buildings::Enums::GateCommand)DAT_GameSynchronyState::instance.DAT_GameCommandParam1,
             DAT_GameSynchronyState::instance.DAT_GameCommandParam2);
     }
 

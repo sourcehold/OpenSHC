@@ -86,10 +86,10 @@ namespace Map {
                     = DAT_GameState::instance.playerDataArray[playerID].popularity / 100;
             } else if (entityType == OpenSHC::Map::Entities::ET_TRADE_BUY_POPUP) {
                 DAT_EntityState::instance.entityArray[entityID].displayValue = amount;
-                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)resourceType * 2 + 141;
+                DAT_EntityState::instance.entityArray[entityID].overlayGmPictureIndex = (short)resourceType * 2 + 141;
             } else if (entityType == OpenSHC::Map::Entities::ET_TRADE_SELL_POPUP) {
                 DAT_EntityState::instance.entityArray[entityID].displayValue = amount;
-                DAT_EntityState::instance.entityArray[entityID].field_0xc0 = (short)resourceType * 2 + 141;
+                DAT_EntityState::instance.entityArray[entityID].overlayGmPictureIndex = (short)resourceType * 2 + 141;
             }
         }
 
