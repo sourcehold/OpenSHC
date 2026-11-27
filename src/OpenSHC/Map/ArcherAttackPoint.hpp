@@ -15,8 +15,8 @@ namespace Map {
     // SIZE: 0x00000020
     typedef struct ArcherAttackPoint {
 
-        int field0_0x0; // 0x00000000 length: 4
-        int field1_0x4; // 0x00000004 length: 4
+        int x; // 0x00000000 length: 4
+        int y; // 0x00000004 length: 4
         int tile; // 0x00000008 length: 4
         int lastSeenCounter; // 0x0000000C length: 4
         int tribeID; // 0x00000010 length: 4

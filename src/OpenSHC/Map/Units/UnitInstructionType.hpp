@@ -24,6 +24,7 @@ namespace Map {
             UIT_MAN_SIEGE_EQUIPMENT = 16, // 0x00000010
             UIT_EXIT_SIEGE_EQUIPMENT = 17, // 0x00000011
             UIT_THROW_OIL = 20, // 0x00000014
+            UIT_DIG_TUNNEL = 21, // 0x00000015
             UIT_THROW_COW = 22, // 0x00000016
             UIT_ATTACK_WALL = 23, // 0x00000017
             UIT_SET_LADDER = 24, // 0x00000018
