@@ -48,15 +48,13 @@ namespace Game {
             if (this->playerDataArray[playerID].blessedPeopleCountUnk <= 0) {
                 this->playerDataArray[playerID].blessedPeoplePercentage = 0;
             } else {
+                int const total = this->playerDataArray[playerID].unblessedPeopleCountUnk
+                    + this->playerDataArray[playerID].blessedPeopleCountUnk;
                 int blessedPercentage;
-                if (this->playerDataArray[playerID].unblessedPeopleCountUnk
-                        + this->playerDataArray[playerID].blessedPeopleCountUnk
-                    == 0) {
+                if (total == 0) {
                     blessedPercentage = 100;
                 } else {
-                    blessedPercentage = (this->playerDataArray[playerID].blessedPeopleCountUnk * 100)
-                        / (this->playerDataArray[playerID].unblessedPeopleCountUnk
-                            + this->playerDataArray[playerID].blessedPeopleCountUnk);
+                    blessedPercentage = (this->playerDataArray[playerID].blessedPeopleCountUnk * 100) / total;
                 }
                 this->playerDataArray[playerID].blessedPeoplePercentage = blessedPercentage;
             }

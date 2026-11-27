@@ -27,6 +27,12 @@ namespace Game {
     using Resources::ResourceType;
     using WindowsHelper::Enums::BOOLEnum;
 
+    // The original walks a pointer to foodClockSpeed and reaches every other PlayerData field by its distance from it.
+    // Indexing playerDataArray[playerID] instead makes MSVC base the loop on another field, which shifts every
+    // displacement, and reading foodStorageLevel back from the field (as the original does) then costs 20 points.
+#define PLAYER_FIELD(type, field)                                                                                      \
+    (*(type*)((char*)foodClockSpeed + offsetof(PlayerData, field) - offsetof(PlayerData, foodClockSpeed)))
+
     // FUNCTION: STRONGHOLDCRUSADER 0x00458AD0
     void GameStateStructures::processFoodConsumption()
     {
@@ -41,53 +47,50 @@ namespace Game {
             return;
         }
         MACRO_CALL_MEMBER(GameStateStructures_Func::updateFoodTypesInStockForAllPlayers, this)();
-        for (int playerID = 1; playerID < 9; ++playerID) {
-            if (this->playerDataArray[playerID].keep.id <= 0 || this->playerDataArray[playerID].campground.id <= 0) {
+        int playerID = 1;
+        int* foodClockSpeed = &this->playerDataArray[1].foodClockSpeed;
+        for (; playerID < 9; ++playerID, foodClockSpeed += sizeof(PlayerData) / sizeof(int)) {
+            if (PLAYER_FIELD(int, keep.id) <= 0 || PLAYER_FIELD(int, campground.id) <= 0) {
                 continue;
             }
-            this->playerDataArray[playerID].foodStorageLevel = -1;
-            if (this->playerDataArray[playerID].foodTypesInStock <= 0) {
-                this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
+            PLAYER_FIELD(int, foodStorageLevel) = -1;
+            if (PLAYER_FIELD(int, foodTypesInStock) <= 0) {
+                PLAYER_FIELD(int, foodTypesCurrentlyEaten) = 0;
                 continue;
             }
-            int foodClockSpeed = this->playerDataArray[playerID].currentPopulation * 3;
-            this->playerDataArray[playerID].foodClockSpeed = foodClockSpeed;
+            int clockSpeed = PLAYER_FIELD(int, currentPopulation) * 3;
+            PLAYER_FIELD(int, foodClockSpeed) = clockSpeed;
             if (DAT_GameSynchronyState::instance.currentGameMode != GM_SOLITARY
                 && MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::isAIPlayer, DAT_GameSynchronyState::ptr)(
                        playerID)
                     != FALSE) {
-                this->playerDataArray[playerID].foodClockSpeed = (foodClockSpeed * 60) / 100;
+                PLAYER_FIELD(int, foodClockSpeed) = (clockSpeed * 60) / 100;
             }
-            switch (this->playerDataArray[playerID].rationsSetting) {
+            switch (PLAYER_FIELD(int, rationsSetting)) {
             case 0:
-                this->playerDataArray[playerID].foodClockSpeed = 0;
-                this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
+                PLAYER_FIELD(int, foodClockSpeed) = 0;
+                PLAYER_FIELD(int, foodTypesCurrentlyEaten) = 0;
                 break;
             case 1:
-                this->playerDataArray[playerID].foodClockSpeed = this->playerDataArray[playerID].foodClockSpeed / 2;
+                PLAYER_FIELD(int, foodClockSpeed) = PLAYER_FIELD(int, foodClockSpeed) / 2;
                 break;
             case 3:
-                this->playerDataArray[playerID].foodClockSpeed
-                    = (this->playerDataArray[playerID].foodClockSpeed * 3) / 2;
+                PLAYER_FIELD(int, foodClockSpeed) = (PLAYER_FIELD(int, foodClockSpeed) * 3) / 2;
                 break;
             case 4:
-                this->playerDataArray[playerID].foodClockSpeed = this->playerDataArray[playerID].foodClockSpeed * 2;
+                PLAYER_FIELD(int, foodClockSpeed) = PLAYER_FIELD(int, foodClockSpeed) * 2;
             }
-            int storageLevel = -1;
-            if (this->playerDataArray[playerID].foodClockSpeed != 0) {
-                storageLevel = ((15000 / this->playerDataArray[playerID].foodClockSpeed)
-                                   * this->playerDataArray[playerID].totalFood)
-                    / 800;
-                this->playerDataArray[playerID].foodStorageLevel = storageLevel;
+            if (PLAYER_FIELD(int, foodClockSpeed) != 0) {
+                PLAYER_FIELD(int, foodStorageLevel)
+                    = ((15000 / PLAYER_FIELD(int, foodClockSpeed)) * PLAYER_FIELD(int, totalFood)) / 800;
             }
             if (DAT_GameState::instance.mapAndTime.monthChanged != 0) {
-                short leftover = (short)storageLevel;
-                short lastMonthLeftover = this->playerDataArray[playerID].foodStorageLevelLastMonth;
-                this->playerDataArray[playerID].foodStorageLevelLastLastMonth = lastMonthLeftover;
-                this->playerDataArray[playerID].foodStorageLevelLastMonth = leftover;
+                short leftover = (short)PLAYER_FIELD(int, foodStorageLevel);
+                PLAYER_FIELD(short, foodStorageLevelLastLastMonth) = PLAYER_FIELD(short, foodStorageLevelLastMonth);
+                PLAYER_FIELD(short, foodStorageLevelLastMonth) = leftover;
                 if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                     && DAT_GameState::instance.mapAndTime.singlePlayerHasKeepAndGranary != FALSE) {
-                    if (this->playerDataArray[playerID].totalFood == 0) {
+                    if (PLAYER_FIELD(int, totalFood) == 0) {
                         if (DAT_CounterFoodWarningInterval::instance == 0
                             && MACRO_CALL_MEMBER(
                                    Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -100,8 +103,8 @@ namespace Game {
                         if ((int)DAT_CounterFoodWarningInterval::instance > 2) {
                             DAT_CounterFoodWarningInterval::instance = 0;
                         }
-                    } else if (leftover < 2 && leftover != lastMonthLeftover
-                        && this->playerDataArray[playerID].rationsSetting != 0) {
+                    } else if (leftover < 2 && leftover != PLAYER_FIELD(short, foodStorageLevelLastLastMonth)
+                        && PLAYER_FIELD(int, rationsSetting) != 0) {
                         if (leftover == 1) {
                             if (MACRO_CALL_MEMBER(
                                     Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -120,38 +123,31 @@ namespace Game {
                     }
                 }
             }
-            this->playerDataArray[playerID].foodClock
-                = this->playerDataArray[playerID].foodClock + this->playerDataArray[playerID].foodClockSpeed;
-            if (this->playerDataArray[playerID].foodClock > 15000) {
-                this->playerDataArray[playerID].foodClock = 0;
-                this->playerDataArray[playerID].foodTypesCurrentlyEaten
-                    = this->playerDataArray[playerID].foodTypesInStock;
+            PLAYER_FIELD(int, foodClock) = PLAYER_FIELD(int, foodClock) + PLAYER_FIELD(int, foodClockSpeed);
+            if (PLAYER_FIELD(int, foodClock) > 15000) {
+                PLAYER_FIELD(int, foodClock) = 0;
+                PLAYER_FIELD(int, foodTypesCurrentlyEaten) = PLAYER_FIELD(int, foodTypesInStock);
                 while (true) {
-                    this->playerDataArray[playerID].foodTypeToBeEatenNext
-                        = this->playerDataArray[playerID].foodTypeToBeEatenNext + 1;
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext > 3) {
-                        this->playerDataArray[playerID].foodTypeToBeEatenNext = 0;
+                    PLAYER_FIELD(int, foodTypeToBeEatenNext) = PLAYER_FIELD(int, foodTypeToBeEatenNext) + 1;
+                    if (PLAYER_FIELD(int, foodTypeToBeEatenNext) > 3) {
+                        PLAYER_FIELD(int, foodTypeToBeEatenNext) = 0;
                     }
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext == 0
-                        && this->playerDataArray[playerID].breadCount > 0) {
+                    if (PLAYER_FIELD(int, foodTypeToBeEatenNext) == 0 && PLAYER_FIELD(int, breadCount) > 0) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                             DAT_BuildingsState::ptr)(playerID, Resources::RT_BREAD, 1, 0);
                         break;
                     }
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext == 1
-                        && this->playerDataArray[playerID].cheeseCount > 0) {
+                    if (PLAYER_FIELD(int, foodTypeToBeEatenNext) == 1 && PLAYER_FIELD(int, cheeseCount) > 0) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                             DAT_BuildingsState::ptr)(playerID, Resources::RT_CHEESE, 1, 0);
                         break;
                     }
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext == 2
-                        && this->playerDataArray[playerID].meatCount > 0) {
+                    if (PLAYER_FIELD(int, foodTypeToBeEatenNext) == 2 && PLAYER_FIELD(int, meatCount) > 0) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                             DAT_BuildingsState::ptr)(playerID, Resources::RT_MEAT, 1, 0);
                         break;
                     }
-                    if (this->playerDataArray[playerID].foodTypeToBeEatenNext == 3
-                        && this->playerDataArray[playerID].appleCount > 0) {
+                    if (PLAYER_FIELD(int, foodTypeToBeEatenNext) == 3 && PLAYER_FIELD(int, appleCount) > 0) {
                         MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::processResourceLoss,
                             DAT_BuildingsState::ptr)(playerID, Resources::RT_APPLE, 1, 0);
                         break;
@@ -160,6 +156,8 @@ namespace Game {
             }
         }
     }
+
+#undef PLAYER_FIELD
 
 }
 }
