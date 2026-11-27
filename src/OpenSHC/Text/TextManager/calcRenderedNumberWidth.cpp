@@ -1,5 +1,7 @@
 #include "../TextManager.func.hpp"
 
+#include "OpenSHC/IO/Graphics/GmID.hpp"
+
 #include "OpenSHC/Globals/DAT_GMImageHeaders.hpp"
 #include "OpenSHC/Globals/GMFirstPictureIndex.hpp"
 
@@ -7,16 +9,14 @@ namespace OpenSHC {
 namespace Text {
 
     /*
-      Computes the total pixel width needed to render integer param_1 using digit glyphs from GMImageHeaders.
-      Processes each decimal place (100000 down to units), looks up the glyph width for each digit with a font-set
-      offset derived from param_2 (0=small, 1=medium, 2=large, 3=xlarge) and sums widths minus 2px kerning per digit.
-      If param_1 == -1, returns the width of a special placeholder glyph for the given font size.
+      Computes the pixel width of number rendered with the digit glyphs of the slanted font, from the hundred
+      thousands down to the units, subtracting 2px of kerning per digit. fontSet selects the digit set (0 small,
+      1 medium, 2 large, 3 extra large). -1 returns the width of the placeholder glyph of that set.
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x0046A4D0
     int TextManager::calcRenderedNumberWidth(int number, int fontSet)
     {
         int fullWidth = 0;
-
         if (number == -1) {
             int pictureOffset;
             if (fontSet == 0) {
@@ -28,13 +28,15 @@ namespace Text {
             } else {
                 pictureOffset = 43;
             }
-            return DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + pictureOffset].width - 2;
+            return DAT_GMImageHeaders::instance
+                       .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + pictureOffset]
+                       .width
+                - 2;
         }
-
+        // the decimal places are written out: the original has a separate constant division for each
         int numberPicOffset;
-
         numberPicOffset = number / 100000;
-        if (numberPicOffset) {
+        if (numberPicOffset != 0) {
             numberPicOffset %= 10;
             if (fontSet == 1) {
                 numberPicOffset += 11;
@@ -43,13 +45,13 @@ namespace Text {
             } else if (fontSet == 3) {
                 numberPicOffset += 33;
             }
-            fullWidth
-                += DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width
+            fullWidth += DAT_GMImageHeaders::instance
+                             .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                             .width
                 - 2;
         }
-
         numberPicOffset = number / 10000;
-        if (numberPicOffset) {
+        if (numberPicOffset != 0) {
             numberPicOffset %= 10;
             if (fontSet == 1) {
                 numberPicOffset += 11;
@@ -58,13 +60,13 @@ namespace Text {
             } else if (fontSet == 3) {
                 numberPicOffset += 33;
             }
-            fullWidth
-                += DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width
+            fullWidth += DAT_GMImageHeaders::instance
+                             .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                             .width
                 - 2;
         }
-
         numberPicOffset = number / 1000;
-        if (numberPicOffset) {
+        if (numberPicOffset != 0) {
             numberPicOffset %= 10;
             if (fontSet == 1) {
                 numberPicOffset += 11;
@@ -73,13 +75,13 @@ namespace Text {
             } else if (fontSet == 3) {
                 numberPicOffset += 33;
             }
-            fullWidth
-                += DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width
+            fullWidth += DAT_GMImageHeaders::instance
+                             .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                             .width
                 - 2;
         }
-
         numberPicOffset = number / 100;
-        if (numberPicOffset) {
+        if (numberPicOffset != 0) {
             numberPicOffset %= 10;
             if (fontSet == 1) {
                 numberPicOffset += 11;
@@ -88,13 +90,13 @@ namespace Text {
             } else if (fontSet == 3) {
                 numberPicOffset += 33;
             }
-            fullWidth
-                += DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width
+            fullWidth += DAT_GMImageHeaders::instance
+                             .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                             .width
                 - 2;
         }
-
         numberPicOffset = number / 10;
-        if (numberPicOffset) {
+        if (numberPicOffset != 0) {
             numberPicOffset %= 10;
             if (fontSet == 1) {
                 numberPicOffset += 11;
@@ -103,11 +105,11 @@ namespace Text {
             } else if (fontSet == 3) {
                 numberPicOffset += 33;
             }
-            fullWidth
-                += DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width
+            fullWidth += DAT_GMImageHeaders::instance
+                             .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                             .width
                 - 2;
         }
-
         numberPicOffset = number % 10;
         if (fontSet == 1) {
             numberPicOffset += 11;
@@ -117,7 +119,10 @@ namespace Text {
             numberPicOffset += 33;
         }
         return fullWidth
-            + DAT_GMImageHeaders::instance.imh[GMFirstPictureIndex::instance[146] + numberPicOffset].width + -2;
+            + DAT_GMImageHeaders::instance
+                  .imh[GMFirstPictureIndex::instance[IO::Graphics::GID_FONT_SLANTED] + numberPicOffset]
+                  .width
+            - 2;
     }
 
 }

@@ -7,9 +7,8 @@ namespace Text {
     void UserTextHandler::handleRightKey()
     {
         if (this->textCursorIndexArray[this->textArrayIndex] < this->textContentLengthArray[this->textArrayIndex]) {
-            this->textCursorIndexArray[this->textArrayIndex] = this->textCursorIndexArray[this->textArrayIndex] + 1;
+            ++this->textCursorIndexArray[this->textArrayIndex];
         }
-        return;
     }
 
 }

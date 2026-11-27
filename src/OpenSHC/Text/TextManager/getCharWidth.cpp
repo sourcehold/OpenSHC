@@ -2,8 +2,6 @@
 
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
 
-#include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-
 namespace OpenSHC {
 namespace Text {
 

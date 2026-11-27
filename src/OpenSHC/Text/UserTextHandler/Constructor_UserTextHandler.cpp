@@ -12,7 +12,7 @@ namespace Text {
     UserTextHandler* UserTextHandler::Constructor_UserTextHandler()
     {
         this->returnPressed = FALSE;
-        this->textArrayIndex = OpenSHC::Text::TAIT_NINE__FILTER_B;
+        this->textArrayIndex = TAIT_NINE__FILTER_B;
 
         this->textArrayFontSizes[0] = 17;
         this->textBoxMaxCharactersArray[0] = 256;

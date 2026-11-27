@@ -7,9 +7,9 @@ namespace Text {
     char* UserTextHandler::getCurrentText()
     {
         if (this->unknown01 == 0) {
-            return (char*)0x0;
+            return NULL;
         }
-        return (char*)(this->textArray[this->textArrayIndex]);
+        return this->textArray[this->textArrayIndex];
     }
 
 }

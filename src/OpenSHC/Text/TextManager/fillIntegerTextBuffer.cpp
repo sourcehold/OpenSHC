@@ -8,35 +8,32 @@ namespace Text {
     // FUNCTION: STRONGHOLDCRUSADER 0x00469FA0
     void TextManager::fillIntegerTextBuffer(int numberInt)
     {
-        memset(this->integerTextBuffer, '\0', sizeof(this->integerTextBuffer));
-
-        BOOL hasSymbol;
+        memset(this->integerTextBuffer, 0, sizeof(this->integerTextBuffer));
+        int signLength;
         if (numberInt < 0) {
             numberInt = -numberInt;
             this->integerTextBuffer[0] = '-';
-            hasSymbol = TRUE;
+            signLength = 1;
         } else if (numberInt <= 0 || !this->renderPlusSignForNumbers) {
-            hasSymbol = FALSE;
+            signLength = 0;
         } else {
             this->integerTextBuffer[0] = '+';
-            hasSymbol = TRUE;
+            signLength = 1;
         }
-
-        int numberOfDigitsAndIndex = 0;
-        for (int i = 0; i < 8; ++i) {
+        int numberOfDigits = 0;
+        for (int i = 0; i < countof(DAT_TextInputDefinedData::instance.numberOfDigitsThresholds); ++i) {
             if (numberInt <= DAT_TextInputDefinedData::instance.numberOfDigitsThresholds[i].maxNumber) {
-                numberOfDigitsAndIndex = DAT_TextInputDefinedData::instance.numberOfDigitsThresholds[i].numberOfDigits;
+                numberOfDigits = DAT_TextInputDefinedData::instance.numberOfDigitsThresholds[i].numberOfDigits;
                 break;
             }
         }
-        if (!numberOfDigitsAndIndex) {
-            numberOfDigitsAndIndex = 9;
+        if (numberOfDigits == 0) {
+            numberOfDigits = 9;
         }
-        --numberOfDigitsAndIndex;
-        while (numberOfDigitsAndIndex >= 0) {
-            this->integerTextBuffer[numberOfDigitsAndIndex + hasSymbol] = numberInt + (numberInt / 10) * -10 + '0';
+        // the digit count itself is counted down: a separate loop index does not match
+        for (--numberOfDigits; numberOfDigits >= 0; --numberOfDigits) {
+            this->integerTextBuffer[numberOfDigits + signLength] = numberInt % 10 + '0';
             numberInt /= 10;
-            --numberOfDigitsAndIndex;
         }
     }
 

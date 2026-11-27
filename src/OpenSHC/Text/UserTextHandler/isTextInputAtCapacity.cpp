@@ -8,23 +8,21 @@ namespace OpenSHC {
 namespace Text {
 
     /*
-      Returns 2 if the current text slot is at capacity (cannot accept more input), 0 otherwise.   Capacity is reached
-      if either: (1) the rendered pixel width of the current text meets or exceeds   textBoxMaxTextWidthDimensionArray
-      for this slot, or (2) the cursor index is at or beyond   textBoxMaxCharactersArray. Used as a boolean gate before
-      inserting a new character.      renamed by: Claude Sonnet 4.6
+      Returns 2 when the current text slot cannot take another character: its rendered width has reached
+      textBoxMaxTextWidthDimensionArray, or the cursor has reached textBoxMaxCharactersArray. Returns 0 otherwise.
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x00472CB0
     int UserTextHandler::isTextInputAtCapacity()
     {
-        int const textWidth
-            = MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
-                this->textArray[this->textArrayIndex], this->textArrayFontSizes[this->textArrayIndex]);
+        int const textWidth = MACRO_CALL_MEMBER(TextManager_Func::computeTextWidth, DAT_TextManagerObject::ptr)(
+            this->textArray[this->textArrayIndex], this->textArrayFontSizes[this->textArrayIndex]);
         if (textWidth >= this->textBoxMaxTextWidthDimensionArray[this->textArrayIndex]) {
             return 2;
         }
-        return this->textCursorIndexArray[this->textArrayIndex] < this->textBoxMaxCharactersArray[this->textArrayIndex]
-            ? 0
-            : 2;
+        if (this->textCursorIndexArray[this->textArrayIndex] >= this->textBoxMaxCharactersArray[this->textArrayIndex]) {
+            return 2;
+        }
+        return 0;
     }
 
 }

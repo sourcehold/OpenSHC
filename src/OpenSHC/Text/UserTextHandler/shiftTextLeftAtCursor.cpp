@@ -4,16 +4,14 @@ namespace OpenSHC {
 namespace Text {
 
     /*
-      Shifts characters in the current text slot left by one position starting at index startIndex,
-      repeating count times, deleting the character at startIndex and closing the gap.
+      Moves count characters of the current text slot one position to the left, starting at startIndex, which
+      deletes the character at startIndex.
      */
     // FUNCTION: STRONGHOLDCRUSADER 0x004698F0
     void UserTextHandler::shiftTextLeftAtCursor(int startIndex, int count)
     {
-        while (count != 0) {
+        for (; count != 0; --count, ++startIndex) {
             this->textArray[this->textArrayIndex][startIndex] = this->textArray[this->textArrayIndex][startIndex + 1];
-            --count;
-            ++startIndex;
         }
     }
 

@@ -8,24 +8,20 @@ namespace Text {
     // FUNCTION: STRONGHOLDCRUSADER 0x00469980
     void UserTextHandler::handleCharacterIntoInputBuffer(int characterCode)
     {
-        if ((DAT_TextInputDefinedData::instance.UserTextHandler_CharacterFilter_B_1_8_9[characterCode] == 0)
-            && (characterCode < 240)) {
+        if (DAT_TextInputDefinedData::instance.UserTextHandler_CharacterFilter_B_1_8_9[characterCode] == 0
+            && characterCode < 240) {
             return;
         }
-
-        if (this->inputBufferIndex == 30) {
-            /*
-              consume the first character and append the char at the end
-             */
-            for (int i = 0; i < 29; ++i) {
+        if (this->inputBufferIndex == countof(this->inputBuffer)) {
+            // the buffer is full: drop the oldest character and append at the end
+            for (int i = 0; i < countof(this->inputBuffer) - 1; ++i) {
                 this->inputBuffer[i] = this->inputBuffer[i + 1];
             }
-            this->inputBuffer[29] = (char)characterCode;
+            this->inputBuffer[countof(this->inputBuffer) - 1] = (byte)characterCode;
             return;
         }
-
-        this->inputBuffer[this->inputBufferIndex] = (char)characterCode;
-        this->inputBufferIndex = this->inputBufferIndex + 1;
+        this->inputBuffer[this->inputBufferIndex] = (byte)characterCode;
+        ++this->inputBufferIndex;
     }
 
 }

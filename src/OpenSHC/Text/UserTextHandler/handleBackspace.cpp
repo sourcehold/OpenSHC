@@ -1,7 +1,5 @@
 #include "../UserTextHandler.func.hpp"
 
-#include "OpenSHC/Text/UserTextHandler.func.hpp"
-
 namespace OpenSHC {
 namespace Text {
 

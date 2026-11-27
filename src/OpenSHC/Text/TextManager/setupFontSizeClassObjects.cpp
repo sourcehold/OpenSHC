@@ -4,8 +4,6 @@
 #include "OpenSHC/IO/Graphics/GmID.hpp"
 #include "OpenSHC/Text/FontRenderType.hpp"
 
-#include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-
 namespace OpenSHC {
 namespace Text {
 

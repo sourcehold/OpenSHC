@@ -7,7 +7,6 @@ namespace Text {
     void UserTextHandler::moveCursorToEnd()
     {
         this->textCursorIndexArray[this->textArrayIndex] = this->textContentLengthArray[this->textArrayIndex];
-        return;
     }
 
 }

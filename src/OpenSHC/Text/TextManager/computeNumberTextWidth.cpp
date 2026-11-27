@@ -1,9 +1,6 @@
 #include "../TextManager.func.hpp"
 
 #include "OpenSHC/Text/FontSizeClass.func.hpp"
-#include "OpenSHC/Text/TextManager.func.hpp"
-
-#include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
 
 namespace OpenSHC {
 namespace Text {
@@ -12,6 +9,7 @@ namespace Text {
     int TextManager::computeNumberTextWidth(int numberInt, int fontSize)
     {
         MACRO_CALL_MEMBER(TextManager_Func::fillIntegerTextBuffer, this)(numberInt);
+        // the null check of computeTextWidth, inlined: the array can never be null, but the original still tests it
         if (!this->integerTextBuffer) {
             return 0;
         }
