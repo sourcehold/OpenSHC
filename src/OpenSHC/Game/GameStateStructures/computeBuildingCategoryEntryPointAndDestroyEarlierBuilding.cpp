@@ -24,26 +24,26 @@ namespace Game {
         int entryY = 0;
         DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
         if (category == Player::PDBCE_KEEP) {
-            if ((int)this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
                 && this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id != buildingID) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
                     this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id);
             }
             short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
-            entryX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            entryY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].x;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].y;
             if (orientation == 4) {
-                entryX = entryX + 3;
+                entryX += 3;
                 --entryY;
             } else if (orientation == 2) {
                 --entryX;
-                entryY = entryY + 3;
+                entryY += 3;
             } else if (orientation == 6) {
-                entryX = entryX + 7;
-                entryY = entryY + 3;
+                entryX += 7;
+                entryY += 3;
             } else {
-                entryX = entryX + 3;
-                entryY = entryY + 7;
+                entryX += 3;
+                entryY += 7;
             }
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
@@ -52,81 +52,69 @@ namespace Game {
                         this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id);
                 }
             }
-        } else if (category == Player::PDBCE_MARKETPLACE) {
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id > 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id);
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_ENGINEERSGUILD) {
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id > 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id);
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_TUNNELERSGUILD) {
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id > 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id);
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_STOCKPILE) {
-            // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id > 0) {
-                return;
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_ARMORY) {
-            // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ARMORY].id > 0) {
-                return;
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_GRANARY) {
-            // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_GRANARY].id > 0) {
-                return;
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_BARRACKS) {
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id > 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id);
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_MERCENARYPOST) {
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id > 0) {
-                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id);
-            }
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_OILSMELTER) {
-            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
-            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
-        } else if (category == Player::PDBCE_CAMPGROUND) {
-            short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
-            entryX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
-            entryY = (short)DAT_BuildingsState::instance.buildings[buildingID].y;
-            if (orientation == 4) {
-                entryX = entryX + 3;
-                entryY = entryY + 6;
-            } else if (orientation == 2) {
-                entryY = entryY + 3;
-            } else if (orientation == 6) {
-                entryX = entryX + 6;
-                entryY = entryY + 3;
+        } else {
+            // The original reads the building entrance once for all of these categories and jumps to it, the
+            // same goes for the destroy call. Writing the read out in every arm (MSVC merges the copies only after
+            // register allocation) makes buildingID look hot enough to keep in a register: 33.5% instead of 64.0%.
+            int existingID;
+            if (category == Player::PDBCE_MARKETPLACE) {
+                existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id;
+            } else if (category == Player::PDBCE_ENGINEERSGUILD) {
+                existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id;
+            } else if (category == Player::PDBCE_TUNNELERSGUILD) {
+                existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id;
+            } else if (category == Player::PDBCE_STOCKPILE) {
+                // a storage building of this kind already exists, keep the old entry
+                if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id > 0) {
+                    return;
+                }
+                goto readEntry;
+            } else if (category == Player::PDBCE_ARMORY) {
+                // a storage building of this kind already exists, keep the old entry
+                if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ARMORY].id > 0) {
+                    return;
+                }
+                goto readEntry;
+            } else if (category == Player::PDBCE_GRANARY) {
+                // a storage building of this kind already exists, keep the old entry
+                if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_GRANARY].id > 0) {
+                    return;
+                }
+                goto readEntry;
+            } else if (category == Player::PDBCE_BARRACKS) {
+                existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id;
+            } else if (category == Player::PDBCE_MERCENARYPOST) {
+                existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id;
+            } else if (category == Player::PDBCE_OILSMELTER) {
+                goto readEntry;
+            } else if (category == Player::PDBCE_CAMPGROUND) {
+                short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
+                entryX = DAT_BuildingsState::instance.buildings[buildingID].x;
+                entryY = DAT_BuildingsState::instance.buildings[buildingID].y;
+                if (orientation == 4) {
+                    entryX += 3;
+                    entryY += 6;
+                } else if (orientation == 2) {
+                    entryY += 3;
+                } else if (orientation == 6) {
+                    entryX += 6;
+                    entryY += 3;
+                } else {
+                    entryX += 3;
+                }
+                goto checkEntry;
             } else {
-                entryX = entryX + 3;
+                goto checkEntry;
             }
+            if (existingID > 0) {
+                MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
+                    existingID);
+            }
+        readEntry:
+            entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
+            entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         }
+    checkEntry:
         if (entryX < 0) {
             return;
         }
@@ -146,7 +134,7 @@ namespace Game {
             this->playerDataArray[playerID].buildingEntryInfos[category].tileEntry
                 = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile + entryX;
             this->playerDataArray[playerID].buildingEntryInfos[category].areaEntry
-                = (short)DAT_TileMapState::instance
+                = DAT_TileMapState::instance
                       .PathConnectionLayer[this->playerDataArray[playerID].buildingEntryInfos[category].tileEntry];
             DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 0;
         }

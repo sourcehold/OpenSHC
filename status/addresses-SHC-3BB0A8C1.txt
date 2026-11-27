@@ -17155,7 +17155,7 @@ SHC_3BB0A8C1_0x00456C50 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00456EF0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00456FD0 | 33.5% | Join block placed after arm 1
+SHC_3BB0A8C1_0x00456FD0 | 64.0% | category held in a callee-saved reg
 
 SHC_3BB0A8C1_0x004572A0 | 100.0% | Reimplemented
 
