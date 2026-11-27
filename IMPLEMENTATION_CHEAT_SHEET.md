@@ -718,7 +718,8 @@ change nothing in this toolchain (they are deprecated no-ops in VS2005).
 MSVC bases a run of accesses into one object on a single address (`lea esi, [ecx + 0x367e4]`, then
 `[esi - 0x10]`, `[esi + 0xe0]`, ...). Which field lands at offset 0 is not a size or frequency decision -
 with the right anchor `processFoodConsumption` gets 30 byte-sized displacements and with the wrong one 3,
-and MSVC still picks the wrong one - and it cannot be steered from the source: the global vs `this->`
+and MSVC still picks the wrong one - and it cannot be steered from an *indexed* source (an explicit pointer to the
+anchor field does pin it, see the section near the end): the global vs `this->`
 spelling of a field, an extra read of it, the index's cast, the statement order and the number of stores to
 other fields all leave it unchanged (probed with a `/FA` compile per variant, about ten seconds each).
 
@@ -859,11 +860,12 @@ further from `sub esp, 0x18` rather than closer.
 
 Four of the finds above came from `decompile_function`, not from the interleaved reccmp diff, and two
 of them were worth 100%. The decompiler names the original's locals and pointers, which is exactly the
-information the asm hides: `processFoodConsumption`'s AI branch is
-`(currentPopulation * 180) / 100` with `currentPopulation` as the local, not
-`(foodClockSpeed * 60) / 100` - the same value, but MSVC reaches the original's instruction sequence
-only from the first spelling. `updateCrowding`'s pointer is anchored at `currentPopulation`, which is
-why its base is 0x2100 away from the field it stores to.
+information the asm hides. `updateCrowding`'s pointer is anchored at `currentPopulation`, which is
+why its base is 0x2100 away from the field it stores to - and writing that pointer out is what took it
+to 100% (see *A loop base the original anchors on one field* below). Do not over-read the decompiler's
+arithmetic, though: it renders `processFoodConsumption`'s AI branch as `(currentPopulation * 0xb4) / 100`,
+but the binary keeps `currentPopulation * 3` in `edi` and multiplies that by 60 (`shl 4; sub; add; add`),
+so `(clockSpeed * 60) / 100` with `clockSpeed` as the local is the form that matches.
 
 ## reccmp can score a byte-identical function below 100%
 
@@ -904,19 +906,20 @@ reach the original's `sub esp, 0x18`, because it drops the `0xfffcf0ec` base to 
 of two - but that base exists in the original, so the frame matches by compensation and reccmp
 measured 54.5%, a slight regression. quick_diff ranked it 0.751 over 0.739; trust reccmp.
 
-## spawnPoisonCloudsAroundBuilding: the memory decrement (92.4%, closed)
+## spawnPoisonCloudsAroundBuilding: the memory decrement is a decrement in each failure branch (100%)
 
-The only gap is the loop tail. The original folds it to a read-modify-write plus a fresh re-read:
+The original ends its retry loop with a read-modify-write and a fresh compare:
 
     sub dword ptr [esp + 0x10], 1
     cmp dword ptr [esp + 0x10], 0
+    jg  <loop top>
 
-while we keep the value in a register (`mov eax, mem; sub eax, 1; test eax, eax; mov mem, eax`). The
-peephole needs the load/sub/store contiguous, and our scheduler puts the `test` between the sub and
-the store. The two `continue`s force the decrement into the `for` header, so the obvious forms were
-already known to canonicalise; rewriting the `continue`s as nested `if`s to put the decrement at the
-bottom of the body - the decompilation's own shape, and the one the peephole wants - measured
-*worse* (0.905 against 0.950) and still did not produce `sub dword ptr`.
+A `for (...; attemptsLeft > 0; attemptsLeft--)` with two `continue`s compiles to a register load, `sub`, `test` and
+store instead, and every spelling of the header (`--x`, `x -= 1`, `0 < x`, `x >= 1`, `short`, a count-up loop)
+gives the same or worse. `!= 0` and `>= 0` do give `sub dword ptr`, but fused with its own flags (`jne`/`jns`), not
+the separate `cmp`. What matches is a `while (attemptsLeft > 0)` with `attemptsLeft--;` written before **each**
+`continue`: the two decrements are cross-jumped into one block, which is the shape the peephole folds into
+`sub [mem], 1`, and the loop test then re-reads memory. 92.4% -> 100%.
 
 ## processPeasantSpawnAndDespawnCycle: do not hoist the popularity read (84.0%, closed)
 
@@ -1006,38 +1009,37 @@ answer either, because the original has the cookie code and dropping it loses mo
 `playSFXAtLocation` is likewise done at 98.1% / normalized 100%: its only diff is the call targets
 of the CRT helpers `_CIsqrt` and `_ftol2_sse`.
 
-## updateCrowding: the anchor and the store count cannot both be had (37.7%)
+## A loop base the original anchors on one field: walk a pointer to that field (100%, three functions)
 
-Correcting an earlier note that said the anchor was wrong here - in the current one-store form the
-anchor is **right**. The original (`disassemble_function 0x00458E60`) is:
+MSVC strength-reduces a `playerDataArray[playerID].field` loop into one base register plus displacements, and
+which field sits at displacement 0 is the anchor discussed above. It cannot be steered while the source indexes
+the array, but it **can** be pinned by writing the induction pointer yourself, aimed at the field the decompiler
+names (`_currentPopulationAddr = &DAT_GameState.playerDataArray[1].currentPopulation`, `ADJ(...)->field`), and
+reaching the other fields by their offset from it:
 
-    add ecx, 0x368b4              ; anchor on currentPopulation, displacement 0
-    mov ebx, 8                    ; a countdown, no playerID
-    xor edi, edi                  ; a zero register, before the loop
-    mov esi, dword ptr [ecx - 0x210c]     ; populationCap
-    mov eax, dword ptr [ecx]              ; currentPopulation
-    ...
-    mov dword ptr [ecx - 0x2100], edi     ; crowding = 0, four stores, one per arm
-    ...
-    add ecx, 0x39f4
-    sub ebx, 1
-    jnz
+```cpp
+#define PLAYER_FIELD(type, field)     (*(type*)((char*)currentPopulation + offsetof(PlayerData, field) - offsetof(PlayerData, currentPopulation)))
 
-We match the anchor, the countdown, the pointer stride and both reads. The gap is that the original
-assigns the *field* in each of the four arms, where we compute into a local and store once. The two
-forms measure:
+int* currentPopulation = &this->playerDataArray[1].currentPopulation;
+for (...; currentPopulation += sizeof(PlayerData) / sizeof(int)) { PLAYER_FIELD(int, crowding) = 0; ... }
+```
 
-* one store, value in `eax`  -> **37.7%**, anchor `0x368b4` correct
-* four field stores          -> 33.3%, anchor moves to `0x347b4`, i.e. onto `crowding` itself
+A `PlayerData*` (or a `PlayerData&` per iteration) is canonicalised back to the indexed form and does not help;
+the pointer has to point at the field itself. Once the anchor is pinned, the changes that used to "move the
+anchor" become free and the function matches:
 
-The four stores drag the anchor because our zeros are immediates (`mov dword ptr [ecx], 0`), and an
-immediate store is shortest at displacement 0, so MSVC bases on the field being stored. The original
-pays nothing for a displacement because its zero is in `edi`, which is also why it can spell
-`currentPopulation <= 0` as `cmp eax, edi` instead of our `test eax, eax`. Giving the zero a name to
-force it into a register does not work - MSVC constant-propagates it straight back to an immediate:
+- `updateCrowding` 37.7% -> 100%: with the anchor right, the four per-arm `crowding` stores take their zero
+  from a register as the original does. It also needed the pointer advance written in both exits (an early
+  `continue` arm and the end of the body) rather than once in the `for` header, which swapped two registers.
+- `processFoodConsumption` 96.8% -> 100%: anchor on `foodClockSpeed`; `leftover` read back from
+  `foodStorageLevel` instead of a local; `LastLastMonth = LastMonth` copied field to field and compared through
+  the field (that gives the original's 16-bit `mov cx`); `int playerID = 1;` declared before the pointer, for
+  the order of the two loop initialisers. The `this` it keeps in `edx` across `updateFoodTypesInStockForAllPlayers`
+  is LTCG over that callee, which therefore had to be reimplemented (0x00458A70, matched first try) and put in
+  `cmake/compiler-flags-gl.txt` next to its caller.
+- `processPeasantSpawnAndDespawnCycle`: anchored on `vclockIncrement`, the shared store after the increment
+  chain no longer moves the base, but what is left (two register names, and `x * 8` as `lea` against three
+  `add`s) still measures below the indexed form in reccmp, so it was not kept.
 
-* `int noCrowding = 0;` inside the loop, used as the store source -> 33.3%
-* the same declared before the loop, live range spanning it       -> 33.3%
+Keep the macro local to the .cpp and `#undef` it at the end of the file.
 
-So the choice is the correct anchor or the correct store count, and the anchor is worth 4.4 points
-more. Keep the one-store form.
