@@ -42,7 +42,8 @@ namespace Text {
         UserTextHandler() {};
         ~UserTextHandler() {};
 
-        void Constructor_UserTextHandler();
+        // Constructor
+        UserTextHandler* Constructor_UserTextHandler();
 
         void resetToTextIndex(int textIndex);
 
@@ -86,7 +87,7 @@ namespace Text {
 
         void handleDeleteKey();
 
-        void handleCharacterCode(byte characterCode);
+        void handleCharacterCode(ushort characterCode);
     };
 
     static_assert_cpp98_obj(sizeof(UserTextHandler) == 4372, UserTextHandler);
