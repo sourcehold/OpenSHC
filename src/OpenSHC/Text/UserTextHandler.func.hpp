@@ -7,6 +7,8 @@ namespace OpenSHC {
 namespace Text {
     namespace UserTextHandler_Func {
 
+        // Constructor
+
         MACRO_FUNCTION_RESOLVER(UserTextHandler* (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004694A0,
             &UserTextHandler::Constructor_UserTextHandler)
         Constructor_UserTextHandler;

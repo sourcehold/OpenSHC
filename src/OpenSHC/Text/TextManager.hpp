@@ -44,7 +44,7 @@ namespace Text {
         dword field_0x14; // 0x00000014 length: 4
         BOOLEnum helpTextLinkActive; // 0x00000018 length: 4
         RenderTargetInt textSurfaceTarget; // 0x0000001C length: 4
-        BOOL renderPlusSignForNumbers; // 0x00000020 length: 4
+        BOOLEnum renderPlusSignForNumbers; // 0x00000020 length: 4
         int field_0x24; // 0x00000024 length: 4
         int field_0x28; // 0x00000028 length: 4
         dword drawingTextShadow; // 0x0000002C length: 4
