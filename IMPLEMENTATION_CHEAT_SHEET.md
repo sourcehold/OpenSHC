@@ -108,14 +108,29 @@ Naturally, the logic flow needs to be kept, so the update of a variable can not 
 The order in which **initialised** declarations appear decides which register each one gets. `countPlayersInSameTeam`
 matched instruction for instruction except that the parameter was loaded into `eax` instead of `edx`; moving
 `int iVar2 = 0;` in front of `int iVar1 = DAT_GameState::instance.mapAndTime.playerTeams[playerID];` freed `edx`
-for the parameter load and took it from 95.7% to 100%. Uninitialised declarations do not have this effect - a
-sweep of `quick_reorder.py -s` over the declaration block of 27 functions found no win at all.
+for the parameter load. Uninitialised declarations do not have this effect.
 
-Stack *slot* assignment for spilled locals is a different matter and is not reachable from the source. Where the
-original lays its locals out in Ghidra order (`local_1c` at the lowest `esp` offset through `local_4` at the
-highest) and our build permutes them, neither declaration order, initialisation order, nor renaming changes
-anything; this was tried on `setupSkirmishLobby`, `initMultiplayerLobbyState`, `initializeFinalResultsForActivePlayers`
-and `createCompoundAddressBasedOnSelectedProvider`. Spend the effort elsewhere.
+Stack *slot* assignment for spilled locals is a different matter: it follows the **reference weight** of each
+local, not the order they are declared in. Neither declaration order, initialisation order, nor renaming moves a
+slot. Examples are `setupSkirmishLobby`, `initMultiplayerLobbyState`,
+`initializeFinalResultsForActivePlayers` and `createCompoundAddressBasedOnSelectedProvider`, and some reverse engineering work on the
+compiler says why: its stack "colorer" sorts the elements by weight per byte and hands out offsets in that order. The
+mechanism, the evidence and the debugger recipe are in
+[tools/compiler-internals/msvc-backend.md](tools/compiler-internals/msvc-backend.md); what matters here is how to
+read a diff:
+
+* A slot-order mismatch means the reimplemented locals carry **different reference counts** from the original's, so look for a
+  read the original might have had and we do not. It is not a declaration-order problem.
+* Weight **ties** are left to the order the symbols arrive in. Permuting declarations can only decide ties.
+* Locals with disjoint live ranges **share** one slot, and a local can be placed on the slot of a parameter that
+  is already dead (e.g., `writeMapOrSaveFile` puts eight locals on the first parameter's slot).
+* Renaming locals doesn't affect anything; the comparator never looks at a name.
+
+`slot_weight.py` prints the slot table for one function with each local's weight beside it (read out of MSVC's own
+intermediate assembly symbol table rather than inferred from the diff for sake of speed).
+
+For **registers** there is no decoded rule yet. Treat a register-only mismatch as an interference difference - a
+different set of values was live at that point - which is a working hypothesis, not an established mechanism.
 
 ### Statement Order
 
@@ -266,9 +281,15 @@ widen the temp rather than changing the struct (`recomputeHashesAndSendResync`, 
   `mov [field], ebx`) is a **result variable** initialised at the top and stored once at the end, not two literal
   stores: `int isNotNervous = 1; ... if (cond) isNotNervous = 0; else {...} field = isNotNervous;`
   (`computeNervousness` 77% -> 100%).
-- `add reg, -N` where we emit `sub reg, N` or `cmp reg, N` means two constants were merged: the source compared a
-  derived value, `aicIndex == 7` with `aicIndex = aiType - 1`, not `aiType == 8`
-  (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- The original's `add reg, -N` against our `sub reg, N` or `cmp reg, N` has two causes, told apart by whether a
+  second constant is in sight. **With one**, they were merged: the source compared a derived value, `aicIndex == 7`
+  with `aicIndex = aiType - 1`, not `aiType == 8` (`removeOrganismsAndSetMoveDestinationPairs` 97.9% -> 100%).
+- **With none**, the value is a separate derived local rather than a self-decrement: the typical case leads to the reimplementation
+  writing `sub` whereas the original had `add` (e.g. `int value -= N`). A solution is to write `int y = x - N;`
+  with `x` becoming a dead local right after. However, this creates another local variable which can cause register and stack
+  allocation changes elsewhere. The solution is to drop a local variable: the one to delete is
+  usually a global that is cached instead of re-read, so reading the global again instead of using the cached value in
+  a local drops the local's importance to allocation and causes a match.
 - Where two arguments are loaded on either side of a store (`mov ecx, [x]` ... `mov [stance], 1` ... `mov eax, [y]`),
   give each a local and put the statements in that order: `int x = pd.someX; tribe.unitStance = ...; int y = pd.someY;`
   (`makeUnitsGoDefensiveAndBackToSomeLocation` 95.7% -> 100%). Without a store in between, the *declaration order*
@@ -438,6 +459,13 @@ unrolled body, write `for (int i = 1; i != 2500; ++i)` instead of `i < 2500` (SH
   { ...; return; } }`. A `for (...; i++)` with the same body does not produce it. Together with `int i = 0;`
   declared where the original's `xor esi, esi` sits (here before an earlier early-return test, which then compares
   against that zero register) this took `generateSiegeCreationInformation` from 39.4% to 100%.
+
+- When a loop reads two **parallel arrays** at the same index, MSVC strength-reduces the index into one pointer and
+  anchors it on whichever of the arrays is compared **last**, reaching the other one off that pointer. If the
+  original anchors on the other array, try swapping the comparisons; where the comparison order is itself fixed by
+  the original's asm, the second array has to be reached as an offset from the first
+  (`createStatsPopUpEntities`, `showPopAndGoldPopup`: 0.9211 -> 1.0000). Derive that offset from the two array
+  names so no literal index past an array's end is needed.
 
 ### GOTO
 

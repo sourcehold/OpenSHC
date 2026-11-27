@@ -24,7 +24,7 @@ namespace Game {
         for (int playerID = 1; playerID < 9; ++playerID) {
             this->playerDataArray[playerID].weeksWithoutFood = 0;
             this->playerDataArray[playerID].foodTypesCurrentlyEaten = 0;
-            this->playerDataArray[playerID].someCount40 = 0;
+            this->playerDataArray[playerID].largestPopularityChangeReason = 0;
             this->playerDataArray[playerID].foodStorageLevelLastLastMonth = 0;
             this->playerDataArray[playerID].foodStorageLevelLastMonth = 0;
             this->playerDataArray[playerID].vclock = 2000;
@@ -48,19 +48,19 @@ namespace Game {
             this->playerDataArray[playerID].playerDeathRelated = 0;
             this->playerDataArray[playerID].previousBlessedPeoplePercentage = 0;
             this->playerDataArray[playerID].popularityReligionBasedDiv25 = 0;
-            this->playerDataArray[playerID].someCount48 = 0;
-            this->playerDataArray[playerID].someCount49 = 0;
-            this->playerDataArray[playerID].someCount50 = 0;
-            this->playerDataArray[playerID].someCount51 = 0;
-            this->playerDataArray[playerID].someCount52 = 0;
-            this->playerDataArray[playerID].someCount53 = 0;
-            this->playerDataArray[playerID].someCount54 = 0;
-            this->playerDataArray[playerID].someCount55 = 0;
-            this->playerDataArray[playerID].someCount56 = 0;
-            this->playerDataArray[playerID].someCount57 = 0;
-            this->playerDataArray[playerID].someCount58 = 0;
-            this->playerDataArray[playerID].someCount59 = 0;
-            this->playerDataArray[playerID].someCount60 = 0;
+            this->playerDataArray[playerID].eventPlagueCountdown = 0;
+            this->playerDataArray[playerID].eventLionsCountdown = 0;
+            this->playerDataArray[playerID].eventBanditsCountdown = 0;
+            this->playerDataArray[playerID].eventFireCountdown = 0;
+            this->playerDataArray[playerID].eventMarriageCountdown = 0;
+            this->playerDataArray[playerID].eventJesterCountdown = 0;
+            this->playerDataArray[playerID].currentPlaguePenalty = 0;
+            this->playerDataArray[playerID].currentLionsPenalty = 0;
+            this->playerDataArray[playerID].currentBanditsPenalty = 0;
+            this->playerDataArray[playerID].currentFirePenalty = 0;
+            this->playerDataArray[playerID].currentMarriageBoost = 0;
+            this->playerDataArray[playerID].currentJesterBoost = 0;
+            this->playerDataArray[playerID].eventPlagueHealerActivity = 0;
             this->playerDataArray[playerID].keepEnclosementRelatedCountdown = 0;
             this->playerDataArray[playerID].defensesDamagedByPlayer = 0;
             for (int resourceType = 0; resourceType < 25; ++resourceType) {
@@ -71,8 +71,8 @@ namespace Game {
             this->playerDataArray[playerID].troopsKilled = 0;
             this->playerDataArray[playerID].troopsLost = 0;
             this->playerDataArray[playerID].weightedLosses = 0;
-            this->playerDataArray[playerID].field25_0x40 = 0;
-            this->playerDataArray[playerID].field26_0x42 = 0;
+            this->playerDataArray[playerID].field_0x40 = 0;
+            this->playerDataArray[playerID].field_0x42 = 0;
             if (this->mapAndTime.editScenarioExtraOptions != 0) {
                 this->playerDataArray[playerID].taxesSetting = this->mapAndTime.scenarioTaxesSetting;
                 int scenarioRations = this->mapAndTime.scenarioRationsSetting;
@@ -91,7 +91,7 @@ namespace Game {
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
                     this->playerDataArray[playerID].startResources[0xf]
                         = DAT_RenderingDefinedData::instance
-                              .field451_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
+                              .field_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
                                                     + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
                                       * 2
                                   + 0xc]
@@ -99,7 +99,7 @@ namespace Game {
                 } else if (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
                     this->playerDataArray[playerID].startResources[0xf]
                         = DAT_RenderingDefinedData::instance
-                              .field451_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
+                              .field_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
                                                     + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
                                       * 2
                                   + 0xd]

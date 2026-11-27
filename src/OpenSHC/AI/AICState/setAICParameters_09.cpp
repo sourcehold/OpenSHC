@@ -82,9 +82,9 @@ namespace AI {
         this->aics[aicIndex].RecruitInterval = 4;
         this->aics[aicIndex].RecruitIntervalStrong = 4;
         this->aics[aicIndex].SortieUnitRangedMin = 12;
-        this->aics[aicIndex].SortieUnitRanged = 22;
+        this->aics[aicIndex].SortieUnitRanged = OpenSHC::Map::Units::UT_E_ARCHER;
         this->aics[aicIndex].SortieUnitMeleeMin = 4;
-        this->aics[aicIndex].SortieUnitMelee = 27;
+        this->aics[aicIndex].SortieUnitMelee = OpenSHC::Map::Units::UT_E_SWORD;
         this->aics[aicIndex].DefDiggingUnitMax = 10;
         this->aics[aicIndex].DefDiggingUnit = 22;
         this->aics[aicIndex].DefWalls = 50;
@@ -140,7 +140,6 @@ namespace AI {
         this->aics[aicIndex].AttMaxDefault = 200;
         this->aics[aicIndex].AttMainGroupsCount = 4;
         this->aics[aicIndex].TargetChoice = OpenSHC::AI::AIC::AITC_GOLD;
-        return;
     }
 }
 }

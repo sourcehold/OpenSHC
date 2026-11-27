@@ -7,6 +7,7 @@
 #include "OpenSHC/Synchrony/GameSynchronyState.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -50,7 +51,8 @@ namespace Game {
         int playerID = 1;
         int* foodClockSpeed = &this->playerDataArray[1].foodClockSpeed;
         for (; playerID < 9; ++playerID, foodClockSpeed += sizeof(PlayerData) / sizeof(int)) {
-            if (PLAYER_FIELD(int, keep.id) <= 0 || PLAYER_FIELD(int, campground.id) <= 0) {
+            if (PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_KEEP].id) <= 0
+                || PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id) <= 0) {
                 continue;
             }
             PLAYER_FIELD(int, foodStorageLevel) = -1;

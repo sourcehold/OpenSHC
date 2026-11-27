@@ -79,7 +79,7 @@ namespace AI {
         this->aics[aicIndex].RecruitIntervalWeak = 1;
         this->aics[aicIndex].RecruitInterval = 1;
         this->aics[aicIndex].RecruitIntervalStrong = 1;
-        this->aics[aicIndex].SortieUnitRanged = 22;
+        this->aics[aicIndex].SortieUnitRanged = OpenSHC::Map::Units::UT_E_ARCHER;
         this->aics[aicIndex].DefDiggingUnit = 22;
         this->aics[aicIndex].OuterPatrolGroupsCount = 1;
         this->aics[aicIndex].OuterPatrolGroupsMove = 1;
@@ -92,7 +92,7 @@ namespace AI {
         this->aics[aicIndex].recruitProbAttackStrong = 50;
         this->aics[aicIndex].SortieUnitRangedMin = 4;
         this->aics[aicIndex].SortieUnitMeleeMin = 20;
-        this->aics[aicIndex].SortieUnitMelee = 37;
+        this->aics[aicIndex].SortieUnitMelee = OpenSHC::Map::Units::UT_E_MONK;
         this->aics[aicIndex].DefDiggingUnitMax = 4;
         this->aics[aicIndex].DefWalls = 30;
         this->aics[aicIndex].DefTotal = 30;
@@ -138,7 +138,6 @@ namespace AI {
         this->aics[aicIndex].AttMaxDefault = 200;
         this->aics[aicIndex].AttMainGroupsCount = 2;
         this->aics[aicIndex].TargetChoice = OpenSHC::AI::AIC::AITC_BALANCED;
-        return;
     }
 }
 }

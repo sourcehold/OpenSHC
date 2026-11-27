@@ -89,45 +89,45 @@ namespace Map {
 
             void computeSiegeSpotScores(int attackedPlayerID, int attackingPlayerID);
 
-            undefined4 findEnemyWalls(int unitID);
+            int findEnemyWalls(int unitID);
 
-            void setScale3(int one, int playerID);
+            void setScale3(BOOLEnum includeAll, int playerID);
 
-            undefined4 findNearestAvailableScalePoint(int unitID);
+            int findNearestAvailableScalePoint(int unitID);
 
-            void setTown2(int param_1, int playerID);
+            void setTown2(BOOLEnum includeAll, int playerID);
 
-            undefined4 findEnemyBuildingsClosestToUnit(int unitID);
+            int findEnemyBuildingsClosestToUnit(int unitID);
 
-            void countAvailablePeopleValueSlots(int param_1);
+            void countAvailablePeopleValueSlots(BOOLEnum includeOccupied);
 
-            void countAvailableLordValueSlots(int param_1);
+            void countAvailableLordValueSlots(BOOLEnum includeOccupied);
 
-            undefined4 calculateTile2PeoplValueClosestToUnit(int unitID);
+            int calculateTile2PeoplValueClosestToUnit(int unitID);
 
             int findEnemyLord(int unitID);
 
-            void setGate2(int param_1, int param_2);
+            void setGate2(BOOLEnum includeAll, int playerID);
 
-            undefined4 findEnemyTowersOrGates(int unitID);
+            int findEnemyTowersOrGates(int unitID);
 
-            void setWide3(int param_1, int param_2);
+            void setWide3(BOOLEnum includeAll, int playerID);
 
-            undefined4 getClosestWideValueBasedOnPlayer(int playerID);
+            int getClosestWideValueBasedOnPlayer(int unitID);
 
-            void setMoat3(int checkAgainstNonZero, int playerID);
+            void setMoat3(BOOLEnum includeAll, int playerID);
 
-            undefined4 calculateTile2MoatValueClosestToUnit(int unitID);
+            int calculateTile2MoatValueClosestToUnit(int unitID);
 
             int findNearestDiggableMoatPoint(int param_1);
 
-            undefined4 findTribeWithMoatAttackBehavior();
+            BOOLEnum findTribeWithMoatAttackBehavior();
 
-            void countAvailableHighValueSlots(int param_1);
+            void countAvailableHighValueSlots(BOOLEnum includeOccupied);
 
             int calculateHigh2ClostestToTribeTargetUnit(int tribeID);
 
-            void countAvailableArcherValueSlots(int param_1);
+            void countAvailableArcherValueSlots(BOOLEnum includeOccupied);
 
             int calculateArch2ClosestToTribeTargetUnit(int tribeID);
 
@@ -151,7 +151,7 @@ namespace Map {
 
             void pruneStaleSupportPoints();
 
-            int assignTribeToSupportPoint(uint x, uint y, int tribeID);
+            int assignTribeToSupportPoint(int x, int y, int tribeID);
 
             int getSiegeIndexForTile(int tile);
 
@@ -168,11 +168,11 @@ namespace Map {
 
             void playAttackAlarmSound();
 
-            void placeSiegeTentsAndAssignEngineers(int param_1, int param_2);
+            void placeSiegeTentsAndAssignEngineers(int param_1, BOOLEnum param_2);
 
             void placeTunnelForEveryTunneler(int attackWave);
 
-            void addUnitToNewTribe(undefined4 unitID, int attackWave, AITribeType tribeType, undefined4 playerID);
+            void addUnitToNewTribe(int unitID, int attackWave, AITribeType tribeType, int playerID);
 
             void exitSiegeEquipmentForWave(int wave);
 
@@ -182,7 +182,7 @@ namespace Map {
 
             BOOLEnum shouldLightPitchBasedOnTroopValue(int tile, int playerID, int param_3);
 
-            undefined4 giveLightPitchInstructionToUnitClosestToPitch(int tile);
+            BOOLEnum giveLightPitchInstructionToUnitClosestToPitch(int tile);
 
             void lightPitchIfNecessary(int unitID, int unitID2);
 
@@ -192,7 +192,7 @@ namespace Map {
 
             void queueOilThrowForIdleArchers();
 
-            undefined4 ifNecessaryThrowOilAutomatically(int param_1);
+            BOOLEnum ifNecessaryThrowOilAutomatically(int param_1);
 
             void commandUnitsToMoveToKeep();
 
@@ -212,7 +212,7 @@ namespace Map {
 
             void decideAndExecuteTribeAttackAction(int tribeID);
 
-            undefined4 moveTribeToNearbyGatehouse(int param_1);
+            BOOLEnum moveTribeToNearbyGatehouse(int param_1);
 
             void moveTowardsParticularUnits(int param_1);
 
@@ -240,15 +240,15 @@ namespace Map {
 
             void uselessFunction(PackagedFileMagicNum receivedMapVersion, PackagedFileMagicNum packagerMapVersion);
 
-            void recountAttackTroopValue(int param_1);
+            void recountAttackTroopValue(BOOLEnum param_1);
 
             void updateAttackInfoTick();
 
             void initializeOrAdvanceAttackWave(int param_1);
 
-            void aiRecomputeAttacks2(int param_1, int param_2);
+            void aiRecomputeAttacks2(BOOLEnum param_1, int param_2);
 
-            void aiRecomputeAttacks(undefined4 param_1, int param_2);
+            void aiRecomputeAttacks(int param_1, int param_2);
 
             void updateInProgressAttackWave(int attackID);
 

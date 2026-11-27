@@ -22,7 +22,7 @@ namespace Game {
             this->playerDataArray[playerID].currentPopulation
                 = ((this->playerDataArray[playerID].countEntities
                        - this->playerDataArray[playerID].nonInteractiveCitizenCountUnk)
-                      - this->playerDataArray[playerID].field639_0x2174)
+                      - this->playerDataArray[playerID].field_0x2174)
                 - this->playerDataArray[playerID].armySize;
             if (this->playerDataArray[playerID].lordID != 0
                 && DAT_UnitsState::instance.units[this->playerDataArray[playerID].lordID].uid

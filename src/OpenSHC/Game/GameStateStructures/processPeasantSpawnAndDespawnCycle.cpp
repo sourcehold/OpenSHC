@@ -8,6 +8,7 @@
 #include "OpenSHC/Audio/SFX/SpeechEffectID.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
@@ -73,10 +74,10 @@ namespace Game {
             if (this->playerDataArray[playerID].vclockIncrement == 0) {
                 this->playerDataArray[playerID].vclock = 2000;
             }
-            if (this->playerDataArray[playerID].keep.id <= 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id <= 0) {
                 continue;
             }
-            int campgroundID = this->playerDataArray[playerID].campground.id;
+            int campgroundID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id;
             if (campgroundID <= 0) {
                 continue;
             }
@@ -84,8 +85,8 @@ namespace Game {
                 if (this->playerDataArray[playerID].currentPopulation < this->playerDataArray[playerID].populationCap
                     && this->playerDataArray[playerID].availablePeasantsOrHousedPeasants < 24) {
                     // Havent reached peasant limit.
-                    int x = this->playerDataArray[playerID].campground.xEntry;
-                    int y = this->playerDataArray[playerID].campground.yEntry;
+                    int x = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].xEntry;
+                    int y = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].yEntry;
                     this->playerDataArray[playerID].vclock = 2000;
                     int peasantUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
                         playerID, playerID, x * 8, y * 8,
@@ -99,8 +100,8 @@ namespace Game {
                             MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(9, Map::Buildings::BT_HOVEL);
                         }
                     }
-                    if (this->playerDataArray[playerID].field26_0x42 == 1) {
-                        this->playerDataArray[playerID].field26_0x42 = 0;
+                    if (this->playerDataArray[playerID].field_0x42 == 1) {
+                        this->playerDataArray[playerID].field_0x42 = 0;
                         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                             && MACRO_CALL_MEMBER(
                                    Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -118,8 +119,8 @@ namespace Game {
                 this->playerDataArray[playerID].vclock = 2000;
                 // let a peasant disappear?
                 MACRO_CALL_MEMBER(GameStateStructures_Func::despawnPeasantOrWorker, this)(playerID);
-                if (this->playerDataArray[playerID].field26_0x42 == 0) {
-                    this->playerDataArray[playerID].field26_0x42 = 1;
+                if (this->playerDataArray[playerID].field_0x42 == 0) {
+                    this->playerDataArray[playerID].field_0x42 = 1;
                     if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && MACRO_CALL_MEMBER(
                                Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()

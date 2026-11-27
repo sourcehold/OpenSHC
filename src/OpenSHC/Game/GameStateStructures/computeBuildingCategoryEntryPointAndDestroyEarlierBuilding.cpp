@@ -1,6 +1,7 @@
 #include "../GameStateStructures.func.hpp"
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
@@ -23,10 +24,10 @@ namespace Game {
         int entryY = 0;
         DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
         if (category == Player::PDBCE_KEEP) {
-            if ((int)this->playerDataArray[playerID].keep.id > 0
-                && this->playerDataArray[playerID].keep.id != buildingID) {
+            if ((int)this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
+                && this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id != buildingID) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].keep.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id);
             }
             short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
             entryX = (short)DAT_BuildingsState::instance.buildings[buildingID].x;
@@ -46,64 +47,64 @@ namespace Game {
             }
             if (DAT_GameCore::instance.currentMenuViewType == UI::Enums::MVT_MAP_EDITOR_LANDSCAPING) {
                 DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
-                if (this->playerDataArray[playerID].stockpile.id != 0) {
+                if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id != 0) {
                     MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                        this->playerDataArray[playerID].stockpile.id);
+                        this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id);
                 }
             }
         } else if (category == Player::PDBCE_MARKETPLACE) {
-            if (this->playerDataArray[playerID].marketplace.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].marketplace.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id);
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_ENGINEERSGUILD) {
-            if (this->playerDataArray[playerID].engineersGuild.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].engineersGuild.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id);
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_TUNNELERSGUILD) {
-            if (this->playerDataArray[playerID].tunnelersGuild.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].tunnelersGuild.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id);
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_STOCKPILE) {
             // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].stockpile.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id > 0) {
                 return;
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_ARMORY) {
             // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].armory.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ARMORY].id > 0) {
                 return;
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_GRANARY) {
             // a storage building of this kind already exists, keep the old entry
-            if (this->playerDataArray[playerID].granary.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_GRANARY].id > 0) {
                 return;
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_BARRACKS) {
-            if (this->playerDataArray[playerID].barracks.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].barracks.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id);
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
         } else if (category == Player::PDBCE_MERCENARYPOST) {
-            if (this->playerDataArray[playerID].mercenaryPost.id > 0) {
+            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id > 0) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
-                    this->playerDataArray[playerID].mercenaryPost.id);
+                    this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id);
             }
             entryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
             entryY = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryY;
@@ -139,14 +140,14 @@ namespace Game {
             return;
         }
         if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[entryY * 400 + entryX] != 0) {
-            (&this->playerDataArray[playerID].keep)[category].id = buildingID;
-            (&this->playerDataArray[playerID].keep)[category].yEntry = entryY;
-            (&this->playerDataArray[playerID].keep)[category].xEntry = entryX;
-            (&this->playerDataArray[playerID].keep)[category].tileEntry
+            this->playerDataArray[playerID].buildingEntryInfos[category].id = buildingID;
+            this->playerDataArray[playerID].buildingEntryInfos[category].yEntry = entryY;
+            this->playerDataArray[playerID].buildingEntryInfos[category].xEntry = entryX;
+            this->playerDataArray[playerID].buildingEntryInfos[category].tileEntry
                 = DAT_ViewportRenderState::instance.translationMatrix[entryY].addXgetTile + entryX;
-            (&this->playerDataArray[playerID].keep)[category].areaEntry
+            this->playerDataArray[playerID].buildingEntryInfos[category].areaEntry
                 = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[(&this->playerDataArray[playerID].keep)[category].tileEntry];
+                      .PathConnectionLayer[this->playerDataArray[playerID].buildingEntryInfos[category].tileEntry];
             DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 0;
         }
     }

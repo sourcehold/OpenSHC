@@ -11,9 +11,9 @@ namespace IO {
     void ResourceManager::setSoundFileFilter()
 
     {
-        this->openFileNameA.lpstrFilter = DAT_TextInputDefinedData::instance.field27_0x728;
+        this->openFileNameA.lpstrFilter = DAT_TextInputDefinedData::instance.field_0x728;
         this->openFileNameA.nFilterIndex = 1;
-        this->openFileNameA.lpstrDefExt = DAT_TextInputDefinedData::instance.field27_0x728;
+        this->openFileNameA.lpstrDefExt = DAT_TextInputDefinedData::instance.field_0x728;
         this->openFileNameA.lpstrInitialDir = s_fx__005a5a2c;
     }
 

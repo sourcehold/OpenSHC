@@ -26,7 +26,7 @@ namespace UI {
                 &OpenSHC::UI::MenuItems::InGameMenu::MenuItemActionHandler_InGameMenu_ViewToKeeps)
             MenuItemActionHandler_InGameMenu_ViewToKeeps;
 
-            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(int param_1, ...), false, Address::SHC_3BB0A8C1_0x00434120,
+            MACRO_FUNCTION_RESOLVER(void(__cdecl*)(), false, Address::SHC_3BB0A8C1_0x00434120,
                 &OpenSHC::UI::MenuItems::InGameMenu::MenuItemActionHandler_InGameMenu_Scrolling)
             MenuItemActionHandler_InGameMenu_Scrolling;
 

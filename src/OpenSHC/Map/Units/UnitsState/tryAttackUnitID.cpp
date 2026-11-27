@@ -1,0 +1,52 @@
+#include "../UnitsState.func.hpp"
+
+#include "OpenSHC/Map/Units/Pathfinding/DestinationNeededEnum.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/UnitLogicState.hpp"
+
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00537D60
+        BOOLEnum UnitsState::tryAttackUnitID(int unitID_1, int unitID_2)
+        {
+            if (unitID_2 <= 0) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_1].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_1].dying) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_2].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_2].dying) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_1].state.generic == OpenSHC::Map::Units::States::US_UNKNOWN_207) {
+                return FALSE;
+            }
+            if (DAT_UnitsState::instance.units[unitID_1].state.generic
+                == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
+                return FALSE;
+            }
+            DAT_UnitsState::instance.units[unitID_1].movementType_OR_targetUnitID = unitID_2;
+            DAT_UnitsState::instance.units[unitID_1].targetedUnitID__OR__engineerMannedSiegeEngineRef = unitID_2;
+            DAT_UnitsState::instance.units[unitID_1]
+                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
+                = DAT_UnitsState::instance.units[unitID_2].uid;
+            DAT_UnitsState::instance.units[unitID_2].huntedBy = DAT_UnitsState::instance.units[unitID_2].huntedBy + 1;
+            DAT_UnitsState::instance.units[unitID_1].state.generic = OpenSHC::Map::Units::States::US_UNKNOWN_207;
+            DAT_UnitsState::instance.units[unitID_1].destinationNeeded
+                = OpenSHC::Map::Units::Pathfinding::DNE_DESTINATION_NEEDED;
+            return TRUE;
+        }
+
+    }
+}
+}

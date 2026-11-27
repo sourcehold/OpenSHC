@@ -1,15 +1,27 @@
 """Permute a short run of declarations and keep the order that matches best.
 
-MSVC assigns stack slots in declaration order, so two locals declared the wrong way round sit in
-each other's slots and usually end up in each other's registers too - a mismatch that spreads over
-every instruction touching either of them while `diff_triage.py` still reports the function as
-register-naming only. `assignSelectionToKey` had the original's slot *set* exactly
+Declaration order does not decide stack slots: the colorer sorts its elements by reference weight
+per byte (`StkColorCmp`, see the cheat sheet) and leaves only the *ties* to the order the symbols
+arrive in. So this pays exactly when two locals of equal weight are declared the wrong way round -
+they then sit in each other's slots and usually in each other's registers too, a mismatch that
+spreads over every instruction touching either of them while `diff_triage.py` still reports the
+function as register-naming only. Run `slot_weight.py` first: if the weights differ, no permutation
+of the declarations will move those slots. `assignSelectionToKey` had the original's slot *set* exactly
 (`0x18`, `0x1c`, `0x20`) with `tribeIndex` and `slotID` swapped between `0x18` and `0x20`;
 declaring `tribeIndex` first took it from 95.9% to 100%.
 
+Where the weights differ no permutation of the declarations can move those slots, which is why the
+attempts recorded under "Variable Usage" in IMPLEMENTATION_CHEAT_SHEET.md all came back empty. The two
+findings are not in conflict: that section's functions had unequal weights, `assignSelectionToKey` had a
+tie. A run of this script is cheap enough to measure rather than predict, but do not keep retrying a
+function it has already declined - `AI::AIVState::applyAIV` is the worked negative case, where
+`slotpair.py` shows the slots permuted by +-4 and +-8 and thirteen variants including every declaration
+permutation measured tie-or-worse.
+
 Find the candidates with `diff_slots.py`: same number of slots on both sides but a different
-use count per slot. Then read the original's spill order - `mov [esp+0x18], edi` before
-`mov [esp+0x20], esi` means the local in the lower slot is declared first.
+use count per slot, then `slotpair.py` for which slots traded places. The original's spill order gives
+you its slot order - `mov [esp+0x18], edi` before `mov [esp+0x20], esi` means the local in the lower
+slot is the heavier one, or, where the two weigh the same, the one declared first.
 
 This permutes every order of one run and scores with `quick_diff.py -s` (stack offsets kept, which
 is what makes slot assignment visible), so a run of four costs about two minutes. It only moves

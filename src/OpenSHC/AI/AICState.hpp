@@ -37,7 +37,7 @@ namespace AI {
     class AICState {
     public:
         AICSpecification aics[20]; // 0x00000000 length: 13520
-        undefined4 aiBorderTilesIndex; // 0x000034D0 length: 4
+        int aiBorderTilesIndex; // 0x000034D0 length: 4
         TileDistancePair aiBorderTiles[1000]; // 0x000034D4 length: 8000
         byte unused01[512]; // 0x00005414 length: 512
         short tribeIDArray[1000]; // 0x00005614 length: 2000
@@ -110,13 +110,13 @@ namespace AI {
 
         BOOLEnum aiShouldBuildWoodcutter(int playerID);
 
-        uint aiShouldBuildQuarry(int playerID);
+        BOOLEnum aiShouldBuildQuarry(int playerID);
 
         BOOLEnum aiRequiresExtraOxtethers(int playerID);
 
-        uint aiShouldBuildIronMine(int playerID);
+        BOOLEnum aiShouldBuildIronMine(int playerID);
 
-        uint aiShouldBuildPitchrig(int playerID);
+        BOOLEnum aiShouldBuildPitchrig(int playerID);
 
         BOOLEnum shouldNotBeBuildingHovel(int playerID, MappersEnum mapper);
 
@@ -273,7 +273,7 @@ namespace AI {
 
         void clearOutdatedAITribes(int playerID);
 
-        undefined4 giveSomeRaidCommand(int tribeIndex, int tribeType);
+        BOOLEnum giveSomeRaidCommand(int tribeIndex, int tribeType);
 
         void addRallyPointForTribe(int tribeID);
 

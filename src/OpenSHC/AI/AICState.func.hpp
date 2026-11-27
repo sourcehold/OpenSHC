@@ -136,7 +136,7 @@ namespace AI {
         aiShouldBuildWoodcutter;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB330, &AICState::aiShouldBuildQuarry)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB330, &AICState::aiShouldBuildQuarry)
         aiShouldBuildQuarry;
 
         MACRO_FUNCTION_RESOLVER(
@@ -144,11 +144,11 @@ namespace AI {
         aiRequiresExtraOxtethers;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB4D0, &AICState::aiShouldBuildIronMine)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB4D0, &AICState::aiShouldBuildIronMine)
         aiShouldBuildIronMine;
 
         MACRO_FUNCTION_RESOLVER(
-            uint (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
+            BOOLEnum (AICState::*)(int), false, Address::SHC_3BB0A8C1_0x004CB540, &AICState::aiShouldBuildPitchrig)
         aiShouldBuildPitchrig;
 
         MACRO_FUNCTION_RESOLVER(BOOLEnum (AICState::*)(int, MappersEnum), false, Address::SHC_3BB0A8C1_0x004CB5B0,
@@ -460,7 +460,7 @@ namespace AI {
         clearOutdatedAITribes;
 
         MACRO_FUNCTION_RESOLVER(
-            undefined4 (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CF920, &AICState::giveSomeRaidCommand)
+            BOOLEnum (AICState::*)(int, int), false, Address::SHC_3BB0A8C1_0x004CF920, &AICState::giveSomeRaidCommand)
         giveSomeRaidCommand;
 
         MACRO_FUNCTION_RESOLVER(

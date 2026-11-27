@@ -33,6 +33,7 @@ namespace AI {
             } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 100) {
                 return FALSE;
             }
+            return TRUE;
         } else {
             // without enemy ranged troops there is no reason to become nervous
             if (DAT_GameState::instance.playerDataArray[playerID].totalEnemyRangedTroopValue < 100)
@@ -46,8 +47,8 @@ namespace AI {
             } else if (DAT_GameState::instance.playerDataArray[playerID].relativeStrengthOfTeamComparedToEnemy >= 75) {
                 return FALSE;
             }
+            return TRUE;
         }
-        return TRUE;
     }
 }
 }

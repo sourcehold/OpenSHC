@@ -8,6 +8,7 @@
 
 #pragma once
 
+#include "OpenSHC/Game/ScenarioEvents/Enums/ScenarioEventTypeInt.hpp"
 #include "OpenSHC/Game/ScenarioEvents/IngameEventHeader.hpp"
 #include "OpenSHC/Game/ScenarioEvents/ScenarioEventCondition.hpp"
 
@@ -17,6 +18,7 @@ namespace Game {
 
         using OpenSHC::Game::ScenarioEvents::IngameEventHeader;
         using OpenSHC::Game::ScenarioEvents::ScenarioEventCondition;
+        using OpenSHC::Game::ScenarioEvents::Enums::ScenarioEventTypeInt;
 
 #pragma pack(push, 1)
         // SIZE: 0x000000E4
@@ -24,7 +26,7 @@ namespace Game {
 
             IngameEventHeader header; // 0x00000000 length: 16
             int intensity; // 0x00000010 length: 4
-            int ScenarioEventType; // 0x00000014 length: 4
+            ScenarioEventTypeInt scenarioEventType; // 0x00000014 length: 4
             byte allOrAnyCondition; // 0x00000018 length: 1
             byte magic; // 0x00000019 length: 1
             byte repeat; // 0x0000001A length: 1

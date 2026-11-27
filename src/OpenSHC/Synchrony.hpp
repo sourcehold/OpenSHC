@@ -32,13 +32,14 @@ namespace Synchrony {
 
     HRESULT __stdcall EnumDisplayModesCallback(DDSURFACEDESC* displayDesc, LPVOID userParam);
 
-    BOOL __stdcall EnumConnectionsCallback(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
+    BOOLEnum __stdcall EnumConnectionsCallback(LPCGUID lpguidSP, LPVOID lpConnection, DWORD dwConnectionSize,
         LPCDPNAME lpName, DWORD dwFlags, LPVOID lpContext);
 
-    BOOL __stdcall EnumSessionsCallback_addSession_async(
+    BOOLEnum __stdcall EnumSessionsCallback_addSession_async(
         LPCDPSESSIONDESC2 lpThisSD, LPDWORD lpdwTimeOut, DWORD dwFlags, LPVOID lpContext);
 
-    BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationCallback(int* param_1, undefined4 param_2, char* param_3);
+    BOOLEnum __stdcall DirectPlayModemRelated_MemoryAllocationCallback(
+        GUID* guidDataType, DWORD dataSize, char* data, void* context);
 
     void __cdecl MemCopyFromParameter(char* dest, size_t size, undefined4 playerID);
 

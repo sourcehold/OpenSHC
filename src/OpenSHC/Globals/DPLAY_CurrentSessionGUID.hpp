@@ -11,11 +11,11 @@
 #include "guiddef.h"
 
 // GLOBAL: STRONGHOLDCRUSADER 0x00DF3D1C
-// StructResolver::Instance<GUID,14630172>::instance
+// StructResolver::Instance<_GUID,14630172>::instance
 
 namespace OpenSHC {
 
-MACRO_STRUCT_RESOLVER(GUID, false, Address::SHC_3BB0A8C1_0x00DF3D1C) DPLAY_CurrentSessionGUID;
+MACRO_STRUCT_RESOLVER(_GUID, false, Address::SHC_3BB0A8C1_0x00DF3D1C) DPLAY_CurrentSessionGUID;
 } // namespace OpenSHC
 
 MACRO_STRUCT_INSTANCE(Address::SHC_3BB0A8C1_0x00DF3D1C);
