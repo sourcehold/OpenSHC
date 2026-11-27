@@ -4,7 +4,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /* each case is a hand-written `rol` on the parameter (rol byte ptr [esp+4], n in the original) */
         // FUNCTION: STRONGHOLDCRUSADER 0x0046CE30
         byte DirectionAlgorithmState::rotateByteLeft(byte value, int bits)
         {

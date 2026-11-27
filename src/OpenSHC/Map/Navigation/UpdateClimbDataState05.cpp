@@ -9,16 +9,9 @@
 namespace OpenSHC {
 namespace Map {
 
-    /* climb data of a building ladder (bottom 3 tiles out, top 1 tileUnk behind the building origin); the same as
-       state 03 with other offsets */
     // FUNCTION: STRONGHOLDCRUSADER 0x004A50E0
     void __cdecl Navigation::UpdateClimbDataState05()
     {
-        /*
-          The repeated `climbData[DAT_CurrentClimbDataID::instance]` cannot be collapsed into
-          a `ClimbData&`: the original re-reads the global index for every field, and the
-          reference measured 0.53 against 0.98 (quick_diff).
-         */
         int const buildingID = DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].buildingID;
         DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID = DAT_CurrentClimbDataID::instance;
         if (DAT_PathFindingState::instance.climbData[DAT_CurrentClimbDataID::instance].sourceUID

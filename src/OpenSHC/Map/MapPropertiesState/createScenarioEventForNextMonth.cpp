@@ -7,7 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // data+8 is cleared as one 16-bit word (allOrAnyCondition + magic, 0x4BDA3A); data+0x17 = conditions[2].enabled.
     // FUNCTION: STRONGHOLDCRUSADER 0x004BD980
     void MapPropertiesState::createScenarioEventForNextMonth()
     {

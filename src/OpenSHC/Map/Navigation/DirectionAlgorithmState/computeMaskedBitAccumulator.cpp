@@ -4,16 +4,6 @@ namespace OpenSHC {
 namespace Map {
     namespace Navigation {
 
-        /*
-          The original is hand-written assembly (like computeHash), equivalent to:
-            uint hash = 0;
-            while (byteCount > 3) {
-                hash += *address++ & mask;
-                hash = (hash << 1) | (hash >> 31);
-                byteCount -= 4;
-            }
-            return hash;
-        */
         // FUNCTION: STRONGHOLDCRUSADER 0x0046CDF0
         uint DirectionAlgorithmState::computeMaskedBitAccumulator(int byteCount, uint* address, uint mask)
         {

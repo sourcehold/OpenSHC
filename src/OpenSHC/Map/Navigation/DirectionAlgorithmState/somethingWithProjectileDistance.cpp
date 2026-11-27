@@ -18,8 +18,6 @@ namespace Map {
                 this->distanceY = targetY - y;
             }
 
-            /* minor axis in percent of the major axis (an inlined percentage helper like computeHealthPercentage:
-               100 when the major axis is 0) */
             int axisRatioPercent;
             if (this->distanceX >= this->distanceY) {
                 int const part = this->distanceY;

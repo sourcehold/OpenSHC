@@ -6,8 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Per resource (25): buyAndSalesPriceArray[i] (= copyOfBuyAndSalesPrice[i + 25], the original addresses it
-    // from the copy pointer, [eax+0xC8] at 0x4B7846) is written before copyOfBuyAndSalesPrice[i] (0x4B784C).
     // FUNCTION: STRONGHOLDCRUSADER 0x004B7800
     void MapPropertiesState::importTradingCosts()
     {
