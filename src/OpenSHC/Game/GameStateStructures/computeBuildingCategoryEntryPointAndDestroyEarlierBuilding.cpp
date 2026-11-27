@@ -2,7 +2,6 @@
 
 #include "OpenSHC/Map/Buildings/BuildingsState.func.hpp"
 #include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
-#include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/UI/Enums/MenuViewType.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -13,17 +12,17 @@
 namespace OpenSHC {
 namespace Game {
 
-    using Player::PlayerDataBuildingCategoryEnum;
+    using Player::Enums::BuildingEntryInfoEnum;
     using UI::Enums::MenuViewType;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x00456FD0
     void GameStateStructures::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding(
-        uint buildingID, int playerID, PlayerDataBuildingCategoryEnum category)
+        uint buildingID, int playerID, BuildingEntryInfoEnum category)
     {
         int entryX = 0;
         int entryY = 0;
         DAT_TileMapState::instance.showNoRubbleWhenDestroyingBuilding = 1;
-        if (category == Player::PDBCE_KEEP) {
+        if (category == Player::Enums::BEIE_KEEP) {
             if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id > 0
                 && this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id != buildingID) {
                 MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::destroyBuilding, DAT_BuildingsState::ptr)(
@@ -57,37 +56,37 @@ namespace Game {
             // same goes for the destroy call. Writing the read out in every arm (MSVC merges the copies only after
             // register allocation) makes buildingID look hot enough to keep in a register: 33.5% instead of 64.0%.
             int existingID;
-            if (category == Player::PDBCE_MARKETPLACE) {
+            if (category == Player::Enums::BEIE_MARKETPLACE) {
                 existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MARKETPLACE].id;
-            } else if (category == Player::PDBCE_ENGINEERSGUILD) {
+            } else if (category == Player::Enums::BEIE_ENGINEERSGUILD) {
                 existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ENGINEERSGUILD].id;
-            } else if (category == Player::PDBCE_TUNNELERSGUILD) {
+            } else if (category == Player::Enums::BEIE_TUNNELERSGUILD) {
                 existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_TUNNELERSGUILD].id;
-            } else if (category == Player::PDBCE_STOCKPILE) {
+            } else if (category == Player::Enums::BEIE_STOCKPILE) {
                 // a storage building of this kind already exists, keep the old entry
                 if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_STOCKPILE].id > 0) {
                     return;
                 }
                 goto readEntry;
-            } else if (category == Player::PDBCE_ARMORY) {
+            } else if (category == Player::Enums::BEIE_ARMORY) {
                 // a storage building of this kind already exists, keep the old entry
                 if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_ARMORY].id > 0) {
                     return;
                 }
                 goto readEntry;
-            } else if (category == Player::PDBCE_GRANARY) {
+            } else if (category == Player::Enums::BEIE_GRANARY) {
                 // a storage building of this kind already exists, keep the old entry
                 if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_GRANARY].id > 0) {
                     return;
                 }
                 goto readEntry;
-            } else if (category == Player::PDBCE_BARRACKS) {
+            } else if (category == Player::Enums::BEIE_BARRACKS) {
                 existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_BARRACKS].id;
-            } else if (category == Player::PDBCE_MERCENARYPOST) {
+            } else if (category == Player::Enums::BEIE_MERCENARYPOST) {
                 existingID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_MERCENARYPOST].id;
-            } else if (category == Player::PDBCE_OILSMELTER) {
+            } else if (category == Player::Enums::BEIE_OILSMELTER) {
                 goto readEntry;
-            } else if (category == Player::PDBCE_CAMPGROUND) {
+            } else if (category == Player::Enums::BEIE_CAMPGROUND) {
                 short orientation = DAT_BuildingsState::instance.buildings[buildingID].orientation;
                 entryX = DAT_BuildingsState::instance.buildings[buildingID].x;
                 entryY = DAT_BuildingsState::instance.buildings[buildingID].y;
