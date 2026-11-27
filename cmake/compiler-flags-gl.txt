@@ -20,3 +20,5 @@ src/OpenSHC/Input/MouseState/updateRightDragCameraControl.cpp
 
 src/OpenSHC/AI/AIVState/executeDefaultCastleAIV.cpp
 src/OpenSHC/AI/AIVState/findAppropriateGridLocationForBuilding.cpp
+src/OpenSHC/Game/GameStateStructures/updateFoodTypesInStockForAllPlayers.cpp
+src/OpenSHC/Game/GameStateStructures/processFoodConsumption.cpp
