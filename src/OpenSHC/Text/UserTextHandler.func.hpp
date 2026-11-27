@@ -7,7 +7,7 @@ namespace OpenSHC {
 namespace Text {
     namespace UserTextHandler_Func {
 
-        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004694A0,
+        MACRO_FUNCTION_RESOLVER(UserTextHandler* (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x004694A0,
             &UserTextHandler::Constructor_UserTextHandler)
         Constructor_UserTextHandler;
 
@@ -95,7 +95,7 @@ namespace Text {
             void (UserTextHandler::*)(), false, Address::SHC_3BB0A8C1_0x00472D00, &UserTextHandler::handleDeleteKey)
         handleDeleteKey;
 
-        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(byte), false, Address::SHC_3BB0A8C1_0x00474110,
+        MACRO_FUNCTION_RESOLVER(void (UserTextHandler::*)(ushort), false, Address::SHC_3BB0A8C1_0x00474110,
             &UserTextHandler::handleCharacterCode)
         handleCharacterCode;
 

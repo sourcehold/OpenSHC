@@ -44,7 +44,7 @@ namespace Text {
         dword field_0x14; // 0x00000014 length: 4
         BOOLEnum helpTextLinkActive; // 0x00000018 length: 4
         RenderTargetInt textSurfaceTarget; // 0x0000001C length: 4
-        dword field_0x20; // 0x00000020 length: 4
+        BOOL renderPlusSignForNumbers; // 0x00000020 length: 4
         int field_0x24; // 0x00000024 length: 4
         int field_0x28; // 0x00000028 length: 4
         dword drawingTextShadow; // 0x0000002C length: 4
@@ -90,7 +90,7 @@ namespace Text {
         void renderTextFromTextGroup(eTextSections offsetIndex, int numInGroup, int xParam, int yParam,
             TextAlignment alignment, uint color, int fontSize, BOOLEnum keepOffsetX, int blendStrength);
 
-        int renderMultilineText2(eTextSections param_1, int param_2, int param_3, int param_4);
+        int renderMultilineText2(eTextSections textOffsetIndex, int textNumInGroup, int maxWidth, int fontSize);
 
         void renderMultilineTextUnk(eTextSections textOffsetIndex, int textNumInGroup, int xPos, int yPos, int maxWidth,
             uint color, int fontSize, int blendStrength);
@@ -129,10 +129,10 @@ namespace Text {
 
         char* getTextStringInGroupAtOffset(eTextSections offsetIndex, int numInGroup);
 
-        int renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
+        void renderPartOfNumberUnk(int numberToRenderUnk, int xPosUnk, int yPosUnk, int integerPartToRenderUnk,
             int bgr24, int digitSet, BOOL useCurrentXOffsetUnk);
 
-        int calcRenderedNumberWidth(int param_1, int param_2);
+        int calcRenderedNumberWidth(int number, int fontSet);
 
         int getCharWidth(char character, int fontSize);
 

@@ -109,7 +109,7 @@ namespace Text {
             &TextManager::getTextStringInGroupAtOffset)
         getTextStringInGroupAtOffset;
 
-        MACRO_FUNCTION_RESOLVER(int (TextManager::*)(int, int, int, int, int, int, BOOL), false,
+        MACRO_FUNCTION_RESOLVER(void (TextManager::*)(int, int, int, int, int, int, BOOL), false,
             Address::SHC_3BB0A8C1_0x0046A2C0, &TextManager::renderPartOfNumberUnk)
         renderPartOfNumberUnk;
 
