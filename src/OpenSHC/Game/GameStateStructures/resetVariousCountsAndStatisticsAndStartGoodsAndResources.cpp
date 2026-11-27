@@ -4,6 +4,7 @@
 #include "OpenSHC/OS.func.hpp"
 #include "OpenSHC/Game/GameMode.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/TrailType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -43,7 +44,7 @@ namespace Game {
             this->playerDataArray[playerID].someCount45 = 1;
             this->playerDataArray[playerID].someCount46 = 1;
             this->playerDataArray[playerID].someCount47 = 0;
-            this->playerDataArray[playerID].textYOffset = 0x3c;
+            this->playerDataArray[playerID].textYOffset = 60;
             this->playerDataArray[playerID].someCountdown01 = 0;
             this->playerDataArray[playerID].playerDeathRelated = 0;
             this->playerDataArray[playerID].previousBlessedPeoplePercentage = 0;
@@ -63,11 +64,13 @@ namespace Game {
             this->playerDataArray[playerID].eventPlagueHealerActivity = 0;
             this->playerDataArray[playerID].keepEnclosementRelatedCountdown = 0;
             this->playerDataArray[playerID].defensesDamagedByPlayer = 0;
-            for (int resourceType = 0; resourceType < 25; ++resourceType) {
+            for (int resourceType = 0; resourceType < countof(this->playerDataArray[playerID].startResources);
+                ++resourceType) {
                 this->playerDataArray[playerID].startResources[resourceType]
                     = this->mapAndTime.startGoods[resourceType];
             }
-            MACRO_CALL(OS_Func::_memset)(this->playerDataArray[playerID].snoozedBuildings, 0, 100);
+            MACRO_CALL(OS_Func::_memset)(this->playerDataArray[playerID].snoozedBuildings, 0,
+                sizeof(this->playerDataArray[playerID].snoozedBuildings));
             this->playerDataArray[playerID].troopsKilled = 0;
             this->playerDataArray[playerID].troopsLost = 0;
             this->playerDataArray[playerID].weightedLosses = 0;
@@ -79,7 +82,7 @@ namespace Game {
                 this->playerDataArray[playerID].rationsSetting2 = scenarioRations;
                 this->playerDataArray[playerID].rationsSetting3 = scenarioRations;
                 this->playerDataArray[playerID].rationsSetting = scenarioRations;
-                this->playerDataArray[playerID].currentResources[0xf] = this->mapAndTime.scenarioGold;
+                this->playerDataArray[playerID].currentResources[Resources::RT_GOLD] = this->mapAndTime.scenarioGold;
             }
             if (DAT_GameSynchronyState::instance.currentGameMode != GM_SOLITARY) {
                 int gameTypeMultiplier = 1;
@@ -89,35 +92,35 @@ namespace Game {
                     gameTypeMultiplier = 3;
                 }
                 if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[playerID] != -1) {
-                    this->playerDataArray[playerID].startResources[0xf]
+                    this->playerDataArray[playerID].startResources[Resources::RT_GOLD]
                         = DAT_RenderingDefinedData::instance
                               .field_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
-                                                    + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
+                                                 + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
                                       * 2
-                                  + 0xc]
+                                  + 12]
                         * gameTypeMultiplier;
                 } else if (DAT_GameSynchronyState::instance.currentAIArray[playerID] != 0) {
-                    this->playerDataArray[playerID].startResources[0xf]
+                    this->playerDataArray[playerID].startResources[Resources::RT_GOLD]
                         = DAT_RenderingDefinedData::instance
                               .field_0x53bb4[(DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance
-                                                    + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
+                                                 + DAT_GameSynchronyState::instance.skirmishGameIntensityType * 5)
                                       * 2
-                                  + 0xd]
+                                  + 13]
                         * gameTypeMultiplier;
                 }
             }
             DAT_GameState::instance.mapAndTime.populationIndex = 0;
             this->playerDataArray[playerID].beforeLastMonthsGold
-                = (short)this->playerDataArray[playerID].currentResources[0xf];
+                = (short)this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
             this->playerDataArray[playerID].lastMonthsGold
-                = (short)this->playerDataArray[playerID].currentResources[0xf];
+                = (short)this->playerDataArray[playerID].currentResources[Resources::RT_GOLD];
             this->playerDataArray[playerID].aiControlStatusRelated = -1000;
-            for (int foodType = 0; foodType < 4; ++foodType) {
+            for (int foodType = 0; foodType < countof(this->playerDataArray[playerID].isFoodTypeBanned); ++foodType) {
                 this->playerDataArray[playerID].isFoodTypeBanned[foodType] = 0;
             }
             MACRO_CALL_MEMBER(AI::AICState_Func::setCurrentAttackStrength, DAT_AICState::ptr)(playerID);
             MACRO_CALL_MEMBER(AI::AICState_Func::setCurrentAttackRaidParameter, DAT_AICState::ptr)(playerID);
-            DAT_GameState::instance.playerDataArray[playerID].nervousBikCountdown = 0x30;
+            DAT_GameState::instance.playerDataArray[playerID].nervousBikCountdown = 48;
             this->playerDataArray[playerID].tacticalPowersBarLevel = 0;
             this->playerDataArray[playerID].goldDonation = 0;
         }

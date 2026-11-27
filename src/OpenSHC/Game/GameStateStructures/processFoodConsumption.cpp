@@ -11,6 +11,7 @@
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Map/MapType2.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+#include "OpenSHC/string-literals.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
 #include "OpenSHC/Globals/DAT_CounterFoodWarningInterval.hpp"
@@ -99,7 +100,7 @@ namespace Game {
                                 == FALSE) {
                             // "No food distributed this month"
                             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                                "food_warning4.wav");
+                                s_food_warning4_wav_005a509c);
                         }
                         ++DAT_CounterFoodWarningInterval::instance;
                         if ((int)DAT_CounterFoodWarningInterval::instance > 2) {
@@ -113,24 +114,24 @@ namespace Game {
                                 == FALSE) {
                                 // "Granary stocks are very low sire"
                                 MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                                    "food_warning2.wav");
+                                    s_food_warning2_wav_005a5088);
                             }
                         } else if (MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying,
                                        DAT_SoundSystemState::ptr)()
                             == FALSE) {
                             // "We are almost out of food sire"
                             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playWAVSFX, DAT_SFXState::ptr)(
-                                "food_warning3.wav");
+                                s_food_warning3_wav_005a5074);
                         }
                     }
                 }
             }
-            PLAYER_FIELD(int, foodClock) = PLAYER_FIELD(int, foodClock) + PLAYER_FIELD(int, foodClockSpeed);
+            PLAYER_FIELD(int, foodClock) += PLAYER_FIELD(int, foodClockSpeed);
             if (PLAYER_FIELD(int, foodClock) > 15000) {
                 PLAYER_FIELD(int, foodClock) = 0;
                 PLAYER_FIELD(int, foodTypesCurrentlyEaten) = PLAYER_FIELD(int, foodTypesInStock);
-                while (true) {
-                    PLAYER_FIELD(int, foodTypeToBeEatenNext) = PLAYER_FIELD(int, foodTypeToBeEatenNext) + 1;
+                for (;;) {
+                    ++PLAYER_FIELD(int, foodTypeToBeEatenNext);
                     if (PLAYER_FIELD(int, foodTypeToBeEatenNext) > 3) {
                         PLAYER_FIELD(int, foodTypeToBeEatenNext) = 0;
                     }

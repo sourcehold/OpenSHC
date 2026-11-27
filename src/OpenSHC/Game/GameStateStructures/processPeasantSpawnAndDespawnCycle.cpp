@@ -64,8 +64,7 @@ namespace Game {
                               .PeasantSpawnClockIncrementSolitaryPopLessThan101[popularityIndex];
                 }
             }
-            this->playerDataArray[playerID].vclock
-                = this->playerDataArray[playerID].vclockIncrement + this->playerDataArray[playerID].vclock;
+            this->playerDataArray[playerID].vclock += this->playerDataArray[playerID].vclockIncrement;
             if (this->playerDataArray[playerID].vclock >= 4000) {
                 this->playerDataArray[playerID].vclock = 4000;
             } else if (this->playerDataArray[playerID].vclock < 0) {

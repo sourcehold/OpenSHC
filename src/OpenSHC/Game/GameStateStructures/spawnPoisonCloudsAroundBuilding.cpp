@@ -24,27 +24,28 @@ namespace Game {
     // FUNCTION: STRONGHOLDCRUSADER 0x00459A20
     void GameStateStructures::spawnPoisonCloudsAroundBuilding(int buildingID)
     {
-        int attemptsLeft = 20;
-        while (attemptsLeft > 0) {
-            uint xPosition = SEC_RNG::instance.currentNumber2 % 30 - 15
-                + (short)DAT_BuildingsState::instance.buildings[buildingID].x;
+        // The decrement sits in each failure branch rather than in the loop header: that is what makes MSVC emit the
+        // original's read-modify-write on the stack slot.
+        for (int attemptsLeft = 20; attemptsLeft > 0;) {
+            uint xPosition
+                = SEC_RNG::instance.currentNumber2 % 30 - 15 + DAT_BuildingsState::instance.buildings[buildingID].x;
             uint yPosition = (SEC_RNG::instance.currentNumber2 >> 8) % 30 - 15
-                + (short)DAT_BuildingsState::instance.buildings[buildingID].y;
+                + DAT_BuildingsState::instance.buildings[buildingID].y;
             MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             if (xPosition > 399 || yPosition > 399
                 || DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[yPosition * 400 + xPosition] == 0) {
                 attemptsLeft--;
                 continue;
             }
-            int tile = DAT_ViewportRenderState::instance.translationMatrix[yPosition].addXgetTile + xPosition;
+            int const tile = DAT_ViewportRenderState::instance.translationMatrix[yPosition].addXgetTile + xPosition;
             if ((DAT_TileMapState::instance.LogicLayer[tile] & 0x4a5014b1U) != 0) {
                 attemptsLeft--;
                 continue;
             }
             for (int cloudIndex = SEC_RNG::instance.currentNumber2 % 5 - 2; cloudIndex < 8; ++cloudIndex) {
                 MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0, 0, 0,
-                    xPosition * 8, yPosition * 8, (byte)DAT_TileMapState::instance.EntityLayerLT25[tile + 0x13a10], 0,
-                    0, 0, Map::Entities::ET_COW_POISON_CLOUD, 0);
+                    xPosition * 8, yPosition * 8, DAT_TileMapState::instance.HeightLayer[tile], 0, 0, 0,
+                    Map::Entities::ET_COW_POISON_CLOUD, 0);
             }
             MACRO_CALL_MEMBER(Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                 xPosition, yPosition, DE::SHCDE::FX_FLIES);

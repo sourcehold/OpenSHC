@@ -101,10 +101,9 @@ namespace Game {
                     }
                 } else if (DAT_GameState::instance.playerDataArray[playerID].popularity / 100 >= 50) {
                     // if popularity is higher than 49
-                    DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown
-                        = DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown - 1;
-                    if ((char)DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown <= 0
-                        && (short)(char)DAT_BuildingsState::instance.buildings[buildingID].maxOccupants
+                    --DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown;
+                    if (DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown <= 0
+                        && DAT_BuildingsState::instance.buildings[buildingID].maxOccupants
                             != DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount) {
                         short childEntryX = DAT_BuildingsState::instance.buildings[buildingID].buildingEntryX;
                         DAT_BuildingsState::instance.buildings[buildingID].childSpawnCountdown
@@ -129,8 +128,7 @@ namespace Game {
                                         = DAT_UnitsState::instance.units[childUnitID].uid;
                                     int workplaceUID = DAT_BuildingsState::instance.buildings[buildingID].uid;
                                     // increment currentEmployeeCount of building
-                                    DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount
-                                        = DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount + 1;
+                                    ++DAT_BuildingsState::instance.buildings[buildingID].currentEmployeeCount;
                                     DAT_UnitsState::instance.units[childUnitID].workplaceBuildingID_1
                                         = (short)buildingID;
                                     DAT_UnitsState::instance.units[childUnitID].workplaceBuildingUID = workplaceUID;

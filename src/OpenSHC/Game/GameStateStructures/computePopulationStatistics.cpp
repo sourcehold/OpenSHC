@@ -2,6 +2,7 @@
 
 #include "OpenSHC/Game/GameStateStructures.func.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
@@ -27,20 +28,17 @@ namespace Game {
             if (this->playerDataArray[playerID].lordID != 0
                 && DAT_UnitsState::instance.units[this->playerDataArray[playerID].lordID].uid
                     == this->playerDataArray[playerID].lordUID) {
-                this->playerDataArray[playerID].currentPopulation
-                    = this->playerDataArray[playerID].currentPopulation - 1;
+                --this->playerDataArray[playerID].currentPopulation;
             }
             if (this->playerDataArray[playerID].ladyIDUnk != 0
                 && DAT_UnitsState::instance.units[this->playerDataArray[playerID].ladyIDUnk].uid
                     == this->playerDataArray[playerID].someUnitIDSelfRef) {
-                this->playerDataArray[playerID].currentPopulation
-                    = this->playerDataArray[playerID].currentPopulation - 1;
+                --this->playerDataArray[playerID].currentPopulation;
             }
             if (this->playerDataArray[playerID].jesterIDUnk != 0
                 && DAT_UnitsState::instance.units[this->playerDataArray[playerID].jesterIDUnk].uid
                     == this->playerDataArray[playerID].someUnitIDSelfRef_2) {
-                this->playerDataArray[playerID].currentPopulation
-                    = this->playerDataArray[playerID].currentPopulation - 1;
+                --this->playerDataArray[playerID].currentPopulation;
             }
             this->playerDataArray[playerID].populationRelatedCrowdingCountUnk
                 = this->playerDataArray[playerID].currentPopulation_2
@@ -62,8 +60,7 @@ namespace Game {
                 this->playerDataArray[playerID]
                     .populationGrowth[this->playerDataArray[playerID].populationGrowthStatisticCounter]
                     = this->playerDataArray[playerID].availablePeasantsOrHousedPeasants;
-                this->playerDataArray[playerID].populationGrowthStatisticCounter
-                    = this->playerDataArray[playerID].populationGrowthStatisticCounter + 1;
+                ++this->playerDataArray[playerID].populationGrowthStatisticCounter;
                 if (this->playerDataArray[playerID].populationGrowthStatisticCounter >= 8) {
                     this->playerDataArray[playerID].populationGrowthStatisticCounter = 0;
                 }
@@ -94,18 +91,15 @@ namespace Game {
             }
             if (DAT_GameCore::instance.gameMode_2 != GM_EDITOR) {
                 if (this->playerDataArray[playerID].tacticalPowersBarLevel < 7000) {
-                    this->playerDataArray[playerID].tacticalPowersBarLevel
-                        = this->playerDataArray[playerID].tacticalPowersBarLevel + 1;
+                    ++this->playerDataArray[playerID].tacticalPowersBarLevel;
                 }
                 if (this->playerDataArray[playerID].goldDonation > 0) {
                     int goldIncrement = this->playerDataArray[playerID].goldDonation;
                     if (goldIncrement > 10) {
                         goldIncrement = 10;
                     }
-                    this->playerDataArray[playerID].currentResources[15]
-                        = this->playerDataArray[playerID].currentResources[15] + goldIncrement;
-                    this->playerDataArray[playerID].goldDonation
-                        = this->playerDataArray[playerID].goldDonation - goldIncrement;
+                    this->playerDataArray[playerID].currentResources[Resources::RT_GOLD] += goldIncrement;
+                    this->playerDataArray[playerID].goldDonation -= goldIncrement;
                     if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID) {
                         DAT_UIDragDropDefinedData::instance.MenuView_TriggerInitial = TRUE;
                         DAT_WindowAndDirectDraw::instance.unk_resetViewportRelated = 1;
