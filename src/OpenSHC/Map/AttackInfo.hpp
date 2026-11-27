@@ -15,6 +15,7 @@
 #include "OpenSHC/Map/AttackInfoSubArrayElement2.hpp"
 #include "OpenSHC/Map/AttackInfoSubArrayElement3.hpp"
 #include "OpenSHC/Map/AttackInfoSubElement.hpp"
+#include "OpenSHC/Map/Enums/AttackWaveStateInt.hpp"
 #include "OpenSHC/Map/Units/Attack/TribeSizesPerTribeType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -28,6 +29,7 @@ namespace Map {
     using OpenSHC::Map::AttackInfoSubArrayElement2;
     using OpenSHC::Map::AttackInfoSubArrayElement3;
     using OpenSHC::Map::AttackInfoSubElement;
+    using OpenSHC::Map::Enums::AttackWaveStateInt;
     using OpenSHC::Map::Units::Attack::TribeSizesPerTribeType;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -136,7 +138,7 @@ namespace Map {
         AttackInfoSubArrayElement2 hackValuesArray[82]; // 0x000301D0 length: 1312
         undefined1 padding_0x306f0[12]; // 0x000306F0 length: 12
         int inv_count; // 0x000306FC length: 4
-        int value3Array01[50]; // 0x00030700 length: 200
+        AttackWaveStateInt value3Array01[50]; // 0x00030700 length: 200
         int attackWaveTicker[50]; // 0x000307C8 length: 200
         char nof_tribes[50]; // 0x00030890 length: 50
         byte unknownByteArray02[50]; // 0x000308C2 length: 50
@@ -150,28 +152,7 @@ namespace Map {
         AttackInfoSubArrayElement3 supportPointsArray[201]; // 0x00030C28 length: 6432
         int tentPoints; // 0x00032548 length: 4
         int tentPointsNext; // 0x0003254C length: 4
-        AttackInfoSubArrayElement3 tentPointsValues[216]; // 0x00032550 length: 6912
-        undefined1 padding_0x34050[16]; // 0x00034050 length: 16
-        int unknownDistance_0x34060; // 0x00034060 length: 4
-        int field127601_0x34064; // 0x00034064 length: 4
-        undefined1 padding_0x34068[4]; // 0x00034068 length: 4
-        int stoneValue1; // 0x0003406C length: 4
-        int scaleValue1; // 0x00034070 length: 4
-        int scaleValue2; // 0x00034074 length: 4
-        int scaleValue3; // 0x00034078 length: 4
-        AttackInfoSubArrayElement1 scaleValuesArray[1001]; // 0x0003407C length: 16016
-        int townValue1; // 0x00037F0C length: 4
-        int townValue22; // 0x00037F10 length: 4
-        int townValue2; // 0x00037F14 length: 4
-        AttackInfoSubArrayElement2 townValuesArray[1001]; // 0x00037F18 length: 16016
-        int gateValue1; // 0x0003BDA8 length: 4
-        int gateValue15; // 0x0003BDAC length: 4
-        int gateValue2; // 0x0003BDB0 length: 4
-        AttackInfoSubArrayElement1 gateValuesArray[1001]; // 0x0003BDB4 length: 16016
-        int moat1; // 0x0003FC44 length: 4
-        int moat2; // 0x0003FC48 length: 4
-        int moat3; // 0x0003FC4C length: 4
-        AttackInfoSubArrayElement1 moatValuesArray[562]; // 0x0003FC50 length: 8992
+        AttackInfoSubArrayElement3 tentPointsValues[2001]; // 0x00032550 length: 64032
         int createTribeAmount; // 0x00041F70 length: 4
         EngineerBuildingAndCountPair engineerBuildQueue[250]; // 0x00041F74 length: 2000
         int field127625_0x42744; // 0x00042744 length: 4
