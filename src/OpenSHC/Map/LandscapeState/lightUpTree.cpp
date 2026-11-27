@@ -9,10 +9,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // OrganismLayer is read signed (movsx); ids >= 2000 (rocks, signed jl 0x4F2291) and burning trees fail.
-    // Types 1-4 need burningTreeCount < 20 (signed jge 0x4F22D4) and stage >= 3. Their stageTracker is read
-    // from TreeStageLevels with a row stride of 0x20 bytes (shl ecx, 5 at 0x4F22E3), i.e. flat index type * 8,
-    // not TreeStageLevels[type][0] (row stride 0x1C).
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2280
     BOOLEnum LandscapeState::lightUpTree(int tileUnk, int playerID)
     {

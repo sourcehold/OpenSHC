@@ -3,7 +3,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Wood chunks are tested signed (jle 0x4F309F, jg 0x4F30B3); the second test re-reads the stored value.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F3080
     void LandscapeState::advanceTreeDecayState(int treeID, int treeUID)
     {

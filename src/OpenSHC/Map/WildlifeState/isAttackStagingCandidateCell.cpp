@@ -17,7 +17,6 @@ namespace Map {
         if (this->grid[cellX][cellY].firstMember < 50) {
             return FALSE;
         }
-        // only the four edge neighbours (every second entry of the clockwise offsets)
         for (int direction = 0; direction < 8; direction += 2) {
             uint const x
                 = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[direction].int_.xOffset + cellX;

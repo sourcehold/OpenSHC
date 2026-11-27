@@ -5,7 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Signed compares (jg) of DAT_TotalOrganisms; the last step compiles to a setle.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2CC0
     void LandscapeState::setTreeSpreadInterval()
     {

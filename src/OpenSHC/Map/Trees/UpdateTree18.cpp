@@ -6,7 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Fixed frame 4..6: (rng1 & 3) + 4, the value 7 is clamped to 6; both frame fields get it.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2970
     void Trees::UpdateTree18()
     {

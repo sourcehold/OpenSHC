@@ -5,7 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // only the four edge neighbours (every second entry of the clockwise offsets)
     // FUNCTION: STRONGHOLDCRUSADER 0x0052D620
     undefined4 WildlifeState::hasAdjacentCellWithField24Or25(int cellX, int cellY)
     {

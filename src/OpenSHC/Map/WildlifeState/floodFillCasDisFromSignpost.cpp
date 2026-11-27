@@ -7,11 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // BFS from the cell of the active attack signpost (tileUnk / 10, signed idiv by 10) writing the step distance into
-    // casDisRelated2 (start = 1). A dequeued distance >= 100 ends the fill (signed jge 0x52DAD7). Neighbours need
-    // unsigned bounds (ja 0x27), firstMember > 0, the start cell's separateAreaID, unknownNonZero01 == 0 and
-    // casDisRelated2 == 0; each entered cell also gets field_0x74 incremented. The original leaves the last
-    // compared value in eax, the only caller (updateNofFpoints, 0x52E18B) does not read it.
     // FUNCTION: STRONGHOLDCRUSADER 0x0052D9D0
     void WildlifeState::floodFillCasDisFromSignpost()
     {

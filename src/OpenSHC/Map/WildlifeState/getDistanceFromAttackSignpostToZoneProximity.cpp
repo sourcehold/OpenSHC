@@ -7,10 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // BFS from the cell of the active attack signpost within its separateAreaID, casDisRelated2 = step distance
-    // (start = 1). Returns the distance of the first dequeued cell with a same-area populated neighbour whose
-    // unknownNonZero01 != 0 (0x52DE6E), 0 when the queue runs empty or a dequeued distance is >= 100 (signed jge
-    // 0x52DE23).
     // FUNCTION: STRONGHOLDCRUSADER 0x0052DD20
     int WildlifeState::getDistanceFromAttackSignpostToZoneProximity()
     {

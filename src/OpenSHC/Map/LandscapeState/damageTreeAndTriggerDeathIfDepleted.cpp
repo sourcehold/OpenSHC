@@ -6,7 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // healthDelta is added as 16 bit; the hit points are then tested signed (test cx,cx / jg 0x4F3047).
     // FUNCTION: STRONGHOLDCRUSADER 0x004F3010
     BOOLEnum LandscapeState::damageTreeAndTriggerDeathIfDepleted(int treeID, undefined4 healthDelta, int treeUID)
     {

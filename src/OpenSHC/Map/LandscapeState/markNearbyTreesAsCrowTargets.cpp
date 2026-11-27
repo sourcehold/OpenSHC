@@ -6,7 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // stage < 4 and distanceHigh < 4 are signed (jge 0x4F30FA / 0x4F312D); isTreeAdult is called on this.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F30D0
     void LandscapeState::markNearbyTreesAsCrowTargets(int x, int y)
     {

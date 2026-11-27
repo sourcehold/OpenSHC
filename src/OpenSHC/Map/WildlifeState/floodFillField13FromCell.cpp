@@ -5,10 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // BFS over the 40x40 grid writing field_0x34. The start sets casDisRelated = 1 as the original does.
-    // A dequeued value <= 1 ends the fill (signed jle 0x52C604); neighbours are tested with unsigned bounds (ja 0x27),
-    // firstMember > 0 and a lower current value (signed jge 0x52C641). Queue indices wrap at 1600 (signed jl).
-    // The three queue fields are declared undefined4 (unsigned), so they are cast to int for the signed compares.
     // FUNCTION: STRONGHOLDCRUSADER 0x0052C570
     void WildlifeState::floodFillField13FromCell(int seedX, int seedY, int seedValue)
     {

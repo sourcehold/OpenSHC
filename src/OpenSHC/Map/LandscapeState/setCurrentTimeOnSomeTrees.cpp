@@ -6,7 +6,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // The loop counter is the global DAT_CurrentTreeID (left at 2000); trees in state 0 (free) or 3 are skipped.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F20E0
     void LandscapeState::setCurrentTimeOnSomeTrees()
     {

@@ -5,8 +5,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Used slots of type 1..4 (unsigned range check at 0x4F2DC1) with stage 2..4 go to stage 5 unless
-    // (currentNumber2 (signed short) ^ rng1) % 5 == 0 (signed idiv, je 0x4F2DE6).
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2DA0
     void LandscapeState::ageFourFifthsOfGrowingTrees()
     {

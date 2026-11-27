@@ -7,10 +7,6 @@
 namespace OpenSHC {
 namespace Map {
 
-    // Felled (zeroUpTo2 != 0): when the Tree_2 entry (A for stage 0) is <= 0 (signed jg 0x4F23C0) the index steps
-    // back one. Standing: when the signed Tree_1 sway byte is <= 0 (jg 0x4F23EE) the index wraps to 0 and the
-    // table is re-picked (B if one == 2). Frame per stage (jump table 0x4F2620, stages 0..4, rest 146);
-    // 148 while field_0x0.
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2380
     void Trees::UpdateTree1()
     {
@@ -64,7 +60,6 @@ namespace Map {
                 break;
             }
         }
-        // stage 0 with zeroUpTo2 2 shares the default frame (je 0x4F2600)
         default:
             DAT_LandscapeState::instance.trees[DAT_CurrentTreeID::instance].animationFrameUnk = 146;
             break;
