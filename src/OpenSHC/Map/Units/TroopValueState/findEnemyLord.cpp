@@ -12,9 +12,8 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051A220
         int TroopValueState::findEnemyLord(int param_1)
         {
-            int const _lordCount = DAT_TroopValueState::instance.attackInfo.lord3;
             int i = 0;
-            if (0 < _lordCount) {
+            if (0 < DAT_TroopValueState::instance.attackInfo.lord3) {
                 do {
                     if (DAT_TroopValueState::instance.attackInfo.lordValuesArray[i].unitID == 0) {
                         this->y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
@@ -26,7 +25,7 @@ namespace Map {
                         return DAT_TroopValueState::instance.attackInfo.lordValuesArray[i].tile2;
                     }
                     i++;
-                } while (i < _lordCount);
+                } while (i < DAT_TroopValueState::instance.attackInfo.lord3);
                 this->y = (int)DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent
                               [DAT_TroopValueState::instance.attackInfo.lordValuesArray[0].tile2];
                 this->x = DAT_TroopValueState::instance.attackInfo.lordValuesArray[0].tile2
