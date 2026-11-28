@@ -1,0 +1,49 @@
+#include "OpenSHC/Map/WildlifeState.func.hpp"
+
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x0052D720
+    void WildlifeState::floodFillZoneProximityFromCell(int cellX, int cellY, int strength)
+    {
+        this->candidateIndex2 = 1;
+        this->casDisRelated = 1;
+        this->DAT_X10_Array_Section1034[0] = cellX;
+        this->DAT_Y10_Array_Section1034[0] = cellY;
+        this->candidateIndex = 0;
+        this->grid[cellX][cellY].unknownNonZero01 = strength;
+        while (this->candidateIndex != this->candidateIndex2) {
+            cellX = this->DAT_X10_Array_Section1034[this->candidateIndex];
+            cellY = this->DAT_Y10_Array_Section1034[this->candidateIndex];
+            this->casDisRelated = this->grid[cellX][cellY].unknownNonZero01;
+            if (this->casDisRelated <= 1) {
+                return;
+            }
+            int const nextValue = this->casDisRelated - 1;
+            for (int dir = 0; dir < 8; dir++) {
+                uint const x
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.xOffset + cellX;
+                uint const y
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + cellY;
+                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && this->grid[x][y].unclaimedArea <= 10
+                    && this->grid[x][y].unknownNonZero01 < nextValue) {
+                    this->grid[x][y].unknownNonZero01 = nextValue;
+                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = x;
+                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = y;
+                    this->candidateIndex2++;
+                    if (this->candidateIndex2 >= 1600) {
+                        this->candidateIndex2 = 0;
+                    }
+                }
+            }
+            this->candidateIndex++;
+            if (this->candidateIndex >= 1600) {
+                this->candidateIndex = 0;
+            }
+        }
+    }
+
+}
+}

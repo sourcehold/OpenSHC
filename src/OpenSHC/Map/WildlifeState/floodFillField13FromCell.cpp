@@ -1,0 +1,48 @@
+#include "OpenSHC/Map/WildlifeState.func.hpp"
+
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x0052C570
+    void WildlifeState::floodFillField13FromCell(int seedX, int seedY, int seedValue)
+    {
+        this->candidateIndex2 = 1;
+        this->casDisRelated = 1;
+        this->DAT_X10_Array_Section1034[0] = seedX;
+        this->DAT_Y10_Array_Section1034[0] = seedY;
+        this->candidateIndex = 0;
+        this->grid[seedX][seedY].field_0x34 = seedValue;
+        while (this->candidateIndex != this->candidateIndex2) {
+            seedX = this->DAT_X10_Array_Section1034[this->candidateIndex];
+            seedY = this->DAT_Y10_Array_Section1034[this->candidateIndex];
+            this->casDisRelated = this->grid[seedX][seedY].field_0x34;
+            if (this->casDisRelated <= 1) {
+                return;
+            }
+            int const nextValue = this->casDisRelated - 1;
+            for (int dir = 0; dir < 8; dir++) {
+                uint const x
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.xOffset + seedX;
+                uint const y
+                    = DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[dir].int_.yOffset + seedY;
+                if (x <= 39 && y <= 39 && this->grid[x][y].firstMember > 0 && this->grid[x][y].field_0x34 < nextValue) {
+                    this->grid[x][y].field_0x34 = nextValue;
+                    this->DAT_X10_Array_Section1034[this->candidateIndex2] = x;
+                    this->DAT_Y10_Array_Section1034[this->candidateIndex2] = y;
+                    this->candidateIndex2++;
+                    if (this->candidateIndex2 >= 1600) {
+                        this->candidateIndex2 = 0;
+                    }
+                }
+            }
+            this->candidateIndex++;
+            if (this->candidateIndex >= 1600) {
+                this->candidateIndex = 0;
+            }
+        }
+    }
+
+}
+}

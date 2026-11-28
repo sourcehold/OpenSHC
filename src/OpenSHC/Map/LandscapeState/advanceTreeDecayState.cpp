@@ -1,0 +1,22 @@
+#include "OpenSHC/Map/LandscapeState.func.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004F3080
+    void LandscapeState::advanceTreeDecayState(int treeID, int treeUID)
+    {
+        if (this->trees[treeID].uid != treeUID) {
+            return;
+        }
+        if (this->trees[treeID].treeAdultHoodStageRelatedVisual3 > 0) {
+            this->trees[treeID].treeAdultHoodStageRelatedVisual3--;
+        }
+        if (this->trees[treeID].treeAdultHoodStageRelatedVisual3 <= 0) {
+            this->trees[treeID].state = 3;
+        }
+        this->trees[treeID].zeroUpTo2 = 2;
+    }
+
+}
+}
