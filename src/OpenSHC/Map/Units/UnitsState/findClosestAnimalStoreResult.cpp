@@ -66,9 +66,9 @@ namespace Map {
                     }
                     this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = unitID;
                     this->unusedUnitIDArrayIndex = this->unusedUnitIDArrayIndex + 1;
-                    int _score = _distance + this->units[unitID].huntedBy * 3;
-                    if (_score < _bestScore) {
-                        _bestScore = _score;
+                    _distance = _distance + this->units[unitID].huntedBy * 3;
+                    if (_distance < _bestScore) {
+                        _bestScore = _distance;
                         _bestUnitID = unitID;
                     }
                 }
