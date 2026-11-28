@@ -14,6 +14,7 @@
 #include "OpenSHC/Map/Buildings/Building.hpp"
 #include "OpenSHC/Map/Buildings/BuildingCostStruct.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
+#include "OpenSHC/Map/Buildings/Enums/BuildingEntranceSearchResult.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
@@ -27,6 +28,7 @@ namespace Map {
         using OpenSHC::Map::Buildings::Building;
         using OpenSHC::Map::Buildings::BuildingCostStruct;
         using OpenSHC::Map::Buildings::BuildingType;
+        using OpenSHC::Map::Buildings::Enums::BuildingEntranceSearchResult;
         using OpenSHC::Map::Units::UnitType;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
@@ -39,7 +41,7 @@ namespace Map {
             undefined4 field_0x4; // 0x00000004 length: 4
             int maxBuildingsCount; // 0x00000008 length: 4
             int unknownCountdown01; // 0x0000000C length: 4
-            undefined4 field_0x10; // 0x00000010 length: 4
+            int field_0x10; // 0x00000010 length: 4
             Building buildings[2000]; // 0x00000014 length: 1624000
             BuildingCostStruct buildingCosts[110]; // 0x0018C7D4 length: 2200
             int pathLinkageKeepWasUpdatedUnk; // 0x0018D06C length: 4
@@ -347,9 +349,11 @@ namespace Map {
 
             void swapOwnersOfCastle(int param_1, int param_2);
 
-            undefined4 determineBuildingEntranceFromKeepArea(int buildingID, int workerIndexPlus1, BOOLEnum flag);
+            BuildingEntranceSearchResult determineBuildingEntranceFromKeepArea(
+                int buildingID, int workerIndexPlus1, BOOLEnum flag);
 
-            undefined4 determineBuildingEntranceFromCustomArea(int buildingID, int param_2, int param_3, int x, int y);
+            BuildingEntranceSearchResult determineBuildingEntranceFromCustomArea(
+                int buildingID, int param_2, int param_3, int x, int y);
 
             void computeBuildingEntranceFlagsForOrientations(int param_1);
 
@@ -399,7 +403,7 @@ namespace Map {
 
             int buildingIsAccessible(int buildingID, int amountUnk);
 
-            int resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
+            BuildingEntranceSearchResult resolveBuildingEntryAccessibility(int buildingID, int param_2, int x, int y);
 
             void giveBackResourceForDestroyedBuilding(int buildingIDORIfNegResourceType, int playerID, int param_3);
 

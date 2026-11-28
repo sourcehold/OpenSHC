@@ -24,6 +24,8 @@ namespace AI {
             AITT_KNIGHTS = 10, // 0x0000000A
             AITT_ENGINEERS = 11, // 0x0000000B
             AITT_HOPS_FARMER_UNK = 12, // 0x0000000C
+            AITT_CATAPULT = 22, // 0x00000016
+            AITT_TREBUCHET = 23, // 0x00000017
             AITT_FIRE_BALLISTA = 24, // 0x00000018
             AITT_ARAB_ARCHER = 25, // 0x00000019
             AITT_ARAB_SLAVE = 26, // 0x0000001A

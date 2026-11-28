@@ -1,0 +1,58 @@
+#include "../UnitsState.func.hpp"
+
+#include "OpenSHC/Map/Navigation/PathFindingState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_PathFindingState.hpp"
+#include "OpenSHC/Globals/DAT_TerrainDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00534130
+        void UnitsState::applyTunnelDamageAlongPathPlan(uint unitID)
+        {
+            uint _xPosition = this->units[unitID].ladderExitXPosition;
+            uint _yPosition = this->units[unitID].ladderExitYPosition;
+            int _tile = this->units[unitID].previousTilePosition;
+            for (int _stepIndex = 0; _stepIndex < this->units[unitID].totalSizeOfPathPlan; ++_stepIndex) {
+                if ((DAT_TileMapState::instance.LogicLayer[_tile]
+                        & (LogicHelpers::L_SEA | LogicHelpers::L_ROCKY | LogicHelpers::L_MARSH))
+                    == 0) {
+                    if (DAT_TileMapState::instance.BuildingLayer[_tile] == 0
+                        && (DAT_TileMapState::instance.HeightLayer[_tile] < 16
+                            || DAT_TileMapState::instance.DefaultHeightLayer[_tile] < 16)) {
+                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::increaseHeightForTunnelWithBrush,
+                            DAT_TileMapState::ptr)(_tile, _xPosition, _yPosition, -2);
+                        DAT_TileMapState::instance.HeightLayer[_tile] = 0;
+                    } else {
+                        MACRO_CALL_MEMBER(
+                            OpenSHC::Map::TileMapState_Func::processDamageToBuilding, DAT_TileMapState::ptr)(_tile,
+                            _xPosition, _yPosition, 5, 0, DAT_UnitsState::instance.units[unitID].owner, FALSE, 0);
+                    }
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::updateWalkAndPathLayer,
+                        DAT_PathFindingState::ptr)(1, _xPosition, _yPosition);
+                }
+                int const _packedDirections = (char)this->units[unitID].pathPlanStart[_stepIndex / 2];
+                int _direction;
+                if ((_stepIndex & 1) != 0) {
+                    _direction = _packedDirections >> 4;
+                } else {
+                    _direction = _packedDirections & 15;
+                }
+                _xPosition = _xPosition
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.xOffset;
+                _tile = _tile + DAT_TileMapState::instance.directionTranslationMatrix[_yPosition][_direction];
+                _yPosition = _yPosition
+                    + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[_direction].int_.yOffset;
+            }
+        }
+
+    }
+}
+}

@@ -100,8 +100,8 @@ namespace Map {
             short field_0xb8; // 0x000000B8 length: 2
             short clearanceStepsRemaining; // 0x000000BA length: 2
             short rng_2; // 0x000000BC length: 2
-            short field_0xbe; // 0x000000BE length: 2
-            short field_0xc0; // 0x000000C0 length: 2
+            short overlayGmID; // 0x000000BE length: 2
+            short overlayGmPictureIndex; // 0x000000C0 length: 2
             byte unused_0xc2[2]; // 0x000000C2 length: 2
             int displayValue; // 0x000000C4 length: 4
             short field_0xc8; // 0x000000C8 length: 2

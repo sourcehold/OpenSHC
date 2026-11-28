@@ -10,12 +10,14 @@
 
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/Resources/ResourceTypeMin1.hpp"
+#include "OpenSHC/Map/Buildings/Enums/GateCommand.hpp"
 namespace OpenSHC {
 namespace Synchrony {
     namespace Actions {
 
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::Game::Resources::ResourceTypeMin1;
+        using OpenSHC::Map::Buildings::Enums::GateCommand;
 
         void __cdecl RemovePositionOfPlayer(int playerID);
 
@@ -26,7 +28,7 @@ namespace Synchrony {
 
         void __cdecl OpenOrCloseDrawbridge(undefined4 param_1, int buildingID, int value, int buildingUID);
 
-        void __cdecl GateOpenOrClose(undefined4 playerID, int buildingID, int newGateState, int buildingUID);
+        void __cdecl GateOpenOrClose(undefined4 playerID, int buildingID, GateCommand newGateState, int buildingUID);
 
         void __cdecl ChangeTaxes(int playerID, int taxesSetting);
 

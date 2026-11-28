@@ -14,6 +14,8 @@
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Buildings/Enums/BuildingTargetMarkerShort.hpp"
 #include "OpenSHC/Map/Buildings/Enums/DefensiveTowerEngineTypeByte.hpp"
+#include "OpenSHC/Map/Buildings/Enums/GateCommandByte.hpp"
+#include "OpenSHC/Map/Buildings/Enums/GatePhaseByte.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -25,6 +27,8 @@ namespace Map {
         using OpenSHC::Map::Buildings::BuildingTypeShort;
         using OpenSHC::Map::Buildings::Enums::BuildingTargetMarkerShort;
         using OpenSHC::Map::Buildings::Enums::DefensiveTowerEngineTypeByte;
+        using OpenSHC::Map::Buildings::Enums::GateCommandByte;
+        using OpenSHC::Map::Buildings::Enums::GatePhaseByte;
 
 #pragma pack(push, 1)
         // SIZE: 0x0000032C
@@ -110,8 +114,8 @@ namespace Map {
             short y; // 0x000000F0 length: 2
             undefined1 padding_0xf2[2]; // 0x000000F2 length: 2
             uint currentTilePositionAdjusted; // 0x000000F4 length: 4
-            uint widthOrHeight; // 0x000000F8 length: 4
-            ushort entranceAttemptTileIndex; // 0x000000FC length: 2
+            int widthOrHeight; // 0x000000F8 length: 4
+            short entranceAttemptTileIndex; // 0x000000FC length: 2
             short buildingEntryX; // 0x000000FE length: 2
             short buildingEntryY; // 0x00000100 length: 2
             short buildingVariation; // 0x00000102 length: 2
@@ -183,8 +187,8 @@ namespace Map {
             short outpostRelatedUnk4; // 0x0000029A length: 2
             int ffBuildingVariation; // 0x0000029C length: 4
             short engineerUnitID; // 0x000002A0 length: 2
-            byte pathLinkageRelated2; // 0x000002A2 length: 1
-            byte gateState; // 0x000002A3 length: 1
+            GatePhaseByte gatePhase; // 0x000002A2 length: 1
+            GateCommandByte gateCommand; // 0x000002A3 length: 1
             undefined1 unknownFlag4; // 0x000002A4 length: 1
             char maxOccupants; // 0x000002A5 length: 1
             char childSpawnCountdown; // 0x000002A6 length: 1
@@ -199,7 +203,7 @@ namespace Map {
             short buildMonthOrBuildOrder; // 0x000002BA length: 2
             short hasAccessToKeep; // 0x000002BC length: 2
             short fireDuration; // 0x000002BE length: 2
-            short gateState2; // 0x000002C0 length: 2
+            short gateKeepClosedTimer; // 0x000002C0 length: 2
             undefined1 padding_0x2c2[2]; // 0x000002C2 length: 2
             short cooldownTimer; // 0x000002C4 length: 2
             short field_0x2c6; // 0x000002C6 length: 2
@@ -212,7 +216,7 @@ namespace Map {
             short unknownSiegeTentRelated01; // 0x000002D8 length: 2
             short field_0x2da; // 0x000002DA length: 2
             short unknownTickRelatedValue; // 0x000002DC length: 2
-            ushort ifFireThenResponsiblePlayer; // 0x000002DE length: 2
+            short ifFireThenResponsiblePlayer; // 0x000002DE length: 2
             short insideUnitID[4]; // 0x000002E0 length: 8
             int insideUnitUID[4]; // 0x000002E8 length: 16
             short hasUnitsOntop; // 0x000002F8 length: 2

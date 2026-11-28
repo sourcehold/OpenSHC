@@ -247,11 +247,11 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x0049FC00, &PathFindingState::pathFindingRelated)
             pathFindingRelated;
 
-            MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(uint, uint, int, uint, int), false,
+            MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(uint, uint, int, uint, int), false,
                 Address::SHC_3BB0A8C1_0x0049FF20, &PathFindingState::pathfindingRelated49ff20)
             pathfindingRelated49ff20;
 
-            MACRO_FUNCTION_RESOLVER(dword (PathFindingState::*)(uint, uint, int, uint), false,
+            MACRO_FUNCTION_RESOLVER(int (PathFindingState::*)(uint, uint, int, uint), false,
                 Address::SHC_3BB0A8C1_0x004A01D0, &PathFindingState::findBestAttackTileByPathCost)
             findBestAttackTileByPathCost;
 
@@ -431,7 +431,7 @@ namespace Map {
                 Address::SHC_3BB0A8C1_0x004A79A0, &PathFindingState::pathPlanningForTribe)
             pathPlanningForTribe;
 
-            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int*, int, int, int), false,
+            MACRO_FUNCTION_RESOLVER(void (PathFindingState::*)(int, int, int, int, int, int), false,
                 Address::SHC_3BB0A8C1_0x004A7F50,
                 &PathFindingState::findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance)
             findFreeSpaceNextToEnemyDefensiveStructureInSameAreaWithinDistance;

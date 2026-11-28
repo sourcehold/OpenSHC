@@ -12,6 +12,7 @@ namespace OpenSHC {
 namespace AI {
     typedef enum AIUnitBehaviourType {
 
+        AIUBT_DEFENSE = 2, // 0x00000002
         AIUBT_PATROL = 4, // 0x00000004
         AIUBT_ENGINEERING = 10, // 0x0000000A
         AIUBT_DIGGING = 11, // 0x0000000B

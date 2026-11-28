@@ -3080,3 +3080,274 @@ Two more `quick_diff.py` artefacts came out of this batch and are fixed: a `swit
 (`$LN38@f[edi]`, `jmp dword ptr [ecx*4 + 0x41c9d0]`) were not collapsed to `G` on either side, which alone
 held `lightUpBuilding` at 0.8988 where it is 0.9312; and the original's indirect jumps were skipping
 normalisation entirely.
+
+## The TU symbol count decides some register choices (`shift_sweep.py`, `color_probe.py`)
+
+`placeDefensiveStructureTile` (TileMapState, PR #366) was 100% before a merge of `main` and 96.3% after it, with
+the `.cpp` byte-identical and the IL identical up to `regalloc`. The merge had only added three enums to headers
+the file includes. None of them is used by the function; what they changed is **how many symbols the front end
+had numbered before the function**, and that number reaches the register allocator through a hash.
+
+### The chain, in c2.dll
+
+1. **`GrgImmedTupleHash`** (0x10b5c050) files every constant operand into the 64-bucket `_ImmedHashTable`
+   (0x10d12170). An address constant (tuple kind 3, the `&Instance<...>::instance` of a resolver global) hashes
+   by `[[[tuple+0x18]+8]]+0x28 & 0x3f` - a symbol number counted over the whole translation unit. Measured: an
+   `enum` with one enumerator adds 2 to it, a `typedef` 1, a `#define` 0, and only declarations *before* the
+   function count (four dummy enums after the last `#include` moved the result; the same four after the body
+   did not).
+2. **`CreateGlobregs`** (0x10b5abe0) walks that table bucket by bucket and frees every immediate candidate that
+   turned out worthless (`ColRemoveGlobregFromHashTable`, 0x10b18790, called from 0x10b5ac39). The bucket
+   decides where each one lands in the free order.
+3. **`GrgNewGlobreg`** (0x10b5b7b0) reuses `_FreeGlobs` last-in-first-out and **keeps the freed record's number**
+   (`+0x1c`). The same `CreateGlobregs` call then creates the candidates for the real symbols (`this`, `tile`,
+   `x`, temporaries), so they receive a permutation of the freed numbers.
+4. What the number does **not** change: the colouring key `+0x0c`, the benefit `+0x40`, the symbol id `+0x44`,
+   and therefore `InsertInList`'s serve order, whose tie-break is the id. `color_probe.py --compare` on a bad
+   and a good shift shows all of them equal right up to the pass that diverges.
+5. What it does change: any **greedy** pass that visits candidates in number order - walking `_GlobregHash`
+   (0x10d15090, bucket `number & 0x3ff`, chained through `+0x30`) or `bsf` over a bitset of numbers - where
+   acting on one candidate changes what the pass can do with a later one. Two were caught doing it.
+
+### Pass 1: `FoldTooCheapDefs` (0x10b0da80) - `placeDefensiveStructureTile`
+
+Phase 2 of `FoldTooCheapDefs` walks `_GlobregHash` and folds each cheap single-definition candidate back into its
+uses (`ComponentKilled` 0x10b19fe0 as the veto, then `DoFoldDef` 0x10b195e0 -> `CmdDoFoldDef`). This function
+has two such candidates, one built on the other (`tuple_dump.py` at `FoldTooCheapDefs` entry; the `t` numbers
+are the candidate numbers):
+
+```
+shift 0 (bad)                              shift 46 (good)
+lea  t8,  dword ptr [this + tile]          lea  t11, dword ptr [this + tile]
+mov  byte ptr [t8 + 3313824], t1           mov  byte ptr [t11 + 3313824], t1
+lea  t21, dword ptr [t8 + 2751024]         lea  t8,  dword ptr [t11 + 2751024]     ; &HeightLayer[tile]
+mov  t3,  byte ptr [t8 + 2831424]          mov  t21, byte ptr [t11 + 2831424]
+mov  byte ptr [t21], t3                    mov  byte ptr [t8], t21                 ; ... and ~16 more uses
+```
+
+With the inner `lea` (A) numbered lower, it is folded first: every `[A + d]` becomes `[this + tile + d]`, which
+turns the outer `lea` (B) from a based address (`0x27c`) into an indexed one (`0x27d`). `CmdDoFoldDef`'s end
+block notices and sets B's never-fold bit (byte `+5 |= 4`, the write at 0x10c248f5, caught with `--watch 0x1b`),
+so B is skipped when the walk reaches it. With B numbered lower, B folds first (into `[A + 2751024]`) and A
+after it, and both disappear:
+
+```
+color_probe.py ... --compare                       (A = shift 0, B = shift 46)
+FOLD    A: 46#2 34#6 1d#8 5c#f 62#17 75#1a 68#1e 6d#25 56#26
+        B: 56#2 34#3 46#6 1b#8 1d#b 5c#f 62#17 6d#1a 68#1e 75#23
+CK 4.0  id=1e tile   A [key 385, refs 0x26, benefit 76]    B [key 451, refs 0x38, benefit 112]
+        id=e  this   A [key 311, refs 0x25, benefit 74]    B [key 383, refs 0x37, benefit 110]
+```
+
+The surviving B is gone again before colouring proper, but it is still there when `Spillcosts` counts
+references, so 18 uses each of `tile` and `this` are booked against B instead. The lower keys reorder the tail
+of the serve list, the `x & 1` temporaries tie with `x` and take `eax` instead of `ecx` (`CPRDONE` in the same
+comparison), a `mov eax, ecx` copy survives, and `FgDoCommonTailMerge` can no longer merge the two crenel arms'
+identical tails - seven instructions more:
+
+```
+shift 0 (ours, 96.3%)                      shift 46 (= original)
+add  byte ptr [esi+edi+2751024], 98        add  byte ptr [esi+edi+2751024], 98
+mov  eax, ecx                            $LN54:
+and  eax, 1                                and  ecx, 1
+je   $LN18                                 je   $LN18
+test bl, 1                                 test bl, 1
+jne  $LN18                                 jne  $LN18
+or   dword ptr [edi+esi*4+1462624], 0x400000   or   dword ptr [edi+esi*4+1462624], 0x400000
+jmp  $LN52                                 jmp  $LN52
+...                                        ...
+add  byte ptr [esi+edi+2751024], 68        add  byte ptr [esi+edi+2751024], 68
+mov  eax, ecx                              jmp  $LN54          ; the second arm reuses the first's tail
+and  eax, 1
+... (the whole tail again)
+```
+
+### Pass 2: `SpillObvious` (0x10b11560) - the sliders and `DisplayMapDescriptionAndAllocatePlayersToSlots`
+
+`SpillObvious` spills every candidate with fewer than two references (`+0x24 < 2`) in `bsf` order (the `Spill`
+call at 0x10b115d6, `CmdSubstDef` at 0x10b11630; `eax` is the candidate at both). Each spill inserts its reload
+right before the use, so the spill order is the order of the loads. In
+`MenuItemRenderFunction_GameplayOptions_SpeedSlider`, `thumbX = thumbXPos + DAT_ButtonX::instance`:
+
+```
+SPILL   A: 7(thumbXPos)#3 29(thumbWidth)#6 8(DAT_ButtonX)#7 ...          shift 0  (= original)
+        B: 29(thumbWidth)#6 8(DAT_ButtonX)#7 7(thumbXPos)#8 ...          shift 30
+
+shift 0                                    shift 30
+mov  ecx, dword ptr [DAT_ButtonX]          mov  ecx, dword ptr [thumbXPos]
+mov  eax, dword ptr [thumbXPos]            mov  eax, dword ptr [DAT_ButtonX]
+add  eax, ecx                              add  eax, ecx
+```
+
+Serve order, `ChoosePhysReg` costs and chosen registers are identical in both runs; only the load order flips,
+so the two operands trade registers.
+
+### Periodic in 64, and how many functions it reaches
+
+Because the only path is `number & 0x3f`, the outcome repeats every 64 symbols - predicted and confirmed for
+nine combinations of dummy enums and typedefs on `placeDefensiveStructureTile`, including 32 enums = 64
+typedefs = 128 typedefs = no change. `shift_sweep.py --all` screened all 2469 marked functions at shifts
+0/17/34/51 (no compile errors), then swept the six that varied over the full period:
+
+| function | shift 0 | best | shifts at best (of 64) |
+|---|---|---|---|
+| `placeDefensiveStructureTile` | 0.9630 | **1.0000** | 39: 13-23, 25-52 |
+| `MenuItemRenderFunction_GameplayOptions_SpeedSlider` | 1.0000 | 1.0000 | 21: 0-14, 16-19, 62-63 |
+| `MenuItemRenderFunction_SoundOptions_VolumeSlider` | 1.0000 | 1.0000 | 21: 0-10, 12-15, 58-63 |
+| `MenuItemActionHandler_UnusedChooseAvailableKeeps_Main` | 1.0000 | 1.0000 | 50: 0-48, 63 |
+| `DisplayMapDescriptionAndAllocatePlayersToSlots` | 0.9507 | 0.9686 | 45 |
+| `UpdateFireBallistaBuilding` | 0.9936 | 0.9936 | 55 |
+
+About 0.25% of functions, and only one is held below a reachable 100% today; three sit at 100% by luck and an
+unrelated header edit can knock them down (the two sliders hardest). A function whose sensitive window is
+narrower than 17 shifts can slip between the screen's four points, so six is a lower bound.
+
+### What to do with it
+
+- A header-only change that moves one function's match is a candidate for this. Check with
+  `shift_sweep.py OUT.jsonl FILE.cpp --name FUNC` (0-63 by default, about 30 s at `-j 12`).
+- If any shift reaches 1.0, the source is right: record the function as "matches modulo TU symbol count" in the
+  commit remark, like "only call targets differ". Do **not** pad the translation unit with dummy declarations
+  or steer the enum/typedef count by hand - the next header edit anywhere above the function moves it again.
+  Converting enums to `#define`s does not fix it either; it only removes symbols, which helps or hurts by luck.
+- To see which pass decides it for a new case: `color_probe.py FILE.cpp --name FUNC` and again with
+  `--shift N` for a good N, then `color_probe.py --compare A.txt B.txt`. The first checkpoint where a
+  candidate differs by more than its number, and the first event list that differs, name the pass. `--watch ID`
+  puts a hardware breakpoint on that candidate's flag byte and prints the stack of every write.
+## Decoded on the TileMapState last mile (2026-11-15)
+
+Eight more c2 decisions, traced with Ghidra on `c2.dll` and the cdb probes while finishing
+`Map::TileMapState`. Each entry says what decides, what feeds it from the source, and whether a lever was found.
+Addresses are for the unrebased load at `0x10b00000`.
+
+### Inlining is gated on `_Globopt_flag`: only `__forceinline` callees inline in an `/Od` function
+
+`InlCallTupleIsCandidate` (`0x10b69bd0`) ends at `0x10b69d48` with
+
+```
+test edi, edi            ; edi = _Globopt_flag (0x10d0d708)
+jnz  accept
+test ecx, 0x2080         ; ecx = callee function record flags (+0x50)
+jz   reject
+```
+
+so with global optimisation off a callee is an inline candidate only with bit `0x2000` (`__forceinline`, which
+also skips the `_MaxInlineeSize` test at `0x10b69d26`) or `0x80` (not decoded). Plain `inline` is bit `0x40` and
+is not enough. The module gate in `Inline` (`0x10b69110`) is the `/Ob` level (`DAT_10d127d0`, written by
+`MscProcessSwitches`), nonzero under `/O2`, so passing `/Ob` changes nothing. `#pragma inline_depth`,
+`inline_recursion` and `auto_inline` are not honoured either.
+
+`_Globopt_flag` is cleared two ways: the `g` letter of `#pragma optimize` (`MscProcessPragstat`), and
+`dop2_GetInitialTuples` (`0x10c06670`, at `0x10c06834`-`0x10c06879`), which calls `MscCheckAsm` (`0x10b9d6a0`)
+on any function with inline asm (func `+0xac` bit `0x10`) and, if control flows into or out of an `__asm` block,
+raises C4740 and clears `_Globopt_flag` and `0x10d0d714` for that function. That is the whole of the `/Od` look:
+`optimize("g", off)` alone gives byte-identical code to `optimize("", off)`; `y` does nothing once `g` is off;
+`t` off switches to favour-size and is much worse.
+
+Consequence for this project: every `MACRO_CALL` in an `/Od` function (pragma or C4740) compiled to
+`call Resolver::get` + `call eax` where the original has one direct `call`, two bytes longer per call, so every
+jump displacement after the first call shifted too. PR #396 makes `get()` in
+`src/precomp/FunctionResolver.h` `__forceinline` (all five definitions - the implemented, the game-function and the wrapper unifiers, `GameFunction`
+and the member `GameFunction` macro; one alone leaves calls to disabled callees indirect). Optimised functions are
+unaffected because they inlined `get()` already. Measured with reccmp: `setBitFlagBasedOnWallTowerGatehouseOrKeep`,
+`setTerrain`, `updateGFXLayers`, `updateMacroLayerRelated` and `updateGfxLayer` (C4740) went from 92.8-98.1% to
+100%, and nothing else in the TileMapState build list moved. A build of all 2515 sources under `src/OpenSHC`
+with each header (2533 functions) agreed: those five better, and the only two "worse" functions
+(`UI::Menu::Constructor_Menu`, `handleMenuItems`) differ solely in a `cmp .., 0x11000000` immediate that reccmp
+now prints as a symbol name, because the layout shift put a compiler-generated destructor of our DLL at that VA.
+The bytes are unchanged.
+
+### Loop unrolling: `!=` is not a counted loop, and loads == stores vetoes the unroll
+
+`LurClassifyNests` -> `LurClassifyLoop` (`0x10b90650`) -> `LurClassifyDo` (`0x10b8f4f0`) ->
+`LurDetermineDoUnrollAmount` (`0x10b91160`, body counted by `LurCountTuples` `0x10b8e090`). A `!=` bound is
+classified 5 (not counted) and never reaches the unroller - that is why `!=` suppresses unrolling. A `<` bound is
+classified 1, and the amount is 0 (no unroll, `jl` back-edge) when
+
+- the body has more than 128 tuples, or
+- it stores to memory but never loads, or
+- **it has no calls and its memory loads equal its memory stores**, or
+- it has more than 15 blocks, unless call-free with more than 50 tuples.
+
+Otherwise the factor is the largest of 6..2 (5..2 above 50 tuples) dividing the trip count. The counts are taken
+before CSE and store-to-load forwarding, but after dead loads are removed, so a duplicated read before any store
+counts and a dead read does not. `placeStockpile` keeps `!=` (one store more than loads; a `<` gives x3 unroll).
+
+### Post-allocation scheduler: address-taken locals add store -> load edges
+
+`SchSelectInstrs` (`0x10c722c0`) with `SchComputeStaticPriority` (`0x10c71f00`): priority =
+branch/compare flag << 23 + memory-source flag << 15 + (height + field `+0x26`) << 10, ties by IL order, one
+instruction per cycle on these functions. A store to an address-taken local (`(int*)&y` passed to
+`getTileForBrush`), or through a `T&` that may alias one, orders every later load after it, so the IL position of
+such a store relative to a test decides the issue order (`placeTree`, `processEntityDamageToBuildingCollateral`).
+Conversely a store through a `byte&` keeps it ahead of a following read-modify-write on another layer
+(`useTerrainHeightBrush`).
+
+### Copy preferences go only to partners that are not coloured yet
+
+`InsertSplitPoints` (`0x10b13460`) fills `_UpdatePrefsBv` (`0x10d15088`) at `0x10b139b3` (candidate defined by a
+copy from an uncoloured globreg) and `0x10b14047` (candidate's first use in a block is the source of a copy into a
+globreg). At the end of `ChoosePhysReg` (`0x10b14b70`) each uncoloured member gets +1 for the chosen register in
+its `+0x38` list. So of two copy partners the one coloured first takes a register without preference and the copy
+survives. Lever: when copy propagation rewrote a call argument to the source variable (a separate, higher-keyed
+candidate that then wins), `T const v = *(T volatile*)&src;` stops the propagation (`useEraserBrush` -> 1.0).
+
+### Spill reload on a new edge block: the latch's first predecessor decides
+
+`RewriteSplitGlobregs` (`0x10b12d20`, from `ColProcessSplitGlobregs` `0x10b11b20`) picks the piece of a split
+counter at the loop latch from the latch's **first** predecessor. If that predecessor holds it in memory,
+`GrgAirlockEnterloads` (`0x10b59320`) must reload on the latch -> head edge and, the edge source having several
+successors, `FgInsertAirlockBlock` adds a block: a stray `jmp` + reload and every later displacement 4 bytes off.
+`do { ... } while (++i < N);` instead of `i++; if (i >= N) break;` changes the first predecessor
+(`updateBuildingGraphicsLayer`).
+
+### Branch-free `?:` is refused for a volatile arm
+
+`BuildQuestion` (`0x10b9e5c0`, via `MscBuildQuestion` `0x10b9dfe0` from `dop2_PreLowerGlobalOpts`) ->
+`MscIsQuestionable` (`0x10b9e0e0`) -> `QuesNoJumpsNeeded` (`0x10c5dc60`, `FindSbbPattern` / `FindSetccPattern`
+against `DAT_10cdf0a0[_Speed == 0]`). An arm is refused when `MscUnsafeQuestionArmLeaf` (`0x10b9e970`) is set -
+bit 6 of the leaf's byte `+0x14`, which a volatile symbol has - or when the else label has a second reference.
+If the original has `neg/sbb/and` or `setcc` on a value we made volatile, copy it into a plain local just before
+the `?:` (`processDamageToBuilding`). The converse also holds: explicit branches in the original where we get
+`setcc`/`lea` mean the original's arm failed one of these checks.
+
+### Code motion past a `ret` needs a non-falling-through predecessor
+
+`FgCodeMotion` (`0x10b312c0`, called only from `dop2_FinalFlowOpts` after `FgDoLateFlowOpts(2)`) replaces a
+`goto L` (or a `jcc A; goto L` pair, trying A after `FgInvertAndSwapBranches`) with the code range at L.
+`FgCanMoveCode` (`0x10b319b0`) allows it only if L is forward, the tuple after the jump is another label, the range
+ends at the first non-falling-through instruction without reaching `OPSEGMENT`, and **the last real instruction
+before L does not fall through** (`FgSafeLocation` `0x10b31aa0`; exit gotos count as not falling through). An
+original with arms placed after the `ret` that jump back therefore had a goto target preceded by a jump - usually
+a cross-jump that retargeted a then-arm into the else chain's last block. The input order comes from
+`FgDFOReorderLoopRecog`: `GrInitDFOWalk` (`0x10b5cd30`) follows successor lists that `FgAddAllArcs`
+(`0x10b28910`) builds by pushing each arc to the front, so the physically later successor is explored first and
+`FgChangeNextToDFOEx` (`0x10b281e0`) keeps source order in reverse post-order. Any if/else-if chain thus puts its
+last arm right before the join; `useTerrainHeightBrush` is still open on this.
+
+### Stack slots: weights are counted before cross-jumping, and small frames are not sorted
+
+`ColorStackElements` (`0x10beaef0`, with `colorElemental` `0x10beb760`): parameter homes become colours first, in
+element-list order; every other element takes the first parameter colour it does not interfere with, else an
+existing local colour from the newest backwards, else a new colour (first created = lowest address). The list is
+size ascending then weight descending (`AddStackElement` `0x10be9190`), and for a frame of 0x80 bytes or less
+without a /GS buffer `QSortColors` never runs, so first reference in `CollectStackElements`' block walk
+(`0x10be8f10`, via `EnumerateStackElements` `0x10be92d0`) decides ties. The weight counts references **before**
+tail merging: two identical stores that later fold into one still count twice. That explains an original calling
+`isAIPlayer` and discarding the result - both arms assigned the same `distance`/`range` - and is a lever: writing
+the duplicated stores back raises a local's weight without changing the code (`checkBuildingCanBePlacedHere`).
+Reusing a parameter for a later coordinate moves that value's spills into the parameter's home.
+
+### Smaller notes
+
+- c2 packs locals into dead parameter home slots, including a 4-byte local into a 2-byte parameter's slot, so a
+  dword store to a parameter's slot does not prove the parameter is a dword (`placeRock`).
+- A trailing `+ret N` on our side of a reccmp diff, when ours is shorter in bytes, is reccmp clipping the
+  original's stream at our length, not a tail difference.
+- `quick_diff.py` mishandles `/Od` and asm-heavy listings (`_x$[ebp]` slots, `DB`-encoded jcc, `global+offset`),
+  and cannot measure a header change while the PCH is used - the header is baked in. Compile such variants
+  without the PCH.
+- `QD_OUT` is a folder name under `build-RelWithDebInfo/batch/`, not a path.
+- Editing a header under `src/precomp/` does **not** rebuild the PCH: `cmake_pch.cxx.obj.d` is empty, so the
+  build reports `BUILD_OK`, recompiles nothing that matters and reccmp shows the old code. Delete
+  `build-RelWithDebInfo/CMakeFiles/OpenSHC.dll.dir/cmake_pch.cxx.obj` and `cmake_pch.cxx.pch` first.

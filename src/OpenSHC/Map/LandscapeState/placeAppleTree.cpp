@@ -15,7 +15,7 @@ namespace Map {
     void LandscapeState::placeAppleTree(int buildingID, undefined4 treeX, undefined4 treeY)
     {
         int const treeID = MACRO_CALL_MEMBER(LandscapeState_Func::createTree, DAT_LandscapeState::ptr)(
-            treeX, treeY, Trees::TT_APPLEUnk, 1, 0, 0, 0);
+            treeX, treeY, Trees::TT_TREE_APPLE, 1, 0, 0, 0);
         if (treeID == 0) {
             return;
         }

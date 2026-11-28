@@ -39,7 +39,10 @@ os.chdir(ROOT)
 ENV = common.build_env()
 ENV['PATH'] = os.path.join(ROOT, 'MSVC1400-SP1', 'Common7', 'IDE') + os.pathsep + ENV['PATH']
 cc = json.load(open('build-RelWithDebInfo/compile_commands.json'))
-base = [e for e in cc if 'OpenSHC.dll.dir' in e['command'] and '/src/OpenSHC/' in e['file'].replace(chr(92), '/')][0]
+cands = [e for e in cc if 'OpenSHC.dll.dir' in e['command'] and '/src/OpenSHC/' in e['file'].replace(chr(92), '/')]
+# a /GL object writes no /FA listing, so take the command of a file outside cmake/compiler-flags-gl.txt
+base = ([e for e in cands if ' /GL' not in e['command']] or cands)[0]
+base = dict(base, command=base['command'].replace(' /GL', ''))
 # QD_OUT picks the output folder, so concurrent runs (quick_reorder.py) do not share x.asm
 out = ROOT + '/build-RelWithDebInfo/batch/' + os.environ.get('QD_OUT', 'quick')
 os.makedirs(out, exist_ok=True)
