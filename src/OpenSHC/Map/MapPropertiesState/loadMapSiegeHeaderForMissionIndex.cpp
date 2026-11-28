@@ -15,23 +15,25 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004C6820
     void MapPropertiesState::loadMapSiegeHeaderForMissionIndex(char* param_1)
     {
-        char* pcVar1;
-        pcVar1 = param_1 + -1;
-        if ((int)pcVar1 < 5) {
+        param_1 = param_1 - 1;
+        if ((int)param_1 < 5) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)param_1]);
+            return;
         }
-        if ((int)pcVar1 < 10) {
+        if ((int)param_1 < 10) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)param_1]);
+            return;
         }
-        if ((int)pcVar1 < 0xf) {
+        if ((int)param_1 < 15) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)param_1]);
+            return;
         }
-        if ((int)pcVar1 < 20) {
+        if ((int)param_1 < 20) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)param_1]);
         }
     }
 

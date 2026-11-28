@@ -23369,7 +23369,7 @@ SHC_3BB0A8C1_0x0048FCB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0048FFD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00490060 | 94.4% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x00490060 | 99.3% | Base/index operand order
 
 SHC_3BB0A8C1_0x00490080 | 0.0% | Pending
 
@@ -29881,7 +29881,7 @@ SHC_3BB0A8C1_0x004BC100 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BC104 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BC110 | 28.9% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004BC110 | 74.7% | Shared tail in wrong arm
 
 SHC_3BB0A8C1_0x004BC1C0 | 100.0% | Pending
 
@@ -34143,13 +34143,13 @@ SHC_3BB0A8C1_0x004C62A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C62C0 | 43.3% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C6820 | 3.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004C6820 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004C6880 | 26.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004C6880 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C68D0 | 44.8% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C6B20 | 92.4% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004C6B20 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C6B90 | 0.0% | Pending
 
@@ -35565,7 +35565,7 @@ SHC_3BB0A8C1_0x004D5010 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D5180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D52A0 | 17.0% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004D52A0 | 87.4% | Count/entries struct aliasing
 
 SHC_3BB0A8C1_0x004D5370 | 16.4% | Ported from gynt, asm differs
 

@@ -15,16 +15,9 @@ namespace Game {
         // FUNCTION: STRONGHOLDCRUSADER 0x00490060
         void SkirmishLobbySetupStructure::restoreSkirmishLobbySetup()
         {
-            char cVar1;
-            char* pcVar2;
             DAT_GameSynchronyState::instance.skirmishAutoSaveEveryMinutes = this->mapu4int2;
-            pcVar2 = this->mapName;
             this->mbr_0x4 = DAT_GameState::instance.mapAndTime.skirmishFogOfWar;
-            do {
-                cVar1 = *pcVar2;
-                pcVar2[0xc2ee7c] = cVar1;
-                pcVar2 = pcVar2 + 1;
-            } while (cVar1 != '\0');
+            strcpy(DAT_GameSynchronyState::instance.mapName, this->mapName);
             DAT_GameSynchronyState::instance.DAT_RoundTableOrderArray[0] = this->roundTableOrderArray[0];
             DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[0] = this->playerGroupArray[0];
             DAT_GameSynchronyState::instance.currentAIArray[0] = this->currentAIArray[0];
@@ -87,8 +80,9 @@ namespace Game {
             DAT_GameSynchronyState::instance.skirmishDefaultPopularity = this->popularity;
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = this->mapSelectionRelativeSelected;
             DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset = this->mapSelectionScrollOffset;
-            INT_00b960b0::instance = this->mapSelectionScrollOffset + this->mapSelectionRelativeSelected;
             DAT_GameSynchronyState::instance.lobbyMapSortOrder = this->mbr_0xfc;
+            INT_00b960b0::instance = DAT_GameSynchronyState::instance.DAT_MapSelectionScrollOffset
+                + DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected;
             MACRO_CALL_MEMBER(
                 Synchrony::GameSynchronyState_Func::reorderTeamsAndPositions, DAT_GameSynchronyState::ptr)();
         }

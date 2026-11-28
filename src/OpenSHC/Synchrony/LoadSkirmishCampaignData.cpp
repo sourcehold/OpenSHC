@@ -69,16 +69,9 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
     DAT_GameSynchronyState::instance.currentGameMode = Game::GM_SKIRMISH_SINGLE_PLAYER;
     MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::queueCommand, DAT_GameSynchronyState::ptr)(
         Commands::GCT_ASK_FOR_SLOT_ASSIGNMENT);
-    if (1 < pCVar9->numberOfPlayers) {
-        piVar4 = &pCVar9->player2AI;
-        iVar7 = 1;
-        do {
-            iVar5 = iVar7 + 1;
-            DAT_GameSynchronyState::instance.currentAIArray[iVar7 + 1] = *piVar4;
-            MACRO_CALL(Synchrony_Func::ResetAiVariationArrayValue)(iVar5);
-            piVar4 = piVar4 + 1;
-            iVar7 = iVar5;
-        } while (iVar5 < pCVar9->numberOfPlayers);
+    for (int i = 1; i < pCVar9->numberOfPlayers; i++) {
+        DAT_GameSynchronyState::instance.currentAIArray[i + 1] = (&pCVar9->player1AI)[i];
+        MACRO_CALL(Synchrony_Func::ResetAiVariationArrayValue)(i + 1);
     }
     MACRO_CALL(Synchrony_Func::SetAIPlayerNickNames)();
     iVar7 = pCVar9->numberOfPlayers;
@@ -113,14 +106,8 @@ void Synchrony::LoadSkirmishCampaignData(int missionID)
     } while (iVar5 < 9);
     DAT_GameSynchronyState::instance.skirmishCurrentAdvantageBalance = pCVar9->fairness;
     DAT_GameSynchronyState::instance.skirmishGameIntensityType = pCVar9->startLevels;
-    DAT_GameSynchronyState::instance.playerPositionsArray[0] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[1] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[2] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[3] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[4] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[5] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[6] = -10;
-    DAT_GameSynchronyState::instance.playerPositionsArray[7] = -10;
+    memset(DAT_GameSynchronyState::instance.playerPositionsArray, -10,
+        sizeof(DAT_GameSynchronyState::instance.playerPositionsArray));
     piVar4 = &pCVar9->position1;
     iVar7 = 0;
     do {
