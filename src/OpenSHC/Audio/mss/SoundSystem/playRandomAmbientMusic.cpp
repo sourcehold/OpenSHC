@@ -189,7 +189,7 @@ namespace Audio {
                 } else if (0
                         < DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                             .totalEnemyUnitsCount
-                    && DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated == 0) {
+                    && !DAT_TroopValueState::instance.attackInfo.lowTroopValueRelated) {
                     MACRO_CALL_MEMBER(SoundSystem_Func::playRandomMusic02, this)(1);
                     MACRO_CALL_MEMBER(SoundSystem_Func::playBattleGloryMusicIfConditionsMet, this)();
                 }
@@ -260,12 +260,13 @@ namespace Audio {
                         && 30000 < timeGetTime() - DAT_SoundEffectsHelperData1::instance.DAT_SomeSoundTime2) {
                         MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber1, SEC_RNG::ptr)();
                         int const randomNumber = SEC_RNG::instance.currentNumber1 % 3;
-                        if (randomNumber == 0)
+                        if (randomNumber == 0) {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 1;
-                        else if (randomNumber == 1)
+                        } else if (randomNumber == 1) {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 2;
-                        else
+                        } else {
                             DAT_SoundEffectsHelperData1::instance.battleMoodState = 0;
+                        }
                     }
                 }
 

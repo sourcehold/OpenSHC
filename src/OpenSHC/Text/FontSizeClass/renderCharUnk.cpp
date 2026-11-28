@@ -17,7 +17,7 @@ namespace Text {
     int FontSizeClass::renderCharUnk(byte charId, int xPos, int yPosUnk, int bgr24, int blendStrengthUnk)
     {
         int _xPos = xPos;
-        int _yPos = yPosUnk;
+        int const _yPos = yPosUnk;
 
         Rendering::Enums::RenderTarget renderTargetTemp
             = (Rendering::Enums::RenderTarget)DAT_TextureRenderCoreObject::instance.drawBufferChoiceValue;

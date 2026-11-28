@@ -1,0 +1,266 @@
+#include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/AI/Tribes/AITribeTypeInt.hpp"
+#include "OpenSHC/Map/Units/SomeTribeBehaviorType.hpp"
+
+#include "OpenSHC/Globals/DAT_AttackInfoDefinedData.hpp"
+#include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
+#include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using Map::Units::SomeTribeBehaviorType;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x00518380
+        void TroopValueState::sortAttackInfoTribeIDArrayBasedOn(
+            int attackWave, int shrinkSize, int tribeSizeSumLimit, SomeTribeBehaviorType someTribeTypeIdentifier)
+        {
+            int* _pPriority;
+            AI::Tribes::AITribeTypeInt const* _tribeTypePriority;
+            int _sumIndex;
+            int _currentTribeType;
+            int _nextValue;
+            int _lookupValue3;
+            int _tribeID;
+            int _currentValue;
+            int _tribeType;
+            int _tribeSizeSum;
+            int _index;
+            int _nextTribeType;
+            int _counter2;
+            int _index2;
+            int _current;
+            int _next;
+            BOOLEnum swapped;
+            if (someTribeTypeIdentifier == 1010) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x21c;
+            } else if (someTribeTypeIdentifier == 1011) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x44c;
+            } else if (someTribeTypeIdentifier == 1012) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x35c;
+            } else if (someTribeTypeIdentifier == 1018) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x4ec;
+            } else if (someTribeTypeIdentifier == 1040) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x3ac;
+            } else if (someTribeTypeIdentifier == 1045) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x3fc;
+            } else if (someTribeTypeIdentifier == 7) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x12c;
+            } else if (someTribeTypeIdentifier == 5) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x17c;
+            } else if (someTribeTypeIdentifier == 1014) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x26c;
+            } else if (someTribeTypeIdentifier == 1047) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x99c;
+            } else if (someTribeTypeIdentifier == 1043) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x2bc;
+            } else if (someTribeTypeIdentifier == 1044) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x30c;
+            } else if (someTribeTypeIdentifier == 1013) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x53c;
+            } else if (someTribeTypeIdentifier == 1019) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x58c;
+            } else if (someTribeTypeIdentifier == 1025) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x5dc;
+            } else if (someTribeTypeIdentifier == 1021) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x62c;
+            } else if (someTribeTypeIdentifier == 1046) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x67c;
+            } else if (someTribeTypeIdentifier == 1020) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x7bc;
+            } else if (someTribeTypeIdentifier == 1049) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x80c;
+            } else if (someTribeTypeIdentifier == 1050) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x71c;
+            } else if (someTribeTypeIdentifier == 1051) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x71c;
+            } else if (someTribeTypeIdentifier == 1048) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x85c;
+            } else if (someTribeTypeIdentifier == 1054) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x8fc;
+            } else if (someTribeTypeIdentifier == 1042) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x8ac;
+            } else if (someTribeTypeIdentifier == 1016) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x6cc;
+            } else if (someTribeTypeIdentifier == 1017) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x76c;
+            } else if (someTribeTypeIdentifier == 1015) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x49c;
+            } else if (someTribeTypeIdentifier == 1041) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x94c;
+            } else if (someTribeTypeIdentifier == 1023) {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x1cc;
+            } else {
+                _tribeTypePriority = DAT_AttackInfoDefinedData::instance.field_0x17c;
+            }
+            for (int i = 0; i < 50; ++i) {
+                DAT_TroopValueState::instance.attackInfo.tribeIDArray[i] = 0;
+                DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[i] = 0xc;
+            }
+            _index = 0;
+            DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = 0;
+            for (_tribeID = 1; _tribeID < 1250; ++_tribeID) {
+                if (DAT_TribesState::instance.tribes[_tribeID].tribeState
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeState != 3
+                    && DAT_GameSynchronyState::instance
+                            .currentPlayerFullIDArray[DAT_TribesState::instance.tribes[_tribeID].owner]
+                        == -1
+                    && DAT_TribesState::instance.tribes[_tribeID].attackWave == attackWave
+                    && DAT_TribesState::instance.tribes[_tribeID].attackInfo_someCounter1
+                        != DAT_TroopValueState::instance.attackInfo.someCounter1
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType != 1040
+                    && DAT_TribesState::instance.tribes[_tribeID].tribeBehaviorType != 1045) {
+                    DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index] = _tribeID;
+                    _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize + 1;
+                    DAT_TroopValueState::instance.attackInfo.tribeIDArraySize = _index;
+                }
+            }
+            if ((0 < shrinkSize) && (0 < tribeSizeSumLimit)) {
+                do {
+                    /*
+                      This is a sorting algorithm
+                     */
+                    _index2 = 0;
+                    swapped = FALSE;
+                    if (_index - 1 <= 0) {
+                        break;
+                    }
+                    do {
+                        _current = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2];
+                        _next = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2 + 1];
+                        _currentTribeType = (int)(short)DAT_TribesState::instance.tribes[_current].tribeType;
+                        _nextTribeType = (int)(short)DAT_TribesState::instance.tribes[_next].tribeType;
+                        _currentValue = 0;
+                        _pPriority = (int*)(_tribeTypePriority + 2);
+                        do {
+                            if (_pPriority[-2] == _currentTribeType) {
+                                break;
+                            }
+                            if (_pPriority[-1] == _currentTribeType) {
+                                _currentValue++;
+                                break;
+                            }
+                            if (*_pPriority == _currentTribeType) {
+                                _currentValue += 2;
+                                break;
+                            }
+                            if (_pPriority[1] == _currentTribeType) {
+                                _currentValue += 3;
+                                break;
+                            }
+                            if (_pPriority[2] == _currentTribeType) {
+                                _currentValue += 4;
+                                break;
+                            }
+                            if (_pPriority[3] == _currentTribeType) {
+                                _currentValue += 5;
+                                break;
+                            }
+                            _currentValue += 6;
+                            _pPriority += 6;
+                        } while (_currentValue < 12);
+                        _nextValue = 0;
+                        _pPriority = (int*)(_tribeTypePriority + 2);
+                        do {
+                            if (_pPriority[-2] == _nextTribeType) {
+                                break;
+                            }
+                            if (_pPriority[-1] == _nextTribeType) {
+                                _nextValue++;
+                                break;
+                            }
+                            if (*_pPriority == _nextTribeType) {
+                                _nextValue += 2;
+                                break;
+                            }
+                            if (_pPriority[1] == _nextTribeType) {
+                                _nextValue += 3;
+                                break;
+                            }
+                            if (_pPriority[2] == _nextTribeType) {
+                                _nextValue += 4;
+                                break;
+                            }
+                            if (_pPriority[3] == _nextTribeType) {
+                                _nextValue += 5;
+                                break;
+                            }
+                            _nextValue += 6;
+                            _pPriority += 6;
+                        } while (_nextValue < 0xc);
+                        if (_nextValue < _currentValue) {
+                            swapped = TRUE;
+                            DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2] = _next;
+                            DAT_TroopValueState::instance.attackInfo.tribeIDArray[_index2 + 1] = _current;
+                        }
+                        _index2++;
+                    } while (_index2 < DAT_TroopValueState::instance.attackInfo.tribeIDArraySize - 1);
+                    _index = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
+                } while (swapped);
+                _counter2 = 0;
+                if (0 < _index) {
+                    do {
+                        _tribeType = (int)(short)DAT_TribesState::instance
+                                         .tribes[DAT_TroopValueState::instance.attackInfo.tribeIDArray[_counter2]]
+                                         .tribeType;
+                        _lookupValue3 = 0;
+                        _pPriority = (int*)(_tribeTypePriority + 2);
+                        do {
+                            if (_pPriority[-2] == _tribeType) {
+                                break;
+                            }
+                            if (_pPriority[-1] == _tribeType) {
+                                _lookupValue3++;
+                                break;
+                            }
+                            if (*_pPriority == _tribeType) {
+                                _lookupValue3 += 2;
+                                break;
+                            }
+                            if (_pPriority[1] == _tribeType) {
+                                _lookupValue3 += 3;
+                                break;
+                            }
+                            if (_pPriority[2] == _tribeType) {
+                                _lookupValue3 += 4;
+                                break;
+                            }
+                            if (_pPriority[3] == _tribeType) {
+                                _lookupValue3 += 5;
+                                break;
+                            }
+                            _lookupValue3 += 6;
+                            _pPriority += 6;
+                        } while (_lookupValue3 < 0xc);
+                        DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_counter2]
+                            = _lookupValue3;
+                        _counter2++;
+                        _index = _index;
+                    } while (_counter2 < _index);
+                }
+                _tribeSizeSum = 0;
+                _sumIndex = 0;
+                if (0 < _index) {
+                    do {
+                        int const _sumTribeID = DAT_TroopValueState::instance.attackInfo.tribeIDArray[_sumIndex];
+                        if (tribeSizeSumLimit < _tribeSizeSum) {
+                            DAT_TroopValueState::instance.attackInfo.tribeRelatedArrayValue0UpTo12[_sumIndex] = 0xc;
+                            _index = _index;
+                        }
+                        _sumIndex++;
+                        _tribeSizeSum += DAT_TribesState::instance.tribes[_sumTribeID].size;
+                    } while (_sumIndex < _index);
+                }
+                if (shrinkSize < _index) {
+                    _index = shrinkSize;
+                }
+            }
+        }
+
+    }
+}
+}

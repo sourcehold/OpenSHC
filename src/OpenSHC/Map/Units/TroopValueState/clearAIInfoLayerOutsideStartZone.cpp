@@ -1,4 +1,5 @@
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
+
 #include "OpenSHC/Map/MapConstants.hpp"
 
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"

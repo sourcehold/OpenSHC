@@ -1,4 +1,4 @@
-#include "OpenSHC/Map/Units/TroopValueState.func.hpp"
+#include "../TroopValueState.func.hpp"
 
 namespace OpenSHC {
 namespace Map {

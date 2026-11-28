@@ -172,8 +172,8 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
 
     // The original passes the AICState as this to the empty function
     ((void(__fastcall*)(OpenSHC::AI::AICState*))MACRO_CALL(OpenSHC::Global_Func::DoNothing))(DAT_AICState::ptr);
-    int mainMenuBorderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
-    int mainMenuBorderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
+    int const mainMenuBorderHeight = DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight;
+    int const mainMenuBorderWidth = DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth;
     Menu* loadingMenu = DAT_MenuHandlerState::instance.currentMenu;
     loadingMenu->yPosition = mainMenuBorderHeight;
     loadingMenu->xPosition = mainMenuBorderWidth;
@@ -241,8 +241,9 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
              */
             tagMSG windowMessage;
             if (PeekMessageA(&windowMessage, NULL, 0, 0, 0)) {
-                if (!GetMessageA(&windowMessage, NULL, 0, 0))
+                if (!GetMessageA(&windowMessage, NULL, 0, 0)) {
                     break; // Break the game loop
+                }
                 TranslateMessage(&windowMessage);
                 DispatchMessageA(&windowMessage);
             } else {
@@ -442,7 +443,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                         && MACRO_CALL_MEMBER(
                             OpenSHC::Game::GameCore_Func::getAreWeInAInGameMenu, DAT_GameCore::ptr)()) {
                         if (TIME_ReceivedMessage_2::instance) {
-                            int pausedDuration = timeGetTime() - TIME_ReceivedMessage_2::instance;
+                            int const pausedDuration = timeGetTime() - TIME_ReceivedMessage_2::instance;
                             TIME_ReceivedMessage_2::instance = 0;
                             DAT_GameCore::instance.timeSum_2 = DAT_GameCore::instance.timeSum_2 + pausedDuration;
                         }
@@ -450,7 +451,7 @@ int __stdcall Global::WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPST
                         TIME_ReceivedMessage_2::instance = timeGetTime();
                     }
                     if (TIME_ReceivedMessage_1::instance) {
-                        int unfocusedDuration = timeGetTime() - TIME_ReceivedMessage_1::instance;
+                        int const unfocusedDuration = timeGetTime() - TIME_ReceivedMessage_1::instance;
                         TIME_ReceivedMessage_1::instance = 0;
                         TIME_Sum_1::instance = TIME_Sum_1::instance + unfocusedDuration;
                     }

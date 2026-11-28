@@ -20,10 +20,10 @@ namespace Input {
             MACRO_CALL_MEMBER(MouseState_Func::resetMouseCursorState, this)();
             return;
         }
-        int left = this->previousSelectionBox.left;
-        int right = this->previousSelectionBox.right;
-        int top = this->previousSelectionBox.top;
-        int bottom = this->previousSelectionBox.bottom;
+        int const left = this->previousSelectionBox.left;
+        int const right = this->previousSelectionBox.right;
+        int const top = this->previousSelectionBox.top;
+        int const bottom = this->previousSelectionBox.bottom;
 
         DAT_PencilRenderCore::instance.surfaceTarget = Rendering::Enums::RT_MAP_GAME;
         MACRO_CALL_MEMBER(UI::Rendering::PencilRenderCore_Func::drawBorderBox, DAT_PencilRenderCore::ptr)(

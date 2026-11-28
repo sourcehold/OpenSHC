@@ -1,0 +1,97 @@
+#include "../TroopValueState.func.hpp"
+
+#include "OpenSHC/Map.func.hpp"
+#include "OpenSHC/Map/Entities/EntityState.func.hpp"
+#include "OpenSHC/Map/TileMapState.func.hpp"
+#include "OpenSHC/Map/Units/UnitsState.func.hpp"
+#include "OpenSHC/Map/Units/States/UnitState.hpp"
+#include "OpenSHC/Map/Units/UnitInstructionType.hpp"
+#include "OpenSHC/Map/Units/UnitLogicState.hpp"
+#include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
+
+#include "OpenSHC/Globals/DAT_EntityState.hpp"
+#include "OpenSHC/Globals/DAT_TileMapState.hpp"
+#include "OpenSHC/Globals/DAT_UnitsState.hpp"
+
+namespace OpenSHC {
+namespace Map {
+    namespace Units {
+
+        using Map::Units::UnitInstructionType;
+        using Map::Units::UnitLogicState;
+        using Map::Units::UnitType;
+        using Map::Units::States::UnitState;
+        using WindowsHelper::Enums::BOOLEnum;
+
+        // FUNCTION: STRONGHOLDCRUSADER 0x0051BF70
+        BOOLEnum TroopValueState::giveLightPitchInstructionToUnitClosestToPitch(int tile)
+        {
+            BOOLEnum isAIPlayerWithKeep;
+            int _shot;
+            int _ditchID
+                = MACRO_CALL_MEMBER(Map::TileMapState_Func::getPitchDitchIDForTile, DAT_TileMapState::ptr)(tile);
+            int _minUnitID = 0;
+            int _minDistance = 100000000;
+            int _unitID = 1;
+            if (1 < DAT_UnitsState::instance.maxUnitCount) {
+                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
+                do {
+                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE
+                        && (isAIPlayerWithKeep = MACRO_CALL_MEMBER(
+                                Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)((int)_pUnit->owner),
+                            isAIPlayerWithKeep)
+                        && (_pUnit->unitType == Map::Units::UT_E_ARCHER
+                            || (_pUnit->unitType == Map::Units::UT_A_ARCHER))
+                        && !_pUnit->dying && _pUnit->field_0x40d != false
+                        && _pUnit->targetingType != Map::Units::UIT_LIGHT_PITCH) {
+                        int const _ditchY = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].y;
+                        int const _ditchX = (int)DAT_TileMapState::instance.pitchDitches[_ditchID].x;
+                        int const _unitY = _ditchY - _pUnit->y;
+                        int const _unitX = _ditchX - _pUnit->x;
+                        int _distancePyth = _unitX * _unitX + _unitY * _unitY;
+                        if (_distancePyth <= 2500
+                            && (_shot = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::arrowShootingRelated,
+                                    DAT_EntityState::ptr)((int)_pUnit->microXPosition, (int)(_pUnit->microYPosition),
+                                    (int)(_pUnit->buildingHeight + 30 + _pUnit->terrainOrClimbHeight), _ditchX * 8 + 4,
+                                    _ditchY * 8 + 4,
+                                    (int)(DAT_TileMapState::instance
+                                            .HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile])),
+                                0 < _shot)
+                            && _distancePyth < _minDistance) {
+                            _minUnitID = _unitID;
+                            _minDistance = _distancePyth;
+                        }
+                    }
+                    _unitID++;
+                    _pUnit++;
+                } while (_unitID < DAT_UnitsState::instance.maxUnitCount);
+            }
+            if (!_minUnitID) {
+                return 0;
+            }
+            DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroX
+                = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
+            DAT_UnitsState::instance.units[_minUnitID].shootTargetMicroY
+                = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
+            int _height
+                = DAT_TileMapState::instance.HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
+            DAT_UnitsState::instance.units[_minUnitID].targetID_OR_targetBuildingID = (short)_ditchID;
+            int _ditchUID = DAT_TileMapState::instance.pitchDitches[_ditchID].uid;
+            DAT_UnitsState::instance.units[_minUnitID].shootTargetZ = (ushort)_height;
+            DAT_UnitsState::instance.units[_minUnitID].shootTargetedUnit = -1;
+            DAT_UnitsState::instance.units[_minUnitID]
+                .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID = _ditchUID;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x3c5 = 0x22;
+            DAT_UnitsState::instance.units[_minUnitID].targetingType = Map::Units::UIT_LIGHT_PITCH;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x3f8 = 0;
+            MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState,
+                DAT_UnitsState::ptr)(_minUnitID);
+            DAT_UnitsState::instance.units[_minUnitID].state.generic = Map::Units::States::US_FIRE_WEAPONUnk;
+            DAT_UnitsState::instance.units[_minUnitID].field_0x40e = true;
+            return 1;
+        }
+
+    }
+}
+}

@@ -306,6 +306,52 @@ Diff patterns that were reliable (more in the cheat sheet):
   independent stores into one object says nothing about the order the fields were assigned in the original source
   (see the cheat sheet's *Statement Order*). Reordering the body to follow the asm makes the match worse.
 - Diffs can reveal real bugs in existing reimplementations (wrong constants, wrong strides); fix those.
+- An `if (cond) {}` with an empty body is a `goto` the import dropped, and it is almost always a *loop or
+  function exit*. Thirteen sat in `Map::Units::TroopValueState`, six of them leaving a `do { } while (true);`
+  that never terminates. Read the original's jump target with `orig_asm.py NAME` - a jump past the loop's
+  back edge is `break`, a jump into the epilogue is `return` - and fix the exit *before* restyling anything
+  else: `placeTunnelForEveryTunneler` went 32% -> 52% from three `return`s alone, while the same function
+  rewritten structurally first went *down*. Where the correct exit costs match because the original shares
+  one epilogue and we need two, keep the fix and say so in the commit remark.
+- A literal game address (`while ((int)p < 0x17802b4)`, `*(byte*)(tile + 0x1ee2998)`) is the original's global,
+  which `resolve_address.py` turns into `DAT_X::instance.field[i]`. It is only correct while that struct's
+  reimplementation is off, because an enabled resolver puts the data in our own object, so these are latent
+  bugs and worth replacing. Replacing an *array base* is free or better; replacing a *loop bound* is not -
+  a typed pointer bound (`p < &tribes[1251]`) re-anchors the walk and cost 5-11 points in three functions,
+  where converting the whole loop to an index over `tribes[t]` gained instead.
+- **Where a field read sits relative to a call or a test is worth more than almost anything else.**
+  The decompiler hoists reads to the top of a block; the original reads them where they are used, and
+  `quick_styles.py` settles it in seconds per variant. Moving one read down past a call took
+  `recountTotalTroopValue` 27.7% -> 49.5% and `collectArcherUnitsByLocation` 49.4% -> 61.5%; moving one
+  down past two threshold tests took `queueOilThrowForIdleArchers` 70.7% -> 100%. The same lever runs the
+  other way for an argument subexpression inside a short-circuit chain, which the original computed
+  *before* the test: hoisting the `PathConnectionLayer` lookup out of the `&&` took
+  `assignBehaviorTypeToNearbyTribes` 46.6% -> 68.0%. Read which side of the branch the original's address
+  arithmetic falls on and follow it.
+- `if (x < N) { if (x == N) { ... } ... }` is a three-way test the decompiler flattened wrongly: the inner
+  arm is unreachable, so whatever it does never happens. The original tests `> N`, then `== N`, then falls
+  through to the rest. Rebuild it as `if (x < N) { rest } else if (x == N) { arm } else { high }` - the
+  fall-through arm has to stay first or MSVC lays the blocks out the other way and the match collapses
+  (20 points on `updateTribeBehaviorBasedOnBehaviorType`, which is also where the unreachable arm was).
+- A `je` in the original against a `jne` of ours after the same compare means the two arms of an
+  `if/else` are the other way round: the arm the original falls into is the one it keeps inline, and the
+  one it jumps to is the one we should put in the `else`. `scan_arms.py` lists them. Swapping took
+  `getPlayerNot1AndHasKeep` 50% -> 100%, `addUnitToNewTribe` 84% -> 100% and
+  `aiControlNonSkirmishUnitMovement` 78% -> 98.6% (two swaps plus a tail call), and it is the same lever as
+  inverting an `if/else if` chain so its first test matches the original's - `computeAttackWaveTroopComposition`
+  gained 11 points from testing `< 10` and taking the lower arm there instead of `9 <` and taking the upper.
+  Read the original rather than trusting the hint: the scan pairs branches loosely and one of its five
+  suggestions measured worse.
+- `pop`s followed by `jmp <callee>` in the original is a tail call, so nothing runs after it. Where the
+  decompiler shows that callee in the middle of a function, the original returned there:
+  `aiControlNonSkirmishUnitMovement` called `updateAttackInfoTick` and then carried on, where the original
+  stops, and fixing it was worth 3.6 points before the arm swaps.
+- `expr * 0x177bc` into one of `AttackInfo`'s own `*ValuesArray` members is `playerInfo[player - 1]`:
+  the per-player `AttackInfoSubElement` array is one-based, and `AttackInfo`'s named copies of those fields
+  are the unused slot 0 at the same relative offsets (delta 0x301C0). Writing
+  `playerInfo[playerID - 1].wide2` for `*(int*)((int)wideValuesArray + playerID * 0x177bc + -8)` took seven
+  of that namespace's "find the nearest X" functions from 45-78% to exactly 100%, and the negative deltas
+  (-0x10, -0xc, -8, -4) are the four scalars declared before each array.
 - `(-(uint)(c) & MASK) + BASE` in the decompiler output is a conditional it has already turned into mask-and-add:
   it is `c ? BASE + MASK : BASE`. Writing the conditional out recovers the same instructions and stops the constants
   being unreadable - `(-(uint)(d != 1) & 0xffffffce) + 200` is `d == 1 ? 200 : 150`.
@@ -410,3 +456,747 @@ When a relevant skill exists, prefer it over this document, as it contains more 
 ## Agent Maintenance
 
 If you discover undocumented conventions, missing workflows, or repeated guidance, suggest updates to this guide or the relevant skill.
+
+- **`reccmp_report.py --run` does not build.** It only re-runs reccmp over the DLL that is already
+  on disk, so a source edit measured with `--run` alone scores the *previous* build. Run
+  `build_quiet.py` (check for `BUILD_OK`) first, every time. A suspiciously bit-identical diff -
+  same percentages and the same `(file.cpp:NN)` line numbers as before the edit - is the symptom.
+
+- **Switch-arm source order decides the arm layout, including for a jump-table switch.**
+  `playAttackAlarmSound` went 75% -> 100% purely by moving `case 5:` ahead of `case 2/3/4:`, which
+  is the order reccmp's printed jump table implies (the arm reached by the lowest `start + N`
+  offset comes first in the source). Sort the distinct jump-table offsets, map each back to its
+  arm, and lay the arms out in that order.
+
+- **Four identical stores beat one shared store.** Where Ghidra nests a chain of tests as
+  `if (a) { x = K; } else { if (b) { x = K; } else { ... } }`, the original often writes each
+  failure as its own guard - `if (a) { x = K; goto LAB_tail; }` - repeated per test, with the
+  success path falling into a label just before the loop's increments. reccmp shows this as the
+  original carrying several copies of the same `mov dword ptr [reg], K` plus a `jmp`, against a
+  single copy on our side. `computeSiegeSpotScores` gained 5 points from it (47.4% -> 52.2%);
+  rewriting the same block's `!x` tests as signed `(int)x < 1` at the same time *cost* 3, so land
+  the restructure on its own and measure before touching the comparisons.
+
+- **`b = a + 1; <call>; a = b;` is one variable, not two.** When a counter is live across a call,
+  Ghidra sometimes names the pre-call and post-call halves separately, leaving a copy-back that
+  reads as a no-op (`a = b;` on a path where `b` never changed). reccmp shows the original doing
+  `add reg, 1` / `mov [esp+N], reg` once and reloading after the call, against our two counters
+  shuffling between a register and two slots. Merging them into one variable took
+  `assignMacemenAndKnightsNotFromPlayer1ToTribes` from 41.8% to 52.5%. Check that the two really
+  are equal at the top of each iteration before merging - initialised together, and every
+  assignment to one followed by the copy-back.
+
+- **A store Ghidra invented from a shared constant.** `computeAttackWaveTroopComposition` opened
+  with `maxMoatAttackTribes = 6;` although every arm of the chain below assigns that field; the
+  original only materialises 6 for the first `cmp`. If reccmp shows a `mov dword ptr [global], reg`
+  on our side alone right before a compare against the same constant, and the field is written on
+  every path, the assignment is not in the original.
+
+- **`test r8, r8` + `jbe` is `0 < (byte)x`, not `x != '\0'`.** `jbe` after a compare against zero
+  means the source tested an *unsigned* value with `<` or `<=`; a `!= 0` test gives `je`/`jne`
+  instead. Writing the guard as `if (0 < (byte)cVar1)` is what reproduces it. Five of those plus a
+  restored `else` took `decrementTileMap1104` from 79.4% to an exact match.
+
+- **An unconditional store after a conditional one means a dropped `else`.** Ghidra emitted
+  `if (off < 80200) { off += 200; } off = 0;` - which makes the increment dead, and our compiler
+  duly dropped it, so reccmp showed the original carrying a `cmp`/`jge` we had nothing for. The
+  second store belongs in an `else`. Any tail where the decompiler assigns a field it has just
+  conditionally updated is worth this check.
+
+- **Loop shape is not reachable from the source.** `pruneStaleArcherPoints` and its two twins walk
+  a 199-element array; the original exits on `cmp esi, <end address>` / `jl`, we emit a down-counter
+  (`mov edi, 0xc7` / `sub edi, 1` / `jne`), and that single transform is the whole 29% they are
+  missing. A `do/while` on the pointer, a `for`, a `while`, `!=` instead of `<`, an index with the
+  pointer derived inside, and a hoisted end-pointer local all compile to the *same* down-counter -
+  measured, not assumed, on three functions in one build. When several spellings of a loop give a
+  bit-identical diff, the remaining difference is the optimiser's and there is nothing left to try.
+
+- **Near-miss constants are comparison encodings, and they are worth sweeping for.** Ghidra prints
+  `x < K+1` where the original compiled `x <= K`, and `K-1 < x` where it compiled `K <= x`; the
+  reccmp diff shows it as the original's `cmp reg, K` against our `cmp reg, K+-1` on the next line.
+  Scan every sub-100 diff for adjacent `-cmp`/`+cmp` pairs whose constants differ by a small
+  amount, then rewrite each condition in the original's form. Seven of them in one build lifted six
+  functions and cost nothing anywhere. The same scan with the delta restricted to a struct size
+  (820 for Tribe, 1168 for Unit) finds loop bounds that are off by one whole element.
+
+- **Comparison operand *order* is visible too, and sweepable the same way.** MSVC emits
+  `cmp <left>, <right>` in source order, so `bound <= index` and `index >= bound` - identical in
+  meaning - produce opposite operand orders. Scan the diffs for an adjacent `-cmp A, B` / `+cmp B, A`
+  pair and rewrite the condition with the original's left-hand side first: the index before its
+  bound, the tick before its delay, the cached field before the layer read. Worth 2 points on
+  `placeTunnelForEveryTunneler`, 2 on `scanForSiegeTentPoints`, 1.4 on `initializeOrAdvanceAttackWave`.
+  It is not universal - 25 flips in `updateTribeBehaviorBasedOnBehaviorType` changed nothing at all,
+  because the compiler had already canonicalised those - so measure per function.
+
+- **An inverted `jcc` means the two arms are the wrong way round - scan for it first.** For every
+  sub-100 function, pair each `-jcc` in the diff with a `+jcc` within three lines and flag the ones
+  whose conditions are exact inverses (`je`/`jne`, `jl`/`jge`, `jg`/`jle`, `ja`/`jbe`). Each hit is
+  an `if`/`else` whose arms the original lays out in the other order, or a guard written with the
+  opposite sense; rewriting it in the original's sense is usually a few lines and has been the
+  single most productive sweep here:
+
+      isLessThanPercentageOfTribesInAttackDying  89.6 -> 100.0   (zero case first, with an else)
+      collectArcherUnitsByLocation              61.5 ->  75.9   (mask test positive, arms swapped)
+      updateInProgressAttackWave                78.4 ->  84.1   (tent-points arms swapped)
+      computeAttackWaveTroopComposition         55.3 ->  60.7   (four wall-scale chains swapped)
+      findNearestDiggableMoatPoint              89.2 ->  94.6   ('(int)tile <= -1', giving jg)
+
+  Beware that the sense also encodes signedness and the exact constant: `!x` gives `jne`, `(int)x
+  <= 0` gives `jg`, and `(int)x < 1` gives `jge` - three spellings of the same test with three
+  different branches. Pick the one the original used.
+
+- **A `(short)` cast written twice in one condition costs a conversion.** `registerSpottedEnemyTile`
+  cast `EntityLayer[tile]` from short once for the zero test and again as the array index; the
+  compiler emitted `movzx` + `test ax, ax` + a second `movsx`, where the original does a single
+  `movsx` into a register it then reuses. Reading it once into an `int` local took that function
+  from 81.8% to an exact match. Scan each sub-100 source for the same `(short)expr` appearing twice
+  - the declared-`short`-local form of this is the same bug with a different spelling. It does not
+  always pay (hoisting `(short)_unitID` in `recomputeAttackInfo` cost 2 points), so measure.
+
+- **Per-block work on a long function: map its counters, not its instructions.** For a function too
+  long for reccmp to align (`recomputeAttackInfo`, 981 instructions, ten near-identical per-feature
+  blocks), the way in is to find a value each block touches exactly once - here the `gate1`,
+  `town1`, `high1`, `arch1`, ... counters - resolve each to its `instance+N` offset from the
+  prologue's zero stores, then grep `orig_asm.py NAME --both` for those offsets *in address order*.
+  That prints the original's block layout directly:
+
+      people lord gate town high2 arch2 wide hack scale moat
+
+  Ours had the owned-building arm as high2/arch2, town, gate - exactly reversed. `swap_arms.py`
+  reorders an `if`/`else` or `if`/`else if` chain in place (it negates the condition, so behaviour
+  is unchanged); three calls on the nested chains were worth 2 points.
+
+  **The layout order is not the whole source order, though.** Matching it completely measured
+  *worse*: moving `moat` last cost 1.3 and swapping the two outer arms another 2.1, because MSVC
+  outlines some of these blocks rather than emitting them where the source puts them. Reorder one
+  chain at a time and keep only the chains that measure better.
+
+- **When the two streams are the same length, stop looking for missing code.** `recomputeAttackInfo`
+  is 941 instructions against the original's 981, with the same 41 calls in the same order and the
+  same addressing idioms - so its 30% is an *alignment* score, not a structural gap: the prologue
+  allocates the player offset to a different register and needs one stack slot more, the streams
+  desynchronise there, and everything after counts as a mismatch. Things that look like the cause
+  and are not (all measured, all reverted): un-caching the second neighbour-gather so the layer
+  pointers reload, inlining three single-use height locals, moving the hoisted `ptr_SpecialAreasArray`
+  / `ptr_PathConnectionLayer` loads down to their first use, and hoisting a repeated `(short)_unitID`.
+  Count both streams before spending a day here.
+
+- **Retry a failed change once the function has moved.** Replacing `this->attackInfo.` with
+  `DAT_TroopValueState::instance.attackInfo.` in `initializeOrAdvanceAttackWave` measured *worse*
+  early on (54.8% -> 38.2%) and took it from 58.8% to 88.1% later, after the pointer temp and the
+  loop bound were fixed. Through `this` every field is a this-relative literal offset that can never
+  match the original's absolute addressing, so the change was always right; it just could not show
+  while a larger misalignment sat in front of it. When a change you believe in measures worse, note
+  it and try it again after the next structural win - and when it still loses, trust the number
+  (the same substitution in `scanForSiegeTentPoints` has now lost twice, five points each time).
+
+- **Symbolic loop bounds are not automatically better than Ghidra's literal.** Rewriting
+  `(int)p < 0x176238c` as `(int)p < (int)&tribes[1250].owner` reproduces the original's symbolic
+  operand but costs a `lea` to re-anchor the walking pointer, and measured worse on
+  `placeSiegeTentsAndAssignEngineers`, `recountAttackTroopValue` and
+  `sortAttackInfoTribeIDArrayBasedOn` (that last one by 14 points). Check the trip count either
+  way - `&tribes[1250]` and the literal are usually count-equivalent, so the literal is not a bug -
+  and keep whichever measures better.
+
+- **Verify a jump table's index -> case mapping against the *data* table.** For a sparse switch MSVC
+  emits a byte table (value - min -> jump index) alongside the jump table, and reccmp prints both.
+  The indices run strictly ascending over the case values that are present, and `default` gets the
+  *last* index - not a slot in the middle. I assumed the default sat at index 12 in
+  `updateTribeBehaviorBasedOnBehaviorType`, which shifted every case from 0x400 on by one and made
+  the derived arm order wrong from position 6 onwards; it still gained 9 points, which is how it
+  went unnoticed. Correcting it gained another 7 and made our layout match the original's exactly.
+  `arm_layout.py` prints both layouts, so check them rather than trusting the derivation.
+
+- **`arm_sizes.py` turns a big switch into a short worklist.** Differencing consecutive jump-table
+  offsets gives each arm's byte size on both sides, so an 800-instruction function at 55% becomes
+  "these four arms are the wrong length". It is also how you catch a reorder that dropped a
+  terminator: Ghidra's last arm carries no `break`, so moving it anywhere else makes it fall
+  through - `arm_sizes.py` showed that arm 13 bytes *short*, and the listing showed the original
+  ending it with `ret`.
+
+- **A jcc pair differing only in the equality is an off-by-one in the condition.** `sweep_all.py`
+  flags `-jg`/`+jge`, `-jl`/`+jle` and the unsigned equivalents over the same compare. Sometimes it
+  is only an encoding (`cmp x, 0xa` / `jl` against `cmp x, 9` / `jle` mean the same thing - write
+  the original's form), and sometimes the operands really do differ, so read the compare before
+  acting. Check that the `cmp` itself is identical on both sides: if the original compares a
+  register where we compare an immediate, the pairing is noise.
+
+- **Instruction order inside a basic block is the scheduler's, not the source's.** The original
+  reads `owner` before its `getValueOfTroopType` call in `recountTotalTroopValue`; moving our read
+  to match cost *24 points*, because it forces a spill across the call where MSVC otherwise keeps
+  the unit pointer and re-reads. Same for hoisting the layer pointers in `recomputeAttackInfo`.
+  Reorder *blocks*, not instructions.
+
+- **/GL does not rescue an allocator-bound function.** Adding the `pruneStale*` trio and the three
+  find-slot scans to `cmake/compiler-flags-gl.txt` changed their codegen not at all - all six
+  measured identical to the byte. Whatever decides the down-counter and the `mov [abs], esi` vs
+  `eax` choice is not reachable through that flag either, so do not reach for per-file flags as a
+  way out of register allocation.
+
+- **A `(char)BVar1` that MSVC can fold is not a way to reuse a known-zero register.** The original's
+  second `fillMemory_ByteValue` in `pruneStaleArcherPoints` passes the zero already in `eax`
+  (`push eax`, one byte) where we emit `push 0` (two). Passing `(char)BVar1` instead of `'\0'` -
+  provably the same value inside that branch - changes nothing, because MSVC const-folds it back.
+
+### Ghidra's decompilation is the *starting point*, not the target
+
+`giveLightPitchInstructionToUnitClosestToPitch` (0x51BF70) carries a
+`decompilerscript: committed` banner - its Ghidra listing is the same text the
+.cpp was seeded from. Three of its differences from our current file were tested
+and all three lose:
+
+| Ghidra's form | ours | delta |
+|---|---|---|
+| success block nested inside the `maxUnitCount` guard | early `if (!_minUnitID) return 0;` | -6.6 |
+| `getPlayerNot1AndHasKeep(&DAT_TroopValueState, ...)` | `this` | -4.6 |
+| both together | | -5.0 |
+
+On a function already improved past its seed, Ghidra re-confirms the seed, not
+the original. Check for the `decompilerscript: committed` banner first: when it
+is there and our % is already well above where the seed would land, Ghidra has
+no new information and the time is better spent on a function whose listing is
+fresh.
+
+### A local that only mirrors a global is really the *enregistered global*
+
+The three slot scans (`findOrReserveArcherPointSlot`, `getSupportPointIndex`,
+`getSiegeIndexForTile`) each had a `_firstFree` local written beside the
+`...Next` global and never read for anything but its own zero-test. All three
+sat at 76.6% on a single-instruction diff:
+
+    - mov dword ptr [...Next], esi     <- original
+    + mov dword ptr [...Next], eax     <- ours
+
+`mov [abs32], eax` is the 5-byte `A3` form, `esi` needs 6 - and that one byte
+shifted every jump displacement in the function, which is where the 23 points
+went. MSVC had coalesced our `_firstFree = i; Next = _firstFree;` onto `eax`.
+
+Deleting the local and testing/assigning the global directly took all three to
+**100%** at once: with no call or aliasing store in the loop MSVC enregisters
+the global in `esi` and writes through, which is exactly the original's shape.
+
+Generalisation: when a local exists only to shadow a global, the original
+probably had no local at all. Grep for a local assigned next to a global of the
+same meaning and whose only other use is a predicate on itself.
+
+### Cast the loop bound to `int` to stop MSVC strength-reducing a pointer walk
+
+The `pruneStale*` trio all walked `point < &array[200]`, which MSVC turned into
+a down-counter (`mov edi, 0xc7` / `sub edi,1` / `jne`) and an extra live
+register; the original keeps the pointer compare (`cmp esi, <end>` / `jl`).
+Writing the bound as
+
+    } while ((int)point < (int)&...array[200]);
+
+defeats the strength reduction and took all three from 70.7% to **77.1%**.
+
+This is the first thing to try on any counted pointer loop whose diff shows a
+`sub <reg>,1 / jne` where the original has `cmp <ptr>, <abs>`.
+
+Not reachable (both tried and lost ~19 points each on this trio):
+- walking an `int*` at the `tribeID` field offset, as Ghidra prints it, to kill
+  the per-iteration `lea ecx,[esi-0x10]`. The lea is cheaper than whatever MSVC
+  does to the field accesses afterwards.
+- Ghidra's arm order here is the *inverted* one. The original lays the
+  `!= someCounter1` (fill) arm first, which is what our file already had;
+  taking Ghidra's `==`-first order costs the arm layout.
+
+### Initialise a global *from* the local, not from a bare literal
+
+`applyTribeBehaviorTypes` opened with
+
+    int iVar2 = 0;
+    int _index = 0;
+    DAT_...unknownTribeCounterRelated = 0;
+
+MSVC saw three independent zeros, coalesced two of the locals into one register
+and stored the literal: `xor edx,edx` then `mov [global], edx`. The original
+keeps two zeroed registers and stores `esi`. Rewriting the middle store as
+
+    int iVar2 = 0;
+    DAT_...unknownTribeCounterRelated = iVar2;
+    int _index = 0;
+
+took it 95.7% -> **100%**: reading `iVar2` forces MSVC to give it its own
+register and store through it, and it fixes the `xor`/store order at the same
+time.
+
+Same family as [the spare local being the enregistered global]: whenever a
+global and a local hold the same value, the *data flow between them* is what
+pins the register allocation. Spell the dependency out - `global = local;` -
+rather than writing the literal twice.
+
+### Read the local, not the global, once you have cached it
+
+`placeTunnelEntrances` did
+
+    iVar2 = DAT_TileMapState::instance.placedBuildingID;
+    if (0 < (int)DAT_TileMapState::instance.placedBuildingID) {
+        ...buildings[DAT_TileMapState::instance.placedBuildingID].attackWave = ...;
+
+The original tests the cached value and indexes with a *copy* of it, giving
+`mov eax,[global] / test eax,eax / mov ecx,eax / imul ecx,0x32c`; our re-reads
+made MSVC pick the opposite registers, which also flipped two `push` operands.
+Replacing both re-reads with `iVar2` took it 88.6% -> **100%**.
+
+This and the two entries above are one rule in three costumes: **the original's
+register allocation is a shadow of the source's data flow, so write the data
+flow the registers imply.**
+
+- global written beside a local that mirrors it -> drop the local, use the global
+  (the three slot scans, 76.6% -> 100%)
+- global initialised to a literal a local also holds -> `global = local;`
+  (`applyTribeBehaviorTypes`, 95.7% -> 100%)
+- global cached in a local and then re-read -> read the local
+  (`placeTunnelEntrances`, 88.6% -> 100%)
+
+Each is worth a mechanical grep across the namespace. Three of the four known
+100% jumps this session came from this family.
+
+Scheduler-bound, do not retry: `initializeAttackZoneSearch` (77.8%) and
+`findEnemyLord` (78.0%) differ only in load placement inside one basic block and
+in which register holds the count vs the walk pointer.
+
+#### ...but the direction is per site, so measure
+
+Replacing the re-read with the cached local was swept over six functions in one
+build (scores are per-function, so one build evaluates them all):
+
+| function | before | after |
+|---|---|---|
+| `trySendKnightTribeToAttack` | 62.1 | **100.0** |
+| `collectArcherUnitsByLocation` | 75.9 | 63.7 |
+| `commandUnitsToMoveToKeep` | 77.6 | 73.7 |
+| `executeAttackWaveTargetAssignment` | 88.5 | 82.4 |
+| `recountAttackTroopValue` | 75.9 | 65.9 |
+
+One big win, four clear losses. The rule says *the register allocation implies a
+data flow*, not *caching is always right* - sometimes the original really does
+re-read. Sweep the candidates, keep the winners, and do it in a single build.
+
+### sweep_all.py CONST and SIGNED hits drift out of alignment - verify before trusting
+
+A full sweep after this session's structural wins produced four plausible-looking
+constant mismatches. All four were artefacts of the aligner pairing the original's
+*next* comparison against ours, and all four lost points when "fixed":
+
+| reported | reality |
+|---|---|
+| `computeAttackWaveTroopComposition` orig 0x4 vs ours 0x2 | ours cmp 2 paired with orig's cmp 4 from the *following* `5 <= x` test; `4 < x` -> 66.8 to 65.9 |
+| `executeAttackWaveTargetAssignment` orig 0x3 vs ours 0x6 | same drift one test over; `< 3`/`< 7`/`< 13` -> 88.5 to 88.3 |
+| `setRallyPointForLaddermenTribe` SIGNED jl/jb | int-casting the bound is exactly neutral here |
+| `assignMacemen...` orig 0x12 vs ours 0x13 | `cmp 0x12/jle` and `cmp 0x13/jl` are the same test; MSVC canonicalises `<= 18` back to `< 19`, exactly neutral |
+
+Before acting on a CONST hit, read both sides' surrounding comparisons and check
+the hit is not just our test aligned against the original's neighbour. A CONST
+hit is only real if the two tests it pairs are the *same* test.
+
+Also measured and reverted (the cached-local substitution, wrong direction here):
+`scanForArcherPoints` 82.7 -> 77.7, `scanForSiegeTentPoints` 41.7 -> 34.5.
+
+### A boolean argument that the original *branches* on wants two call sites
+
+`aiRecomputeAttacks2` passed `(int)(BVar3 != 0)` to `computeAIZoneLayer`, which
+MSVC renders branchlessly as `xor eax,eax / setne al`. The original branches:
+`je / push 1 / jmp`. Writing the call twice under an `if (BVar3) ... else ...`
+with literal `1` and `0` gives the branch and took it 87.6% -> **89.2%**.
+
+`BVar3 ? 1 : 0` is *not* a substitute - it compiles bit-identically to
+`(BVar3 != 0)` (measured, 87.6%). MSVC only branches when the two argument
+values reach the call from genuinely different paths, so the call has to be
+duplicated.
+
+Note this cuts the opposite way from `computeAttackWaveTroopComposition`, where
+reading `setne` in the original's listing and converting two assignments to
+`(x != 0)` form collapsed it from 66.8% to **13.7%** - that `setne` belonged to a
+different statement that the aligner had drifted onto. Confirm which statement a
+`setne` belongs to before acting on it.
+
+### Rebase parameter arithmetic onto the derived local that already holds it
+
+`renderAttackInfoDebugOverlay` computed `xParam = x + 2` once and then wrote
+`x + 0x16` (4 sites) and `x + 0x20` (2 sites) for later columns. The original
+emits `lea eax,[esi + 0x14]` from the register already holding `xParam`, while
+ours re-read the parameter off the frame and added the absolute offset - which
+also cost an extra dword of frame (`sub esp,0x3f0` vs `0x3ec`).
+
+`x + 0x16` is `xParam + 0x14`, same value. Rewriting all six sites relative to
+`xParam` took it 82.4% -> **95.8%**, and the rest of the gap is only reccmp
+mis-symbolising the literal `0xffffff` (white) as `BuildingsState+424671` plus
+the security-cookie names.
+
+Fourth instance of the data-flow rule. Worth grepping for: two expressions on
+the same parameter with different constants, where one of them is already a
+named local - the later ones are probably offsets from that local, not from the
+parameter.
+
+#### Sweep result, round two (same substitution, five more functions)
+
+| function | before | after | kept |
+|---|---|---|---|
+| `updateTribeBehaviorBasedOnBehaviorType` | 55.0 | **71.3** | yes |
+| `sortAttackInfoTribeIDArrayBasedOn` | 74.5 | **83.1** | yes |
+| `placeSiegeTentOrTunnelAtSuitableLocation...` | 83.2 | **84.2** | yes |
+| `placeTunnelForEveryTunneler` | 70.2 | 56.0 | no |
+| `placeSiegeTentsAndAssignEngineers` | 32.6 | 28.1 | no |
+| `ifNecessaryThrowOilAutomatically` | 36.5 | 35.9 | no |
+
+Running tally for "read the cached local, not the global": **5 wins (two of them
+to 100%), 8 losses.** It is the single highest-yield substitution found so far
+and it is still only slightly better than a coin flip per site, so it must be
+swept and measured, never reasoned about. Batch every candidate into one build -
+scores are per-function - then revert the losers.
+
+The scan that finds the candidates:
+
+    local = <DAT_...global expr>;   ...and that same expr appears again later
+
+### `x + -1` and `x - 1` are the same instruction - do not chase it
+
+`updateTribeBehaviorBasedOnBehaviorType`'s diff shows the original using
+`sub eax,1` where ours emits `add eax,-1`, which looks like the Ghidra `+ -1`
+idiom leaking into codegen. It is not. Rewriting every `+ -1` as `- 1` across
+all twelve sub-100 files that contain it changed **nothing**: all twelve scored
+bit-identically. MSVC canonicalises the two forms.
+
+Keep `+ -1` - it is what the already-100% files in this directory use.
+
+### Do not reorder the three top-level arms of `updateTribeBehaviorBasedOnBehaviorType`
+
+Its dispatch is `cmp eax,0x3f2` followed in the original by `jg <high> / je <eq>`
+where ours emits a single `jge`, which reads as though the original ordered the
+arms high-switch / `== 1010` / low-switch while ours has low / `== 1010` / high.
+Rewriting the chain into that order (same bodies, conditions negated) collapsed
+it **71.3% -> 21.3%**.
+
+The two switches are ~76 and ~308 lines; moving either past the other relocates
+every jump-table entry and every arm, so the per-arm layout that previous
+sessions tuned (see the corrected arm order above) is worth far more than the
+dispatch's two-instruction shape. Treat the dispatch `jge`/`jg`+`je` difference
+as a 2-instruction cost and leave the arms where they are.
+
+## Prioritise by starting percentage: local fixes only pay above ~70%
+
+Tally of every change measured in this session, by the function's starting score:
+
+**Starting >= 70% - 13 wins, 0 regressions kept:**
+slot scans +23.4 (x3, to 100%), `renderAttackInfoDebugOverlay` +13.4,
+`trySendKnightTribeToAttack` +37.9 (to 100%), `placeTunnelEntrances` +11.4
+(to 100%), `applyTribeBehaviorTypes` +4.3 (to 100%), `sortAttackInfo` +8.6,
+`pruneStale*` +6.4 (x3), `aiRecomputeAttacks2` +1.6,
+`placeSiegeTentOrTunnel...` +1.0.
+
+**Starting < 70% - one win (+16.3), everything else lost:**
+`ifNecessaryThrowOilAutomatically` (36.5): cached local -0.6, `< 1`->`<= 0` -6.2,
+and -6.3 for that same edit *in isolation at the exact site the diff flagged*.
+`placeSiegeTentsAndAssignEngineers` (32.6): cached local -4.5, `<= 0` -4.1.
+`computeAttackWaveTroopComposition` (66.8): `setne` -53.1, CONST -0.9.
+`recomputeAttackInfo` (30.5): int-cast bound +0.1.
+
+**Why:** reccmp aligns instruction streams. Below roughly 50-70% the two streams
+are already badly out of phase, so a *correct* one-instruction fix re-phases the
+alignment somewhere else and the score drops. The `<= 0` edit above is almost
+certainly right - the original really does emit `test edi,edi / jg` - and it
+still measured -6.3.
+
+**Consequences:**
+1. On a sub-70% function the score cannot validate a local fix. Do not grind
+   single-site edits there and do not trust a regression as evidence the edit was
+   wrong.
+2. Sub-70% functions need a change large enough to re-phase the whole function -
+   arm order, a dropped `return`, a restructured loop - the kind of thing found
+   by reading Ghidra's control flow, not by reading a diff.
+3. Spend diff-reading time on the 70-99% band. That is where every win came from.
+
+## The induction-pointer anchor is not source-controllable - stop trying
+
+Four functions differ almost entirely in *which struct field* MSVC anchors the
+loop's induction pointer on, which shifts every field offset and the loop bound
+in the diff and costs roughly 20 points each:
+
+| function | % | original anchor | ours |
+|---|---|---|---|
+| `exitSiegeEquipmentForWave` | 77.7 | `TribesState+886` | `+1520` |
+| `recountAttackTroopValue` | 75.9 | `TribesState+886` | `+864` |
+| `commandUnitsToMoveToKeep` | 77.6 | `UnitsState+2866` | `+2874` |
+| `sortAttackInfoTribeIDArrayBasedOn` | 83.1 | `TribesState+1025064` | anchor-0x18 |
+
+The decisive evidence is `recountAttackTroopValue`: both sides access exactly
+the same three fields (884, 864, 912), so MSVC had a free choice of base and
+simply picked differently. The anchor is chosen downstream of register pressure
+and instruction order, not from anything spellable in the source.
+
+Tried and failed:
+- hoisting the read of the field the original anchors on, so it is the first
+  access (`exitSiegeEquipmentForWave`, exactly neutral - MSVC sinks the load back
+  into the branch)
+- walking an explicit `int*`/`short*` at the original's offset (`pruneStale*`,
+  -19 points; also -12 on a second shape)
+- writing the loop bound symbolically instead of as a literal
+  (`sortAttackInfo`, -2.5 raw, twice)
+
+Treat these four as regalloc-bound. Their remaining ~20 points each are not
+reachable from C++.
+
+Also neutral, do not retry: moving `placeTunnelForEveryTunneler`'s zero
+initialisations after the `if (!local_c)` test to stop MSVC reusing a zeroed
+register as the comparison operand. MSVC reorders them back.
+
+## `recomputeAttackInfo` (0x51E300): what it actually is, and why diffs mislead
+
+Ghidra's control-flow analysis: 4124 bytes, 997 instructions, 143 basic blocks,
+cyclomatic complexity 144, 11 loops, **42 calls, 1 return**. Our file has exactly
+42 `MACRO_CALL_MEMBER` and exactly 1 `return`, and 9 loops. So the function is
+*not* missing code or returns - the call and exit structure already match.
+
+Two real fixes found by reading the first non-register divergence (30.5% -> 31.0%):
+- `((2999 < zoneSize) - 1 & 6) + 4` -> `3000 <=`, which is what produces the
+  original's `cmp 0xbb8 / setge` instead of our `cmp 0xbb7 / setg`.
+- the `_isSolitary` if/else arms were swapped; the original lays the
+  `someDistanceLimit = 4` arm as the fallthrough (`je` over it), ours jumped to it.
+
+**The large asymmetric runs in its diff are aligner artifacts, not missing code.**
+The diff shows three separate `orig 29 insns / ours 0` runs and one
+`orig 3 / ours 37`, which look like whole blocks we failed to write. They are not:
+the block in question (`mov eax,[TileMapState+5589560] / shl eax,5 / ...`) occurs
+40 times across the function and *most of its occurrences match*. When a block
+repeats many times reccmp pairs the copies arbitrarily, so one copy matches and
+another shows as wholly absent.
+
+Consequence: do not read this function's diff for missing-code leads. What is
+left is (a) register allocation - the original keeps `_unitID` in `si` and the
+loop index in `ebp` across the main loop while ours spills both to the frame -
+and (b) the pairing noise above. Combined with the sub-70% aligner problem
+documented earlier, its diff cannot validate a local change either. If this
+function is to be moved, it needs Ghidra's control flow read block by block
+against the source, not reccmp.
+
+# The Ghidra reading: what it establishes, and how to use Ghidra here
+
+## Every decompiled function in this namespace is the seed our .cpp came from
+
+`get_plate_comment` on all seven functions checked (`recomputeAttackInfo`,
+`ifNecessaryThrowOilAutomatically`, `commandUnitsToMoveToKeep`,
+`exitSiegeEquipmentForWave`, `pruneStaleArcherPoints`,
+`findOrReserveArcherPointSlot`, `giveLightPitchInstructionToUnitClosestToPitch`)
+returns the identical banner:
+
+    decompilerscript: committed: 2025-01-30 21:57:43.216000
+
+One bulk script run. So **Ghidra's decompiled C is the text our files were
+generated from** - it cannot contain information our files lack, and on a file
+already tuned past the seed, following it *undoes* that tuning. Measured on
+`ifNecessaryThrowOilAutomatically`: rewriting the body to mirror Ghidra exactly
+(its variable set, its `param_1`-as-size-index and `sVar2`-as-y reuse, its merged
+guard) scored **36.5% -> 29.2%**.
+
+Worse, the decompiler actively misleads on control flow: it renders two
+*sequential early returns* as one `||` chain. Ghidra prints
+
+    if ((iVar9 < 1) || (0x50 < ...closestEnemyMicroDistance) || (...)) return 0;
+
+but the disassembly shows `test edi,edi / jg 0xa` - a 10-byte hop over an inline
+epilogue, i.e. genuinely two separate `if (...) return 0;` statements, which is
+what our file already had. Merging them cost 7.3 points on its own.
+
+## What Ghidra *is* good for: the disassembly and the control-flow metrics
+
+Those come from the binary, not the script. `analyze_control_flow` gives a
+structural checksum worth running before touching a low-scoring function:
+
+| function | calls (Ghidra/ours) | instrs (orig/ours) | delta |
+|---|---|---|---|
+| `recomputeAttackInfo` | 42 / 42 | 981 / 941 | -40 |
+| `assignMacemenAndKnights...` | 8 / 8 | 213 / 213 | 0 |
+| `placeSiegeTentsAndAssignEngineers` | 5 / 5 | 211 / 224 | +13 |
+| `scanForSiegeTentPoints` | 2 / 2 | 193 / 200 | +7 |
+| `ifNecessaryThrowOilAutomatically` | 4 / 4 | 176 / 169 | -7 |
+| `recountTotalTroopValue` | 1 / 1 | 48 / 48 | -3 |
+
+**Call counts match exactly on every function.** And diffing the *set of global
+offsets* each side touches (`I<Class>::instance+N` in the reccmp diff) finds
+**zero** offsets the original reads or writes that our side does not - so no
+data access is missing either.
+
+Conclusion: the big low-% functions are not missing logic. Their gap is
+instruction selection and ordering. For `recomputeAttackInfo` the mnemonic
+histogram of the gap is `movzx +25 / mov -41 / add -17 / jge -12 / jg +7` -
+narrow-unsigned loads where the original loads dwords, and comparison polarity.
+Our 16-bit temps are already declared 2-byte (`undefined2`, `ushort`), so the
+extra `movzx` come from MSVC promoting spilled 16-bit temps, not from the source
+types. Not obviously source-addressable.
+
+### Checks worth running, in order, before editing a low-scoring function
+1. `get_plate_comment` - if it carries the bulk banner, do not read the
+   decompiled C as evidence; read `disassemble_function`.
+2. `analyze_control_flow` - compare `calls` against our `MACRO_CALL_MEMBER`
+   count. A mismatch is real missing/extra code and is worth a lot.
+   `returns` and `loops_detected` are *not* comparable to source `return`/loop
+   counts (they count merged epilogues and back-edges).
+3. The global-offset set difference above - catches missing data access.
+4. Instruction-count delta - a large positive delta means we do extra work.
+   Count only lines matching `[a-z]` in the diff; blank lines otherwise inflate
+   it (this produced a bogus "+26" on oil before correction).
+
+# The instruction-surplus ranking: the technique that works below 70%
+
+The reccmp diff gives both sides' instruction totals, so no Ghidra call is
+needed: `orig = matched + orig-only`, `ours = matched + ours-only`. Totals are
+**pairing-independent**, so unlike every other reading of the diff this number
+survives the aligner being out of phase. A positive delta is real extra work,
+and removing real work moves the score even on a sub-50% function - which is the
+one thing local encoding fixes cannot do there.
+
+Exclude `0xcc`, `nop` and the `lea esp,[esp]` / `mov edi,edi` alignment fillers
+or the ranking is wrong: `updateTribeBehaviorBasedOnBehaviorType` has 12 `int3`
+padding bytes counted as original instructions.
+
+Results from the first pass of this ranking:
+
+| function | delta | fix | % |
+|---|---|---|---|
+| `placeSiegeTentsAndAssignEngineers` | +18 | redundant reload in the pop loop | 32.6 -> **44.1** |
+| `computeSiegeSpotScores` | +27 | `-(uint)(cond) & mask` -> ternary | 63.2 -> **66.4** |
+| `placeTunnelForEveryTunneler` | +17 | hoist a loop-invariant store | 70.2 -> **75.7** |
+
+## The two shapes that paid
+
+**A store inside a loop whose target is only read after it.** `placeSiegeTents`
+re-read `tribeIDArraySize` at the end of a loop body that the loop condition
+then re-read anyway; `placeTunnelForEveryTunneler` assigned
+`_nTunnels = _nTunnelers` every iteration. One extra load/store per iteration
+each.
+
+**A 0-or-N mask written as arithmetic on a bool.** `-(uint)(cond) & 9999` and
+`(cond) - 1 & 9999` both make MSVC materialise the bool as 0/1 then negate it
+back into a mask:
+
+    orig:  cmp bl,byte[..] / sbb edx,edx /                     and edx,0x270f
+    ours:  cmp bl,byte[..] / sbb edx,edx / neg edx / neg edx / and edx,0x270f
+
+`cond ? N : 0` lowers straight from `sbb` to `and`. **But only where the
+comparison feeds `sbb`**: the same rewrite on the two `(cond) - 1 & N` sites in
+`computeAttackWaveTroopComposition` and `recomputeAttackInfo`, where there is no
+memory compare, lost 0.3 each. Check for the `neg` pair before rewriting.
+
+## Do not delete a loop store without tracing the gotos
+
+`recomputeAttackInfo:325` sets `_someLimit = 1` inside a loop and `_someLimit` is
+read only at line 596, which looks dead. It is not: the `goto LAB_0051f316` on
+the next line jumps *past* the line-590 assignment that would otherwise
+overwrite it, so line 325 supplies the value actually passed to
+`recomputeALGPathFindingTileMapUnk`. Deleting it would have been a behaviour bug.
+
+## `updateTribeBehaviorBasedOnBehaviorType`: one stack slot, 33 instructions
+
+Its +46 surplus is almost entirely one cause, and it is precisely quantified:
+
+    ret   orig 32  ours 32     <- exits match exactly
+    pop   orig 128 ours 160    <- exactly one extra pop per exit
+
+Ours opens with an extra `push ecx` (the MSVC idiom for allocating one 4-byte
+slot) and every one of the 32 epilogues carries a matching `pop ecx`. The
+original keeps `this` in `ebx` (`mov ebx,ecx`); we spill it
+(`mov [esp+0x10],ecx`). So our source holds **exactly one more value live than
+the original**, and finding it is worth 33 instructions.
+
+Not the cause (measured): the `uVar7` local, loaded at line 73 and read only at
+line 381, whose live range spans the whole switch. Inlining it to its use site
+is safe (the only writers of `attackWaveRetargetCount` are in other functions
+not reachable on that path) but left `pop` at 160 and cost 10.1 points.
+
+## `updateTribeBehaviorBasedOnBehaviorType`: the stack slot is removable, and it is not worth it
+
+Follow-up to the 33-instruction lead above. The extra slot is caused by our
+source keeping **three** values live across the switch dispatch where the
+original keeps none:
+
+- `_playerID_7` (`currentPlayerSlotID`, cached line 72, used at lines 111-122 and 270)
+- `uVar7` (`attackWaveRetargetCount`, cached line 73, used only at line 381)
+- `_attackWave_2` (cached line 60, used at lines 61, 64 and 164)
+
+Removing any **one** of them does nothing - MSVC simply spills a different one
+(measured: `uVar7` alone -10.1, `_playerID_7` alone -14.4, both left `pop` at 160).
+Removing **all three** does fix it exactly:
+
+    before:  pop orig 128 ours 160    surplus +46
+    after:   pop orig 128 ours 128    surplus  +9
+
+So the diagnosis was right and the slot is reachable. But it is still a net loss
+(**71.3% -> 56.4%**) because matched instructions fall from ~566 to 401: pushing
+the three reads down into the arms re-phases the arm bodies, and that costs far
+more than the 33 prologue/epilogue instructions it saves.
+
+Conclusion: this function's +46 surplus is **not** worth collecting. Note also
+that the original reads `currentPlayerSlotID` twice and `unknownAttackRelatedUpdateCounter`
+twice - both already match our counts - and `sVar3` is a *reused* variable
+(reassigned at line 82), not a long-lived cache, so it is not a candidate either.
+
+Generalisation: the instruction-surplus ranking finds real extra work, but
+removing it only pays when the removal is **local** - a dead store in a loop, a
+redundant reload, a mask spelled as bool arithmetic. When the only way to remove
+the work is to move code across basic blocks, the alignment loss dominates.
+Check that a surplus fix is local before attempting it.
+
+# Decoding a jump table with ghidra-mcp: the one reliable structural lever
+
+Ghidra's decompiled C is the seed (see above), but its **jump tables are ground
+truth and arm layout is source-controllable**. This is the one structural thing
+worth reading Ghidra for.
+
+## Procedure
+
+1. `disassemble_function <addr>` and find the dispatch, e.g.
+   `JMP dword ptr [ECX*0x4 + 0x51c7d8]`. A preceding
+   `MOVZX ECX,byte ptr [ECX + <t>]` means there is a byte index table at `<t>`
+   as well as the dword jump table.
+2. `disassemble_bytes` the few instructions before it to get `min` from the
+   `SUB EAX,<min>` / `ADD EAX,-<min>` and the default from the `JA` target.
+3. `read_memory <jump table> <4 * (max-min+1)>` and decode little-endian dwords.
+4. Entry *i* is value `i + min`. Sort the distinct body addresses ascending -
+   that is the **arm layout order**, which is set by the order the arms appear in
+   the source.
+
+## Result: `ifNecessaryThrowOilAutomatically` 36.5% -> 37.80%
+
+The building-type switch lays its arms out `7, 5, 4`
+(`MOV [ESP+0x1c],0x7` at 0051c69a, `0x5` at 0051c6a4, `0x4` at 0051c6ae); our
+source had them `4, 5, 7`. Reversing the source order matched it.
+
+## Result: `updateTribeBehaviorBasedOnBehaviorType`'s low switch is already correct
+
+Worth recording so nobody re-derives it. Table at **0x51E240**, `min = 1`,
+default = **0x51E22C** (the `JA` target):
+
+| value | target | meaning |
+|---|---|---|
+| 1 | 0051d9e0 | body |
+| 2 | 0051e22c | **default** |
+| 3 | 0051d882 | body |
+| 4 | 0051e237 | bare epilogue - do nothing |
+| 5 | 0051d8e3 | body |
+| 6 | 0051e237 | bare epilogue - do nothing |
+| 7 | 0051d932 | body |
+| 8 | 0051d9b5 | body |
+
+So our `case 4: case 6: break;` is right, having no `case 2` is right (it falls
+to `default`), and the arm layout `3, 5, 7, 8, 1, default` already matches.
+Moving the empty `4/6` arm after `default` to mirror 0x51e237 sitting after
+0x51e22c is exactly neutral - MSVC points an empty arm at the shared exit
+wherever it appears in the source.
+
+## `getValueOfTroopType`: the last 3.2% is cold-block placement
+
+Its tail is two separate compares both jumping *forward* to one shared
+`XOR EAX,EAX / RET`:
+
+    0051c3d2: CMP ECX,0x16 / JL 0x0051c3e6
+    0051c3d7: CMP ECX,0x1e / JG 0x0051c3e6
+    0051c3dc: MOV EAX,[ECX*0x4 + 0x6172a0] / RET 0x4
+    0051c3e6: XOR EAX,EAX / RET 0x4
+
+Three source spellings were measured. `&&` and a nested `if` both get fused into
+a range check (`LEA EDX,[ECX-0x16] / CMP EDX,8 / JA`), losing 0.4. Two `goto`s to
+a trailing label keeps the two compares but MSVC still places the cold
+`xor/ret` *first* (`jl 0x5 / jle 0x5` instead of `jl 0xf / jg 0xa`), scoring the
+same 96.8%. No lever found for cold-block placement.

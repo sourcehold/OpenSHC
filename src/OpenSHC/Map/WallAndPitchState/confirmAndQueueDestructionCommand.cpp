@@ -25,7 +25,7 @@ namespace Map {
                 case 0: {
                     int id = this->id;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam0 = id;
-                    int uid = DAT_BuildingsState::instance.buildings[id].uid;
+                    int const uid = DAT_BuildingsState::instance.buildings[id].uid;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam1 = 100;
                     DAT_GameSynchronyState::instance.DAT_GameCommandParam2 = uid;
                     MACRO_CALL_MEMBER(OpenSHC::Synchrony::GameSynchronyState_Func::queueCommand,
