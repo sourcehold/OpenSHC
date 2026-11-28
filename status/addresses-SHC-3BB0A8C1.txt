@@ -26919,7 +26919,7 @@ SHC_3BB0A8C1_0x004B6640 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004B6680 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B66C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B66C0 | 98.3% | The siege engines' colour index and two loads differ
 
 SHC_3BB0A8C1_0x004B6C20 | 0.0% | Pending
 

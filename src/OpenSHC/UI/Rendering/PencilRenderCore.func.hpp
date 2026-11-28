@@ -79,7 +79,7 @@ namespace UI {
                 Address::SHC_3BB0A8C1_0x004710A0, &PencilRenderCore::drawBoxWithRoundedEdges)
             drawBoxWithRoundedEdges;
 
-            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, ushort), false,
+            MACRO_FUNCTION_RESOLVER(void (PencilRenderCore::*)(int, int, int, int, short), false,
                 Address::SHC_3BB0A8C1_0x004711B0, &PencilRenderCore::drawBorderBox)
             drawBorderBox;
 

@@ -89,7 +89,7 @@ namespace UI {
             void drawBoxWithRoundedEdges(
                 int left, int top, int right, int bottom, RoundedBoxEdgeRoundingLevel roundingLevel);
 
-            void drawBorderBox(int left, int top, int right, int bottom, ushort color);
+            void drawBorderBox(int left, int top, int right, int bottom, short color);
 
             void drawDiagonalHeigherThanWideUnk();
 
