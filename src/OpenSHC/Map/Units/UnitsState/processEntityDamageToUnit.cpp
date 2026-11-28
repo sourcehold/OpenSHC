@@ -193,9 +193,10 @@ namespace Map {
                 if (_projectileType == OpenSHC::Map::Entities::ET_BALLISTA) {
                     return FALSE;
                 }
-                if (_projectileType == OpenSHC::Map::Entities::ET_MANGONEL
-                    && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_entityPlayerID] == -1) {
-                    return FALSE;
+                if (_projectileType == OpenSHC::Map::Entities::ET_MANGONEL) {
+                    if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_entityPlayerID] == -1) {
+                        return FALSE;
+                    }
                 }
                 if (_projectileType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
                     return FALSE;
@@ -463,12 +464,11 @@ namespace Map {
             }
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_S_SHIELD:
-                if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 <= 0) {
-                    return TRUE;
+                if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 > 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT2);
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT2);
-                return TRUE;
+                break;
             case OpenSHC::Map::Units::UT_S_CATAPULT:
             case OpenSHC::Map::Units::UT_S_TREBUCHET:
             case OpenSHC::Map::Units::UT_S_MANGONEL:
@@ -478,36 +478,39 @@ namespace Map {
             case OpenSHC::Map::Units::UT_S_FBALLISTA:
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_WOOD_HIT);
-                return TRUE;
+                break;
             case OpenSHC::Map::Units::UT_LORD:
-                return TRUE;
+                break;
+            default: {
+                /* one of eight body-hit sounds, fixed per unit */
+                uint const _hitSound = this->units[unitID].fixedRng & 7;
+                if (_hitSound == 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT);
+                } else if (_hitSound == 1) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT2);
+                } else if (_hitSound == 2) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT3);
+                } else if (_hitSound == 3) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT4);
+                } else if (_hitSound == 4) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT5);
+                } else if (_hitSound == 5) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT6);
+                } else if (_hitSound == 6) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT7);
+                } else if (_hitSound == 7) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT8);
+                }
+                break;
             }
-            /* one of eight body-hit sounds, fixed per unit */
-            uint const _hitSound = this->units[unitID].fixedRng & 7;
-            if (_hitSound == 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT);
-            } else if (_hitSound == 1) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT2);
-            } else if (_hitSound == 2) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT3);
-            } else if (_hitSound == 3) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT4);
-            } else if (_hitSound == 4) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT5);
-            } else if (_hitSound == 5) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT6);
-            } else if (_hitSound == 6) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT7);
-            } else if (_hitSound == 7) {
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unitID].x, this->units[unitID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT8);
             }
             return TRUE;
         }
