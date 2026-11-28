@@ -16275,7 +16275,7 @@ SHC_3BB0A8C1_0x004476AC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004476AD | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004476B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004476B0 | 69.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004479F8 | 0.0% | Pending
 
@@ -18707,7 +18707,7 @@ SHC_3BB0A8C1_0x0045EF80 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045EF84 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045EF90 | 0.0% | Pending
+SHC_3BB0A8C1_0x0045EF90 | 51.6% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x0045F080 | 100.0% | Reimplemented
 
@@ -23935,7 +23935,7 @@ SHC_3BB0A8C1_0x004940A9 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004940AA | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004940B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004940B0 | 78.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004941A0 | 0.0% | Pending
 
@@ -25897,7 +25897,7 @@ SHC_3BB0A8C1_0x004AEF5C | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004AEF60 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004AEF70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AEF70 | 59.1% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004AF4C0 | 100.0% | Reimplemented
 
@@ -32105,9 +32105,9 @@ SHC_3BB0A8C1_0x004BFE12 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BFE13 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BFE20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BFE20 | 24.1% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004BFFA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BFFA0 | 87.6% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004C0040 | 100.0% | Reimplemented, only the atol call target differs
 
@@ -33245,7 +33245,7 @@ SHC_3BB0A8C1_0x004C1760 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C1764 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C1770 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C1770 | 46.3% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004C1A7B | 0.0% | Pending
 
@@ -38629,7 +38629,7 @@ SHC_3BB0A8C1_0x004F4180 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F4270 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004F4290 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F4290 | 42.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004F49D0 | 100.0% | Reimplemented
 
