@@ -59,9 +59,9 @@ namespace Map {
                     if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
                         continue;
                     }
-                    int _score = _distance + this->units[unitID].huntedBy * 3;
-                    if (_score < _bestScore) {
-                        _bestScore = _score;
+                    _distance = _distance + this->units[unitID].huntedBy * 3;
+                    if (_distance < _bestScore) {
+                        _bestScore = _distance;
                         _bestUnitID = unitID;
                     }
                 }
