@@ -66,6 +66,9 @@ def compile_command(src, tag='r'):
         sys.exit('configure the build first')
     o = str(out).replace('\\', '/')
     cmd = re.sub(r'/Fo\S+', lambda _m: '/Fo%s/%s.obj' % (o, tag), ours[0]['command'])   # one .obj per run, so runs can overlap
+    # c2 only runs at compile time without /GL; with it, code generation moves to the link and no
+    # breakpoint is ever reached. The first compile_commands entry may be a /GL file.
+    cmd = cmd.replace(' /GL ', ' ')
     cmd = re.sub(r'-c \S+$', lambda _m: '-c ' + os.path.abspath(src), cmd)
     return cmd, ours[0]['directory']
 

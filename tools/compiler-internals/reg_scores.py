@@ -121,6 +121,9 @@ def compile_command():
         sys.exit('configure the build first: no OpenSHC.dll entry in compile_commands.json')
     o = str(out).replace('\\', '/')
     cmd = re.sub(r'/Fo\S+', lambda _m: '/Fo%s/r.obj' % o, ours[0]['command'])
+    # c2 only runs at compile time without /GL; with it, code generation moves to the link and no
+    # breakpoint is ever reached. The first compile_commands entry may be a /GL file.
+    cmd = cmd.replace(' /GL ', ' ')
     cmd = re.sub(r'-c \S+$', lambda _m: '-c ' + src, cmd)
     return cmd, ours[0]['directory']
 
