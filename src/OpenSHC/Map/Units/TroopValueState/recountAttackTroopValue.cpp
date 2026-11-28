@@ -24,10 +24,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051FB90
         void TroopValueState::recountAttackTroopValue(BOOLEnum param_1)
         {
-            int counter = 0x10;
-            if (!param_1) {
-                counter = DAT_TroopValueState::instance.attackInfo.counter;
-            }
+            int const counter = param_1 ? 0x10 : DAT_TroopValueState::instance.attackInfo.counter;
             DAT_TroopValueState::instance.attackInfo.counter = counter + 1;
             if (16 <= DAT_TroopValueState::instance.attackInfo.counter) {
                 DAT_TroopValueState::instance.attackInfo.counter = 0;
@@ -47,7 +44,7 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.knights = 0;
                 DAT_TroopValueState::instance.attackInfo.ranged = 0;
                 for (int _tribeID = 1; _tribeID < 1250; ++_tribeID) {
-                    if (DAT_TribesState::instance.tribes[_tribeID].tribeState) {
+                    if (DAT_TribesState::instance.tribes[_tribeID].tribeState != 0) {
                         BOOLEnum fullIDIsMinus1
                             = MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1,
                                 DAT_GameState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner);
@@ -59,73 +56,88 @@ namespace Map {
                                     + DAT_TribesState::instance.tribes[_tribeID].size;
                             }
                         } else {
-                            AITribeTypeShort _tribeType = DAT_TribesState::instance.tribes[_tribeID].tribeType;
-                            int _size = DAT_TribesState::instance.tribes[_tribeID].size;
-                            ((int*)&DAT_TroopValueState::instance.attackInfo
-                                    .aiTribeSizesPerTribeType)[(short)_tribeType]
-                                = ((int*)&DAT_TroopValueState::instance.attackInfo
-                                          .aiTribeSizesPerTribeType)[(short)_tribeType]
-                                + _size;
-                            if (_tribeType == AI::Tribes::AITT_ENGINEERS) {
+                            ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)
+                                [(short)DAT_TribesState::instance.tribes[_tribeID].tribeType]
+                                = ((int*)&DAT_TroopValueState::instance.attackInfo.aiTribeSizesPerTribeType)
+                                      [(short)DAT_TribesState::instance.tribes[_tribeID].tribeType]
+                                + DAT_TribesState::instance.tribes[_tribeID].size;
+                            if (DAT_TribesState::instance.tribes[_tribeID].tribeType == AI::Tribes::AITT_ENGINEERS) {
                                 DAT_TroopValueState::instance.attackInfo.engineers
                                     = DAT_TroopValueState::instance.attackInfo.engineers + 1;
-                            } else if (_tribeType == AI::Tribes::AITT_LADDERMEN) {
+                            } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                == AI::Tribes::AITT_LADDERMEN) {
                                 DAT_TroopValueState::instance.attackInfo.laddermen
                                     = DAT_TroopValueState::instance.attackInfo.laddermen + 1;
-                            } else if (_tribeType != (AITribeType)0x13 && _tribeType != (AITribeType)0x14
-                                && _tribeType != (AITribeType)0x15) {
-                                if (_tribeType == (AITribeType)0x16) {
+                            } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType != (AITribeType)0x13
+                                && DAT_TribesState::instance.tribes[_tribeID].tribeType != (AITribeType)0x14
+                                && DAT_TribesState::instance.tribes[_tribeID].tribeType != (AITribeType)0x15) {
+                                if (DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x16) {
                                     if (0 < DAT_UnitsState::instance
                                             .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
                                             .stoneAmmunition) {
                                         DAT_TroopValueState::instance.attackInfo.catapults
                                             = DAT_TroopValueState::instance.attackInfo.catapults + 1;
                                     }
-                                } else if (_tribeType == (AITribeType)0x17) {
+                                } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x17) {
                                     if (0 < DAT_UnitsState::instance
                                             .units[DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID]
                                             .stoneAmmunition) {
                                         DAT_TroopValueState::instance.attackInfo.catapults
                                             = DAT_TroopValueState::instance.attackInfo.catapults + 1;
                                     }
-                                } else if (_tribeType != AI::Tribes::AITT_TUNNELERS
-                                    && ((short)_tribeType < 0xd || (0x19 <= (short)_tribeType))) {
+                                } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        != AI::Tribes::AITT_TUNNELERS
+                                    && ((short)DAT_TribesState::instance.tribes[_tribeID].tribeType < 0xd
+                                        || (0x19 <= (short)DAT_TribesState::instance.tribes[_tribeID].tribeType))) {
                                     DAT_TroopValueState::instance.attackInfo.aiTroops
-                                        = DAT_TroopValueState::instance.attackInfo.aiTroops + _size;
+                                        = DAT_TroopValueState::instance.attackInfo.aiTroops
+                                        + DAT_TribesState::instance.tribes[_tribeID].size;
                                     DAT_TroopValueState::instance.attackInfo.attackTribeCount
                                         = DAT_TroopValueState::instance.attackInfo.attackTribeCount + 1;
-                                    if (_tribeType == AI::Tribes::AITT_SPEARMEN) {
+                                    if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::AITT_SPEARMEN) {
                                         DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen
                                             = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + 1;
-                                    } else if (_tribeType == AI::Tribes::AITT_MACEMEN) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::AITT_MACEMEN) {
                                         DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen
                                             = DAT_TroopValueState::instance.attackInfo.spearmenAndMacemen + 1;
-                                    } else if (_tribeType == (AITribeType)0x1a) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == (AITribeType)0x1a) {
                                         DAT_TroopValueState::instance.attackInfo.assassinTribeCount
                                             = DAT_TroopValueState::instance.attackInfo.assassinTribeCount + 1;
-                                    } else if (_tribeType == AI::Tribes::AITT_PIKEMEN) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::AITT_PIKEMEN) {
                                         DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore
                                             = DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore + 1;
-                                    } else if (_tribeType == AI::Tribes::AITT_SWORDSMEN) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::AITT_SWORDSMEN) {
                                         DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore
                                             = DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore + 1;
-                                    } else if (_tribeType == AI::Tribes::OFFSET_CROSSBOWMAN) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::OFFSET_CROSSBOWMAN) {
                                         DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore
                                             = DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore + 1;
-                                    } else if (_tribeType == (AITribeType)0x1c) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == (AITribeType)0x1c) {
                                         DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore
                                             = DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore + 1;
-                                    } else if (_tribeType == AI::Tribes::AITT_KNIGHTS) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                        == AI::Tribes::AITT_KNIGHTS) {
                                         DAT_TroopValueState::instance.attackInfo.knights
                                             = DAT_TroopValueState::instance.attackInfo.knights + 1;
-                                    } else if (_tribeType
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
                                         == (AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_LADDERMEN)) {
                                         DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore
                                             = DAT_TroopValueState::instance.attackInfo.pikemenSwordsmenAndMore + 1;
-                                    } else if (_tribeType == AI::Tribes::AITT_ARCHERS
-                                        || _tribeType == AI::Tribes::AITT_CROSSBOWMEN || _tribeType == (AITribeType)0x19
-                                        || _tribeType == (AITribeType)0x1d || _tribeType == (AITribeType)0x1b
-                                        || _tribeType == (AITribeType)0x1f) {
+                                    } else if (DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                            == AI::Tribes::AITT_ARCHERS
+                                        || DAT_TribesState::instance.tribes[_tribeID].tribeType
+                                            == AI::Tribes::AITT_CROSSBOWMEN
+                                        || DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x19
+                                        || DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x1d
+                                        || DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x1b
+                                        || DAT_TribesState::instance.tribes[_tribeID].tribeType == (AITribeType)0x1f) {
                                         DAT_TroopValueState::instance.attackInfo.ranged
                                             = DAT_TroopValueState::instance.attackInfo.ranged + 1;
                                     }
