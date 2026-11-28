@@ -22,7 +22,7 @@ namespace Map {
             fVar5 = (double)param_3 * (double)param_3;
             fVar6 = (double)(param_4 * 4);
             dVar1 = (double)(fVar5 / (fVar6 * (double)9.812));
-            fVar5 = sqrt(((fVar5 * fVar5) / ((double)96.275344 * fVar6 * fVar6)
+            fVar5 = sqrt(((fVar5 * fVar5) / ((double)96.275344 * (fVar6 * fVar6))
                              - ((fVar5 + fVar5) * (double)(heightDifference / 2)) / (fVar6 * fVar6 * (double)9.812))
                 - (double)1.0);
             fVar6 = (double)dVar1 - fVar5;

@@ -519,7 +519,7 @@ SHC_3BB0A8C1_0x00402BCC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00402BD0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402C50 | 56.9% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x00402C50 | 57.1% | Parameter slots reused for fild temporaries
 
 SHC_3BB0A8C1_0x00402DA0 | 100.0% | Reimplemented (counted: only float constant names and the CRT math helpers (_CIcos, _CItan, _CIsqrt) differ)
 
@@ -1623,7 +1623,7 @@ SHC_3BB0A8C1_0x00405125 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00405130 | 100.0% | Reimplemented (counted: only the constant 0x10300131 is shown as an address label in ours)
 
-SHC_3BB0A8C1_0x004052E0 | 66.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004052E0 | 71.7% | Operand load order and register allocation
 
 SHC_3BB0A8C1_0x004054AC | 0.0% | Pending
 
