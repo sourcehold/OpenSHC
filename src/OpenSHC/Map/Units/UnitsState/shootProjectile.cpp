@@ -19,6 +19,8 @@ namespace Map {
         void UnitsState::shootProjectile(
             int unitID, EntityType projectileType, int targetX, int targetY, int targetZUnk)
         {
+            int _offsetX = 0;
+            int _offsetY = 0;
             if (projectileType == OpenSHC::Map::Entities::ET_TREBUCHET) {
                 if (DAT_UnitsState::instance.units[unitID].field_0x3b0 != 0) {
                     /* loaded with a dead cow */
@@ -37,8 +39,6 @@ namespace Map {
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_TREBUCHET, 0);
                 }
             } else if (projectileType == OpenSHC::Map::Entities::ET_CATAPULT) {
-                int _offsetX = 0;
-                int _offsetY = 0;
                 switch (this->units[unitID].facingDirection) {
                 case 5:
                     _offsetX = -4;
@@ -85,8 +85,6 @@ namespace Map {
                         targetY, targetZUnk, OpenSHC::Map::Entities::ET_CATAPULT, 0);
                 }
             } else if (projectileType == OpenSHC::Map::Entities::ET_MANGONEL) {
-                int _offsetX = 0;
-                int _offsetY = 0;
                 switch (this->units[unitID].facingDirection) {
                 case 5:
                     _offsetX = -2;
@@ -96,10 +94,11 @@ namespace Map {
                     _offsetX = 1;
                     _offsetY = -1;
                     break;
+                case 4:
+                    _offsetY = 0;
+                    /* falls through */
                 case 1:
                     _offsetX = 0;
-                    /* falls through */
-                case 4:
                     _offsetY = 0;
                     break;
                 case 3:
@@ -141,8 +140,6 @@ namespace Map {
                             targetY, targetZUnk, projectileType, this->units[unitID].shootTargetedUnit);
                     }
                 } else {
-                    int _offsetX = 0;
-                    int _offsetY = 0;
                     switch (this->units[unitID].facingDirection) {
                     case 5:
                         _offsetY = 4;
