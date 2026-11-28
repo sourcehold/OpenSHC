@@ -16371,7 +16371,7 @@ SHC_3BB0A8C1_0x00447CF0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00447D30 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00447DC0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00447DC0 | 85.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00447FA0 | 0.0% | Pending
 
@@ -25935,7 +25935,7 @@ SHC_3BB0A8C1_0x004AFDA0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AFE10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004B0390 | 0.0% | Pending
+SHC_3BB0A8C1_0x004B0390 | 62.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004B07C0 | 100.0% | Reimplemented
 
@@ -36207,7 +36207,7 @@ SHC_3BB0A8C1_0x004DB600 | 100.0% | Reimplemented (counted: only float constant n
 
 SHC_3BB0A8C1_0x004DB7B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DB8B0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DB8B0 | 75.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004DBAF0 | 100.0% | Reimplemented
 
@@ -36259,25 +36259,25 @@ SHC_3BB0A8C1_0x004DC9E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DCC70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DCC90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DCC90 | 57.5% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004DD0C0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DD100 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DD100 | 88.2% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004DD300 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DD350 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DD350 | 53.2% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004DD750 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DD7B0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DE300 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DE300 | 54.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004DF2E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004DFB90 | 0.0% | Pending
+SHC_3BB0A8C1_0x004DFB90 | 63.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004E0A50 | 0.0% | Pending
 
