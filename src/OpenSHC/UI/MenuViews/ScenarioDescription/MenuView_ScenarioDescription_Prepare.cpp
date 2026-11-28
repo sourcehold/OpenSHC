@@ -84,13 +84,11 @@ namespace UI {
             if (DAT_GameCore::instance.missionNumber1to20 <= 0) {
                 DAT_GameCore::instance.missionNumber1to20 = 1;
             }
-            int iVar2 = DAT_GameCore::instance.missionNumber1to20;
             if (!DAT_GameCore::instance.gameSuspended) {
                 if (DAT_GameCore::instance.gameMode_2 != Game::GM_BUILDERUnk) {
                     MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderForMissionIndex,
                         DAT_MapPropertiesState::ptr)((char*)DAT_GameCore::instance.missionNumber1to20);
                 }
-                iVar2 = DAT_GameCore::instance.missionNumber1to20;
                 pIVar3 = DAT_MapPropertiesState::instance.SEC_EventsExtra[0].conditionIsTrue;
                 for (iVar1 = 8000; iVar1 != 0; iVar1 = iVar1 + -1) {
                     *pIVar3 = 0;
@@ -101,7 +99,7 @@ namespace UI {
             }
             if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)
                 && (!DAT_GameCore::instance.gameSuspended)) {
-                if (iVar2 < 4) {
+                if (DAT_GameCore::instance.missionNumber1to20 < 4) {
                     DAT_GameState::instance.mapAndTime.difficulty = 1;
                 } else {
                     DAT_GameState::instance.mapAndTime.difficulty = DAT_GameCore::instance.missionDifficulty;
