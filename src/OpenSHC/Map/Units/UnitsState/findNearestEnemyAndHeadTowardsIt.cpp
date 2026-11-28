@@ -330,7 +330,7 @@ namespace Map {
                                 DAT_TileMapState::instance.destinationNearTargetY, 0);
                             int _lookAhead = -30 - _chosenRawDistance;
                             this->units[unitID].moveDelay = 0;
-                            if (_lookAhead > -51) {
+                            if (_lookAhead >= -50) {
                                 _lookAhead = -50;
                             }
                             this->units[unitID].lookForEnemy = _lookAhead;
