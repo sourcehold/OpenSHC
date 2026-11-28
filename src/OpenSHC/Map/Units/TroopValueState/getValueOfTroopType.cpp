@@ -38,13 +38,13 @@ namespace Map {
             case Map::Units::UT_S_CATAPULT:
                 return DAT_RenderingDefinedData::instance.CATAPULT;
             }
-            if ((int)unitType < 0x16) {
+            if (unitType < Map::Units::UT_E_ARCHER) {
                 return 0;
             }
-            if (0x1e < (int)unitType) {
-                return 0;
+            if (unitType <= Map::Units::UT_E_ENGINEER) {
+                return DAT_RenderingDefinedData::instance.NoRushTicks[unitType + Map::Units::UT_TUNNELER];
             }
-            return DAT_RenderingDefinedData::instance.NoRushTicks[unitType + Map::Units::UT_TUNNELER];
+            return 0;
         }
 
     }
