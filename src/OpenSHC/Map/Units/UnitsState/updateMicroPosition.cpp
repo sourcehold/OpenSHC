@@ -23,18 +23,17 @@ namespace Map {
                 break;
             case 6:
                 _microPartY = (7 - _microPartY) * 2;
-                _microPartX = _microPartX << 4;
+                _microPartX = _microPartX * 16;
                 break;
             case 0:
                 _microPartX = _microPartX * 2;
-                _microPartY = _microPartY << 4;
+                _microPartY = _microPartY * 16;
                 break;
             }
-            _microPartX += _microPartY;
             this->units[unitID].orientationRelatedPositionX
-                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX];
+                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX + _microPartY];
             this->units[unitID].orientationRelatedPositionY
-                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX + 1];
+                = DAT_UnitPropertiesDefinedData::instance.field_0x10f4c[0][_microPartX + _microPartY + 1];
         }
 
     }
