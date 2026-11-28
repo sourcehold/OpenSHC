@@ -17,29 +17,22 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051F9C0
         void TroopValueState::recountTotalTroopValue()
         {
-            UnitTypeShort _troopType;
             for (int _player = 0; _player < 10; ++_player) {
                 DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_player] = 0;
             }
-            if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                Unit* _pUnit = &DAT_UnitsState::instance.units[1];
-                int remainingUnits = DAT_UnitsState::instance.maxUnitCount - 1;
-                do {
-                    if (_pUnit->logicalState != Map::Units::ULS_INVISIBLE && !_pUnit->dying
-                        && _pUnit->isSelectable_OR_matchTime
-                        && (_troopType = _pUnit->unitType,
-                            _troopType != Map::Units::UT_E_ENGINEER && (_troopType != Map::Units::UT_TUNNELER))
-                        && _troopType != Map::Units::UT_E_LADDER) {
-                        int _troopTypeValue = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
-                            DAT_TroopValueState::ptr)((Map::Units::UnitType)(short)_troopType);
-                        int _playerID = _pUnit->owner;
-                        DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
-                            = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
-                            + _troopTypeValue;
-                    }
-                    _pUnit++;
-                    remainingUnits--;
-                } while (remainingUnits);
+            for (int _unitID = 1; _unitID < DAT_UnitsState::instance.maxUnitCount; ++_unitID) {
+                if (DAT_UnitsState::instance.units[_unitID].logicalState != Map::Units::ULS_INVISIBLE
+                    && !DAT_UnitsState::instance.units[_unitID].dying
+                    && DAT_UnitsState::instance.units[_unitID].isSelectable_OR_matchTime
+                    && DAT_UnitsState::instance.units[_unitID].unitType != Map::Units::UT_E_ENGINEER
+                    && DAT_UnitsState::instance.units[_unitID].unitType != Map::Units::UT_TUNNELER
+                    && DAT_UnitsState::instance.units[_unitID].unitType != Map::Units::UT_E_LADDER) {
+                    int const _playerID = DAT_UnitsState::instance.units[_unitID].owner;
+                    DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
+                        = DAT_TroopValueState::instance.attackInfo.playerTotalTroopValueArray[_playerID]
+                        + MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType, this)(
+                            (Map::Units::UnitType)DAT_UnitsState::instance.units[_unitID].unitType);
+                }
             }
         }
 
