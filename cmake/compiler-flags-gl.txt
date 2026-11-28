@@ -278,3 +278,5 @@ src/OpenSHC/Map/Units/UpdateMinerIronFetcher.cpp
 src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
 src/OpenSHC/Map/Units/UnitsState/isWorkplaceBuildingOnAdjacentTile.cpp
 src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
+src/OpenSHC/UI/MenuItems/TextEditor/MenuItemActionHandler_TextEditor_TextInputRelatedUnk.cpp
+src/OpenSHC/Text/TextEditorState/helpToken.cpp

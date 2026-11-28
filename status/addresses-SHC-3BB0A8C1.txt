@@ -14351,7 +14351,7 @@ SHC_3BB0A8C1_0x00443A2D | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00443A2E | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00443A30 | 0.0% | Pending
+SHC_3BB0A8C1_0x00443A30 | 99.5% | rewritten from the listing; left: the orientation is loaded after the tile (second in the original) and the logic layer index's register (eax in the original)
 
 SHC_3BB0A8C1_0x004442A4 | 0.0% | Pending
 
@@ -18835,7 +18835,7 @@ SHC_3BB0A8C1_0x00461520 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00461550 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00461570 | 0.0% | Pending
+SHC_3BB0A8C1_0x00461570 | 90.2% | rewritten from the listing, needs its two /GL lines; left: the character's register (esi in the original) and the place of the insert's entry test
 
 SHC_3BB0A8C1_0x00461750 | 0.0% | Pending
 
@@ -25811,7 +25811,7 @@ SHC_3BB0A8C1_0x004AD780 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004AD7C0 | 100.0% | Pending
 
-SHC_3BB0A8C1_0x004AD920 | 0.0% | Pending
+SHC_3BB0A8C1_0x004AD920 | 92.5% | rewritten from the listing; behind the amount test three scratch registers differ (the amount in eax, Y in ecx, X + 36 in edx in the original)
 
 SHC_3BB0A8C1_0x004ADD90 | 100.0% | Reimplemented
 
