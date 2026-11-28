@@ -4,7 +4,7 @@
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
 #include "OpenSHC/Game/GameStateStructures.hpp"
-#include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/IO/PackagedFileMagicNum.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
@@ -13,7 +13,7 @@ namespace Game {
     namespace GameStateStructures_Func {
 
         using OpenSHC::Commands::MappersEnum;
-        using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
+        using OpenSHC::Game::Player::Enums::BuildingEntryInfoEnum;
         using OpenSHC::Game::Resources::ResourceType;
         using OpenSHC::IO::PackagedFileMagicNum;
         using OpenSHC::WindowsHelper::Enums::BOOLEnum;
@@ -94,7 +94,7 @@ namespace Game {
             &GameStateStructures::addSignpostToBuildingEntryData)
         addSignpostToBuildingEntryData;
 
-        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint, int, PlayerDataBuildingCategoryEnum), false,
+        MACRO_FUNCTION_RESOLVER(void (GameStateStructures::*)(uint, int, BuildingEntryInfoEnum), false,
             Address::SHC_3BB0A8C1_0x00456FD0,
             &GameStateStructures::computeBuildingCategoryEntryPointAndDestroyEarlierBuilding)
         computeBuildingCategoryEntryPointAndDestroyEarlierBuilding;

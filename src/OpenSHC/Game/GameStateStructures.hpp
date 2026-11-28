@@ -9,8 +9,8 @@
 #pragma once
 
 #include "OpenSHC/Commands/MappersEnum.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
-#include "OpenSHC/Game/Player/PlayerDataBuildingCategoryEnum.hpp"
 #include "OpenSHC/Game/Resources/ResourceType.hpp"
 #include "OpenSHC/Game/State/MapAndTimeState.hpp"
 #include "OpenSHC/Game/State/UnitSelectionHotKeyEntry.hpp"
@@ -22,7 +22,7 @@ namespace Game {
 
     using OpenSHC::Commands::MappersEnum;
     using OpenSHC::Game::Player::PlayerData;
-    using OpenSHC::Game::Player::PlayerDataBuildingCategoryEnum;
+    using OpenSHC::Game::Player::Enums::BuildingEntryInfoEnum;
     using OpenSHC::Game::Resources::ResourceType;
     using OpenSHC::Game::State::MapAndTimeState;
     using OpenSHC::Game::State::UnitSelectionHotKeyEntry;
@@ -88,7 +88,7 @@ namespace Game {
         void addSignpostToBuildingEntryData(int buildingID);
 
         void computeBuildingCategoryEntryPointAndDestroyEarlierBuilding(
-            uint buildingID, int playerID, PlayerDataBuildingCategoryEnum category);
+            uint buildingID, int playerID, BuildingEntryInfoEnum category);
 
         void validateBuildingCategoryReference(int playerID, int param_2);
 
