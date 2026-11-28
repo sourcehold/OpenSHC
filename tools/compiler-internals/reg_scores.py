@@ -374,7 +374,8 @@ def why_register(invocation):
     """
     q = BS + '"'
     costs = ', '.join('poi(' + COST_ARRAY + '+' + hex(4 * n) + ')' for n in range(1, 9))
-    cmd = ('.printf ' + q + 'PICK reg=%d costs=%d,%d,%d,%d,%d,%d,%d,%d ' + q + ', @ebx, ' + costs + '; '
+    cmd = ('.printf ' + q + 'PICK reg=%d key=%d wt=%d id=%x costs=%d,%d,%d,%d,%d,%d,%d,%d ' + q + ', @ebx, '
+           'poi(@eax+0xc), poi(@eax+0x40), poi(@eax+0x44), ' + costs + '; '
            '.if (poi(poi(@eax)) != 0) { da poi(poi(poi(@eax))+4)+1 L28 } '
            '.else { .printf ' + q + '(temp)' + BS + BS + 'n' + q + ' }; gc')
     lines = ['sxe ld:c2', 'g', 'r $t0=0',
@@ -385,20 +386,22 @@ def why_register(invocation):
              'g', 'q', '']
     txt = run(lines, 'why' + str(invocation))
     rows = []
-    for m in re.finditer(r'PICK reg=(-?\d+) costs=([\d,-]+) (?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
-        rows.append((int(m.group(1)), [int(x) for x in m.group(2).split(',')], m.group(3) or '(temp)'))
+    for m in re.finditer(r'PICK reg=(-?\d+) key=(-?\d+) wt=(-?\d+) id=([0-9a-f]+) costs=([\d,-]+) '
+                         r'(?:\(temp\)|[0-9a-f]{8}\s+"([^"]*)")', txt):
+        rows.append((int(m.group(1)), [int(x) for x in m.group(5).split(',')],
+                     '%s k=%s w=%s #%s' % (m.group(6) or '(temp)', m.group(2), m.group(3), m.group(4))))
     if not rows:
         print('no register assignment seen in invocation %d' % invocation)
         return
     print('')
-    print('%-22s %-5s %s' % ('candidate', 'got', 'cost per register (lowest wins)'))
-    print('%-22s %-5s %s' % ('', '', ' '.join('%-7s' % REGNAMES[n] for n in range(1, 9))))
+    print('%-34s %-5s %s' % ('candidate', 'got', 'cost per register (lowest wins)'))
+    print('%-34s %-5s %s' % ('', '', ' '.join('%-7s' % REGNAMES[n] for n in range(1, 9))))
     for reg, cost, name in rows:
         cells = []
         for n in range(1, 9):
             c = str(cost[n - 1])
             cells.append('%-7s' % (c if n != reg else '[' + c + ']'))
-        print('%-22s %-5s %s' % (name, REGNAMES.get(reg, reg), ' '.join(cells)))
+        print('%-34s %-5s %s' % (name, REGNAMES.get(reg, reg), ' '.join(cells)))
     print('')
     print('The bracketed cost is the register that was taken. To move a candidate elsewhere,')
     print('that register needs a cost below the bracketed one. Cost is built from interference')
