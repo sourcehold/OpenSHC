@@ -35,6 +35,7 @@ namespace Map {
             /* get the damage from the array based: row is unit1ID type, column is unit2ID type */
             int _damage
                 = DAT_UnitPropertiesDefinedData::instance.MELEE_DAMAGE[this->units[unitID].unitType][_unit2Type];
+            BOOLEnum _hasSpecialDeathSound = FALSE;
             /* if unit 1 is not a lord */
             if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_LORD) {
                 _damage = MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::computeDamageFearFactorBonus, this)(
@@ -135,6 +136,15 @@ namespace Map {
                 return TRUE;
             }
             switch (_unit2Type) {
+            case OpenSHC::Map::Units::UT_S_SHIELD:
+                if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 > 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT);
+                    return TRUE;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_SIEGE_DIE);
+                return TRUE;
             case OpenSHC::Map::Units::UT_S_CATAPULT:
             case OpenSHC::Map::Units::UT_S_MANGONEL:
             case OpenSHC::Map::Units::UT_S_TOWER:
@@ -148,21 +158,11 @@ namespace Map {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_TR_DIE);
                 return TRUE;
-            case OpenSHC::Map::Units::UT_S_SHIELD:
-                if (this->units[unitID].digTileX__OR__countCurrentlyManningEnginers__OR__forCowsRandomBelow300 > 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_BODY_HIT);
-                    return TRUE;
-                }
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_SIEGE_DIE);
-                return TRUE;
             }
-            bool _hasSpecialDeathSound = false;
             if (_unit2Type == OpenSHC::Map::Units::UT_BREWER || _unit2Type == OpenSHC::Map::Units::UT_TANNER
                 || _unit2Type == OpenSHC::Map::Units::UT_LADY || _unit2Type == OpenSHC::Map::Units::UT_MOTHER
                 || (_unit2Type == OpenSHC::Map::Units::UT_CHILD && this->units[unitID].spriteID == 129)) {
-                _hasSpecialDeathSound = true;
+                _hasSpecialDeathSound = TRUE;
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_GIRL_DIE);
             }
@@ -178,11 +178,11 @@ namespace Map {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
                         OpenSHC::Audio::SFX::SEID_AI_LORD_DEATH);
                 }
-                _hasSpecialDeathSound = true;
+                _hasSpecialDeathSound = TRUE;
             } else if (_unit2Type == OpenSHC::Map::Units::UT_JESTER) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_JESTER_DIE);
-                _hasSpecialDeathSound = true;
+                _hasSpecialDeathSound = TRUE;
             }
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_WOODCUTTER:
@@ -193,6 +193,20 @@ namespace Map {
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
                     this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_LORD_KILL);
+                return TRUE;
+            case OpenSHC::Map::Units::UT_LORD:
+                if (_hasSpecialDeathSound) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_LORD_HIT);
+                    return TRUE;
+                }
+                if (this->units[unitID].unknownLordTypeBasedMissionSpecificValue_01 == 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_LORD_KILL);
+                    return TRUE;
+                }
+                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
+                    this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_ARAB_LORD_KILL);
                 return TRUE;
             case OpenSHC::Map::Units::UT_E_SPEAR:
             case OpenSHC::Map::Units::UT_A_ARCHER:
@@ -268,20 +282,6 @@ namespace Map {
                         this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_DEATH_SWORD2);
                     return TRUE;
                 }
-                return TRUE;
-            case OpenSHC::Map::Units::UT_LORD:
-                if (_hasSpecialDeathSound) {
-                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_LORD_HIT);
-                    return TRUE;
-                }
-                if (this->units[unitID].unknownLordTypeBasedMissionSpecificValue_01 == 0) {
-                    MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                        this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_LORD_KILL);
-                    return TRUE;
-                }
-                MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
-                    this->units[unit2ID].x, this->units[unit2ID].y, OpenSHC::DE::SHCDE::FX_ARAB_LORD_KILL);
                 return TRUE;
             default:
                 if (_hasSpecialDeathSound) {
