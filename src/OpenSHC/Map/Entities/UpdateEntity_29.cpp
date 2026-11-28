@@ -1,0 +1,51 @@
+#include "OpenSHC/Map/Entities.func.hpp"
+
+#include "OpenSHC/Globals/DAT_CurrentEntityID.hpp"
+#include "OpenSHC/Globals/DAT_EntityState.hpp"
+#include "OpenSHC/Globals/SEC_RNG.hpp"
+
+namespace OpenSHC {
+namespace Map {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x004023F0
+    uint Entities::UpdateEntity_29()
+    {
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].targetZ == 0) {
+            uint result = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 145;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2 = result;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
+                = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 161;
+            return result;
+        }
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 < 0) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 3;
+        }
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated >= 8) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated = 0;
+        }
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated + 1
+            + DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection * 8;
+        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].imageID
+            = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].screenDirection + 129;
+        short const randomValue = SEC_RNG::instance.currentNumber2;
+        if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 > 0) {
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2--;
+            if (DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 == 0) {
+                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = -10 - randomValue % 50;
+            }
+        }
+        uint result = (ushort)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2;
+        if ((short)result < 0) {
+            result++;
+            DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = result;
+            if ((short)result == 0) {
+                result = randomValue / 200;
+                DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].rng_2 = randomValue % 200 + 170;
+            }
+        }
+        return result;
+    }
+
+}
+}
