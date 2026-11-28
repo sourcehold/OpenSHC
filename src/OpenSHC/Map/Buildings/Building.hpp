@@ -182,7 +182,7 @@ namespace Map {
             DefensiveTowerEngineTypeByte defensiveTowerEngineType; // 0x00000295 length: 1
             bool sleeping; // 0x00000296 length: 1
             char numberOfAnimals; // 0x00000297 length: 1
-            byte dairyProductionStage; // 0x00000298 length: 1
+            char dairyProductionStage; // 0x00000298 length: 1
             byte workerRotationIndex; // 0x00000299 length: 1
             short outpostRelatedUnk4; // 0x0000029A length: 2
             int ffBuildingVariation; // 0x0000029C length: 4
