@@ -143,7 +143,7 @@ namespace Map {
                                 return TRUE;
                             }
                             /* -1 when shooting up at the target, 0 when level with it */
-                            this->units[unitID].jugglerCount = (_shooterTotalHeight >= _targetTotalHeight - 70) - 1;
+                            this->units[unitID].jugglerCount = _shooterTotalHeight >= _targetTotalHeight - 70 ? 0 : -1;
                             this->units[_targetID].field_0x39a = 1;
                             return TRUE;
                         }
@@ -158,7 +158,7 @@ namespace Map {
                         return TRUE;
                     }
                 }
-                int const _savedDestinationX = (ushort)this->units[unitID]._someX_2;
+                short const _savedDestinationX = this->units[unitID]._someX_2;
                 this->units[unitID].targetedUnitID__OR__engineerMannedSiegeEngineRef = 0;
                 this->units[unitID].shootTargetedUnit = 0;
                 this->units[unitID].targetingType = OpenSHC::Map::Units::UIT_NO_INSTRUCTION_OR_MOVEUnk;
@@ -253,10 +253,10 @@ namespace Map {
                         switch (this->units[_enemy].unitType) {
                         case OpenSHC::Map::Units::UT_ANTELOPESHDEER:
                             /* only hunters shoot deer */
-                            if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_HUNTER) {
-                                continue;
+                            if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
+                                break;
                             }
-                            break;
+                            continue;
                         case OpenSHC::Map::Units::UT_RABBIT: {
                             if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_HUNTER) {
                                 continue;
@@ -436,12 +436,6 @@ namespace Map {
                                 _score = _score / 3;
                             }
                             switch (this->units[_enemy].unitType) {
-                            case OpenSHC::Map::Units::UT_E_ENGINEER:
-                            case OpenSHC::Map::Units::UT_S_CATAPULT:
-                            case OpenSHC::Map::Units::UT_S_TREBUCHET:
-                            case OpenSHC::Map::Units::UT_LORD:
-                                _score = _score * 2 + 100;
-                                break;
                             case OpenSHC::Map::Units::UT_E_ARCHER:
                             case OpenSHC::Map::Units::UT_E_XBOW:
                             case OpenSHC::Map::Units::UT_A_ARCHER:
@@ -461,6 +455,12 @@ namespace Map {
                                 break;
                             case OpenSHC::Map::Units::UT_E_LADDER:
                                 _score = _score * 7 + 300;
+                                break;
+                            case OpenSHC::Map::Units::UT_E_ENGINEER:
+                            case OpenSHC::Map::Units::UT_S_CATAPULT:
+                            case OpenSHC::Map::Units::UT_S_TREBUCHET:
+                            case OpenSHC::Map::Units::UT_LORD:
+                                _score = _score * 2 + 100;
                                 break;
                             case OpenSHC::Map::Units::UT_S_MANGONEL:
                             case OpenSHC::Map::Units::UT_S_BALLISTA:
