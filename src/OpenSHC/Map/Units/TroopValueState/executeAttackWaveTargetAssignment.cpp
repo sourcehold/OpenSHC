@@ -94,6 +94,7 @@ namespace Map {
                     Map::Units::STBT_0x3f2);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
                     Map::Units::STBT_0x3f2, Map::Units::STBT_1, 0, 10);
+                return;
             }
             DAT_TroopValueState::instance.attackInfo.reservedTroopBudget = 0;
             if (DAT_TroopValueState::instance.attackInfo.catapults) {
