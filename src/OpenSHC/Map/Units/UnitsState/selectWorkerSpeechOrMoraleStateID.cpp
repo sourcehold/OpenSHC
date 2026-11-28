@@ -143,10 +143,10 @@ namespace Map {
                 _candidateSpeechID = _rngMod4 + 68;
             }
             if (_weight != 0) {
+                _weight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260;
                 _candidateCount = _candidateCount + 1;
-                if (_bestSpeechID == -1
-                    || _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260 > _bestWeight) {
-                    _bestWeight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260;
+                if (_bestSpeechID == -1 || _weight > _bestWeight) {
+                    _bestWeight = _weight;
                     _bestSpeechID = _candidateSpeechID;
                 }
             }
