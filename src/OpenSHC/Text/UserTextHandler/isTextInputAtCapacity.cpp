@@ -7,10 +7,6 @@
 namespace OpenSHC {
 namespace Text {
 
-    /*
-      Returns 2 when the current text slot cannot take another character: its rendered width has reached
-      textBoxMaxTextWidthDimensionArray, or the cursor has reached textBoxMaxCharactersArray. Returns 0 otherwise.
-     */
     // FUNCTION: STRONGHOLDCRUSADER 0x00472CB0
     int UserTextHandler::isTextInputAtCapacity()
     {

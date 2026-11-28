@@ -6,7 +6,6 @@ namespace Text {
     // FUNCTION: STRONGHOLDCRUSADER 0x0046A050
     char* TextManager::getTextStringInGroupAtOffset(eTextSections offsetIndex, int numInGroup)
     {
-        // a few entries of older text groups were moved to TEXT_SKIRMISH_CHOOSE2
         switch (offsetIndex) {
         case DE::SHCDE::TEXT_MAINOPTIONS:
             switch (numInGroup) {
@@ -79,10 +78,9 @@ namespace Text {
             break;
         }
         char* text = this->textStart + this->textOffsets[offsetIndex];
-        // decrementing at the top of the loop matters: as a for loop this does not match
-        while (numInGroup > 0) {
+        // the decrement has to come first in the body: in the for header this does not match
+        for (; numInGroup > 0;) {
             --numInGroup;
-            // skip the current string, then the terminators up to the next one
             for (; *text != '\0'; ++text) {}
             for (; *text == '\0'; ++text) {}
         }

@@ -13,7 +13,6 @@ namespace Text {
             return;
         }
         if (this->inputBufferIndex == countof(this->inputBuffer)) {
-            // the buffer is full: drop the oldest character and append at the end
             for (int i = 0; i < countof(this->inputBuffer) - 1; ++i) {
                 this->inputBuffer[i] = this->inputBuffer[i + 1];
             }
