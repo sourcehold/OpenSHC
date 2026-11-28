@@ -237,6 +237,8 @@ namespace Map {
                     if (_entityType == 3) {
                         return FALSE;
                     }
+                    int* const _enemyUIDs
+                        = DAT_GameState::instance.mapAndTime.playerEnemenyUnitUIDShortList[_unitPlayerID];
                     for (int _enemyIndex = 0;
                         _enemyIndex < DAT_GameState::instance.playerDataArray[_unitPlayerID].enemies;
                         _enemyIndex = _enemyIndex + 1) {
@@ -245,9 +247,7 @@ namespace Map {
                         if (this->units[_enemy].dying != 0) {
                             continue;
                         }
-                        if (this->units[_enemy].uid
-                            != DAT_GameState::instance.mapAndTime
-                                .playerEnemenyUnitUIDShortList[_unitPlayerID][_enemyIndex]) {
+                        if (this->units[_enemy].uid != _enemyUIDs[_enemyIndex]) {
                             continue;
                         }
                         switch (this->units[_enemy].unitType) {
