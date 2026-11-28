@@ -16,28 +16,27 @@ namespace UI {
         void TextEditor::MenuItemRenderFunction_TextEditor_Scrollbar(
             int param_1, int thumbYPos, int param_3, int thumbHeight, BOOLEnum isDragged)
         {
-            int iVar1 = DAT_ButtonH::instance;
-            int iVar2 = DAT_ButtonY::instance;
-            uint x1 = DAT_ButtonX::instance;
+            int const height = DAT_ButtonH::instance;
+            int const y = DAT_ButtonY::instance;
+            int const x = DAT_ButtonX::instance;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawScrollbar, DAT_PencilRenderCore::ptr)(
-                DAT_ButtonX::instance, (int)(DAT_ButtonY::instance), (int)(DAT_ButtonH::instance), thumbYPos, isDragged,
-                thumbHeight, 0);
-            int x2 = x1 + 0x13;
+                x, y, height, thumbYPos, isDragged, thumbHeight, 0);
+            int const right = x + 20;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1, iVar2 - 1, x2, iVar2 - 1, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
-            int y1 = iVar2 - 0x16;
+                x, y - 1, right - 1, y - 1, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+            int const top = y - 22;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1, y1, x2, y1, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
-            iVar2 = iVar2 + iVar1;
+                x, top, right - 1, top, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+            int bottom = y + height;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1, iVar2, x2, iVar2, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
-            iVar2 = iVar2 + 0x15;
+                x, bottom, right - 1, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+            bottom = bottom + 21;
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1, iVar2, x2, iVar2, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                x, bottom, right - 1, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1 - 1, y1, (int)(x1 - 1), iVar2, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                x - 1, top, x - 1, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
             MACRO_CALL_MEMBER(OpenSHC::UI::Rendering::PencilRenderCore_Func::drawLine, DAT_PencilRenderCore::ptr)(
-                x1 + 0x14, y1, (int)(x1 + 0x14), iVar2, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
+                right, top, right, bottom, (ushort)(COL_VERY_SOFT_YELLOW::instance.shortValue));
         }
 
     }

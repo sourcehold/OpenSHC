@@ -18707,7 +18707,7 @@ SHC_3BB0A8C1_0x0045EF80 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0045EF84 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0045EF90 | 51.6% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0045EF90 | 76.5% | Register allocation
 
 SHC_3BB0A8C1_0x0045F080 | 100.0% | Reimplemented
 
@@ -23935,7 +23935,7 @@ SHC_3BB0A8C1_0x004940A9 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004940AA | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004940B0 | 78.0% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004940B0 | 86.6% | Zero kept in a register
 
 SHC_3BB0A8C1_0x004941A0 | 0.0% | Pending
 
@@ -32105,7 +32105,7 @@ SHC_3BB0A8C1_0x004BFE12 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BFE13 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BFE20 | 24.1% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004BFE20 | 84.0% | Tail merge of the 0x13 arm
 
 SHC_3BB0A8C1_0x004BFFA0 | 87.6% | Ported from gynt, asm differs
 
