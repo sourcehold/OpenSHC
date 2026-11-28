@@ -142,16 +142,23 @@ namespace Map {
                 if (DAT_GameSynchronyState::instance.currentGameMode == OpenSHC::Game::GM_SOLITARY) {
                     /* fixme: a per-player table (stride 0x177bc) inside attackInfo that the header does not describe
                      * yet */
-                    _maxTargetDistance = *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray
-                                             + _playerID * 0x177bc - 28)
-                        + 15;
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::findBestAttackTargetTileWithHeightAndOwner,
+                        DAT_PathFindingState::ptr)(_searchFlags, this->units[unitID].x, this->units[unitID].y,
+                        (uint)(ushort)this->units[unitID].facingDirection + _attackFacingDirection & 7, _searchRange,
+                        _attackFacingDirection, this->units[unitID].siegeTargetPlayerID,
+                        *(int*)((int)DAT_TroopValueState::instance.attackInfo.scaleValuesArray + _playerID * 0x177bc
+                            - 28)
+                            + 15,
+                        _isFireBallista);
+                } else {
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::PathFindingState_Func::findBestAttackTargetTileWithHeightAndOwner,
+                        DAT_PathFindingState::ptr)(_searchFlags, this->units[unitID].x, this->units[unitID].y,
+                        (uint)(ushort)this->units[unitID].facingDirection + _attackFacingDirection & 7, _searchRange,
+                        _attackFacingDirection, this->units[unitID].siegeTargetPlayerID, _maxTargetDistance,
+                        _isFireBallista);
                 }
-                MACRO_CALL_MEMBER(
-                    OpenSHC::Map::Navigation::PathFindingState_Func::findBestAttackTargetTileWithHeightAndOwner,
-                    DAT_PathFindingState::ptr)(_searchFlags, this->units[unitID].x, this->units[unitID].y,
-                    (uint)(ushort)this->units[unitID].facingDirection + _attackFacingDirection & 7, _searchRange,
-                    _attackFacingDirection, this->units[unitID].siegeTargetPlayerID, _maxTargetDistance,
-                    _isFireBallista);
                 if (DAT_PathFindingState::instance.ALG_TargetTile == 0) {
                     this->units[unitID].attackFacingDirection = this->units[unitID].attackFacingDirection + 1;
                     if (this->units[unitID].attackFacingDirection >= 16
