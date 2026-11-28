@@ -26,13 +26,12 @@ namespace UI {
                 return;
             case OpenSHC::UI::Enums::SMCT_TOGGLE_SOUND_ACTIVEUnk:
                 break;
-            case OpenSHC::UI::Enums::SMCT_TOGGLE_GENIE:
-                {
+            case OpenSHC::UI::Enums::SMCT_TOGGLE_GENIE: {
                 bool bVar1 = DAT_MenuTextInputState::instance.DAT_GenieVoiceActiveMenuVar == 0;
                 DAT_MenuTextInputState::instance.DAT_GenieVoiceActiveMenuVar = (uint)bVar1;
                 DAT_GameCore::instance.genieVoiceActive = (uint)bVar1;
                 return;
-                }
+            }
             default:
                 return;
             case OpenSHC::UI::Enums::SMCT_RESET_SPEECH_VOLUME:

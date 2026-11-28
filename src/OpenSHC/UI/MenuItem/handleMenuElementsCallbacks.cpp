@@ -268,7 +268,7 @@ namespace UI {
                         this->menuPointer->xPosition + (this->position).position.x,
                         this->menuPointer->yPosition + (this->position).position.y, this->itemWidth, this->itemHeight);
                     if (BVar6) {
-                        DAT_MenuHandlerState::instance.field18_0x3c = 1;
+                        DAT_MenuHandlerState::instance.field_0x3c = 1;
                         DAT_ButtonX::instance = this->menuPointer->xPosition + (this->position).position.x;
                         DAT_ButtonY::instance = this->menuPointer->yPosition + (this->position).position.y;
                         BOOL_CurrentMenuClickState::instance = (BOOLEnum)this->clicked;
@@ -293,21 +293,21 @@ namespace UI {
                             this->menuPointer->hoveredItem = this;
                         }
                         pMVar4 = this->menuPointer;
-                        if ((pMVar4->someMenuItemPtr_0x3c != this) && (!pMVar4->field16_0x40)) {
-                            iVar8 = (int)(this->textMessageLookupIndex).field1_0x2;
+                        if ((pMVar4->someMenuItemPtr_0x3c != this) && (!pMVar4->field_0x40)) {
+                            iVar8 = (int)(this->textMessageLookupIndex).field_0x2;
                             if (iVar8 == 1) {
                                 pMVar4->someMenuItemPtr_0x3c = this;
                                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk,
                                     DAT_SFXState::ptr)(((SoundEffectID)0x88));
-                                this->menuPointer->field16_0x40 = 1;
+                                this->menuPointer->field_0x40 = 1;
                             } else if (iVar8 - 2U < 6) {
                                 pMVar4->someMenuItemPtr_0x3c = this;
                                 MACRO_CALL_MEMBER(
                                     OpenSHC::Audio::SFX::SFXState_Func::setUpSFXToPlayUnk, DAT_SFXState::ptr)(
-                                    (OpenSHC::Audio::SFX::SoundEffectID)(this->textMessageLookupIndex.field1_0x2
+                                    (OpenSHC::Audio::SFX::SoundEffectID)(this->textMessageLookupIndex.field_0x2
                                         + (OpenSHC::Audio::SFX::SEID_SIEGE_EQUIPMENT_DESTROYED
                                             | OpenSHC::Audio::SFX::SEID_QUARRY_STONE_LIFT_01)));
-                                this->menuPointer->field16_0x40 = 1;
+                                this->menuPointer->field_0x40 = 1;
                             }
                         }
                         this->hovering = 1;
