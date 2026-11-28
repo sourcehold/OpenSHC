@@ -21,7 +21,6 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005371F0
         uint UnitsState::findFreeTileNearby(uint unitID, uint tile)
         {
-            int _ownerPlayerID = DAT_UnitsState::instance.units[unitID].owner;
             int _originY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             dword _areaAtUnit
                 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
@@ -30,8 +29,8 @@ namespace Map {
             uint _northTile = DAT_ViewportRenderState::instance.translationMatrix[_originY - 2].addXgetTile + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, _areaAtUnit,
+                    DAT_TileMapState::instance.PathConnectionLayer[_northTile], 0)
                 == 0) {
                 _northTile = 0;
             }
@@ -39,8 +38,8 @@ namespace Map {
             uint _eastTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile + 2 + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, _areaAtUnit,
+                    DAT_TileMapState::instance.PathConnectionLayer[_eastTile], 0)
                 == 0) {
                 _eastTile = 0;
             }
@@ -48,8 +47,8 @@ namespace Map {
             uint _southTile = DAT_ViewportRenderState::instance.translationMatrix[_originY + 2].addXgetTile + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, _areaAtUnit,
+                    DAT_TileMapState::instance.PathConnectionLayer[_southTile], 0)
                 == 0) {
                 _southTile = 0;
             }
@@ -57,8 +56,8 @@ namespace Map {
             uint _westTile = DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile - 2 + _originX;
             if (MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::calculateCanPlayerUnitsNavigateToAreaFromArea,
-                    DAT_PathFindingState::ptr)(
-                    _ownerPlayerID, _areaAtUnit, DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
+                    DAT_PathFindingState::ptr)(DAT_UnitsState::instance.units[unitID].owner, _areaAtUnit,
+                    DAT_TileMapState::instance.PathConnectionLayer[_westTile], 0)
                 == 0) {
                 _westTile = 0;
             }
@@ -105,8 +104,11 @@ namespace Map {
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
                         + DAT_UnitPropertiesDefinedData::instance.field_0x1213c[i].x + _originX;
-                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
-                        || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0) {
+                        _northTile = 0;
+                        break;
+                    }
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
                             && DAT_BuildingsState::instance
                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_checkTile]]
@@ -129,8 +131,11 @@ namespace Map {
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
                         + DAT_UnitPropertiesDefinedData::instance.field_0x12184[i].x + _originX;
-                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
-                        || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0) {
+                        _eastTile = 0;
+                        break;
+                    }
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
                             && DAT_BuildingsState::instance
                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_checkTile]]
@@ -153,8 +158,11 @@ namespace Map {
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
                         + DAT_UnitPropertiesDefinedData::instance.field_0x121cc[i].x + _originX;
-                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
-                        || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0) {
+                        _southTile = 0;
+                        break;
+                    }
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
                             && DAT_BuildingsState::instance
                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_checkTile]]
@@ -177,8 +185,11 @@ namespace Map {
                     }
                     int _checkTile = DAT_ViewportRenderState::instance.translationMatrix[_checkY].addXgetTile
                         + DAT_UnitPropertiesDefinedData::instance.field_0x12214[i].x + _originX;
-                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0
-                        || (DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x100) != 0) {
+                        _westTile = 0;
+                        break;
+                    }
+                    if ((DAT_TileMapState::instance.LogicLayer[_checkTile] & 0x4a5014b1) != 0
                         || (DAT_TileMapState::instance.BuildingLayer[_checkTile] != 0
                             && DAT_BuildingsState::instance
                                     .buildings[DAT_TileMapState::instance.BuildingLayer[_checkTile]]
