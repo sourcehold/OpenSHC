@@ -122,8 +122,8 @@ namespace Game {
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_gate_links_005a5178, x + 152, rowY, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
-            (int)(char)DAT_BuildingsState::instance.buildings[19].pathLinkageRelated2, x + 164, rowY, Text::TTA_LEFT,
-            0x80ff, 18, TRUE, 0);
+            (int)(char)DAT_BuildingsState::instance.buildings[19].gatePhase, x + 164, rowY, Text::TTA_LEFT, 0x80ff, 18,
+            TRUE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
             s_Fires_005a5170, x + 302, rowY, Text::TTA_LEFT, 0xffffff, 18, FALSE, 0);
         MACRO_CALL_MEMBER(Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(

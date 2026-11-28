@@ -89,18 +89,26 @@ namespace Map {
         DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].renderAnimation = 1;
 
         // GateHouse*AnimationFrames are declared byte, but the original reads them signed
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 0) {
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState == 10) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 1;
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 12;
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+            == OpenSHC::Map::Buildings::Enums::GP_OPEN) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                == OpenSHC::Map::Buildings::Enums::GC_CLOSE) {
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    = OpenSHC::Map::Buildings::Enums::GP_CLOSING;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                    = OpenSHC::Map::Buildings::Enums::GC_NONE;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             }
             return;
         }
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 2) {
-            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState == 11) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 3;
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateState = 12;
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+            == OpenSHC::Map::Buildings::Enums::GP_CLOSED) {
+            if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                == OpenSHC::Map::Buildings::Enums::GC_OPEN) {
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    = OpenSHC::Map::Buildings::Enums::GP_OPENING;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gateCommand
+                    = OpenSHC::Map::Buildings::Enums::GC_NONE;
                 DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex = 0;
             }
             if (variation == 80) {
@@ -110,7 +118,8 @@ namespace Map {
             }
             return;
         }
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 1) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+            == OpenSHC::Map::Buildings::Enums::GP_CLOSING) {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0) {
                 if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 1) {
                     MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
@@ -129,7 +138,8 @@ namespace Map {
                 = (char)DAT_BuildingDefinedData::instance.GateHouseOverlayAnimationFrames
                       [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
             if (frame <= 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 2;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    = OpenSHC::Map::Buildings::Enums::GP_CLOSED;
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                     DAT_PathFindingState::ptr)(DAT_CurrentBuildingID::instance);
@@ -147,7 +157,8 @@ namespace Map {
             }
             return;
         }
-        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 == 3) {
+        if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+            == OpenSHC::Map::Buildings::Enums::GP_OPENING) {
             if (DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationActive != 0
                 && DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex == 1) {
                 MACRO_CALL_MEMBER(OpenSHC::Audio::SFX::SFXState_Func::playSFXAtLocation, DAT_SFXState::ptr)(
@@ -159,7 +170,8 @@ namespace Map {
                 = (char)DAT_BuildingDefinedData::instance.GateHouseLargeAnimationFrames
                       [DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].animationIndex];
             if (frame <= 0) {
-                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].pathLinkageRelated2 = 0;
+                DAT_BuildingsState::instance.buildings[DAT_CurrentBuildingID::instance].gatePhase
+                    = OpenSHC::Map::Buildings::Enums::GP_OPEN;
                 MACRO_CALL_MEMBER(
                     OpenSHC::Map::Navigation::PathFindingState_Func::updatePathLinkageTileMapRelatedToGates,
                     DAT_PathFindingState::ptr)(DAT_CurrentBuildingID::instance);

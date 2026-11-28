@@ -19,18 +19,21 @@ namespace Map {
                         || DAT_BuildingsState::instance.buildings[buildingID].buildingType == BT_GATEHOUSESMALL)) {
                     if (param_1 == 1) {
                         DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated1
-                            = (char)DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
-                        DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 = 2;
+                            = (char)DAT_BuildingsState::instance.buildings[buildingID].gatePhase;
+                        DAT_BuildingsState::instance.buildings[buildingID].gatePhase
+                            = OpenSHC::Map::Buildings::Enums::GP_CLOSED;
                     } else if (param_1 == 2) {
                         DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated1
-                            = (char)DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2;
-                        DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 = 0;
+                            = (char)DAT_BuildingsState::instance.buildings[buildingID].gatePhase;
+                        DAT_BuildingsState::instance.buildings[buildingID].gatePhase
+                            = OpenSHC::Map::Buildings::Enums::GP_OPEN;
                     } else {
-                        DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2
+                        DAT_BuildingsState::instance.buildings[buildingID].gatePhase
                             = (byte)DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated1;
                     }
                     int const climbDataID = DAT_BuildingsState::instance.buildings[buildingID].laddermanDataID;
-                    if (DAT_BuildingsState::instance.buildings[buildingID].pathLinkageRelated2 == 2) {
+                    if (DAT_BuildingsState::instance.buildings[buildingID].gatePhase
+                        == OpenSHC::Map::Buildings::Enums::GP_CLOSED) {
                         DAT_PathFindingState::instance.climbData[climbDataID].isRecognizedByPathfinding = 0;
                     } else {
                         DAT_PathFindingState::instance.climbData[climbDataID].isRecognizedByPathfinding = 1;
