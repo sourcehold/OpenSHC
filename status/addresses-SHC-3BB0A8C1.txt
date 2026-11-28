@@ -16863,7 +16863,7 @@ SHC_3BB0A8C1_0x0044B673 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044B674 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044B680 | 48.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0044B680 | 53.8% | Register allocation
 
 SHC_3BB0A8C1_0x0044B760 | 100.0% | Reimplemented
 
@@ -30243,7 +30243,7 @@ SHC_3BB0A8C1_0x004BD7F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BD7F4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BD800 | 32.9% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004BD800 | 92.3% | Shared tail in wrong arm
 
 SHC_3BB0A8C1_0x004BD970 | 0.0% | Pending
 
@@ -34147,7 +34147,7 @@ SHC_3BB0A8C1_0x004C6820 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004C6880 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004C68D0 | 44.8% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004C68D0 | 47.6% | idiv by 12, register allocation
 
 SHC_3BB0A8C1_0x004C6B20 | 100.0% | Reimplemented
 

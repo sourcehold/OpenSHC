@@ -37,7 +37,7 @@ namespace Game {
         int iVar5;
         char (*pacVar6)[250];
         CampaignTrailMission* pCVar7;
-        dword _startDateInMonths;
+        int startDateInMonths;
         pCVar7 = DAT_SkirmishDefinedData::instance.SkirmishTrailMissions + skirmishTrailMission;
         if (DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME) {
             pCVar7 = DAT_SkirmishDefinedData::instance.ExtremeTrailMissions + skirmishTrailMission;
@@ -78,25 +78,12 @@ namespace Game {
         DAT_GameSynchronyState::instance.DAT_PlayerSlotArraySomeValue[8] = 1;
         DAT_GameSynchronyState::instance.skirmishRelated1 = -1;
         DAT_GameCore::instance.mapU4Int0 = 0;
-        if (1 < pCVar7->numberOfPlayers) {
-            piVar2 = &pCVar7->player2AI;
-            iVar4 = 1;
-            do {
-                iVar5 = iVar4 + 1;
-                DAT_GameSynchronyState::instance.currentAIArray[iVar4 + 1] = *piVar2;
-                MACRO_CALL(Synchrony_Func::ResetAiVariationArrayValue)(iVar5);
-                piVar2 = piVar2 + 1;
-                iVar4 = iVar5;
-            } while (iVar5 < pCVar7->numberOfPlayers);
+        for (int i = 1; i < pCVar7->numberOfPlayers; i++) {
+            DAT_GameSynchronyState::instance.currentAIArray[i + 1] = (&pCVar7->player1AI)[i];
+            MACRO_CALL(Synchrony_Func::ResetAiVariationArrayValue)(i + 1);
         }
-        DAT_GameSynchronyState::instance.playerPositionsArray[0] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[1] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[2] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[3] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[4] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[5] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[6] = -10;
-        DAT_GameSynchronyState::instance.playerPositionsArray[7] = -10;
+        memset(DAT_GameSynchronyState::instance.playerPositionsArray, -10,
+            sizeof(DAT_GameSynchronyState::instance.playerPositionsArray));
         iVar4 = 0;
         piVar2 = &pCVar7->position1;
         do {
@@ -111,7 +98,7 @@ namespace Game {
         piVar2 = &pCVar7->team1;
         do {
             DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5 + 1] = (byte)*piVar2;
-            if (iVar4 <= iVar5) {
+            if (iVar5 >= iVar4) {
                 DAT_GameSynchronyState::instance.DAT_PlayerGroupArray[iVar5 + 1] = 0xff;
             }
             iVar5 = iVar5 + 1;
@@ -131,26 +118,26 @@ namespace Game {
         if (DAT_GameCore::instance.currentTrailType == Game::TT_EXTREME) {
             DAT_GameCore::instance.extremeTrailProgress = skirmishTrailMission;
             MACRO_CALL(UI::Actions_Func::LaunchSkirmishGame)((int)piVar2);
-            _startDateInMonths
+            startDateInMonths
                 = DAT_GameCore::instance.extremeTrailStartDatesInMonths[DAT_GameCore::instance.extremeTrailProgress];
-            DAT_GameCore::instance.extremeTrailStartDateMonths = _startDateInMonths;
+            DAT_GameCore::instance.extremeTrailStartDateMonths = startDateInMonths;
         } else if (DAT_GameCore::instance.currentTrailType == Game::TT_WARCHEST) {
             DAT_GameCore::instance.warchestTrailProgress = skirmishTrailMission;
             MACRO_CALL(UI::Actions_Func::LaunchSkirmishGame)((int)piVar2);
-            _startDateInMonths
+            startDateInMonths
                 = DAT_GameCore::instance.warchestTrailStartDatesInMonths[DAT_GameCore::instance.warchestTrailProgress];
-            DAT_GameCore::instance.warchestTrailStartDateMonths = _startDateInMonths;
+            DAT_GameCore::instance.warchestTrailStartDateMonths = startDateInMonths;
         } else {
             DAT_GameCore::instance.skirmishTrailProgress = skirmishTrailMission;
             MACRO_CALL(UI::Actions_Func::LaunchSkirmishGame)((int)piVar2);
-            _startDateInMonths
+            startDateInMonths
                 = DAT_GameCore::instance.skirmishTrailStartDateInMonths[DAT_GameCore::instance.skirmishTrailProgress];
-            DAT_GameCore::instance.skirmishTrailStartDateMonths = _startDateInMonths;
+            DAT_GameCore::instance.skirmishTrailStartDateMonths = startDateInMonths;
         }
-        DAT_GameState::instance.mapAndTime.year = (int)_startDateInMonths / 0xc;
-        DAT_GameState::instance.mapAndTime.month = (int)_startDateInMonths % 0xc;
-        DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart = (int)_startDateInMonths / 0xc;
-        DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthStart = (int)_startDateInMonths % 0xc;
+        DAT_GameState::instance.mapAndTime.year = startDateInMonths / 0xc;
+        DAT_GameState::instance.mapAndTime.month = startDateInMonths % 0xc;
+        DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart = startDateInMonths / 0xc;
+        DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthStart = startDateInMonths % 0xc;
     }
 
 }
