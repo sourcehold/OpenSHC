@@ -145,9 +145,6 @@ namespace Map {
                         _offsetY = 4;
                         _offsetX = -10;
                         break;
-                    case 6:
-                        _offsetX = -10;
-                        break;
                     case 7:
                         _offsetY = -4;
                         _offsetX = -10;
@@ -168,6 +165,9 @@ namespace Map {
                         break;
                     case 2:
                         _offsetX = 10;
+                        break;
+                    case 6:
+                        _offsetX = -10;
                         break;
                     }
                     MACRO_CALL_MEMBER(
