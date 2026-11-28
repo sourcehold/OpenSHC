@@ -264,3 +264,4 @@ src/OpenSHC/Map/Units/UpdateMinerIronFetcher.cpp
 src/OpenSHC/Map/Units/UpdateWorker_ConsiderTakingABreakUnk.cpp
 src/OpenSHC/Map/Units/UnitsState/isWorkplaceBuildingOnAdjacentTile.cpp
 src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
+src/OpenSHC/Map/Units/UpdateDairyFarmer.cpp
