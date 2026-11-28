@@ -40,8 +40,10 @@ namespace Map {
             _xOffset = _microXPart * 2;
             _yOffset = _microYPart << 4;
         LAB_0040372e:
-            this->entityArray[entityID].x1 = DAT_EntityDefinedData::instance.EntitySubTileDrawOffsets[_yOffset + _xOffset].x;
-            this->entityArray[entityID].y1 = DAT_EntityDefinedData::instance.EntitySubTileDrawOffsets[_yOffset + _xOffset + 1].x;
+            this->entityArray[entityID].x1
+                = DAT_EntityDefinedData::instance.EntitySubTileDrawOffsets[_yOffset + _xOffset].x;
+            this->entityArray[entityID].y1
+                = DAT_EntityDefinedData::instance.EntitySubTileDrawOffsets[_yOffset + _xOffset + 1].x;
         }
 
     }

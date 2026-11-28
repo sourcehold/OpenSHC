@@ -50,9 +50,9 @@ namespace Map {
                     psVar3 = psVar3 + 0x74;
                 } while ((int)entityID < 0x19);
             } else {
-                entityID = this->every10Ticks;
-                if (this->every10Ticks < 3000) {
-                    psVar3 = &this->entityArray[this->every10Ticks].logicalState;
+                entityID = this->everyTenTicks;
+                if (this->everyTenTicks < 3000) {
+                    psVar3 = &this->entityArray[this->everyTenTicks].logicalState;
                     do {
                         if (*psVar3 == 0)
                             break;
@@ -91,7 +91,7 @@ namespace Map {
                         psVar3 = psVar3 + 0x74;
                     } while ((int)entityID < 3000);
                 }
-                this->every10Ticks = entityID;
+                this->everyTenTicks = entityID;
                 if (this->maxEntityCount <= (int)entityID) {
                     this->maxEntityCount = entityID + 1;
                 }
@@ -104,7 +104,7 @@ namespace Map {
                 entityType = Map::Entities::ET_ARROW_AND_DEFAULT;
             } else if (entityType == Map::Entities::ET_FIREBALLISTA) {
                 bVar1 = true;
-                this->entityArray[entityID].field90_0xd0 = 1;
+                this->entityArray[entityID].field_0xd0 = 1;
                 entityType = Map::Entities::ET_BALLISTA;
             } else {
                 if ((entityType == Map::Entities::ET_FIRETHROWER)
@@ -181,7 +181,7 @@ namespace Map {
             this->entityArray[entityID].targetY = (short)targetY;
             this->entityArray[entityID].targetZ = (short)targetZUnk;
             this->entityArray[entityID].heightDifference = targetZUnk - totalHeight;
-            this->entityArray[entityID].field21_0x34 = dVar2;
+            this->entityArray[entityID].field_0x34 = dVar2;
             this->entityArray[entityID].unitID = (short)param_11;
             this->entityArray[entityID].owner = (short)playerID1;
             this->entityArray[entityID].microX = (short)microX;
@@ -202,18 +202,16 @@ namespace Map {
                 DAT_DirectionAlgorithmState::ptr)(microX, microY, targetX, targetY);
             this->entityArray[entityID].orientation = DAT_DirectionAlgorithmState::instance.orientation;
             this->entityArray[entityID].colorUnk = 0;
-            if ((((entityType == Map::Entities::ET_FLAG_1)
-                     || (entityType == Map::Entities::ET_FLAG_4))
+            if ((((entityType == Map::Entities::ET_FLAG_1) || (entityType == Map::Entities::ET_FLAG_4))
                     || (entityType == Map::Entities::ET_FLAG_2))
                 || (entityType == Map::Entities::ET_FLAG_3)) {
                 this->entityArray[entityID].colorUnk = ownerColorUnk;
             }
-            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::setProjectileEntityValues2, this)(
-                entityID, entityType);
+            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::setProjectileEntityValues2, this)(entityID, entityType);
             if (this->entityArray[entityID].rng_2 != 0) {
                 this->entityArray[entityID].gmID = 0x91;
             }
-            this->entityArray[entityID].field7_0x12 = 0;
+            this->entityArray[entityID].field_0x12 = 0;
             this->entityArray[entityID].unknownAnimationFrameRelated = 0;
             if (entityType == Map::Entities::ET_DUST_CLOUD) {
                 if (param_11 == 1) {
@@ -263,8 +261,7 @@ namespace Map {
                 this->entityArray[entityID].gmLookupValue = 1;
             }
             if (entityID) {
-                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
-                    entityID);
+                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(entityID);
                 MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset, this)(entityID);
                 uVar5 = DAT_CurrentEntityID::instance;
                 DAT_CurrentEntityID::instance = entityID;
@@ -289,7 +286,7 @@ namespace Map {
                 pEVar4 = pEVar4 + 0x74;
                 if (2999 < (int)entityID) {
                 switchD_00404bac_caseD_5:
-                    this->every10Ticks = 2999;
+                    this->everyTenTicks = 2999;
                     return 0;
                 }
             }

@@ -26,7 +26,7 @@ namespace Map {
             int local_4;
             short _gmLookupValue;
             if (DAT_GameState::instance.gameTicksLoadBalancer % 10 == 0) {
-                this->every10Ticks = 25;
+                this->everyTenTicks = 25;
             }
             this->totalEntityCount = 0;
             DAT_CurrentEntityID::instance = 1;
@@ -71,13 +71,13 @@ namespace Map {
                         goto LAB_00408d6d;
                     }
                     if (this->entityArray[DAT_CurrentEntityID::instance].unkOne_1
-                        <= this->entityArray[DAT_CurrentEntityID::instance].field7_0x12) {
+                        <= this->entityArray[DAT_CurrentEntityID::instance].field_0x12) {
                         this->entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
                             = this->entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated + 1;
-                        this->entityArray[DAT_CurrentEntityID::instance].field7_0x12 = 0;
+                        this->entityArray[DAT_CurrentEntityID::instance].field_0x12 = 0;
                     }
-                    this->entityArray[DAT_CurrentEntityID::instance].field7_0x12
-                        = this->entityArray[DAT_CurrentEntityID::instance].field7_0x12 + 1;
+                    this->entityArray[DAT_CurrentEntityID::instance].field_0x12
+                        = this->entityArray[DAT_CurrentEntityID::instance].field_0x12 + 1;
                     if (this->entityArray[DAT_CurrentEntityID::instance].logicalState == 6)
                         goto switchD_0040890b_caseD_9;
                     /*
@@ -92,10 +92,10 @@ namespace Map {
                     case Map::Entities::ET_FLAG_3:
                     case Map::Entities::ET_BRAZIER:
                     case Map::Entities::ET_HEADS_ON_SPIKES:
-                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile,
-                            this)(DAT_CurrentEntityID::instance);
-                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit,
-                            this)(DAT_CurrentEntityID::instance);
+                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(
+                            DAT_CurrentEntityID::instance);
+                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
+                            DAT_CurrentEntityID::instance);
                         break;
                     default:
                         this->entityArray[DAT_CurrentEntityID::instance].screenDirection
@@ -134,9 +134,8 @@ namespace Map {
                     case Map::Entities::ET_DUST_CLOUD:
                         if (this->entityArray[DAT_CurrentEntityID::instance].unitID == 2) {
                             if ((this->entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated & 1)) {
-                                MACRO_CALL_MEMBER(
-                                    Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(
-                                    DAT_CurrentEntityID::instance);
+                                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile,
+                                    this)(DAT_CurrentEntityID::instance);
                                 this->entityArray[DAT_CurrentEntityID::instance].height
                                     = this->entityArray[DAT_CurrentEntityID::instance].height + 1;
                                 iVar3 = (int)this->entityArray[DAT_CurrentEntityID::instance]
@@ -163,17 +162,15 @@ namespace Map {
                                     this->entityArray[DAT_CurrentEntityID::instance].microY
                                         = this->entityArray[DAT_CurrentEntityID::instance].microY + 1;
                                 }
-                                MACRO_CALL_MEMBER(
-                                    Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
-                                    DAT_CurrentEntityID::instance);
-                                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset,
+                                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit,
                                     this)(DAT_CurrentEntityID::instance);
+                                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset, this)(
+                                    DAT_CurrentEntityID::instance);
                             }
                         } else if ((this->entityArray[DAT_CurrentEntityID::instance].unknownAnimationFrameRelated
                                        & 1)) {
-                            MACRO_CALL_MEMBER(
-                                Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(
-                                DAT_CurrentEntityID::instance);
+                            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile,
+                                this)(DAT_CurrentEntityID::instance);
                             this->entityArray[DAT_CurrentEntityID::instance].height
                                 = this->entityArray[DAT_CurrentEntityID::instance].height + 1;
                             sVar2 = this->entityArray[DAT_CurrentEntityID::instance].startingAngle;
@@ -198,10 +195,10 @@ namespace Map {
                                 this->entityArray[DAT_CurrentEntityID::instance].microY
                                     = this->entityArray[DAT_CurrentEntityID::instance].microY + 1;
                             }
-                            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit,
-                                this)(DAT_CurrentEntityID::instance);
-                            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset,
-                                this)(DAT_CurrentEntityID::instance);
+                            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
+                                DAT_CurrentEntityID::instance);
+                            MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset, this)(
+                                DAT_CurrentEntityID::instance);
                         }
                         break;
                     case Map::Entities::ET_COW_POISON_CLOUD:
@@ -209,8 +206,8 @@ namespace Map {
                             = this->entityArray[DAT_CurrentEntityID::instance].velocityUnk + 1;
                         if (this->entityArray[DAT_CurrentEntityID::instance].velocityUnk < 0x1f)
                             goto LAB_00408c15;
-                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile,
-                            this)(DAT_CurrentEntityID::instance);
+                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(
+                            DAT_CurrentEntityID::instance);
                         if (this->entityArray[DAT_CurrentEntityID::instance].velocityUnk != 1000) {
                             this->entityArray[DAT_CurrentEntityID::instance].graphicRotationUnk
                                 = this->entityArray[DAT_CurrentEntityID::instance].graphicRotationUnk - 1;
@@ -263,8 +260,8 @@ namespace Map {
                             this->entityArray[DAT_CurrentEntityID::instance].microY
                                 = this->entityArray[DAT_CurrentEntityID::instance].microY + -1;
                         }
-                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit,
-                            this)(DAT_CurrentEntityID::instance);
+                        MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
+                            DAT_CurrentEntityID::instance);
                         MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::calculateEntityDrawOffset, this)(
                             DAT_CurrentEntityID::instance);
                     LAB_00408c15:
@@ -284,8 +281,7 @@ namespace Map {
                 switchD_0040890b_caseD_9:
                     ((void (*)())DAT_EntityDefinedData::instance
                             .EntityCallbacks[(short)this->entityArray[DAT_CurrentEntityID::instance].entityType])();
-                    if (this->entityArray[DAT_CurrentEntityID::instance].entityType
-                        == Map::Entities::ET_SEAGULLUnk) {
+                    if (this->entityArray[DAT_CurrentEntityID::instance].entityType == Map::Entities::ET_SEAGULLUnk) {
                         MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processSeaGulls, this)(
                             (int)this->entityArray[DAT_CurrentEntityID::instance].unitID_OR_seaGullID);
                     }

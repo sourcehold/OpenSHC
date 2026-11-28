@@ -15,17 +15,14 @@ namespace Map {
             sVar1 = this->entityArray[entityID].startingHeight + (short)param_2;
             this->entityArray[entityID].height = sVar1;
             if ((sVar1 < 3) && (!param_4)) {
-                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(
-                    entityID);
-                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(
-                    entityID);
+                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::doSomethingWithOtherEntitiesOnTile, this)(entityID);
+                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::processEntityHitBuildingOrUnit, this)(entityID);
             }
             sVar1 = this->entityArray[entityID].height;
             if (10000 < sVar1) {
                 MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::markEntityDestroyed, this)(entityID);
             }
-            uVar2
-                = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::angleToRotationFrameIndex, this)(param_3);
+            uVar2 = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::angleToRotationFrameIndex, this)(param_3);
             this->entityArray[entityID].rotationFrameIndex = (short)uVar2;
             this->entityArray[entityID].height_2 = sVar1;
         }

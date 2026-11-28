@@ -107,8 +107,8 @@ namespace Map {
                                             && ((!bVar4
                                                 || (!(DAT_TileMapState::instance.LogicLayer[iVar6] & 0x400200U))))))) {
                                         bVar5 = true;
-                                        uVar8 = MACRO_CALL_MEMBER(Map::TileMapState_Func::returnSomeHeight,
-                                            DAT_TileMapState::ptr)(iVar6, 1);
+                                        uVar8 = MACRO_CALL_MEMBER(
+                                            Map::TileMapState_Func::returnSomeHeight, DAT_TileMapState::ptr)(iVar6, 1);
                                         uVar12 = local_38 - y >> 0x1f;
                                         iVar9 = ((local_38 - y ^ uVar12) - uVar12) * (targetHeight - height);
                                     LAB_004033cf:
@@ -167,8 +167,8 @@ namespace Map {
                                                     || (!(DAT_TileMapState::instance.LogicLayer[iVar9]
                                                         & 0x400200U))))))) {
                                         bVar5 = true;
-                                        local_30 = MACRO_CALL_MEMBER(Map::TileMapState_Func::returnSomeHeight,
-                                            DAT_TileMapState::ptr)(iVar9, 1);
+                                        local_30 = MACRO_CALL_MEMBER(
+                                            Map::TileMapState_Func::returnSomeHeight, DAT_TileMapState::ptr)(iVar9, 1);
                                         uVar12 = local_3c - x >> 0x1f;
                                         local_1c = iVar9;
                                         if ((int)(((local_3c - x ^ uVar12) - uVar12) * (targetHeight - height)) / iVar11
@@ -260,8 +260,8 @@ namespace Map {
                                             && ((!bVar4
                                                 || (!(DAT_TileMapState::instance.LogicLayer[iVar13] & 0x400200U))))))) {
                                         bVar5 = true;
-                                        local_30 = MACRO_CALL_MEMBER(Map::TileMapState_Func::returnSomeHeight,
-                                            DAT_TileMapState::ptr)(iVar13, 1);
+                                        local_30 = MACRO_CALL_MEMBER(
+                                            Map::TileMapState_Func::returnSomeHeight, DAT_TileMapState::ptr)(iVar13, 1);
                                         uVar12 = iVar10 - x >> 0x1f;
                                         iVar9 = local_38;
                                         if ((int)(((iVar10 - x ^ uVar12) - uVar12) * (targetHeight - height)) / iVar11
@@ -349,8 +349,8 @@ namespace Map {
                                         && ((!bVar4
                                             || (!(DAT_TileMapState::instance.LogicLayer[iVar14] & 0x400200U))))))) {
                                     bVar5 = true;
-                                    local_30 = MACRO_CALL_MEMBER(Map::TileMapState_Func::returnSomeHeight,
-                                        DAT_TileMapState::ptr)(iVar14, 1);
+                                    local_30 = MACRO_CALL_MEMBER(
+                                        Map::TileMapState_Func::returnSomeHeight, DAT_TileMapState::ptr)(iVar14, 1);
                                     uVar12 = iVar6 - y >> 0x1f;
                                     x = local_3c;
                                     if ((int)(((iVar6 - y ^ uVar12) - uVar12) * (targetHeight - height)) / iVar7

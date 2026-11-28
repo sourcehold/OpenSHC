@@ -57,25 +57,23 @@ namespace Map {
                     goto switchD_0040539c_caseD_2d;
                 }
             }
-            _entityID = MACRO_CALL_MEMBER(
-                Map::Entities::EntityState_Func::getFireEntityIDAtTile, DAT_EntityState::ptr)(_tile);
+            _entityID = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::getFireEntityIDAtTile, DAT_EntityState::ptr)(
+                _tile);
             if (!_entityID) {
                 if (_buildingID) {
-                    MACRO_CALL_MEMBER(
-                        Map::Buildings::BuildingsState_Func::lightUpBuilding, DAT_BuildingsState::ptr)(
+                    MACRO_CALL_MEMBER(Map::Buildings::BuildingsState_Func::lightUpBuilding, DAT_BuildingsState::ptr)(
                         (int)DAT_TileMapState::instance.BuildingLayer[_tile], playerID, fireIntensity);
                 }
                 if ((DAT_TileMapState::instance.LogicLayer[_tile] & 0x1000U)) {
-                    MACRO_CALL_MEMBER(Map::LandscapeState_Func::lightUpTree, DAT_LandscapeState::ptr)(
-                        _tile, playerID);
+                    MACRO_CALL_MEMBER(Map::LandscapeState_Func::lightUpTree, DAT_LandscapeState::ptr)(_tile, playerID);
                 }
                 _entityID_2 = MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity,
                     DAT_EntityState::ptr)(0, (undefined4)((int)(playerID)), 0, microX, microY, tileHeightMin8, 0, 0, 0,
                     Map::Entities::ET_FIRE, 0);
                 if ((2 < two) && (!(DAT_TileMapState::instance.RandomLayer[_tile] & 3))) {
-                    MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity,
-                        DAT_EntityState::ptr)(0, (undefined4)((int)(playerID)), 0, microX, microY, tileHeightMin8, 0, 0,
-                        0, (EntityType)((int)(26)), 0);
+                    MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(0,
+                        (undefined4)((int)(playerID)), 0, microX, microY, tileHeightMin8, 0, 0, 0,
+                        (EntityType)((int)(26)), 0);
                 }
                 if (_entityID_2) {
                     DAT_EntityState::instance.entityArray[_entityID_2].fireParameter_0xb6 = (short)two;
