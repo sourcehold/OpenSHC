@@ -24,56 +24,57 @@ namespace Map {
         {
             int _bestScore = 10000;
             int _bestUnitID = 0;
-            if (x > 399 || y > 399) {
-                return 0;
-            }
-            if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
-                return 0;
-            }
-            dword _areaOfOrigin
-                = (short)DAT_TileMapState::instance
-                      .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
-            this->unusedUnitIDArrayIndex = 0;
-            for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
-                if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
-                    continue;
-                }
-                if (this->units[unitID].dying != 0) {
-                    continue;
-                }
-                if (this->units[unitID].unknownTestAgainst0_2 != 0) {
-                    continue;
-                }
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
-                    continue;
-                }
-                if (excludeCows == FALSE) {
-                    if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_ANTELOPESHDEER
-                        && this->units[unitID].unitType != OpenSHC::Map::Units::UT_RABBIT
-                        && this->units[unitID].unitType != OpenSHC::Map::Units::UT_COW) {
+            if (x > 399) {
+            } else if (y > 399) {
+            } else if (DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[y * 400 + x] == 0) {
+            } else {
+                dword _areaOfOrigin
+                    = (short)DAT_TileMapState::instance
+                          .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[y].addXgetTile + x];
+                this->unusedUnitIDArrayIndex = 0;
+                for (int unitID = 1; unitID < this->maxUnitCount; ++unitID) {
+                    if (this->units[unitID].logicalState != OpenSHC::Map::Units::ULS_NORMAL) {
                         continue;
                     }
-                } else if (this->units[unitID].isStalked != 0) {
-                    continue;
+                    if (this->units[unitID].dying != 0) {
+                        continue;
+                    }
+                    if (this->units[unitID].unknownTestAgainst0_2 != 0) {
+                        continue;
+                    }
+                    if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MELEE_ATTACK) {
+                        continue;
+                    }
+                    if (excludeCows == FALSE) {
+                        if (this->units[unitID].unitType != OpenSHC::Map::Units::UT_ANTELOPESHDEER
+                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_RABBIT
+                            && this->units[unitID].unitType != OpenSHC::Map::Units::UT_COW) {
+                            continue;
+                        }
+                    } else if (this->units[unitID].isStalked != 0) {
+                        continue;
+                    }
+                    MACRO_CALL_MEMBER(
+                        OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
+                        DAT_DirectionAlgorithmState::ptr)(x, y, this->units[unitID].x, this->units[unitID].y);
+                    int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
+                    if (_distance > maxDistance) {
+                        continue;
+                    }
+                    if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
+                        continue;
+                    }
+                    this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = unitID;
+                    this->unusedUnitIDArrayIndex = this->unusedUnitIDArrayIndex + 1;
+                    int _score = _distance + this->units[unitID].huntedBy * 3;
+                    if (_score < _bestScore) {
+                        _bestScore = _score;
+                        _bestUnitID = unitID;
+                    }
                 }
-                MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::DirectionAlgorithmState_Func::setAxisBasedDistanceResult,
-                    DAT_DirectionAlgorithmState::ptr)(x, y, this->units[unitID].x, this->units[unitID].y);
-                int _distance = DAT_DirectionAlgorithmState::instance.distanceHigh;
-                if (_distance > maxDistance) {
-                    continue;
-                }
-                if (DAT_TileMapState::instance.PathConnectionLayer[this->units[unitID].tile] != _areaOfOrigin) {
-                    continue;
-                }
-                this->unusedUnitIDArray[this->unusedUnitIDArrayIndex] = unitID;
-                this->unusedUnitIDArrayIndex = this->unusedUnitIDArrayIndex + 1;
-                int _score = _distance + this->units[unitID].huntedBy * 3;
-                if (_score < _bestScore) {
-                    _bestScore = _score;
-                    _bestUnitID = unitID;
-                }
+                return _bestUnitID;
             }
-            return _bestUnitID;
+            return 0;
         }
 
     }
