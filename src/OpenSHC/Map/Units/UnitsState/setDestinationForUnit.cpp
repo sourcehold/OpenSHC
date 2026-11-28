@@ -79,22 +79,22 @@ namespace Map {
                                 DAT_PathFindingState::ptr)(
                                 this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
                         if (this->units[unitID].field_0x2a8 == 0) {
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
-                                unitID);
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             this->units[unitID].movementCooldown = 0;
-                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
                             return FALSE;
                         }
                         this->units[unitID].climbDataID = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
                             DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field_0x2a8);
                         if (this->units[unitID].climbDataID == 0) {
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
-                                unitID);
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             this->units[unitID].movementCooldown = 0;
-                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
                             return FALSE;
                         }
                         int const _registerResult = MACRO_CALL_MEMBER(
@@ -105,11 +105,11 @@ namespace Map {
                             x = DAT_PathFindingState::instance.climbX;
                             y = DAT_PathFindingState::instance.climbY;
                         } else if (_registerResult == -1) {
-                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
-                                unitID);
+                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
                             DAT_PathFindingState::instance.climbIsIllegal = 0;
                             this->units[unitID].movementCooldown = 0;
-                            DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(
+                                unitID);
                             return FALSE;
                         }
                     }
@@ -119,20 +119,20 @@ namespace Map {
                         DAT_PathFindingState::ptr)(
                         this->units[unitID].owner, _fromArea, _toArea, this->units[unitID].unitCanClimb);
                     if (this->units[unitID].field_0x2a8 == 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
+                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
                         DAT_PathFindingState::instance.climbIsIllegal = 0;
                         this->units[unitID].movementCooldown = 0;
-                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
                         return FALSE;
                     }
                     this->units[unitID].climbDataID = MACRO_CALL_MEMBER(
                         OpenSHC::Map::Navigation::PathFindingState_Func::setClimbBasedOnClosestClimbData,
                         DAT_PathFindingState::ptr)(unitID, _fromArea, this->units[unitID].field_0x2a8);
                     if (this->units[unitID].climbDataID == 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
+                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
                         DAT_PathFindingState::instance.climbIsIllegal = 0;
                         this->units[unitID].movementCooldown = 0;
-                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
                         return FALSE;
                     }
                     int const _registerResult
@@ -143,10 +143,10 @@ namespace Map {
                         x = DAT_PathFindingState::instance.climbX;
                         y = DAT_PathFindingState::instance.climbY;
                     } else if (_registerResult == -1) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
+                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
                         DAT_PathFindingState::instance.climbIsIllegal = 0;
                         this->units[unitID].movementCooldown = 0;
-                        DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
                         return FALSE;
                     }
                 }
@@ -178,10 +178,10 @@ namespace Map {
             }
             DAT_PathFindingState::instance.notAllAssassinsUnk = 0;
             if (_pathPlanSize <= 0) {
-                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
+                DAT_PathFindingState::instance.allAssassinsUnk = 0;
                 DAT_PathFindingState::instance.climbIsIllegal = 0;
                 this->units[unitID].movementCooldown = 0;
-                DAT_PathFindingState::instance.allAssassinsUnk = 0;
+                MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::despawnUnreachableUnit, this)(unitID);
                 return FALSE;
             }
             this->units[unitID].totalSizeOfPathPlan = _pathPlanSize;
