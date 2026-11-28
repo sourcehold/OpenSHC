@@ -1,0 +1,19 @@
+#include "../TextManager.func.hpp"
+
+#include "OpenSHC/Text/FontSizeClass.func.hpp"
+
+namespace OpenSHC {
+namespace Text {
+
+    // FUNCTION: STRONGHOLDCRUSADER 0x00469F70
+    int TextManager::getTextWidthTillCursorUnk(char* text, int cursorIndex, int fontSize)
+    {
+        if (text == NULL) {
+            return 0;
+        }
+        return MACRO_CALL_MEMBER(FontSizeClass_Func::getWidthOfText, &this->fontSizeClassArray[fontSize])(
+            text, cursorIndex);
+    }
+
+}
+}
