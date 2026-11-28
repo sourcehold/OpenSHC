@@ -123,9 +123,8 @@ namespace Map {
                                 && (uVar5 = COL_DARK_GREEN::instance.shortValue,
                                     this->grid[iVar6][iVar8].farmFieldTiles == 0)
                                 && (uVar5 = COL_RED::instance.shortValue, this->grid[iVar6][iVar8].rabbitCount == 0)
-                                && (uVar5 = COL_WHITE::instance.shortValue,
-                                    this->grid[iVar6][iVar8].field15_0x3c == 0)) {
-                                iVar7 = this->grid[iVar6][iVar8].field20_0x50;
+                                && (uVar5 = COL_WHITE::instance.shortValue, this->grid[iVar6][iVar8].field_0x3c == 0)) {
+                                iVar7 = this->grid[iVar6][iVar8].field_0x50;
                                 uVar5 = COL_DARK_CYAN_GREY::instance.shortValue;
                                 goto joined_r0x0052c335;
                             }
@@ -142,7 +141,7 @@ namespace Map {
                                 iVar7 = this->grid[iVar6][iVar8].buildingTiles;
                             joined_r0x0052c3aa:
                                 if (!iVar7) {
-                                    iVar7 = this->grid[iVar6][iVar8].field13_0x34;
+                                    iVar7 = this->grid[iVar6][iVar8].field_0x34;
                                     uVar5 = COL_BRIGHT_YELLOW::instance.shortValue;
                                     goto joined_r0x0052c335;
                                 }
@@ -164,36 +163,34 @@ namespace Map {
                                 && (uVar5 = COL_RED::instance.shortValue, this->grid[iVar6][iVar8].deerCount == 0)
                                 && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
                                     this->grid[iVar6][iVar8].lionCount == 0)
-                                && (uVar5 = COL_WHITE::instance.shortValue,
-                                    this->grid[iVar6][iVar8].field15_0x3c == 0)) {
+                                && (uVar5 = COL_WHITE::instance.shortValue, this->grid[iVar6][iVar8].field_0x3c == 0)) {
                                 iVar7 = this->grid[iVar6][iVar8].casDisRelated2;
                                 uVar5 = COL_BRIGHT_YELLOW::instance.shortValue;
                             joined_r0x0052c46b:
                                 if (!iVar7) {
-                                    iVar7 = this->grid[iVar6][iVar8].field13_0x34;
+                                    iVar7 = this->grid[iVar6][iVar8].field_0x34;
                                     uVar5 = COL_BLACK::instance.shortValue;
                                     goto joined_r0x0052c335;
                                 }
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 7) {
                             if ((this->grid[iVar6][iVar8].separateAreaID != 0)
-                                && (uVar5 = COL_WHITE::instance.shortValue,
-                                    this->grid[iVar6][iVar8].field18_0x48 == 0)) {
+                                && (uVar5 = COL_WHITE::instance.shortValue, this->grid[iVar6][iVar8].field_0x48 == 0)) {
                                 iVar7 = this->grid[iVar6][iVar8].deerCount;
                                 uVar5 = COL_RED::instance.shortValue;
                                 goto joined_r0x0052c46b;
                             }
                         } else if (this->DAT_DebugDataMapDataDisplayType == 8) {
                             uVar5 = COL_WHITE::instance.shortValue;
-                            if (this->grid[iVar6][iVar8].field24_0x60 == 0
-                                && (uVar5 = COL_BLACK::instance.shortValue, this->grid[iVar6][iVar8].field25_0x64 == 0)
+                            if (this->grid[iVar6][iVar8].field_0x60 == 0
+                                && (uVar5 = COL_BLACK::instance.shortValue, this->grid[iVar6][iVar8].field_0x64 == 0)
                                 && (uVar5 = COL_BRIGHT_YELLOW::instance.shortValue,
                                     this->grid[iVar6][iVar8].castlebuildings == 0
                                         && ((uVar5 = COL_BLUE::instance.shortValue,
                                             this->grid[iVar6][iVar8].separateAreaID != 0
                                                 && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
                                                     this->grid[iVar6][iVar8].unknownNonZero01 == 0))))) {
-                                iVar7 = this->grid[iVar6][iVar8].field27_0x6c;
+                                iVar7 = this->grid[iVar6][iVar8].field_0x6c;
                                 uVar5 = COL_RED::instance.shortValue;
                                 goto joined_r0x0052c335;
                             }
@@ -201,7 +198,7 @@ namespace Map {
                             if (this->DAT_DebugDataMapDataDisplayType != 9)
                                 continue;
                             uVar5 = COL_RED::instance.shortValue;
-                            if (this->grid[iVar6][iVar8].field29_0x74 == 0
+                            if (this->grid[iVar6][iVar8].field_0x74 == 0
                                 && (uVar5 = COL_VIVID_BLUE::instance.shortValue,
                                     this->grid[iVar6][iVar8].unknownNonZero01 == 0)
                                 && (uVar5 = COL_BLUE::instance.shortValue,

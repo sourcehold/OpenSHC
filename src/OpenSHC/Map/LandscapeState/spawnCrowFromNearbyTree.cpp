@@ -5,6 +5,7 @@
 #include "OpenSHC/Map/Entities/EntityState.func.hpp"
 #include "OpenSHC/Random/RNG.func.hpp"
 #include "OpenSHC/DE/SHCDE/eSFX.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Game/Player/PlayerData.hpp"
 #include "OpenSHC/Map/Entities/EntityType.hpp"
 
@@ -59,9 +60,10 @@ namespace Map {
                 local_1c = 3;
                 _pKeep = &DAT_GameState::instance.playerDataArray[1];
                 do {
-                    if ((local_1c + -2 != _playerID) && ((_pKeep->keep).id)) {
-                        iVar5 = (_pKeep->keep).xEntry;
-                        iVar8 = (_pKeep->keep).yEntry;
+                    if ((local_1c + -2 != _playerID)
+                        && ((_pKeep->buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]).id)) {
+                        iVar5 = (_pKeep->buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]).xEntry;
+                        iVar8 = (_pKeep->buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP]).yEntry;
                         uVar2 = DAT_UnitsState::instance.units[unitID].x - iVar5;
                         uVar6 = (int)uVar2 >> 0x1f;
                         uVar3 = _y - iVar8;
@@ -77,10 +79,12 @@ namespace Map {
                             local_2c = iVar4;
                         }
                     }
-                    if ((local_1c + -1 != _playerID) && (_pKeep[1].keep.id != 0)) {
-                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x - _pKeep[1].keep.xEntry;
+                    if ((local_1c + -1 != _playerID)
+                        && (_pKeep[1].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].id != 0)) {
+                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x
+                            - _pKeep[1].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
                         uVar6 = (int)uVar2 >> 0x1f;
-                        uVar3 = _y - _pKeep[1].keep.yEntry;
+                        uVar3 = _y - _pKeep[1].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                         iVar8 = (uVar2 ^ uVar6) - uVar6;
                         uVar2 = (int)uVar3 >> 0x1f;
                         iVar5 = (uVar3 ^ uVar2) - uVar2;
@@ -88,15 +92,19 @@ namespace Map {
                             iVar5 = iVar8;
                         }
                         if (iVar5 < local_2c) {
-                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2 + _pKeep[1].keep.xEntry;
-                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2 + _pKeep[1].keep.yEntry;
+                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2
+                                + _pKeep[1].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
+                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2
+                                + _pKeep[1].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                             local_2c = iVar5;
                         }
                     }
-                    if ((local_1c != _playerID) && (_pKeep[2].keep.id != 0)) {
-                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x - _pKeep[2].keep.xEntry;
+                    if ((local_1c != _playerID)
+                        && (_pKeep[2].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].id != 0)) {
+                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x
+                            - _pKeep[2].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
                         uVar6 = (int)uVar2 >> 0x1f;
-                        uVar3 = _y - _pKeep[2].keep.yEntry;
+                        uVar3 = _y - _pKeep[2].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                         iVar8 = (uVar2 ^ uVar6) - uVar6;
                         uVar2 = (int)uVar3 >> 0x1f;
                         iVar5 = (uVar3 ^ uVar2) - uVar2;
@@ -104,15 +112,19 @@ namespace Map {
                             iVar5 = iVar8;
                         }
                         if (iVar5 < local_2c) {
-                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2 + _pKeep[2].keep.xEntry;
-                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2 + _pKeep[2].keep.yEntry;
+                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2
+                                + _pKeep[2].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
+                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2
+                                + _pKeep[2].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                             local_2c = iVar5;
                         }
                     }
-                    if ((local_1c + 1 != _playerID) && (_pKeep[3].keep.id != 0)) {
-                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x - _pKeep[3].keep.xEntry;
+                    if ((local_1c + 1 != _playerID)
+                        && (_pKeep[3].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].id != 0)) {
+                        uVar2 = (int)DAT_UnitsState::instance.units[unitID].x
+                            - _pKeep[3].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
                         uVar6 = (int)uVar2 >> 0x1f;
-                        uVar3 = _y - _pKeep[3].keep.yEntry;
+                        uVar3 = _y - _pKeep[3].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                         iVar8 = (uVar2 ^ uVar6) - uVar6;
                         uVar2 = (int)uVar3 >> 0x1f;
                         iVar5 = (uVar3 ^ uVar2) - uVar2;
@@ -120,8 +132,10 @@ namespace Map {
                             iVar5 = iVar8;
                         }
                         if (iVar5 < local_2c) {
-                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2 + _pKeep[3].keep.xEntry;
-                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2 + _pKeep[3].keep.yEntry;
+                            _microX = (int)SEC_RNG::instance.currentNumber2 % 5 + -2
+                                + _pKeep[3].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].xEntry;
+                            _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 5 + -2
+                                + _pKeep[3].buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_KEEP].yEntry;
                             local_2c = iVar5;
                         }
                     }
@@ -135,8 +149,7 @@ namespace Map {
                     _microY = ((int)SEC_RNG::instance.currentNumber2 >> 8) % 100 + -0x32 + _y;
                     MACRO_CALL_MEMBER(Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
                 }
-                MACRO_CALL_MEMBER(
-                    Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
+                MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::spawnProjectileEntity, DAT_EntityState::ptr)(unitID,
                     (undefined4)((int)((int)DAT_UnitsState::instance.units[unitID].owner)), 0,
                     (int)((int)((short)this->trees[_treeID].xPosition * 8)),
                     (int)((int)((short)this->trees[_treeID].yPosition * 8)),

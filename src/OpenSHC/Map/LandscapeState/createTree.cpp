@@ -1,18 +1,18 @@
 #include "../../Map.func.hpp"
 #include "../LandscapeState.func.hpp"
 
+#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
+
 #include "OpenSHC/Globals/DAT_CurrentTreeID.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_OrganismDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_TileMapState.hpp"
 #include "OpenSHC/Globals/DAT_ViewportRenderState.hpp"
-#include "OpenSHC/Map/Trees/TreeTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
     using Map::Trees::TreeTypeShort;
-
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004F1CE0
     int LandscapeState::createTree(undefined4 x, undefined4 y, TreeType treeType, undefined4 size,
@@ -86,7 +86,7 @@ namespace Map {
             = (short)DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[sVar2].originX;
         this->trees[_treeID].gmOriginY
             = (short)DAT_TextureRenderCoreObject::instance.gmFileHeaderColorpaletteArray[sVar2].originY;
-        this->trees[_treeID].treeTypeRelated2 = DAT_OrganismDefinedData::instance.field28_0x854[treeType];
+        this->trees[_treeID].treeTypeRelated2 = DAT_OrganismDefinedData::instance.field_0x854[treeType];
         this->trees[_treeID].zero = 0;
         this->trees[_treeID].animationFrameIndex = (byte)DAT_TileMapState::instance.RandomLayer[_tile] & 0x1f;
         this->trees[_treeID].one = 1;
@@ -172,13 +172,13 @@ namespace Map {
             this->trees[_treeID].appleTreeColorVariation = 8;
             this->trees[_treeID].stage = 4;
         }
-        uVar3 = this->field0_0x0;
-        this->field0_0x0 = 0;
+        uVar3 = this->field_0x0;
+        this->field_0x0 = 0;
         /*
          ***   Update the tree state   ***
          */
         (*DAT_OrganismDefinedData::instance.UpdateTree[(short)this->trees[_treeID].treeType])();
-        this->field0_0x0 = uVar3;
+        this->field_0x0 = uVar3;
         return _treeID;
     }
 

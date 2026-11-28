@@ -45,8 +45,8 @@ namespace Map {
         this->casDisRelated = param_2;
         this->candidateIndex = 0;
         this->candidateIndex2 = 1;
-        if (this->grid[iVar5][local_1c].field20_0x50 != 0) {
-            piVar4 = &this->grid[0][0].field15_0x3c;
+        if (this->grid[iVar5][local_1c].field_0x50 != 0) {
+            piVar4 = &this->grid[0][0].field_0x3c;
             iVar12 = 0x28;
             do {
                 iVar3 = 0x28;
@@ -62,7 +62,7 @@ namespace Map {
             } while (iVar12);
             this->DAT_Y10_Array_Section1034[0] = (short)local_1c;
             this->DAT_X10_Array_Section1034[0] = (short)iVar5;
-            this->grid[iVar5][local_1c].casDisRelated2 = this->grid[iVar5][local_1c].field20_0x50;
+            this->grid[iVar5][local_1c].casDisRelated2 = this->grid[iVar5][local_1c].field_0x50;
             iVar12 = this->grid[iVar5][local_1c].separateAreaID;
             if (this->candidateIndex != this->candidateIndex2) {
                 do {
@@ -74,7 +74,7 @@ namespace Map {
                         uVar7 = ((Point8IntXY*)(piVar4 + -1))->xOffset + iVar8;
                         if (uVar7 < 0x28 && uVar9 < 0x28 && 0 < this->grid[uVar7][uVar9].firstMember
                             && iVar12 == this->grid[uVar7][uVar9].separateAreaID
-                            && (iVar10 = this->grid[uVar7][uVar9].field20_0x50, 0 < iVar10)
+                            && (iVar10 = this->grid[uVar7][uVar9].field_0x50, 0 < iVar10)
                             && this->grid[uVar7][uVar9].casDisRelated2 == 0) {
                             this->grid[uVar7][uVar9].casDisRelated2 = iVar10;
                             this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)uVar7;
@@ -88,7 +88,7 @@ namespace Map {
                         uVar7 = piVar4[1] + iVar8;
                         if (uVar7 < 0x28 && uVar9 < 0x28 && 0 < this->grid[uVar7][uVar9].firstMember
                             && iVar12 == this->grid[uVar7][uVar9].separateAreaID
-                            && (iVar10 = this->grid[uVar7][uVar9].field20_0x50, 0 < iVar10)
+                            && (iVar10 = this->grid[uVar7][uVar9].field_0x50, 0 < iVar10)
                             && this->grid[uVar7][uVar9].casDisRelated2 == 0) {
                             this->grid[uVar7][uVar9].casDisRelated2 = iVar10;
                             this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)uVar7;
@@ -102,7 +102,7 @@ namespace Map {
                         uVar7 = piVar4[3] + iVar8;
                         if (uVar7 < 0x28 && uVar9 < 0x28 && 0 < this->grid[uVar7][uVar9].firstMember
                             && iVar12 == this->grid[uVar7][uVar9].separateAreaID
-                            && (iVar10 = this->grid[uVar7][uVar9].field20_0x50, 0 < iVar10)
+                            && (iVar10 = this->grid[uVar7][uVar9].field_0x50, 0 < iVar10)
                             && this->grid[uVar7][uVar9].casDisRelated2 == 0) {
                             this->grid[uVar7][uVar9].casDisRelated2 = iVar10;
                             this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)uVar7;
@@ -116,7 +116,7 @@ namespace Map {
                         uVar7 = piVar4[5] + iVar8;
                         if (uVar7 < 0x28 && uVar9 < 0x28 && 0 < this->grid[uVar7][uVar9].firstMember
                             && iVar12 == this->grid[uVar7][uVar9].separateAreaID
-                            && (iVar10 = this->grid[uVar7][uVar9].field20_0x50, 0 < iVar10)
+                            && (iVar10 = this->grid[uVar7][uVar9].field_0x50, 0 < iVar10)
                             && this->grid[uVar7][uVar9].casDisRelated2 == 0) {
                             this->grid[uVar7][uVar9].casDisRelated2 = iVar10;
                             this->DAT_X10_Array_Section1034[this->candidateIndex2] = (short)uVar7;
@@ -137,7 +137,7 @@ namespace Map {
             uVar7 = (uint)(byte)SEC_RNG::instance.currentNumber2;
             DAT_TribesState::instance.tribes[param_1].currentRallyPointIndex = 0;
             DAT_TribesState::instance.tribes[param_1].rallyPointCount = 0;
-            this->grid[iVar5][local_1c].field15_0x3c = 1;
+            this->grid[iVar5][local_1c].field_0x3c = 1;
             this->grid[iVar5][local_1c].casDisRelated2 = 0;
             while (true) {
                 local_14 = -1;
@@ -224,10 +224,12 @@ namespace Map {
                 local_1c = local_1c
                     + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + local_14 * 8
                         + 4);
-                this->grid[iVar5][local_1c].field15_0x3c = 1;
+                this->grid[iVar5][local_1c].field_0x3c = 1;
                 uVar9 = iVar5 * 10 + 5;
                 uVar11 = local_1c * 10 + 5;
-                if (uVar9 < 400 && uVar11 < 400 && *(char*)(uVar11 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar9) != '\0') {
+                if (uVar9 < 400 && uVar11 < 400
+                    && *(char*)(uVar11 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar9)
+                        != '\0') {
                     DAT_TribesState::instance.tribes[param_1]
                         .rallyPointArray[DAT_TribesState::instance.tribes[param_1].rallyPointCount][0]
                         = (short)iVar5 * 10 + 5;

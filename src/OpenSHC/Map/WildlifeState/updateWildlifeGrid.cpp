@@ -2,6 +2,7 @@
 #include "../WildlifeState.func.hpp"
 
 #include "OpenSHC/Game/GameMode.hpp"
+#include "OpenSHC/Game/Player/Enums/BuildingEntryInfoEnum.hpp"
 #include "OpenSHC/Map/Buildings/BuildingType.hpp"
 #include "OpenSHC/Map/Buildings/BuildingTypeShort.hpp"
 #include "OpenSHC/Map/Trees/TreeType.hpp"
@@ -61,43 +62,59 @@ namespace Map {
         int _x10;
         local_348 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[1] != -1) {
-            local_348 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[1].campground.tileEntry];
+            local_348
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[1]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_344 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[2] != -1) {
-            local_344 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[2].campground.tileEntry];
+            local_344
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[2]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_340 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[3] != -1) {
-            local_340 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[3].campground.tileEntry];
+            local_340
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[3]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_33c = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[4] != -1) {
-            local_33c = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[4].campground.tileEntry];
+            local_33c
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[4]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_338 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[5] != -1) {
-            local_338 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[5].campground.tileEntry];
+            local_338
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[5]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_334 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[6] != -1) {
-            local_334 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[6].campground.tileEntry];
+            local_334
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[6]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_330 = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[7] != -1) {
-            local_330 = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[7].campground.tileEntry];
+            local_330
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[7]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         local_32c = -1;
         if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[8] != -1) {
-            local_32c = (int)(short)DAT_TileMapState::instance
-                            .PathConnectionLayer[DAT_GameState::instance.playerDataArray[8].campground.tileEntry];
+            local_32c
+                = (int)(short)DAT_TileMapState::instance.PathConnectionLayer[DAT_GameState::instance.playerDataArray[8]
+                        .buildingEntryInfos[OpenSHC::Game::Player::Enums::BEIE_CAMPGROUND]
+                        .tileEntry];
         }
         if (DAT_GameSynchronyState::instance.currentGameMode == Game::GM_SOLITARY) {
             local_35c = 0;
@@ -120,11 +137,11 @@ namespace Map {
                 this->grid[_x10][_y10].rabbitCount = 0;
                 this->grid[_x10][_y10].marshTiles = 0;
                 this->grid[_x10][_y10].rockyTiles = 0;
-                this->grid[_x10][_y10].field18_0x48 = 0;
+                this->grid[_x10][_y10].field_0x48 = 0;
                 this->grid[_x10][_y10].farmFieldTiles = 0;
                 this->grid[_x10][_y10].chimps = 0;
                 this->grid[_x10][_y10].castlebuildings = 0;
-                this->grid[_x10][_y10].field28_0x70 = 0;
+                this->grid[_x10][_y10].field_0x70 = 0;
                 iVar8 = 0;
                 do {
                     local_320[iVar8 * 2] = -1;
@@ -137,7 +154,9 @@ namespace Map {
                     local_358 = 0;
                     do {
                         if ((uint)(local_358 + local_35c) < 400 && uVar9 < 400
-                            && *(char*)(uVar9 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + local_358 + local_35c) != '\0') {
+                            && *(char*)(uVar9 * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400
+                                   + local_358 + local_35c)
+                                != '\0') {
                             pWVar7->firstMember = pWVar7->firstMember + 1;
                             _tile = DAT_ViewportRenderState::instance.translationMatrix[uVar9].addXgetTile + local_358
                                 + local_35c;
@@ -184,7 +203,7 @@ namespace Map {
                                     this->grid[_x10][_y10].chimps = this->grid[_x10][_y10].chimps + 1;
                                 }
                             }
-                            this->grid[_x10][_y10].field28_0x70 = this->grid[_x10][_y10].field28_0x70
+                            this->grid[_x10][_y10].field_0x70 = this->grid[_x10][_y10].field_0x70
                                 + (uint)DAT_TileMapState::instance.HeightLayer[_tile];
                             uVar6 = DAT_TileMapState::instance.LogicLayer[_tile];
                             if ((uVar6 & 0x100)) {
@@ -253,7 +272,7 @@ namespace Map {
                                     this->grid[_x10][_y10].unstalkedUnitCount
                                         = this->grid[_x10][_y10].unstalkedUnitCount + 1;
                                 LAB_0052be68:
-                                    this->grid[_x10][_y10].field18_0x48 = this->grid[_x10][_y10].field18_0x48 + 1;
+                                    this->grid[_x10][_y10].field_0x48 = this->grid[_x10][_y10].field_0x48 + 1;
                                 } else {
                                     this->grid[_x10][_y10].stalkedUnitCount
                                         = this->grid[_x10][_y10].stalkedUnitCount + 1;

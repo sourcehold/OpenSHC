@@ -27,17 +27,17 @@ namespace Map {
             iVar6 = iVar3;
             while (true) {
                 do {
-                    piVar5->field13_0x34 = 0;
-                    piVar5->field20_0x50 = 0;
-                    piVar5->field24_0x60 = 0;
-                    piVar5->field25_0x64 = 0;
-                    piVar5->field28_0x70 = piVar5->field28_0x70 / 100;
+                    piVar5->field_0x34 = 0;
+                    piVar5->field_0x50 = 0;
+                    piVar5->field_0x60 = 0;
+                    piVar5->field_0x64 = 0;
+                    piVar5->field_0x70 = piVar5->field_0x70 / 100;
                     if (piVar5->chimps) {
                         if (piVar5->keeps) {
-                            piVar5->field24_0x60 = 1;
+                            piVar5->field_0x60 = 1;
                         }
                         if (piVar5->castlebuildings) {
-                            piVar5->field24_0x60 = piVar5->field24_0x60 + 1;
+                            piVar5->field_0x60 = piVar5->field_0x60 + 1;
                         }
                     }
                     piVar5 = piVar5 + 0x640;
@@ -68,12 +68,10 @@ namespace Map {
                     } else {
                         iVar7 = 2;
                     LAB_0052dfdf:
-                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillField13FromCell, this)(
-                            iVar6, iVar3, iVar7);
+                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillField13FromCell, this)(iVar6, iVar3, iVar7);
                     }
                     if (piVar2->farmFieldTiles) {
-                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillField20FromCell, this)(
-                            iVar6, iVar3, 6);
+                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillField20FromCell, this)(iVar6, iVar3, 6);
                     }
                     iVar6 = iVar6 + 1;
                     piVar2 = piVar2 + 0x640;

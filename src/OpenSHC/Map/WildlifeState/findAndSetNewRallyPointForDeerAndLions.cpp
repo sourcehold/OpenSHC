@@ -45,7 +45,7 @@ namespace Map {
         this->casDisRelated = always2or3or5;
         this->candidateIndex = 0;
         this->candidateIndex2 = 1;
-        piVar9 = &this->grid[0][0].field15_0x3c;
+        piVar9 = &this->grid[0][0].field_0x3c;
         iVar11 = 0x28;
         do {
             iVar5 = 0x28;
@@ -78,7 +78,7 @@ namespace Map {
                     if (uVar6 < 0x28 && uVar10 < 0x28 && 0 < this->grid[uVar6][uVar10].firstMember
                         && _currentArea == this->grid[uVar6][uVar10].separateAreaID) {
                         if (!always0or1) {
-                            if (this->grid[uVar6][uVar10].field13_0x34 == 0) {
+                            if (this->grid[uVar6][uVar10].field_0x34 == 0) {
                                 if (DAT_TribesState::instance.tribes[tribeID].tribeType
                                     == (AI::Tribes::AITT_SWORDSMEN | AI::Tribes::AITT_SPEARMEN)) {
                                     _count = this->grid[uVar6][uVar10].deerCount;
@@ -113,7 +113,7 @@ namespace Map {
         _randomDirection = (uint)(byte)SEC_RNG::instance.currentNumber2;
         DAT_TribesState::instance.tribes[tribeID].currentRallyPointIndex = 0;
         DAT_TribesState::instance.tribes[tribeID].rallyPointCount = 0;
-        this->grid[_x10][_y10].field15_0x3c = 1;
+        this->grid[_x10][_y10].field_0x3c = 1;
         this->grid[_x10][_y10].casDisRelated2 = 0;
         while (true) {
             local_18 = -1;
@@ -194,10 +194,13 @@ namespace Map {
             _x10 = _x10 + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[local_18].int_.xOffset;
             _y10 = _y10
                 + *(int*)((int)DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix + local_18 * 8 + 4);
-            this->grid[_x10][_y10].field15_0x3c = 1;
+            this->grid[_x10][_y10].field_0x3c = 1;
             _destinationY = _y10 * 10 + 5;
             uVar6 = _x10 * 10 + 5;
-            if (uVar6 < 400 && _destinationY < 400 && *(char*)(_destinationY * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400 + uVar6) != '\0') {
+            if (uVar6 < 400 && _destinationY < 400
+                && *(char*)(_destinationY * 400 + (int)DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400
+                       + uVar6)
+                    != '\0') {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::pathFindingDeerAndLionsUnk,
                     DAT_PathFindingState::ptr)(_currentArea, uVar6, _destinationY);
                 DAT_TribesState::instance.tribes[tribeID]

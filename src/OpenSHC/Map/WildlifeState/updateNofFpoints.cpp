@@ -38,12 +38,13 @@ namespace Map {
           has nothing to do with mercrecruitable
          */
         uVar6 = DAT_GameState::instance.mapAndTime
-                    .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field128056_0x469d4]
+                    .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                     .x;
         _someY = DAT_GameState::instance.mapAndTime
-                     .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field128056_0x469d4]
+                     .signpostEntryData[DAT_TroopValueState::instance.attackInfo.field_0x469d4]
                      .y;
-        if (uVar6 <= 0x18f && _someY <= 0x18f && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_someY * 400 + uVar6] != '\0'
+        if (uVar6 <= 0x18f && _someY <= 0x18f
+            && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[_someY * 400 + uVar6] != '\0'
             && (_separateAreaID = DAT_TileMapState::instance
                     .PathConnectionLayer[DAT_ViewportRenderState::instance.translationMatrix[_someY].addXgetTile
                         + uVar6],
@@ -67,7 +68,7 @@ namespace Map {
                 uVar6 = 0xf;
                 piVar5 = local_4;
                 do {
-                    if ((piVar5->field27_0x6c) && (0 < piVar5->firstMember)) {
+                    if ((piVar5->field_0x6c) && (0 < piVar5->firstMember)) {
                         uVar1 = uVar6 - 10;
                         uVar2 = DAT_TileMapState::instance.PathConnectionLayer[uVar6
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
@@ -84,7 +85,7 @@ namespace Map {
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][3] = uVar2;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][4]
-                                = (short)piVar5->field28_0x70;
+                                = (short)piVar5->field_0x70;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][5]
                                 = (short)piVar5->casDisRelated2;
@@ -100,13 +101,14 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.nof_fpoints = iVar5;
                         }
                     }
-                    if (piVar5[40].field27_0x6c != 0 && 0 < piVar5[40].firstMember
+                    if (piVar5[40].field_0x6c != 0 && 0 < piVar5[40].firstMember
                         && (uVar2 = DAT_TileMapState::instance.PathConnectionLayer
                                 [*(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
                                      + local_10)
                                     + uVar6],
                             _separateAreaID == uVar2)
-                        && uVar6 <= 0x18f && local_10 <= 0x12b4 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[local_c + uVar6] != '\0') {
+                        && uVar6 <= 0x18f && local_10 <= 0x12b4
+                        && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[local_c + uVar6] != '\0') {
                         DAT_TroopValueState::instance.attackInfo.nof_fpointsArray[iVar5][0] = (short)uVar6;
                         DAT_TroopValueState::instance.attackInfo
                             .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][1] = sVar8;
@@ -116,7 +118,7 @@ namespace Map {
                             .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][3] = uVar2;
                         DAT_TroopValueState::instance.attackInfo
                             .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][4]
-                            = (short)piVar5[40].field28_0x70;
+                            = (short)piVar5[40].field_0x70;
                         DAT_TroopValueState::instance.attackInfo
                             .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][5]
                             = (short)piVar5[40].casDisRelated2;
@@ -131,7 +133,7 @@ namespace Map {
                         iVar5 = DAT_TroopValueState::instance.attackInfo.nof_fpoints + 1;
                         DAT_TroopValueState::instance.attackInfo.nof_fpoints = iVar5;
                     }
-                    if ((piVar5[80].field27_0x6c != 0) && (0 < piVar5[80].firstMember)) {
+                    if ((piVar5[80].field_0x6c != 0) && (0 < piVar5[80].firstMember)) {
                         uVar1 = uVar6 + 10;
                         uVar2 = DAT_TileMapState::instance.PathConnectionLayer[uVar6
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
@@ -148,7 +150,7 @@ namespace Map {
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][3] = uVar2;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][4]
-                                = (short)piVar5[80].field28_0x70;
+                                = (short)piVar5[80].field_0x70;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][5]
                                 = (short)piVar5[80].casDisRelated2;
@@ -164,7 +166,7 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.nof_fpoints = iVar5;
                         }
                     }
-                    if ((piVar5[120].field27_0x6c != 0) && (0 < piVar5[120].firstMember)) {
+                    if ((piVar5[120].field_0x6c != 0) && (0 < piVar5[120].firstMember)) {
                         uVar1 = uVar6 + 0x14;
                         uVar2 = DAT_TileMapState::instance.PathConnectionLayer[uVar6
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
@@ -181,7 +183,7 @@ namespace Map {
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][3] = uVar2;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][4]
-                                = (short)piVar5[120].field28_0x70;
+                                = (short)piVar5[120].field_0x70;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][5]
                                 = (short)piVar5[120].casDisRelated2;
@@ -197,7 +199,7 @@ namespace Map {
                             DAT_TroopValueState::instance.attackInfo.nof_fpoints = iVar5;
                         }
                     }
-                    if ((piVar5[160].field27_0x6c != 0) && (0 < piVar5[160].firstMember)) {
+                    if ((piVar5[160].field_0x6c != 0) && (0 < piVar5[160].firstMember)) {
                         uVar1 = uVar6 + 0x1e;
                         uVar2 = DAT_TileMapState::instance.PathConnectionLayer[uVar6
                             + *(int*)((int)&DAT_ViewportRenderState::instance.translationMatrix[0].addXgetTile
@@ -214,7 +216,7 @@ namespace Map {
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][3] = uVar2;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][4]
-                                = (short)piVar5[160].field28_0x70;
+                                = (short)piVar5[160].field_0x70;
                             DAT_TroopValueState::instance.attackInfo
                                 .nof_fpointsArray[DAT_TroopValueState::instance.attackInfo.nof_fpoints][5]
                                 = (short)piVar5[160].casDisRelated2;

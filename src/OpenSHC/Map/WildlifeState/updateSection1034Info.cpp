@@ -30,12 +30,12 @@ namespace Map {
                     piVar4 = piVar3;
                     do {
                         piVar4->unknownNonZero01 = 0;
-                        piVar4->field27_0x6c = 0;
+                        piVar4->field_0x6c = 0;
                         if ((piVar4->castlebuildings)
                             && (iVar1 = MACRO_CALL_MEMBER(
                                     Map::WildlifeState_Func::hasAdjacentCellWithField24Or25, this)(iVar6, iVar2),
                                 iVar1 != 0)) {
-                            piVar4->field25_0x64 = piVar4->field25_0x64 + 1;
+                            piVar4->field_0x64 = piVar4->field_0x64 + 1;
                         }
                         iVar6 = iVar6 + 1;
                         piVar4 = piVar4 + 0x640;
@@ -45,13 +45,13 @@ namespace Map {
                 } while (iVar2 < 0x28);
             }
             iVar2 = 0;
-            piVar5 = &this->grid[0][0].field25_0x64;
+            piVar5 = &this->grid[0][0].field_0x64;
             do {
                 iVar6 = 0;
                 piVar7 = piVar5;
                 do {
                     if ((piVar7[-1] != 0) || (*piVar7 != 0)) {
-                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillUnknownNonZero01FromCell, this)(
+                        MACRO_CALL_MEMBER(Map::WildlifeState_Func::floodFillZoneProximityFromCell, this)(
                             iVar6, iVar2, 6);
                     }
                     iVar6 = iVar6 + 1;
@@ -61,14 +61,14 @@ namespace Map {
                 piVar5 = piVar5 + 0x28;
             } while (iVar2 < 0x28);
             iVar2 = 0;
-            piVar5 = &this->grid[0][0].field27_0x6c;
+            piVar5 = &this->grid[0][0].field_0x6c;
             do {
                 iVar6 = 0;
                 piVar7 = piVar5;
                 do {
                     if ((piVar7[-1] == 0)
-                        && (iVar1 = MACRO_CALL_MEMBER(
-                                Map::WildlifeState_Func::isSuitableWildlifeSpawnCell, this)(iVar6, iVar2),
+                        && (iVar1 = MACRO_CALL_MEMBER(Map::WildlifeState_Func::isAttackStagingCandidateCell, this)(
+                                iVar6, iVar2),
                             iVar1 != 0)) {
                         *piVar7 = *piVar7 + 1;
                     }
