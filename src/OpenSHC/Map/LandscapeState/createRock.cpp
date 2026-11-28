@@ -12,22 +12,16 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x004F2140
     int LandscapeState::createRock(undefined4 x, undefined4 y, int rockType, undefined4 size, undefined4 orientation)
     {
-        short* _pRock;
+        // find a free rock slot
         int _rockID;
-        _rockID = 1;
-        /*
-          the while loop finds the spot to write this tree data
-         */
-        _pRock = &this->rocks[1].one;
-        do {
-            if (*_pRock == 0)
+        for (_rockID = 1; _rockID < 4000; _rockID++) {
+            if (this->rocks[_rockID].one == 0) {
                 break;
-            if (3999 < _rockID) {
+            }
+            if (_rockID >= 3999) {
                 return 0;
             }
-            _rockID = _rockID + 1;
-            _pRock = _pRock + 0x10;
-        } while (_rockID < 4000);
+        }
         this->rocks[_rockID].uid = DAT_GameCore::instance.uniqueGameObjectTracker;
         DAT_GameCore::instance.uniqueGameObjectTracker = DAT_GameCore::instance.uniqueGameObjectTracker + 1;
         this->rocks[_rockID].size = (short)size;
