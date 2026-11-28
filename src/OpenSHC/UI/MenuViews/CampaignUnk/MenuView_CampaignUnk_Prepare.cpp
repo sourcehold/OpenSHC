@@ -26,74 +26,45 @@ namespace UI {
         // FUNCTION: STRONGHOLDCRUSADER 0x004DCC90
         void CampaignUnk::MenuView_CampaignUnk_Prepare()
         {
-            int iVar1;
-            int* piVar2;
-            int iVar3;
-            int iVar4;
-            int* piVar5;
-            int iVar6;
             MACRO_CALL(UI::Helpers_Func::ColorEntireScreen)(COL_BLACK::instance.shortValue);
             if (!INT_00ed3110::instance) {
                 MACRO_CALL(UI::Helpers_Func::ParseCampaignMapHotspotBitmap)();
             }
-            iVar3 = 0;
+            int count = 0;
             INT_00ed27b0::instance = 0;
             INT_00eb9b4c::instance = 0;
             INT_00eb9b44::instance = 0;
-            if (1 < DAT_GameCore::instance.missionNumber1to20) {
-                iVar6 = (DAT_GameCore::instance.missionNumber1to20 + -2) * 0x58;
-                piVar2 = (int*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x28);
-                iVar4 = 3;
-                piVar5 = piVar2;
-                do {
-                    if (piVar5[0x16] != *piVar5) {
-                        /*
-                          fixme:this doesn't make sense, clashes with floats
-                         */
-                        INT_ARRAY_00eb9afc::instance[iVar3] = iVar4 + -2;
-                        iVar3 = iVar3 + 1;
+            if (DAT_GameCore::instance.missionNumber1to20 > 1) {
+                // field_0x28 is the first of one row per mission
+                Game::CampaignInfoStruct1 const* rows
+                    = &(&DAT_MissionDefinedData::instance.field_0x28)[DAT_GameCore::instance.missionNumber1to20 - 2];
+                for (int i = 1; i <= 20; i++) {
+                    if ((&rows[1].sub.field_0x0)[i - 1] != (&rows[0].sub.field_0x0)[i - 1]) {
+                        INT_ARRAY_00eb9afc::instance[count] = i;
+                        count = count + 1;
                     }
-                    if (piVar5[0x17] != piVar5[1]) {
-                        INT_ARRAY_00eb9afc::instance[iVar3] = iVar4 + -1;
-                        iVar3 = iVar3 + 1;
-                    }
-                    if (piVar5[0x18] != piVar5[2]) {
-                        INT_ARRAY_00eb9afc::instance[iVar3] = iVar4;
-                        iVar3 = iVar3 + 1;
-                    }
-                    if (piVar5[0x19] != piVar5[3]) {
-                        INT_ARRAY_00eb9afc::instance[iVar3] = iVar4 + 1;
-                        iVar3 = iVar3 + 1;
-                    }
-                    if (piVar5[26] != piVar5[4]) {
-                        INT_ARRAY_00eb9afc::instance[iVar3] = iVar4 + 2;
-                        iVar3 = iVar3 + 1;
-                    }
-                    iVar1 = iVar4 + 3;
-                    piVar5 = piVar5 + 5;
-                    iVar4 = iVar4 + 5;
-                } while (iVar1 < 21);
-                DAT_00ec02f4::instance.field_0x0 = *piVar2;
-                DAT_00ec02f4::instance.field_0x4 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x2c);
-                DAT_00ec02f4::instance.field_0x8 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x30);
-                DAT_00ec02f4::instance.field_0xc = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x34);
-                DAT_00ec02f4::instance.field_0x10 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x38);
-                DAT_00ec02f4::instance.field_0x14 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x3c);
-                DAT_00ec02f4::instance.field_0x18 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x40);
-                DAT_00ec02f4::instance.field_0x1c = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x44);
-                DAT_00ec02f4::instance.field_0x20 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x48);
-                DAT_00ec02f4::instance.field_0x24 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x4c);
-                DAT_00ec02f4::instance.field_0x28 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x50);
-                DAT_00ec02f4::instance.field_0x2c = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x54);
-                DAT_00ec02f4::instance.field_0x30 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x58);
-                DAT_00ec02f4::instance.field_0x34 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x5c);
-                DAT_00ec02f4::instance.field_0x38 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x60);
-                DAT_00ec02f4::instance.field_0x3c = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 100);
-                DAT_00ec02f4::instance.field_0x40 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x68);
-                DAT_00ec02f4::instance.field_0x44 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x6c);
-                DAT_00ec02f4::instance.field_0x48 = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x70);
-                DAT_00ec02f4::instance.field_0x4c = *(undefined4*)((int)DAT_MissionDefinedData::ptr + iVar6 + 0x74);
-                INT_00ed27b0::instance = iVar3;
+                }
+                DAT_00ec02f4::instance.field_0x0 = rows->sub.field_0x0;
+                DAT_00ec02f4::instance.field_0x4 = rows->sub.field_0x4;
+                DAT_00ec02f4::instance.field_0x8 = rows->sub.field_0x8;
+                DAT_00ec02f4::instance.field_0xc = rows->sub.field_0xc;
+                DAT_00ec02f4::instance.field_0x10 = rows->sub.field_0x10;
+                DAT_00ec02f4::instance.field_0x14 = rows->sub.field_0x14;
+                DAT_00ec02f4::instance.field_0x18 = rows->sub.field_0x18;
+                DAT_00ec02f4::instance.field_0x1c = rows->sub.field_0x1c;
+                DAT_00ec02f4::instance.field_0x20 = rows->sub.field_0x20;
+                DAT_00ec02f4::instance.field_0x24 = rows->sub.field_0x24;
+                DAT_00ec02f4::instance.field_0x28 = rows->sub.field_0x28;
+                DAT_00ec02f4::instance.field_0x2c = rows->sub.field_0x2c;
+                DAT_00ec02f4::instance.field_0x30 = rows->sub.field_0x30;
+                DAT_00ec02f4::instance.field_0x34 = rows->sub.field_0x34;
+                DAT_00ec02f4::instance.field_0x38 = rows->sub.field_0x38;
+                DAT_00ec02f4::instance.field_0x3c = rows->sub.field_0x3c;
+                DAT_00ec02f4::instance.field_0x40 = rows->sub.field_0x40;
+                DAT_00ec02f4::instance.field_0x44 = rows->sub.field_0x44;
+                DAT_00ec02f4::instance.field_0x48 = rows->sub.field_0x48;
+                DAT_00ec02f4::instance.field_0x4c = rows->sub.field_0x4c;
+                INT_00ed27b0::instance = count;
             } else {
                 DAT_00ec02f4::instance.field_0x0 = DAT_MissionDefinedData::instance.field_0x28.sub.field_0x0;
                 DAT_00ec02f4::instance.field_0x4 = DAT_MissionDefinedData::instance.field_0x28.sub.field_0x4;
