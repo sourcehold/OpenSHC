@@ -49291,7 +49291,7 @@ SHC_3BB0A8C1_0x0052DDF0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052DF10 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0052DF30 | 28.9% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0052DF30 | 50.3% | this kept in ecx across calls (LTCG)
 
 SHC_3BB0A8C1_0x0052DF50 | 0.0% | Pending
 
@@ -49299,7 +49299,7 @@ SHC_3BB0A8C1_0x0052DF60 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052E020 | 67.4% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x0052E120 | 8.8% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0052E120 | 61.0% | Register allocation of the grid counters
 
 SHC_3BB0A8C1_0x0052E1A0 | 0.0% | Pending
 
