@@ -16863,7 +16863,7 @@ SHC_3BB0A8C1_0x0044B673 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0044B674 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0044B680 | 0.0% | Pending
+SHC_3BB0A8C1_0x0044B680 | 48.7% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x0044B760 | 100.0% | Reimplemented
 
@@ -23369,7 +23369,7 @@ SHC_3BB0A8C1_0x0048FCB0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0048FFD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00490060 | 0.0% | Pending
+SHC_3BB0A8C1_0x00490060 | 94.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00490080 | 0.0% | Pending
 
@@ -24233,7 +24233,7 @@ SHC_3BB0A8C1_0x00495A30 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00496400 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004968A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004968A0 | 55.6% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00496B80 | 100.0% | Reimplemented
 
@@ -29881,7 +29881,7 @@ SHC_3BB0A8C1_0x004BC100 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BC104 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BC110 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BC110 | 28.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004BC1C0 | 100.0% | Pending
 
@@ -30243,7 +30243,7 @@ SHC_3BB0A8C1_0x004BD7F0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BD7F4 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BD800 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BD800 | 32.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004BD970 | 0.0% | Pending
 
@@ -30257,7 +30257,7 @@ SHC_3BB0A8C1_0x004BD980 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004BDA80 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004BDE40 | 0.0% | Pending
+SHC_3BB0A8C1_0x004BDE40 | 62.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004BDE80 | 0.0% | Pending
 
@@ -33195,7 +33195,7 @@ SHC_3BB0A8C1_0x004C1370 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C1390 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004C13F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C13F0 | 48.1% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004C1708 | 0.0% | Pending
 
@@ -33901,7 +33901,7 @@ SHC_3BB0A8C1_0x004C2280 | 100.0% | Reimplemented (counted: only the resetMouseCu
 
 SHC_3BB0A8C1_0x004C3110 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004C31A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C31A0 | 26.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004C35B0 | 0.0% | Pending
 
@@ -34141,15 +34141,15 @@ SHC_3BB0A8C1_0x004C6298 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004C62A0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004C62C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C62C0 | 43.3% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C6820 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C6820 | 3.7% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C6880 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C6880 | 26.3% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C68D0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C68D0 | 44.8% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004C6B20 | 0.0% | Pending
+SHC_3BB0A8C1_0x004C6B20 | 92.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004C6B90 | 0.0% | Pending
 
@@ -35565,9 +35565,9 @@ SHC_3BB0A8C1_0x004D5010 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D5180 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D52A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D52A0 | 17.0% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x004D5370 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D5370 | 16.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004D53A0 | 0.0% | Pending
 
@@ -36023,7 +36023,7 @@ SHC_3BB0A8C1_0x004D9270 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D9290 | 100.0% | Reimplemented (counted: only memset/_stricmp call labels and the instance[i - 1] address label differ)
 
-SHC_3BB0A8C1_0x004D9400 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D9400 | 42.6% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004D9520 | 0.0% | Pending
 
