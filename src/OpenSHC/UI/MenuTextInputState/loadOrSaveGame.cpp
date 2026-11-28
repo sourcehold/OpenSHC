@@ -49,7 +49,7 @@ namespace UI {
                     _savesPath.c_str());
                 this->fileListEntryCount = DAT_ResourceManager::instance.mapFileCounter;
                 for (int _mapIndex = 0; _mapIndex < DAT_ResourceManager::instance.mapFileCounter; _mapIndex++) {
-                    (&this->DAT_MapSelectionPreloadMapIndexMapping)[_mapIndex] = _mapIndex;
+                    this->DAT_ArrayOfMapIndices[_mapIndex] = _mapIndex;
                 }
             } else {
                 std::string _savesPath
@@ -77,15 +77,15 @@ namespace UI {
             }
             DAT_MouseState::instance.waitCursorToggle = 0;
             this->fileListSortOrder = 0;
-            this->DAT_MenuLoadGameRelativeSelectionOffset = 0;
+            this->menuLoadGameRelativeSelectionOffset = 0;
             if (!this->fileListEntryCount) {
-                this->DAT_MenuLoadGameRelativeSelectionIndex = -1;
+                this->menuLoadGameRelativeSelectionIndex = -1;
             } else {
-                this->DAT_MenuLoadGameRelativeSelectionIndex = 0;
+                this->menuLoadGameRelativeSelectionIndex = 0;
             }
             this->lastListClickTime = 0;
             this->lastClickedListIndex = 0xffffffff;
-            this->field49_0xac = 0;
+            this->DAT_ArrayOfMapU3EndInt2 = 0;
             this->previewedListIndex = 0xffffffff;
             this->fileListVisibleRowCount = 0x10;
             if (action == 9) {
@@ -107,11 +107,11 @@ namespace UI {
                 iVar1 = this->savedListSelection2;
                 iVar2 = this->savedListSortOrder2;
             }
-            if ((this->DAT_MenuLoadGameRelativeSelectionIndex != -1)
-                && (this->fileListSortOrder = iVar2, this->DAT_MenuLoadGameRelativeSelectionIndex = iVar1,
-                    this->DAT_MenuLoadGameRelativeSelectionOffset = iVar6, iVar6 + iVar1 >= this->fileListEntryCount)) {
-                this->DAT_MenuLoadGameRelativeSelectionIndex = 0;
-                this->DAT_MenuLoadGameRelativeSelectionOffset = 0;
+            if ((this->menuLoadGameRelativeSelectionIndex != -1)
+                && (this->fileListSortOrder = iVar2, this->menuLoadGameRelativeSelectionIndex = iVar1,
+                    this->menuLoadGameRelativeSelectionOffset = iVar6, iVar6 + iVar1 >= this->fileListEntryCount)) {
+                this->menuLoadGameRelativeSelectionIndex = 0;
+                this->menuLoadGameRelativeSelectionOffset = 0;
             }
             MACRO_CALL(UI::MenuItems::SaveLoadMap_Func::MenuItemActionHandler_SaveLoadMap_TableHeader)(
                 -1 - this->fileListSortOrder);

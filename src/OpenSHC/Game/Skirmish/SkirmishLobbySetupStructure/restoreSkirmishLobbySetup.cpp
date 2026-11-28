@@ -82,7 +82,7 @@ namespace Game {
             DAT_GameCore::instance.selectedLordTypes[6] = this->playerLordTypeArray[6];
             DAT_GameCore::instance.selectedLordTypes[7] = this->playerLordTypeArray[7];
             DAT_GameCore::instance.selectedLordTypes[8] = this->playerLordTypeArray[8];
-            DAT_GameCore::instance.field152_0x2340 = this->mbr_0xf0;
+            DAT_GameCore::instance.field_0x2340 = this->mbr_0xf0;
             DAT_GameCore::instance.selectedLordTypeUnk = this->selectedLordType;
             DAT_GameSynchronyState::instance.skirmishDefaultPopularity = this->popularity;
             DAT_GameSynchronyState::instance.DAT_MapSelectionRelativeSelected = this->mapSelectionRelativeSelected;

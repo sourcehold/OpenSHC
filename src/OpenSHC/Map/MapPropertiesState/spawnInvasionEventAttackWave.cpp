@@ -5,12 +5,12 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
 #include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_VideoBikQueue.hpp"
-#include "OpenSHC/Map/Units/UnitTypeInt.hpp"
 
 namespace OpenSHC {
 namespace Map {
@@ -43,8 +43,8 @@ namespace Map {
         if (0x31 < DAT_TroopValueState::instance.attackInfo.inv_count) {
             DAT_TroopValueState::instance.attackInfo.inv_count = 1;
         }
-        MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackWaveSlot,
-            DAT_TroopValueState::ptr)(DAT_TroopValueState::instance.attackInfo.inv_count, 0);
+        MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::initializeAttackWaveSlot, DAT_TroopValueState::ptr)(
+            DAT_TroopValueState::instance.attackInfo.inv_count, 0);
         DAT_TroopValueState::instance.attackInfo
             .attackWavePlayerIDArray[DAT_TroopValueState::instance.attackInfo.inv_count]
             = (char)this->invasionEventContent.crusaderArabian + 2;
@@ -201,11 +201,10 @@ namespace Map {
                     if (_sliderValue < _unitCount) {
                         _unitCount = _sliderValue;
                     }
-                    iVar3 = (&DAT_TroopValueState::instance.attackInfo
-                            .unknownSignpostRelatedArray)[DAT_TroopValueState::instance.attackInfo.inv_count];
-                    MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, DAT_TribesState::ptr)(local_c,
-                        _unitTypeOther, DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar3][local_10].x,
+                    iVar3 = DAT_TroopValueState::instance.attackInfo
+                                .unknownSignpostRelatedArray[DAT_TroopValueState::instance.attackInfo.inv_count];
+                    MACRO_CALL_MEMBER(Map::Units::TribesState_Func::spawnUnitsIntoNewTribe, DAT_TribesState::ptr)(
+                        local_c, _unitTypeOther, DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar3][local_10].x,
                         DAT_GameState::instance.mapAndTime.signpostsMapEdge[iVar3][local_10].y,
                         this->invasionEventContent.crusaderArabian + 2, (UnitType)((int)(_unitType)), ((UnitType)0),
                         _unitCount, 0);
@@ -230,8 +229,8 @@ namespace Map {
                     eventWavFile = "arabian_attack.wav";
                     eventVideoBik = "good_soldier_nervous.bik";
                 }
-                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik,
-                    DAT_VideoBikQueue::ptr)("", eventVideoBik, eventWavFile);
+                MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playEventVideoBik, DAT_VideoBikQueue::ptr)(
+                    "", eventVideoBik, eventWavFile);
                 this->eventsCount = 0;
             }
         } while (true);

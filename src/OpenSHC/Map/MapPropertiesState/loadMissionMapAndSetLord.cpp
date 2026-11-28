@@ -18,7 +18,7 @@ namespace Map {
     void MapPropertiesState::loadMissionMapAndSetLord(int missionNumber)
     {
         int iVar1;
-        char** mapName;
+        char* mapName;
         iVar1 = missionNumber + -1;
         if (iVar1 < 5) {
         LAB_004c688d:
@@ -32,7 +32,7 @@ namespace Map {
             }
             mapName = (&DAT_MissionAestheticsDefinedData::instance.RandomEvent15VideoName)[missionNumber];
         }
-        MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMap, this)((char*)mapName);
+        MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMap, this)(mapName);
     LAB_004c68b3:
         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::setMissionNumberSpecificLord, DAT_UnitsState::ptr)(
             missionNumber);

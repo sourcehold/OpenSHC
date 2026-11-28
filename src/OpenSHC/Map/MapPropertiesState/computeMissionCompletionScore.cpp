@@ -228,8 +228,8 @@ namespace Map {
             LAB_004be25c:
                 if (pcVar7[0x10] != '\0') {
                     this->objectiveGoodsType[this->objectiveGoodsCount] = 0xf;
-                    iVar5 = MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::getDifficultyMultipliedValue,
-                        this)((int)*(short*)(pcVar7 + 0xd));
+                    iVar5 = MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::getDifficultyMultipliedValue, this)(
+                        (int)*(short*)(pcVar7 + 0xd));
                     this->objectiveGoodsSurplus[this->objectiveGoodsCount]
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .currentResources[0xf]
@@ -242,8 +242,8 @@ namespace Map {
                 }
                 if (pcVar7[4] != '\0') {
                     this->objectiveGoodsType[this->objectiveGoodsCount] = -1;
-                    iVar5 = MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::getDifficultyMultipliedValue,
-                        this)((int)*(short*)(pcVar7 + 1));
+                    iVar5 = MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::getDifficultyMultipliedValue, this)(
+                        (int)*(short*)(pcVar7 + 1));
                     this->objectiveGoodsSurplus[this->objectiveGoodsCount]
                         = DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                               .currentPopulation
@@ -284,13 +284,11 @@ namespace Map {
         }
         this->troopSurvivalScore = 0;
         if ((DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION)
-            || ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk
-                && ((int)this->SEC_U3_MapType2_1 < 2)))) {
+            || ((DAT_GameCore::instance.gameMode_2 == Game::GM_BUILDERUnk && ((int)this->SEC_U3_MapType2_1 < 2)))) {
             psVar8 = &DAT_UnitsState::instance.units[1].owner;
             iVar5 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             do {
-                if (((psVar8[-5] != Map::Units::ULS_INVISIBLE) && (*psVar8 == iVar5))
-                    && (psVar8[0x107] != 0)) {
+                if (((psVar8[-5] != Map::Units::ULS_INVISIBLE) && (*psVar8 == iVar5)) && (psVar8[0x107] != 0)) {
                     iVar5 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getValueOfTroopType,
                         DAT_TroopValueState::ptr)((Map::Units::UnitType)((int)psVar8[-4]));
                     iVar6 = iVar6 + iVar5;

@@ -44,14 +44,12 @@ namespace Game {
         } else if (DAT_GameCore::instance.currentTrailType == Game::TT_WARCHEST) {
             pCVar7 = DAT_SkirmishDefinedData::instance.WarchestTrailMissions + skirmishTrailMission;
         }
-        MACRO_CALL_MEMBER(
-            Synchrony::GameSynchronyState_Func::setupSkirmishLobby, DAT_GameSynchronyState::ptr)();
+        MACRO_CALL_MEMBER(Synchrony::GameSynchronyState_Func::setupSkirmishLobby, DAT_GameSynchronyState::ptr)();
         DAT_GameSynchronyState::instance.isHost = TRUE;
         DAT_GameSynchronyState::instance.currentGameMode = Game::GM_SKIRMISH_SINGLE_PLAYER;
         DAT_GameSynchronyState::instance.DPLAYX_ReceivedPlayerID = 1;
         DAT_GameCore::instance.gameMode_2 = Game::GM_SKIRMISH_AND_MULTIPLAYER;
-        MACRO_CALL(OS_Func::_memset)(
-            DAT_GameSynchronyState::instance.DAT_PlayerNames, 0, (size_t)((int)(2250)));
+        MACRO_CALL(OS_Func::_memset)(DAT_GameSynchronyState::instance.DAT_PlayerNames, 0, (size_t)((int)(2250)));
         piVar2 = DAT_GameSynchronyState::instance.currentAIArray;
         do {
             piVar2[-0x1b] = -1;
@@ -59,8 +57,7 @@ namespace Game {
             piVar2[9] = -1;
             piVar2 = piVar2 + 1;
         } while ((int)piVar2 < 0x191dea0);
-        pcVar3 = MACRO_CALL_MEMBER(
-            Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
+        pcVar3 = MACRO_CALL_MEMBER(Text::UserTextHandler_Func::getTextArrayPointer, DAT_UserTextHandlerState::ptr)(0);
         pacVar6 = DAT_GameSynchronyState::instance.DAT_PlayerNames + 1;
         do {
             cVar1 = *pcVar3;
@@ -120,7 +117,7 @@ namespace Game {
             iVar5 = iVar5 + 1;
             piVar2 = piVar2 + 1;
         } while (iVar5 < 8);
-        pcVar3 = (char *)(pCVar7->mapNameAddress);
+        pcVar3 = (char*)(pCVar7->mapNameAddress);
         iVar4 = 0x1a22f9c - (int)pcVar3;
         do {
             cVar1 = *pcVar3;
@@ -152,8 +149,8 @@ namespace Game {
         }
         DAT_GameState::instance.mapAndTime.year = (int)_startDateInMonths / 0xc;
         DAT_GameState::instance.mapAndTime.month = (int)_startDateInMonths % 0xc;
-        DAT_GameSynchronyState::instance.finalResults.yearStart = (int)_startDateInMonths / 0xc;
-        DAT_GameSynchronyState::instance.finalResults.monthStart = (int)_startDateInMonths % 0xc;
+        DAT_GameSynchronyState::instance.finalResults.tail.tail1.yearStart = (int)_startDateInMonths / 0xc;
+        DAT_GameSynchronyState::instance.finalResults.tail.tail1.monthStart = (int)_startDateInMonths % 0xc;
     }
 
 }

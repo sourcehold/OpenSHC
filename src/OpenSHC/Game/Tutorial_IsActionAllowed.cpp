@@ -5,10 +5,10 @@
 #include "OpenSHC/Globals/DAT_00df5558.hpp"
 #include "OpenSHC/Globals/DAT_00df5560.hpp"
 #include "OpenSHC/Globals/DAT_00df5590.hpp"
+#include "OpenSHC/Globals/DAT_DisableTutorialRestrictions.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
 #include "OpenSHC/Globals/DAT_GameSynchronyState.hpp"
 #include "OpenSHC/Globals/DAT_TutorialCurrentStep.hpp"
-#include "OpenSHC/Globals/INT_DisableTutorialRestrictions.hpp"
 
 namespace OpenSHC {
 
@@ -19,7 +19,7 @@ BOOLEnum Game::Tutorial_IsActionAllowed(undefined4 actionType, int actionParam)
 {
     int iVar1;
     bool bVar2;
-    if (INT_DisableTutorialRestrictions::instance) {
+    if (DAT_DisableTutorialRestrictions::instance) {
         return TRUE;
     }
     switch (actionType) {

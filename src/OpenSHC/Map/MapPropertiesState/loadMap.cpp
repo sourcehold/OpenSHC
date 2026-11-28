@@ -12,10 +12,13 @@
 #include "OpenSHC/Map/Units/TroopValueState.func.hpp"
 #include "OpenSHC/Map/Units/UnitsState.func.hpp"
 #include "OpenSHC/Rendering/Bink/AIMessageQueue.func.hpp"
+#include "OpenSHC/AI/Siege/SiegeUnitCounts.hpp"
 #include "OpenSHC/Game/GameMode2.hpp"
+#include "OpenSHC/Game/GameMode2Int.hpp"
 #include "OpenSHC/IO/FileResourceType.hpp"
 #include "OpenSHC/Map/Units/UnitLogicState.hpp"
 #include "OpenSHC/Map/Units/UnitType.hpp"
+#include "OpenSHC/Map/Units/UnitTypeShort.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_AICState.hpp"
@@ -33,19 +36,18 @@
 #include "OpenSHC/Globals/FilePackagerObj.hpp"
 #include "OpenSHC/Globals/MSVC_SecurityCookie.hpp"
 #include "OpenSHC/Globals/TIME_ReceivedMessage_2.hpp"
-#include "OpenSHC/Game/GameMode2Int.hpp"
-#include "OpenSHC/Map/Units/UnitTypeShort.hpp"
 
 namespace OpenSHC {
 namespace Map {
 
+    using AI::Siege::SiegeUnitCounts;
     using Game::GameMode2;
+    using Game::GameMode2Int;
     using IO::FileResourceType;
     using Map::Units::UnitLogicState;
     using Map::Units::UnitType;
-    using WindowsHelper::Enums::BOOLEnum;
-    using Game::GameMode2Int;
     using Map::Units::UnitTypeShort;
+    using WindowsHelper::Enums::BOOLEnum;
 
     // FUNCTION: STRONGHOLDCRUSADER 0x004C62C0
     void MapPropertiesState::loadMap(char* mapName)
@@ -93,8 +95,7 @@ namespace Map {
             IO::FRT_MAPS, (char const*)((int)(mapName)));
         MACRO_CALL_MEMBER(IO::FilePackager_Func::readMapOrSavFile, FilePackagerObj::ptr)(
             DAT_MapDefinedData::instance.MapSectionAddressArray);
-        MACRO_CALL_MEMBER(
-            Audio::MSS::SoundSystem_Func::mapLoadingAndLaunchGameRelated1, DAT_SoundSystemState::ptr)();
+        MACRO_CALL_MEMBER(Audio::MSS::SoundSystem_Func::mapLoadingAndLaunchGameRelated1, DAT_SoundSystemState::ptr)();
         DAT_GameState::instance.mapAndTime.difficulty = local_30;
         DAT_GameCore::instance.xbowProducible_logic = local_10;
         DAT_GameCore::instance.pikeProducible_logic = local_28;
@@ -110,8 +111,7 @@ namespace Map {
             iVar6 = 8;
             pUVar3 = &DAT_UnitsState::instance.units[1].unitType;
             do {
-                if (((pUVar3[-1] != Map::Units::ULS_INVISIBLE)
-                        && (*pUVar3 == Map::Units::UT_E_ARCHER))
+                if (((pUVar3[-1] != Map::Units::ULS_INVISIBLE) && (*pUVar3 == Map::Units::UT_E_ARCHER))
                     && (pUVar3[4] == 1)) {
                     iVar6 = iVar6 + -1;
                     *(int*)(pUVar3 + -0x3f) = 3;
@@ -153,8 +153,7 @@ namespace Map {
             mapName = mapName + 1;
         } while (cVar1 != '\0');
         if (DAT_GameCore::instance.gameMode_2 == Game::GM_CAMPAIGN_MISSION) {
-            MACRO_CALL_MEMBER(
-                Game::GameCore_Func::removeJesterAndLadyUnitsInCertainMissions, DAT_GameCore::ptr)();
+            MACRO_CALL_MEMBER(Game::GameCore_Func::removeJesterAndLadyUnitsInCertainMissions, DAT_GameCore::ptr)();
         } else if (DAT_GameCore::instance.gameMode_2 == Game::GM_ECONOMIC_CAMPAIGN_SH1) {
             MACRO_CALL_MEMBER(Game::GameCore_Func::removeLadyAndJester, DAT_GameCore::ptr)();
         }
@@ -180,7 +179,7 @@ namespace Map {
             DAT_GameState::instance.mapAndTime.startGoods[7] = DAT_GameState::instance.mapAndTime.startGoods[8];
             DAT_GameState::instance.mapAndTime.startGoods[8] = 0;
             pSVar5 = &DAT_GameState::instance.mapAndTime.siegeInformation;
-            pSVar8 = &this->SEC_SiegeInformation;
+            pSVar8 = (SiegeUnitCounts*)this->SEC_SiegeInformation;
             do {
                 pSVar5->archers = pSVar8->archers;
                 pSVar5 = (SiegeUnitCounts*)&pSVar5->crossbowmen;
@@ -197,8 +196,7 @@ namespace Map {
         MACRO_CALL_MEMBER(Game::GameStateStructures_Func::clearEnemyRelatedStructures, DAT_GameState::ptr)();
         DAT_UnitsState::instance.lastSelectedUnitID = 0;
         MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::deselectAllUnitsOneByOne, DAT_UnitsState::ptr)();
-        MACRO_CALL_MEMBER(
-            Map::Units::UnitsState_Func::clearSelectionCountsAndPlayerIDs, DAT_UnitsState::ptr)();
+        MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::clearSelectionCountsAndPlayerIDs, DAT_UnitsState::ptr)();
         DAT_GameState::instance.mapAndTime.euroRecruitable[4]
             = (int)this->barracksRecruitability.recruitability.macemen;
         DAT_GameState::instance.mapAndTime.euroRecruitable[5]
@@ -253,10 +251,8 @@ namespace Map {
         MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::importTradingCosts, this)();
         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::clearAttackInfo, DAT_TroopValueState::ptr)();
         MACRO_CALL_MEMBER(AI::AICState_Func::recomputeAIZonerLayer, DAT_AICState::ptr)();
-        MACRO_CALL_MEMBER(
-            Map::TileMapState_Func::setSignpostDistanceForCampaignMission, DAT_TileMapState::ptr)();
-        MACRO_CALL_MEMBER(
-            Rendering::Bink::AIMessageQueue_Func::playNextStoredBinkVideo, DAT_VideoBikQueue::ptr)();
+        MACRO_CALL_MEMBER(Map::TileMapState_Func::setSignpostDistanceForCampaignMission, DAT_TileMapState::ptr)();
+        MACRO_CALL_MEMBER(Rendering::Bink::AIMessageQueue_Func::playNextStoredBinkVideo, DAT_VideoBikQueue::ptr)();
         DAT_GameCore::instance.xbowProducible_logic = (int)this->SEC_XbowProducible_save;
         DAT_GameCore::instance.bowProducible_logic = (int)this->SEC_BowProducible_save;
         DAT_GameCore::instance.pikeProducible_logic = (int)this->SEC_PikeProducible_save;

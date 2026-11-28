@@ -4,13 +4,12 @@
 #include "OpenSHC/Text/TextManager.func.hpp"
 #include "OpenSHC/DE/SHCDE/eTextSections.hpp"
 
-#include "OpenSHC/Globals/DAT_00eb9b60.hpp"
 #include "OpenSHC/Globals/DAT_00ed3124.hpp"
 #include "OpenSHC/Globals/DAT_MissionDefinedData.hpp"
 #include "OpenSHC/Globals/DAT_SkMasters2DataArray.hpp"
 #include "OpenSHC/Globals/DAT_SkMasters2Data_Count.hpp"
 #include "OpenSHC/Globals/DAT_TextManagerObject.hpp"
-#include "OpenSHC/Globals/INT_00eb0e44.hpp"
+#include "OpenSHC/Globals/INT_00eb9b60.hpp"
 #include "OpenSHC/Globals/INT_00ed2bdc.hpp"
 #include "OpenSHC/Globals/INT_ARRAY_00eb0e48.hpp"
 #include "OpenSHC/Globals/INT_ARRAY_00eb96d8.hpp"
@@ -81,7 +80,7 @@ namespace Game {
          */
         if (DAT_MissionDefinedData::instance.sortColumn < 2) {
             iVar7 = 0;
-            DAT_00eb9b60::instance = 0;
+            INT_00eb9b60::instance = 0;
             if (DAT_MissionDefinedData::instance.descending == 1) {
                 _index = 0;
                 if (0 < _count) {
@@ -92,10 +91,10 @@ namespace Game {
                         }
                         _index = _index + 1;
                     } while (_index < _count);
-                    DAT_00eb9b60::instance = iVar7;
+                    INT_00eb9b60::instance = iVar7;
                 }
             } else if ((!DAT_MissionDefinedData::instance.descending) && (0 < _count)) {
-                piVar5 = INT_00eb0e44::ptr + _count;
+                piVar5 = &INT_ARRAY_00eb0e48::instance[_count - 1];
                 _index = _count;
                 do {
                     _index = _index + -1;
@@ -106,13 +105,13 @@ namespace Game {
                     piVar5 = piVar5 + -1;
                     _count = _count + -1;
                 } while (_count);
-                DAT_00eb9b60::instance = iVar7;
+                INT_00eb9b60::instance = iVar7;
             }
         } else {
             if (DAT_MissionDefinedData::instance.sortColumn == 4) {
                 _index = 0;
                 iVar7 = 0;
-                DAT_00eb9b60::instance = 0;
+                INT_00eb9b60::instance = 0;
                 if (0 < _count) {
                     puVar7 = DAT_SkMasters2DataArray::ptr[0];
                     do {
@@ -126,14 +125,15 @@ namespace Game {
                         }
                         iVar7 = iVar7 + 1;
                         puVar7 = puVar7 + 0x2fc;
-                        DAT_00eb9b60::instance = _index;
+                        INT_00eb9b60::instance = _index;
                     } while (iVar7 < _count);
                 }
-                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(DAT_MissionDefinedData::instance.descending);
+                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(
+                    DAT_MissionDefinedData::instance.descending);
             }
             if (DAT_MissionDefinedData::instance.sortColumn == 2) {
                 _index = 0;
-                DAT_00eb9b60::instance = 0;
+                INT_00eb9b60::instance = 0;
                 if (iVar7 == 1) {
                     iVar7 = 0;
                     if (0 < _count) {
@@ -148,8 +148,9 @@ namespace Game {
                             iVar7 = iVar7 + 1;
                             pSVar8 = pSVar8 + 1;
                         } while (iVar7 < _count);
-                        DAT_00eb9b60::instance = _index;
-                        MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(DAT_MissionDefinedData::instance.descending);
+                        INT_00eb9b60::instance = _index;
+                        MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(
+                            DAT_MissionDefinedData::instance.descending);
                     }
                 } else {
                     iVar7 = 0;
@@ -158,17 +159,15 @@ namespace Game {
                         do {
                             if (INT_ARRAY_00eb0e48::instance[iVar7] != 0) {
                                 if (pSVar8->score) {
-                                    pcVar4 = MACRO_CALL_MEMBER(
-                                        Text::TextManager_Func::getTextStringInGroupAtOffset,
-                                        DAT_TextManagerObject::ptr)(
-                                        DE::SHCDE::TEXT_TRAIL_NAMES_CRU, pSVar8->score);
+                                    pcVar4 = MACRO_CALL_MEMBER(Text::TextManager_Func::getTextStringInGroupAtOffset,
+                                        DAT_TextManagerObject::ptr)(DE::SHCDE::TEXT_TRAIL_NAMES_CRU, pSVar8->score);
                                     pcVar9 = pSVar8->mapName;
                                     do {
                                         cVar1 = *pcVar4;
                                         *pcVar9 = cVar1;
                                         pcVar4 = pcVar4 + 1;
                                         pcVar9 = pcVar9 + 1;
-                                        _index = DAT_00eb9b60::instance;
+                                        _index = INT_00eb9b60::instance;
                                         _count = DAT_SkMasters2Data_Count::instance;
                                     } while (cVar1 != '\0');
                                 }
@@ -183,19 +182,20 @@ namespace Game {
                                 INT_ARRAY_00ed2be0::instance[_index] = ((uint)bVar6 * -0x100 + -1) - (uint)bVar3;
                                 INT_ARRAY_00ed27f0::instance[_index] = iVar7;
                                 _index = _index + 1;
-                                DAT_00eb9b60::instance = _index;
+                                INT_00eb9b60::instance = _index;
                             }
                             iVar7 = iVar7 + 1;
                             pSVar8 = pSVar8 + 1;
                         } while (iVar7 < _count);
                     }
                 }
-                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(DAT_MissionDefinedData::instance.descending);
+                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(
+                    DAT_MissionDefinedData::instance.descending);
             }
             if (DAT_MissionDefinedData::instance.sortColumn == 3) {
                 _index = 0;
                 iVar7 = 0;
-                DAT_00eb9b60::instance = 0;
+                INT_00eb9b60::instance = 0;
                 if (0 < _count) {
                     piVar5 = &DAT_SkMasters2DataArray::instance[0].gameDurationInMinutes;
                     do {
@@ -207,10 +207,11 @@ namespace Game {
                         }
                         iVar7 = iVar7 + 1;
                         piVar5 = piVar5 + 0x2fc;
-                        DAT_00eb9b60::instance = _index;
+                        INT_00eb9b60::instance = _index;
                     } while (iVar7 < _count);
                 }
-                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(DAT_MissionDefinedData::instance.descending);
+                MACRO_CALL(Game::Skirmish_Func::Skirmish_SortAIOpponentOrder)(
+                    DAT_MissionDefinedData::instance.descending);
             }
         }
     }

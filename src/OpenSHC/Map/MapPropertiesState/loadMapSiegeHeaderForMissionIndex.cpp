@@ -19,19 +19,19 @@ namespace Map {
         pcVar1 = param_1 + -1;
         if ((int)pcVar1 < 5) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field15_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
         }
         if ((int)pcVar1 < 10) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field15_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
         }
         if ((int)pcVar1 < 0xf) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field15_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
         }
         if ((int)pcVar1 < 20) {
             MACRO_CALL_MEMBER(Map::MapPropertiesState_Func::loadMapSiegeHeaderSections, this)(
-                (char*)(&DAT_MissionAestheticsDefinedData::instance.field15_0x3c)[(int)pcVar1]);
+                (char*)(&DAT_MissionAestheticsDefinedData::instance.field_0x3c)[(int)pcVar1]);
         }
     }
 
