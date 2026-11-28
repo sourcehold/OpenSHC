@@ -58,6 +58,7 @@ namespace Map {
             } else if (unitType == OpenSHC::Map::Units::UT_CAGEDOG) {
                 this->units[_unitID].calculatedOwnerPlayerIndex = 0;
             }
+            this->units[_unitID].field_0xe8 = 0;
             int _x = this->units[_unitID].microXPosition / 8;
             int _y = this->units[_unitID].microYPosition / 8;
             this->units[_unitID].mimicCurrentYPosition = _y;
@@ -67,7 +68,6 @@ namespace Map {
             this->units[_unitID].x = _x;
             this->units[_unitID].destinationX_2Unk = _x;
             this->units[_unitID].movementRelated = 8;
-            this->units[_unitID].field_0xe8 = 0;
             this->units[_unitID].targetingType = (UnitInstructionType)0;
             this->units[_unitID].tile = this->units[_unitID].x
                 + DAT_ViewportRenderState::instance.translationMatrix[this->units[_unitID].y].addXgetTile;
