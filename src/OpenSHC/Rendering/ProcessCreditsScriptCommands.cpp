@@ -24,12 +24,12 @@
 #include "OpenSHC/Globals/DAT_WindowAndDirectDraw.hpp"
 #include "OpenSHC/Globals/DWORD_00eb9ac4.hpp"
 #include "OpenSHC/Globals/FLOAT_00eb0e2c.hpp"
+#include "OpenSHC/Globals/FLOAT_00ec083c.hpp"
 #include "OpenSHC/Globals/FLOAT_Between1And5.hpp"
 #include "OpenSHC/Globals/INT_00eb0e30.hpp"
-#include "OpenSHC/Globals/INT_00ec083c.hpp"
-#include "OpenSHC/Globals/INT_00ed27a4.hpp"
-#include "OpenSHC/Globals/DAT_00ec082c.hpp"
 #include "OpenSHC/Globals/INT_00ec0828.hpp"
+#include "OpenSHC/Globals/INT_00ec082c.hpp"
+#include "OpenSHC/Globals/INT_00ed27a4.hpp"
 
 namespace OpenSHC {
 
@@ -58,18 +58,18 @@ void Rendering::ProcessCreditsScriptCommands()
             iVar10 = iVar9;
             switch (DAT_ARRAY_00eb9b68::instance[iVar9].commandType) {
             case 1:
-                if (FLOAT_Between1And5::instance + (float)INT_00ec083c::instance
+                if (FLOAT_Between1And5::instance + FLOAT_00ec083c::instance
                     <= (float)(int)DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
-                    INT_00ec083c::instance = (int)(FLOAT_Between1And5::instance + (float)INT_00ec083c::instance);
+                    FLOAT_00ec083c::instance = FLOAT_Between1And5::instance + FLOAT_00ec083c::instance;
                     return;
                 }
-                INT_00ec083c::instance = 0;
+                FLOAT_00ec083c::instance = 0.0f;
                 break;
             case 2:
                 iVar8 = 0;
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
             LAB_004e0b60:
-                if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid != 1
+                if (((CreditsRelatedStructure*)(piVar7 + -1))->type != 1
                     || *piVar7 != DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)
                     goto LAB_004e0b74;
                 iVar1 = DAT_ARRAY_00ec0348::instance[iVar8].fadeMode;
@@ -83,14 +83,14 @@ void Rendering::ProcessCreditsScriptCommands()
                 iVar8 = 0;
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->type == 2
                         && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         iVar1 = DAT_ARRAY_00ec0348::instance[iVar8].fadeMode;
                         goto LAB_004e0b8e;
                     }
                     piVar7 = piVar7 + 0xd;
                     iVar8 = iVar8 + 1;
-                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
+                } while ((int)piVar7 < (int)&INT_00ec082c::instance);
             LAB_004e0b98:
                 bVar11 = iVar8 == 0x18;
                 goto LAB_004e0b9b;
@@ -106,39 +106,39 @@ void Rendering::ProcessCreditsScriptCommands()
             case 5:
                 MACRO_CALL(UI::Credits_Func::InsertElementIntoAnArrayAt_ec0348)(1,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field17_0x38)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x38)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].x)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].height)), 0,
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x28)));
                 break;
             case 6:
                 MACRO_CALL(UI::Credits_Func::InsertElementIntoAnArrayAt_ec0348)(1,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field17_0x38)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x38)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].x)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].height)), 1,
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x28)));
                 break;
             case 7:
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 1
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->type == 1
                         && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar7 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
                     piVar7 = piVar7 + 0xd;
-                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
+                } while ((int)piVar7 < (int)&INT_00ec082c::instance);
                 break;
             case 8:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if ((pCVar4->isValid == 1) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
-                        pCVar4->isValid = 0;
+                    if ((pCVar4->type == 1) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                        pCVar4->type = 0;
                     }
                     pCVar4 = pCVar4 + 1;
                 } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
@@ -156,8 +156,8 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0xb:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if ((pCVar4->isValid == 2) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
-                        pCVar4->isValid = 0;
+                    if ((pCVar4->type == 2) && (pCVar4->xSpace == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)) {
+                        pCVar4->type = 0;
                     }
                     pCVar4 = pCVar4 + 1;
                 } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
@@ -169,7 +169,7 @@ void Rendering::ProcessCreditsScriptCommands()
                     (DWORD)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].flagLoopCount)), 0,
                     DAT_ARRAY_00eb9b68::instance[iVar9].x + DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth,
                     DAT_ARRAY_00eb9b68::instance[iVar9].y + DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight,
-                    (DWORD)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
+                    (DWORD)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x28)));
                 iVar10 = DAT_UnknownBinkIndex::instance;
                 break;
             case 0xd:
@@ -184,33 +184,33 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0xe:
                 MACRO_CALL(UI::Credits_Func::InsertElementIntoArrayAt_ec0348_2)(2,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field6_0x18)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field16_0x34)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x18)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x34)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].x)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)), 0,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field15_0x30)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x30)));
                 break;
             case 0xf:
                 MACRO_CALL(UI::Credits_Func::InsertElementIntoArrayAt_ec0348_2)(2,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].soundStream)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field6_0x18)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field16_0x34)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x18)),
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x34)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].x)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)), 1,
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field15_0x30)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x30)));
                 break;
             case 0x10:
                 piVar7 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if (((CreditsRelatedStructure*)(piVar7 + -1))->isValid == 2
+                    if (((CreditsRelatedStructure*)(piVar7 + -1))->type == 2
                         && *piVar7 == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar7 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar7 - 1))->fadeMode = 2;
                     }
                     piVar7 = piVar7 + 0xd;
-                } while ((int)piVar7 < (int)&DAT_00ec082c::instance);
+                } while ((int)piVar7 < (int)&INT_00ec082c::instance);
                 break;
             case 0x11:
                 INT_00ed27a4::instance = DAT_ARRAY_00eb9b68::instance[iVar9].soundStream;
@@ -236,7 +236,7 @@ void Rendering::ProcessCreditsScriptCommands()
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].height)), 0,
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x28)));
                 break;
             case 0x16:
                 if (!DAT_MouseState::instance.draggingStopped) {
@@ -244,7 +244,7 @@ void Rendering::ProcessCreditsScriptCommands()
                 }
                 piVar4 = &DAT_ARRAY_00ec0348::instance[0].x;
                 do {
-                    if (((CreditsRelatedStructure*)(piVar4 - 2))->isValid == 3) {
+                    if (((CreditsRelatedStructure*)(piVar4 - 2))->type == 3) {
                         if (((CreditsRelatedStructure*)(piVar4 - 2))->xSpace <= DAT_MouseState::instance.screenSpaceX
                                     - DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth
                             && DAT_MouseState::instance.screenSpaceX
@@ -268,8 +268,8 @@ void Rendering::ProcessCreditsScriptCommands()
             case 0x17:
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if (pCVar4->isValid == 3) {
-                        pCVar4->isValid = 0;
+                    if (pCVar4->type == 3) {
+                        pCVar4->type = 0;
                     }
                     pCVar4 = pCVar4 + 1;
                 } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
@@ -290,8 +290,8 @@ void Rendering::ProcessCreditsScriptCommands()
                 }
                 pCVar4 = DAT_ARRAY_00ec0348::instance;
                 do {
-                    if (pCVar4->isValid) {
-                        pCVar4->isValid = 0;
+                    if (pCVar4->type) {
+                        pCVar4->type = 0;
                     }
                     pCVar4 = pCVar4 + 1;
                 } while ((int)pCVar4 < (int)&INT_00ec0828::instance);
@@ -356,34 +356,34 @@ void Rendering::ProcessCreditsScriptCommands()
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].y)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].width)),
                     (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].height)), 0,
-                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field13_0x28)));
+                    (undefined4)((int)(DAT_ARRAY_00eb9b68::instance[iVar9].field_0x28)));
                 break;
             case 0x2a:
                 piVar6 = &DAT_ARRAY_00ec0348::instance[0].xSpace;
                 do {
-                    if (((CreditsRelatedStructure*)(piVar6 - 1))->isValid == 4
+                    if (((CreditsRelatedStructure*)(piVar6 - 1))->type == 4
                         && ((CreditsRelatedStructure*)(piVar6 - 1))->xSpace
                             == DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                         ((CreditsRelatedStructure*)(piVar6 - 1))->blendStrength = 1.0f;
                         ((CreditsRelatedStructure*)(piVar6 - 1))->fadeMode = 2;
                     }
                     piVar6 = piVar6 + 0xd;
-                } while ((int)piVar6 < (int)&DAT_00ec082c::instance);
+                } while ((int)piVar6 < (int)&INT_00ec082c::instance);
                 break;
             case 0x2b:
                 DAT_00eb0e40::instance = 5;
                 FLOAT_00eb0e2c::instance = 31.0;
                 break;
             case 0x2c:
-                if (FLOAT_Between1And5::instance + (float)INT_00ec083c::instance
+                if (FLOAT_Between1And5::instance + FLOAT_00ec083c::instance
                     <= (float)(int)DAT_ARRAY_00eb9b68::instance[iVar9].soundStream) {
                     if (!DAT_MouseState::instance.draggingStopped) {
-                        INT_00ec083c::instance = (int)(FLOAT_Between1And5::instance + (float)INT_00ec083c::instance);
+                        FLOAT_00ec083c::instance = FLOAT_Between1And5::instance + FLOAT_00ec083c::instance;
                         return;
                     }
-                    INT_00ec083c::instance = 0;
+                    FLOAT_00ec083c::instance = 0.0f;
                 } else {
-                    INT_00ec083c::instance = 0;
+                    FLOAT_00ec083c::instance = 0.0f;
                 }
             }
             iVar10 = iVar10 + 1;
