@@ -36181,7 +36181,7 @@ SHC_3BB0A8C1_0x004DAD40 | 100.0% | Reimplemented (counted: only the loop-end sym
 
 SHC_3BB0A8C1_0x004DAE00 | 100.0% | Reimplemented (counted: only the loop-end symbol differs)
 
-SHC_3BB0A8C1_0x004DAE90 | 72.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004DAE90 | 95.7% | Only data addresses differ (31.0f literal at 0x5AB03C, array-end label)
 
 SHC_3BB0A8C1_0x004DAF50 | 100.0% | Reimplemented, only the loop's end address resolves to the next symbol
 

@@ -9,15 +9,12 @@ namespace UI {
     void Credits::InsertElementIntoArrayAt_ec0348_2(
         int param_1, int xSpace, int param_3, int param_4, int x, int y, int param_7, int width, int param_9)
     {
-        CreditsRelatedStructure* pCVar1;
         if (param_1 == 2) {
-            int _index = 0;
-            pCVar1 = DAT_ARRAY_00ec0348::instance;
-            while (pCVar1->type) {
-                pCVar1 = pCVar1 + 1;
-                _index = _index + 1;
-                if (0xec0827 < (int)pCVar1) {
-                    return;
+            int _index = -1;
+            for (int i = 0; i < 24; i++) {
+                if (DAT_ARRAY_00ec0348::instance[i].type == 0) {
+                    _index = i;
+                    break;
                 }
             }
             if (_index != -1) {
@@ -28,9 +25,9 @@ namespace UI {
                 DAT_ARRAY_00ec0348::instance[_index].y = y;
                 DAT_ARRAY_00ec0348::instance[_index].width = width;
                 DAT_ARRAY_00ec0348::instance[_index].field_0x24 = param_9;
-                DAT_ARRAY_00ec0348::instance[_index].field_0x28 = param_4;
                 DAT_ARRAY_00ec0348::instance[_index].type = 2;
                 DAT_ARRAY_00ec0348::instance[_index].fadeMode = param_7;
+                DAT_ARRAY_00ec0348::instance[_index].field_0x28 = param_4;
                 DAT_ARRAY_00ec0348::instance[_index].field_0x1c = 7;
                 if (param_7 == 1) {
                     DAT_ARRAY_00ec0348::instance[_index].blendStrength = 31.0f;
