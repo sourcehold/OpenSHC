@@ -2733,6 +2733,42 @@ branch tuple) at `FgTryCommonTailMerge` entry for A, and look at what `FgWeightF
 property that reorders them (candidates: the order the front end emits the `||` block versus
 the inline block, i.e. whether the `||` statement comes first or second in the pair).
 
+### The early-exit epilogue wall, third session: an else-if chain with empty arms gets past it
+
+Source shape, not predecessor order, turned out to be reachable. `findClosestEnemyByAreaAndRange`
+and `findClosestAnimalStoreResult` (Map::Units::UnitsState) have the textbook guard pair
+`if (x > 399 || y > 399) return 0; if (map[y * 400 + x] == 0) return 0;`. `blocks_probe.py` showed
+the documented layout at GlobalRegAlloc entry: the map test's `return 0` inline (BLK 4) and the
+`||` return as a labelled block after the body (BLK 21), with the end copy surviving the fold.
+Every guard spelling tried (`||` merged into one statement, `goto`, nested `if`s, negated
+conditions, `return _bestUnitID`) produced exactly that layout. What did not was moving the
+body into the last arm of an else-if chain whose guard arms are empty:
+
+```cpp
+if (x > 399) {
+} else if (y > 399) {
+} else if (map[y * 400 + x] == 0) {
+} else {
+    /* body */
+    return _bestUnitID;
+}
+return 0;
+```
+
+This gives the original's single inline `xor eax, eax` epilogue that both `ja`s and the map test
+reach: 85.9 -> 98.8 and 72.1 -> 82.0 in reccmp. `x > 399 || y > 399` as the first arm does not
+work (the `||` block goes to the end again); each test has to be its own arm.
+
+The same shape fixes the related case where the original places a value-returning fall-out block
+*last*: `if (A || B || C) { ... } return -1;` laid out with `return -1` in front of the body is
+`if (A) {} else if (B) {} else if (C) {} else { return -1; }` followed by the body
+(`handleUnitMovementWhenTargetingBuildings` 86.2 -> 100, `stopUnitIfNextToTarget` +1). Two
+arms ending in the same `return 0` may also need that return written out in *both* arms: the
+merge then keeps the copy the original keeps, rather than every path jumping back to the first
+`return 0` epilogue of the function. Check jump *direction* with `quick_diff.py -d` /
+`quick_gl.py -d`, which write `Lf`/`Lb` instead of `L`: a layout that differs only there scores
+1.000 without the flag and ~97% in reccmp.
+
 ### Applying the workflow to a 1300-instruction function: `processHelpRichTextTokens` (70.2%, not solved)
 
 What the c2 workflow gave in six builds, and where it stopped.

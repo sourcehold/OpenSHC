@@ -1,12 +1,14 @@
 """Compile ONE source file and diff its code against the original function, in seconds.
 
-usage: quick_diff.py FILE.cpp... [-q] [-s] [--name FUNCTION]
+usage: quick_diff.py FILE.cpp... [-q] [-s] [-d] [--name FUNCTION]
 
 Compiles each file with a DLL compile command plus /FA (no link, no reccmp), disassembles the original function
 at the file's `// FUNCTION:` address straight from `_original/` with capstone, normalizes both streams (globals,
 call/jump targets and esp slots become tokens) and prints a difflib ratio and a unified diff (- original, + ours).
 `-q` prints the ratio only; `-s` keeps `[esp + N]` offsets instead of collapsing them to one token, for chasing
-stack-slot assignment (declaration order) once everything else matches.
+stack-slot assignment (declaration order) once everything else matches. `-d` writes a branch target as `Lf` or `Lb`
+(forward/backward) instead of `L`: a layout where the same block copy exists on both sides but the jumps reach a
+different one scores 1.0000 without it and ~97% in reccmp.
 
 This is a triage loop, not the score: it is stricter than reccmp about register names and looser about stack
 offsets and constants, so confirm a 1.0000 with `reccmp_report.py --run`. Unlike reccmp it shows the *whole*
@@ -28,9 +30,10 @@ import common
 
 quiet = '-q' in sys.argv
 keep_slots = '-s' in sys.argv
+keep_direction = '-d' in sys.argv
 # --name NAME: diff that function of a file holding several `// FUNCTION:` markers (default: the first)
 want = sys.argv[sys.argv.index('--name') + 1] if '--name' in sys.argv else None
-_skip = {'-q', '-s', '--name'} | ({want} if want else set())
+_skip = {'-q', '-s', '-d', '--name'} | ({want} if want else set())
 files = [os.path.abspath(f) for f in sys.argv[1:] if f not in _skip]
 if not files and __name__ == "__main__":
     sys.exit(__doc__)
@@ -88,7 +91,7 @@ def orig(va):
                 t = int(i.op_str, 16)
                 if i.mnemonic != 'call' and va <= t < va + 20000:
                     maxtarget = max(maxtarget, t)
-                    s = i.mnemonic + ' L'
+                    s = i.mnemonic + (' L' if not keep_direction else ' Lf' if t > i.address else ' Lb')
                 else:
                     s = i.mnemonic + ' F'
             except ValueError:

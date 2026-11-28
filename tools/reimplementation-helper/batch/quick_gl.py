@@ -1,6 +1,6 @@
 """quick_diff for files in cmake/compiler-flags-gl.txt: compile ONE file with /GL, LTCG-link it with its callees.
 
-usage: quick_gl.py FILE.cpp [CALLEE.cpp ...] [-q] [-s]
+usage: quick_gl.py FILE.cpp [CALLEE.cpp ...] [-q] [-s] [-d]
 
 quick_diff.py compiles without /GL, so it cannot show what LTCG buys a caller - typically a volatile register
 (ecx/edx) kept alive across a call to a callee that is known not to touch it. This compiles FILE with the /GL
@@ -30,7 +30,7 @@ if not args:
     sys.exit(__doc__)
 target = os.path.abspath(args[0])
 extra = [os.path.abspath(a) for a in args[1:]]
-sys.argv = [sys.argv[0]] + (['-s'] if keep else [])
+sys.argv = [sys.argv[0]] + (['-s'] if keep else []) + (['-d'] if '-d' in sys.argv else [])
 import quick_diff as q  # noqa: E402  (parses sys.argv on import)
 
 ROOT = q.ROOT

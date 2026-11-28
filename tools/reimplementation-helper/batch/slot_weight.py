@@ -73,6 +73,8 @@ def compile_fa(path):
     # lambda replacements: a Windows path in the replacement string would be read as escapes
     cmd = re.sub(r"/Fo\S+", lambda _m: "/Fo%s/w.obj /FA /Fa%s/w.asm" % (out, out), cmd)
     cmd = re.sub(r"-c \S+$", lambda _m: "-c " + str(path), cmd)
+    # a /GL compile emits no listing, only IL for the linker
+    cmd = cmd.replace(" /GL ", " ")
     env = common.build_env()
     # cl.exe loads its own DLLs from Common7/IDE, as quick_diff.py does for the same reason
     env["PATH"] = str(common.ROOT / "MSVC1400-SP1" / "Common7" / "IDE") + os.pathsep + env["PATH"]
