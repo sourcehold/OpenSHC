@@ -469,7 +469,7 @@ SHC_3BB0A8C1_0x00401EA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00401FF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402180 | 12.2% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x00402180 | 90.5% | Offset load scheduled before the division
 
 SHC_3BB0A8C1_0x00402260 | 0.0% | Pending
 
@@ -491,7 +491,7 @@ SHC_3BB0A8C1_0x00402730 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00402820 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402900 | 47.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x00402900 | 53.9% | Switch value re-read and zero register in the original
 
 SHC_3BB0A8C1_0x00402A0C | 0.0% | Pending
 
@@ -2441,7 +2441,7 @@ SHC_3BB0A8C1_0x004081D4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004081D5 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004081E0 | 60.0% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004081E0 | 79.5% | edx kept across the call (LTCG)
 
 SHC_3BB0A8C1_0x00408250 | 100.0% | Reimplemented
 

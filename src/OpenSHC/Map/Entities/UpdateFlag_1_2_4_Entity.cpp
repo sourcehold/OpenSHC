@@ -22,66 +22,59 @@ namespace Map {
     // FUNCTION: STRONGHOLDCRUSADER 0x00402900
     void Entities::UpdateFlag_1_2_4_Entity()
     {
-        AIRecruitUnitChoiceInt AVar1;
-        uint uVar2;
-        int iVar3;
-        short sVar4;
-        short _owner;
-        uVar2 = DAT_CurrentEntityID::instance;
-        sVar4 = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].someTracker;
-        _owner = DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].owner;
-        DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2
-            = (int)DAT_EntityState::instance.entityArray[DAT_CurrentEntityID::instance].graphicType2RelatedOffset;
-        if (DAT_LandscapeState::instance.wind.countdown
-            <= (int)((byte)DAT_EntityState::instance.entityArray[uVar2].yPosition & 0x1f)) {
-            sVar4 = (short)DAT_LandscapeState::instance.wind.value;
+        uint const entityID = DAT_CurrentEntityID::instance;
+        int nextTracker = DAT_EntityState::instance.entityArray[entityID].someTracker;
+        int const owner = DAT_EntityState::instance.entityArray[entityID].owner;
+        DAT_EntityState::instance.entityArray[entityID].graphicType2
+            = DAT_EntityState::instance.entityArray[entityID].graphicType2RelatedOffset;
+        if (((byte)DAT_EntityState::instance.entityArray[entityID].yPosition & 0x1f)
+            >= DAT_LandscapeState::instance.wind.countdown) {
+            nextTracker = DAT_LandscapeState::instance.wind.value;
         }
-        if (((DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY)
-                && (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_owner] == -1))
-            && (DAT_GameSynchronyState::instance.currentAIArray[_owner] != 0)) {
-            if (DAT_GameState::instance.playerDataArray[_owner].aiBuildingDestroyChoiceTracker == 0) {
-                if (DAT_GameState::instance.playerDataArray[_owner].aiNervousActionsTracker == 0) {
-                    AVar1 = DAT_GameState::instance.playerDataArray[_owner].aiRecruitUnitChoiceState;
-                    sVar4 = 0;
-                    if (AVar1 != AI::AIRUC_DEFENSIVE) {
-                        sVar4 = (AVar1 != AI::AIRUC_RAIDING) + 1;
-                    }
-                } else {
-                    sVar4 = 3;
-                }
+        if (DAT_GameSynchronyState::instance.currentGameMode != Game::GM_SOLITARY
+            && DAT_GameSynchronyState::instance.currentPlayerFullIDArray[owner] == -1
+            && DAT_GameSynchronyState::instance.currentAIArray[owner] != 0) {
+            if (DAT_GameState::instance.playerDataArray[owner].aiBuildingDestroyChoiceTracker != 0) {
+                nextTracker = 3;
+            } else if (DAT_GameState::instance.playerDataArray[owner].aiNervousActionsTracker != 0) {
+                nextTracker = 3;
             } else {
-                sVar4 = 3;
+                AIRecruitUnitChoiceInt const recruitChoice
+                    = DAT_GameState::instance.playerDataArray[owner].aiRecruitUnitChoiceState;
+                nextTracker = 0;
+                if (recruitChoice != AI::AIRUC_DEFENSIVE) {
+                    nextTracker = (recruitChoice != AI::AIRUC_RAIDING) + 1;
+                }
             }
         }
-        DAT_EntityState::instance.entityArray[uVar2].unkOne_1 = 3;
-        switch (DAT_EntityState::instance.entityArray[uVar2].someTracker) {
+        DAT_EntityState::instance.entityArray[entityID].unkOne_1 = 3;
+        int frame;
+        switch (DAT_EntityState::instance.entityArray[entityID].someTracker) {
         case 0:
-            iVar3
-                = DAT_EntityDefinedData::instance
-                      .FlagAnimationFrames1[DAT_EntityState::instance.entityArray[uVar2].unknownAnimationFrameRelated];
+            frame = DAT_EntityDefinedData::instance.FlagAnimationFrames1[DAT_EntityState::instance.entityArray[entityID]
+                    .unknownAnimationFrameRelated];
             break;
         case 1:
-            iVar3
-                = DAT_EntityDefinedData::instance
-                      .FlagAnimationFrames2[DAT_EntityState::instance.entityArray[uVar2].unknownAnimationFrameRelated];
+            frame = DAT_EntityDefinedData::instance.FlagAnimationFrames2[DAT_EntityState::instance.entityArray[entityID]
+                    .unknownAnimationFrameRelated];
             break;
         case 3:
-            DAT_EntityState::instance.entityArray[uVar2].unkOne_1 = 1;
+            DAT_EntityState::instance.entityArray[entityID].unkOne_1 = 1;
             /* falls through into case 2 */
         case 2:
-            iVar3
-                = DAT_EntityDefinedData::instance
-                      .FlagAnimationFrames3[DAT_EntityState::instance.entityArray[uVar2].unknownAnimationFrameRelated];
+            frame = DAT_EntityDefinedData::instance.FlagAnimationFrames3[DAT_EntityState::instance.entityArray[entityID]
+                    .unknownAnimationFrameRelated];
             break;
         default:
             return;
         }
-        if (iVar3 < 1) {
-            DAT_EntityState::instance.entityArray[uVar2].unknownAnimationFrameRelated = 0;
-            DAT_EntityState::instance.entityArray[uVar2].someTracker = sVar4;
+        if (frame <= 0) {
+            DAT_EntityState::instance.entityArray[entityID].unknownAnimationFrameRelated = 0;
+            DAT_EntityState::instance.entityArray[entityID].someTracker = nextTracker;
+            return;
         }
-        DAT_EntityState::instance.entityArray[uVar2].graphicType2
-            = DAT_EntityState::instance.entityArray[uVar2].graphicType2 + iVar3 + -1;
+        DAT_EntityState::instance.entityArray[entityID].graphicType2
+            = DAT_EntityState::instance.entityArray[entityID].graphicType2 + frame - 1;
     }
 
 }
