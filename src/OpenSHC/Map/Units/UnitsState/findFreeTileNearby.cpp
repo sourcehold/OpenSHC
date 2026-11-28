@@ -21,9 +21,9 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x005371F0
         uint UnitsState::findFreeTileNearby(uint unitID, uint tile)
         {
-            int _originY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             dword _areaAtUnit
                 = DAT_TileMapState::instance.PathConnectionLayer[DAT_UnitsState::instance.units[unitID].tile];
+            int _originY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[tile];
             int _originX = tile - DAT_ViewportRenderState::instance.translationMatrix[_originY].addXgetTile;
             /* original_y-2 */
             uint _northTile = DAT_ViewportRenderState::instance.translationMatrix[_originY - 2].addXgetTile + _originX;
