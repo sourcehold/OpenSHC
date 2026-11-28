@@ -10,7 +10,7 @@
 #include "OpenSHC/Rendering/ColorMode.hpp"
 #include "OpenSHC/Rendering/Enums/ViewportConstants.hpp"
 #include "OpenSHC/UI/Enums/MinimapConstants.hpp"
-#include "OpenSHC/UI/MiniMap/PlayerUnitColors.hpp"
+#include "OpenSHC/UI/Enums/MinimapDrawFlags.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
 #include "OpenSHC/Globals/DAT_BlendingDefinedData.hpp"
@@ -31,7 +31,9 @@ namespace UI {
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_SHORT_ROW;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_SIZE;
     using OpenSHC::Rendering::Enums::VC_SCREEN_POINT_TABLE_START;
-    using OpenSHC::UI::MiniMap::PlayerUnitColors;
+    using OpenSHC::UI::Enums::MDF_CENTER_ON_OFFSETS;
+    using OpenSHC::UI::Enums::MDF_HALF_SIZE;
+    using OpenSHC::UI::Enums::MDF_VIEWPORT_BOX;
     using OpenSHC::WindowsHelper::Enums::BOOLEnum;
 
     // A row of the minimap picture (200 pixels) in bytes, named here for the assembly (it cannot name a qualified one).
@@ -104,7 +106,7 @@ namespace UI {
                 }
             }
         }
-        if (flags & 4) {
+        if (flags & MDF_HALF_SIZE) {
             scale = 2;
         }
         // a small map sits in the middle of the 400 by 400 picture
@@ -147,7 +149,7 @@ namespace UI {
                 showBox = FALSE;
             }
         } else {
-            if (flags & 1) {
+            if (flags & MDF_CENTER_ON_OFFSETS) {
                 xOffset -= width / 2;
                 yOffset -= height / 2;
                 boxX -= viewWidth / 2;
@@ -255,9 +257,7 @@ namespace UI {
                 xPos -= 2;
             }
         }
-        // per player four animation frames in the two colour modes
-        PlayerUnitColors const* const playerColors
-            = (PlayerUnitColors const*)DAT_MiniMapDefinedData::instance.PlayerColorColors;
+        // the colour table: per colour slot four animation frames in the two colour modes
         uint color;
         // declared once for both unit loops (declared in each loop they take other stack slots)
         int row;
@@ -303,7 +303,7 @@ namespace UI {
                         }
                         short const owner = DAT_UnitsState::instance.units[unit].owner;
                         if (owner == 0) {
-                            color = playerColors[0][2][isRGB565];
+                            color = DAT_MiniMapDefinedData::instance.PlayerColorColors[0][2][isRGB565];
                         } else {
                             int colorPlayer;
                             if (DAT_UnitsState::instance.units[unit].isSelectable_OR_matchTime != 0) {
@@ -327,8 +327,9 @@ namespace UI {
                             }
                             switch (DAT_UnitsState::instance.units[unit].unitType) {
                             case Map::Units::UT_A_ASSASSIN:
-                                color = playerColors[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[colorPlayer]]
-                                                    [0][isRGB565];
+                                color = DAT_MiniMapDefinedData::instance
+                                            .PlayerColorColors[DAT_BlendingDefinedData::instance
+                                                    .PlayerSlotUnitColor[colorPlayer]][0][isRGB565];
                                 if (DAT_GameState::instance.mapAndTime.playerTeams[owner]
                                         != DAT_GameState::instance.mapAndTime
                                             .playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -345,7 +346,7 @@ namespace UI {
                             case Map::Units::UT_COW:
                             case Map::Units::UT_HUNTERDOG:
                             case Map::Units::UT_CHICKEN:
-                                color = playerColors[0][2][isRGB565];
+                                color = DAT_MiniMapDefinedData::instance.PlayerColorColors[0][2][isRGB565];
                                 break;
                             case Map::Units::UT_S_CATAPULT:
                             case Map::Units::UT_S_TREBUCHET:
@@ -355,12 +356,14 @@ namespace UI {
                             case Map::Units::UT_S_SHIELD:
                             case Map::Units::UT_S_BALLISTA:
                             case Map::Units::UT_S_FBALLISTA:
-                                color = playerColors[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[colorPlayer]]
-                                                    [this->someMiniMapCounterTill4][isRGB565];
+                                color = DAT_MiniMapDefinedData::instance.PlayerColorColors
+                                            [DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[colorPlayer]]
+                                            [this->someMiniMapCounterTill4][isRGB565];
                                 break;
                             default:
-                                color = playerColors[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[colorPlayer]]
-                                                    [0][isRGB565];
+                                color = DAT_MiniMapDefinedData::instance
+                                            .PlayerColorColors[DAT_BlendingDefinedData::instance
+                                                    .PlayerSlotUnitColor[colorPlayer]][0][isRGB565];
                                 break;
                             }
                         }
@@ -418,14 +421,14 @@ namespace UI {
             }
         } else {
             // with the wildlife hidden: own team and enemies in two colours
-            uint const ownColor = playerColors[DAT_BlendingDefinedData::instance
+            uint const ownColor = DAT_MiniMapDefinedData::instance.PlayerColorColors[DAT_BlendingDefinedData::instance
                     .PlayerSlotUnitColor[DAT_GameSynchronyState::instance.currentPlayerSlotID]][0][isRGB565];
             uint enemyColor = 0;
             for (int player = 1; player < countof(DAT_GameState::instance.mapAndTime.playerTeams); ++player) {
                 if (DAT_GameState::instance.mapAndTime.playerTeams[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                     != DAT_GameState::instance.mapAndTime.playerTeams[player]) {
-                    enemyColor
-                        = playerColors[DAT_BlendingDefinedData::instance.PlayerSlotUnitColor[player]][0][isRGB565];
+                    enemyColor = DAT_MiniMapDefinedData::instance.PlayerColorColors[DAT_BlendingDefinedData::instance
+                            .PlayerSlotUnitColor[player]][0][isRGB565];
                     break;
                 }
             }
@@ -541,7 +544,7 @@ namespace UI {
                 }
             }
         }
-        if ((flags & 2) && showBox) {
+        if ((flags & MDF_VIEWPORT_BOX) && showBox) {
             if (boxX < xPos) {
                 if (boxX + boxWidth >= blitWidth + xPos) {
                     return;
