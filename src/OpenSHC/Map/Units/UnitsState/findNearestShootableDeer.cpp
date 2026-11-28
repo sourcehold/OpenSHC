@@ -53,9 +53,10 @@ namespace Map {
                             this->units[_deerUnitID].microXPosition, this->units[_deerUnitID].microYPosition,
                             this->units[_deerUnitID].terrainOrClimbHeight + 26
                                 + this->units[_deerUnitID].buildingHeight);
-                        // the unsigned range test matches; "_shotResult < 1 || _shotResult > 432" measured 12 points
-                        // worse
-                        if ((uint)(_shotResult - 1) > 431) {
+                        if (_shotResult <= 0) {
+                            continue;
+                        }
+                        if (_shotResult > 432) {
                             continue;
                         }
                     }
