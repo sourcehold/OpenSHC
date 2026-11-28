@@ -49251,7 +49251,7 @@ SHC_3BB0A8C1_0x0052C810 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052C870 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052CAB0 | 44.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0052CAB0 | 71.5% | Register and stack-slot allocation
 
 SHC_3BB0A8C1_0x0052CBB0 | 0.0% | Pending
 
@@ -49259,7 +49259,7 @@ SHC_3BB0A8C1_0x0052CD40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052CD60 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052CFE0 | 69.4% | Stack-slot and register allocation in the walk
+SHC_3BB0A8C1_0x0052CFE0 | 69.7% | Stack-slot and register allocation in the walk
 
 SHC_3BB0A8C1_0x0052D090 | 0.0% | Pending
 

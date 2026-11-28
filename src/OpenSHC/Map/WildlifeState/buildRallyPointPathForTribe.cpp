@@ -95,7 +95,7 @@ namespace Map {
                     bestDirection = direction;
                 }
             }
-            if (bestDirection < 0) {
+            if (bestDirection <= -1) {
                 return TRUE;
             }
             x = x + DAT_TerrainDefinedData::instance.clockwiseCardinalTranslationMatrix[bestDirection].int_.xOffset;
@@ -103,7 +103,7 @@ namespace Map {
             this->grid[x][y].field_0x3c = 1;
             uint const tileX = x * 10 + 5;
             uint const tileY = y * 10 + 5;
-            if (tileX < 400 && tileY < 400
+            if (tileX <= 399 && tileY <= 399
                 && DAT_ViewportRenderState::instance.DAT_BinaryTileMap400x400[tileY * 400 + tileX] != '\0') {
                 DAT_TribesState::instance.tribes[param_1]
                     .rallyPointArray[DAT_TribesState::instance.tribes[param_1].rallyPointCount][0] = (short)x * 10 + 5;
