@@ -17,9 +17,10 @@ namespace Map {
             this->units[unitID].y = this->units[unitID].mimicCurrentYPosition;
             this->units[unitID].microXPosition = this->units[unitID].mimicCurrentXPosition * 8 + 4;
             this->units[unitID].microYPosition = this->units[unitID].mimicCurrentYPosition * 8 + 4;
-            this->units[unitID].tile = this->units[unitID].x
+            int const _tile = this->units[unitID].x
                 + DAT_ViewportRenderState::instance.translationMatrix[this->units[unitID].y].addXgetTile;
-            this->units[unitID].terrainOrClimbHeight = DAT_TileMapState::instance.HeightLayer[this->units[unitID].tile];
+            this->units[unitID].tile = _tile;
+            this->units[unitID].terrainOrClimbHeight = DAT_TileMapState::instance.HeightLayer[_tile];
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::commitPendingUnitPosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::updateMicroPosition, this)(unitID);
             MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::recomputeUnitStandingHeight, this)(unitID);
