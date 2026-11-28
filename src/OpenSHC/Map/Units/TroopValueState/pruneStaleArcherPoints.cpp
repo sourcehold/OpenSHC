@@ -18,27 +18,28 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AF70
         void TroopValueState::pruneStaleArcherPoints()
         {
-            ArcherAttackPoint* point = &DAT_TroopValueState::instance.attackInfo.archerPointArray[1];
-            do {
-                if (point->lastSeenCounter != DAT_TroopValueState::instance.attackInfo.someCounter1) {
+            for (int slot = 1; slot < countof(DAT_TroopValueState::instance.attackInfo.archerPointArray) - 1; ++slot) {
+                if (DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].lastSeenCounter
+                    != DAT_TroopValueState::instance.attackInfo.someCounter1) {
                     MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                        sizeof(*point), '\0', (void*)((int)(point)));
+                        sizeof(DAT_TroopValueState::instance.attackInfo.archerPointArray[slot]), 0,
+                        &DAT_TroopValueState::instance.attackInfo.archerPointArray[slot]);
                 } else {
-                    if (point->tribeID != 0) {
-                        BOOLEnum tribeMatchesUID
-                            = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::tribeCorrespondsWithUID,
-                                DAT_TribesState::ptr)(point->tribeID, point->tribeUID);
-                        if (!tribeMatchesUID) {
-                            MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                                sizeof(*point), '\0', (void*)((int)(point)));
-                        }
+                    if (DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].tribeID != 0
+                        && MACRO_CALL_MEMBER(
+                               Map::Units::TribesState_Func::tribeCorrespondsWithUID, DAT_TribesState::ptr)(
+                               DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].tribeID,
+                               DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].tribeUID)
+                            == FALSE) {
+                        MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
+                            sizeof(DAT_TroopValueState::instance.attackInfo.archerPointArray[slot]), 0,
+                            &DAT_TroopValueState::instance.attackInfo.archerPointArray[slot]);
                     }
-                    if (0 < point->claimCooldown) {
-                        point->claimCooldown--;
+                    if (DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].claimCooldown > 0) {
+                        DAT_TroopValueState::instance.attackInfo.archerPointArray[slot].claimCooldown--;
                     }
                 }
-                point++;
-            } while ((int)point < (int)&DAT_TroopValueState::instance.attackInfo.archerPointArray[200]);
+            }
         }
 
     }

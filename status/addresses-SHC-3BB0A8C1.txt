@@ -45853,7 +45853,7 @@ SHC_3BB0A8C1_0x0051AE90 | 95.6% | Style pass, asm differs
 
 SHC_3BB0A8C1_0x0051AF20 | 76.6% | Fixed my off-by-one bound
 
-SHC_3BB0A8C1_0x0051AF70 | 70.7% | Style pass, asm differs
+SHC_3BB0A8C1_0x0051AF70 | 80.5% | Known-zero push lost in loop
 
 SHC_3BB0A8C1_0x0051AF80 | 0.0% | Pending
 
