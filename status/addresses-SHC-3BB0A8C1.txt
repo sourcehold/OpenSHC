@@ -469,7 +469,7 @@ SHC_3BB0A8C1_0x00401EA0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00401FF0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402180 | 0.0% | Pending
+SHC_3BB0A8C1_0x00402180 | 12.2% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00402260 | 0.0% | Pending
 
@@ -491,7 +491,7 @@ SHC_3BB0A8C1_0x00402730 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00402820 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402900 | 0.0% | Pending
+SHC_3BB0A8C1_0x00402900 | 47.3% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00402A0C | 0.0% | Pending
 
@@ -519,15 +519,15 @@ SHC_3BB0A8C1_0x00402BCC | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00402BD0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x00402C50 | 0.0% | Pending
+SHC_3BB0A8C1_0x00402C50 | 56.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00402DA0 | 100.0% | Reimplemented (counted: only float constant names and the CRT math helpers (_CIcos, _CItan, _CIsqrt) differ)
 
-SHC_3BB0A8C1_0x00402E20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00402E20 | 8.2% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00403200 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004036F0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004036F0 | 24.2% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00403790 | 100.0% | Pending
 
@@ -543,9 +543,9 @@ SHC_3BB0A8C1_0x004039B0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004039F0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00403A20 | 0.0% | Pending
+SHC_3BB0A8C1_0x00403A20 | 36.5% | Ported from gynt, asm differs
 
-SHC_3BB0A8C1_0x00403FF0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00403FF0 | 74.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004044E4 | 0.0% | Pending
 
@@ -1183,7 +1183,7 @@ SHC_3BB0A8C1_0x00404A10 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00404A70 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00404AE0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00404AE0 | 70.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00404B70 | 0.0% | Pending
 
@@ -1623,7 +1623,7 @@ SHC_3BB0A8C1_0x00405125 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00405130 | 100.0% | Reimplemented (counted: only the constant 0x10300131 is shown as an address label in ours)
 
-SHC_3BB0A8C1_0x004052E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004052E0 | 66.7% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x004054AC | 0.0% | Pending
 
@@ -1699,7 +1699,7 @@ SHC_3BB0A8C1_0x004054D5 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004054E0 | 100.0% | Pending
 
-SHC_3BB0A8C1_0x00405680 | 0.0% | Pending
+SHC_3BB0A8C1_0x00405680 | 30.5% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00405B70 | 100.0% | Reimplemented
 
@@ -1707,7 +1707,7 @@ SHC_3BB0A8C1_0x00405C00 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00405CF0 | 100.0% | Pending
 
-SHC_3BB0A8C1_0x00405DA0 | 0.0% | Pending
+SHC_3BB0A8C1_0x00405DA0 | 78.9% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x0040612C | 0.0% | Pending
 
@@ -2343,7 +2343,7 @@ SHC_3BB0A8C1_0x00406648 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x00406650 | 100.0% | Reimplemented (counted: only float constant names and the CRT math helpers (_CIsin, _CIcos, _ftol2_sse) differ)
 
-SHC_3BB0A8C1_0x00406900 | 0.0% | Pending
+SHC_3BB0A8C1_0x00406900 | 47.5% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00406FD0 | 0.0% | Pending
 
@@ -2351,7 +2351,7 @@ SHC_3BB0A8C1_0x00407130 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00407160 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00407190 | 0.0% | Pending
+SHC_3BB0A8C1_0x00407190 | 47.8% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00407570 | 0.0% | Pending
 
@@ -2441,7 +2441,7 @@ SHC_3BB0A8C1_0x004081D4 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004081D5 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004081E0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004081E0 | 60.0% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00408250 | 100.0% | Reimplemented
 
@@ -2449,11 +2449,11 @@ SHC_3BB0A8C1_0x004082A0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004083A0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004084A0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004084A0 | 50.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00408770 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004087C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004087C0 | 56.4% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x00408D90 | 0.0% | Pending
 
