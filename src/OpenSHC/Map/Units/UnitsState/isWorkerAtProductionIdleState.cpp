@@ -13,6 +13,7 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0053A070
         BOOLEnum UnitsState::isWorkerAtProductionIdleState(int unitID)
         {
+            int const _state = this->units[unitID].state.generic;
             switch (this->units[unitID].unitType) {
             case OpenSHC::Map::Units::UT_WOODCUTTER:
             case OpenSHC::Map::Units::UT_HOPSFARMER:
@@ -22,45 +23,45 @@ namespace Map {
             case OpenSHC::Map::Units::UT_SMITH:
             case OpenSHC::Map::Units::UT_ARMORER:
             case OpenSHC::Map::Units::UT_TANNER:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_STAND_UPUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_STAND_UPUnk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_FLETCHER:
             case OpenSHC::Map::Units::UT_APPLEFARMER:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_LOOK_AROUNDUnk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_HUNTER:
             case OpenSHC::Map::Units::UT_DAIRYFARMER:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_AIM_WEAPONUnk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_QUARRYWORKER:
             case OpenSHC::Map::Units::UT_PITCHMAN:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_STATE_3Unk) {
+                if (_state == OpenSHC::Map::Units::States::US_STATE_3Unk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_QUARRYOX:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_IDLEUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_IDLEUnk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_WHEATFARMER:
-                if (this->units[unitID].state.generic == (UnitState)10) {
+                if (_state == (UnitState)10) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_BAKER:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_FIRE_WEAPONUnk) {
                     return TRUE;
                 }
                 break;
             case OpenSHC::Map::Units::UT_TRANSPORTMINER:
-                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk) {
+                if (_state == OpenSHC::Map::Units::States::US_RELOAD_WEAPONUnk) {
                     return TRUE;
                 }
             }
