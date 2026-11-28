@@ -2028,6 +2028,32 @@ So the pairwise family rejected everything and the common-tail family did the wo
 polarity flip in this function is a merge artefact, as suspected from reading the streams, and
 the instrument now says so directly instead of by inference.
 
+### What `FgDoCommonTailMerge` compares (Ghidra reading, tentative)
+
+Read from the decompilation of `0x10b307e0` while chasing `setDestinationForUnit`
+(Map::Units::UnitsState), where the original has one `despawnUnreachableUnit` block that seven
+failure paths reach and we keep three copies:
+
+* It walks both predecessors **backwards** (`+0x10` is the previous tuple) and compares with
+  `FgMdInstrsMatch`, skipping label/pseudo tuples (kind `0x1b`, opcode `0x300`). The walk stops
+  at the first mismatch, and also - once at least one tuple has matched - at a kind `0x10`
+  tuple, a kind `0x14` tuple, or a kind `0x12` tuple with `+0x30 == 0` whose opcode is outside
+  `0x316..0x476` (bar `0x381`, `0x399`, `0x408`, `0x409`). Those look like block-boundary and
+  call tuples, so the common tail cannot be extended upwards past them.
+* The matched length is then sized with `decode` (bytes), capped at `_Speed ? 20 : 2`, plus the
+  larger of the two blocks' `+0x1c` words (tail length already merged into them). A total of
+  `<= 20` (for speed) declines the merge unless an earlier cut point was recorded.
+
+In `setDestinationForUnit`, `tuple_dump.py --at final` shows our seven copies tuple-identical
+from `mov ecx, this` to the end, and they differ only in the register that loads `unitID` for
+the `push`. After the merge three copies survive, one per push register (`ecx`, `edx`, `eax`).
+So the pass merged whole identical blocks and did not cut between the `push` and the call.
+The original cuts exactly there (`0x53d63a`, after `push ecx`), and two of its predecessors
+reach that point with the `push` hoisted into them by the head merge. A `goto`-shared block in
+the source is not the answer either: it lowers the zero constant's key from 128 to about 56
+(weight 34 -> 16), the constant loses `ebx`, and the function drops from 0.77 to 0.37 in
+quick_gl. Unresolved.
+
 ## Triage of every sub-100 function in AICState + FontSizeClass, and what it turned up
 
 The point of decoding the allocator was never to fix functions one at a time; it was to know
