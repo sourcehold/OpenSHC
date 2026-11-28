@@ -8,7 +8,7 @@ namespace Map {
     namespace Units {
 
         // FUNCTION: STRONGHOLDCRUSADER 0x0051AB10
-        void TroopValueState::countAvailableArcherValueSlots(int includeOccupied)
+        void TroopValueState::countAvailableArcherValueSlots(BOOLEnum includeOccupied)
         {
             DAT_TroopValueState::instance.attackInfo.arch3 = 0;
             for (int i = 0; i < DAT_TroopValueState::instance.attackInfo.arch2; ++i) {
