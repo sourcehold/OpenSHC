@@ -23,151 +23,110 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x0051CCB0
         void TroopValueState::assignMacemenAndKnightsNotFromPlayer1ToTribes()
         {
-            int playerID;
-            BOOLEnum BVar1;
-            int _tribeID1;
-            int _tribeID2;
-            int _count;
-            uint _unitID1;
-            uint _unitID2;
-            int _macemenCount;
-            int _limitCounter2;
-            uint _unitID0;
-            short* psVar2;
-            Unit* _pUnit2;
-            int _knightCount;
-            int _macemenLimit;
-            int local_14;
-            int _knightLimit;
-            int _limitCounter;
-            short* _pUnit1;
-            playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
-            _count = 0;
-            _unitID0 = 1;
-            _macemenCount = 0;
-            _knightCount = 0;
-            if (1 < DAT_UnitsState::instance.maxUnitCount) {
-                _pUnit2 = &DAT_UnitsState::instance.units[1];
-                do {
-                    if ((_pUnit2->logicalState != Map::Units::ULS_INVISIBLE)
-                        && (BVar1 = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
-                                (int)_pUnit2->owner),
-                            BVar1)) {
-                        if (_pUnit2->unitType == Map::Units::UT_E_MACE) {
-                            _macemenCount = _macemenCount + 1;
-                        } else {
-                            if (_pUnit2->unitType != Map::Units::UT_E_KNIGHT)
-                                goto LAB_0051cd29;
-                            _knightCount = _count + 1;
-                        }
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
-                            _unitID0, (int)((int)(_pUnit2->tribeID)));
-                        _count = _knightCount;
-                    }
-                LAB_0051cd29:
-                    _unitID0 = _unitID0 + 1;
-                    _pUnit2 = _pUnit2 + 0x248;
-                } while ((int)_unitID0 < DAT_UnitsState::instance.maxUnitCount);
-                if (0x28 < _macemenCount) {
-                    _macemenLimit = 10;
-                    goto LAB_0051cd5e;
+            int const playerID = DAT_TroopValueState::instance.attackInfo.pitchRelatedPlayerID;
+            int macemenCount = 0;
+            int knightCount = 0;
+            for (int unitID = 1; unitID < DAT_UnitsState::instance.maxUnitCount; unitID++) {
+                if (DAT_UnitsState::instance.units[unitID].logicalState == Map::Units::ULS_INVISIBLE
+                    || !MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
+                        DAT_UnitsState::instance.units[unitID].owner)) {
+                    continue;
                 }
-                _macemenLimit = 8;
-                if (0x14 < _macemenCount)
-                    goto LAB_0051cd5e;
+                if (DAT_UnitsState::instance.units[unitID].unitType == Map::Units::UT_E_MACE) {
+                    macemenCount = macemenCount + 1;
+                } else if (DAT_UnitsState::instance.units[unitID].unitType == Map::Units::UT_E_KNIGHT) {
+                    knightCount = knightCount + 1;
+                } else {
+                    continue;
+                }
+                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
+                    unitID, DAT_UnitsState::instance.units[unitID].tribeID);
             }
-            _macemenLimit = 5;
-        LAB_0051cd5e:
-            if (_count < 18) {
-                _knightLimit = (uint)(12 < _count) * 2 + 2;
+            int macemenLimit;
+            if (macemenCount > 40) {
+                macemenLimit = 10;
+            } else if (macemenCount > 20) {
+                macemenLimit = 8;
             } else {
-                _knightLimit = 6;
+                macemenLimit = 5;
             }
-            if (_macemenCount < 1) {
+            int knightLimit;
+            if (knightCount > 18) {
+                knightLimit = 6;
+            } else {
+                knightLimit = (knightCount > 12) * 2 + 2;
+            }
+            if (macemenCount <= 0) {
                 DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 0;
-            } else if (_macemenLimit < _macemenCount) {
-                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = _macemenCount / _macemenLimit + 1;
-                _count = _knightCount;
-                if (100 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount) {
+            } else if (macemenCount <= macemenLimit) {
+                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 1;
+            } else {
+                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = macemenCount / macemenLimit + 1;
+                if (DAT_TroopValueState::instance.attackInfo.macemenTribeCount > 100) {
                     DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 100;
                 }
-            } else {
-                DAT_TroopValueState::instance.attackInfo.macemenTribeCount = 1;
             }
-            if (_count < 1) {
+            if (knightCount <= 0) {
                 DAT_TroopValueState::instance.attackInfo.knightTribeCount = 0;
-            } else if (_knightLimit < _count) {
-                DAT_TroopValueState::instance.attackInfo.knightTribeCount = _count / _knightLimit + 1;
-                if (100 < DAT_TroopValueState::instance.attackInfo.knightTribeCount) {
+            } else if (knightCount <= knightLimit) {
+                DAT_TroopValueState::instance.attackInfo.knightTribeCount = 1;
+            } else {
+                DAT_TroopValueState::instance.attackInfo.knightTribeCount = knightCount / knightLimit + 1;
+                if (DAT_TroopValueState::instance.attackInfo.knightTribeCount > 100) {
                     DAT_TroopValueState::instance.attackInfo.knightTribeCount = 100;
                 }
-            } else {
-                DAT_TroopValueState::instance.attackInfo.knightTribeCount = 1;
             }
-            local_14 = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount) {
-                _unitID1 = 0;
-                do {
-                    _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
-                        playerID, 0);
-                    DAT_TroopValueState::instance.attackInfo.macemenTribeArray[local_14] = _tribeID1;
-                    DAT_TribesState::instance.tribes[_tribeID1].tribeType = AI::Tribes::AITT_MACEMEN;
-                    _limitCounter = 0;
-                    if (_macemenLimit) {
-                        _pUnit1 = &DAT_UnitsState::instance.units[_unitID1].owner;
-                        do {
-                            _unitID1 = _unitID1 + 1;
-                            if (((_pUnit1[0x243] != 0)
-                                    && (BVar1
-                                        = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep,
-                                            this)((int)_pUnit1[0x248]),
-                                        BVar1))
-                                && (_pUnit1[0x244] == 0x1a)) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                                    _unitID1, _tribeID1);
-                                _macemenCount = _macemenCount + -1;
-                                if (_macemenCount < 1)
-                                    goto LAB_0051ceba;
-                                _limitCounter = _limitCounter + 1;
-                            }
-                            _pUnit1 = _pUnit1 + 0x248;
-                        } while (_limitCounter < _macemenLimit);
+            int macemenUnitID = 0;
+            for (int tribeIndex = 0; tribeIndex < DAT_TroopValueState::instance.attackInfo.macemenTribeCount;
+                tribeIndex++) {
+                int const tribeID
+                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(playerID, 0);
+                DAT_TroopValueState::instance.attackInfo.macemenTribeArray[tribeIndex] = tribeID;
+                DAT_TribesState::instance.tribes[tribeID].tribeType = AI::Tribes::AITT_MACEMEN;
+                for (int assigned = 0; assigned < macemenLimit;) {
+                    macemenUnitID = macemenUnitID + 1;
+                    if (DAT_UnitsState::instance.units[macemenUnitID].logicalState != Map::Units::ULS_INVISIBLE
+                        && MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
+                            DAT_UnitsState::instance.units[macemenUnitID].owner)
+                        && DAT_UnitsState::instance.units[macemenUnitID].unitType == Map::Units::UT_E_MACE) {
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                            macemenUnitID, tribeID);
+                        macemenCount = macemenCount - 1;
+                        if (macemenCount <= 0) {
+                            break;
+                        }
+                        assigned = assigned + 1;
                     }
-                } while ((0 < _macemenCount)
-                    && (local_14 = local_14 + 1,
-                        local_14 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount));
+                }
+                if (macemenCount <= 0) {
+                    break;
+                }
             }
-        LAB_0051ceba:
-            local_14 = 0;
-            if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount) {
-                _unitID2 = 0;
-                do {
-                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
-                        playerID, 0);
-                    _limitCounter2 = 0;
-                    DAT_TroopValueState::instance.attackInfo.knightTribeArray[local_14] = _tribeID2;
-                    DAT_TribesState::instance.tribes[_tribeID2].tribeType = AI::Tribes::AITT_KNIGHTS;
-                    if (_knightLimit) {
-                        psVar2 = &DAT_UnitsState::instance.units[_unitID2].owner;
-                        do {
-                            _unitID2 = _unitID2 + 1;
-                            if (((psVar2[0x243] != 0)
-                                    && (BVar1
-                                        = MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep,
-                                            this)((int)psVar2[0x248]),
-                                        BVar1))
-                                && (psVar2[0x244] == 0x1c)) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
-                                    _unitID2, _tribeID2);
-                                _knightCount = _knightCount + -1;
-                                if (_knightCount < 1) {}
-                                _limitCounter2 = _limitCounter2 + 1;
-                            }
-                            psVar2 = psVar2 + 0x248;
-                        } while (_limitCounter2 < _knightLimit);
+            int knightUnitID = 0;
+            for (int tribeIndex = 0; tribeIndex < DAT_TroopValueState::instance.attackInfo.knightTribeCount;
+                tribeIndex++) {
+                int const tribeID
+                    = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(playerID, 0);
+                DAT_TroopValueState::instance.attackInfo.knightTribeArray[tribeIndex] = tribeID;
+                DAT_TribesState::instance.tribes[tribeID].tribeType = AI::Tribes::AITT_KNIGHTS;
+                for (int assigned = 0; assigned < knightLimit;) {
+                    knightUnitID = knightUnitID + 1;
+                    if (DAT_UnitsState::instance.units[knightUnitID].logicalState != Map::Units::ULS_INVISIBLE
+                        && MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::getPlayerNot1AndHasKeep, this)(
+                            DAT_UnitsState::instance.units[knightUnitID].owner)
+                        && DAT_UnitsState::instance.units[knightUnitID].unitType == Map::Units::UT_E_KNIGHT) {
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                            knightUnitID, tribeID);
+                        knightCount = knightCount - 1;
+                        if (knightCount <= 0) {
+                            return;
+                        }
+                        assigned = assigned + 1;
                     }
-                } while ((0 < _knightCount)
-                    && (local_14 = local_14 + 1, local_14 < DAT_TroopValueState::instance.attackInfo.knightTribeCount));
+                }
+                if (knightCount <= 0) {
+                    break;
+                }
             }
         }
 
