@@ -56,14 +56,14 @@ namespace Map {
             if (_shooterID == unitID) {
                 return FALSE;
             }
-            EntityTypeShort const _entityType = DAT_EntityState::instance.entityArray[entityID].entityType;
-            if (_entityType == OpenSHC::Map::Entities::ET_FIRE) {
+            if (DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FIRE) {
                 return FALSE;
             }
-            if (_entityType == OpenSHC::Map::Entities::ET_FIRETHROWER) {
+            if (DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_FIRETHROWER) {
                 return FALSE;
             }
-            if (_entityType == OpenSHC::Map::Entities::ET_COW_POISON_CLOUD) {
+            if (DAT_EntityState::instance.entityArray[entityID].entityType
+                == OpenSHC::Map::Entities::ET_COW_POISON_CLOUD) {
                 /*
                   if the unit is dead, don't bother
                  */
@@ -189,16 +189,16 @@ namespace Map {
                 if (!_siegeProjectile) {
                     return FALSE;
                 }
-                EntityTypeShort const _projectileType = DAT_EntityState::instance.entityArray[entityID].entityType;
-                if (_projectileType == OpenSHC::Map::Entities::ET_BALLISTA) {
+                if (DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_BALLISTA) {
                     return FALSE;
                 }
-                if (_projectileType == OpenSHC::Map::Entities::ET_MANGONEL) {
+                if (DAT_EntityState::instance.entityArray[entityID].entityType == OpenSHC::Map::Entities::ET_MANGONEL) {
                     if (DAT_GameSynchronyState::instance.currentPlayerFullIDArray[_entityPlayerID] == -1) {
                         return FALSE;
                     }
                 }
-                if (_projectileType == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
+                if (DAT_EntityState::instance.entityArray[entityID].entityType
+                    == OpenSHC::Map::Entities::ET_FIREBALLISTA) {
                     return FALSE;
                 }
                 if (_unitType == OpenSHC::Map::Units::UT_S_SHIELD) {
