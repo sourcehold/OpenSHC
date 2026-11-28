@@ -49241,7 +49241,7 @@ SHC_3BB0A8C1_0x0052BB40 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0052BEA0 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0052BF40 | 16.0% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0052BF40 | 48.9% | Register allocation (y and x+2 held all function in the original)
 
 SHC_3BB0A8C1_0x0052C570 | 0.0% | Pending
 
