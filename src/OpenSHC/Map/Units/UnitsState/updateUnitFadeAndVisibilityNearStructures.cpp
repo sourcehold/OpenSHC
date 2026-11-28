@@ -16,13 +16,13 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00533D50
         void UnitsState::updateUnitFadeAndVisibilityNearStructures(int unitID)
         {
+            int _fadeType = 0;
             int _tile = DAT_UnitsState::instance.units[unitID].tile;
             int const buildingID = DAT_TileMapState::instance.BuildingLayer[_tile];
             uint _logicFlags = DAT_TileMapState::instance.LogicLayer[_tile];
             int _gateFadeType = 0;
             BOOLEnum _isOnDefensiveStructure = FALSE;
             int _towerFadeType = 0;
-            int _fadeType = 0;
             if (DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 != 0) {
                 DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402
                     = DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 - 1;
@@ -83,11 +83,11 @@ namespace Map {
                     DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402 = 0;
                 } else {
                     DAT_UnitsState::instance.units[unitID].unknownCountdown_0x402
-                        = (DAT_BuildingDefinedData::instance.IsGateOrTowerArray
-                                  [DAT_BuildingsState::instance.buildings[destinationBuildingID].buildingType]
-                              != FALSE)
-                            - 1U
-                        & 10;
+                        = DAT_BuildingDefinedData::instance.IsGateOrTowerArray
+                                [DAT_BuildingsState::instance.buildings[destinationBuildingID].buildingType]
+                            != FALSE
+                        ? 0
+                        : 10;
                 }
             }
             if (_isOnDefensiveStructure) {
