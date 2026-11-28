@@ -7,8 +7,8 @@
 #include "OpenSHC/Map/Units/UnitType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_TribesState.hpp"
+#include "OpenSHC/Globals/DAT_TroopValueState.hpp"
 #include "OpenSHC/Globals/DAT_UnitsState.hpp"
 
 namespace OpenSHC {
@@ -60,8 +60,8 @@ namespace Map {
                                 goto LAB_0051cd29;
                             _knightCount = _count + 1;
                         }
-                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe,
-                            DAT_TribesState::ptr)(_unitID0, (int)((int)(_pUnit2->tribeID)));
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::removeUnitFromTribe, DAT_TribesState::ptr)(
+                            _unitID0, (int)((int)(_pUnit2->tribeID)));
                         _count = _knightCount;
                     }
                 LAB_0051cd29:
@@ -108,8 +108,8 @@ namespace Map {
             if (0 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount) {
                 _unitID1 = 0;
                 do {
-                    _tribeID1 = MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(playerID, 0);
+                    _tribeID1 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                        playerID, 0);
                     DAT_TroopValueState::instance.attackInfo.macemenTribeArray[local_14] = _tribeID1;
                     DAT_TribesState::instance.tribes[_tribeID1].tribeType = AI::Tribes::AITT_MACEMEN;
                     _limitCounter = 0;
@@ -123,8 +123,8 @@ namespace Map {
                                             this)((int)_pUnit1[0x248]),
                                         BVar1))
                                 && (_pUnit1[0x244] == 0x1a)) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
-                                    DAT_TribesState::ptr)(_unitID1, _tribeID1);
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                                    _unitID1, _tribeID1);
                                 _macemenCount = _macemenCount + -1;
                                 if (_macemenCount < 1)
                                     goto LAB_0051ceba;
@@ -133,16 +133,17 @@ namespace Map {
                             _pUnit1 = _pUnit1 + 0x248;
                         } while (_limitCounter < _macemenLimit);
                     }
-                } while (
-                    (0 < _macemenCount) && (local_14 = local_14 + 1, local_14 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount));
+                } while ((0 < _macemenCount)
+                    && (local_14 = local_14 + 1,
+                        local_14 < DAT_TroopValueState::instance.attackInfo.macemenTribeCount));
             }
         LAB_0051ceba:
             local_14 = 0;
             if (0 < DAT_TroopValueState::instance.attackInfo.knightTribeCount) {
                 _unitID2 = 0;
                 do {
-                    _tribeID2 = MACRO_CALL_MEMBER(
-                        Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(playerID, 0);
+                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                        playerID, 0);
                     _limitCounter2 = 0;
                     DAT_TroopValueState::instance.attackInfo.knightTribeArray[local_14] = _tribeID2;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeType = AI::Tribes::AITT_KNIGHTS;
@@ -156,8 +157,8 @@ namespace Map {
                                             this)((int)psVar2[0x248]),
                                         BVar1))
                                 && (psVar2[0x244] == 0x1c)) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
-                                    DAT_TribesState::ptr)(_unitID2, _tribeID2);
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                                    _unitID2, _tribeID2);
                                 _knightCount = _knightCount + -1;
                                 if (_knightCount < 1) {}
                                 _limitCounter2 = _limitCounter2 + 1;
@@ -165,7 +166,8 @@ namespace Map {
                             psVar2 = psVar2 + 0x248;
                         } while (_limitCounter2 < _knightLimit);
                     }
-                } while ((0 < _knightCount) && (local_14 = local_14 + 1, local_14 < DAT_TroopValueState::instance.attackInfo.knightTribeCount));
+                } while ((0 < _knightCount)
+                    && (local_14 = local_14 + 1, local_14 < DAT_TroopValueState::instance.attackInfo.knightTribeCount));
             }
         }
 

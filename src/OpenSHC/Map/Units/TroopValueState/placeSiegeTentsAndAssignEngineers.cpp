@@ -59,8 +59,8 @@ namespace Map {
             iVar6 = 0;
             do {
                 byte bVar1 = (*local_c)[0];
-                MappersEnum MVar3 = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field5_0xc8 + iVar6);
-                iVar4 = *(int*)((int)DAT_AttackInfoDefinedData::instance.field1461_0x9ec + iVar6);
+                MappersEnum MVar3 = *(MappersEnum*)((int)DAT_AttackInfoDefinedData::instance.field_0xc8 + iVar6);
+                iVar4 = *(int*)((int)DAT_AttackInfoDefinedData::instance.field_0x9ec + iVar6);
                 iVar7 = 0;
                 if (0 < (char)bVar1) {
                     do {
@@ -76,8 +76,8 @@ namespace Map {
                         iVar7 = iVar7 + 1;
                     } while (iVar7 < (char)bVar1);
                 }
-                iVar7 = DAT_AttackInfoDefinedData::instance.field1474_0xa0c;
-                iVar4 = DAT_AttackInfoDefinedData::instance.field9_0xe8;
+                iVar7 = DAT_AttackInfoDefinedData::instance.field_0xa0c;
+                iVar4 = DAT_AttackInfoDefinedData::instance.field_0xe8;
                 local_c = (byte(*)[10])(*local_c + 1);
                 iVar6 = iVar6 + 4;
             } while (iVar6 < 16);
@@ -118,8 +118,8 @@ namespace Map {
                     short sVar2 = DAT_TribesState::instance.tribes[_tribeID].size;
                     for (; (sVar2 && (iVar5 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize, 0 < iVar8));
                         iVar8 = iVar8 + -1) {
-                        MACRO_CALL_MEMBER(
-                            Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(_tribeID);
+                        MACRO_CALL_MEMBER(Map::Units::TribesState_Func::popUnitFromTribe, DAT_TribesState::ptr)(
+                            _tribeID);
                         sVar2 = DAT_TribesState::instance.tribes[_tribeID].size;
                         iVar5 = DAT_TroopValueState::instance.attackInfo.tribeIDArraySize;
                     }
@@ -129,8 +129,8 @@ namespace Map {
                 if (0 < DAT_TroopValueState::instance.attackInfo.createTribeAmount) {
                 LAB_0051b904:
                     _unitCount = DAT_TroopValueState::instance.attackInfo.engineerBuildQueue[param_1].engineerCount;
-                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe,
-                        DAT_TribesState::ptr)(DAT_TribesState::instance.tribes[_tribeID].owner, 0);
+                    _tribeID2 = MACRO_CALL_MEMBER(Map::Units::TribesState_Func::createTribe, DAT_TribesState::ptr)(
+                        DAT_TribesState::instance.tribes[_tribeID].owner, 0);
                     _maxUnits = DAT_UnitsState::instance.maxUnitCount;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeType = 11;
                     DAT_TribesState::instance.tribes[_tribeID2].tribeBehaviorType = 1040;
@@ -146,8 +146,8 @@ namespace Map {
                                 && ((!_ptrPlayerID->dying
                                     && ((_ptrPlayerID->unitType == Map::Units::UT_E_ENGINEER
                                         && (!_ptrPlayerID->tribeID)))))) {
-                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe,
-                                    DAT_TribesState::ptr)(_unitID, _tribeID2);
+                                MACRO_CALL_MEMBER(Map::Units::TribesState_Func::addUnitToTribe, DAT_TribesState::ptr)(
+                                    _unitID, _tribeID2);
                                 _unitCount = _unitCount + -1;
                                 if (_unitCount < 1)
                                     goto LAB_0051b9cb;
