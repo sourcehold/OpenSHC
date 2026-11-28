@@ -68,9 +68,9 @@ namespace Map {
             this->units[_unitID].x = _x;
             this->units[_unitID].destinationX_2Unk = _x;
             this->units[_unitID].movementRelated = 8;
-            this->units[_unitID].targetingType = (UnitInstructionType)0;
             this->units[_unitID].tile = this->units[_unitID].x
                 + DAT_ViewportRenderState::instance.translationMatrix[this->units[_unitID].y].addXgetTile;
+            this->units[_unitID].targetingType = (UnitInstructionType)0;
             this->units[_unitID].fixedRng = SEC_RNG::instance.currentNumber2;
             MACRO_CALL_MEMBER(OpenSHC::Random::RNG_Func::nextRandomNumber2, SEC_RNG::ptr)();
             if (unitType == OpenSHC::Map::Units::UT_S_CATAPULT) {
