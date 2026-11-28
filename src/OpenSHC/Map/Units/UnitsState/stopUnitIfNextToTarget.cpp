@@ -13,7 +13,6 @@ namespace Map {
         int UnitsState::stopUnitIfNextToTarget(int unitID)
         {
             uint _targetTile = this->units[unitID].targetedBuildingTile;
-            BOOLEnum _isNear = FALSE;
             if (_targetTile == 0) {
                 return 0;
             }
@@ -35,6 +34,7 @@ namespace Map {
                 /* The original does not leave this loop once it has found the target two tiles away, so the tile
                    tested below is always the one in the last direction. */
                 int _y = this->units[unitID].y;
+                BOOLEnum _isNear = FALSE;
                 for (int direction = 0; direction < 8; ++direction) {
                     _tile = DAT_TileMapState::instance.directionTranslationMatrix[_y][direction] + _unitTile;
                     for (int secondDirection = 0; secondDirection < 8; ++secondDirection) {
