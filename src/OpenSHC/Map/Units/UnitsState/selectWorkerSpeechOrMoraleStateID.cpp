@@ -176,9 +176,9 @@ namespace Map {
                 }
                 if (_weight != 0) {
                     _candidateCount = _candidateCount + 1;
-                    int const _score = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
-                    if (_bestSpeechID == -1 || _score > _bestWeight) {
-                        _bestWeight = _score;
+                    _weight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
+                    if (_bestSpeechID == -1 || _weight > _bestWeight) {
+                        _bestWeight = _weight;
                         _bestSpeechID = _candidateSpeechID;
                     }
                 }
