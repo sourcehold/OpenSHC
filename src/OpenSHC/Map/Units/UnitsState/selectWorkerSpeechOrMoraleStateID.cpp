@@ -52,7 +52,7 @@ namespace Map {
                 if (i < 5) {
                     continue;
                 }
-                if (i > 5 && (i < 11 || i == 20 || i > 22)) {
+                if ((i > 5 && i < 11) || i == 20 || i > 22) {
                     continue;
                 }
                 if (DAT_GameState::instance.mapAndTime.scenarioEventTimers[i] < 40) {
@@ -71,8 +71,8 @@ namespace Map {
                         DAT_GameState::instance.mapAndTime.scenarioEventTimers[_worstPopularityReason] = 0;
                     }
                 } else {
-                    DAT_00ee1034::instance = 0;
                     DAT_UnitPropertiesDefinedData::instance.field_0x1225c = _worstPopularityReason;
+                    DAT_00ee1034::instance = 0;
                 }
                 switch (_worstPopularityReason) {
                 case 5:
@@ -102,9 +102,9 @@ namespace Map {
                 }
             }
             int _bestSpeechID = -1;
-            int _candidateCount = 0;
             int _bestWeight = 0;
-            int _candidateSpeechID = 0;
+            int _candidateCount = 0;
+            int _candidateSpeechID = _worstPopularityReason;
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
                         .totalEnemyUnitsCount
                     < 10
@@ -113,17 +113,18 @@ namespace Map {
                     && DAT_GameCore::instance.missionNumber1to20 >= 16)) {
                 DAT_00ee1030::instance = 0;
             } else {
-                DAT_00ee1030::instance = DAT_00ee1030::instance + 1;
                 _candidateSpeechID = _rngMod4 + 98;
-                _bestWeight = 80;
+                int _startWeight = 80;
+                DAT_00ee1030::instance = DAT_00ee1030::instance + 1;
                 if ((int)DAT_00ee1030::instance > 2) {
-                    _bestWeight = (4 - DAT_00ee1030::instance) * 20;
-                    if (_bestWeight < 20) {
-                        _bestWeight = 20;
+                    _startWeight = (4 - DAT_00ee1030::instance) * 20;
+                    if (_startWeight < 20) {
+                        _startWeight = 20;
                     }
                 }
-                _candidateCount = 100;
                 _bestSpeechID = _candidateSpeechID;
+                _bestWeight = _startWeight;
+                _candidateCount = 100;
             }
             int _weight = 0;
             if (DAT_GameState::instance.playerDataArray[DAT_GameSynchronyState::instance.currentPlayerSlotID]
@@ -146,8 +147,8 @@ namespace Map {
                 _weight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12260;
                 _candidateCount = _candidateCount + 1;
                 if (_bestSpeechID == -1 || _weight > _bestWeight) {
-                    _bestWeight = _weight;
                     _bestSpeechID = _candidateSpeechID;
+                    _bestWeight = _weight;
                 }
             }
             int _taxesSetting
@@ -178,8 +179,8 @@ namespace Map {
                     _candidateCount = _candidateCount + 1;
                     _weight = _weight + DAT_UnitPropertiesDefinedData::instance.field_0x12264;
                     if (_bestSpeechID == -1 || _weight > _bestWeight) {
-                        _bestWeight = _weight;
                         _bestSpeechID = _candidateSpeechID;
+                        _bestWeight = _weight;
                     }
                 }
             }
@@ -260,10 +261,10 @@ namespace Map {
             }
             if (_candidateCount == 1 && SEC_RNG::instance.currentNumber1 % 3 == 0) {
                 _bestSpeechID = 1;
-            } else if (_bestSpeechID == -1) {
-                return 1;
             }
-            if (_candidateSpeechID < 98) {
+            if (_bestSpeechID == -1) {
+                _bestSpeechID = 1;
+            } else if (_candidateSpeechID < 98) {
                 DAT_00ee1030::instance = 0;
             }
             return _bestSpeechID;
