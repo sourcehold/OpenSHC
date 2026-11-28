@@ -10,10 +10,8 @@
 #include "OpenSHC/UI/Enums/MenuModalType.hpp"
 #include "OpenSHC/WindowsHelper/Enums/BOOLEnum.hpp"
 
-#include "OpenSHC/Globals/DAT_00eb0b24.hpp"
 #include "OpenSHC/Globals/DAT_00ed2794.hpp"
 #include "OpenSHC/Globals/DAT_00ed2798.hpp"
-#include "OpenSHC/Globals/DAT_00ed27bc.hpp"
 #include "OpenSHC/Globals/DAT_ARRAY_00ed26d0.hpp"
 #include "OpenSHC/Globals/DAT_GameCore.hpp"
 #include "OpenSHC/Globals/DAT_GameState.hpp"
@@ -23,6 +21,8 @@
 #include "OpenSHC/Globals/DAT_MouseState.hpp"
 #include "OpenSHC/Globals/DAT_TextureRenderCoreObject.hpp"
 #include "OpenSHC/Globals/DAT_VideoBikQueue.hpp"
+#include "OpenSHC/Globals/INT_00eb0b24.hpp"
+#include "OpenSHC/Globals/INT_00ed27bc.hpp"
 #include "OpenSHC/Globals/INT_00ed27c4.hpp"
 
 namespace OpenSHC {
@@ -109,10 +109,10 @@ namespace UI {
             }
             DAT_MouseState::instance.waitCursorToggle = 0;
             MACRO_CALL(UI::Helpers_Func::ResetEventStatusUnk)();
-            DAT_00eb0b24::instance = 0;
+            INT_00eb0b24::instance = 0;
             INT_00ed27c4::instance = 1;
             DAT_ARRAY_00ed26d0::instance[0].y = 0;
-            DAT_00ed27bc::instance = 0;
+            INT_00ed27bc::instance = 0;
             DAT_00ed2794::instance = 0;
             if ((DAT_MenuView_TriggerPrepare::instance != 2) && (!DAT_GameCore::instance.gameSuspended)) {
                 DAT_00ed2794::instance = timeGetTime();

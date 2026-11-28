@@ -64,9 +64,9 @@ namespace UI {
             }
         }
         if ((DAT_ViewportRenderState::instance.viewportState.mouseRayBuildingID == 0)
-            || (DAT_ViewportRenderState::instance.viewportState.field0_0x0 == 0)) {
+            || (DAT_ViewportRenderState::instance.viewportState.field_0x0 == 0)) {
             if (DAT_ViewportRenderState::instance.viewportState.cursorWallTile != 0
-                && DAT_ViewportRenderState::instance.viewportState.field0_0x0 != 0
+                && DAT_ViewportRenderState::instance.viewportState.field_0x0 != 0
                 && (hoveredOwner
                     = (DAT_TileMapState::instance
                               .WallOwnerLayer[DAT_ViewportRenderState::instance.viewportState.cursorWallTile]

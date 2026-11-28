@@ -268,13 +268,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     (int)DAT_GameCore::instance.skirmishTrailYearReached / 0xc,
@@ -296,13 +296,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 if (DAT_GameCore::instance.furthestSkirmishTrailMission == 0x32) {
                     iVar14 = 0;
@@ -447,13 +447,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     (int)DAT_GameCore::instance.warchestTrailYearReached / 0xc,
@@ -475,13 +475,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 if (DAT_GameCore::instance.furthestWarchestTrailMission == 0x1e) {
                     iVar14 = 0;
@@ -625,13 +625,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 0x11,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x30, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderNumberToScreen2, DAT_TextManagerObject::ptr)(
                     (int)DAT_GameCore::instance.extremeTrailYearReached / 0xc,
@@ -653,13 +653,13 @@ namespace UI {
                 if (DAT_TextManagerObject::instance.gameLanguage != OpenSHC::Text::GL_GERMAN) {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " A.D.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 } else {
                     MACRO_CALL_MEMBER(OpenSHC::Text::TextManager_Func::renderTextToScreen, DAT_TextManagerObject::ptr)(
                         " n. Chr.", DAT_WindowAndDirectDraw::instance.mainMenuBorderWidth + 700,
-                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT, 0xccfaff,
-                        0x12, TRUE, 0);
+                        DAT_WindowAndDirectDraw::instance.mainMenuBorderHeight + 0x15, OpenSHC::Text::TTA_LEFT,
+                        0xccfaff, 0x12, TRUE, 0);
                 }
                 if (DAT_GameCore::instance.furthestExtremeTrailMission == 0x1e) {
                     iVar14 = 0;
