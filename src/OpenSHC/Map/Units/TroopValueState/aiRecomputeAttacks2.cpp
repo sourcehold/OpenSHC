@@ -31,11 +31,9 @@ namespace Map {
             DAT_TroopValueState::instance.attackInfo.playerInfo[playerID - 1].currentPlayerID_OR_attackedPlayerID_OR_one
                 = DAT_GameSynchronyState::instance.currentPlayerSlotID;
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TileMapState::instance.AIZoneLayer), '\0',
-                (void*)((int)(DAT_TileMapState::instance.AIZoneLayer)));
+                sizeof(DAT_TileMapState::instance.AIZoneLayer), 0, DAT_TileMapState::instance.AIZoneLayer);
             MACRO_CALL_MEMBER(IO::LowLevelMemory_Func::fillMemory_ByteValue, DAT_LowLevelMemory::ptr)(
-                sizeof(DAT_TileMapState::instance.AIInfoLayer), '\0',
-                (void*)((int)(DAT_TileMapState::instance.AIInfoLayer)));
+                sizeof(DAT_TileMapState::instance.AIInfoLayer), 0, DAT_TileMapState::instance.AIInfoLayer);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::recountAttackTroopValue, this)(TRUE);
             MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::computeAttackWaveTroopComposition, this)();
             int const _defaultSignpostTile = DAT_GameState::instance.mapAndTime.signpostEntryData[0].tile;
@@ -48,14 +46,13 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.unknownSignpostRelatedArray[param_2] = 0;
                 _signpostTile = _defaultSignpostTile;
             }
+            int const zone = (short)DAT_TileMapState::instance.PathConnectionLayer[_signpostTile];
             if (canKeepReachSignpost) {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
-                    DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 1,
-                    (int)((short)DAT_TileMapState::instance.PathConnectionLayer[_signpostTile]));
+                    DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 1, zone);
             } else {
                 MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeAIZoneLayer,
-                    DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 0,
-                    (int)((short)DAT_TileMapState::instance.PathConnectionLayer[_signpostTile]));
+                    DAT_PathFindingState::ptr)(DAT_GameSynchronyState::instance.currentPlayerSlotID, 0, zone);
             }
             MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::updateWalkLayerAndAIPathCostLayer,
                 DAT_PathFindingState::ptr)(90, 0, 0, playerID);
