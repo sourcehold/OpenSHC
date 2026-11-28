@@ -207,7 +207,7 @@ public:
 
         template <bool implemented, bool wrapper, typename _> struct FunctionPtrUnifier;
         template <typename _> struct FunctionPtrUnifier<true, false, _> {
-            inline static FuncPtrType const get() { return funcAddress; }
+            __forceinline static FuncPtrType const get() { return funcAddress; }
         };
 
         // At the moment, there is not much sense in allowing the wrapper function for the exe.
@@ -216,10 +216,10 @@ public:
 #ifdef OPEN_SHC_DLL
 
         template <typename _> struct FunctionPtrUnifier<false, false, _> {
-            inline static FuncPtrType const get() { return GameFunction<FuncPtrType>::get(); }
+            __forceinline static FuncPtrType const get() { return GameFunction<FuncPtrType>::get(); }
         };
         template <bool implemented, typename _> struct FunctionPtrUnifier<implemented, true, _> {
-            inline static FuncPtrType const get()
+            __forceinline static FuncPtrType const get()
             {
                 return reinterpret_cast<FuncPtrType>(&Wrapper<FuncPtrType>::Function::call);
             }
@@ -372,7 +372,7 @@ public:
 #undef MACRO_STREAM_PRINT_PARAMETER
 
         template <typename FuncPtrType> struct GameFunction {
-            inline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&trampoline<gameAddress>); }
+            __forceinline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&trampoline<gameAddress>); }
         };
 
 #define MACRO_GAME_THIS_FUNCTION(N)                                                                                    \
@@ -395,7 +395,7 @@ public:
         };                                                                                                             \
                                                                                                                        \
     public:                                                                                                            \
-        inline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&CallHelper<Ret>::call); }              \
+        __forceinline static FuncPtrType get() { return reinterpret_cast<FuncPtrType>(&CallHelper<Ret>::call); }       \
     };
         MACRO_INDEX_ITERATE_DEPTH_1(MACRO_NUMBER_OF_FUNCTIONS_TO_GENERATE, MACRO_GAME_THIS_FUNCTION, M_SPACE)
 #undef MACRO_GAME_THIS_FUNCTION

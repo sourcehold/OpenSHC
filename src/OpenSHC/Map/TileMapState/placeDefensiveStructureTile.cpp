@@ -51,7 +51,8 @@ namespace Map {
             this->HeightLayer[tile] = this->DefaultHeightLayer[tile] + WALL_LOW_HEIGHT;
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL) {
             this->LogicLayer[tile] |= L_CRENEL;
-            this->HeightLayer[tile] += WALL_HIGH_CRENAL_HEIGHT;
+            byte& height = this->HeightLayer[tile];
+            height += WALL_HIGH_CRENAL_HEIGHT;
             if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((x & 1) == 0 && (y & 1) == 1) {
@@ -59,7 +60,8 @@ namespace Map {
             }
         } else if (command == OpenSHC::Commands::M_MAPPER_CRENAL2) {
             this->LogicLayer[tile] |= L_CRENEL;
-            this->HeightLayer[tile] += WALL_LOW_CRENAL_HEIGHT;
+            byte& height = this->HeightLayer[tile];
+            height += WALL_LOW_CRENAL_HEIGHT;
             if ((x & 1) == 1 && (y & 1) == 0) {
                 this->LogicLayer[tile] |= L_CRENEL_VARIATIONUnk;
             } else if ((x & 1) == 0 && (y & 1) == 1) {

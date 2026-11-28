@@ -1,6 +1,5 @@
 #include "../TileMapState.func.hpp"
 
-#include "OpenSHC/Map/LogicHelpers/Logic1.hpp"
 #include "OpenSHC/Map/LogicHelpers/MiscDisplay.hpp"
 
 #include "OpenSHC/Globals/DAT_BuildingsState.hpp"
@@ -19,7 +18,7 @@ namespace Map {
     {
         for (int i = 0; i < countof(DAT_TerrainDefinedData::instance.StockpilePathableOffsets); ++i) {
             int const tile = DAT_ViewportRenderState::instance
-                                 .translationMatrix[y + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[i].y]
+                                 .translationMatrix[DAT_TerrainDefinedData::instance.StockpilePathableOffsets[i].y + y]
                                  .addXgetTile
                 + x + DAT_TerrainDefinedData::instance.StockpilePathableOffsets[i].x;
             this->LogicLayer[tile] &= ~(L_STOCKPILEUnk | L_WALL_OR_GATEHOUSE);
@@ -33,5 +32,5 @@ namespace Map {
         }
     }
 
-} // namespace Map
-} // namespace OpenSHC
+}
+}
