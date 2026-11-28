@@ -320,10 +320,12 @@ namespace Map {
                             DAT_TileMapState::instance
                                 .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0]
                             + this->units[unitID].tile);
+                        /* the row above is reached through negative columns of this row, as the original addresses it
+                         */
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x100) != 0) {
                             _adjacentTiles[8]
                                 = DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][7]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-1]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
@@ -331,9 +333,9 @@ namespace Map {
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x200) != 0) {
                             _adjacentTiles[9]
                                 = DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][6]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-2]
                                 + DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][7]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-1]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
@@ -429,9 +431,9 @@ namespace Map {
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x200000) != 0) {
                             _adjacentTiles[21]
                                 = DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-7]
                                 + DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][2]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-6]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
@@ -439,7 +441,7 @@ namespace Map {
                         if ((DAT_TileMapState::instance.field_0x554a48 & 0x400000) != 0) {
                             _adjacentTiles[22]
                                 = DAT_TileMapState::instance
-                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY - 1][1]
+                                      .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][-7]
                                 + this->units[unitID].tile
                                 + DAT_TileMapState::instance
                                       .directionTranslationMatrix[DAT_TileMapState::instance.DAT_SomeY][0];
