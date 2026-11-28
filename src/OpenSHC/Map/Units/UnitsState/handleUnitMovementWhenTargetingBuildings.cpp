@@ -36,28 +36,30 @@ namespace Map {
                 return 0;
             }
             uint _isDefensiveStructure = DAT_TileMapState::instance.LogicLayer[_buildingTile] & 0x100;
-            if (_isDefensiveStructure != 0 || (DAT_TileMapState::instance.LogicLayer[_buildingTile] & 0x40000000U) != 0
-                || DAT_TileMapState::instance.BuildingLayer[_buildingTile] != 0) {
-                if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
-                        this->units[unitID].tile)
-                    != FALSE) {
-                    if (_isDefensiveStructure != 0) {
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationNearTargetedBuilding,
-                            DAT_UnitsState::ptr)(unitID, 0);
-                    }
-                } else {
-                    MACRO_CALL_MEMBER(
-                        OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(
-                        unitID);
-                    if (this->units[unitID].movementRelated >= 8) {
-                        this->units[unitID].destinationX_2Unk = this->units[unitID].x;
-                        this->units[unitID].destinationY_2Unk = this->units[unitID].y;
-                        return 1;
-                    }
-                }
-                return 0;
+            if (_isDefensiveStructure != 0) {
+            } else if ((DAT_TileMapState::instance.LogicLayer[_buildingTile] & 0x40000000U) != 0) {
+            } else if (DAT_TileMapState::instance.BuildingLayer[_buildingTile] != 0) {
+            } else {
+                return -1;
             }
-            return -1;
+            if (MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::ifAnyUnitOnSameTileIsLadder, this)(
+                    this->units[unitID].tile)
+                != FALSE) {
+                if (_isDefensiveStructure != 0) {
+                    MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationNearTargetedBuilding,
+                        DAT_UnitsState::ptr)(unitID, 0);
+                    return 0;
+                }
+            } else {
+                MACRO_CALL_MEMBER(
+                    OpenSHC::Map::Units::UnitsState_Func::makeUnitStopWalkingByClearingPathProgressState, this)(unitID);
+                if (this->units[unitID].movementRelated >= 8) {
+                    this->units[unitID].destinationX_2Unk = this->units[unitID].x;
+                    this->units[unitID].destinationY_2Unk = this->units[unitID].y;
+                    return 1;
+                }
+            }
+            return 0;
         }
 
     }
