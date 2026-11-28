@@ -67,7 +67,7 @@ namespace Map {
                         if (tile >= _tileCapacity) {
                             return TRUE;
                         }
-                        int _freeCapacity = _tileCapacity - tile;
+                        _tileCapacity = _tileCapacity - tile;
                         int _selectedUnitCount = 0;
                         for (int i = 0; i <= 26; ++i) {
                             if (i != Selection::USE_E_KNIGHTS && i != Selection::USE_E_LADDERMEN
@@ -76,7 +76,7 @@ namespace Map {
                                 _selectedUnitCount = _selectedUnitCount + this->selectionUnitType[i];
                             }
                         }
-                        return _selectedUnitCount > _freeCapacity * 2;
+                        return _selectedUnitCount > _tileCapacity * 2;
                     }
                 }
             }
