@@ -28,9 +28,10 @@ namespace Map {
                 _searchRadius = 6;
             } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 8) {
                 _searchRadius = 7;
+            } else if ((int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev < 20) {
+                _searchRadius = 8;
             } else {
-                _searchRadius
-                    = (uint)(0x14 <= (int)DAT_TroopValueState::instance.attackInfo.archerPointCountPrev) * 2 + 8;
+                _searchRadius = 10;
             }
             for (int tile = 0; tile < 80400; ++tile) {
                 if (DAT_TileMapState::instance.AIInfoLayer[tile] == '') {
@@ -69,8 +70,6 @@ namespace Map {
                                 DAT_TroopValueState::instance.attackInfo.archerPoints
                                     = DAT_TroopValueState::instance.attackInfo.archerPoints + 1;
                                 if (200 <= DAT_TroopValueState::instance.attackInfo.archerPoints) {
-                                    DAT_TroopValueState::instance.attackInfo.archerPointCountPrev
-                                        = DAT_TroopValueState::instance.attackInfo.archerPoints;
                                     return;
                                 }
                                 break;
