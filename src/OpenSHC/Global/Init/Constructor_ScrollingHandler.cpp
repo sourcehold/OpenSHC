@@ -14,8 +14,7 @@ namespace Global {
     void Init::Constructor_ScrollingHandler()
     {
         MACRO_CALL_MEMBER(UI::ScrollingHandler_Func::Constructor_ScrollingHandler, DAT_ScrollingHandler::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_ScrollingHandler));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_ScrollingHandler::get());
     }
 
 }

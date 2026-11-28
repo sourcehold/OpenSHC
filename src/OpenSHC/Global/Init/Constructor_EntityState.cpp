@@ -14,8 +14,7 @@ namespace Global {
     void Init::Constructor_EntityState()
     {
         MACRO_CALL_MEMBER(Map::Entities::EntityState_Func::Constructor_EntityState, DAT_EntityState::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d6f0));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_0059d6f0::get());
     }
 
 }

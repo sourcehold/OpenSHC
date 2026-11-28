@@ -69573,7 +69573,7 @@ SHC_3BB0A8C1_0x0059A13A | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0059A155 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0059A170 | 85.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059A170 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059A190 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
@@ -70095,13 +70095,13 @@ SHC_3BB0A8C1_0x0059C760 | 100.0% | Reimplemented (counted: only the pushed callb
 
 SHC_3BB0A8C1_0x0059C780 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059C7A0 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059C7A0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059C7C0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059C7E0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x0059C800 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059C800 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059C820 | 100.0% | Reimplemented
 
@@ -70127,7 +70127,7 @@ SHC_3BB0A8C1_0x0059C960 | 100.0% | Reimplemented (counted: only the pushed callb
 
 SHC_3BB0A8C1_0x0059C980 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059C9A0 | 88.9% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059C9A0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059C9D0 | 100.0% | Reimplemented
 
@@ -70135,7 +70135,7 @@ SHC_3BB0A8C1_0x0059C9F0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x0059CA10 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059CA20 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059CA20 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059CA40 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
@@ -70145,19 +70145,19 @@ SHC_3BB0A8C1_0x0059CA80 | 100.0% | Reimplemented (counted: only the pushed callb
 
 SHC_3BB0A8C1_0x0059CAA0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059CAC0 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059CAC0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059CAE0 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059CAE0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059CB00 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059CB20 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059CB40 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059CB40 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059CB60 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
-SHC_3BB0A8C1_0x0059CB80 | 83.3% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x0059CB80 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 
 SHC_3BB0A8C1_0x0059CBA0 | 100.0% | Reimplemented (counted: only the pushed callback address is unnamed in the original)
 

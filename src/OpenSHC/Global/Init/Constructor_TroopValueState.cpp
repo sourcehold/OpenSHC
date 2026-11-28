@@ -14,8 +14,7 @@ namespace Global {
     void Init::Constructor_TroopValueState()
     {
         MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::Constructor_TroopValueState, DAT_TroopValueState::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d710));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_0059d710::get());
     }
 
 }

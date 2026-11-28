@@ -15,8 +15,7 @@ namespace Global {
     {
         MACRO_CALL_MEMBER(
             Rendering::ViewportRenderState_Func::Constructor_ViewportRenderState, DAT_ViewportRenderState::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d660));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_0059d660::get());
     }
 
 }

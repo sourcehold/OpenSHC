@@ -14,8 +14,7 @@ namespace Global {
     void Init::Constructor_UserTextHandler()
     {
         MACRO_CALL_MEMBER(Text::UserTextHandler_Func::Constructor_UserTextHandler, DAT_UserTextHandlerState::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d550));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_0059d550::get());
     }
 
 }

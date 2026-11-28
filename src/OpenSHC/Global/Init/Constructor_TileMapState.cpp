@@ -14,8 +14,7 @@ namespace Global {
     void Init::Constructor_TileMapState()
     {
         MACRO_CALL_MEMBER(Map::TileMapState_Func::Constructor_TileMapState, DAT_TileMapState::ptr)();
-        MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d6b0));
-        return;
+        MACRO_CALL(OS_Func::_atexit)(Meta_Func::Destructor_0059d6b0::get());
     }
 
 }
