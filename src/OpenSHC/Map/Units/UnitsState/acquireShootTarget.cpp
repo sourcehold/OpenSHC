@@ -184,9 +184,10 @@ namespace Map {
                         == this->units[unitID]
                             .targetedUnitUIDUnk_OR_someAppearTileUnk_OR_buildingUID_OR_pitchDitchUID_OR_entityUID
                     && (_brazierEntityID = MACRO_CALL_MEMBER(OpenSHC::Map::Entities::EntityState_Func::isBrazierNearby,
-                            DAT_EntityState::ptr)(this->units[unitID].x, this->units[unitID].y,
+                            DAT_EntityState::ptr)(DAT_UnitsState::instance.units[unitID].x,
+                            DAT_UnitsState::instance.units[unitID].y,
                             (int)(DAT_UnitsState::instance.units[unitID].buildingHeight
-                                + this->units[unitID].terrainOrClimbHeight)),
+                                + DAT_UnitsState::instance.units[unitID].terrainOrClimbHeight)),
                         _brazierEntityID != 0)) {
                     this->units[unitID].shootTargetMicroX = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
                     this->units[unitID].shootTargetMicroY = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
@@ -211,8 +212,8 @@ namespace Map {
                     return TRUE;
                 }
             } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_WALL) {
-                int _wallY = this->units[unitID].attackAtTileY;
-                int _wallX = this->units[unitID].attackAtTileX;
+                short _wallY = this->units[unitID].attackAtTileY;
+                short _wallX = this->units[unitID].attackAtTileX;
                 int _wallTile = DAT_ViewportRenderState::instance.translationMatrix[_wallY].addXgetTile + _wallX;
                 BOOLEnum _tileIsValid = MACRO_CALL_MEMBER(OpenSHC::Rendering::ViewportRenderState_Func::xyAreValid,
                     DAT_ViewportRenderState::ptr)(_wallX, (uint)(_wallY));
