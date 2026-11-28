@@ -397,10 +397,11 @@ namespace Map {
                         this->units[_targetID].field_0x39a = 1;
                     }
                 }
-                int const _noticeMask = this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk;
-                if (_noticeMask != 0
-                    && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk & _noticeMask)
-                        == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng & _noticeMask)) {
+                if (this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk != 0
+                    && (DAT_GameState::instance.mapAndTime.totalGameTicksUnk
+                           & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)
+                        == (this->units[DAT_CurrentUnitSlotID::instance].fixedRng
+                            & this->units[DAT_CurrentUnitSlotID::instance].enemyNoticeFrequencyUnk)) {
                     if (this->units[DAT_CurrentUnitSlotID::instance].owner == 0) {
                         this->units[DAT_CurrentUnitSlotID::instance].closestEnemyMicroDistance = MACRO_CALL_MEMBER(
                             OpenSHC::Map::Units::UnitsState_Func::computeDistanceToNearestEnemyForLegacyMissions, this)(
@@ -605,9 +606,9 @@ namespace Map {
                         > this->units[DAT_CurrentUnitSlotID::instance].calculatedMovementSpeed
                             + this->units[DAT_CurrentUnitSlotID::instance].stateBasedSpeed
                             + this->units[DAT_CurrentUnitSlotID::instance].moveDelay) {
+                        this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _moveTicks;
                         short* const _movementRunUpTime
                             = &this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime;
-                        this->units[DAT_CurrentUnitSlotID::instance].field_0x350 = _moveTicks;
                         if (this->units[DAT_CurrentUnitSlotID::instance].movementRunUpTime > 0) {
                             *_movementRunUpTime = *_movementRunUpTime - 1;
                         } else {
