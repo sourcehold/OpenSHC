@@ -46,11 +46,8 @@ namespace Map {
                 DAT_TroopValueState::instance.attackInfo.attackWaveTicker[param_1] = 0;
                 DAT_TroopValueState::instance.attackInfo.someCounter1
                     = DAT_TroopValueState::instance.attackInfo.someCounter1 + 1;
-                int _signpostIndex = DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1];
-                DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1]
-                    = (short)(_signpostIndex + 1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::aiRecomputeAttacks, this)(
-                    (int)_signpostIndex, param_1);
+                    DAT_TroopValueState::instance.attackInfo.attackWaveSignpostShorts[param_1]++, param_1);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::sortAttackInfoTribeIDArrayBasedOn, this)(
                     param_1, 1000, 10000, Map::Units::STBT_0x41b);
                 MACRO_CALL_MEMBER(Map::Units::TroopValueState_Func::applyTribeBehaviorTypes, this)(
