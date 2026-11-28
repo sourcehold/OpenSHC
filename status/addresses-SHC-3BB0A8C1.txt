@@ -22997,7 +22997,7 @@ SHC_3BB0A8C1_0x004863A0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00486530 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x00486600 | 0.0% | Pending
+SHC_3BB0A8C1_0x00486600 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x00486A70 | 100.0% | Reimplemented
 
@@ -36021,7 +36021,7 @@ SHC_3BB0A8C1_0x004D9230 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004D9270 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004D9290 | 0.0% | Pending
+SHC_3BB0A8C1_0x004D9290 | 100.0% | Reimplemented (counted: only memset/_stricmp call labels and the instance[i - 1] address label differ)
 
 SHC_3BB0A8C1_0x004D9400 | 0.0% | Pending
 
@@ -38447,7 +38447,7 @@ SHC_3BB0A8C1_0x004F2630 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x004F2640 | 100.0% | Pending
 
-SHC_3BB0A8C1_0x004F26C0 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F26C0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F28D0 | 0.0% | Pending
 
@@ -38641,7 +38641,7 @@ SHC_3BB0A8C1_0x004F4C80 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F4CD0 | 100.0% | Reimplemented
 
-SHC_3BB0A8C1_0x004F4D70 | 0.0% | Pending
+SHC_3BB0A8C1_0x004F4D70 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004F4E00 | 100.0% | Reimplemented
 
