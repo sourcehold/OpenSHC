@@ -36279,7 +36279,7 @@ SHC_3BB0A8C1_0x004DF2E0 | 100.0% | Reimplemented
 
 SHC_3BB0A8C1_0x004DFB90 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x004E0A50 | 59.7% | Ported from gynt, asm differs
+SHC_3BB0A8C1_0x004E0A50 | 71.6% | Script index kept in esi by the original, in memory by us
 
 SHC_3BB0A8C1_0x004E0A90 | 0.0% | Pending
 
