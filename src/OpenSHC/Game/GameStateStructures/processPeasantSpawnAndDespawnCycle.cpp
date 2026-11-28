@@ -32,6 +32,11 @@ namespace Game {
     using Map::Units::UnitType;
     using WindowsHelper::Enums::BOOLEnum;
 
+// The original walks a pointer to vclockIncrement and reaches the other PlayerData fields by their distance from
+// it. Indexing playerDataArray[playerID] instead makes MSVC base the loop on popularity.
+#define PLAYER_FIELD(type, field)                                                                                      \
+    (*(type*)((char*)vclockIncrement + offsetof(PlayerData, field) - offsetof(PlayerData, vclockIncrement)))
+
     // FUNCTION: STRONGHOLDCRUSADER 0x0045B4A0
     void GameStateStructures::processPeasantSpawnAndDespawnCycle()
     {
@@ -40,56 +45,60 @@ namespace Game {
             && DAT_MapPropertiesState::instance.SEC_U3_MapType2_1 == Map::MT_SIEGE) {
             return;
         }
-        for (int playerID = 1; playerID < 9; ++playerID) {
-            if (this->playerDataArray[playerID].lordKilledByPlayerID != 0) {
+        int playerID = 1;
+        int* vclockIncrement = &this->playerDataArray[1].vclockIncrement;
+        for (; playerID < 9; ++playerID, vclockIncrement += sizeof(PlayerData) / sizeof(int)) {
+            if (PLAYER_FIELD(int, lordKilledByPlayerID) != 0) {
                 continue;
             }
-            if (this->playerDataArray[playerID].playerDeathRelated != 0
+            if (PLAYER_FIELD(int, playerDeathRelated) != 0
                 && DAT_GameSynchronyState::instance.currentGameMode == GM_SOLITARY) {
                 continue;
             }
+            // The original picks the increment into a register and stores it once, then reuses that register for
+            // the sum and for the zero test below.
+            int increment;
             if (DAT_GameSynchronyState::instance.currentGameMode != GM_SOLITARY) {
-                this->playerDataArray[playerID].vclockIncrement
-                    = DAT_TroopDefinedData::instance
-                          .PeasantSpawnClockIncrementSkirmish[this->playerDataArray[playerID].popularity / 500];
+                increment = DAT_TroopDefinedData::instance
+                                .PeasantSpawnClockIncrementSkirmish[PLAYER_FIELD(int, popularity) / 500];
             } else {
-                int popularityIndex = this->playerDataArray[playerID].popularity / 500;
-                if (this->playerDataArray[playerID].currentPopulation > 100) {
-                    this->playerDataArray[playerID].vclockIncrement
-                        = DAT_TroopDefinedData::instance
-                              .PeasantSpawnClockIncrementSolitaryPopMoreThan100[popularityIndex];
+                int popularityIndex = PLAYER_FIELD(int, popularity) / 500;
+                if (PLAYER_FIELD(int, currentPopulation) > 100) {
+                    increment = DAT_TroopDefinedData::instance
+                                    .PeasantSpawnClockIncrementSolitaryPopMoreThan100[popularityIndex];
                 } else {
-                    this->playerDataArray[playerID].vclockIncrement
-                        = DAT_TroopDefinedData::instance
-                              .PeasantSpawnClockIncrementSolitaryPopLessThan101[popularityIndex];
+                    increment = DAT_TroopDefinedData::instance
+                                    .PeasantSpawnClockIncrementSolitaryPopLessThan101[popularityIndex];
                 }
             }
-            this->playerDataArray[playerID].vclock += this->playerDataArray[playerID].vclockIncrement;
-            if (this->playerDataArray[playerID].vclock >= 4000) {
-                this->playerDataArray[playerID].vclock = 4000;
-            } else if (this->playerDataArray[playerID].vclock < 0) {
-                this->playerDataArray[playerID].vclock = 0;
+            PLAYER_FIELD(int, vclockIncrement) = increment;
+            int const vclock = PLAYER_FIELD(int, vclock) + increment;
+            PLAYER_FIELD(int, vclock) = vclock;
+            if (vclock >= 4000) {
+                PLAYER_FIELD(int, vclock) = 4000;
+            } else if (vclock < 0) {
+                PLAYER_FIELD(int, vclock) = 0;
             }
-            if (this->playerDataArray[playerID].vclockIncrement == 0) {
-                this->playerDataArray[playerID].vclock = 2000;
+            if (increment == 0) {
+                PLAYER_FIELD(int, vclock) = 2000;
             }
-            if (this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_KEEP].id <= 0) {
+            if (PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_KEEP].id) <= 0) {
                 continue;
             }
-            int campgroundID = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id;
+            int campgroundID = PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].id);
             if (campgroundID <= 0) {
                 continue;
             }
-            if (this->playerDataArray[playerID].vclock >= 4000) {
-                if (this->playerDataArray[playerID].currentPopulation < this->playerDataArray[playerID].populationCap
-                    && this->playerDataArray[playerID].availablePeasantsOrHousedPeasants < 24) {
+            if (PLAYER_FIELD(int, vclock) >= 4000) {
+                if (PLAYER_FIELD(int, currentPopulation) < PLAYER_FIELD(int, populationCap)
+                    && PLAYER_FIELD(int, availablePeasantsOrHousedPeasants) < 24) {
                     // Havent reached peasant limit.
-                    int x = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].xEntry;
-                    int y = this->playerDataArray[playerID].buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].yEntry;
-                    this->playerDataArray[playerID].vclock = 2000;
+                    int x = PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].xEntry) * 8;
+                    int y = PLAYER_FIELD(int, buildingEntryInfos[Player::Enums::BEIE_CAMPGROUND].yEntry) * 8;
+                    PLAYER_FIELD(int, vclock) = 2000;
                     int peasantUnitID = MACRO_CALL_MEMBER(Map::Units::UnitsState_Func::spawnUnit, DAT_UnitsState::ptr)(
-                        playerID, playerID, x * 8, y * 8,
-                        DAT_BuildingsState::instance.buildings[campgroundID].terrainHeightUnk, Map::Units::UT_PEASANT);
+                        playerID, playerID, x, y, DAT_BuildingsState::instance.buildings[campgroundID].terrainHeightUnk,
+                        Map::Units::UT_PEASANT);
                     if (peasantUnitID != 0) {
                         // Successfully spawned peasant.
                         DAT_UnitsState::instance.units[peasantUnitID].animationCycleNumber
@@ -99,8 +108,8 @@ namespace Game {
                             MACRO_CALL(UI::Helpers_Func::SetTutorialBuildingActionState)(9, Map::Buildings::BT_HOVEL);
                         }
                     }
-                    if (this->playerDataArray[playerID].field_0x42 == 1) {
-                        this->playerDataArray[playerID].field_0x42 = 0;
+                    if (PLAYER_FIELD(short, field_0x42) == 1) {
+                        PLAYER_FIELD(short, field_0x42) = 0;
                         if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                             && MACRO_CALL_MEMBER(
                                    Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -111,15 +120,15 @@ namespace Game {
                         }
                     }
                 }
-            } else if (this->playerDataArray[playerID].vclock <= 0
-                && this->playerDataArray[playerID].availablePeasantsOrHousedPeasants
-                        + this->playerDataArray[playerID].populationRelatedCrowdingCountUnk
+            } else if (PLAYER_FIELD(int, vclock) <= 0
+                && PLAYER_FIELD(int, availablePeasantsOrHousedPeasants)
+                        + PLAYER_FIELD(int, populationRelatedCrowdingCountUnk)
                     > 4) {
-                this->playerDataArray[playerID].vclock = 2000;
+                PLAYER_FIELD(int, vclock) = 2000;
                 // let a peasant disappear?
                 MACRO_CALL_MEMBER(GameStateStructures_Func::despawnPeasantOrWorker, this)(playerID);
-                if (this->playerDataArray[playerID].field_0x42 == 0) {
-                    this->playerDataArray[playerID].field_0x42 = 1;
+                if (PLAYER_FIELD(short, field_0x42) == 0) {
+                    PLAYER_FIELD(short, field_0x42) = 1;
                     if (playerID == DAT_GameSynchronyState::instance.currentPlayerSlotID
                         && MACRO_CALL_MEMBER(
                                Audio::MSS::SoundSystem_Func::shouldSoundXNotBePlaying, DAT_SoundSystemState::ptr)()
@@ -132,6 +141,8 @@ namespace Game {
             }
         }
     }
+
+#undef PLAYER_FIELD
 
 }
 }
