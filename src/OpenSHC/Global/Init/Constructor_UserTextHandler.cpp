@@ -13,7 +13,7 @@ namespace Global {
     // FUNCTION: STRONGHOLDCRUSADER 0x0059C800
     void Init::Constructor_UserTextHandler()
     {
-        MACRO_CALL_MEMBER(Text::UserTextHandler_Func::FUN_004694a0, DAT_UserTextHandlerState::ptr)();
+        MACRO_CALL_MEMBER(Text::UserTextHandler_Func::Constructor_UserTextHandler, DAT_UserTextHandlerState::ptr)();
         MACRO_CALL(OS_Func::_atexit)(MACRO_CALL(Meta_Func::Destructor_0059d550));
         return;
     }
