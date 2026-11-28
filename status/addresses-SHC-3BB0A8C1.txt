@@ -45893,7 +45893,7 @@ SHC_3BB0A8C1_0x0051B708 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051B70C | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0051B710 | 0.0% | Pending
+SHC_3BB0A8C1_0x0051B710 | 25.6% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x0051B770 | 0.0% | Pending
 
@@ -46139,7 +46139,7 @@ SHC_3BB0A8C1_0x0051CBD0 | 0.0% | Pending
 
 SHC_3BB0A8C1_0x0051CC00 | 0.0% | Pending
 
-SHC_3BB0A8C1_0x0051CCB0 | 0.0% | Pending
+SHC_3BB0A8C1_0x0051CCB0 | 55.3% | Ported from gynt, asm differs
 
 SHC_3BB0A8C1_0x0051CE50 | 0.0% | Pending
 
