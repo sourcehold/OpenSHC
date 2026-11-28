@@ -47,12 +47,13 @@ namespace Map {
                 int const _tribeID = this->units[unitID].tribeID;
                 if (_tribeID != 0) {
                     _isRallying = DAT_TribesState::instance.tribes[_tribeID].isRallyingUnk;
-                    if (DAT_TribesState::instance.tribes[_tribeID].unitStance
-                        == OpenSHC::Map::Units::Behavior::USE_DEFENSIVE) {
+                    switch (DAT_TribesState::instance.tribes[_tribeID].unitStance) {
+                    case OpenSHC::Map::Units::Behavior::USE_DEFENSIVE:
                         _stanceBasedRange = 40;
-                    } else if (DAT_TribesState::instance.tribes[_tribeID].unitStance
-                        == OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE) {
+                        break;
+                    case OpenSHC::Map::Units::Behavior::USE_AGGRESSIVE:
                         _stanceBasedRange = 200;
+                        break;
                     }
                 }
             }
@@ -127,52 +128,53 @@ namespace Map {
                 ++_enemyIndex) {
                 int _enemyUnitID = DAT_GameState::instance.playerDataArray[_playerID].enemyIDArray[_enemyIndex];
                 int _distanceX;
-                if (this->units[_enemyUnitID].microXPosition < _microX) {
+                if (_microX > this->units[_enemyUnitID].microXPosition) {
                     _distanceX = _microX - this->units[_enemyUnitID].microXPosition;
                 } else {
                     _distanceX = this->units[_enemyUnitID].microXPosition - _microX;
                 }
                 int _distanceY;
-                if (this->units[_enemyUnitID].microYPosition < _microY) {
+                if (_microY > this->units[_enemyUnitID].microYPosition) {
                     _distanceY = _microY - this->units[_enemyUnitID].microYPosition;
                 } else {
                     _distanceY = this->units[_enemyUnitID].microYPosition - _microY;
                 }
-                int _approximateDistance;
+                int _score;
                 if (_distanceX < _distanceY) {
                     /* pythagorean approximation */
-                    _approximateDistance = (((_distanceX * 2) / 5) * _distanceX) / _distanceY + _distanceY;
-                } else if (_distanceX == 0) {
-                    /* fixme: bug: I think this needs to be set not to 0 but to _distanceY */
-                    _approximateDistance = 0;
+                    _score = (((_distanceX * 2) / 5) * _distanceX) / _distanceY + _distanceY;
+                } else if (_distanceX != 0) {
+                    _score = (((_distanceY * 2) / 5) * _distanceY) / _distanceX + _distanceX;
                 } else {
-                    _approximateDistance = (((_distanceY * 2) / 5) * _distanceY) / _distanceX + _distanceX;
+                    /* fixme: bug: I think this needs to be set not to 0 but to _distanceY */
+                    _score = 0;
                 }
-                if (_approximateDistance < _minDistance) {
-                    _minDistance = _approximateDistance;
+                if (_score < _minDistance) {
+                    _minDistance = _score;
                 }
                 if (this->units[unitID].unitType == OpenSHC::Map::Units::UT_A_ASSASSIN
-                    && DAT_UnitsState::instance.units[_enemyUnitID].isSelectable_OR_matchTime != 0
-                    && _approximateDistance < this->unitDistanceComputationResultUnk) {
-                    this->unitDistanceComputationResultUnk = _approximateDistance;
+                    && this->units[_enemyUnitID].isSelectable_OR_matchTime != 0
+                    && _score < this->unitDistanceComputationResultUnk) {
+                    this->unitDistanceComputationResultUnk = _score;
                 }
                 if (_skipStanceSearch || _stanceBasedRange == 0 || this->units[unitID].lookForEnemy < 0) {
                     continue;
                 }
-                int _score = _approximateDistance;
                 if (this->units[unitID]._someX_2 != 0 && _isRallying == 0 && _stanceBasedRange == 40) {
+                    int const _savedX = this->units[unitID]._someX_2 * 8;
+                    int const _savedY = this->units[unitID]._someY_2 * 8;
                     int _savedDistanceX;
-                    if (this->units[unitID]._someX_2 * 8 < this->units[_enemyUnitID].microXPosition) {
-                        _savedDistanceX = this->units[_enemyUnitID].microXPosition + this->units[unitID]._someX_2 * -8;
+                    if (this->units[_enemyUnitID].microXPosition > _savedX) {
+                        _savedDistanceX = this->units[_enemyUnitID].microXPosition - _savedX;
                     } else {
-                        _savedDistanceX = this->units[unitID]._someX_2 * 8 - this->units[_enemyUnitID].microXPosition;
+                        _savedDistanceX = _savedX - this->units[_enemyUnitID].microXPosition;
                     }
-                    if (this->units[unitID]._someY_2 * 8 < this->units[_enemyUnitID].microYPosition) {
-                        _score = this->units[_enemyUnitID].microYPosition + this->units[unitID]._someY_2 * -8;
+                    if (this->units[_enemyUnitID].microYPosition > _savedY) {
+                        _score = this->units[_enemyUnitID].microYPosition - _savedY;
                     } else {
-                        _score = this->units[unitID]._someY_2 * 8 - this->units[_enemyUnitID].microYPosition;
+                        _score = _savedY - this->units[_enemyUnitID].microYPosition;
                     }
-                    if (_score <= _savedDistanceX) {
+                    if (_savedDistanceX >= _score) {
                         _score = _savedDistanceX;
                     }
                 }
@@ -253,14 +255,16 @@ namespace Map {
                 if (_score >= _bestScore) {
                     continue;
                 }
+                int const _enemyTile = this->units[_enemyUnitID].tile;
+                int const _enemyY = this->units[_enemyUnitID].y;
                 int _enemyTotalHeight
                     = this->units[_enemyUnitID].buildingHeight + this->units[_enemyUnitID].terrainOrClimbHeight;
                 int _bestApproachDirection = -1;
                 int _bestApproachDistance = 10000;
                 for (int _direction = 0; _direction < 8; ++_direction) {
-                    int _approachTile = DAT_TileMapState::instance.directionTranslationMatrix[this->units[_enemyUnitID]
-                                                .y][DAT_UnitPropertiesDefinedData::instance.field_0x11cb4[_direction]]
-                        + this->units[_enemyUnitID].tile;
+                    int _approachTile = DAT_TileMapState::instance.directionTranslationMatrix
+                                            [_enemyY][DAT_UnitPropertiesDefinedData::instance.field_0x11cb4[_direction]]
+                        + _enemyTile;
                     if (DAT_TileMapState::instance.UnitLayer[_approachTile] != 0) {
                         continue;
                     }
@@ -269,25 +273,25 @@ namespace Map {
                     if (_enemyTotalHeight >= (int)(_tileHeight + 16)) {
                         continue;
                     }
-                    if ((int)(_tileHeight - 16) >= _enemyTotalHeight) {
+                    if (_enemyTotalHeight <= (int)(_tileHeight - 16)) {
                         continue;
                     }
                     int _approachY = DAT_ViewportRenderState::instance.tileTranslationMatrix_YComponent[_approachTile];
                     int _approachX
                         = _approachTile - DAT_ViewportRenderState::instance.translationMatrix[_approachY].addXgetTile;
                     int _approachDistanceX;
-                    if (_approachX * 8 < _microX) {
-                        _approachDistanceX = _microX + _approachX * -8;
+                    if (_microX > _approachX * 8) {
+                        _approachDistanceX = _microX - _approachX * 8;
                     } else {
                         _approachDistanceX = _approachX * 8 - _microX;
                     }
                     int _approachDistance;
-                    if (_approachY * 8 < _microY) {
-                        _approachDistance = _microY + _approachY * -8;
+                    if (_microY > _approachY * 8) {
+                        _approachDistance = _microY - _approachY * 8;
                     } else {
                         _approachDistance = _approachY * 8 - _microY;
                     }
-                    if (_approachDistance <= _approachDistanceX) {
+                    if (_approachDistanceX >= _approachDistance) {
                         _approachDistance = _approachDistanceX;
                     }
                     if (_approachDistance < _bestApproachDistance) {
@@ -302,60 +306,55 @@ namespace Map {
                 }
             }
             BOOLEnum _restoreSavedDestination = FALSE;
-            if (_stanceBasedRange == 0) {
-                if (this->units[unitID].lookForEnemy == 0) {
-                    this->units[unitID].movementType_OR_targetUnitID = 0;
-                    if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION) {
-                        _restoreSavedDestination = TRUE;
-                    }
-                }
-            } else if (this->units[unitID].lookForEnemy >= 0) {
-                if (_skipStanceSearch) {
-                    if (this->units[unitID].lookForEnemy == 0) {
+            if (_stanceBasedRange != 0) {
+                if (this->units[unitID].lookForEnemy >= 0) {
+                    if (!_skipStanceSearch) {
+                        if (_foundEnemyID != 0
+                            && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
+                                                     calculateCanPlayerUnitsNavigateToAreaFromArea,
+                                   DAT_PathFindingState::ptr)(this->units[unitID].owner, (short)_area,
+                                   DAT_TileMapState::instance.PathConnectionLayer[this->units[_foundEnemyID].tile],
+                                   this->units[unitID].unitCanClimb)
+                                != 0) {
+                            this->units[unitID].animationCycleNumber = 0;
+                            this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
+                            if (this->units[unitID]._someX_2 == 0) {
+                                this->units[unitID]._someX_2 = this->units[unitID].destinationX_2Unk;
+                                this->units[unitID]._someY_2 = this->units[unitID].destinationY_2Unk;
+                            }
+                            MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::findNearestValidDigTileNearTarget,
+                                DAT_TileMapState::ptr)(this->units[unitID].x, this->units[unitID].y,
+                                this->units[_foundEnemyID].x, this->units[_foundEnemyID].y);
+                            MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(unitID,
+                                DAT_TileMapState::instance.destinationNearTargetX,
+                                DAT_TileMapState::instance.destinationNearTargetY, 0);
+                            int _lookAhead = -30 - _chosenRawDistance;
+                            this->units[unitID].moveDelay = 0;
+                            if (_lookAhead > -51) {
+                                _lookAhead = -50;
+                            }
+                            this->units[unitID].lookForEnemy = _lookAhead;
+                            if (this->units[unitID].movementType_OR_targetUnitID != _foundEnemyID) {
+                                this->units[unitID].movementType_OR_targetUnitID = _foundEnemyID;
+                                DAT_UnitsState::instance.units[_foundEnemyID].huntedBy
+                                    = DAT_UnitsState::instance.units[_foundEnemyID].huntedBy + 1;
+                            }
+                        } else {
+                            this->units[unitID].lookForEnemy = -8;
+                            this->units[unitID].movementType_OR_targetUnitID = 0;
+                            _restoreSavedDestination = TRUE;
+                        }
+                    } else if (this->units[unitID].lookForEnemy == 0) {
                         this->units[unitID].movementType_OR_targetUnitID = 0;
                         if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION) {
                             _restoreSavedDestination = TRUE;
                         }
                     }
-                } else {
-                    BOOLEnum _headedToEnemy = FALSE;
-                    if (_foundEnemyID != 0
-                        && MACRO_CALL_MEMBER(OpenSHC::Map::Navigation::PathFindingState_Func::
-                                                 calculateCanPlayerUnitsNavigateToAreaFromArea,
-                               DAT_PathFindingState::ptr)(this->units[unitID].owner, (short)_area,
-                               DAT_TileMapState::instance.PathConnectionLayer[this->units[_foundEnemyID].tile],
-                               this->units[unitID].unitCanClimb)
-                            != 0) {
-                        this->units[unitID].animationCycleNumber = 0;
-                        this->units[unitID].state.generic = OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION;
-                        if (this->units[unitID]._someX_2 == 0) {
-                            this->units[unitID]._someX_2 = this->units[unitID].destinationX_2Unk;
-                            this->units[unitID]._someY_2 = this->units[unitID].destinationY_2Unk;
-                        }
-                        MACRO_CALL_MEMBER(OpenSHC::Map::TileMapState_Func::findNearestValidDigTileNearTarget,
-                            DAT_TileMapState::ptr)(this->units[unitID].x, this->units[unitID].y,
-                            this->units[_foundEnemyID].x, this->units[_foundEnemyID].y);
-                        MACRO_CALL_MEMBER(OpenSHC::Map::Units::UnitsState_Func::setDestinationForUnit, this)(unitID,
-                            DAT_TileMapState::instance.destinationNearTargetX,
-                            DAT_TileMapState::instance.destinationNearTargetY, 0);
-                        int _lookAhead = -30 - _chosenRawDistance;
-                        this->units[unitID].moveDelay = 0;
-                        if (_lookAhead > -51) {
-                            _lookAhead = -50;
-                        }
-                        this->units[unitID].lookForEnemy = _lookAhead;
-                        if (this->units[unitID].movementType_OR_targetUnitID != _foundEnemyID) {
-                            this->units[unitID].movementType_OR_targetUnitID = _foundEnemyID;
-                            DAT_UnitsState::instance.units[_foundEnemyID].huntedBy
-                                = DAT_UnitsState::instance.units[_foundEnemyID].huntedBy + 1;
-                        }
-                        _headedToEnemy = TRUE;
-                    }
-                    if (!_headedToEnemy) {
-                        this->units[unitID].lookForEnemy = -8;
-                        this->units[unitID].movementType_OR_targetUnitID = 0;
-                        _restoreSavedDestination = TRUE;
-                    }
+                }
+            } else if (this->units[unitID].lookForEnemy == 0) {
+                this->units[unitID].movementType_OR_targetUnitID = 0;
+                if (this->units[unitID].state.generic == OpenSHC::Map::Units::States::US_MOVE_TO_DESTINATION) {
+                    _restoreSavedDestination = TRUE;
                 }
             }
             if (_restoreSavedDestination && this->units[unitID]._someX_2 != 0) {
