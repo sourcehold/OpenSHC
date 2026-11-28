@@ -33,6 +33,18 @@ starts with '/' is rewritten into a Windows path by MSYS, which silently turns
 the regex into one that matches nothing -- prefix the command with
 MSYS_NO_PATHCONV=1, or write the pattern without a leading slash.
 
+When several refs reach the same best percentage, best_source names one of them
+by these rules, in order (see tie_rank):
+
+  1. the owner, in OWNER_ORDER; owners not listed come after all listed ones
+  2. main (HEAD) before every branch
+  3. within an owner, a branch named for the function's namespace
+     (reimpl/map-entities-functions for src/OpenSHC/Map/Entities/...)
+  4. within an owner, not a catch-all branch: archive/, docs/, tools/, style/,
+     fix/, *backup*, a bare 'development', or a branch that is ahead of main in
+     more than CATCHALL_SPREAD namespaces
+  5. the newest branch tip, then the ref name
+
 The helpers here are also imported by status_regression.py, so keep the module
 importable: everything that runs belongs in main().
 """
@@ -41,6 +53,17 @@ import argparse, os, re, subprocess
 from collections import Counter
 
 ROOT = 'src/OpenSHC'
+#: who wins a tie at the same percentage, first listed first (case-insensitive)
+OWNER_ORDER = ('sourcehold', 'gynt', 'TheRedDaemon', 'kotijekriv', '6and8', 'Sebauxs', 'Wilps93')
+#: branch names that hold work from all over the tree rather than one topic
+CATCHALL_NAME = re.compile(r'^(archive|docs|tools|style|fix)/|backup|^development$', re.I)
+#: a branch ahead of main in more namespaces (two folders below ROOT, e.g. Map/Units)
+#: than this is a catch-all whatever its name says: the UI-*-development branches
+#: that grew out of one big integration branch are ahead in ~40, topic branches in 1-5
+CATCHALL_SPREAD = 10
+#: branch-name words that say nothing about the topic
+GENERIC_WORDS = {'reimpl', 'development', 'functions', 'batch', 'leftover', 'backup', 'archive',
+                 'merged', 'full', 'second', 'pass', 'near', 'round', 'docs', 'tools', 'style', 'fix'}
 #: the project's own repository; forks are enumerated from its root
 DEFAULT_REPO = 'sourcehold/OpenSHC'
 STATUS_GLOB = re.compile(r'^status/addresses-SHC-[0-9A-Fa-f]+\.txt$')
@@ -213,23 +236,82 @@ def reimpl_refs(filter_re=None, exclude_shas=()):
     return ['HEAD'] + sorted(refs)
 
 
-def best_per_id(refs):
-    """-> ({shc id: (pct, status, source)}, Counter of refs at 100%, refs that had a status file)."""
-    best = {}
+def namespace(cpp):
+    """'src/OpenSHC/Map/Units/UnitsState/x.cpp' -> 'Map/Units'."""
+    return '/'.join(cpp.split('/')[2:4])
+
+
+def named_for(branch, cpp):
+    """True if a topic word of the branch name occurs in the function's path."""
+    words = [w for w in re.split(r'[-_/.]+', branch.lower())
+             if len(w) >= 4 and w not in GENERIC_WORDS and not w.isdigit()]
+    return any(w in cpp.lower() for w in words)
+
+
+def branch_tips():
+    """-> {remote-tracking ref: committer time of its tip}."""
+    rc, out = run(['git', 'for-each-ref', '--format=%(refname:short) %(committerdate:unix)',
+                   'refs/remotes'])
+    tips = {}
+    for line in out.splitlines():
+        parts = line.split()
+        if len(parts) == 2 and parts[1].isdigit():
+            tips[parts[0]] = int(parts[1])
+    return tips
+
+
+def tie_rank(ref, cpp, repos, tips, spread):
+    """Sort key among refs tied at one percentage; the smallest wins (rules in the module doc)."""
+    if ref == 'HEAD':
+        return (0,)
+    owner = fork_of(ref, repos).split('/')[0].lower()
+    order = [o.lower() for o in OWNER_ORDER]
+    branch = ref.split('/', 1)[1] if '/' in ref else ref
+    catch_all = bool(CATCHALL_NAME.search(branch)) or spread.get(ref, 0) > CATCHALL_SPREAD
+    return (1 + (order.index(owner) if owner in order else len(order)),
+            0 if named_for(branch, cpp) else 1,
+            1 if catch_all else 0,
+            -tips.get(ref, 0),
+            ref)
+
+
+def best_per_id(refs, cpp_of=None):
+    """-> ({shc id: (pct, status, source)}, Counter of refs at 100%, refs that had a status file).
+
+    `cpp_of` ({shc id: expected cpp}) feeds the namespace rules of tie_rank;
+    without it a tie is still settled by owner, main, catch-all names and tip age.
+    """
+    cpp_of = cpp_of or {}
+    tied = {}  # shc id -> (pct, [(ref, status), ...] at that pct)
     at100 = Counter()
     seen = []
+    main_rows = {}
+    spread = {}  # ref -> namespaces in which it is ahead of main
     for ref in refs:
         rows = rows_at(ref)
         if not rows:
             continue
         seen.append(ref)
+        if ref == 'HEAD':
+            main_rows = rows
+        else:
+            spread[ref] = len(set(namespace(cpp_of.get(sid, '')) for sid, (pct, st) in rows.items()
+                                  if pct > main_rows.get(sid, (0.0,))[0]))
         for sid, (pct, st) in rows.items():
             if pct >= 100.0:
                 at100[sid] += 1
-            cur = best.get(sid)
-            # keep the highest pct; on a tie prefer main so its remark text wins
-            if cur is None or pct > cur[0] or (pct == cur[0] and ref == 'HEAD'):
-                best[sid] = (pct, st, 'main' if ref == 'HEAD' else ref)
+            cur = tied.get(sid)
+            if cur is None or pct > cur[0]:
+                tied[sid] = (pct, [(ref, st)])
+            elif pct == cur[0]:
+                cur[1].append((ref, st))
+    repos = remote_repos()
+    tips = branch_tips()
+    best = {}
+    for sid, (pct, cands) in tied.items():
+        cpp = cpp_of.get(sid, '')
+        ref, st = min(cands, key=lambda c: tie_rank(c[0], cpp, repos, tips, spread))
+        best[sid] = (pct, st, 'main' if ref == 'HEAD' else ref)
     return best, at100, seen
 
 
@@ -287,7 +369,7 @@ def main(argv=None):
     print('resolvers in main headers:', len(cpp_of))
 
     refs = reimpl_refs()
-    best, at100, seen = best_per_id(refs)
+    best, at100, seen = best_per_id(refs, cpp_of)
     print('refs scanned: %d (%d with a status file)' % (len(refs), len(seen)))
     repos = remote_repos()
     # GitHub repository names are case-insensitive, and the same fork is often
