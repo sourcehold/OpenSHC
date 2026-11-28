@@ -191,10 +191,10 @@ namespace Map {
                         _brazierEntityID != 0)) {
                     this->units[unitID].shootTargetMicroX = DAT_TileMapState::instance.pitchDitches[_ditchID].x * 8 + 4;
                     this->units[unitID].shootTargetMicroY = DAT_TileMapState::instance.pitchDitches[_ditchID].y * 8 + 4;
+                    this->units[unitID].shootTargetedUnit = -1;
                     this->units[unitID].shootTargetZ
                         = (ushort)DAT_TileMapState::instance
                               .HeightLayer[DAT_TileMapState::instance.pitchDitches[_ditchID].tile];
-                    this->units[unitID].shootTargetedUnit = -1;
                     return TRUE;
                 }
             } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_BUILDING) {
@@ -206,9 +206,9 @@ namespace Map {
                         + (short)((int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight * 8) / 2);
                     this->units[unitID].shootTargetMicroY = DAT_BuildingsState::instance.buildings[_buildingID].y * 8
                         + (short)((int)(DAT_BuildingsState::instance.buildings[_buildingID].widthOrHeight * 8) / 2);
+                    this->units[unitID].shootTargetedUnit = -1;
                     this->units[unitID].shootTargetZ
                         = DAT_BuildingsState::instance.buildings[_buildingID].terrainHeightUnk;
-                    this->units[unitID].shootTargetedUnit = -1;
                     return TRUE;
                 }
             } else if (this->units[unitID].targetingType == OpenSHC::Map::Units::UIT_ATTACK_WALL) {
