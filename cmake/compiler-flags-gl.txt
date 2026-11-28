@@ -266,3 +266,5 @@ src/OpenSHC/Map/Units/UnitsState/isWorkplaceBuildingOnAdjacentTile.cpp
 src/OpenSHC/Map/Units/ConsiderHavingABreakNowUnk.cpp
 src/OpenSHC/Map/Units/UpdatePriest.cpp
 src/OpenSHC/Map/Units/UpdateMerchantHorse.cpp
+src/OpenSHC/Map/Units/UpdatePikeman.cpp
+src/OpenSHC/Rendering/ViewportRenderState/xyAreValid.cpp
