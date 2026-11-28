@@ -21,30 +21,27 @@ namespace Map {
         // FUNCTION: STRONGHOLDCRUSADER 0x00519790
         void TroopValueState::setRallyPointForLaddermenTribe(int param_1)
         {
-            int _laddermenTribeCount = 0;
-            int _tribeID = 1;
-            Tribe* _pTribe = &DAT_TribesState::instance.tribes[1];
-            do {
-                if (_pTribe->tribeState != 0) {
-                    BOOLEnum fullIDIsMinus1 = MACRO_CALL_MEMBER(
-                        Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(_pTribe->owner);
-                    if (fullIDIsMinus1 && _pTribe->tribeType == AI::Tribes::AITT_LADDERMEN
-                        && (_laddermenTribeCount = _laddermenTribeCount + 1,
-                            _laddermenTribeCount == DAT_TribesState::instance.tribes[param_1].someCounter1 + 1)) {
-                        int const _unitID = DAT_TribesState::instance.tribes[_tribeID].selectionTargetUnitID;
-                        MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
-                            DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[_unitID].x),
-                            (int)(DAT_UnitsState::instance.units[_unitID].y));
-                        short const _rallyPointY = (short)DAT_PathFindingState::instance.ALG_ResultY;
-                        DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][0]
-                            = (short)DAT_PathFindingState::instance.ALG_ResultX;
-                        DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][1] = _rallyPointY;
-                        return;
+            int laddermenTribeCount = 0;
+            for (int tribeID = 1; tribeID < countof(DAT_TribesState::instance.tribes); ++tribeID) {
+                if (DAT_TribesState::instance.tribes[tribeID].tribeState != 0) {
+                    if (MACRO_CALL_MEMBER(Game::GameStateStructures_Func::isFullIDEqualsToMinus1, DAT_GameState::ptr)(
+                            DAT_TribesState::instance.tribes[tribeID].owner)
+                        && DAT_TribesState::instance.tribes[tribeID].tribeType == AI::Tribes::AITT_LADDERMEN) {
+                        ++laddermenTribeCount;
+                        if (laddermenTribeCount == DAT_TribesState::instance.tribes[param_1].someCounter1 + 1) {
+                            int const _unitID = DAT_TribesState::instance.tribes[tribeID].selectionTargetUnitID;
+                            MACRO_CALL_MEMBER(Map::Navigation::PathFindingState_Func::computeNextRallyPointDestination,
+                                DAT_PathFindingState::ptr)(-1, (int)(DAT_UnitsState::instance.units[_unitID].x),
+                                (int)(DAT_UnitsState::instance.units[_unitID].y));
+                            short const _rallyPointY = (short)DAT_PathFindingState::instance.ALG_ResultY;
+                            DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][0]
+                                = (short)DAT_PathFindingState::instance.ALG_ResultX;
+                            DAT_TribesState::instance.tribes[param_1].rallyPointArray[0][1] = _rallyPointY;
+                            return;
+                        }
                     }
                 }
-                _pTribe++;
-                _tribeID++;
-            } while (_pTribe < &DAT_TribesState::instance.tribes[1250]);
+            }
         }
 
     }
